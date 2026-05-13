@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --foreground-rgb: 245, 245, 245;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 26, 26, 26;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b8b8b;
+}
+
+/* Custom selection */
+::selection {
+  background: #8b8b8b;
+  color: #000000;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(139, 139, 139, 0.1);
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Subtle neon text effect */
+.neon-text {
+  text-shadow: 0 0 5px #8b8b8b, 0 0 10px #8b8b8b, 0 0 15px #8b8b8b;
+  animation: neon-pulse 3s ease-in-out infinite alternate;
+}
+
+/* Rotating neon light effect for logos */
+.neon-logo {
+  -webkit-text-fill-color: initial !important;
+  color: white !important;
+  animation: neon-rotate 2s linear infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(45deg, #8b8b8b, #a8a8a8, #7a7a7a);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 3s ease infinite;
+}
+
+/* Neon pulse animation */
+@keyframes neon-pulse {
+  0% { 
+    text-shadow: 0 0 5px #8b8b8b, 0 0 10px #8b8b8b, 0 0 15px #8b8b8b;
+  }
+  100% { 
+    text-shadow: 0 0 10px #8b8b8b, 0 0 20px #8b8b8b, 0 0 30px #8b8b8b;
+  }
+}
+
+/* Neon rotate animation with RGB colors */
+@keyframes neon-rotate {
+  0% { 
+    text-shadow: 0 0 10px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0), 0 0 30px rgb(255, 0, 0);
+  }
+  20% { 
+    text-shadow: 0 0 10px rgb(255, 165, 0), 0 0 20px rgb(255, 165, 0), 0 0 30px rgb(255, 165, 0);
+  }
+  40% { 
+    text-shadow: 0 0 10px rgb(255, 255, 0), 0 0 20px rgb(255, 255, 0), 0 0 30px rgb(255, 255, 0);
+  }
+  60% { 
+    text-shadow: 0 0 10px rgb(0, 255, 0), 0 0 20px rgb(0, 255, 0), 0 0 30px rgb(0, 255, 0);
+  }
+  80% { 
+    text-shadow: 0 0 10px rgb(0, 0, 255), 0 0 20px rgb(0, 0, 255), 0 0 30px rgb(0, 0, 255);
+  }
+  100% { 
+    text-shadow: 0 0 10px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0), 0 0 30px rgb(255, 0, 0);
+  }
+}
+
+/* RGB glow animation for background elements */
+@keyframes rgb-glow {
+  0% { 
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% { 
+    filter: hue-rotate(90deg) brightness(1.2);
+  }
+  50% { 
+    filter: hue-rotate(180deg) brightness(1);
+  }
+  75% { 
+    filter: hue-rotate(270deg) brightness(1.2);
+  }
+  100% { 
+    filter: hue-rotate(360deg) brightness(1);
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+} 

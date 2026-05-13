@@ -1,0 +1,8 @@
+/admin (dashboard)
+/admin/drops (dedicated drops management)
+/cart
+/membership
+/new-drops
+/product/[id]
+/shop
+/track-order
