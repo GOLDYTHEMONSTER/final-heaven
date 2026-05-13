@@ -6,26 +6,7 @@ import Image from 'next/image'
 import { FiShoppingCart, FiEye, FiStar, FiClock, FiUsers } from 'react-icons/fi'
 import { useCart } from '@/components/providers/CartProvider'
 import { useState, useEffect } from 'react'
-
-interface Product {
-  id: string
-  name: string
-  price: number
-  originalPrice?: number
-  image: string
-  isMembersOnly?: boolean
-  category: string
-  tags?: string[]
-  isNew?: boolean
-  isLimited?: boolean
-  releaseDate?: string
-  rating?: number
-  reviews?: number
-  colors?: string[]
-  sizes?: string[]
-  description?: string
-  images?: { url: string }[]
-}
+import { Product } from '@/lib/stores/productStore'
 
 interface ProductCardProps {
   product: Product
@@ -47,10 +28,10 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.images && product.images.length > 0 ? product.images[0].url : product.image,
+      image: product.images && product.images.length > 0 ? product.images[0].url : '/api/placeholder/400/500',
       size: 'M', // Default size
       quantity: 1,
-      isMembersOnly: product.isMembersOnly
+      isMembersOnly: product.membersOnly
     })
     setShowToast(true)
     setTimeout(() => setShowToast(false), 1500)
@@ -58,7 +39,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
 
   const mainImage = product.images && product.images.length > 0
     ? product.images[0].url
-    : product.image
+    : '/api/placeholder/400/500'
 
   if (viewMode === 'list') {
     return (
@@ -98,7 +79,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
                     LIMITED
                   </span>
                 )}
-                {product.isMembersOnly && (
+                {product.membersOnly && (
                   <span className="bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                     MEMBERS ONLY
                   </span>
@@ -260,7 +241,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
                 LIMITED
               </span>
             )}
-            {product.isMembersOnly && (
+            {product.membersOnly && (
               <span className="bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                 MEMBERS ONLY
               </span>
