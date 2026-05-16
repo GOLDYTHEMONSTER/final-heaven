@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   FiCalendar, FiClock, FiUsers, FiEye, FiEdit, FiTrash2, FiPlus, FiUpload,
@@ -9,22 +9,29 @@ import {
 } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 
-// 1. Move mockDrops to useState, use real placeholder images, and enable CRUD
-const initialDrops = [
-  {
-    id: 'drop1',
-    name: 'Neon Dreams Collection',
-    description: 'The ultimate streetwear statement piece with neon accents and premium comfort.',
-    releaseDate: '2024-01-25',
-    releaseTime: '10:00',
-    status: 'scheduled',
-    products: [
-      { id: 'p1', name: 'Neon Dreams Hoodie', price: 89.99, stock: 100, image: 'https://picsum.photos/100/100?random=1' },
-      { id: 'p2', name: 'Neon Dreams Tee', price: 49.99, stock: 150, image: 'https://picsum.photos/100/100?random=2' },
-      { id: 'p3', name: 'Neon Dreams Pants', price: 129.99, stock: 75, image: 'https://picsum.photos/100/100?random=3' }
-    ],
-    isMembersOnly: false,
-    earlyAccessHours: 24,
+const statusConfig = {
+  draft: { color: 'text-gray-400', bg: 'bg-gray-400/20', label: 'Draft' },
+  scheduled: { color: 'text-blue-400', bg: 'bg-blue-400/20', label: 'Scheduled' },
+  published: { color: 'text-green-400', bg: 'bg-green-400/20', label: 'Published' },
+  archived: { color: 'text-red-400', bg: 'bg-red-400/20', label: 'Archived' }
+}
+
+export default function DropsAdminPage() {
+  const [drops, setDrops] = useState<any[]>([
+    {
+      id: 'drop1',
+      name: 'Neon Dreams Collection',
+      description: 'The ultimate streetwear statement piece with neon accents and premium comfort.',
+      releaseDate: '2024-01-25',
+      releaseTime: '10:00',
+      status: 'scheduled',
+      products: [
+        { id: 'p1', name: 'Neon Dreams Hoodie', price: 89.99, stock: 100, image: 'https://picsum.photos/100/100?random=1' },
+        { id: 'p2', name: 'Neon Dreams Tee', price: 49.99, stock: 150, image: 'https://picsum.photos/100/100?random=2' },
+        { id: 'p3', name: 'Neon Dreams Pants', price: 129.99, stock: 75, image: 'https://picsum.photos/100/100?random=3' }
+      ],
+      isMembersOnly: false,
+      earlyAccessHours: 24,
     previewImage: 'https://picsum.photos/400/300?random=1',
     tags: ['Neon', 'Limited', 'Trending']
   },
@@ -60,18 +67,8 @@ const initialDrops = [
     previewImage: 'https://picsum.photos/400/300?random=3',
     tags: ['Urban', 'Classic']
   }
-]
+  ])
 
-const statusConfig = {
-  draft: { color: 'text-gray-400', bg: 'bg-gray-400/20', label: 'Draft' },
-  scheduled: { color: 'text-blue-400', bg: 'bg-blue-400/20', label: 'Scheduled' },
-  published: { color: 'text-green-400', bg: 'bg-green-400/20', label: 'Published' },
-  archived: { color: 'text-red-400', bg: 'bg-red-400/20', label: 'Archived' }
-}
-
-export default function DropsManagementPage() {
-  // 2. Use state for drops
-  const [drops, setDrops] = useState<any[]>(initialDrops)
   const [selectedDrop, setSelectedDrop] = useState<any>(null)
   const [showCreateDrop, setShowCreateDrop] = useState(false)
   const [editingDrop, setEditingDrop] = useState<any>(null)

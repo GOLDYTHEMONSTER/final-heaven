@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FiShoppingCart, FiEye, FiStar, FiClock, FiUsers } from 'react-icons/fi'
 import { useCart } from '@/components/providers/CartProvider'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Product } from '@/lib/stores/productStore'
 
 interface ProductCardProps {
@@ -19,7 +19,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   const [hasMounted, setHasMounted] = useState(false)
   useEffect(() => { setHasMounted(true) }, [])
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     
@@ -35,7 +35,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
     })
     setShowToast(true)
     setTimeout(() => setShowToast(false), 1500)
-  }
+  }, [addItem, product.id, product.name, product.price, product.images, product.membersOnly])
 
   const mainImage = product.images && product.images.length > 0
     ? product.images[0].url
@@ -61,6 +61,8 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
                 src={mainImage}
                 alt={product.name}
                 fill
+                unoptimized
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               
@@ -204,6 +206,8 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
             src={mainImage}
             alt={product.name}
             fill
+            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover group-hover:scale-110 transition-transform duration-500"
           />
           

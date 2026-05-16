@@ -101,26 +101,32 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Link href="/shop">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex rounded-lg"
+            >
+              <Link
+                href="/shop"
                 className="bg-final-accent text-final-black px-8 py-4 rounded-lg font-bold text-lg flex items-center space-x-2 hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
               >
                 <span>SHOP NOW</span>
                 <FiArrowRight className="w-5 h-5" />
-              </motion.button>
-            </Link>
-            
-            <Link href="/membership">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex rounded-lg"
+            >
+              <Link
+                href="/membership"
                 className="border-2 border-final-accent text-final-accent px-8 py-4 rounded-lg font-bold text-lg hover:bg-final-accent hover:text-final-black transition-all duration-300"
               >
                 JOIN THE CULT
-              </motion.button>
-            </Link>
+              </Link>
+            </motion.div>
           </motion.div>
 
           {/* Scroll indicator */}
@@ -128,7 +134,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="mt-10 flex justify-center"
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}

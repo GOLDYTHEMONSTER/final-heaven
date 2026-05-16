@@ -41,18 +41,31 @@ export default function TrackOrderPage() {
   const [searchValue, setSearchValue] = useState('')
   const [order, setOrder] = useState<any>(null)
   const [isSearching, setIsSearching] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!searchValue.trim()) return
 
     setIsSearching(true)
-    
-    // Simulate API call
-    setTimeout(() => {
-      const foundOrder = mockOrders[searchValue as keyof typeof mockOrders]
-      setOrder(foundOrder)
+    setErrorMessage('')
+    setOrder(null)
+
+    const params = new URLSearchParams({
+      type: searchType,
+      value: searchValue.trim(),
+    })
+
+    const response = await fetch(`/api/orders?${params.toString()}`)
+    const data = await response.json()
+
+    if (!response.ok) {
+      setErrorMessage(data?.error || 'Order not found.')
       setIsSearching(false)
-    }, 1000)
+      return
+    }
+
+    setOrder(data.order)
+    setIsSearching(false)
   }
 
   const getStatusIcon = (status: string) => {
@@ -148,13 +161,13 @@ export default function TrackOrderPage() {
               {/* Order Summary */}
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div>
+                          <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Order ID</h3>
-                    <p className="text-lg font-bold text-final-off-white">{order.id}</p>
+                    <p className="text-lg font-bold text-final-off-white">{order.order_number}</p>
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Order Date</h3>
-                    <p className="text-lg font-bold text-final-off-white">{new Date(order.orderDate).toLocaleDateString()}</p>
+                    <p className="text-lg font-bold text-final-off-white">{new Date(order.created_at).toLocaleDateString()}</p>
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Total</h3>
@@ -174,7 +187,7 @@ export default function TrackOrderPage() {
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
                 <h3 className="text-xl font-bold text-final-off-white mb-6">Order Items</h3>
                 <div className="space-y-4">
-                  {order.items.map((item: any, index: number) => (
+                  {order.order_items.map((item: any, index: number) => (
                     <div key={index} className="flex items-center justify-between py-4 border-b border-final-light-gray/20 last:border-b-0">
                       <div>
                         <h4 className="font-semibold text-final-off-white">{item.name}</h4>
@@ -195,13 +208,13 @@ export default function TrackOrderPage() {
                       <FiMapPin className="w-5 h-5 text-final-accent" />
                       <span>Shipping Address</span>
                     </h4>
-                    <p className="text-final-off-white/70">{order.shippingAddress}</p>
+                    <p className="text-final-off-white/70">{order.shipping_address}</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-final-off-white mb-2">Tracking Number</h4>
-                    <p className="text-final-accent font-mono">{order.trackingNumber}</p>
+                    <p className="text-final-accent font-mono">{order.tracking_number}</p>
                     <p className="text-final-off-white/70 text-sm mt-1">
-                      Estimated Delivery: {new Date(order.estimatedDelivery).toLocaleDateString()}
+                      Estimated Delivery: TBD
                     </p>
                   </div>
                 </div>

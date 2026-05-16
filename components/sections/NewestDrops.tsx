@@ -1,13 +1,30 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ProductCard } from '@/components/ui/ProductCard'
-import { useProductStore } from '@/lib/stores/productStore'
 
 export function NewestDrops() {
-  const { getNewDrops } = useProductStore()
-  const newestProducts = getNewDrops().slice(0, 6) // Show only first 6 new drops
+  const [newestProducts, setNewestProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadNewestDrops() {
+      try {
+        setLoading(true)
+        const res = await fetch('/api/products?isNew=true')
+        const data = await res.json()
+        setNewestProducts((data.products || []).slice(0, 6))
+      } catch (error) {
+        console.error('Failed to load newest drops:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadNewestDrops()
+  }, [])
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-final-gray via-final-dark-gray to-final-black">
@@ -30,19 +47,26 @@ export function NewestDrops() {
         </motion.div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-          {newestProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <ProductCard product={product} />
-            </motion.div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-20">
+            <div className="w-16 h-16 border-4 border-final-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-final-off-white/70">Loading latest drops...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+            {newestProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* View All Button */}
         <motion.div

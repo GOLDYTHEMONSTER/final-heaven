@@ -1,10 +1,44 @@
 'use client'
 
 import Link from 'next/link'
+import { FormEvent, useState } from 'react'
 import { FiInstagram, FiTwitter, FiFacebook } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 
 export function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [newsletterMessage, setNewsletterMessage] = useState('')
+
+  const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!newsletterEmail.trim()) {
+      setNewsletterStatus('error')
+      setNewsletterMessage('Enter a valid email to subscribe.')
+      return
+    }
+
+    setNewsletterStatus('loading')
+    setNewsletterMessage('')
+
+    const response = await fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: newsletterEmail.trim() }),
+    })
+    const data = await response.json()
+
+    if (!response.ok) {
+      setNewsletterStatus('error')
+      setNewsletterMessage(data.error || 'Subscription failed. Please try again.')
+      return
+    }
+
+    setNewsletterStatus('success')
+    setNewsletterMessage(data.message || 'Subscribed successfully!')
+    setNewsletterEmail('')
+  }
+
   return (
     <footer className="relative bg-gradient-to-t from-final-gray to-final-black border-t border-final-light-gray/30 overflow-hidden">
       {/* Background RGB glow elements */}
@@ -134,6 +168,34 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold text-final-off-white mb-4">Newsletter</h4>
+            <p className="text-final-off-white/70 text-sm mb-4">
+              Get drop alerts, restock notices, and exclusive updates straight to your inbox.
+            </p>
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                value={newsletterEmail}
+                onChange={(event) => setNewsletterEmail(event.target.value)}
+                className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
+                placeholder="Your email"
+              />
+              <button
+                type="submit"
+                disabled={newsletterStatus === 'loading'}
+                className="px-5 py-3 bg-final-accent text-final-black rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
+              >
+                Subscribe
+              </button>
+            </form>
+            {newsletterMessage && (
+              <p className={`mt-3 text-sm ${newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                {newsletterMessage}
+              </p>
+            )}
           </div>
         </div>
 

@@ -1,14 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiShoppingCart, FiMenu, FiX, FiUser } from 'react-icons/fi'
 import { useCart } from '@/components/providers/CartProvider'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [hasMounted, setHasMounted] = useState(false)
   const { itemCount } = useCart()
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
 
   const navItems = [
     { name: 'Shop', href: '/shop' },
@@ -52,7 +57,7 @@ export function Header() {
             
             <Link href="/cart" className="relative">
               <FiShoppingCart className="w-6 h-6 text-final-off-white hover:text-final-accent transition-colors" />
-              {itemCount > 0 && (
+              {hasMounted && itemCount > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}

@@ -6,13 +6,13 @@ const getSupabase = () => createSupabaseServerClient()
 export async function GET() {
   try {
     const { data, error } = await getSupabase()
-      .from('products')
+      .from('drops')
       .select('*')
-      .order('created_at', { ascending: false })
+      .order('release_date', { ascending: false })
 
     if (error) throw error
 
-    return NextResponse.json({ products: data || [] })
+    return NextResponse.json({ drops: data || [] })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -25,66 +25,44 @@ export async function POST(req: NextRequest) {
       id,
       name,
       description,
-      price,
-      original_price,
-      category,
-      images,
-      stock,
-      status,
-      is_new,
-      is_limited,
-      is_trending,
-      members_only,
       release_date,
-      rating,
-      reviews,
-      sales,
-      colors,
-      sizes,
+      release_time,
+      status,
+      preview_image,
+      members_only,
+      early_access_hours,
+      products,
       tags,
-      card_size,
     } = body
 
-    const productId = id || `p${Date.now()}`
-
-    if (!name || !category) {
+    if (!id || !name || !release_date || !release_time) {
       return NextResponse.json(
-        { error: 'Missing required fields: name, category' },
+        { error: 'Missing required fields: id, name, release_date, release_time' },
         { status: 400 }
       )
     }
 
     const { data, error } = await getSupabase()
-      .from('products')
+      .from('drops')
       .insert({
-        id: productId,
+        id,
         name,
         description,
-        price,
-        original_price,
-        category,
-        images: images || [],
-        stock: stock || 0,
-        status: status || 'active',
-        is_new: is_new || false,
-        is_limited: is_limited || false,
-        is_trending: is_trending || false,
-        members_only: members_only || false,
         release_date,
-        rating,
-        reviews: reviews || 0,
-        sales: sales || 0,
-        colors: colors || [],
-        sizes: sizes || [],
+        release_time,
+        status: status || 'draft',
+        preview_image,
+        members_only: members_only || false,
+        early_access_hours: early_access_hours || 24,
+        products: products || [],
         tags: tags || [],
-        card_size: card_size || 'medium',
       })
       .select()
       .single()
 
     if (error) throw error
 
-    return NextResponse.json({ product: data }, { status: 201 })
+    return NextResponse.json({ drop: data }, { status: 201 })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -97,13 +75,13 @@ export async function PUT(req: NextRequest) {
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Product ID is required' },
+        { error: 'Drop ID is required' },
         { status: 400 }
       )
     }
 
     const { data, error } = await getSupabase()
-      .from('products')
+      .from('drops')
       .update(updates)
       .eq('id', id)
       .select()
@@ -111,7 +89,7 @@ export async function PUT(req: NextRequest) {
 
     if (error) throw error
 
-    return NextResponse.json({ product: data })
+    return NextResponse.json({ drop: data })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -124,19 +102,19 @@ export async function DELETE(req: NextRequest) {
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Product ID is required' },
+        { error: 'Drop ID is required' },
         { status: 400 }
       )
     }
 
     const { error } = await getSupabase()
-      .from('products')
+      .from('drops')
       .delete()
       .eq('id', id)
 
     if (error) throw error
 
-    return NextResponse.json({ message: 'Product deleted' })
+    return NextResponse.json({ message: 'Drop deleted' })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }

@@ -96,6 +96,7 @@ export default function CartPage() {
                             src={item.image}
                             alt={item.name}
                             fill
+                            sizes="96px"
                             className="object-cover"
                           />
                           {item.isMembersOnly && (
@@ -149,14 +150,14 @@ export default function CartPage() {
               {/* Continue Shopping */}
               <div className="mt-8">
                 <Link href="/shop">
-                  <motion.button
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center space-x-2 text-final-off-white hover:text-final-accent transition-colors"
+                    className="flex items-center space-x-2 text-final-off-white hover:text-final-accent transition-colors cursor-pointer"
                   >
                     <FiArrowLeft className="w-5 h-5" />
                     <span>Continue Shopping</span>
-                  </motion.button>
+                  </motion.div>
                 </Link>
               </div>
             </div>
@@ -210,13 +211,15 @@ export default function CartPage() {
                 </div>
 
                 {/* Checkout Button */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-                >
-                  PROCEED TO CHECKOUT
-                </motion.button>
+                <Link href="/checkout">
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="block text-center w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
+                  >
+                    PROCEED TO CHECKOUT
+                  </motion.a>
+                </Link>
 
                 {/* Security Notice */}
                 <p className="text-sm text-final-off-white/50 text-center mt-4">

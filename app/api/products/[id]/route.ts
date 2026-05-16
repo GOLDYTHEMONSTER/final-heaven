@@ -1,0 +1,25 @@
+import { NextResponse } from 'next/server'
+import { createSupabaseServerClient } from '@/lib/supabaseClient'
+
+const getSupabase = () => createSupabaseServerClient()
+
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+  try {
+    const { data, error } = await getSupabase()
+      .from('products')
+      .select('*')
+      .eq('id', params.id)
+      .single()
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return NextResponse.json({ product: null }, { status: 404 })
+      }
+      throw error
+    }
+
+    return NextResponse.json({ product: data })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}

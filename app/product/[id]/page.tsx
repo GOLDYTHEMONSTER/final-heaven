@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FiShoppingCart, FiHeart, FiShare2, FiZoomIn, FiStar, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
-import { useProductStore } from '@/lib/stores/productStore'
 
 // Mock reviews data
 const reviews = [
@@ -43,10 +42,39 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [quantity, setQuantity] = useState(1)
   const [isImageZoomed, setIsImageZoomed] = useState(false)
   const [activeTab, setActiveTab] = useState<'description' | 'reviews' | 'shipping'>('description')
+  const [product, setProduct] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
   const { addItem } = useCart()
-  const { getProduct } = useProductStore()
 
-  const product = getProduct(params.id)
+  useEffect(() => {
+    async function loadProduct() {
+      try {
+        setLoading(true)
+        const res = await fetch(`/api/products/${params.id}`)
+        const data = await res.json()
+        setProduct(data.product)
+      } catch (error) {
+        console.error('Failed to load product:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadProduct()
+  }, [params.id])
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-final-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-final-off-white text-lg">Loading product details…</p>
+          </div>
+        </div>
+      </Layout>
+    )
+  }
 
   if (!product) {
     return (
@@ -63,14 +91,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   // Use images array from product, fallback to legacy image
   const images = product.images && product.images.length > 0
-    ? product.images.map(img => img.url)
+    ? product.images.map((img: any) => img.url)
     : product.image
       ? [product.image]
       : []
 
   // Find the image index for the selected color
   const colorImageIndex = selectedColor && product.images
-    ? product.images.findIndex(img => img.color === selectedColor)
+    ? product.images.findIndex((img: any) => img.color === selectedColor)
     : -1
 
   const mainImageIndex = colorImageIndex >= 0 ? colorImageIndex : selectedImage
@@ -160,7 +188,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
               {/* Thumbnail Images */}
               <div className="flex space-x-4">
-                {images.map((image, index) => (
+                {images.map((image: string, index: number) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
@@ -217,7 +245,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 <div>
                   <h3 className="text-lg font-semibold text-final-off-white mb-3">Size</h3>
                   <div className="flex flex-wrap gap-3">
-                    {product.sizes.map((size) => (
+                    {product.sizes.map((size: string) => (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
@@ -239,7 +267,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 <div>
                   <h3 className="text-lg font-semibold text-final-off-white mb-3">Color</h3>
                   <div className="flex flex-wrap gap-3">
-                    {product.colors.map((color) => (
+                    {product.colors.map((color: string) => (
                       <button
                         key={color}
                         onClick={() => setSelectedColor(color)}
@@ -309,7 +337,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 { id: 'description', label: 'Description' },
                 { id: 'reviews', label: 'Reviews' },
                 { id: 'shipping', label: 'Shipping & Returns' }
-              ].map((tab) => (
+              ].map((tab: any) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
@@ -336,7 +364,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     <div>
                       <h4 className="text-lg font-semibold text-final-off-white mb-3">Tags</h4>
                       <div className="flex flex-wrap gap-2">
-                        {product.tags.map((tag) => (
+                        {product.tags.map((tag: string) => (
                           <span key={tag} className="bg-final-gray text-final-off-white px-3 py-1 rounded-full text-sm">
                             {tag}
                           </span>
@@ -357,7 +385,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     </div>
                   </div>
                   <div className="space-y-6">
-                    {reviews.map((review) => (
+                    {reviews.map((review: any) => (
                       <div key={review.id} className="border-b border-final-light-gray/20 pb-6 last:border-b-0">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center space-x-2">

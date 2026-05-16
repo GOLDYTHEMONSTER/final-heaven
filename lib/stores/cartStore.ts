@@ -17,8 +17,8 @@ interface CartStore {
   removeItem: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
   clearCart: () => void
-  total: number
-  itemCount: number
+  getTotal: () => number
+  getItemCount: () => number
 }
 
 export const useCartStore = create<CartStore>()(
@@ -30,7 +30,7 @@ export const useCartStore = create<CartStore>()(
         const existingItem = items.find(
           (i) => i.id === item.id && i.size === item.size
         )
-        
+
         if (existingItem) {
           set({
             items: items.map((i) =>
@@ -56,15 +56,19 @@ export const useCartStore = create<CartStore>()(
         })
       },
       clearCart: () => set({ items: [] }),
-      get total() {
-        return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      getTotal: () => {
+        const { items } = get()
+        return items.reduce((sum, item) => sum + item.price * item.quantity, 0)
       },
-      get itemCount() {
-        return get().items.reduce((sum, item) => sum + item.quantity, 0)
+      getItemCount: () => {
+        const { items } = get()
+        return items.reduce((sum, item) => sum + item.quantity, 0)
       },
     }),
     {
       name: 'final-heaven-cart',
+      // Only persist items, not computed values
+      partialize: (state) => ({ items: state.items }),
     }
   )
 ) 

@@ -1,11 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiFilter, FiGrid, FiList, FiSearch } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
-import { useProductStore } from '@/lib/stores/productStore'
 
 const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Accessories', 'Footwear']
 const sortOptions = [
@@ -17,15 +16,31 @@ const sortOptions = [
 ]
 
 export default function ShopPage() {
-  const { getActiveProducts } = useProductStore()
+  const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortBy, setSortBy] = useState('newest')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [searchTerm, setSearchTerm] = useState('')
+  const [loading, setLoading] = useState(true)
 
-  const allProducts = getActiveProducts()
-  
-  const filteredProducts = allProducts
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        setLoading(true)
+        const res = await fetch('/api/products')
+        const data = await res.json()
+        setProducts(data.products || [])
+      } catch (error) {
+        console.error('Failed to load products:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadProducts()
+  }, [])
+
+  const filteredProducts = products
     .filter(product => {
       const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -157,7 +172,17 @@ export default function ShopPage() {
         {/* Products Grid */}
         <section className="px-4 sm:px-6 lg:px-8 pb-20">
           <div className="max-w-7xl mx-auto">
-            {filteredProducts.length === 0 ? (
+            {loading ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-20"
+              >
+                <div className="w-16 h-16 border-4 border-final-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <h3 className="text-2xl font-semibold text-final-off-white mb-2">Loading products...</h3>
+                <p className="text-final-off-white/70">Fetching the latest collection from Supabase.</p>
+              </motion.div>
+            ) : filteredProducts.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

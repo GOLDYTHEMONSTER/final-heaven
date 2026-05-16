@@ -90,25 +90,31 @@ export function MembershipCTA() {
               Join thousands of streetwear enthusiasts in the Final Heaven cult.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/membership">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-final-accent text-final-black px-8 py-4 rounded-lg font-bold text-lg flex items-center space-x-2 hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-                >
-                  <span>BECOME A MEMBER</span>
-                  <FiArrowRight className="w-5 h-5" />
-                </motion.button>
+              <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex rounded-lg"
+            >
+              <Link
+                href="/membership"
+                className="bg-final-accent text-final-black px-8 py-4 rounded-lg font-bold text-lg flex items-center space-x-2 hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
+              >
+                <span>BECOME A MEMBER</span>
+                <FiArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/shop">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="border-2 border-final-accent text-final-accent px-8 py-4 rounded-lg font-bold text-lg hover:bg-final-accent hover:text-final-black transition-all duration-300"
-                >
-                  SHOP NOW
-                </motion.button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex rounded-lg"
+            >
+              <Link
+                href="/shop"
+                className="border-2 border-final-accent text-final-accent px-8 py-4 rounded-lg font-bold text-lg hover:bg-final-accent hover:text-final-black transition-all duration-300"
+              >
+                SHOP NOW
               </Link>
+            </motion.div>
             </div>
           </div>
         </motion.div>

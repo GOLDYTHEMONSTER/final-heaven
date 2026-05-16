@@ -18,8 +18,19 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children }: { children: ReactNode }) {
   const cart = useCartStore()
 
+  // Memoize computed values to prevent unnecessary re-renders
+  const contextValue = {
+    items: cart.items,
+    addItem: cart.addItem,
+    removeItem: cart.removeItem,
+    updateQuantity: cart.updateQuantity,
+    clearCart: cart.clearCart,
+    total: cart.getTotal(),
+    itemCount: cart.getItemCount(),
+  }
+
   return (
-    <CartContext.Provider value={cart}>
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   )
