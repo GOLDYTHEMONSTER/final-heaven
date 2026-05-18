@@ -1,11 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FiShoppingCart, FiHeart, FiShare2, FiZoomIn, FiStar, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi'
+import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
+import { RecommendedProducts } from '@/components/sections/RecommendedProducts'
+import { useInterestStore } from '@/lib/stores/interestStore'
 
 // Mock reviews data
 const reviews = [
@@ -44,7 +47,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [activeTab, setActiveTab] = useState<'description' | 'reviews' | 'shipping'>('description')
   const [product, setProduct] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [allProducts, setAllProducts] = useState<any[]>([])
+  const timeStartRef = useRef<number>(Date.now())
   const { addItem } = useCart()
+  const { trackProductView, updateTimeSpent, addFavoriteCategory, trackCartAddition } = useInterestStore()
 
   useEffect(() => {
     async function loadProduct() {
@@ -53,6 +59,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         const res = await fetch(`/api/products/${params.id}`)
         const data = await res.json()
         setProduct(data.product)
+        
+        // Load all products for recommendations
+        const allRes = await fetch('/api/products')
+        const allData = await allRes.json()
+        setAllProducts(allData.products || [])
       } catch (error) {
         console.error('Failed to load product:', error)
       } finally {
@@ -62,6 +73,35 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
     loadProduct()
   }, [params.id])
+
+  // Track product view and time spent
+  useEffect(() => {
+    if (!product) return
+
+    // Track product view
+    trackProductView(
+      product.id,
+      product.category,
+      product.tags || []
+    )
+    addFavoriteCategory(product.category)
+
+    // Reset time start when product changes
+    timeStartRef.current = Date.now()
+
+    // Update time spent on page
+    const interval = setInterval(() => {
+      const timeSpent = Date.now() - timeStartRef.current
+      updateTimeSpent(product.id, timeSpent)
+    }, 5000) // Update every 5 seconds
+
+    return () => {
+      clearInterval(interval)
+      // Final update on cleanup
+      const finalTimeSpent = Date.now() - timeStartRef.current
+      updateTimeSpent(product.id, finalTimeSpent)
+    }
+  }, [product, trackProductView, updateTimeSpent, addFavoriteCategory])
 
   if (loading) {
     return (
@@ -114,6 +154,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       return
     }
 
+    trackCartAddition(product.id)
     addItem({
       id: product.id,
       name: product.name,
@@ -223,9 +264,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="flex items-center space-x-2">
-                    <span className="text-3xl font-bold text-final-accent">${product.price}</span>
+                    <span className="text-3xl font-bold text-final-accent">{formatCurrency(product.price)}</span>
                     {product.originalPrice && product.originalPrice > product.price && (
-                      <span className="text-xl text-final-off-white/50 line-through">${product.originalPrice}</span>
+                      <span className="text-xl text-final-off-white/50 line-through">{formatCurrency(product.originalPrice)}</span>
                     )}
                   </div>
                   {product.originalPrice && product.originalPrice > product.price && (
@@ -457,6 +498,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </button>
             </div>
           </div>
+        )}
+
+        {/* Recommended Products Section */}
+        {allProducts.length > 0 && (
+          <RecommendedProducts
+            currentProductId={product?.id}
+            allProducts={allProducts}
+            title="Also Check Out"
+            subtitle="Curated picks based on your current selection"
+            limit={4}
+            variant="compact"
+          />
         )}
       </div>
     </Layout>

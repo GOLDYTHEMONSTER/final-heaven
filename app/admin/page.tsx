@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { 
   FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX, 
-  FiBarChart, FiShoppingBag, FiTrendingUp, FiAlertCircle
+  FiBarChart, FiShoppingBag, FiTrendingUp, FiAlertCircle, FiActivity
 } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
+import { formatCurrency } from '@/lib/utils/format'
 
 const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
 const statuses = ['All', 'Active', 'Draft', 'Archived']
@@ -457,6 +459,28 @@ export default function AdminPage() {
   return (
     <Layout>
       <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+        {/* Admin Navigation */}
+        <div className="border-b border-final-light-gray/20 bg-final-black/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex gap-8 py-4">
+              <Link
+                href="/admin"
+                className="flex items-center gap-2 text-final-off-white font-semibold border-b-2 border-final-accent pb-4"
+              >
+                <FiPackage className="w-5 h-5" />
+                Products
+              </Link>
+              <Link
+                href="/admin/tracking"
+                className="flex items-center gap-2 text-final-off-white/60 hover:text-final-off-white font-semibold border-b-2 border-transparent pb-4 transition-colors"
+              >
+                <FiActivity className="w-5 h-5" />
+                User Tracking
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -467,7 +491,7 @@ export default function AdminPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-4xl font-bold text-final-off-white mb-2">
-                  <span className="gradient-text">ADMIN</span> DASHBOARD
+                  <span className="gradient-text">PRODUCT</span> MANAGEMENT
                 </h1>
                 <p className="text-final-off-white/70">
                   Manage your Final Heaven products (Supabase Synced)
@@ -616,7 +640,7 @@ export default function AdminPage() {
                           </div>
                         </td>
                         <td className="p-4 text-final-off-white">{product.category}</td>
-                        <td className="p-4 text-final-accent font-bold">${product.price}</td>
+                        <td className="p-4 text-final-accent font-bold">{formatCurrency(product.price)}</td>
                         <td className="p-4">
                           <span className={`font-bold ${getStockColor(product.stock)}`}>{product.stock}</span>
                         </td>

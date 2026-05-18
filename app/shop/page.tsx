@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiFilter, FiGrid, FiList, FiSearch } from 'react-icons/fi'
+import { FiFilter, FiGrid, FiList } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
+import { SearchBar } from '@/components/ui/SearchBar'
+import { RecommendedProducts } from '@/components/sections/RecommendedProducts'
+import { useInterestStore } from '@/lib/stores/interestStore'
 
 const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
 const sortOptions = [
@@ -22,6 +25,7 @@ export default function ShopPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(true)
+  const { trackProductView, addFavoriteCategory } = useInterestStore()
 
   useEffect(() => {
     async function loadProducts() {
@@ -39,6 +43,17 @@ export default function ShopPage() {
 
     loadProducts()
   }, [])
+
+  const handleSearch = (query: string, category?: string) => {
+    if (query) {
+      setSearchTerm(query)
+      setSelectedCategory('All')
+    } else if (category) {
+      setSearchTerm('')
+      setSelectedCategory(category)
+      addFavoriteCategory(category)
+    }
+  }
 
   const filteredProducts = products
     .filter(product => {
@@ -92,8 +107,15 @@ export default function ShopPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-6 border border-final-light-gray/30"
+              className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-6 border border-final-light-gray/30 space-y-6"
             >
+              {/* Smart Search Bar */}
+              <SearchBar
+                onSearch={handleSearch}
+                allProducts={products}
+                placeholder="Search by product name, category, style..."
+              />
+
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 {/* Category Filter */}
                 <div className="flex flex-wrap gap-2">
@@ -114,23 +136,11 @@ export default function ShopPage() {
 
                 {/* Search and Sort Controls */}
                 <div className="flex items-center gap-4">
-                  {/* Search */}
-                  <div className="relative">
-                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-final-off-white/50 w-5 h-5" />
-                    <input
-                      type="text"
-                      placeholder="Search products..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                    />
-                  </div>
-
                   {/* Sort Dropdown */}
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
+                    className="bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent text-sm"
                   >
                     {sortOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -218,6 +228,17 @@ export default function ShopPage() {
             )}
           </div>
         </section>
+
+        {/* Recommended Products Section */}
+        {filteredProducts.length > 0 && (
+          <RecommendedProducts
+            allProducts={products}
+            title="Personalized Recommendations"
+            subtitle="Based on your browsing interests and shopping preferences"
+            limit={4}
+            variant="default"
+          />
+        )}
       </div>
     </Layout>
   )

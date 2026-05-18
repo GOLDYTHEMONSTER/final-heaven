@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FiTrash2, FiArrowLeft, FiLock } from 'react-icons/fi'
+import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
 
@@ -112,7 +113,7 @@ export default function CartPage() {
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-semibold text-final-off-white mb-1">{item.name}</h3>
                           <p className="text-final-off-white/70 mb-2">Size: {item.size}</p>
-                          <p className="text-xl font-bold text-final-accent">${item.price}</p>
+                          <p className="text-xl font-bold text-final-accent">{formatCurrency(item.price)}</p>
                         </div>
 
                         {/* Quantity Controls */}
@@ -190,12 +191,12 @@ export default function CartPage() {
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-final-off-white/70">
                     <span>Subtotal ({items.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>{formatCurrency(total)}</span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between text-final-accent">
                       <span>Discount</span>
-                      <span>-${discount.toFixed(2)}</span>
+                      <span>-{formatCurrency(discount)}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-final-off-white/70">
@@ -205,7 +206,7 @@ export default function CartPage() {
                   <div className="border-t border-final-light-gray/30 pt-4">
                     <div className="flex justify-between text-xl font-bold text-final-off-white">
                       <span>Total</span>
-                      <span>${finalTotal.toFixed(2)}</span>
+                      <span>{formatCurrency(finalTotal)}</span>
                     </div>
                   </div>
                 </div>

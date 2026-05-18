@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FiShoppingCart, FiEye, FiStar, FiClock, FiUsers } from 'react-icons/fi'
+import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { useState, useEffect, useCallback } from 'react'
 import { Product } from '@/lib/stores/productStore'
@@ -145,11 +146,11 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
                   <div className="mb-2">
                     {product.originalPrice && (
                       <span className="text-final-off-white/50 line-through text-sm mr-2">
-                        ${product.originalPrice}
+                        {formatCurrency(product.originalPrice)}
                       </span>
                     )}
                     <span className="text-2xl font-bold text-final-accent">
-                      ${product.price}
+                      {formatCurrency(product.price)}
                     </span>
                   </div>
                   
@@ -281,11 +282,11 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
             <div>
               {product.originalPrice && (
                 <span className="text-final-off-white/50 line-through text-sm mr-2">
-                  ${product.originalPrice}
+                  {formatCurrency(product.originalPrice)}
                 </span>
               )}
               <span className="text-xl font-bold text-final-accent">
-                ${product.price}
+                {formatCurrency(product.price)}
               </span>
             </div>
             
