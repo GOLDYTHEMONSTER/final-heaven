@@ -93,7 +93,7 @@ export default function CartPage() {
                         {/* Product Image */}
                         <div className="relative w-24 h-32 bg-final-gray rounded-lg overflow-hidden flex-shrink-0">
                           <Image
-                            src={item.image}
+                            src={item.image || '/api/placeholder/400/500'}
                             alt={item.name}
                             fill
                             sizes="96px"

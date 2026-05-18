@@ -100,8 +100,8 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-bold gradient-text mb-4 neon-logo">FINAL HEAVEN</h3>
             <p className="text-final-off-white/70 mb-4 max-w-md">
-              Join the cult. Exclusive streetwear for the chosen ones. 
-              Early access, member-only drops, and the finest urban fashion.
+              Discover premium streetwear and lifestyle goods with a modern edge.
+              Early access, special drops, and the best in urban fashion.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-final-off-white hover:text-final-accent transition-colors hover:neon-text">

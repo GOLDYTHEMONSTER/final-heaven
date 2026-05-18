@@ -89,7 +89,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-final-off-white/80 mb-8 max-w-2xl mx-auto"
           >
-            Join the cult. Exclusive streetwear for the chosen ones.
+            Shop premium streetwear, shoes, accessories, and vapor lifestyle goods.
             <br />
             <span className="text-final-accent font-semibold">Early access. Member-only drops.</span>
           </motion.p>
@@ -124,7 +124,7 @@ export function HeroSection() {
                 href="/membership"
                 className="border-2 border-final-accent text-final-accent px-8 py-4 rounded-lg font-bold text-lg hover:bg-final-accent hover:text-final-black transition-all duration-300"
               >
-                JOIN THE CULT
+                JOIN THE COMMUNITY
               </Link>
             </motion.div>
           </motion.div>

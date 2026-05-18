@@ -124,6 +124,58 @@ const initialProducts: Product[] = [
     sizes: ['30', '32', '34', '36', '38'],
     tags: ['Urban', 'Limited'],
     cardSize: 'large'
+  },
+  {
+    id: 'p4',
+    name: 'Skyline Runner Sneakers',
+    price: 139.99,
+    originalPrice: 169.99,
+    images: [
+      { url: '/api/placeholder/400/500', color: 'White' },
+      { url: '/api/placeholder/400/500', color: 'Black' }
+    ],
+    category: 'Shoes',
+    description: 'Comfort-driven sneakers with bold city style and premium cushioning.',
+    isNew: true,
+    isLimited: false,
+    isTrending: true,
+    membersOnly: false,
+    releaseDate: '2024-01-22',
+    rating: 4.9,
+    reviews: 42,
+    sales: 42,
+    stock: 18,
+    status: 'active',
+    colors: ['White', 'Black'],
+    sizes: ['8', '9', '10', '11', '12'],
+    tags: ['Sneakers', 'City', 'Performance'],
+    cardSize: 'medium'
+  },
+  {
+    id: 'p5',
+    name: 'Pulse Vape Kit',
+    price: 59.99,
+    originalPrice: 79.99,
+    images: [
+      { url: '/api/placeholder/400/500', color: 'Gunmetal' },
+      { url: '/api/placeholder/400/500', color: 'Midnight Blue' }
+    ],
+    category: 'Vapes',
+    description: 'Sleek, portable vape kit built for smooth hits and effortless style.',
+    isNew: true,
+    isLimited: false,
+    isTrending: false,
+    membersOnly: false,
+    releaseDate: '2024-01-10',
+    rating: 4.5,
+    reviews: 31,
+    sales: 31,
+    stock: 26,
+    status: 'active',
+    colors: ['Gunmetal', 'Midnight Blue'],
+    sizes: [],
+    tags: ['Vape', 'Lifestyle'],
+    cardSize: 'medium'
   }
 ]
 

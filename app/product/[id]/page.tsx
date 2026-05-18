@@ -118,7 +118,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
+      image: mainImage || '/api/placeholder/400/500',
       size: selectedSize,
       quantity,
       isMembersOnly: product.membersOnly || false

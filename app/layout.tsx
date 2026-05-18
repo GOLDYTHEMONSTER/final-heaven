@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Final Heaven - Urban Streetwear',
-  description: 'Join the cult. Exclusive streetwear for the chosen ones.',
-  keywords: 'streetwear, urban fashion, exclusive, membership, cult',
+  description: 'Shop premium urban streetwear, shoes, accessories, and lifestyle goods with effortless style.',
+  keywords: 'streetwear, urban fashion, shoes, accessories, vapes, lifestyle',
 }
 
 export default function RootLayout({

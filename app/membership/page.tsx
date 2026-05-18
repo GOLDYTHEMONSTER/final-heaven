@@ -20,10 +20,10 @@ const membershipTiers = [
     popular: false
   },
   {
-    name: 'Cult Member',
+    name: 'Plus Member',
     price: 29.99,
     period: 'month',
-    description: 'Join the exclusive Final Heaven cult',
+    description: 'Get priority access to new arrivals and member-only deals.',
     features: [
       '24h early access to all drops',
       'Exclusive member-only products',
@@ -37,13 +37,12 @@ const membershipTiers = [
     popular: true
   },
   {
-    name: 'Cult Elite',
+    name: 'Premium Member',
     price: 79.99,
     period: 'month',
-    description: 'Ultimate Final Heaven experience',
+    description: 'A premium membership tier for serious buyers.',
     features: [
-      'All Cult Member benefits',
-      '48h early access to all drops',
+      'All Plus Member benefits',
       'Up to 50% off on member items',
       'Free worldwide shipping',
       'Personal shopping assistant',
@@ -69,7 +68,7 @@ const benefits = [
   {
     icon: FiUsers,
     title: 'Private Community',
-    description: 'Join our exclusive Discord server and connect with fellow cult members.'
+    description: 'Join our private Discord server and connect with fellow members.'
   },
   {
     icon: FiShield,
@@ -89,7 +88,7 @@ const benefits = [
 ]
 
 export default function MembershipPage() {
-  const [selectedTier, setSelectedTier] = useState('Cult Member')
+  const [selectedTier, setSelectedTier] = useState('Plus Member')
   const [isSigningUp, setIsSigningUp] = useState(false)
 
   const handleSignUp = (tierName: string) => {
@@ -115,13 +114,11 @@ export default function MembershipPage() {
               <div className="flex items-center justify-center mb-6">
                 <FiClock className="w-16 h-16 text-final-accent mr-4" />
                 <h1 className="text-5xl md:text-6xl font-bold text-final-off-white">
-                  JOIN THE <span className="gradient-text">CULT</span>
+                  JOIN THE <span className="gradient-text">COMMUNITY</span>
                 </h1>
               </div>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto mb-8">
-                Become a member and unlock exclusive access to limited drops, early releases, 
-                and the finest streetwear community. Join thousands of streetwear enthusiasts 
-                in the Final Heaven cult.
+                Become a member and unlock early access to new drops, special offers, and a growing streetwear community. Connect with fellow enthusiasts and shop smarter.
               </p>
             </motion.div>
           </div>
@@ -272,7 +269,7 @@ export default function MembershipPage() {
                 },
                 {
                   question: 'Do I get early access to all products?',
-                  answer: 'Cult Members get 24h early access, while Cult Elite members get 48h early access to all new drops and releases.'
+                  answer: 'Plus Members get 24h early access, while Premium Members get 48h early access to all new drops and releases.'
                 },
                 {
                   question: 'Are there any hidden fees?',

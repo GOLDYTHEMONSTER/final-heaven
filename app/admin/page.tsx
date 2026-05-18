@@ -9,7 +9,7 @@ import {
 import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
 
-const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Accessories', 'Footwear']
+const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
 const statuses = ['All', 'Active', 'Draft', 'Archived']
 
 export default function AdminPage() {

@@ -35,11 +35,10 @@ export function MembershipCTA() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-final-off-white mb-6">
-            JOIN THE <span className="gradient-text">CULT</span>
+            JOIN THE <span className="gradient-text">COMMUNITY</span>
           </h2>
           <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto">
-            Become a member and unlock exclusive access to limited drops, 
-            early releases, and the finest streetwear community.
+            Become a member and unlock early access to limited drops, special offers, and a growing streetwear community.
           </p>
         </motion.div>
 
@@ -86,8 +85,8 @@ export function MembershipCTA() {
               </h3>
             </div>
             <p className="text-xl text-final-off-white/70 mb-8 max-w-2xl mx-auto">
-              Get exclusive access to limited drops, early releases, and member-only products. 
-              Join thousands of streetwear enthusiasts in the Final Heaven cult.
+              Get exclusive access to limited drops, early releases, and member-only products.
+              Join thousands of streetwear enthusiasts in the Final Heaven community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.div

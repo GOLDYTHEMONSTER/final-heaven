@@ -6,7 +6,7 @@ import { FiFilter, FiGrid, FiList, FiSearch } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
 
-const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Accessories', 'Footwear']
+const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
 const sortOptions = [
   { value: 'newest', label: 'Newest First' },
   { value: 'price-low', label: 'Price: Low to High' },
@@ -79,8 +79,7 @@ export default function ShopPage() {
                 <span className="gradient-text">SHOP</span> ALL
               </h1>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto">
-                Discover the complete Final Heaven collection. From streetwear essentials 
-                to limited edition pieces, find your perfect style.
+                Discover the complete Final Heaven collection. Shop streetwear, shoes, accessories, and vapor lifestyle pieces in one place.
               </p>
             </motion.div>
           </div>
