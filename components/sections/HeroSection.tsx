@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
+import { LogoMark } from '@/components/ui/LogoMark'
 
 export function HeroSection() {
   return (
@@ -64,11 +65,14 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center pointer-events-none">
+          <LogoMark size={260} variant="silhouette" className="opacity-10 blur-sm" />
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="relative max-w-4xl mx-auto"
         >
           {/* Main heading */}
           <motion.h1

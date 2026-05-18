@@ -112,6 +112,35 @@ a {
   animation: neon-rotate 2s linear infinite;
 }
 
+/* Logo mark glow and silhouette */
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.45));
+  animation: logo-pulse 4s ease-in-out infinite alternate;
+}
+
+.logo-mark svg {
+  display: block;
+}
+
+.logo-mark-black {
+  filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 36px rgba(0, 0, 0, 0.4));
+}
+
+.logo-mark-silhouette {
+  opacity: 0.12;
+  filter: blur(0.5px) drop-shadow(0 0 45px rgba(255, 255, 255, 0.16));
+  transform: scale(1.05);
+}
+
+@keyframes logo-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(45deg, #8b8b8b, #a8a8a8, #7a7a7a);

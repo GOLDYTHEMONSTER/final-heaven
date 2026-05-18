@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiShoppingCart, FiMenu, FiX, FiUser } from 'react-icons/fi'
 import { useCart } from '@/components/providers/CartProvider'
+import { LogoMark } from '@/components/ui/LogoMark'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -27,12 +28,10 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold gradient-text italic tracking-wider lowercase font-serif"
-            >
-              final heaven
+          <Link href="/" className="flex items-center">
+            <span className="sr-only">Final Heaven</span>
+            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
+              <LogoMark size={40} className="min-w-[40px] h-[40px]" />
             </motion.div>
           </Link>
 
