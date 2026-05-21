@@ -119,7 +119,7 @@ export function HeroSection() {
             </Link>
           </motion.div>
 
-          <div className="mt-14 grid gap-4 sm:grid-cols-3">
+          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-5 text-left backdrop-blur-sm">
               <span className="block text-sm uppercase tracking-[0.35em] text-final-off-white/60">Fast restocks</span>
               <p className="mt-3 text-2xl font-bold text-final-off-white">New drops weekly</p>
