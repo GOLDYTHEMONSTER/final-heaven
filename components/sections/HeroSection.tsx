@@ -3,16 +3,15 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
-import { LogoMark } from '@/components/ui/LogoMark'
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-final-black via-final-gray to-final-dark-gray" />
       
       {/* Animated background elements */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -64,94 +63,76 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center pointer-events-none">
-          <LogoMark size={260} variant="silhouette" className="opacity-10 blur-sm" />
-        </div>
+      <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative max-w-4xl mx-auto"
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="mx-auto flex max-w-6xl flex-col items-center text-center"
         >
-          {/* Main heading */}
+          <span className="mb-6 inline-flex rounded-full border border-final-accent/50 bg-final-accent/10 px-5 py-2 text-sm uppercase tracking-[0.35em] text-final-accent">
+            Streetwear. Premium drops.
+          </span>
+
           <motion.h1
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-[-0.04em]"
           >
-            <span className="gradient-text neon-logo">FINAL</span>
-            <br />
-            <span className="text-final-off-white">HEAVEN</span>
+            <motion.span
+              initial={{ opacity: 0.9, scale: 0.96 }}
+              animate={{
+                opacity: [0.95, 1, 0.95],
+                textShadow: [
+                  '0 0 18px rgba(255, 0, 145, 0.45), 0 0 40px rgba(255, 0, 145, 0.15)',
+                  '0 0 18px rgba(0, 200, 255, 0.45), 0 0 40px rgba(0, 200, 255, 0.15)',
+                  '0 0 18px rgba(255, 200, 0, 0.45), 0 0 40px rgba(255, 200, 0, 0.15)'
+                ]
+              }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="block text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-cyan-400 to-amber-300"
+            >
+              FINAL
+            </motion.span>
+            <span className="block mt-2 text-final-off-white">HEAVEN</span>
           </motion.h1>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-final-off-white/80 mb-8 max-w-2xl mx-auto"
-          >
-            Shop premium streetwear, shoes, accessories, and vapor lifestyle goods.
-            <br />
-            <span className="text-final-accent font-semibold">Early access. Member-only drops.</span>
-          </motion.p>
-
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex rounded-lg"
+            <Link
+              href="/shop"
+              className="inline-flex items-center justify-center rounded-full bg-final-accent px-8 py-4 text-base font-semibold text-final-black shadow-[0_20px_60px_rgba(255,145,0,0.18)] transition-transform duration-300 hover:-translate-y-1"
             >
-              <Link
-                href="/shop"
-                className="bg-final-accent text-final-black px-8 py-4 rounded-lg font-bold text-lg flex items-center space-x-2 hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-              >
-                <span>SHOP NOW</span>
-                <FiArrowRight className="w-5 h-5" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex rounded-lg"
+              Shop the Drop
+              <FiArrowRight className="ml-3 h-5 w-5" />
+            </Link>
+            <Link
+              href="/membership"
+              className="inline-flex items-center justify-center rounded-full border border-final-off-white/20 bg-white/5 px-8 py-4 text-base font-semibold text-final-off-white transition-colors duration-300 hover:border-final-accent hover:text-final-accent"
             >
-              <Link
-                href="/membership"
-                className="border-2 border-final-accent text-final-accent px-8 py-4 rounded-lg font-bold text-lg hover:bg-final-accent hover:text-final-black transition-all duration-300"
-              >
-                JOIN THE COMMUNITY
-              </Link>
-            </motion.div>
+              Join the Circle
+            </Link>
           </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="mt-10 flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-6 h-10 border-2 border-final-accent rounded-full flex justify-center"
-            >
-              <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-3 bg-final-accent rounded-full mt-2"
-              />
-            </motion.div>
-          </motion.div>
+          <div className="mt-14 grid gap-4 sm:grid-cols-3">
+            <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-5 text-left backdrop-blur-sm">
+              <span className="block text-sm uppercase tracking-[0.35em] text-final-off-white/60">Fast restocks</span>
+              <p className="mt-3 text-2xl font-bold text-final-off-white">New drops weekly</p>
+            </div>
+            <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-5 text-left backdrop-blur-sm">
+              <span className="block text-sm uppercase tracking-[0.35em] text-final-off-white/60">Members only</span>
+              <p className="mt-3 text-2xl font-bold text-final-off-white">24h early access</p>
+            </div>
+            <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-5 text-left backdrop-blur-sm">
+              <span className="block text-sm uppercase tracking-[0.35em] text-final-off-white/60">Street cred</span>
+              <p className="mt-3 text-2xl font-bold text-final-off-white">Curated, limited runs</p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

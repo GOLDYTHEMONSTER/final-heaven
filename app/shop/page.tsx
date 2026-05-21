@@ -94,7 +94,7 @@ export default function ShopPage() {
                 <span className="gradient-text">SHOP</span> ALL
               </h1>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto">
-                Discover the complete Final Heaven collection. Shop streetwear, shoes, accessories, and vapor lifestyle pieces in one place.
+                Discover the complete Final Heaven collection. Shop streetwear, shoes, accessories, and premium lifestyle pieces in one place.
               </p>
             </motion.div>
           </div>
