@@ -1,53 +1,51 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireAdmin } from '@/lib/auth'
-import { BadRequest, handle, readJson, text } from '@/lib/api'
+import { requirePermission } from '@/lib/auth'
+import { handle, readJson, text } from '@/lib/api'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
 
-const STATUSES = ['ordered', 'processing', 'shipped', 'delivered', 'cancelled']
-
 export const GET = handle('admin.orders.list', async () => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('orders.read')
   if (denied) return denied
 
-  const { data, error } = await admin.supabase
-    .from('orders')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(100)
-  if (error) throw error
-  return NextResponse.json({ orders: data || [] }, { headers: { 'Cache-Control': 'private, no-store' } })
+  const [orders, transitions] = await Promise.all([
+    staff.supabase.from('orders').select('*').eq('tenant_id', staff.tenant.tenantId)
+      .order('created_at', { ascending: false }).limit(100),
+    staff.supabase.from('order_status_transitions').select('from_status, to_status, requires_payment'),
+  ])
+  if (orders.error) throw orders.error
+  if (transitions.error) throw transitions.error
+
+  return NextResponse.json({
+    orders: orders.data || [],
+    // The database's transition policy, so the UI only offers valid moves.
+    transitions: transitions.data || [],
+    can: { update: staff.can('orders.update'), recordPayment: staff.can('payments.record') },
+  }, { headers: { 'Cache-Control': 'private, no-store' } })
 })
 
+/**
+ * Changes fulfilment status only. The database enforces the transition policy
+ * (409 with its message on an invalid move), records the order event and the
+ * audit entry, and refuses "confirmed" until payment is verified.
+ */
 export const PUT = handle('admin.orders.update', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('orders.update')
   if (denied) return denied
 
   const body = await readJson(req)
   const orderNumber = text(body.orderNumber, 'Order number', { max: 40, required: true })!
-  const status = text(body.status, 'Status', { max: 20, required: true })!
-  if (STATUSES.indexOf(status) === -1) throw new BadRequest(`Status must be one of: ${STATUSES.join(', ')}.`)
+  const status = text(body.status, 'Status', { max: 30, required: true })!
 
-  const { data: existing, error: fetchErr } = await admin.supabase
+  const { data, error } = await staff.supabase
     .from('orders')
-    .select('timeline')
+    .update({ status })
     .eq('order_number', orderNumber)
-    .maybeSingle()
-  if (fetchErr) throw fetchErr
-  if (!existing) return NextResponse.json({ error: 'Order not found.' }, { status: 404 })
-
-  const now = new Date().toISOString()
-  const newEvent = { status, date: now.slice(0, 10), time: now.slice(11, 16), description: `Status updated to ${status}` }
-  const timeline = Array.isArray(existing.timeline) ? [...existing.timeline, newEvent] : [newEvent]
-
-  const { data, error } = await admin.supabase
-    .from('orders')
-    .update({ status, timeline, updated_at: now })
-    .eq('order_number', orderNumber)
+    .eq('tenant_id', staff.tenant.tenantId)
     .select()
-    .single()
+    .maybeSingle()
   if (error) throw error
-
+  if (!data) return NextResponse.json({ error: 'Order not found.' }, { status: 404 })
   return NextResponse.json({ order: data })
 })

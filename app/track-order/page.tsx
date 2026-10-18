@@ -3,15 +3,26 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { FiSearch, FiPackage, FiTruck, FiCheckCircle, FiClock, FiMapPin, FiRefreshCw } from 'react-icons/fi'
+import { FiSearch, FiPackage, FiTruck, FiCheckCircle, FiClock, FiMapPin, FiRefreshCw, FiX, FiCreditCard } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { formatCurrency } from '@/lib/utils/format'
 
+// Fulfilment status (separate from payment status). 'ordered' is the legacy
+// name for pending_payment and still appears in older order timelines.
 const statusConfig = {
-  ordered: { color: 'text-blue-400', bg: 'bg-blue-400/20', icon: FiClock },
-  processing: { color: 'text-yellow-400', bg: 'bg-yellow-400/20', icon: FiPackage },
-  shipped: { color: 'text-purple-400', bg: 'bg-purple-400/20', icon: FiTruck },
-  delivered: { color: 'text-green-400', bg: 'bg-green-400/20', icon: FiCheckCircle }
+  pending_payment: { label: 'Awaiting payment', color: 'text-blue-400', bg: 'bg-blue-400/20', icon: FiClock },
+  ordered: { label: 'Order placed', color: 'text-blue-400', bg: 'bg-blue-400/20', icon: FiClock },
+  confirmed: { label: 'Confirmed', color: 'text-blue-400', bg: 'bg-blue-400/20', icon: FiCreditCard },
+  processing: { label: 'Processing', color: 'text-yellow-400', bg: 'bg-yellow-400/20', icon: FiPackage },
+  shipped: { label: 'Shipped', color: 'text-purple-400', bg: 'bg-purple-400/20', icon: FiTruck },
+  delivered: { label: 'Delivered', color: 'text-green-400', bg: 'bg-green-400/20', icon: FiCheckCircle },
+  cancelled: { label: 'Cancelled', color: 'text-final-muted', bg: 'bg-final-off-white/10', icon: FiX },
+}
+const cfg = (status: string) => statusConfig[status as keyof typeof statusConfig] ?? statusConfig.pending_payment
+const STEPS = ['confirmed', 'processing', 'shipped', 'delivered']
+const PAYMENT_LABEL: Record<string, string> = {
+  unpaid: 'Not paid yet', pending: 'Processing', paid: 'Paid', failed: 'Payment failed',
+  partially_refunded: 'Partially refunded', refunded: 'Refunded', unverified: 'Paid (recorded)',
 }
 
 function TrackOrderContent() {
@@ -22,6 +33,8 @@ function TrackOrderContent() {
   const [isSearching, setIsSearching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [paying, setPaying] = useState(false)
+  const [payError, setPayError] = useState('')
 
   // Checkout links here with ?orderNumber=; the customer still confirms their email.
   useEffect(() => {
@@ -68,15 +81,40 @@ function TrackOrderContent() {
     }
   }
 
+  // Customer-initiated payment for an unpaid order; reuses a recent checkout link.
+  const payNow = async () => {
+    if (!order) return
+    setPaying(true)
+    setPayError('')
+    try {
+      const res = await fetch('/api/payments/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderNumber: order.order_number, email: email.trim() }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (res.ok && data.paymentUrl) {
+        window.location.href = data.paymentUrl
+        return
+      }
+      setPayError(data?.error || 'Payment is unavailable right now. Please try again shortly.')
+    } catch {
+      setPayError('Payment is unavailable right now. Please try again shortly.')
+    } finally {
+      setPaying(false)
+    }
+  }
+
+  const needsPayment = order && order.status === 'pending_payment' && ['unpaid', 'failed', 'pending'].includes(order.payment_status)
+
   const getStatusIcon = (status: string) => {
-    const config = statusConfig[status as keyof typeof statusConfig] ?? statusConfig.ordered
+    const config = cfg(status)
     const Icon = config.icon
     return <Icon className={`w-5 h-5 ${config.color}`} />
   }
 
   const getStatusProgress = (status: string) => {
-    const statuses = ['ordered', 'processing', 'shipped', 'delivered']
-    return Math.max(0, statuses.indexOf(status) + 1) / statuses.length * 100
+    return Math.max(0, STEPS.indexOf(status) + 1) / STEPS.length * 100
   }
 
   const inputClass =
@@ -181,16 +219,16 @@ function TrackOrderContent() {
                   />
                 </div>
                 <div className="grid grid-cols-4 gap-2 text-center">
-                  {['ordered', 'processing', 'shipped', 'delivered'].map((status) => (
+                  {STEPS.map((status) => (
                     <div key={status} className="flex flex-col items-center">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
-                        ['ordered', 'processing', 'shipped', 'delivered'].indexOf(status) <= ['ordered', 'processing', 'shipped', 'delivered'].indexOf(order.status)
-                          ? statusConfig[status as keyof typeof statusConfig].bg
+                        STEPS.indexOf(status) <= STEPS.indexOf(order.status)
+                          ? cfg(status).bg
                           : 'bg-final-gray'
                       }`}>
                         {getStatusIcon(status)}
                       </div>
-                      <span className="text-xs text-final-off-white/70 capitalize">{status}</span>
+                      <span className="text-xs text-final-off-white/70">{cfg(status).label}</span>
                     </div>
                   ))}
                 </div>
@@ -215,11 +253,25 @@ function TrackOrderContent() {
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Status</h3>
                     <div className="flex items-center space-x-2">
                       {getStatusIcon(order.status)}
-                      <span className="text-lg font-bold text-final-off-white capitalize">{order.status}</span>
+                      <span className="text-lg font-bold text-final-off-white">{cfg(order.status).label}</span>
                     </div>
+                    <p className="mt-1 text-sm text-final-muted">Payment: {PAYMENT_LABEL[order.payment_status] ?? order.payment_status}</p>
                   </div>
                 </div>
               </div>
+
+              {needsPayment && (
+                <div className="rounded-xl border border-final-off-white/10 bg-final-gray p-6 md:flex md:items-center md:justify-between md:gap-6">
+                  <div>
+                    <h3 className="font-semibold">This order is waiting for payment</h3>
+                    <p className="mt-1 text-sm text-final-muted">Pay securely with Flutterwave. It’s confirmed as soon as payment is verified.</p>
+                    {payError && <p role="alert" className="mt-2 text-sm text-final-ember">{payError}</p>}
+                  </div>
+                  <button type="button" onClick={payNow} disabled={paying} className="btn-primary mt-4 shrink-0 md:mt-0 disabled:opacity-60">
+                    {paying ? 'Opening checkout' : `Pay ${formatCurrency(order.total)}`}
+                  </button>
+                </div>
+              )}
 
               {/* Order Items */}
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
@@ -264,12 +316,12 @@ function TrackOrderContent() {
                 <div className="space-y-6">
                   {order.timeline.map((event: any, index: number) => (
                     <div key={index} className="flex items-start space-x-4">
-                      <div className={`p-3 rounded-full ${statusConfig[event.status as keyof typeof statusConfig].bg}`}>
+                      <div className={`p-3 rounded-full ${cfg(event.status).bg}`}>
                         {getStatusIcon(event.status)}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-semibold text-final-off-white capitalize">{event.status}</h4>
+                          <h4 className="font-semibold text-final-off-white">{cfg(event.status).label}</h4>
                           <span className="text-final-off-white/70 text-sm">
                             {new Date(event.date).toLocaleDateString()} at {event.time}
                           </span>

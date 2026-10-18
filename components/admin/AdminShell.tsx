@@ -8,26 +8,62 @@ import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiPackage, FiShopping
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
+// Each section is shown only to staff holding its permission. Hiding is a
+// convenience: the API and RLS enforce the same permissions.
 const nav = [
-  { name: 'Products', href: '/admin', icon: FiPackage },
-  { name: 'Orders', href: '/admin/orders', icon: FiShoppingBag },
-  { name: 'Drops', href: '/admin/drops', icon: FiCalendar },
-  { name: 'Tracking', href: '/admin/tracking', icon: FiActivity },
+  { name: 'Products', href: '/admin', icon: FiPackage, permission: 'products.read' },
+  { name: 'Orders', href: '/admin/orders', icon: FiShoppingBag, permission: 'orders.read' },
+  { name: 'Drops', href: '/admin/drops', icon: FiCalendar, permission: 'products.read' },
+  { name: 'Tracking', href: '/admin/tracking', icon: FiActivity, permission: 'analytics.read' },
 ]
 
-export function AdminShell({ email, children }: { email: string; children: React.ReactNode }) {
-  const pathname = usePathname()
+function useSignOut() {
   const router = useRouter()
   const [signingOut, setSigningOut] = useState(false)
-
-  const isActive = (href: string) => (href === '/admin' ? pathname === '/admin' : pathname?.startsWith(href))
-
   async function signOut() {
     setSigningOut(true)
     await createSupabaseBrowserClient().auth.signOut().catch(() => {})
     router.replace('/login')
     router.refresh()
   }
+  return { signingOut, signOut }
+}
+
+/** Signed in, but not staff of any active business. */
+export function NoAccess({ email }: { email: string }) {
+  const { signingOut, signOut } = useSignOut()
+  return (
+    <main className="grid min-h-[100dvh] place-items-center bg-final-black px-4 text-final-off-white">
+      <div className="max-w-sm text-center">
+        <LogoMark size={40} />
+        <h1 className="display mt-6 text-2xl">No admin access</h1>
+        <p className="mt-3 text-sm text-final-muted">
+          {email ? <>{email} isn’t</> : <>This account isn’t</>} a staff member of any store. Ask the store owner to invite you.
+        </p>
+        <button type="button" onClick={signOut} disabled={signingOut} className="btn-secondary mt-6">
+          {signingOut ? 'Signing out' : 'Sign out'}
+        </button>
+      </div>
+    </main>
+  )
+}
+
+export function AdminShell({
+  email,
+  tenantName,
+  permissions,
+  children,
+}: {
+  email: string
+  tenantName: string
+  permissions: string[]
+  children: React.ReactNode
+}) {
+  const pathname = usePathname()
+  const { signingOut, signOut } = useSignOut()
+  const visibleNav = nav.filter((item) => permissions.includes(item.permission))
+
+  const isActive = (href: string) => (href === '/admin' ? pathname === '/admin' : pathname?.startsWith(href))
 
   return (
     <div className="min-h-[100dvh] bg-final-black text-final-off-white">
@@ -35,7 +71,7 @@ export function AdminShell({ email, children }: { email: string; children: React
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Link href="/admin" className="flex items-center gap-3">
             <LogoMark size={22} />
-            <span className="display text-[13px] tracking-[0.04em]">Final Heaven</span>
+            <span className="display text-[13px] tracking-[0.04em]">{tenantName}</span>
             <span className="rounded-md border border-final-off-white/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-final-muted">
               Admin
             </span>
@@ -66,7 +102,7 @@ export function AdminShell({ email, children }: { email: string; children: React
 
         <nav aria-label="Admin" className="mx-auto max-w-7xl overflow-x-auto px-4 sm:px-6 lg:px-8">
           <ul className="flex gap-6">
-            {nav.map(({ name, href, icon: Icon }) => (
+            {visibleNav.map(({ name, href, icon: Icon }) => (
               <li key={href}>
                 <Link
                   href={href}

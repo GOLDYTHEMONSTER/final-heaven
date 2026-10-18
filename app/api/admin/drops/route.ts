@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireAdmin } from '@/lib/auth'
-import { BadRequest, handle, int, readJson, text, url } from '@/lib/api'
+import { requirePermission } from '@/lib/auth'
+import { audit } from '@/lib/audit'
+import { BadRequest, handle, int, readJson, requestIdOf, text, url } from '@/lib/api'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
@@ -47,31 +48,35 @@ function dropColumns(body: Record<string, unknown>, partial: boolean) {
 }
 
 export const GET = handle('admin.drops.list', async () => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.read')
   if (denied) return denied
 
-  const { data, error } = await admin.supabase.from('drops').select('*').order('release_date', { ascending: false })
+  const { data, error } = await staff.supabase.from('drops').select('*')
+    .eq('tenant_id', staff.tenant.tenantId).order('release_date', { ascending: false })
   if (error) throw error
   return NextResponse.json({ drops: data || [] })
 })
 
 export const POST = handle('admin.drops.create', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.write')
   if (denied) return denied
+  if (!staff.tenant.storeId) throw new BadRequest('This business has no active store.')
 
   const body = await readJson(req)
   if (typeof body.id !== 'string' || !ID.test(body.id)) throw new BadRequest('Drop ID is required.')
-  const { data, error } = await admin.supabase
+  const { data, error } = await staff.supabase
     .from('drops')
-    .insert({ id: body.id, ...dropColumns(body, false) })
+    .insert({ id: body.id, ...dropColumns(body, false), tenant_id: staff.tenant.tenantId, store_id: staff.tenant.storeId })
     .select()
     .single()
   if (error) throw error
+  await audit({ tenantId: staff.tenant.tenantId, action: 'drop.created', entityType: 'drop', entityId: body.id,
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req) })
   return NextResponse.json({ drop: data }, { status: 201 })
 })
 
 export const PUT = handle('admin.drops.update', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.write')
   if (denied) return denied
 
   const body = await readJson(req)
@@ -79,24 +84,32 @@ export const PUT = handle('admin.drops.update', async (req: NextRequest) => {
   const updates = dropColumns(body, true)
   if (!Object.keys(updates).length) throw new BadRequest('Nothing to update.')
 
-  const { data, error } = await admin.supabase
+  const { data, error } = await staff.supabase
     .from('drops')
     .update({ ...updates, updated_at: new Date().toISOString() })
     .eq('id', body.id)
+    .eq('tenant_id', staff.tenant.tenantId)
     .select()
-    .single()
+    .maybeSingle()
   if (error) throw error
+  if (!data) return NextResponse.json({ error: 'Drop not found.' }, { status: 404 })
+  await audit({ tenantId: staff.tenant.tenantId, action: 'drop.updated', entityType: 'drop', entityId: body.id,
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { fields: Object.keys(updates) } })
   return NextResponse.json({ drop: data })
 })
 
 export const DELETE = handle('admin.drops.delete', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.write')
   if (denied) return denied
 
   const id = new URL(req.url).searchParams.get('id') || ''
   if (!ID.test(id)) throw new BadRequest('Drop ID is required.')
 
-  const { error } = await admin.supabase.from('drops').delete().eq('id', id)
+  const { data, error } = await staff.supabase.from('drops').delete()
+    .eq('id', id).eq('tenant_id', staff.tenant.tenantId).select('id')
   if (error) throw error
+  if (!data?.length) return NextResponse.json({ error: 'Drop not found.' }, { status: 404 })
+  await audit({ tenantId: staff.tenant.tenantId, action: 'drop.deleted', entityType: 'drop', entityId: id,
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req) })
   return NextResponse.json({ message: 'Drop deleted' })
 })

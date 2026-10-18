@@ -22,7 +22,9 @@ export default function CheckoutPage() {
   const [orderConfirmation, setOrderConfirmation] = useState<{
     orderNumber: string
     trackingNumber: string
-    paystackUrl?: string | null
+    total: string
+    paymentUrl: string | null
+    paymentIssue: string | null
   } | null>(null)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -50,8 +52,6 @@ export default function CheckoutPage() {
       shippingPostalCode: postalCode,
       shippingCountry: country,
       items,
-      subtotal: total,
-      total,
     }
 
     const response = await fetch('/api/orders', {
@@ -72,9 +72,11 @@ export default function CheckoutPage() {
     setOrderConfirmation({
       orderNumber: data.orderNumber,
       trackingNumber: data.trackingNumber,
-      paystackUrl: data.paystackUrl,
+      total: data.total,
+      paymentUrl: data.paymentUrl ?? null,
+      paymentIssue: data.paymentIssue ?? null,
     })
-    setMessage(`Order created. Your order number is ${data.orderNumber}. Use it to track shipment.`)
+    setMessage(`Order placed. Your order number is ${data.orderNumber}.`)
     clearCart()
   }
 
@@ -236,75 +238,66 @@ export default function CheckoutPage() {
       </div>
 
       {orderConfirmation && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-final-black/80 p-4 backdrop-blur-sm">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="order-placed-heading"
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative max-w-xl w-full bg-[#0c0f17] border border-cyan-400/30 shadow-[0_0_60px_rgba(56,189,248,0.15)] rounded-3xl p-8"
+            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+            className="w-full max-w-xl rounded-2xl border border-final-off-white/10 bg-final-gray p-6 md:p-8"
           >
-            <div className="absolute inset-0 rounded-3xl border border-white/10 pointer-events-none" />
-            <div className="relative space-y-6">
-              <div className="rounded-2xl bg-final-gray p-6 border border-final-off-white/10">
-                <h2 className="text-3xl font-bold text-final-off-white mb-2">Order Confirmed</h2>
-                <p className="text-final-off-white/70">Your order is now saved and ready for fulfillment.</p>
-              </div>
+            <h2 id="order-placed-heading" className="display text-3xl">Order placed</h2>
+            <p className="mt-2 text-final-muted">
+              {orderConfirmation.paymentUrl
+                ? 'Complete payment to confirm your order. We start preparing it once payment is verified.'
+                : 'Your order is saved. It will be confirmed once payment is received.'}
+            </p>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
-                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Order Number</p>
-                  <p className="text-xl font-semibold text-final-off-white">{orderConfirmation.orderNumber}</p>
-                </div>
-                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
-                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Tracking Number</p>
-                  <p className="text-xl font-semibold text-final-accent">{orderConfirmation.trackingNumber}</p>
-                </div>
+            <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div>
+                <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Order number</dt>
+                <dd className="mt-1 font-mono text-lg">{orderConfirmation.orderNumber}</dd>
               </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Tracking number</dt>
+                <dd className="mt-1 font-mono text-lg">{orderConfirmation.trackingNumber}</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Total</dt>
+                <dd className="mt-1 text-lg tabular-nums">{formatCurrency(orderConfirmation.total)}</dd>
+              </div>
+            </dl>
 
-              {orderConfirmation.paystackUrl ? (
-                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
-                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Payment</p>
-                  <p className="text-final-off-white/70 mb-4">Complete your payment securely using Paystack.</p>
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <a
-                      href={orderConfirmation.paystackUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-full bg-final-accent text-final-black px-6 py-3 font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all"
-                    >
-                      Complete Payment
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => navigator.clipboard.writeText(orderConfirmation.paystackUrl || '')}
-                      className="inline-flex items-center justify-center rounded-full border border-final-light-gray/50 px-6 py-3 text-final-off-white hover:border-final-accent transition-all"
-                    >
-                      Copy Paystack Link
-                    </button>
-                  </div>
-                </div>
+            <div className="mt-6 rounded-xl border border-final-off-white/10 bg-final-black p-5">
+              {orderConfirmation.paymentUrl ? (
+                <>
+                  <p className="text-sm text-final-muted">You’ll pay on Flutterwave’s secure checkout, then come back here.</p>
+                  <a href={orderConfirmation.paymentUrl} className="btn-primary mt-4 w-full sm:w-auto">
+                    Pay {formatCurrency(orderConfirmation.total)}
+                  </a>
+                </>
               ) : (
-                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
-                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Payment</p>
-                  <p className="text-final-off-white/70">No Paystack checkout was generated automatically. You can still track this order and fulfill it manually.</p>
-                </div>
+                <p className="text-sm text-final-muted">
+                  {orderConfirmation.paymentIssue === 'provider_unavailable'
+                    ? 'We couldn’t reach the payment service just now. You can pay from the Track Order page in a few minutes.'
+                    : 'Online payment isn’t available right now. We’ll contact you at the email you entered to arrange payment.'}
+                </p>
               )}
+            </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <button
-                  type="button"
-                  onClick={() => setOrderConfirmation(null)}
-                  className="w-full sm:w-auto rounded-full border border-final-light-gray/30 px-6 py-3 text-final-off-white hover:border-final-accent transition-all"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  onClick={() => router.push(`/track-order?orderNumber=${orderConfirmation.orderNumber}`)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-final-accent text-final-black px-6 py-3 font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all"
-                >
-                  Track Your Order
-                </button>
-              </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <button type="button" onClick={() => setOrderConfirmation(null)} className="btn-secondary">
+                Close
+              </button>
+              <button
+                type="button"
+                onClick={() => router.push(`/track-order?orderNumber=${orderConfirmation.orderNumber}`)}
+                className="btn-secondary"
+              >
+                Track order
+              </button>
             </div>
           </motion.div>
         </div>

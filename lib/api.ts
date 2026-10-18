@@ -1,12 +1,20 @@
 import 'server-only'
 import { NextResponse } from 'next/server'
+import { logger } from '@/lib/log'
 
 export class BadRequest extends Error {}
 
+/** An HTTP error with a status and a message that is safe to show the client. */
+export class HttpError extends Error {
+  constructor(public status: number, message: string) {
+    super(message)
+  }
+}
+
 /** Logs the real error on the server; the client only ever sees a generic message. */
-export function serverError(error: unknown, context: string) {
-  console.error(`[${context}]`, error)
-  return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 })
+export function serverError(error: unknown, context: string, requestId?: string) {
+  logger.error('request.failed', { context, requestId, error: describe(error) })
+  return NextResponse.json({ error: 'Something went wrong. Please try again.', requestId }, { status: 500 })
 }
 
 export function badRequest(message: string) {
@@ -83,23 +91,67 @@ export function pick<T extends string>(body: Record<string, unknown>, keys: read
 }
 
 /** Unguessable public reference like FH-7K2Q9XWMRA (Crockford base32, ~50 bits). */
-export function reference(prefix: string) {
+export function reference(prefix: string, length = 10) {
   const alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
-  const bytes = crypto.getRandomValues(new Uint8Array(10))
+  const bytes = crypto.getRandomValues(new Uint8Array(length))
   return `${prefix}-${Array.from(bytes, (b) => alphabet[b % 32]).join('')}`
 }
 
-/** Wraps a handler so BadRequest becomes a 400 and anything else a generic 500. */
+/** Correlation id for a request: the caller's x-request-id if sane, else a new one. */
+export function requestIdOf(req: unknown) {
+  const incoming = req instanceof Request ? req.headers.get('x-request-id') : null
+  return incoming && /^[A-Za-z0-9-]{8,64}$/.test(incoming) ? incoming : crypto.randomUUID()
+}
+
+type PgLike = { code?: string; message?: string; hint?: string; details?: string }
+const isPg = (e: unknown): e is PgLike => !!e && typeof e === 'object' && 'code' in e && 'message' in e
+
+/**
+ * Database rule violations that are the caller's fault become 4xx with the
+ * database's own message (it is written for humans, e.g. "invalid order
+ * status transition: shipped -> pending_payment"). Everything else is a 500.
+ */
+function fromDatabase(e: unknown): Response | null {
+  if (!isPg(e)) return null
+  if (e.hint === 'order_transition') return NextResponse.json({ error: e.message }, { status: 409 })
+  if (e.code === '22023') return NextResponse.json({ error: e.message }, { status: 400 })
+  if (e.code === '42501') return NextResponse.json({ error: 'Not permitted.' }, { status: 403 })
+  if (e.code === '23505') return NextResponse.json({ error: 'That already exists.' }, { status: 409 })
+  return null
+}
+
+function describe(e: unknown) {
+  if (isPg(e)) return { code: e.code, message: e.message, hint: e.hint }
+  return e
+}
+
+/**
+ * Wraps a route handler: attaches a request id, turns validation and known
+ * database errors into 4xx, logs and hides everything else behind a 500.
+ */
 export function handle<A extends unknown[]>(context: string, fn: (...args: A) => Promise<Response>) {
   return async (...args: A) => {
+    const requestId = requestIdOf(args[0])
+    const started = Date.now()
+    let res: Response
     try {
-      return await fn(...args)
+      res = await fn(...args)
     } catch (error) {
       // Next.js control-flow errors (dynamic usage, redirect, notFound) carry a
       // `digest` and must propagate, or Next could cache a 500 as a static page.
       if (error && typeof error === 'object' && 'digest' in error) throw error
-      if (error instanceof BadRequest) return badRequest(error.message)
-      return serverError(error, context)
+      if (error instanceof BadRequest) res = badRequest(error.message)
+      else if (error instanceof HttpError) res = NextResponse.json({ error: error.message }, { status: error.status })
+      else res = fromDatabase(error) ?? serverError(error, context, requestId)
     }
+    try {
+      res.headers.set('x-request-id', requestId)
+    } catch {
+      // Some responses (e.g. Response.redirect) have immutable headers.
+    }
+    if (res.status >= 400 && res.status < 500) {
+      logger.info('request.rejected', { context, requestId, status: res.status, ms: Date.now() - started })
+    }
+    return res
   }
 }

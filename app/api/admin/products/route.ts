@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireAdmin } from '@/lib/auth'
-import { BadRequest, handle, int, money, readJson, text, url } from '@/lib/api'
+import { requirePermission } from '@/lib/auth'
+import { audit } from '@/lib/audit'
+import { BadRequest, handle, int, money, readJson, requestIdOf, text, url } from '@/lib/api'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
@@ -67,35 +68,40 @@ function productColumns(body: Record<string, unknown>, partial: boolean) {
   return out
 }
 
-// Admin queries run as the signed-in admin under RLS (the admin policies in
-// supabase/migrations), not with the service key.
+// Queries run as the signed-in staff member under RLS (per-tenant permission
+// policies), scoped to the tenant resolved from their membership. The tenant
+// and store are never taken from the request body.
 
 export const GET = handle('admin.products.list', async () => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.read')
   if (denied) return denied
 
-  const { data, error } = await admin.supabase.from('products').select('*').order('created_at', { ascending: false })
+  const { data, error } = await staff.supabase.from('products').select('*')
+    .eq('tenant_id', staff.tenant.tenantId).order('created_at', { ascending: false })
   if (error) throw error
   return NextResponse.json({ products: data || [] })
 })
 
 export const POST = handle('admin.products.create', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.write')
   if (denied) return denied
+  if (!staff.tenant.storeId) throw new BadRequest('This business has no active store.')
 
   const body = await readJson(req, 64_000)
   const id = typeof body.id === 'string' && ID.test(body.id) ? body.id : `p${Date.now()}`
-  const { data, error } = await admin.supabase
+  const { data, error } = await staff.supabase
     .from('products')
-    .insert({ id, ...productColumns(body, false) })
+    .insert({ id, ...productColumns(body, false), tenant_id: staff.tenant.tenantId, store_id: staff.tenant.storeId })
     .select()
     .single()
   if (error) throw error
+  await audit({ tenantId: staff.tenant.tenantId, action: 'product.created', entityType: 'product', entityId: id,
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { name: data.name, price: data.price } })
   return NextResponse.json({ product: data }, { status: 201 })
 })
 
 export const PUT = handle('admin.products.update', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.write')
   if (denied) return denied
 
   const body = await readJson(req, 64_000)
@@ -103,24 +109,32 @@ export const PUT = handle('admin.products.update', async (req: NextRequest) => {
   const updates = productColumns(body, true)
   if (!Object.keys(updates).length) throw new BadRequest('Nothing to update.')
 
-  const { data, error } = await admin.supabase
+  const { data, error } = await staff.supabase
     .from('products')
     .update({ ...updates, updated_at: new Date().toISOString() })
     .eq('id', body.id)
+    .eq('tenant_id', staff.tenant.tenantId)
     .select()
-    .single()
+    .maybeSingle()
   if (error) throw error
+  if (!data) return NextResponse.json({ error: 'Product not found.' }, { status: 404 })
+  await audit({ tenantId: staff.tenant.tenantId, action: 'product.updated', entityType: 'product', entityId: body.id,
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { fields: Object.keys(updates) } })
   return NextResponse.json({ product: data })
 })
 
 export const DELETE = handle('admin.products.delete', async (req: NextRequest) => {
-  const { admin, denied } = await requireAdmin()
+  const { staff, denied } = await requirePermission('products.write')
   if (denied) return denied
 
   const id = new URL(req.url).searchParams.get('id') || ''
   if (!ID.test(id)) throw new BadRequest('Product ID is required.')
 
-  const { error } = await admin.supabase.from('products').delete().eq('id', id)
+  const { data, error } = await staff.supabase.from('products').delete()
+    .eq('id', id).eq('tenant_id', staff.tenant.tenantId).select('id, name')
   if (error) throw error
+  if (!data?.length) return NextResponse.json({ error: 'Product not found.' }, { status: 404 })
+  await audit({ tenantId: staff.tenant.tenantId, action: 'product.deleted', entityType: 'product', entityId: id,
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { name: data[0].name } })
   return NextResponse.json({ message: 'Product deleted' })
 })

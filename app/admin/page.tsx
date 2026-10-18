@@ -226,13 +226,13 @@ export default function AdminPage() {
                 />
               </div>
               <div>
-                <label className="block text-final-off-white/70 text-sm mb-1">Paystack Product URL</label>
+                <label className="block text-final-off-white/70 text-sm mb-1">External payment link (optional)</label>
                 <input
                   name="product_url"
                   type="url"
                   value={form.product_url || ''}
                   onChange={handleChange}
-                  placeholder="https://paystack.com/buy/your-product-slug"
+                  placeholder="https://..."
                   className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
                 />
               </div>

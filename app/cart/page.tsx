@@ -42,7 +42,7 @@ export default function CartPage() {
                 </div>
                 <h1 className="display text-4xl text-final-off-white mb-4">Your cart is empty</h1>
                 <p className="text-xl text-final-off-white/70 mb-8">
-                  Looks like you haven't added anything to your cart yet.
+                  Looks like you haven&apos;t added anything to your cart yet.
                 </p>
               </motion.div>
               
@@ -225,7 +225,7 @@ export default function CartPage() {
                 {/* Security Notice */}
                 <p className="text-sm text-final-off-white/50 text-center mt-4">
                   <FiLock className="inline w-4 h-4 mr-1" />
-                  Secure checkout powered by Stripe
+                  Secure payment with Flutterwave
                 </p>
               </div>
             </div>

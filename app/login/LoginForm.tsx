@@ -37,9 +37,14 @@ export function LoginForm() {
         setError('That email and password don’t match an admin account.')
         return
       }
-      if (data.user?.app_metadata?.role !== 'admin') {
+      // Staff access comes from memberships in the database, not from the token.
+      const [{ data: access }, { data: platform }] = await Promise.all([
+        supabase.rpc('my_tenant_access'),
+        supabase.rpc('am_platform_admin'),
+      ])
+      if (!access?.length && platform !== true) {
         await supabase.auth.signOut()
-        setError('This account doesn’t have admin access.')
+        setError('This account isn’t a staff member of any store.')
         return
       }
       router.replace(safeNext(searchParams.get('next')))

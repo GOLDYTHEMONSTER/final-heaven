@@ -122,7 +122,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-final-off-white mb-4">Product not found</h1>
-            <p className="text-final-off-white/70">The product you're looking for doesn't exist.</p>
+            <p className="text-final-off-white/70">The product you&apos;re looking for doesn&apos;t exist.</p>
           </div>
         </div>
       </Layout>

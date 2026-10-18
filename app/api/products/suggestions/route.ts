@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
+import { getStorefront } from '@/lib/tenancy'
 
 const getSupabase = () => createSupabasePublicClient()
 const strings = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string').slice(0, 50) : [])
@@ -16,6 +17,7 @@ export async function POST(req: Request) {
     const { data: allProducts, error: fetchError } = await getSupabase()
       .from('products')
       .select('*')
+      .eq('store_id', (await getStorefront()).storeId)
       .eq('status', 'active')
       .order('created_at', { ascending: false })
 
