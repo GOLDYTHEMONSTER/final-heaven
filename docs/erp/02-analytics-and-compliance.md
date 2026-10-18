@@ -14,23 +14,24 @@ All figures are for the tenant's own data, computed in the database (`analytics_
 | Average order value | Gross sales ÷ paid orders. |
 | Awaiting payment | Orders placed in the period still in `pending_payment` (count and value). Not sales. |
 | Unverified (legacy) | Orders with `payment_status = 'unverified'`: paid outside the system before 18 Oct 2026. Shown separately, never counted as sales. |
-| Visitors | Distinct anonymous visitor codes per day, summed over the period. One person visiting on three days counts three times; cross-day uniqueness is impossible by design. |
-| Funnel steps | Distinct visitor-days with a `product_view`, `add_to_cart` or `checkout_started` event; then orders placed and paid orders. |
-| Conversion | Paid orders ÷ visitors, same period. |
+| Paid rate | Paid orders ÷ orders placed, same period. |
 | Paying, new and returning customers | Distinct lower-cased emails with a paid order in the period. New: their first ever paid order falls in the period. Returning: two or more paid orders in total. |
 | Top products | By revenue (`price × quantity` from `order_items`) across paid orders in the period. |
-| Sources | Each visitor-day's first event: `utm_source` if present, else the referring host, else "Direct". |
 | To fulfil, in transit, awaiting payment now | Current counts (not period-bound) of orders in `confirmed`/`processing`, `shipped`, and `pending_payment`. |
 
 Not yet available: refunds and net sales (Phase 2), processor fees and settlements (Phase 4).
 
-## How the tracker works (privacy)
+## Visitor analytics: Vercel Web Analytics
 
-- **Events:** `page_view` (every storefront navigation), `product_view`, `add_to_cart` (recorded once, in the cart provider) and `checkout_started`. Orders and payments come from the orders table, never from the tracker.
-- **No cookies, no browser storage.** The browser sends the path (query string removed after reading UTM tags), the referrer and an optional product ID.
-- **Hashing:** the server hashes `IP | user agent` with a random salt that changes daily (`private.analytics_salts`). Salts older than a day are deleted by the daily job, so codes can't be linked across days or reversed. The IP address and user agent are never stored.
-- **Not counted:** visitors sending Do Not Track or Global Privacy Control, known bots, and admin or login pages.
-- **Stored per event:** the event type, path, product ID, referring host, UTM source, medium and campaign, device class (mobile, tablet or desktop) and country (from Vercel's edge header; empty locally).
+Switched from the in-house tracker to Vercel Web Analytics on 18 Oct 2026 (owner's decision): no tracker code or database writes of our own to maintain, plus Vercel's dashboard.
+
+- **Where:** Vercel dashboard → the project → Analytics. Web Analytics must be **enabled in the Vercel project**; it collects only on Vercel deployments (in development it logs to the console and sends nothing).
+- **Page views** are automatic (`<VercelAnalytics />` in `app/layout.tsx`, a wrapper around `@vercel/analytics/next`).
+- **Shopping steps** are custom events from `lib/analytics.ts`: `product_view`, `add_to_cart` (once, in the cart provider), `checkout_started`. **Vercel stores custom events on Pro and Enterprise plans only.**
+- **Privacy filter (`beforeSend`):** drops visitors with Do Not Track or Global Privacy Control; never sends `/admin`, `/login` or `/unsubscribe`; strips every query parameter except `utm_source`, `utm_medium` and `utm_campaign` (addresses here can carry payment references, order numbers or unsubscribe tokens). Verified in the browser.
+- **CSP:** production loads from `/_vercel/insights` (same origin); the dev debug script host `va.vercel-scripts.com` is allowed in development only.
+- **Install note:** `.npmrc` sets `legacy-peer-deps=true`. `@vercel/analytics` lists SvelteKit as an optional peer and npm 11 fails trying to reconcile it with Vitest's Vite. No Svelte package is installed; a clean `npm ci` was verified.
+- **Legacy:** the in-house `analytics_events` table and `track_event` function are no longer written to. They're harmless (the retention job keeps expiring old rows) and can be dropped in a later migration.
 
 ## Customers
 

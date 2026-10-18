@@ -8,7 +8,7 @@ const rows: [string, string, string][] = [
   ['Orders', 'Your email, delivery address, the items you bought and your order history', 'To process and deliver your order and handle returns (contract); to keep records the law requires (legal obligation)'],
   ['Payments', 'Payment status, amount and reference from Flutterwave. Never your card details', 'To confirm you paid and to reconcile our accounts (contract, legal obligation)'],
   ['Newsletter', 'Your email and a record of the consent you gave', 'To send you drop alerts and offers (your consent, which you can withdraw at any time)'],
-  ['Visit statistics', 'Pages and products viewed, cart and checkout steps, the referring website, campaign tags, device type and country', 'To understand how the shop is used and improve it (legitimate interests). This is anonymous: see below'],
+  ['Visit statistics', 'Pages viewed (without any personal details in the address), product views and cart or checkout steps, the referring website, campaign tags, country, and browser and device type', 'To understand how the shop is used and improve it (legitimate interests). Collected anonymously by Vercel Web Analytics: see below'],
   ['Security', 'A scrambled (hashed) form of your IP address, used to limit repeated requests and kept for up to 2 days', 'To protect the shop from abuse and fraud (legitimate interests)'],
 ]
 
@@ -39,9 +39,10 @@ export default function PrivacyPage() {
 
       <Section title="Anonymous visit statistics">
         <ul>
-          <li>We use no analytics or advertising cookies and store nothing on your device for statistics.</li>
-          <li>To count visitors, your IP address and browser details are combined with a random key and turned into a code. The key changes every day and the old one is destroyed, so the code can’t be linked to you or to your visits on other days. Your IP address and browser details are not stored.</li>
-          <li>If your browser sends a Do Not Track or Global Privacy Control signal, you are not counted at all.</li>
+          <li>We use Vercel Web Analytics, which uses no cookies and stores nothing on your device.</li>
+          <li>Vercel tells visits apart with an anonymous code made from your connection that resets every day, so your visits can’t be linked to you or followed across days or other websites.</li>
+          <li>Before anything is sent, we remove personal details from page addresses (such as order and payment references), and we never send staff, sign-in or unsubscribe pages.</li>
+          <li>If your browser sends a Do Not Track or Global Privacy Control signal, nothing is sent and you aren’t counted.</li>
         </ul>
       </Section>
 
@@ -57,7 +58,7 @@ export default function PrivacyPage() {
         <ul>
           <li><strong>Flutterwave</strong>, to process your payment.</li>
           <li><strong>Supabase</strong>, which hosts our database. Our data is stored on its servers in the European Union (Germany).</li>
-          <li><strong>Vercel</strong>, which hosts the website.</li>
+          <li><strong>Vercel</strong>, which hosts the website and provides our anonymous visit statistics.</li>
           <li><strong>Our delivery partners</strong>, who receive your delivery address and order details to deliver your order.</li>
         </ul>
         <p>We don’t sell your data or share it for advertising. These providers process data only on our instructions. Where data is handled outside Nigeria, we rely on the safeguards the Nigeria Data Protection Act requires, such as the providers’ contractual protections.</p>

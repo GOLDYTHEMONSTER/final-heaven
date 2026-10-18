@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Archivo } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
+import { VercelAnalytics } from '@/components/analytics/VercelAnalytics'
 
 // One variable family: the width axis gives the expanded display cut, normal width for body.
 const archivo = Archivo({
@@ -32,6 +33,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <VercelAnalytics />
       </body>
     </html>
   )

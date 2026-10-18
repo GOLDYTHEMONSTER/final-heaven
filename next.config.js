@@ -4,10 +4,12 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 // 'unsafe-inline' scripts are needed by Next 14's inline bootstrap without nonces;
 // 'unsafe-eval' only in dev for React Refresh. Images may come from any https host
-// because product image URLs are entered by admins.
+// because product image URLs are entered by admins. Vercel Web Analytics loads
+// from /_vercel/insights (same origin) in production; its dev debug script is on
+// va.vercel-scripts.com, allowed in development only.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
