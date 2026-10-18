@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FiArrowRight } from 'react-icons/fi'
-import { LogoMark } from '@/components/ui/LogoMark'
+import { NeonMark } from '@/components/ui/NeonMark'
 
 const settle = { type: 'spring', bounce: 0, duration: 0.8 } as const
 
@@ -57,11 +57,7 @@ export function HeroSection() {
           transition={{ type: 'spring', bounce: 0, duration: 1.1 }}
           className="order-1 flex justify-center md:order-2 md:col-span-5 md:justify-end"
         >
-          <LogoMark
-            size={460}
-            priority
-            className="h-[150px] w-auto drop-shadow-[0_0_60px_rgb(255_255_255/0.12)] sm:h-[220px] md:h-[min(56vh,460px)]"
-          />
+          <NeonMark className="h-[150px] sm:h-[220px] md:h-[min(56vh,460px)]" />
         </motion.div>
       </div>
     </section>
