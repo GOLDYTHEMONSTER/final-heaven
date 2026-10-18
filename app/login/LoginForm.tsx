@@ -38,10 +38,16 @@ export function LoginForm() {
         return
       }
       // Staff access comes from memberships in the database, not from the token.
-      const [{ data: access }, { data: platform }] = await Promise.all([
+      const [{ data: access, error: accessError }, { data: platform }] = await Promise.all([
         supabase.rpc('my_tenant_access'),
         supabase.rpc('am_platform_admin'),
       ])
+      if (accessError) {
+        // e.g. 404 when the database hasn't had the Phase 1 migration yet.
+        await supabase.auth.signOut()
+        setError('Admin access couldn’t be checked: the database isn’t set up for staff accounts yet. Contact the site owner.')
+        return
+      }
       if (!access?.length && platform !== true) {
         await supabase.auth.signOut()
         setError('This account isn’t a staff member of any store.')
