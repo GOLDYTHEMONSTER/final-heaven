@@ -21,17 +21,33 @@ All figures are for the tenant's own data, computed in the database (`analytics_
 
 Not yet available: refunds and net sales (Phase 2), processor fees and settlements (Phase 4).
 
-## Visitor analytics: Vercel Web Analytics
+## Visitor analytics: first-party for admin, Vercel alongside
 
-Switched from the in-house tracker to Vercel Web Analytics on 18 Oct 2026 (owner's decision): no tracker code or database writes of our own to maintain, plus Vercel's dashboard.
+**Admin → Analytics is the client's analytics and must stay self-contained.** Vercel Web Analytics is dashboard-only (no query API; only panel CSV exports and Drains), so it can't feed admin. Both run:
 
-- **Where:** Vercel dashboard → the project → Analytics. Web Analytics must be **enabled in the Vercel project**; it collects only on Vercel deployments (in development it logs to the console and sends nothing).
-- **Page views** are automatic (`<VercelAnalytics />` in `app/layout.tsx`, a wrapper around `@vercel/analytics/next`).
-- **Shopping steps** are custom events from `lib/analytics.ts`: `product_view`, `add_to_cart` (once, in the cart provider), `checkout_started`. **Vercel stores custom events on Pro and Enterprise plans only.**
+| | First-party tracker | Vercel Web Analytics |
+| --- | --- | --- |
+| Who sees it | The store owner, in Admin → Analytics | The developer, in the Vercel dashboard |
+| Code | `/api/track`, `PageViewTracker`, `track_event`, `analytics_events` | `<VercelAnalytics />` (`@vercel/analytics/next`) |
+| Page views | `PageViewTracker` on every storefront navigation | automatic |
+| Shopping steps | `lib/analytics.ts` sends `product_view`, `add_to_cart`, `checkout_started` to both | custom events; **stored on Pro plans only** |
+
+Both are cookieless and skip Do Not Track and Global Privacy Control visitors, staff pages, login and unsubscribe. The first-party tracker works the way described below.
+
+### First-party tracker (privacy)
+
+- **No cookies, no browser storage.** The browser sends the path (query string removed after reading UTM tags), the referrer and an optional product ID.
+- **Hashing:** the server hashes `IP | user agent` with a random salt that changes daily (`private.analytics_salts`). Salts older than a day are deleted by the daily job, so codes can't be linked across days or reversed. The IP address and user agent are never stored.
+- **Not counted:** known bots as well.
+- **Stored per event:** the event type, path, product ID, referring host, UTM source, medium and campaign, device class and country (from Vercel's edge header; empty locally).
+
+### Vercel Web Analytics
+
+- Enable Web Analytics in the Vercel project; it collects only on Vercel deployments (in development it logs to the console).
 - **Privacy filter (`beforeSend`):** drops visitors with Do Not Track or Global Privacy Control; never sends `/admin`, `/login` or `/unsubscribe`; strips every query parameter except `utm_source`, `utm_medium` and `utm_campaign` (addresses here can carry payment references, order numbers or unsubscribe tokens). Verified in the browser.
 - **CSP:** production loads from `/_vercel/insights` (same origin); the dev debug script host `va.vercel-scripts.com` is allowed in development only.
 - **Install note:** `.npmrc` sets `legacy-peer-deps=true`. `@vercel/analytics` lists SvelteKit as an optional peer and npm 11 fails trying to reconcile it with Vitest's Vite. No Svelte package is installed; a clean `npm ci` was verified.
-- **Legacy:** the in-house `analytics_events` table and `track_event` function are no longer written to. They're harmless (the retention job keeps expiring old rows) and can be dropped in a later migration.
+- **Do not remove the first-party tracker** in favour of Vercel: admin would lose visitors, conversion, funnel, sources and devices.
 
 ## Customers
 

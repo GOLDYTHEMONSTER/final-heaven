@@ -38,7 +38,7 @@ export const POLICY = {
 
 export const RETENTION = {
   ordersAndPayments: '6 years after the order, for tax and accounting records',
-  analytics: 'held by Vercel as anonymous totals that cannot identify you, for the period our Vercel plan provides',
+  analytics: '13 months in our own anonymous statistics; Vercel keeps its anonymous totals for the period our hosting plan provides',
   newsletter: 'until you unsubscribe',
   abuseProtection: '2 days',
 }

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
-import { ColumnChart, DataTable } from '@/components/admin/charts'
+import { BarList, ColumnChart, DataTable, LineChart } from '@/components/admin/charts'
 import { formatCurrency } from '@/lib/utils/format'
 
 type Summary = Record<string, any>
@@ -66,13 +66,22 @@ export default function AnalyticsPage() {
 
   const s = data
   const daily: { day: string; paidOrders: number; gross: number; visitors: number }[] = s?.daily ?? []
+  const traffic = s?.traffic ?? {}
+  const funnel = s ? [
+    { label: 'Visitors', value: num(traffic.visitorDays) },
+    { label: 'Viewed a product', value: num(traffic.productViewers) },
+    { label: 'Added to cart', value: num(traffic.addedToCart) },
+    { label: 'Started checkout', value: num(traffic.startedCheckout) },
+    { label: 'Placed an order', value: num(s.orders.placed) },
+    { label: 'Paid', value: num(s.orders.paid) },
+  ] : []
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="display text-3xl md:text-4xl">Analytics</h1>
-          <p className="mt-1 text-sm text-final-muted">Sales and customers from your orders. Days are in Lagos time. Visitor traffic is in Vercel Analytics.</p>
+          <p className="mt-1 text-sm text-final-muted">From verified orders and anonymous visit counts. Days are in Lagos time.</p>
         </div>
         {/* One filter row; it scopes everything below. */}
         <div role="radiogroup" aria-label="Date range" className="inline-flex rounded-lg border border-final-off-white/15 p-1">
@@ -107,8 +116,8 @@ export default function AnalyticsPage() {
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               <Stat label="Paid orders" value={count(num(s.orders.paid))} note={`of ${count(num(s.orders.placed))} placed`} />
               <Stat label="Average order" value={naira(num(s.sales.averageOrderValue))} />
-              <Stat label="Orders placed" value={count(num(s.orders.placed))} note="any status" />
-              <Stat label="Paid rate" value={pct(num(s.orders.paid), num(s.orders.placed))} note="paid ÷ placed" />
+              <Stat label="Visitors" value={count(num(traffic.visitorDays))} note="unique per day" />
+              <Stat label="Conversion" value={pct(num(s.orders.paid), num(traffic.visitorDays))} note="paid orders ÷ visitors" />
             </div>
           </section>
 
@@ -118,23 +127,25 @@ export default function AnalyticsPage() {
             <Stat label="Awaiting payment now" value={count(num(s.fulfilment.awaitingPaymentNow))} note="placed, not yet paid" href="/admin/orders?status=pending_payment" />
           </section>
 
-          <Card title="Sales per day" subtitle="Verified paid orders, by the day they were placed. Latest day highlighted.">
-            <ColumnChart label="Gross sales per day" format={naira} axisFormat={compactNaira}
-              points={daily.map((d) => ({ label: dayLabel(d.day), value: num(d.gross) }))} />
-            <DataTable caption="Sales per day" columns={['Day', 'Paid orders', 'Gross sales']}
-              rows={daily.map((d) => [dayLabel(d.day), num(d.paidOrders), naira(num(d.gross))])} />
-          </Card>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Card title="Sales per day" subtitle="Verified paid orders, by the day they were placed. Latest day highlighted.">
+              <ColumnChart label="Gross sales per day" format={naira} axisFormat={compactNaira}
+                points={daily.map((d) => ({ label: dayLabel(d.day), value: num(d.gross) }))} />
+              <DataTable caption="Sales per day" columns={['Day', 'Paid orders', 'Gross sales']}
+                rows={daily.map((d) => [dayLabel(d.day), num(d.paidOrders), naira(num(d.gross))])} />
+            </Card>
+            <Card title="Visitors per day" subtitle="Anonymous, counted once per person per day.">
+              <LineChart label="Visitors per day" format={(v) => `${count(v)} visitors`}
+                points={daily.map((d) => ({ label: dayLabel(d.day), value: num(d.visitors) }))} />
+              <DataTable caption="Visitors per day" columns={['Day', 'Visitors']}
+                rows={daily.map((d) => [dayLabel(d.day), num(d.visitors)])} />
+            </Card>
+          </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
-            <Card title="Visitors and traffic" subtitle="Page views, sources, countries and devices.">
-              <p className="text-sm text-final-muted">
-                Visitor analytics run on Vercel Web Analytics: cookieless, and visitors with Do Not Track or Global Privacy Control aren’t counted.
-                Open your project in Vercel and choose <span className="text-final-off-white">Analytics</span>.
-              </p>
-              <a href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer" className="btn-secondary mt-4 px-4 py-2">
-                Open Vercel
-              </a>
-              <p className="mt-3 text-xs text-final-muted">Shopping steps (product views, add to cart, checkout) are sent as custom events, which Vercel stores on Pro plans.</p>
+            <Card title="Funnel" subtitle="Each step as a share of visitors.">
+              <BarList emphasise={funnel.length - 1} format={count}
+                rows={funnel.map((f) => ({ ...f, note: pct(f.value, funnel[0].value) }))} />
             </Card>
             <Card title="Top products" subtitle="By revenue from paid orders.">
               {s.topProducts.length ? (
@@ -164,6 +175,15 @@ export default function AnalyticsPage() {
             </Card>
           </div>
 
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Card title="Where visitors come from" subtitle="Campaign tag if present, otherwise the referring site.">
+              <BarList format={(v) => `${count(v)}`} rows={(s.sources ?? []).map((r: any) => ({ label: r.source, value: num(r.visitors) }))} />
+            </Card>
+            <Card title="Devices" subtitle="Visitors per day by device type.">
+              <BarList format={(v) => `${count(v)}`} rows={(s.devices ?? []).map((r: any) => ({ label: r.device.charAt(0).toUpperCase() + r.device.slice(1), value: num(r.visitors) }))} />
+            </Card>
+          </div>
+
           {(num(s.orders.unverifiedLegacy) > 0 || num(s.orders.awaitingPayment) > 0) && (
             <p className="text-sm text-final-muted">
               Not counted as sales: {count(num(s.orders.awaitingPayment))} awaiting payment ({naira(num(s.orders.awaitingPaymentValue))})
@@ -177,10 +197,11 @@ export default function AnalyticsPage() {
               <div><dt className="font-medium text-final-off-white">Gross sales</dt><dd>Total of orders placed in the period whose payment was verified by Flutterwave or recorded by staff. Before refunds.</dd></div>
               <div><dt className="font-medium text-final-off-white">Paid orders</dt><dd>Orders placed in the period with a verified payment. Awaiting-payment and older unverified orders are excluded.</dd></div>
               <div><dt className="font-medium text-final-off-white">Average order</dt><dd>Gross sales ÷ paid orders.</dd></div>
-              <div><dt className="font-medium text-final-off-white">Orders placed</dt><dd>All orders created in the period, whatever their status.</dd></div>
-              <div><dt className="font-medium text-final-off-white">Paid rate</dt><dd>Paid orders ÷ orders placed, for the same period.</dd></div>
+              <div><dt className="font-medium text-final-off-white">Visitors</dt><dd>People counted once per day, anonymously (no cookies). Someone visiting on three days counts three times.</dd></div>
+              <div><dt className="font-medium text-final-off-white">Conversion</dt><dd>Paid orders ÷ visitors, for the same period.</dd></div>
               <div><dt className="font-medium text-final-off-white">New vs returning</dt><dd>New: their first ever paid order is in this period. Returning: two or more paid orders in total.</dd></div>
-              <div><dt className="font-medium text-final-off-white">Visitors</dt><dd>Counted by Vercel Web Analytics and shown in the Vercel dashboard, not here.</dd></div>
+              <div><dt className="font-medium text-final-off-white">Not counted</dt><dd>Visitors with Do Not Track or Global Privacy Control on, and known bots.</dd></div>
+              <div><dt className="font-medium text-final-off-white">Tracking started</dt><dd>{s.trackingSince ? new Date(s.trackingSince).toLocaleDateString('en-GB') : 'No visits recorded yet'}. Visitor figures before then are zero.</dd></div>
             </dl>
           </details>
         </div>

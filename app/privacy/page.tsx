@@ -39,9 +39,10 @@ export default function PrivacyPage() {
 
       <Section title="Anonymous visit statistics">
         <ul>
-          <li>We use Vercel Web Analytics, which uses no cookies and stores nothing on your device.</li>
-          <li>Vercel tells visits apart with an anonymous code made from your connection that resets every day, so your visits can’t be linked to you or followed across days or other websites.</li>
-          <li>Before anything is sent, we remove personal details from page addresses (such as order and payment references), and we never send staff, sign-in or unsubscribe pages.</li>
+          <li>We count visits in two ways, both anonymous and without cookies or anything stored on your device: our own statistics, and Vercel Web Analytics from our hosting provider.</li>
+          <li>Our own statistics: your IP address and browser details are combined with a random key and turned into a code. The key changes every day and the old one is destroyed, so the code can’t be linked to you or to your visits on other days. Your IP address and browser details are not stored.</li>
+          <li>Vercel tells visits apart with a similar anonymous code that resets every day, so visits can’t be followed across days or other websites.</li>
+          <li>We remove personal details from page addresses (such as order and payment references) before either records them, and staff, sign-in and unsubscribe pages are never counted.</li>
           <li>If your browser sends a Do Not Track or Global Privacy Control signal, nothing is sent and you aren’t counted.</li>
         </ul>
       </Section>
