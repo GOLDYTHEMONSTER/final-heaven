@@ -2,13 +2,20 @@
 // Every value that came from a customer is HTML-escaped. Light layout with
 // table markup and inline styles, which is what email clients render reliably.
 import { BUSINESS, POLICY } from '@/lib/legal'
+import { formatDay } from '@/lib/catalog'
 
 export type OrderEmailData = {
   orderNumber: string
   email: string
+  subtotal?: number | string
+  discount?: number | string
+  promoCode?: string | null
   total: number | string
   currency: string
-  items: { name: string; quantity: number; size: string | null; price: number | string }[]
+  isPreorder?: boolean
+  /** Lines the shop couldn't fully cover from stock when the order was paid. */
+  stockShortfall?: { name: string; size: string | null; missing: number }[] | null
+  items: { name: string; quantity: number; size: string | null; color?: string | null; price: number | string; preorder?: boolean; shipsOn?: string | null }[]
   trackingNumber: string
   shippingCity: string | null
   shippingState: string | null
@@ -81,21 +88,31 @@ ${rows.filter(([, v]) => v).map(([k, v]) => `<tr><td style="padding:6px 0;color:
 </table>`
 }
 
+const shipDate = (d: string) => formatDay(d)
+const itemDetails = (i: OrderEmailData['items'][number]) =>
+  [i.size ? `Size ${i.size}` : null, i.color ? `Colour ${i.color}` : null, i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null]
+    .filter(Boolean).join(' · ')
+
 function itemsTable(o: OrderEmailData) {
+  const discount = Number(o.discount ?? 0)
   const rows = o.items.map((i) => `<tr>
-<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${i.size ? `<br><span style="color:${C.muted};font-size:12px;">Size ${escapeHtml(i.size)}</span>` : ''}</td>
+<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${itemDetails(i) ? `<br><span style="color:${C.muted};font-size:12px;">${escapeHtml(itemDetails(i))}</span>` : ''}</td>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.muted};text-align:center;white-space:nowrap;">× ${escapeHtml(i.quantity)}</td>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};text-align:right;white-space:nowrap;">${escapeHtml(formatMoney(Number(i.price) * i.quantity, o.currency))}</td>
 </tr>`).join('\n')
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;font-size:14px;">
 ${rows}
+${discount > 0 ? `<tr><td colspan="2" style="padding:12px 0 0;color:${C.muted};">Discount${o.promoCode ? ` (${escapeHtml(o.promoCode)})` : ''}</td>
+<td style="padding:12px 0 0;color:${C.muted};text-align:right;white-space:nowrap;">-${escapeHtml(formatMoney(discount, o.currency))}</td></tr>` : ''}
 <tr><td colspan="2" style="padding:12px 0 0;color:${C.ink};font-weight:700;">Total paid</td>
 <td style="padding:12px 0 0;color:${C.ink};font-weight:700;text-align:right;white-space:nowrap;">${escapeHtml(formatMoney(o.total, o.currency))}</td></tr>
 </table>`
 }
 
-const itemsText = (o: OrderEmailData) =>
-  o.items.map((i) => `- ${i.name}${i.size ? ` (size ${i.size})` : ''} × ${i.quantity}  ${formatMoney(Number(i.price) * i.quantity, o.currency)}`).join('\n')
+const itemsText = (o: OrderEmailData) => [
+  ...o.items.map((i) => `- ${i.name}${itemDetails(i) ? ` (${itemDetails(i)})` : ''} × ${i.quantity}  ${formatMoney(Number(i.price) * i.quantity, o.currency)}`),
+  ...(Number(o.discount ?? 0) > 0 ? [`Discount${o.promoCode ? ` (${o.promoCode})` : ''}: -${formatMoney(Number(o.discount), o.currency)}`] : []),
+].join('\n')
 
 function customerFooter(site: string) {
   const contact = BUSINESS.email
@@ -107,12 +124,15 @@ function customerFooter(site: string) {
 const trackUrl = (site: string, orderNumber: string) => `${site}/track-order?orderNumber=${encodeURIComponent(orderNumber)}`
 
 export function orderPaidEmail(o: OrderEmailData, site: string): RenderedEmail {
-  const subject = `Payment received for order ${o.orderNumber}`
+  const subject = `Order ${o.orderNumber} confirmed`
+  const next = o.isPreorder
+    ? 'Pre-order items ship from the date shown below. We\'ll email you when your order ships.'
+    : 'We\'re getting it ready and will email you when it ships.'
   const html = layout({
-    preheader: `We've received your payment of ${formatMoney(o.total, o.currency)}. We're getting your order ready.`,
-    heading: 'Thank you. Your payment is confirmed.',
+    preheader: `We've received your payment of ${formatMoney(o.total, o.currency)}. Your order is placed.`,
+    heading: 'Thank you. Your order is placed.',
     body: [
-      p(`We've received your payment for order <strong>${escapeHtml(o.orderNumber)}</strong> and we're getting it ready. We'll email you again when it ships.`),
+      p(`Your payment is confirmed and order <strong>${escapeHtml(o.orderNumber)}</strong> is placed. ${escapeHtml(next)}`),
       itemsTable(o),
       detailRows([
         ['Order number', o.orderNumber],
@@ -125,9 +145,9 @@ export function orderPaidEmail(o: OrderEmailData, site: string): RenderedEmail {
     footer: customerFooter(site),
   })
   const text = [
-    'Thank you. Your payment is confirmed.',
+    'Thank you. Your order is placed.',
     '',
-    `We've received your payment for order ${o.orderNumber} and we're getting it ready. We'll email you again when it ships.`,
+    `Your payment is confirmed and order ${o.orderNumber} is placed. ${next}`,
     '',
     itemsText(o),
     `Total paid: ${formatMoney(o.total, o.currency)}`,
@@ -180,13 +200,17 @@ export function staffOrderPaidEmail(o: OrderEmailData, site: string): RenderedEm
   const amount = formatMoney(o.total, o.currency)
   const subject = cancelled
     ? `Payment on cancelled order ${o.orderNumber}: refund needed`
-    : `New paid order ${o.orderNumber} · ${amount}`
+    : o.stockShortfall?.length
+      ? `New order ${o.orderNumber} · ${amount} · stock short`
+      : `New order ${o.orderNumber} · ${amount}`
   const link = `${site}/admin/orders?q=${encodeURIComponent(o.orderNumber)}`
   const html = layout({
     preheader: `${amount}${o.shippingCity ? ` · ${o.shippingCity}` : ''}`,
     heading: cancelled ? 'A payment arrived for a cancelled order' : 'New paid order, ready to fulfil',
     body: [
       cancelled ? p(`<strong style="color:${C.ember};">This order was already cancelled.</strong> The customer has paid and needs a refund.`) : '',
+      o.stockShortfall?.length ? p(`<strong style="color:${C.ember};">Stock ran short when this was paid:</strong> ${o.stockShortfall.map((l) => `${escapeHtml(l.name)}${l.size ? ` (${escapeHtml(l.size)})` : ''}: ${l.missing} missing`).join('; ')}. Restock, or contact the customer about a refund for the missing items.`) : '',
+      o.isPreorder ? p('Includes pre-order items: ship them from their pre-order date.') : '',
       itemsTable(o),
       detailRows([
         ['Order number', o.orderNumber],
@@ -199,6 +223,8 @@ export function staffOrderPaidEmail(o: OrderEmailData, site: string): RenderedEm
   })
   const text = [
     cancelled ? 'A payment arrived for a cancelled order. The customer needs a refund.' : 'New paid order, ready to fulfil.',
+    ...(o.stockShortfall?.length ? [`STOCK SHORT: ${o.stockShortfall.map((l) => `${l.name}${l.size ? ` (${l.size})` : ''}: ${l.missing} missing`).join('; ')}`] : []),
+    ...(o.isPreorder ? ['Includes pre-order items.'] : []),
     '',
     itemsText(o),
     `Total paid: ${amount}`,

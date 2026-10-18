@@ -226,7 +226,7 @@ export default function AdminPage() {
                 />
               </div>
               <div>
-                <label className="block text-final-off-white/70 text-sm mb-1">External payment link (optional)</label>
+                <label className="block text-final-off-white/70 text-sm mb-1">Staff reference link (optional, never shown to customers; they always pay through checkout)</label>
                 <input
                   name="product_url"
                   type="url"
@@ -250,15 +250,16 @@ export default function AdminPage() {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block text-final-off-white/70 text-sm mb-1">Original Price</label>
+                  <label className="block text-final-off-white/70 text-sm mb-1">Original price (for a sale)</label>
                   <input 
                     name="original_price" 
                     type="number" 
                     step="0.01"
-                    value={form.original_price || ''} 
-                    onChange={handleChange} 
-                    className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" 
+                    value={form.original_price || ''}
+                    onChange={handleChange}
+                    className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
                   />
+                  <p className="mt-1 text-xs text-final-off-white/50">Shown crossed out; must be higher than the price. Leave empty for no sale.</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -414,6 +415,29 @@ export default function AdminPage() {
                   </button>
                 </div>
               </div>
+              <div>
+                <label className="block text-final-off-white/70 text-sm mb-1">Release date (optional)</label>
+                <input name="release_date" type="date" value={form.release_date || ''} onChange={handleChange} className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" />
+                <p className="mt-1 text-xs text-final-off-white/50">Before this date the product shows &ldquo;Coming soon&rdquo; and can&apos;t be bought, unless pre-orders are on.</p>
+              </div>
+              <div className="rounded-lg border border-final-light-gray/30 p-4 space-y-3">
+                <label className="flex items-center gap-2 text-final-off-white/80">
+                  <input type="checkbox" name="preorder" checked={!!form.preorder} onChange={handleChange} /> Take pre-orders
+                </label>
+                {form.preorder && (
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                      <label className="block text-final-off-white/70 text-sm mb-1">Ships from *</label>
+                      <input name="preorder_ships_on" type="date" required value={form.preorder_ships_on || ''} onChange={handleChange} className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" />
+                    </div>
+                    <div className="flex-1">
+                      <label className="block text-final-off-white/70 text-sm mb-1">Pre-orders available *</label>
+                      <input name="preorder_limit" type="number" min={0} required value={form.preorder_limit ?? 0} onChange={handleChange} className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" />
+                    </div>
+                  </div>
+                )}
+                <p className="text-xs text-final-off-white/50">Customers pay in full through Flutterwave now. Each paid pre-order uses one from &ldquo;available&rdquo;; stock isn&apos;t touched. Untick when the stock arrives.</p>
+              </div>
               <div className="flex gap-4 flex-wrap">
                 <label className="flex items-center gap-2 text-final-off-white/80">
                   <input type="checkbox" name="is_new" checked={form.is_new} onChange={handleChange} /> New
@@ -425,7 +449,7 @@ export default function AdminPage() {
                   <input type="checkbox" name="is_trending" checked={form.is_trending} onChange={handleChange} /> Trending
                 </label>
                 <label className="flex items-center gap-2 text-final-off-white/80">
-                  <input type="checkbox" name="members_only" checked={form.members_only} onChange={handleChange} /> Members Only
+                  <input type="checkbox" name="members_only" checked={form.members_only} onChange={handleChange} /> Members only (can&apos;t be bought until membership launches)
                 </label>
               </div>
               <div className="flex gap-4">

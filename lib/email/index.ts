@@ -18,15 +18,18 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
 
     async loadOrder(id) {
       const { data, error } = await db.from('orders')
-        .select('order_number, email, total, currency, order_items, tracking_number, shipping_city, shipping_state, shipping_carrier, shipping_reference, status')
+        .select('order_number, email, subtotal, discount, promo_code, total, currency, is_preorder, stock_shortfall, order_items, tracking_number, shipping_city, shipping_state, shipping_carrier, shipping_reference, status')
         .eq('id', id).maybeSingle()
       if (error) throw error
       if (!data) return null
       const items = Array.isArray(data.order_items) ? data.order_items : []
       return {
-        orderNumber: data.order_number, email: data.email, total: data.total, currency: data.currency,
+        orderNumber: data.order_number, email: data.email, subtotal: data.subtotal, discount: data.discount,
+        promoCode: data.promo_code, total: data.total, currency: data.currency, isPreorder: Boolean(data.is_preorder),
+        stockShortfall: Array.isArray(data.stock_shortfall) ? data.stock_shortfall : null,
         items: items.map((i: Record<string, any>) => ({
-          name: String(i.name ?? 'Item'), quantity: Number(i.quantity ?? 1), size: i.size ?? null, price: i.price ?? 0,
+          name: String(i.name ?? 'Item'), quantity: Number(i.quantity ?? 1), size: i.size ?? null, color: i.color ?? null,
+          price: i.price ?? 0, preorder: Boolean(i.preorder), shipsOn: i.ships_on ?? null,
         })),
         trackingNumber: data.tracking_number, shippingCity: data.shipping_city, shippingState: data.shipping_state,
         shippingCarrier: data.shipping_carrier, shippingReference: data.shipping_reference, status: data.status,

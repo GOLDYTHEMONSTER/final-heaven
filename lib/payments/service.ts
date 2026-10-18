@@ -11,7 +11,9 @@ export type PaymentRecord = {
   id: string
   reference: string
   tenantId: string
-  orderId: string
+  /** Set once the order exists: at once for legacy orders, on payment for checkouts. */
+  orderId: string | null
+  checkoutId: string | null
   orderNumber: string
   amountMinor: number
   currency: string
@@ -21,7 +23,7 @@ export type PaymentRecord = {
 }
 
 export type ApplyOutcome =
-  | 'applied' | 'already_applied' | 'applied_to_cancelled_order' | 'rejected_amount'
+  | 'applied' | 'already_applied' | 'applied_to_cancelled_order' | 'duplicate_payment' | 'rejected_amount'
   | 'rejected_currency' | 'failed_recorded' | 'pending' | 'unknown_reference'
 
 export type StoredEvent = { id: string; duplicate: boolean }
@@ -36,8 +38,8 @@ export type BacklogEvent = {
 
 /** Persistence the workflows need; implemented on Supabase in ./store.ts. */
 export interface PaymentStore {
-  findReusableAttempt(orderId: string, maxAgeMinutes: number): Promise<PaymentRecord | null>
-  createAttempt(a: { tenantId: string; orderId: string; reference: string; amountMinor: number; currency: string; provider: string }): Promise<void>
+  findReusableAttempt(target: PaymentTarget, maxAgeMinutes: number): Promise<PaymentRecord | null>
+  createAttempt(a: { target: PaymentTarget; reference: string; amountMinor: number; currency: string; provider: string }): Promise<void>
   setCheckoutUrl(reference: string, url: string): Promise<void>
   recordInitFailure(reference: string, reason: string): Promise<void>
   getByReference(reference: string): Promise<PaymentRecord | null>
@@ -48,6 +50,9 @@ export interface PaymentStore {
   stalePayments(olderThanMinutes: number, limit: number): Promise<PaymentRecord[]>
   markAbandoned(reference: string): Promise<void>
 }
+
+/** What a payment pays for: a checkout (its order is placed when it succeeds) or an existing order. */
+export type PaymentTarget = { kind: 'checkout' | 'order'; id: string; tenantId: string }
 
 export type Deps = {
   store: PaymentStore
@@ -70,27 +75,25 @@ export type StartResult =
 
 export async function startPayment(
   deps: Deps,
-  order: { id: string; tenantId: string; orderNumber: string; amountMinor: number; currency: string; email: string },
+  payFor: PaymentTarget & { amountMinor: number; currency: string; email: string; description: string },
   redirectBaseUrl: string
 ): Promise<StartResult> {
   const { store, provider, log } = deps
   if (!provider) return { ok: false, reason: 'not_configured' }
+  const target: PaymentTarget = { kind: payFor.kind, id: payFor.id, tenantId: payFor.tenantId }
 
-  // A recent link for the same order is reused, so a double-click or a retry
-  // after a slow response doesn't create a second checkout.
-  const existing = await store.findReusableAttempt(order.id, REUSE_ATTEMPT_MINUTES)
+  // A recent link for the same checkout is reused, so a double-click or a retry
+  // after a slow response doesn't create a second payment.
+  const existing = await store.findReusableAttempt(target, REUSE_ATTEMPT_MINUTES)
   if (existing?.checkoutUrl) return { ok: true, checkoutUrl: existing.checkoutUrl, reference: existing.reference, reused: true }
 
   const reference = newReference('FHP', 12)
-  await store.createAttempt({
-    tenantId: order.tenantId, orderId: order.id, reference, amountMinor: order.amountMinor,
-    currency: order.currency, provider: provider.name,
-  })
+  await store.createAttempt({ target, reference, amountMinor: payFor.amountMinor, currency: payFor.currency, provider: provider.name })
   try {
     const redirectUrl = `${redirectBaseUrl.replace(/\/$/, '')}/checkout/complete?ref=${encodeURIComponent(reference)}`
     const { checkoutUrl } = await provider.initiate({
-      reference, amountMinor: order.amountMinor, currency: order.currency,
-      customer: { email: order.email }, redirectUrl, description: `Order ${order.orderNumber}`,
+      reference, amountMinor: payFor.amountMinor, currency: payFor.currency,
+      customer: { email: payFor.email }, redirectUrl, description: payFor.description,
     })
     await store.setCheckoutUrl(reference, checkoutUrl)
     return { ok: true, checkoutUrl, reference, reused: false }
@@ -99,7 +102,7 @@ export async function startPayment(
     // reconciliation will pick it up if the customer did reach checkout.
     const retryable = e instanceof ProviderError && e.retryable
     await store.recordInitFailure(reference, (e as Error).message)
-    log('payment.initiate_failed', { reference, order: order.orderNumber, retryable, error: (e as Error).message })
+    log('payment.initiate_failed', { reference, target: target.kind, retryable, error: (e as Error).message })
     return { ok: false, reason: retryable ? 'provider_unavailable' : 'provider_rejected', reference }
   }
 }

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { handle } from '@/lib/api'
 import { getStorefront } from '@/lib/tenancy'
+import { storeToday, toPublicProduct } from '@/lib/catalog'
 
 export const GET = handle('products.get', async (_req: Request, { params }: { params: { id: string } }) => {
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(params.id)) {
@@ -19,5 +20,5 @@ export const GET = handle('products.get', async (_req: Request, { params }: { pa
   if (error) throw error
   if (!data) return NextResponse.json({ product: null }, { status: 404 })
 
-  return NextResponse.json({ product: data })
+  return NextResponse.json({ product: toPublicProduct(data, storeToday(store.timeZone)) })
 })

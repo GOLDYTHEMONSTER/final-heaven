@@ -53,11 +53,23 @@ describe('templates', () => {
 
   it('receipt carries items, total, tracking link and a plain-text part', () => {
     const r = orderPaidEmail(ORDER, 'https://s.test')
-    expect(r.subject).toBe('Payment received for order FH-ABC123')
+    expect(r.subject).toBe('Order FH-ABC123 confirmed')
     expect(r.html).toContain('Ember Runner &lt;b&gt;')
     expect(r.html).toContain('₦24,999.90')
     expect(r.html).toContain('https://s.test/track-order?orderNumber=FH-ABC123')
     expect(r.text).toContain('Total paid: ₦24,999.90')
+  })
+
+  it('shows discount, colour and pre-order ship date; warns staff about a stock shortfall', () => {
+    const o = { ...ORDER, discount: '2500.00', promoCode: 'SAVE10', isPreorder: true,
+      items: [{ name: 'Tee', quantity: 1, size: 'M', color: 'black', price: 27499.9, preorder: true, shipsOn: '2026-12-01' }],
+      stockShortfall: [{ name: 'Tee', size: 'M', missing: 1 }] }
+    const r = orderPaidEmail(o, 'https://s.test')
+    expect(r.html).toContain('Discount (SAVE10)')
+    expect(r.text).toContain('Size M · Colour black · Pre-order, ships from 1 December 2026')
+    const staff = staffOrderPaidEmail(o, 'https://s.test')
+    expect(staff.subject).toMatch(/stock short/)
+    expect(staff.text).toContain('STOCK SHORT: Tee (M): 1 missing')
   })
 
   it('flags a payment on a cancelled order for refund', () => {

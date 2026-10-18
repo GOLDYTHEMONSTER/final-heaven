@@ -37,15 +37,15 @@ describe('order pricing', () => {
   ]
 
   it('uses catalogue prices, never anything from the cart', () => {
-    const priced = priceOrder([{ id: 'shoe', size: 'M', quantity: 2 }, { id: 'tee', size: null, quantity: 1 }], catalogue, 'NGN')
+    const priced = priceOrder([{ id: 'shoe', size: 'M', quantity: 2 }, { id: 'tee', size: null, quantity: 1 }], catalogue, 'NGN', { today: '2026-10-18' })
     expect(priced.totalMinor).toBe(2 * 2499990 + 1850000)
     expect(priced.items[0]).toMatchObject({ id: 'shoe', price: 24999.9, quantity: 2, image: '/s.png' })
   })
 
   it('refuses unavailable products and overselling, counting all sizes of a product', () => {
-    expect(() => priceOrder([{ id: 'old', size: null, quantity: 1 }], catalogue, 'NGN')).toThrow(/no longer available/)
-    expect(() => priceOrder([{ id: 'ghost', size: null, quantity: 1 }], catalogue, 'NGN')).toThrow(/no longer available/)
-    expect(() => priceOrder([{ id: 'shoe', size: 'M', quantity: 2 }, { id: 'shoe', size: 'L', quantity: 2 }], catalogue, 'NGN'))
+    expect(() => priceOrder([{ id: 'old', size: null, quantity: 1 }], catalogue, 'NGN', { today: '2026-10-18' })).toThrow(/no longer available/)
+    expect(() => priceOrder([{ id: 'ghost', size: null, quantity: 1 }], catalogue, 'NGN', { today: '2026-10-18' })).toThrow(/no longer available/)
+    expect(() => priceOrder([{ id: 'shoe', size: 'M', quantity: 2 }, { id: 'shoe', size: 'L', quantity: 2 }], catalogue, 'NGN', { today: '2026-10-18' }))
       .toThrow(/Only 3 left/)
   })
 })

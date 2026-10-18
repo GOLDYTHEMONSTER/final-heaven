@@ -1,29 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FiTrash2, FiArrowLeft, FiLock } from 'react-icons/fi'
+import { FiTrash2, FiArrowLeft, FiLock, FiAlertCircle } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
+import { lineKey } from '@/lib/stores/cartStore'
+import { formatDay } from '@/lib/catalog'
+import { quoteLineAt, useQuote } from '@/lib/useQuote'
+
+const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, total, clearCart } = useCart()
-  const [promoCode, setPromoCode] = useState('')
-  const [discount, setDiscount] = useState(0)
-
-  const handlePromoCode = () => {
-    // Mock promo code logic
-    if (promoCode.toLowerCase() === 'final10') {
-      setDiscount(total * 0.1)
-    } else {
-      alert('Invalid promo code')
-    }
-  }
-
-  const finalTotal = total - discount
+  const { items, removeItem, updateQuantity, total, clearCart, promoCode, setPromoCode } = useCart()
+  const [promoInput, setPromoInput] = useState(promoCode)
+  useEffect(() => setPromoInput(promoCode), [promoCode])
+  // Prices, discount and availability come from the server: exactly what checkout will charge.
+  const { quote, loading } = useQuote(items, promoCode)
+  const subtotal = quote ? Number(quote.subtotal) : total
+  const discount = quote ? Number(quote.discount) : 0
+  const finalTotal = quote ? Number(quote.total) : total
+  const lineIssues = quote?.lines.some((l) => l.issue) ?? false
+  const canCheckout = !!quote && !lineIssues && !loading
 
   if (items.length === 0) {
     return (
@@ -81,9 +82,14 @@ export default function CartPage() {
 
               <div className="space-y-6">
                 <AnimatePresence>
-                  {items.map((item, index) => (
+                  {items.map((item, index) => {
+                    const line = quoteLineAt(quote, items, index)
+                    const key = lineKey(item)
+                    const size = line ? line.size : item.size
+                    const color = line ? line.color : item.color
+                    return (
                     <motion.div
-                      key={`${item.id}-${item.size}`}
+                      key={key}
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 50 }}
@@ -112,14 +118,26 @@ export default function CartPage() {
                         {/* Product Info */}
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-semibold text-final-off-white mb-1">{item.name}</h3>
-                          <p className="text-final-off-white/70 mb-2">Size: {item.size}</p>
-                          <p className="text-xl font-bold text-final-accent">{formatCurrency(item.price)}</p>
+                          <p className="text-final-off-white/70 mb-2">
+                            {[size ? `Size ${size}` : null, color ? `Colour ${color}` : null].filter(Boolean).join(' · ')}
+                          </p>
+                          <p className="text-xl font-bold text-final-accent">{formatCurrency(line ? Number(line.unitPrice) : item.price)}</p>
+                          {line?.preorder && line.shipsOn && (
+                            <p className="mt-1 text-sm text-final-ember">Pre-order · ships from {formatDate(line.shipsOn)}</p>
+                          )}
+                          {line?.issue && (
+                            <p className="mt-2 flex items-start gap-1.5 text-sm text-red-400" role="alert">
+                              <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                              <span>{line.issue} <Link href={`/product/${item.id}`} className="underline underline-offset-2">View item</Link></span>
+                            </p>
+                          )}
                         </div>
 
                         {/* Quantity Controls */}
                         <div className="flex items-center space-x-3">
                           <button
-                            onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                            onClick={() => updateQuantity(key, item.quantity - 1)}
+                            aria-label={`Decrease quantity of ${item.name}`}
                             className="w-8 h-8 bg-final-gray border border-final-light-gray rounded text-final-off-white hover:bg-final-accent hover:text-final-black transition-colors"
                           >
                             -
@@ -128,7 +146,8 @@ export default function CartPage() {
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            onClick={() => updateQuantity(key, item.quantity + 1)}
+                            aria-label={`Increase quantity of ${item.name}`}
                             className="w-8 h-8 bg-final-gray border border-final-light-gray rounded text-final-off-white hover:bg-final-accent hover:text-final-black transition-colors"
                           >
                             +
@@ -137,14 +156,16 @@ export default function CartPage() {
 
                         {/* Remove Button */}
                         <button
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removeItem(key)}
+                          aria-label={`Remove ${item.name}`}
                           className="p-2 text-final-off-white/70 hover:text-red-400 transition-colors"
                         >
                           <FiTrash2 className="w-5 h-5" />
                         </button>
                       </div>
                     </motion.div>
-                  ))}
+                    )
+                  })}
                 </AnimatePresence>
               </div>
 
@@ -168,34 +189,42 @@ export default function CartPage() {
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-lg p-6 border border-final-light-gray/30 sticky top-24">
                 <h2 className="text-2xl font-bold text-final-off-white mb-6">Order Summary</h2>
 
-                {/* Promo Code */}
-                <div className="mb-6">
+                {/* Promo Code: checked and applied by the server */}
+                <form className="mb-6" onSubmit={(e) => { e.preventDefault(); setPromoCode(promoInput) }}>
                   <div className="flex space-x-2">
                     <input
                       type="text"
                       placeholder="Promo code"
-                      value={promoCode}
-                      onChange={(e) => setPromoCode(e.target.value)}
-                      className="flex-1 px-4 py-3 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent transition-colors"
+                      aria-label="Promo code"
+                      value={promoInput}
+                      onChange={(e) => setPromoInput(e.target.value.toUpperCase())}
+                      maxLength={30}
+                      autoCapitalize="characters"
+                      className="min-w-0 flex-1 px-4 py-3 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent transition-colors"
                     />
-                    <button
-                      onClick={handlePromoCode}
-                      className="px-4 py-3 bg-final-accent text-final-black rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-                    >
-                      Apply
-                    </button>
+                    {promoCode ? (
+                      <button type="button" onClick={() => setPromoCode('')} className="px-4 py-3 border border-final-light-gray/30 text-final-off-white rounded-lg font-semibold">
+                        Remove
+                      </button>
+                    ) : (
+                      <button type="submit" disabled={!promoInput.trim()} className="px-4 py-3 bg-final-accent text-final-black rounded-lg font-semibold transition-all duration-300 disabled:opacity-50">
+                        Apply
+                      </button>
+                    )}
                   </div>
-                </div>
+                  {promoCode && quote?.promo && <p className="mt-2 text-sm text-green-400">{quote.promo.code} applied{quote.promo.description ? ` · ${quote.promo.description}` : ''}</p>}
+                  {promoCode && quote?.promoError && <p className="mt-2 text-sm text-red-400" role="alert">{quote.promoError}</p>}
+                </form>
 
                 {/* Summary Details */}
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-final-off-white/70">
                     <span>Subtotal ({items.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
-                    <span>{formatCurrency(total)}</span>
+                    <span>{formatCurrency(subtotal)}</span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between text-final-accent">
-                      <span>Discount</span>
+                      <span>Discount{quote?.promo ? ` (${quote.promo.code})` : ''}</span>
                       <span>-{formatCurrency(discount)}</span>
                     </div>
                   )}
@@ -212,15 +241,18 @@ export default function CartPage() {
                 </div>
 
                 {/* Checkout Button */}
-                <Link href="/checkout">
-                  <motion.a
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                {canCheckout ? (
+                  <Link
+                    href="/checkout"
                     className="block text-center w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
                   >
                     PROCEED TO CHECKOUT
-                  </motion.a>
-                </Link>
+                  </Link>
+                ) : (
+                  <button type="button" disabled className="block w-full rounded-lg bg-final-accent py-4 text-center text-lg font-bold text-final-black opacity-50">
+                    {lineIssues ? 'FIX YOUR CART TO CONTINUE' : 'CHECKING PRICES…'}
+                  </button>
+                )}
 
                 {/* Security Notice */}
                 <p className="text-sm text-final-off-white/50 text-center mt-4">

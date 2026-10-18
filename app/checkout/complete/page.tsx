@@ -5,23 +5,37 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { FiCheck, FiClock, FiX } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
+import { useCart } from '@/components/providers/CartProvider'
 import { track } from '@/lib/analytics'
+import { PENDING_CHECKOUT_KEY } from '@/lib/useQuote'
 
 type Result =
   | { state: 'checking' }
-  | { state: 'paid'; orderNumber: string }
-  | { state: 'pending'; orderNumber?: string }
-  | { state: 'failed'; orderNumber?: string }
+  | { state: 'paid'; orderNumber: string; trackingNumber: string; isPreorder: boolean }
+  | { state: 'pending' }
+  | { state: 'failed' }
   | { state: 'error'; message: string }
+
+function readPending(): { checkout: string; email: string } | null {
+  try {
+    const raw = sessionStorage.getItem(PENDING_CHECKOUT_KEY)
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
 
 /**
  * Where Flutterwave returns the customer. The `status` it appends is ignored:
- * the server verifies the transaction with Flutterwave before anything is
- * marked paid, and this page only shows what the server concluded.
+ * the server verifies the transaction with Flutterwave, and only then does the
+ * order exist. This page shows the order number and tracking only after that.
  */
 function PaymentResult() {
   const params = useSearchParams()
+  const { clearCart } = useCart()
   const [result, setResult] = useState<Result>({ state: 'checking' })
+  const [retrying, setRetrying] = useState(false)
+  const [retryError, setRetryError] = useState('')
   const started = useRef(false)
 
   useEffect(() => {
@@ -44,23 +58,48 @@ function PaymentResult() {
           body: JSON.stringify({ reference, transactionId }),
         })
         const data = await res.json().catch(() => ({}))
-        if (res.ok && data.paymentStatus === 'paid') {
-          // Only after the server verified the payment with Flutterwave.
+        if (res.ok && data.paymentStatus === 'paid' && data.orderNumber) {
+          // Only after the server verified the payment with Flutterwave and placed the order.
           track('payment_completed')
-          return setResult({ state: 'paid', orderNumber: data.orderNumber })
+          clearCart()
+          try { sessionStorage.removeItem(PENDING_CHECKOUT_KEY) } catch {}
+          return setResult({ state: 'paid', orderNumber: data.orderNumber, trackingNumber: data.trackingNumber, isPreorder: Boolean(data.isPreorder) })
         }
-        if (res.ok && data.paymentStatus === 'failed') return setResult({ state: 'failed', orderNumber: data.orderNumber })
+        if (res.ok && data.paymentStatus === 'failed') return setResult({ state: 'failed' })
         // Still processing at Flutterwave, or briefly unreachable: check a few more times.
-        if (tries < 5 && (res.ok || res.status === 503)) return void setTimeout(check, 3000)
-        if (res.ok) return setResult({ state: 'pending', orderNumber: data.orderNumber })
-        setResult({ state: res.status === 503 ? 'pending' : 'error', message: data.error || 'We couldn’t check this payment.' } as Result)
+        if (tries < 6 && (res.ok || res.status === 503)) return void setTimeout(check, 3000)
+        if (res.ok || res.status === 503) return setResult({ state: 'pending' })
+        setResult({ state: 'error', message: data.error || 'We couldn’t check this payment.' })
       } catch {
-        if (tries < 5) return void setTimeout(check, 3000)
+        if (tries < 6) return void setTimeout(check, 3000)
         setResult({ state: 'pending' })
       }
     }
     check()
-  }, [params])
+  }, [params, clearCart])
+
+  const retry = async () => {
+    const pending = readPending()
+    if (!pending) {
+      setRetryError('Please go back to your cart and check out again.')
+      return
+    }
+    setRetrying(true)
+    setRetryError('')
+    try {
+      const res = await fetch('/api/payments/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pending),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (res.ok && typeof data.paymentUrl === 'string') return window.location.assign(data.paymentUrl)
+      setRetryError(data.error || 'We couldn’t start a new payment. Please try again from your cart.')
+    } catch {
+      setRetryError('We couldn’t reach the shop. Check your connection and try again.')
+    }
+    setRetrying(false)
+  }
 
   const icon = {
     checking: <FiClock className="h-6 w-6" />,
@@ -80,23 +119,33 @@ function PaymentResult() {
 
       {result.state === 'checking' && (
         <>
-          <h1 className="display mt-6 text-3xl">Checking your payment</h1>
-          <p className="mt-3 text-final-muted">We’re confirming with Flutterwave. This takes a few seconds.</p>
+          <h1 className="display mt-6 text-3xl">Confirming your payment</h1>
+          <p className="mt-3 text-final-muted">We’re checking with Flutterwave. This takes a few seconds.</p>
         </>
       )}
       {result.state === 'paid' && (
         <>
-          <h1 className="display mt-6 text-3xl">Payment received</h1>
+          <h1 className="display mt-6 text-3xl">Order placed</h1>
           <p className="mt-3 text-final-muted">
-            Order <span className="font-mono text-final-off-white">{result.orderNumber}</span> is confirmed. We’ll email you when it ships.
+            Payment received. {result.isPreorder ? 'We’ll ship your pre-order from the date shown on the product, and' : 'We’re preparing your order and'} we’ll email you when it ships.
           </p>
+          <dl className="mx-auto mt-6 grid max-w-sm grid-cols-1 gap-4 rounded-xl border border-final-off-white/10 bg-final-gray p-5 text-left sm:grid-cols-2">
+            <div>
+              <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Order number</dt>
+              <dd className="mt-1 font-mono text-lg">{result.orderNumber}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Tracking number</dt>
+              <dd className="mt-1 font-mono text-lg">{result.trackingNumber}</dd>
+            </div>
+          </dl>
         </>
       )}
       {result.state === 'pending' && (
         <>
           <h1 className="display mt-6 text-3xl">Payment processing</h1>
           <p className="mt-3 text-final-muted">
-            Flutterwave hasn’t confirmed it yet. You don’t need to pay again: your order updates automatically once it does.
+            Flutterwave hasn’t confirmed it yet, which can happen with bank transfers. You don’t need to pay again: your order is placed automatically once it does, and we’ll email you.
           </p>
         </>
       )}
@@ -104,7 +153,7 @@ function PaymentResult() {
         <>
           <h1 className="display mt-6 text-3xl">Payment didn’t go through</h1>
           <p className="mt-3 text-final-muted">
-            Flutterwave reported this attempt as failed. You can try again from the Track Order page. If you were charged anyway, contact us with your order number.
+            No order was placed and your cart is saved. You can try again. If you were charged anyway, contact us and we’ll sort it out.
           </p>
         </>
       )}
@@ -115,13 +164,18 @@ function PaymentResult() {
         </>
       )}
 
+      {retryError && <p className="mt-4 text-sm text-red-400" role="alert">{retryError}</p>}
+
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <Link
-          href={'orderNumber' in result && result.orderNumber ? `/track-order?orderNumber=${result.orderNumber}` : '/track-order'}
-          className="btn-primary"
-        >
-          Track order
-        </Link>
+        {result.state === 'paid' && (
+          <Link href={`/track-order?orderNumber=${result.orderNumber}`} className="btn-primary">Track order</Link>
+        )}
+        {result.state === 'failed' && (
+          <button type="button" onClick={retry} disabled={retrying} className="btn-primary disabled:opacity-50">
+            {retrying ? 'Opening Flutterwave…' : 'Try payment again'}
+          </button>
+        )}
+        {(result.state === 'failed' || result.state === 'error') && <Link href="/cart" className="btn-secondary">Back to cart</Link>}
         <Link href="/shop" className="btn-secondary">Back to the shop</Link>
       </div>
     </div>

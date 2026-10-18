@@ -17,24 +17,25 @@ beforeAll(async () => {
 afterAll(() => db.close())
 
 describe('activity feed', () => {
-  it('records new orders automatically, with amount and a link', async () => {
-    const rows = await feed(f.users.ownerA)
-    const placed = rows.filter((r) => r.kind === 'order.placed')
-    expect(placed.map((r) => r.title)).toEqual(['New order FH-A1', 'New order FH-A2'])
-    expect(placed[0].detail).toBe('₦24,999.90')
-    expect(placed[0].link).toBe('/admin/orders?q=FH-A1')
+  it('shows nothing for an order until it is paid', async () => {
+    expect((await feed(f.users.ownerA)).filter((r) => r.kind === 'order.placed')).toEqual([])
   })
 
-  it('records payment received, payment failed and cancellations', async () => {
+  it('announces a new order once paid, with amount and a link; and failures and cancellations', async () => {
     const pay = await as(db, { kind: 'service' }, (tx) => tx.query<{ id: string }>(
       `insert into public.payments (tenant_id, order_id, provider, reference, amount_minor, currency)
        values ($1, $2, 'flutterwave', 'FHP-ACTIVITY0001', 2499990, 'NGN') returning id`, [f.tenantA, f.orders.a1]))
     expect(pay.rows).toHaveLength(1)
     await as(db, { kind: 'service' }, (tx) => tx.query(`select public.apply_verified_payment('FHP-ACTIVITY0001', '1', 'successful', 2499990, 'NGN')`))
+    const placed = (await feed(f.users.ownerA)).filter((r) => r.kind === 'order.placed')
+    expect(placed.map((r) => r.title)).toEqual(['New order FH-A1'])
+    expect(placed[0].detail).toBe('₦24,999.90 paid · ready to fulfil')
+    expect(placed[0].link).toBe('/admin/orders?q=FH-A1')
+
     await db.query(`update public.orders set payment_status = 'failed' where id = $1`, [f.orders.a2])
     await db.query(`update public.orders set status = 'cancelled' where id = $1`, [f.orders.a2])
     const kinds = (await feed(f.users.ownerA)).map((r) => r.kind)
-    expect(kinds).toEqual(expect.arrayContaining(['payment.received', 'payment.failed', 'order.cancelled']))
+    expect(kinds).toEqual(expect.arrayContaining(['order.placed', 'payment.failed', 'order.cancelled']))
   })
 
   it('records messages, new subscribers and low stock', async () => {
@@ -59,8 +60,10 @@ describe('activity feed', () => {
   })
 
   it('never shows another business’s activity', async () => {
+    await db.query(`update public.orders set payment_status = 'paid', status = 'confirmed' where id = $1`, [f.orders.b1])
     const titles = (await feed(f.users.ownerB)).map((r) => r.title)
     expect(titles).toEqual(['New order FH-B1'])
+    expect((await feed(f.users.ownerA)).map((r) => r.title)).not.toContain('New order FH-B1')
     expect(await feed(f.users.outsider)).toHaveLength(0)
   })
 

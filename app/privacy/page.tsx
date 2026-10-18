@@ -68,6 +68,7 @@ export default function PrivacyPage() {
       <Section title="How long we keep it">
         <ul>
           <li>Orders and payment records: {RETENTION.ordersAndPayments}.</li>
+          <li>Checkouts that were never paid: {RETENTION.unfinishedCheckouts}.</li>
           <li>Newsletter subscription: {RETENTION.newsletter}.</li>
           <li>Visit statistics: {RETENTION.analytics}.</li>
           <li>Abuse protection data: {RETENTION.abuseProtection}.</li>

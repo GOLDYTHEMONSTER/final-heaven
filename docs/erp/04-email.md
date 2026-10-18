@@ -6,9 +6,9 @@ Migration: `supabase/migrations/20261018180000_email_outbox.sql`. Code: `lib/ema
 
 | Email | To | When |
 |---|---|---|
-| Payment received (receipt) | customer | order becomes paid: Flutterwave or a payment staff record. Not sent if the order was already cancelled. |
+| Order confirmed (receipt) | customer | the order is placed, i.e. payment is confirmed (Flutterwave, or a payment staff record for an older unpaid order). Shows items with size and colour, any discount, pre-order ship dates and the tracking link. Not sent if the order was already cancelled. |
 | Order shipped | customer | status becomes shipped. Includes the courier and reference if they're set by then. |
-| New paid order | `STAFF_ALERT_EMAIL` | order becomes paid. Flagged "refund needed" if the order was cancelled. Reply-to is the customer. |
+| New order | `STAFF_ALERT_EMAIL` | the order is placed. Flagged if stock ran short (restock or refund) or if the order was cancelled (refund needed). Reply-to is the customer. |
 | New message | `STAFF_ALERT_EMAIL` | contact form message. Reply-to is the customer, so replying answers them directly. |
 
 No marketing email is sent. Newsletter sign-ups are stored only.

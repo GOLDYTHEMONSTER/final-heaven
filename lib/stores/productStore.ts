@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type { PurchaseState } from '@/lib/catalog'
 
 export interface ProductImage {
   url: string;
@@ -29,6 +30,8 @@ export interface Product {
   sizes?: string[]
   tags?: string[]
   cardSize?: 'large' | 'medium' | 'small'
+  /** From the server: whether and how this can be bought right now. */
+  purchase?: PurchaseState
 }
 
 interface ProductStore {

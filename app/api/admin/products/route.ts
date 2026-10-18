@@ -53,6 +53,19 @@ function productColumns(body: Record<string, unknown>, partial: boolean) {
     if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new BadRequest('Release date must be YYYY-MM-DD.')
     out.release_date = date
   }
+  // A sale shows the original price crossed out, so it must be higher than the price.
+  if (out.original_price != null && out.price != null && Number(out.original_price) <= Number(out.price)) {
+    throw new BadRequest('Original price must be higher than the price (it shows crossed out as a sale). Leave it empty for no sale.')
+  }
+  // Pre-orders: paid now through Flutterwave, shipped from the date given, limited to the allowance.
+  if (has('preorder')) out.preorder = bool(body.preorder)
+  if (has('preorder_ships_on')) {
+    const date = text(body.preorder_ships_on, 'Pre-order ship date', { max: 10 })
+    if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new BadRequest('Pre-order ship date must be YYYY-MM-DD.')
+    out.preorder_ships_on = date
+  }
+  if (has('preorder_limit')) out.preorder_limit = int(body.preorder_limit ?? 0, 'Pre-order quantity', { min: 0, max: 100_000 })
+  if (out.preorder === true && !out.preorder_ships_on) throw new BadRequest('Set the date pre-orders ship from.')
   if (has('product_url')) out.product_url = url(body.product_url, 'Product link')
   if (has('colors')) out.colors = list(body.colors, 'Colors')
   if (has('sizes')) out.sizes = list(body.sizes, 'Sizes')

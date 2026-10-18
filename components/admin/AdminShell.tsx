@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiMail, FiPackage, FiShoppingBag, FiUsers } from 'react-icons/fi'
+import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiMail, FiPackage, FiShoppingBag, FiTag, FiUsers } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { ActivityBell, ActivityProvider, LiveStatus, NavBadge, type Section } from '@/components/admin/activity'
@@ -16,6 +16,7 @@ const nav: { name: string; href: string; icon: typeof FiActivity; permission: st
   { name: 'Products', href: '/admin', icon: FiPackage, permission: 'products.read', section: 'products' },
   { name: 'Orders', href: '/admin/orders', icon: FiShoppingBag, permission: 'orders.read', section: 'orders' },
   { name: 'Drops', href: '/admin/drops', icon: FiCalendar, permission: 'products.read' },
+  { name: 'Promo codes', href: '/admin/promos', icon: FiTag, permission: 'products.read' },
   { name: 'Customers', href: '/admin/customers', icon: FiUsers, permission: 'customers.read', section: 'customers' },
   { name: 'Messages', href: '/admin/messages', icon: FiMail, permission: 'customers.read', section: 'messages' },
 ]

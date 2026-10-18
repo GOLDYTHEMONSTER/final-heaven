@@ -13,11 +13,13 @@ function memoryStore() {
   const events: { id: string; dedupeKey: string; status: string; attempts: number; eventType: string; providerTransactionId: string | null; reference: string | null }[] = []
   const applied: VerifiedTransaction[] = []
   const store: PaymentStore = {
-    async findReusableAttempt(orderId) {
-      return [...payments.values()].find((p) => p.orderId === orderId && p.checkoutUrl && ['initiated', 'pending'].includes(p.status)) ?? null
+    async findReusableAttempt(target) {
+      return [...payments.values()].find((p) => (target.kind === 'checkout' ? p.checkoutId : p.orderId) === target.id
+        && p.checkoutUrl && ['initiated', 'pending'].includes(p.status)) ?? null
     },
     async createAttempt(a) {
-      payments.set(a.reference, { id: `pay-${payments.size + 1}`, reference: a.reference, tenantId: a.tenantId, orderId: a.orderId,
+      payments.set(a.reference, { id: `pay-${payments.size + 1}`, reference: a.reference, tenantId: a.target.tenantId,
+        orderId: a.target.kind === 'order' ? a.target.id : null, checkoutId: a.target.kind === 'checkout' ? a.target.id : null,
         orderNumber: 'FH-1', amountMinor: a.amountMinor, currency: a.currency, status: 'initiated', checkoutUrl: null, createdAt: new Date().toISOString() })
     },
     async setCheckoutUrl(reference, url) { payments.get(reference)!.checkoutUrl = url },
@@ -74,8 +76,8 @@ function fakeProvider(o: Partial<PaymentProvider> = {}): PaymentProvider {
 let mem: ReturnType<typeof memoryStore>
 let provider: PaymentProvider
 let deps: Deps
-const order = { id: 'order-1', tenantId: 't1', orderNumber: 'FH-1', amountMinor: 2499990, currency: 'NGN', email: 'c@x.co' }
-const seedPayment = async () => { await mem.store.createAttempt({ tenantId: 't1', orderId: 'order-1', reference: REF, amountMinor: 2499990, currency: 'NGN', provider: 'flutterwave' }) }
+const order = { kind: 'checkout' as const, id: 'chk-1', tenantId: 't1', amountMinor: 2499990, currency: 'NGN', email: 'c@x.co', description: 'Final Heaven order' }
+const seedPayment = async () => { await mem.store.createAttempt({ target: { kind: 'checkout', id: 'chk-1', tenantId: 't1' }, reference: REF, amountMinor: 2499990, currency: 'NGN', provider: 'flutterwave' }) }
 const webhookBody = (status = 'successful', id = 777) => JSON.stringify({ event: 'charge.completed', data: { id, tx_ref: REF, status, amount: 1, currency: 'NGN' } })
 
 beforeEach(() => {
@@ -100,7 +102,7 @@ describe('starting a payment', () => {
     expect(provider.initiate).toHaveBeenCalledTimes(1)
   })
 
-  it('without provider keys the order still stands; payment is reported as not configured', async () => {
+  it('without provider keys, payment is reported as not configured', async () => {
     expect(await startPayment({ ...deps, provider: null }, order, 'https://shop.test')).toEqual({ ok: false, reason: 'not_configured' })
   })
 })

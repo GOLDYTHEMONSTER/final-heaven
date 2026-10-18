@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { FiSearch, FiPackage, FiTruck, FiCheckCircle, FiClock, FiMapPin, FiRefreshCw, FiX, FiCreditCard } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { formatCurrency } from '@/lib/utils/format'
+import { formatDay } from '@/lib/catalog'
 
 // Fulfilment status (separate from payment status). 'ordered' is the legacy
 // name for pending_payment and still appears in older order timelines.
@@ -281,7 +282,10 @@ function TrackOrderContent() {
                     <div key={index} className="flex items-center justify-between py-4 border-b border-final-light-gray/20 last:border-b-0">
                       <div>
                         <h4 className="font-semibold text-final-off-white">{item.name}</h4>
-                        <p className="text-final-off-white/70">Quantity: {item.quantity}</p>
+                        <p className="text-final-off-white/70">
+                          {[`Quantity: ${item.quantity}`, item.size ? `Size ${item.size}` : null, item.color ? `Colour ${item.color}` : null].filter(Boolean).join(' · ')}
+                        </p>
+                        {item.preorder && item.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDay(item.shipsOn)}</p>}
                       </div>
                       <span className="text-lg font-bold text-final-accent">{formatCurrency(item.price)}</span>
                     </div>

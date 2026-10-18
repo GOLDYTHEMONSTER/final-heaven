@@ -12,6 +12,7 @@ import { useInterestStore } from '@/lib/stores/interestStore'
 import { track } from '@/lib/analytics'
 import { PolicySummary } from '@/components/legal/PolicySummary'
 import { POLICY } from '@/lib/legal'
+import { formatDay } from '@/lib/catalog'
 
 
 export default function ProductPage({ params }: { params: { id: string } }) {
@@ -121,7 +122,24 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const mainImageIndex = colorImageIndex >= 0 ? colorImageIndex : selectedImage
   const mainImage = images[mainImageIndex] || images[0] || ''
 
+  // From the server, by the same rules checkout enforces.
+  const purchase = product.purchase ?? { state: 'unavailable' }
+  const buyable = purchase.state === 'available' || purchase.state === 'preorder'
+  const maxQuantity = Math.min(20, purchase.maxQuantity ?? 0)
+  const shipsOn = purchase.state === 'preorder'
+    ? formatDay(purchase.shipsOn) : null
+  const buttonLabel = {
+    available: 'ADD TO CART',
+    preorder: `PRE-ORDER · SHIPS ${shipsOn?.toUpperCase()}`,
+    sold_out: 'SOLD OUT',
+    coming_soon: purchase.releaseDate
+      ? `COMING ${formatDay(purchase.releaseDate, { day: 'numeric', month: 'long' }).toUpperCase()}` : 'COMING SOON',
+    members_only: 'MEMBERS ONLY',
+    unavailable: 'UNAVAILABLE',
+  }[purchase.state as string] ?? 'UNAVAILABLE'
+
   const handleAddToCart = () => {
+    if (!buyable) return
     if (!selectedSize && product.sizes && product.sizes.length > 0) {
       alert('Please select a size')
       return
@@ -137,8 +155,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       name: product.name,
       price: product.price,
       image: mainImage || '/api/placeholder/400/500',
-      size: selectedSize,
-      quantity,
+      size: product.sizes?.length ? selectedSize : null,
+      color: product.colors?.length ? selectedColor : null,
+      quantity: Math.min(quantity, maxQuantity || 1),
       isMembersOnly: product.membersOnly || false
     })
   }
@@ -180,7 +199,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     </span>
                   </div>
                 )}
-                {product.isLimited && (
+                {product.isLimited && !product.membersOnly && (
                   <div className="absolute top-4 left-4">
                     <span className="bg-final-ember text-final-black text-sm font-bold px-3 py-1 rounded-full">
                       LIMITED
@@ -291,12 +310,17 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   </button>
                   <span className="text-xl font-semibold text-final-off-white w-12 text-center">{quantity}</span>
                   <button
-                    onClick={() => setQuantity(quantity + 1)}
+                    onClick={() => setQuantity(Math.min(quantity + 1, Math.max(1, maxQuantity)))}
+                    disabled={!buyable || quantity >= maxQuantity}
                     className="w-10 h-10 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white hover:bg-final-accent hover:text-final-black transition-colors"
                   >
                     +
                   </button>
-                  <span className="text-final-off-white/70">({product.stock} available)</span>
+                  {buyable && (
+                    <span className="text-final-off-white/70">
+                      {purchase.state === 'preorder' ? `(${maxQuantity} left to pre-order)` : maxQuantity <= 5 ? `(only ${maxQuantity} left)` : '(in stock)'}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -305,11 +329,17 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAddToCart}
-                disabled={product.stock === 0}
+                disabled={!buyable}
                 className="w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {product.stock === 0 ? 'OUT OF STOCK' : 'ADD TO CART'}
+                {buttonLabel}
               </motion.button>
+              {purchase.state === 'preorder' && (
+                <p className="text-sm text-final-muted">Pay now to reserve yours. It ships from {shipsOn}; we&apos;ll email you when it does.</p>
+              )}
+              {purchase.state === 'members_only' && (
+                <p className="text-sm text-final-muted">This piece is reserved for Final Heaven members. <a href="/membership" className="underline underline-offset-2">Join the waitlist</a> to hear when membership opens.</p>
+              )}
 
               {/* Shipping Info */}
               <div className="flex items-center space-x-4 text-final-off-white/70">

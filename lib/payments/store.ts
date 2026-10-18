@@ -4,14 +4,15 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import type { ApplyOutcome, BacklogEvent, PaymentRecord, PaymentStore } from './service'
 import type { VerifiedTransaction } from './types'
 
-const PAYMENT_COLUMNS = 'id, reference, tenant_id, order_id, amount_minor, currency, status, checkout_url, created_at, orders(order_number)'
+const PAYMENT_COLUMNS = 'id, reference, tenant_id, order_id, checkout_id, amount_minor, currency, status, checkout_url, created_at, orders(order_number)'
 
 function toRecord(row: Record<string, any>): PaymentRecord {
   return {
     id: row.id,
     reference: row.reference,
     tenantId: row.tenant_id,
-    orderId: row.order_id,
+    orderId: row.order_id ?? null,
+    checkoutId: row.checkout_id ?? null,
     orderNumber: row.orders?.order_number ?? '',
     amountMinor: Number(row.amount_minor),
     currency: row.currency,
@@ -26,9 +27,10 @@ export function supabasePaymentStore(db: SupabaseClient = createSupabaseServiceC
   const minutesAgo = (m: number) => new Date(Date.now() - m * 60_000).toISOString()
 
   return {
-    async findReusableAttempt(orderId, maxAgeMinutes) {
+    async findReusableAttempt(target, maxAgeMinutes) {
       const { data, error } = await db.from('payments').select(PAYMENT_COLUMNS)
-        .eq('order_id', orderId).in('status', ['initiated', 'pending']).not('checkout_url', 'is', null)
+        .eq(target.kind === 'checkout' ? 'checkout_id' : 'order_id', target.id)
+        .in('status', ['initiated', 'pending']).not('checkout_url', 'is', null)
         .gte('created_at', minutesAgo(maxAgeMinutes)).order('created_at', { ascending: false }).limit(1).maybeSingle()
       if (error) throw error
       return data ? toRecord(data) : null
@@ -36,7 +38,8 @@ export function supabasePaymentStore(db: SupabaseClient = createSupabaseServiceC
 
     async createAttempt(a) {
       const { error } = await db.from('payments').insert({
-        tenant_id: a.tenantId, order_id: a.orderId, provider: a.provider, reference: a.reference,
+        tenant_id: a.target.tenantId, provider: a.provider, reference: a.reference,
+        ...(a.target.kind === 'checkout' ? { checkout_id: a.target.id } : { order_id: a.target.id }),
         amount_minor: a.amountMinor, currency: a.currency, status: 'initiated',
       })
       if (error) throw error

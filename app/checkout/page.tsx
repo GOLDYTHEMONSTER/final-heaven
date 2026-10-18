@@ -1,18 +1,20 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { FiAlertCircle, FiLock } from 'react-icons/fi'
 import Link from 'next/link'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
 import { Layout } from '@/components/layout/Layout'
 import { track } from '@/lib/analytics'
 import { POLICY } from '@/lib/legal'
+import { formatDay } from '@/lib/catalog'
+import { PENDING_CHECKOUT_KEY, quoteLineAt, useQuote } from '@/lib/useQuote'
+const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CheckoutPage() {
-  const router = useRouter()
-  const { items, total, clearCart } = useCart()
+  const { items, total, promoCode, setPromoCode } = useCart()
   const trackedCheckout = useRef(false)
   useEffect(() => {
     if (items.length && !trackedCheckout.current) {
@@ -28,15 +30,11 @@ export default function CheckoutPage() {
   // We deliver within Nigeria only (lib/legal.ts), so the country is fixed.
   const country = POLICY.shipsTo
   const [termsAccepted, setTermsAccepted] = useState(false)
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'redirecting' | 'error'>('idle')
   const [message, setMessage] = useState('')
-  const [orderConfirmation, setOrderConfirmation] = useState<{
-    orderNumber: string
-    trackingNumber: string
-    total: string
-    paymentUrl: string | null
-    paymentIssue: string | null
-  } | null>(null)
+  // The server's price: exactly what Flutterwave will charge.
+  const { quote, loading: pricing } = useQuote(items, promoCode, email)
+  const lineIssues = quote?.lines.some((l) => l.issue) ?? false
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -69,11 +67,13 @@ export default function CheckoutPage() {
       shippingCountry: country,
       // Only what the server uses: it prices from the catalogue. Cart items also
       // carry the product photo, which alone can exceed the request size limit.
-      items: items.map((item: { id: string; size?: string | null; quantity: number }) => ({
+      items: items.map((item) => ({
         id: item.id,
         size: item.size ?? null,
+        color: item.color ?? null,
         quantity: item.quantity,
       })),
+      promoCode: promoCode || null,
       termsAccepted,
     }
 
@@ -92,26 +92,23 @@ export default function CheckoutPage() {
       return
     }
 
-    if (!response.ok) {
+    if (!response.ok || typeof data.paymentUrl !== 'string') {
       setStatus('error')
-      setMessage(data?.error || 'Unable to create your order.')
+      setMessage(data?.error || 'We couldn’t start your payment. Nothing was charged. Please try again.')
       return
     }
 
+    // No order exists yet: it is placed once Flutterwave confirms the payment.
+    // The cart stays until then, so a failed payment loses nothing.
     track('order_placed')
-    setStatus('success')
-    setOrderConfirmation({
-      orderNumber: data.orderNumber,
-      trackingNumber: data.trackingNumber,
-      total: data.total,
-      paymentUrl: data.paymentUrl ?? null,
-      paymentIssue: data.paymentIssue ?? null,
-    })
-    setMessage(`Order placed. Your order number is ${data.orderNumber}.`)
-    clearCart()
+    try {
+      sessionStorage.setItem(PENDING_CHECKOUT_KEY, JSON.stringify({ checkout: data.checkout, email }))
+    } catch {}
+    setStatus('redirecting')
+    window.location.assign(data.paymentUrl)
   }
 
-  if (!items.length && !orderConfirmation) {
+  if (!items.length) {
     return (
       <Layout>
         <div className="min-h-screen bg-final-black pt-24">
@@ -141,7 +138,7 @@ export default function CheckoutPage() {
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
                 <h1 className="display text-3xl md:text-4xl text-final-off-white mb-6">Checkout</h1>
-                <p className="text-final-off-white/70 mb-6">Enter your shipping details and email to create an order. No account is required.</p>
+                <p className="text-final-off-white/70 mb-6">Enter your delivery details, then pay securely on Flutterwave. Your order is placed once payment is confirmed. No account is required.</p>
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-final-off-white/80 mb-2" htmlFor="email">Email</label>
@@ -230,15 +227,36 @@ export default function CheckoutPage() {
 
                   <button
                     type="submit"
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || status === 'redirecting' || !quote?.ok || pricing}
                     className="w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
                   >
-                    {status === 'loading' ? 'Placing Order…' : 'Place Order'}
+                    {status === 'redirecting'
+                      ? 'Taking you to Flutterwave…'
+                      : status === 'loading'
+                        ? 'Starting payment…'
+                        : quote
+                          ? `Pay ${formatCurrency(quote.total)}`
+                          : 'Checking prices…'}
                   </button>
+                  <p className="flex items-center justify-center gap-1.5 text-sm text-final-muted">
+                    <FiLock className="h-4 w-4" /> Card, bank transfer or USSD on Flutterwave&apos;s secure page
+                  </p>
                 </form>
 
+                {lineIssues && (
+                  <p className="mt-5 flex items-start gap-1.5 text-sm text-red-400" role="alert">
+                    <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                    <span>Some items in your cart can&apos;t be bought right now. <Link href="/cart" className="underline underline-offset-2">Review your cart</Link></span>
+                  </p>
+                )}
+                {promoCode && quote?.promoError && (
+                  <p className="mt-5 text-sm text-red-400" role="alert">
+                    {quote.promoError}{' '}
+                    <button type="button" onClick={() => setPromoCode('')} className="underline underline-offset-2">Remove code</button>
+                  </p>
+                )}
                 {message && (
-                  <p className={`mt-5 text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                  <p className="mt-5 text-sm text-red-400" role="alert">
                     {message}
                   </p>
                 )}
@@ -249,29 +267,44 @@ export default function CheckoutPage() {
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
                 <h2 className="text-2xl font-bold text-final-off-white mb-4">Order Summary</h2>
                 <div className="space-y-4">
-                  {items.map((item) => (
-                    <div key={`${item.id}-${item.size}`} className="flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold text-final-off-white">{item.name}</p>
-                        <p className="text-final-off-white/70 text-sm">Qty {item.quantity} • {item.size}</p>
+                  {items.map((item, index) => {
+                    const line = quoteLineAt(quote, items, index)
+                    const details = [`Qty ${item.quantity}`, line?.size ?? item.size, line?.color ?? item.color].filter(Boolean).join(' • ')
+                    return (
+                      <div key={`${item.id}-${item.size}-${item.color ?? ''}`} className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <p className="font-semibold text-final-off-white">{item.name}</p>
+                          <p className="text-final-off-white/70 text-sm">{details}</p>
+                          {line?.preorder && line.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDate(line.shipsOn)}</p>}
+                          {line?.issue && <p className="text-sm text-red-400">{line.issue}</p>}
+                        </div>
+                        <p className="shrink-0 text-final-accent font-bold">{formatCurrency(line ? Number(line.lineTotal) : item.price * item.quantity)}</p>
                       </div>
-                      <p className="text-final-accent font-bold">{formatCurrency(item.price * item.quantity)}</p>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
                 <div className="border-t border-final-light-gray/30 mt-6 pt-6">
                   <div className="flex justify-between text-final-off-white/70 mb-2">
                     <span>Subtotal</span>
-                    <span>{formatCurrency(total)}</span>
+                    <span>{formatCurrency(quote ? quote.subtotal : total)}</span>
                   </div>
+                  {quote && Number(quote.discount) > 0 && (
+                    <div className="flex justify-between text-final-accent mb-2">
+                      <span>Discount{quote.promo ? ` (${quote.promo.code})` : ''}</span>
+                      <span>-{formatCurrency(quote.discount)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-final-off-white/70 mb-2">
                     <span>Shipping</span>
                     <span>Free</span>
                   </div>
                   <div className="flex justify-between text-xl font-bold text-final-off-white">
                     <span>Total</span>
-                    <span>{formatCurrency(total)}</span>
+                    <span>{formatCurrency(quote ? quote.total : total)}</span>
                   </div>
+                  {quote?.isPreorder && (
+                    <p className="mt-3 text-sm text-final-muted">Your order includes pre-order items. They ship from the date shown; we deliver everything together unless we tell you otherwise.</p>
+                  )}
                 </div>
               </div>
             </aside>
@@ -279,71 +312,6 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      {orderConfirmation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-final-black/80 p-4 backdrop-blur-sm">
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="order-placed-heading"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-            className="w-full max-w-xl rounded-2xl border border-final-off-white/10 bg-final-gray p-6 md:p-8"
-          >
-            <h2 id="order-placed-heading" className="display text-3xl">Order placed</h2>
-            <p className="mt-2 text-final-muted">
-              {orderConfirmation.paymentUrl
-                ? 'Complete payment to confirm your order. We start preparing it once payment is verified.'
-                : 'Your order is saved. It will be confirmed once payment is received.'}
-            </p>
-
-            <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div>
-                <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Order number</dt>
-                <dd className="mt-1 font-mono text-lg">{orderConfirmation.orderNumber}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Tracking number</dt>
-                <dd className="mt-1 font-mono text-lg">{orderConfirmation.trackingNumber}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-[0.12em] text-final-muted">Total</dt>
-                <dd className="mt-1 text-lg tabular-nums">{formatCurrency(orderConfirmation.total)}</dd>
-              </div>
-            </dl>
-
-            <div className="mt-6 rounded-xl border border-final-off-white/10 bg-final-black p-5">
-              {orderConfirmation.paymentUrl ? (
-                <>
-                  <p className="text-sm text-final-muted">You’ll pay on Flutterwave’s secure checkout, then come back here.</p>
-                  <a href={orderConfirmation.paymentUrl} className="btn-primary mt-4 w-full sm:w-auto">
-                    Pay {formatCurrency(orderConfirmation.total)}
-                  </a>
-                </>
-              ) : (
-                <p className="text-sm text-final-muted">
-                  {orderConfirmation.paymentIssue === 'provider_unavailable'
-                    ? 'We couldn’t reach the payment service just now. You can pay from the Track Order page in a few minutes.'
-                    : 'Online payment isn’t available right now. We’ll contact you at the email you entered to arrange payment.'}
-                </p>
-              )}
-            </div>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
-              <button type="button" onClick={() => setOrderConfirmation(null)} className="btn-secondary">
-                Close
-              </button>
-              <button
-                type="button"
-                onClick={() => router.push(`/track-order?orderNumber=${orderConfirmation.orderNumber}`)}
-                className="btn-secondary"
-              >
-                Track order
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      )}
     </Layout>
   )
 }

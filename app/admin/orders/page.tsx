@@ -326,11 +326,23 @@ function AdminOrders() {
                     <ul className="space-y-1 text-sm">
                       {Array.isArray(order.order_items) && order.order_items.map((item: any, idx: number) => (
                         <li key={idx} className="flex justify-between gap-3">
-                          <span>{item.name} × {item.quantity}{item.size ? ` (${item.size})` : ''}</span>
+                          <span>
+                            {item.name} × {item.quantity}
+                            {[item.size, item.color].some(Boolean) ? ` (${[item.size, item.color].filter(Boolean).join(', ')})` : ''}
+                            {item.preorder && <span className="ml-1 text-xs text-final-ember">pre-order{item.ships_on ? `, ships ${item.ships_on}` : ''}</span>}
+                          </span>
                           <span className="tabular-nums text-final-muted">{formatCurrency(item.price)}</span>
                         </li>
                       ))}
                     </ul>
+                    {Number(order.discount) > 0 && (
+                      <p className="mt-2 text-sm text-final-muted">Discount{order.promo_code ? ` (${order.promo_code})` : ''}: -{formatCurrency(order.discount)}</p>
+                    )}
+                    {Array.isArray(order.stock_shortfall) && order.stock_shortfall.length > 0 && (
+                      <p role="alert" className="mt-2 rounded-md border border-final-ember/40 p-2 text-xs text-final-ember">
+                        Stock ran short when this was paid: {order.stock_shortfall.map((l: any) => `${l.name}${l.size ? ` (${l.size})` : ''} ${l.missing} missing`).join('; ')}. Restock, or contact the customer about a refund.
+                      </p>
+                    )}
                   </div>
                   <div>
                     <h4 className="mb-2 text-xs uppercase tracking-[0.12em] text-final-muted">Shipping</h4>

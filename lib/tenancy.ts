@@ -9,6 +9,8 @@ export type StoreContext = {
   currency: string
   /** Categories withheld from sale (e.g. pending legal review). Enforced by RLS for public reads and by checkout. */
   hiddenCategories: string[]
+  /** For release and pre-order dates. Matches tenants.timezone for the default store. */
+  timeZone: string
 }
 
 let cached: { value: StoreContext; at: number } | null = null
@@ -36,6 +38,7 @@ export async function getStorefront(): Promise<StoreContext> {
     storeSlug: data.slug,
     currency: data.currency,
     hiddenCategories: (data.hidden_categories as string[] | null) ?? [],
+    timeZone: process.env.STORE_TIMEZONE || 'Africa/Lagos',
   }
   cached = { value, at: Date.now() }
   return value

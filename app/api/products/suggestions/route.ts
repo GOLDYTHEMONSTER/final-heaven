@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { getStorefront } from '@/lib/tenancy'
+import { storeToday, toPublicProduct } from '@/lib/catalog'
 
 const getSupabase = () => createSupabasePublicClient()
 const strings = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string').slice(0, 50) : [])
@@ -14,10 +15,11 @@ export async function POST(req: Request) {
     const excludeProductId = typeof body?.excludeProductId === 'string' ? body.excludeProductId : undefined
 
     // Fetch all active products
+    const store = await getStorefront()
     const { data: allProducts, error: fetchError } = await getSupabase()
       .from('products')
       .select('*')
-      .eq('store_id', (await getStorefront()).storeId)
+      .eq('store_id', store.storeId)
       .eq('status', 'active')
       .order('created_at', { ascending: false })
 
@@ -65,7 +67,7 @@ export async function POST(req: Request) {
       .filter((product) => product.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, limit)
-      .map(({ score, ...product }) => product)
+      .map(({ score, ...product }) => toPublicProduct(product, storeToday(store.timeZone)))
 
     return NextResponse.json({ products: scoredProducts })
   } catch (error: any) {

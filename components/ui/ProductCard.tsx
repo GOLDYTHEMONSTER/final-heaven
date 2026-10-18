@@ -9,6 +9,17 @@ import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Product } from '@/lib/stores/productStore'
 
+/** What stops this product being bought now, as a short label; null when it can be bought. */
+function blockedLabel(product: Product) {
+  switch (product.purchase?.state) {
+    case 'sold_out': return 'Sold out'
+    case 'coming_soon': return 'Coming soon'
+    case 'members_only': return 'Members only'
+    case 'unavailable': return 'Unavailable'
+    default: return null
+  }
+}
+
 interface ProductCardProps {
   product: Product
   viewMode?: 'grid' | 'list'
@@ -17,9 +28,21 @@ interface ProductCardProps {
 const PLACEHOLDER = '/api/placeholder/400/500'
 
 function Badges({ product }: { product: Product }) {
-  if (!product.isNew && !product.isLimited && !product.membersOnly) return null
+  const preorder = product.purchase?.state === 'preorder'
+  const blocked = blockedLabel(product)
+  if (!product.isNew && !product.isLimited && !product.membersOnly && !preorder && !blocked) return null
   return (
     <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
+      {blocked && blocked !== 'Members only' && (
+        <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
+          {blocked}
+        </span>
+      )}
+      {preorder && (
+        <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
+          Pre-order
+        </span>
+      )}
       {product.isNew && (
         <span className="rounded-md bg-final-ember px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
           New
@@ -59,6 +82,9 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
 
   const mainImage = product.images?.[0]?.url || product.image || PLACEHOLDER
   const href = `/product/${product.id}`
+  // Quick add only when there's nothing to choose; otherwise the product page asks for size and colour.
+  const buyable = !product.purchase || product.purchase.state === 'available' || product.purchase.state === 'preorder'
+  const needsChoice = (product.sizes?.length ?? 0) > 0 || (product.colors?.length ?? 0) > 0
 
   const handleAddToCart = useCallback(() => {
     addItem({
@@ -66,7 +92,8 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
       name: product.name,
       price: product.price,
       image: mainImage,
-      size: 'M', // Default size
+      size: null,
+      color: null,
       quantity: 1,
       isMembersOnly: product.membersOnly,
     })
@@ -76,7 +103,15 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   }, [addItem, product.id, product.name, product.price, product.membersOnly, mainImage])
 
   // Icon morphs from plus to check, so the confirmation appears exactly where the tap happened.
-  const addButton = (
+  const addButton = !buyable ? null : needsChoice ? (
+    <Link
+      href={href}
+      aria-label={`Choose options for ${product.name}`}
+      className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-final-off-white text-final-black transition-colors duration-200 hover:bg-final-accent-dark"
+    >
+      <FiPlus className="h-[18px] w-[18px]" strokeWidth={2.5} />
+    </Link>
+  ) : (
     <motion.button
       type="button"
       onClick={handleAddToCart}

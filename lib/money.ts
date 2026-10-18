@@ -41,3 +41,13 @@ function numberToPlainString(n: number) {
   if (!/e/i.test(s)) return s
   return n.toFixed(20).replace(/\.?0+$/, '')
 }
+
+/** Display form, e.g. 2499990 NGN -> "₦24,999.90". */
+export function formatMinor(minor: number, currency: string) {
+  const amount = Number(fromMinor(minor, currency))
+  try {
+    return new Intl.NumberFormat('en-NG', { style: 'currency', currency, minimumFractionDigits: currencyExponent(currency) }).format(amount)
+  } catch {
+    return `${currency} ${fromMinor(minor, currency)}`
+  }
+}
