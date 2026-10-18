@@ -1,45 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { requireAdmin } from '@/lib/auth'
+import { BadRequest, handle, readJson, text } from '@/lib/api'
 
-const getSupabase = () => createSupabaseServerClient()
+// Per-request only: never cached or prerendered.
+export const dynamic = 'force-dynamic'
 
-export async function GET(req: NextRequest) {
-  try {
-    const { data, error } = await getSupabase().from('orders').select('*').order('created_at', { ascending: false }).limit(100)
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-    return NextResponse.json({ orders: data || [] })
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message || String(err) }, { status: 500 })
-  }
-}
+const STATUSES = ['ordered', 'processing', 'shipped', 'delivered', 'cancelled']
 
-export async function PUT(req: NextRequest) {
-  try {
-    const body = await req.json()
-    const { orderNumber, status } = body
-    if (!orderNumber || !status) {
-      return NextResponse.json({ error: 'Missing orderNumber or status' }, { status: 400 })
-    }
+export const GET = handle('admin.orders.list', async () => {
+  const { admin, denied } = await requireAdmin()
+  if (denied) return denied
 
-    // Fetch current order to append timeline
-    const { data: existing, error: fetchErr } = await getSupabase().from('orders').select('*').eq('order_number', orderNumber).maybeSingle()
-    if (fetchErr) return NextResponse.json({ error: fetchErr.message }, { status: 500 })
-    if (!existing) return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+  const { data, error } = await admin.supabase
+    .from('orders')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(100)
+  if (error) throw error
+  return NextResponse.json({ orders: data || [] }, { headers: { 'Cache-Control': 'private, no-store' } })
+})
 
-    const newEvent = {
-      status,
-      date: new Date().toISOString().slice(0, 10),
-      time: new Date().toISOString().slice(11, 16),
-      description: `Status updated to ${status}`,
-    }
+export const PUT = handle('admin.orders.update', async (req: NextRequest) => {
+  const { admin, denied } = await requireAdmin()
+  if (denied) return denied
 
-    const updatedTimeline = Array.isArray(existing.timeline) ? [...existing.timeline, newEvent] : [newEvent]
+  const body = await readJson(req)
+  const orderNumber = text(body.orderNumber, 'Order number', { max: 40, required: true })!
+  const status = text(body.status, 'Status', { max: 20, required: true })!
+  if (STATUSES.indexOf(status) === -1) throw new BadRequest(`Status must be one of: ${STATUSES.join(', ')}.`)
 
-    const { data, error } = await getSupabase().from('orders').update({ status, timeline: updatedTimeline }).eq('order_number', orderNumber).select().single()
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  const { data: existing, error: fetchErr } = await admin.supabase
+    .from('orders')
+    .select('timeline')
+    .eq('order_number', orderNumber)
+    .maybeSingle()
+  if (fetchErr) throw fetchErr
+  if (!existing) return NextResponse.json({ error: 'Order not found.' }, { status: 404 })
 
-    return NextResponse.json({ order: data })
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message || String(err) }, { status: 500 })
-  }
-}
+  const now = new Date().toISOString()
+  const newEvent = { status, date: now.slice(0, 10), time: now.slice(11, 16), description: `Status updated to ${status}` }
+  const timeline = Array.isArray(existing.timeline) ? [...existing.timeline, newEvent] : [newEvent]
+
+  const { data, error } = await admin.supabase
+    .from('orders')
+    .update({ status, timeline, updated_at: now })
+    .eq('order_number', orderNumber)
+    .select()
+    .single()
+  if (error) throw error
+
+  return NextResponse.json({ order: data })
+})

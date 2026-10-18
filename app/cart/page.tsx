@@ -28,7 +28,7 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <Layout>
-        <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+        <div className="min-h-screen bg-final-black pt-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center">
               <motion.div
@@ -40,7 +40,7 @@ export default function CartPage() {
                 <div className="w-24 h-24 bg-final-dark-gray rounded-full flex items-center justify-center mx-auto mb-4">
                   <FiLock className="w-12 h-12 text-final-accent" />
                 </div>
-                <h1 className="text-4xl font-bold text-final-off-white mb-4">Your cart is empty</h1>
+                <h1 className="display text-4xl text-final-off-white mb-4">Your cart is empty</h1>
                 <p className="text-xl text-final-off-white/70 mb-8">
                   Looks like you haven't added anything to your cart yet.
                 </p>
@@ -64,13 +64,13 @@ export default function CartPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Cart Items */}
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-8">
-                <h1 className="text-3xl font-bold text-final-off-white">Shopping Cart</h1>
+                <h1 className="display text-3xl md:text-4xl text-final-off-white">Shopping Cart</h1>
                 <button
                   onClick={clearCart}
                   className="text-final-off-white/70 hover:text-final-accent transition-colors"

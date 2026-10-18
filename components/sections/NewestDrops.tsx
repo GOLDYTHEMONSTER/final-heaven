@@ -1,66 +1,107 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { FiArrowRight, FiRotateCw } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
+
+type Status = 'loading' | 'ready' | 'error'
+
+function ProductSkeleton() {
+  return (
+    <div aria-hidden="true">
+      <div className="skeleton aspect-[3/4] rounded-xl" />
+      <div className="skeleton mt-3 h-3 w-16 rounded" />
+      <div className="skeleton mt-2 h-4 w-3/4 rounded" />
+      <div className="skeleton mt-2 h-4 w-20 rounded" />
+    </div>
+  )
+}
 
 export function NewestDrops() {
   const [newestProducts, setNewestProducts] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [status, setStatus] = useState<Status>('loading')
 
-  useEffect(() => {
-    async function loadNewestDrops() {
-      try {
-        setLoading(true)
-        const res = await fetch('/api/products?isNew=true')
-        const data = await res.json()
-        setNewestProducts((data.products || []).slice(0, 6))
-      } catch (error) {
-        console.error('Failed to load newest drops:', error)
-      } finally {
-        setLoading(false)
-      }
+  const loadNewestDrops = useCallback(async () => {
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/products?isNew=true')
+      if (!res.ok) throw new Error(`Request failed with ${res.status}`)
+      const data = await res.json()
+      setNewestProducts((data.products || []).slice(0, 4))
+      setStatus('ready')
+    } catch (error) {
+      console.error('Failed to load newest drops:', error)
+      setStatus('error')
     }
-
-    loadNewestDrops()
   }, [])
 
-  return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-final-gray via-final-dark-gray to-final-black">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-final-off-white mb-4">
-            <span className="gradient-text">NEWEST</span> DROPS
-          </h2>
-          <p className="text-xl text-final-off-white/70 max-w-2xl mx-auto">
-            Fresh from the underground. Limited quantities. 
-            <span className="text-final-accent font-semibold"> Members get 24h early access.</span>
-          </p>
-        </motion.div>
+  useEffect(() => {
+    loadNewestDrops()
+  }, [loadNewestDrops])
 
-        {/* Products Grid */}
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="w-16 h-16 border-4 border-final-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-final-off-white/70">Loading latest drops...</p>
+  return (
+    <section className="py-20 md:py-28" aria-labelledby="newest-drops-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 flex items-end justify-between gap-6">
+          <div>
+            <h2 id="newest-drops-heading" className="display text-4xl md:text-6xl">
+              Newest <span className="heading-muted">drops</span>
+            </h2>
+            <p className="mt-4 max-w-[48ch] text-final-muted">
+              Fresh from the underground. Limited quantities, and members get 24 hours early access.
+            </p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+          <Link
+            href="/new-drops"
+            className="group hidden shrink-0 items-center gap-2 text-sm font-semibold uppercase tracking-[0.06em] text-final-off-white sm:inline-flex"
+          >
+            View all new drops
+            <FiArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+
+        {status === 'loading' && (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4" role="status" aria-label="Loading newest drops">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
+        {status === 'error' && (
+          <div className="rounded-xl border border-final-off-white/10 px-6 py-16 text-center">
+            <p className="text-lg font-semibold">We couldn&apos;t load the latest drops.</p>
+            <p className="mt-2 text-final-muted">Check your connection and try again.</p>
+            <button type="button" onClick={loadNewestDrops} className="btn-secondary mt-6">
+              <FiRotateCw className="h-4 w-4" />
+              Try again
+            </button>
+          </div>
+        )}
+
+        {status === 'ready' && newestProducts.length === 0 && (
+          <div className="rounded-xl border border-dashed border-final-off-white/15 px-6 py-16 text-center">
+            <p className="text-lg font-semibold">No drops live right now.</p>
+            <p className="mx-auto mt-2 max-w-[40ch] text-final-muted">
+              New pieces land weekly. Members hear about them first.
+            </p>
+            <Link href="/membership" className="btn-primary mt-6">
+              Become a member
+            </Link>
+          </div>
+        )}
+
+        {status === 'ready' && newestProducts.length > 0 && (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
             {newestProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ type: 'spring', bounce: 0, duration: 0.6, delay: (index % 4) * 0.06 }}
               >
                 <ProductCard product={product} />
               </motion.div>
@@ -68,25 +109,10 @@ export function NewestDrops() {
           </div>
         )}
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Link href="/new-drops">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-final-accent text-final-black px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-            >
-              VIEW ALL NEW DROPS
-            </motion.button>
-          </Link>
-        </motion.div>
+        <Link href="/new-drops" className="btn-secondary mt-10 w-full sm:hidden">
+          View all new drops
+        </Link>
       </div>
     </section>
   )
-} 
+}

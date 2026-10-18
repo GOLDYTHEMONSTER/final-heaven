@@ -183,7 +183,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Product Images */}
@@ -220,7 +220,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 )}
                 {product.isLimited && (
                   <div className="absolute top-4 left-4">
-                    <span className="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                    <span className="bg-final-ember text-final-black text-sm font-bold px-3 py-1 rounded-full">
                       LIMITED
                     </span>
                   </div>
@@ -270,7 +270,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     )}
                   </div>
                   {product.originalPrice && product.originalPrice > product.price && (
-                    <span className="bg-red-500 text-white text-sm font-bold px-2 py-1 rounded">
+                    <span className="bg-final-ember text-final-black text-sm font-bold px-2 py-1 rounded">
                       {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                     </span>
                   )}

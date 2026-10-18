@@ -1,38 +1,19 @@
 import { NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { createSupabasePublicClient } from '@/lib/supabase/server'
+import { handle } from '@/lib/api'
 
-const getSupabase = () => createSupabaseServerClient()
+// Public catalogue: only active products, whatever the query string says.
+// RLS enforces the same rule in the database.
+export const GET = handle('products.list', async (req: Request) => {
+  const params = new URL(req.url).searchParams
+  const category = params.get('category')
 
-export async function GET(req: Request) {
-  try {
-    const url = new URL(req.url)
-    const isNew = url.searchParams.get('isNew')
-    const category = url.searchParams.get('category')
-    const status = url.searchParams.get('status') || 'active'
+  let query = createSupabasePublicClient().from('products').select('*').eq('status', 'active')
+  if (params.get('isNew') === 'true') query = query.eq('is_new', true)
+  if (category && category !== 'All') query = query.eq('category', category.slice(0, 60))
 
-    let query = getSupabase().from('products').select('*')
+  const { data, error } = await query.order('created_at', { ascending: false }).limit(500)
+  if (error) throw error
 
-    if (status) {
-      query = query.eq('status', status)
-    }
-    if (isNew === 'true') {
-      query = query.eq('is_new', true)
-    }
-    if (category && category !== 'All') {
-      query = query.eq('category', category)
-    }
-
-    const { data, error } = await query.order('created_at', { ascending: false })
-    if (error) throw error
-
-    return NextResponse.json({ products: data || [] })
-  } catch (error: any) {
-    if (error?.code === 'PGRST116') {
-      return NextResponse.json(
-        { error: "Supabase table 'public.products' was not found. Apply the schema from supabase/schema.sql to your database." },
-        { status: 500 }
-      )
-    }
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-}
+  return NextResponse.json({ products: data || [] })
+})

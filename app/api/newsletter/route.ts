@@ -1,25 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { createSupabaseServiceClient } from '@/lib/supabase/admin'
+import { email, handle, readJson } from '@/lib/api'
 
-const getSupabase = () => createSupabaseServerClient()
+// Per-request only: never cached or prerendered.
+export const dynamic = 'force-dynamic'
 
-export async function POST(req: NextRequest) {
-  const body = await req.json()
-  const { email } = body
+export const POST = handle('newsletter.subscribe', async (req: NextRequest) => {
+  const body = await readJson(req, 2_000)
+  const address = email(body.email)
 
-  if (!email) {
-    return NextResponse.json({ error: 'Email is required.' }, { status: 400 })
-  }
+  const { error } = await createSupabaseServiceClient()
+    .from('newsletter_subscribers')
+    .upsert({ email: address, source: 'footer' }, { onConflict: 'email', ignoreDuplicates: true })
+  if (error) throw error
 
-  const { error } = await getSupabase().from('newsletter_subscribers').insert({ email })
-
-  if (error) {
-    const duplicate = error.code === '23505' || error.message?.includes('duplicate')
-    return NextResponse.json(
-      { error: duplicate ? 'Email already subscribed.' : error.message },
-      { status: duplicate ? 200 : 500 }
-    )
-  }
-
-  return NextResponse.json({ message: 'Subscribed successfully.' }, { status: 201 })
-}
+  // Same reply for new and existing addresses, so this can't be used to check who is subscribed.
+  return NextResponse.json({ message: 'Thanks. You’re on the list.' }, { status: 201 })
+})

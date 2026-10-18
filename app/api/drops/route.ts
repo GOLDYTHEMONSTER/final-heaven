@@ -1,22 +1,17 @@
 import { NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { createSupabasePublicClient } from '@/lib/supabase/server'
+import { handle } from '@/lib/api'
 
-const getSupabase = () => createSupabaseServerClient()
+// Cached briefly at the edge; newly published drops appear within a minute.
+export const revalidate = 60
 
-export async function GET(req: Request) {
-  try {
-    const url = new URL(req.url)
-    const status = url.searchParams.get('status') || 'published'
-
-    const { data, error } = await getSupabase()
-      .from('drops')
-      .select('*')
-      .eq('status', status)
-      .order('release_date', { ascending: false })
-
-    if (error) throw error
-    return NextResponse.json({ drops: data || [] })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-}
+// Public: published drops only. Drafts and scheduled drops stay private (RLS enforces this too).
+export const GET = handle('drops.list', async () => {
+  const { data, error } = await createSupabasePublicClient()
+    .from('drops')
+    .select('*')
+    .eq('status', 'published')
+    .order('release_date', { ascending: false })
+  if (error) throw error
+  return NextResponse.json({ drops: data || [] })
+})

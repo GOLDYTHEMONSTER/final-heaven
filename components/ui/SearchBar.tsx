@@ -200,8 +200,8 @@ export function SearchBar({
     <div ref={searchRef} className={`relative ${className}`}>
       <div className="relative">
         {/* Search Input */}
-        <div className="relative bg-final-dark-gray/50 backdrop-blur-sm border border-final-light-gray/30 rounded-lg overflow-hidden transition-all duration-300 hover:border-final-light-gray/50 focus-within:border-final-accent">
-          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-final-light-gray/50 w-5 h-5" />
+        <div className="relative bg-final-black border border-final-off-white/15 rounded-lg overflow-hidden transition-colors duration-200 hover:border-final-off-white/30 focus-within:border-final-off-white/60">
+          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-final-muted w-5 h-5" />
           <input
             ref={inputRef}
             type="text"
@@ -216,7 +216,7 @@ export function SearchBar({
             }}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className="w-full bg-transparent pl-10 pr-10 py-3 text-final-off-white placeholder-final-light-gray/50 outline-none text-sm"
+            className="w-full bg-transparent pl-10 pr-10 py-3 text-final-off-white placeholder:text-final-muted outline-none text-sm"
           />
 
           {/* Clear Button */}

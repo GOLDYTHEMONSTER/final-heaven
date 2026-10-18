@@ -102,7 +102,7 @@ export default function MembershipPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         {/* Hero Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
@@ -113,8 +113,8 @@ export default function MembershipPage() {
             >
               <div className="flex items-center justify-center mb-6">
                 <FiClock className="w-16 h-16 text-final-accent mr-4" />
-                <h1 className="text-5xl md:text-6xl font-bold text-final-off-white">
-                  JOIN THE <span className="gradient-text">COMMUNITY</span>
+                <h1 className="display text-5xl md:text-7xl text-final-off-white">
+                  JOIN THE <span className="heading-muted">COMMUNITY</span>
                 </h1>
               </div>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto mb-8">

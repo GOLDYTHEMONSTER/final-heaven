@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useCart } from '@/components/providers/CartProvider'
@@ -8,6 +9,7 @@ import { formatCurrency } from '@/lib/utils/format'
 import { Layout } from '@/components/layout/Layout'
 
 export default function CheckoutPage() {
+  const router = useRouter()
   const { items, total, clearCart } = useCart()
   const [email, setEmail] = useState('')
   const [shippingAddress, setShippingAddress] = useState('')
@@ -17,6 +19,11 @@ export default function CheckoutPage() {
   const [country, setCountry] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  const [orderConfirmation, setOrderConfirmation] = useState<{
+    orderNumber: string
+    trackingNumber: string
+    paystackUrl?: string | null
+  } | null>(null)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -62,16 +69,21 @@ export default function CheckoutPage() {
     }
 
     setStatus('success')
+    setOrderConfirmation({
+      orderNumber: data.orderNumber,
+      trackingNumber: data.trackingNumber,
+      paystackUrl: data.paystackUrl,
+    })
     setMessage(`Order created. Your order number is ${data.orderNumber}. Use it to track shipment.`)
     clearCart()
   }
 
-  if (!items.length) {
+  if (!items.length && !orderConfirmation) {
     return (
       <Layout>
-        <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+        <div className="min-h-screen bg-final-black pt-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            <h1 className="text-4xl font-bold text-final-off-white mb-4">Checkout</h1>
+            <h1 className="display text-4xl text-final-off-white mb-4">Checkout</h1>
             <p className="text-final-off-white/70 mb-8">Your cart is empty. Add something to your cart before placing an order.</p>
             <Link href="/shop">
               <motion.button
@@ -90,12 +102,12 @@ export default function CheckoutPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
-                <h1 className="text-3xl font-bold text-final-off-white mb-6">Checkout</h1>
+                <h1 className="display text-3xl md:text-4xl text-final-off-white mb-6">Checkout</h1>
                 <p className="text-final-off-white/70 mb-6">Enter your shipping details and email to create an order. No account is required.</p>
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
@@ -222,6 +234,81 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {orderConfirmation && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative max-w-xl w-full bg-[#0c0f17] border border-cyan-400/30 shadow-[0_0_60px_rgba(56,189,248,0.15)] rounded-3xl p-8"
+          >
+            <div className="absolute inset-0 rounded-3xl border border-white/10 pointer-events-none" />
+            <div className="relative space-y-6">
+              <div className="rounded-2xl bg-final-gray p-6 border border-final-off-white/10">
+                <h2 className="text-3xl font-bold text-final-off-white mb-2">Order Confirmed</h2>
+                <p className="text-final-off-white/70">Your order is now saved and ready for fulfillment.</p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
+                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Order Number</p>
+                  <p className="text-xl font-semibold text-final-off-white">{orderConfirmation.orderNumber}</p>
+                </div>
+                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
+                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Tracking Number</p>
+                  <p className="text-xl font-semibold text-final-accent">{orderConfirmation.trackingNumber}</p>
+                </div>
+              </div>
+
+              {orderConfirmation.paystackUrl ? (
+                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
+                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Payment</p>
+                  <p className="text-final-off-white/70 mb-4">Complete your payment securely using Paystack.</p>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={orderConfirmation.paystackUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center rounded-full bg-final-accent text-final-black px-6 py-3 font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all"
+                    >
+                      Complete Payment
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => navigator.clipboard.writeText(orderConfirmation.paystackUrl || '')}
+                      className="inline-flex items-center justify-center rounded-full border border-final-light-gray/50 px-6 py-3 text-final-off-white hover:border-final-accent transition-all"
+                    >
+                      Copy Paystack Link
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="rounded-3xl bg-[#11151f] border border-final-light-gray/20 p-5">
+                  <p className="text-sm text-final-off-white/60 uppercase tracking-[0.24em] mb-2">Payment</p>
+                  <p className="text-final-off-white/70">No Paystack checkout was generated automatically. You can still track this order and fulfill it manually.</p>
+                </div>
+              )}
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <button
+                  type="button"
+                  onClick={() => setOrderConfirmation(null)}
+                  className="w-full sm:w-auto rounded-full border border-final-light-gray/30 px-6 py-3 text-final-off-white hover:border-final-accent transition-all"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push(`/track-order?orderNumber=${orderConfirmation.orderNumber}`)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-final-accent text-final-black px-6 py-3 font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all"
+                >
+                  Track Your Order
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </Layout>
   )
 }

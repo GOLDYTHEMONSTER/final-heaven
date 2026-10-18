@@ -7,7 +7,6 @@ import {
   FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX, 
   FiBarChart, FiShoppingBag, FiTrendingUp, FiAlertCircle, FiActivity
 } from 'react-icons/fi'
-import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
 
@@ -121,6 +120,7 @@ export default function AdminPage() {
       images: [],
       category: 'T-Shirts',
       description: '',
+      product_url: '',
       stock: 0,
       status: 'active',
       colors: [],
@@ -223,6 +223,17 @@ export default function AdminPage() {
                   onChange={handleChange} 
                   rows={3}
                   className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" 
+                />
+              </div>
+              <div>
+                <label className="block text-final-off-white/70 text-sm mb-1">Paystack Product URL</label>
+                <input
+                  name="product_url"
+                  type="url"
+                  value={form.product_url || ''}
+                  onChange={handleChange}
+                  placeholder="https://paystack.com/buy/your-product-slug"
+                  className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
                 />
               </div>
               <div className="flex gap-4">
@@ -457,29 +468,8 @@ export default function AdminPage() {
   }
 
   return (
-    <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
-        {/* Admin Navigation */}
-        <div className="border-b border-final-light-gray/20 bg-final-black/50 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex gap-8 py-4">
-              <Link
-                href="/admin"
-                className="flex items-center gap-2 text-final-off-white font-semibold border-b-2 border-final-accent pb-4"
-              >
-                <FiPackage className="w-5 h-5" />
-                Products
-              </Link>
-              <Link
-                href="/admin/tracking"
-                className="flex items-center gap-2 text-final-off-white/60 hover:text-final-off-white font-semibold border-b-2 border-transparent pb-4 transition-colors"
-              >
-                <FiActivity className="w-5 h-5" />
-                User Tracking
-              </Link>
-            </div>
-          </div>
-        </div>
+    <>
+      <div className="pb-16">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <motion.div
@@ -490,8 +480,8 @@ export default function AdminPage() {
           >
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-4xl font-bold text-final-off-white mb-2">
-                  <span className="gradient-text">PRODUCT</span> MANAGEMENT
+                <h1 className="display text-3xl md:text-4xl text-final-off-white mb-2">
+                  <span className="heading-muted">PRODUCT</span> MANAGEMENT
                 </h1>
                 <p className="text-final-off-white/70">
                   Manage your Final Heaven products (Supabase Synced)
@@ -616,6 +606,7 @@ export default function AdminPage() {
                     <tr>
                       <th className="text-left p-4 text-final-off-white font-semibold">Product</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Category</th>
+                      <th className="text-left p-4 text-final-off-white font-semibold">Link</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Price</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Stock</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Status</th>
@@ -639,7 +630,26 @@ export default function AdminPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="p-4 text-final-off-white">{product.category}</td>
+                        <td className="p-4 text-final-off-white">
+                          {product.product_url ? (
+                            <div className="flex flex-col gap-1">
+                              <a href={product.product_url} target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 underline text-sm truncate max-w-[220px]">
+                                {product.product_url}
+                              </a>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  navigator.clipboard.writeText(product.product_url)
+                                }}
+                                className="text-xs text-final-off-white/70 hover:text-final-off-white"
+                              >
+                                Copy link
+                              </button>
+                            </div>
+                          ) : (
+                            <span className="text-final-off-white/70 text-sm">No link</span>
+                          )}
+                        </td>
                         <td className="p-4 text-final-accent font-bold">{formatCurrency(product.price)}</td>
                         <td className="p-4">
                           <span className={`font-bold ${getStockColor(product.stock)}`}>{product.stock}</span>
@@ -694,7 +704,7 @@ export default function AdminPage() {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
 

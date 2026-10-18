@@ -1,12 +1,12 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FiShoppingCart, FiEye, FiStar, FiClock, FiUsers } from 'react-icons/fi'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { FiCheck, FiPlus } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
-import { useState, useEffect, useCallback } from 'react'
 import { Product } from '@/lib/stores/productStore'
 
 interface ProductCardProps {
@@ -14,293 +14,160 @@ interface ProductCardProps {
   viewMode?: 'grid' | 'list'
 }
 
+const PLACEHOLDER = '/api/placeholder/400/500'
+
+function Badges({ product }: { product: Product }) {
+  if (!product.isNew && !product.isLimited && !product.membersOnly) return null
+  return (
+    <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
+      {product.isNew && (
+        <span className="rounded-md bg-final-ember px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
+          New
+        </span>
+      )}
+      {product.isLimited && (
+        <span className="rounded-md bg-final-black/80 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-off-white backdrop-blur">
+          Limited
+        </span>
+      )}
+      {product.membersOnly && (
+        <span className="rounded-md border border-final-ember/60 bg-final-black/80 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-ember backdrop-blur">
+          Members
+        </span>
+      )}
+    </div>
+  )
+}
+
+function Price({ product, large = false }: { product: Product; large?: boolean }) {
+  return (
+    <p className={`flex items-baseline gap-2 tabular-nums ${large ? 'text-lg' : 'text-[15px]'}`}>
+      <span className="font-semibold text-final-off-white">{formatCurrency(product.price)}</span>
+      {product.originalPrice && (
+        <span className="text-sm text-final-muted line-through">{formatCurrency(product.originalPrice)}</span>
+      )}
+    </p>
+  )
+}
+
 export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   const { addItem } = useCart()
-  const [showToast, setShowToast] = useState(false)
-  const [hasMounted, setHasMounted] = useState(false)
-  useEffect(() => { setHasMounted(true) }, [])
+  const [justAdded, setJustAdded] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>()
 
-  const handleAddToCart = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    
-    // For demo purposes, using default size and color
+  useEffect(() => () => clearTimeout(timer.current), [])
+
+  const mainImage = product.images?.[0]?.url || product.image || PLACEHOLDER
+  const href = `/product/${product.id}`
+
+  const handleAddToCart = useCallback(() => {
     addItem({
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.images && product.images.length > 0 ? product.images[0].url : '/api/placeholder/400/500',
+      image: mainImage,
       size: 'M', // Default size
       quantity: 1,
-      isMembersOnly: product.membersOnly
+      isMembersOnly: product.membersOnly,
     })
-    setShowToast(true)
-    setTimeout(() => setShowToast(false), 1500)
-  }, [addItem, product.id, product.name, product.price, product.images, product.membersOnly])
+    setJustAdded(true)
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => setJustAdded(false), 1400)
+  }, [addItem, product.id, product.name, product.price, product.membersOnly, mainImage])
 
-  const mainImage = product.images && product.images.length > 0
-    ? product.images[0].url
-    : '/api/placeholder/400/500'
+  // Icon morphs from plus to check, so the confirmation appears exactly where the tap happened.
+  const addButton = (
+    <motion.button
+      type="button"
+      onClick={handleAddToCart}
+      whileTap={{ scale: 0.9 }}
+      aria-label={justAdded ? `${product.name} added to cart` : `Add ${product.name} to cart`}
+      className={`grid h-10 w-10 shrink-0 place-items-center rounded-full transition-colors duration-200 ${
+        justAdded ? 'bg-final-ember text-final-black' : 'bg-final-off-white text-final-black hover:bg-final-accent-dark'
+      }`}
+    >
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={justAdded ? 'added' : 'add'}
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.6 }}
+          transition={{ type: 'spring', bounce: 0, duration: 0.25 }}
+        >
+          {justAdded ? <FiCheck className="h-[18px] w-[18px]" strokeWidth={2.5} /> : <FiPlus className="h-[18px] w-[18px]" strokeWidth={2.5} />}
+        </motion.span>
+      </AnimatePresence>
+    </motion.button>
+  )
 
   if (viewMode === 'list') {
     return (
-      <Link href={`/product/${product.id}`}>
-        <motion.div
-          whileHover={{ y: -4 }}
-          className="group bg-final-dark-gray rounded-lg overflow-hidden card-hover border border-final-light-gray/30"
-        >
-          {/* Toast Feedback */}
-          {hasMounted && showToast && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-6 py-3 bg-final-accent text-final-black font-bold rounded-full shadow-lg animate-bounce drop-shadow-xl border-2 border-final-black/30">
-              Added to cart!
-            </div>
-          )}
-          <div className="flex">
-            {/* Image Container */}
-            <div className="relative w-48 h-48 flex-shrink-0">
-              <Image
-                src={mainImage}
-                alt={product.name}
-                fill
-                unoptimized
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              {/* Badges */}
-              <div className="absolute top-3 left-3 flex flex-col gap-2">
-                {product.isNew && (
-                  <span className="bg-final-accent text-final-black text-xs font-bold px-2 py-1 rounded-full">
-                    NEW
-                  </span>
-                )}
-                {product.isLimited && (
-                  <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    LIMITED
-                  </span>
-                )}
-                {product.membersOnly && (
-                  <span className="bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    MEMBERS ONLY
-                  </span>
-                )}
-              </div>
-
-              {/* Quick Actions */}
-              <div className="absolute top-3 right-3 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-8 h-8 bg-final-accent text-final-black rounded-full flex items-center justify-center hover:shadow-lg"
-                >
-                  <FiEye className="w-4 h-4" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handleAddToCart}
-                  className="w-8 h-8 bg-final-accent text-final-black rounded-full flex items-center justify-center hover:shadow-lg"
-                >
-                  <FiShoppingCart className="w-4 h-4" />
-                </motion.button>
-              </div>
-            </div>
-
-            {/* Product Info */}
-            <div className="flex-1 p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-final-off-white mb-2 group-hover:text-final-accent transition-colors">
-                    {product.name}
-                  </h3>
-                  <p className="text-final-off-white/70 text-sm mb-3 line-clamp-2">
-                    {product.description}
-                  </p>
-                  
-                  {/* Rating and Reviews */}
-                  {product.rating && (
-                    <div className="flex items-center space-x-2 mb-3">
-                      <div className="flex items-center space-x-1">
-                        <FiStar className="w-4 h-4 text-yellow-400 fill-current" />
-                        <span className="text-final-off-white text-sm">{product.rating}</span>
-                      </div>
-                      <span className="text-final-off-white/50 text-sm">({product.reviews} reviews)</span>
-                    </div>
-                  )}
-
-                  {/* Release Date */}
-                  {product.releaseDate && (
-                    <div className="flex items-center space-x-2 mb-3">
-                      <FiClock className="w-4 h-4 text-final-accent" />
-                      <span className="text-final-off-white/70 text-sm">
-                        Released {new Date(product.releaseDate).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="text-right">
-                  <div className="mb-2">
-                    {product.originalPrice && (
-                      <span className="text-final-off-white/50 line-through text-sm mr-2">
-                        {formatCurrency(product.originalPrice)}
-                      </span>
-                    )}
-                    <span className="text-2xl font-bold text-final-accent">
-                      {formatCurrency(product.price)}
-                    </span>
-                  </div>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleAddToCart}
-                    className="bg-final-accent text-final-black px-6 py-2 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-                  >
-                    ADD TO CART
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Additional Info */}
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center space-x-4">
-                  <span className="text-final-off-white/70">Category: {product.category}</span>
-                  {product.colors && (
-                    <span className="text-final-off-white/70">
-                      Colors: {product.colors.length}
-                    </span>
-                  )}
-                  {product.sizes && (
-                    <span className="text-final-off-white/70">
-                      Sizes: {product.sizes.join(', ')}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </Link>
-    )
-  }
-
-  // Grid view (original design)
-  return (
-    <Link href={`/product/${product.id}`}>
-      <motion.div
-        whileHover={{ y: -8 }}
-        className="group relative bg-final-dark-gray rounded-lg overflow-hidden card-hover"
-      >
-        {/* Toast Feedback */}
-        {hasMounted && showToast && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 px-6 py-3 bg-final-accent text-final-black font-bold rounded-full shadow-lg animate-bounce drop-shadow-xl border-2 border-final-black/30">
-            Added to cart!
-          </div>
-        )}
-        {/* Image Container */}
-        <div className="relative aspect-[3/4] overflow-hidden">
+      <article className="group relative flex gap-5 rounded-xl border border-final-off-white/10 bg-final-gray p-3 transition-colors duration-200 hover:border-final-off-white/20">
+        <Link href={href} className="relative aspect-[4/5] w-32 shrink-0 overflow-hidden rounded-lg bg-final-dark-gray sm:w-40">
           <Image
             src={mainImage}
             alt={product.name}
             fill
             unoptimized
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover group-hover:scale-110 transition-transform duration-500"
+            sizes="160px"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
-          
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
-          {/* Quick Actions */}
-          <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 bg-final-accent text-final-black rounded-full flex items-center justify-center hover:shadow-lg"
-            >
-              <FiEye className="w-5 h-5" />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={handleAddToCart}
-              className="w-10 h-10 bg-final-accent text-final-black rounded-full flex items-center justify-center hover:shadow-lg"
-            >
-              <FiShoppingCart className="w-5 h-5" />
-            </motion.button>
-          </div>
+          <Badges product={product} />
+        </Link>
 
-          {/* Badges */}
-          <div className="absolute top-4 left-4 flex flex-col gap-2">
-            {product.isNew && (
-              <span className="bg-final-accent text-final-black text-xs font-bold px-2 py-1 rounded-full">
-                NEW
-              </span>
-            )}
-            {product.isLimited && (
-              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                LIMITED
-              </span>
-            )}
-            {product.membersOnly && (
-              <span className="bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                MEMBERS ONLY
-              </span>
-            )}
-          </div>
-
-          {/* Tags */}
-          {product.tags && product.tags.length > 0 && (
-            <div className="absolute top-4 left-4 flex flex-wrap gap-1">
-              {product.tags.map(tag => (
-                <span key={tag} className="bg-final-black/80 text-final-off-white text-xs font-medium px-2 py-1 rounded">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Category Badge */}
-          <div className="absolute bottom-4 left-4">
-            <span className="bg-final-black/80 text-final-off-white text-xs font-medium px-2 py-1 rounded">
-              {product.category}
-            </span>
-          </div>
-        </div>
-
-        {/* Product Info */}
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-final-off-white mb-2 group-hover:text-final-accent transition-colors">
-            {product.name}
+        <div className="flex min-w-0 flex-1 flex-col py-1">
+          <p className="text-xs uppercase tracking-[0.12em] text-final-muted">{product.category}</p>
+          <h3 className="mt-1 text-lg font-semibold leading-snug">
+            <Link href={href} className="after:absolute after:inset-0">
+              {product.name}
+            </Link>
           </h3>
-          
-          <div className="flex items-center justify-between">
-            <div>
-              {product.originalPrice && (
-                <span className="text-final-off-white/50 line-through text-sm mr-2">
-                  {formatCurrency(product.originalPrice)}
-                </span>
-              )}
-              <span className="text-xl font-bold text-final-accent">
-                {formatCurrency(product.price)}
-              </span>
-            </div>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleAddToCart}
-              className="bg-final-accent text-final-black px-4 py-2 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
-            >
-              ADD TO CART
-            </motion.button>
+          {product.description && (
+            <p className="mt-2 line-clamp-2 max-w-[60ch] text-sm text-final-muted">{product.description}</p>
+          )}
+          {product.sizes && product.sizes.length > 0 && (
+            <p className="mt-2 text-xs text-final-muted">Sizes {product.sizes.join(' / ')}</p>
+          )}
+          <div className="relative z-10 mt-auto flex items-center justify-between gap-4 pt-4">
+            <Price product={product} large />
+            {addButton}
           </div>
         </div>
-      </motion.div>
-    </Link>
+      </article>
+    )
+  }
+
+  return (
+    <article className="group relative">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-final-dark-gray">
+        <Link href={href} aria-label={product.name} className="absolute inset-0">
+          <Image
+            src={mainImage}
+            alt={product.name}
+            fill
+            unoptimized
+            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+        </Link>
+        <Badges product={product} />
+        {/* Always visible on touch screens; revealed on hover or keyboard focus with a pointer. */}
+        <div className="absolute bottom-3 right-3 transition-[opacity,transform] duration-200 ease-out [@media(hover:hover)]:translate-y-1 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within:translate-y-0 [@media(hover:hover)]:group-focus-within:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100">
+          {addButton}
+        </div>
+      </div>
+
+      <div className="mt-3 min-w-0">
+        <p className="text-[11px] uppercase tracking-[0.12em] text-final-muted">{product.category}</p>
+        <h3 className="mt-1 truncate text-[15px] font-medium">
+          <Link href={href} className="transition-colors hover:text-final-muted">
+            {product.name}
+          </Link>
+        </h3>
+        <div className="mt-1.5">
+          <Price product={product} />
+        </div>
+      </div>
+    </article>
   )
-} 
+}

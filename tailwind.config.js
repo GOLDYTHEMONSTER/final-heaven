@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
+// Colours resolve to the CSS variables in app/globals.css, so the palette lives in one place.
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,44 +12,39 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'final-black': '#000000',
-        'final-gray': '#1a1a1a',
-        'final-dark-gray': '#2a2a2a',
-        'final-light-gray': '#3a3a3a',
-        'final-off-white': '#f5f5f5',
-        'final-cream': '#f8f6f0',
-        'final-dark-cream': '#e8e4d8',
-        'final-accent': '#8b8b8b',
-        'final-accent-dark': '#6b6b6b',
-        'final-neon': '#8b8b8b',
-        'final-neon-pink': '#a8a8a8',
-        'final-neon-blue': '#7a7a7a',
+        'final-black': token('bg'),
+        'final-gray': token('surface'),
+        'final-dark-gray': token('surface-raised'),
+        'final-light-gray': token('line'),
+        'final-off-white': token('fg'),
+        'final-muted': token('fg-muted'),
+        // Primary actions are off-white on near-black. Ember is the single accent,
+        // reserved for state: new, members-only, cart count, focus.
+        'final-accent': token('fg'),
+        'final-accent-dark': token('fg-dim'),
+        'final-ember': token('ember'),
       },
       fontFamily: {
-        'urban': ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-archivo)', 'system-ui', 'sans-serif'],
+        urban: ['var(--font-archivo)', 'system-ui', 'sans-serif'],
       },
-      animation: {
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      // Radius rule: controls and surfaces use a tight 6-12px scale; full rounding is
+      // only for circular icon buttons and count badges.
+      borderRadius: {
+        md: '4px',
+        lg: '6px',
+        xl: '8px',
+        '2xl': '12px',
+        '3xl': '12px',
       },
-      keyframes: {
-        glow: {
-          '0%': { boxShadow: '0 0 5px #8b8b8b, 0 0 10px #8b8b8b, 0 0 15px #8b8b8b' },
-          '100%': { boxShadow: '0 0 10px #8b8b8b, 0 0 20px #8b8b8b, 0 0 30px #8b8b8b' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
+      transitionTimingFunction: {
+        out: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-transparent': 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.8))',
-        'gradient-glass': 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
+        'gradient-glass': 'linear-gradient(135deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02))',
       },
     },
   },
   plugins: [],
-} 
+}

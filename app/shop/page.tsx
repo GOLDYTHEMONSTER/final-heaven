@@ -81,7 +81,7 @@ export default function ShopPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         {/* Hero Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
@@ -90,8 +90,8 @@ export default function ShopPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-final-off-white mb-6">
-                <span className="gradient-text">SHOP</span> ALL
+              <h1 className="display text-5xl md:text-7xl text-final-off-white mb-6">
+                <span className="heading-muted">SHOP</span> ALL
               </h1>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto">
                 Discover the complete Final Heaven collection. Shop streetwear, shoes, accessories, and premium lifestyle pieces in one place.
@@ -182,15 +182,16 @@ export default function ShopPage() {
         <section className="px-4 sm:px-6 lg:px-8 pb-20">
           <div className="max-w-7xl mx-auto">
             {loading ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-20"
-              >
-                <div className="w-16 h-16 border-4 border-final-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                <h3 className="text-2xl font-semibold text-final-off-white mb-2">Loading products...</h3>
-                <p className="text-final-off-white/70">Fetching the latest collection from Supabase.</p>
-              </motion.div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3 xl:grid-cols-4" role="status" aria-label="Loading products">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} aria-hidden="true">
+                    <div className="skeleton aspect-[3/4] rounded-xl" />
+                    <div className="skeleton mt-3 h-3 w-16 rounded" />
+                    <div className="skeleton mt-2 h-4 w-3/4 rounded" />
+                    <div className="skeleton mt-2 h-4 w-20 rounded" />
+                  </div>
+                ))}
+              </div>
             ) : filteredProducts.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -208,7 +209,7 @@ export default function ShopPage() {
             ) : (
               <div className={`grid gap-6 ${
                 viewMode === 'grid' 
-                  ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+                  ? 'grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3 xl:grid-cols-4'
                   : 'grid-cols-1'
               }`}>
                 {filteredProducts.map((product, index) => (

@@ -1,33 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { FiSearch, FiPackage, FiTruck, FiCheckCircle, FiClock, FiMapPin } from 'react-icons/fi'
+import { FiSearch, FiPackage, FiTruck, FiCheckCircle, FiClock, FiMapPin, FiRefreshCw } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
-
-// Mock order data
-const mockOrders = {
-  'FH123456': {
-    id: 'FH123456',
-    email: 'alex@example.com',
-    status: 'shipped',
-    items: [
-      { name: 'Neon Dreams Hoodie', quantity: 1, price: 89.99 },
-      { name: 'Cyberpunk Tee', quantity: 2, price: 49.99 }
-    ],
-    total: 189.97,
-    orderDate: '2024-01-15',
-    estimatedDelivery: '2024-01-20',
-    trackingNumber: '1Z999AA1234567890',
-    shippingAddress: '123 Street Name, City, State 12345',
-    timeline: [
-      { status: 'ordered', date: '2024-01-15', time: '14:30', description: 'Order placed' },
-      { status: 'processing', date: '2024-01-16', time: '09:15', description: 'Order confirmed and processing' },
-      { status: 'shipped', date: '2024-01-17', time: '16:45', description: 'Package shipped via Express' },
-      { status: 'delivered', date: '2024-01-20', time: '11:20', description: 'Package delivered' }
-    ]
-  }
-}
+import { formatCurrency } from '@/lib/utils/format'
 
 const statusConfig = {
   ordered: { color: 'text-blue-400', bg: 'bg-blue-400/20', icon: FiClock },
@@ -36,47 +14,77 @@ const statusConfig = {
   delivered: { color: 'text-green-400', bg: 'bg-green-400/20', icon: FiCheckCircle }
 }
 
-export default function TrackOrderPage() {
-  const [searchType, setSearchType] = useState<'orderId' | 'email'>('orderId')
-  const [searchValue, setSearchValue] = useState('')
+function TrackOrderContent() {
+  const searchParams = useSearchParams()
+  const [reference, setReference] = useState('')
+  const [email, setEmail] = useState('')
   const [order, setOrder] = useState<any>(null)
   const [isSearching, setIsSearching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
-  const handleSearch = async () => {
-    if (!searchValue.trim()) return
+  // Checkout links here with ?orderNumber=; the customer still confirms their email.
+  useEffect(() => {
+    const orderNumber = searchParams.get('orderNumber')
+    if (orderNumber) setReference(orderNumber)
+  }, [searchParams])
+
+  const lookup = async () => {
+    const params = new URLSearchParams({ reference: reference.trim(), email: email.trim() })
+    const response = await fetch(`/api/orders?${params.toString()}`, { cache: 'no-store' })
+    const data = await response.json().catch(() => ({}))
+    return { ok: response.ok, data }
+  }
+
+  const handleSearch = async (event?: React.FormEvent) => {
+    event?.preventDefault()
+    if (!reference.trim() || !email.trim()) {
+      setErrorMessage('Enter both your order number and the email you ordered with.')
+      return
+    }
 
     setIsSearching(true)
     setErrorMessage('')
     setOrder(null)
-
-    const params = new URLSearchParams({
-      type: searchType,
-      value: searchValue.trim(),
-    })
-
-    const response = await fetch(`/api/orders?${params.toString()}`)
-    const data = await response.json()
-
-    if (!response.ok) {
-      setErrorMessage(data?.error || 'Order not found.')
+    try {
+      const { ok, data } = await lookup()
+      if (ok) setOrder(data.order)
+      else setErrorMessage(data?.error || 'We couldn’t find an order matching those details.')
+    } catch {
+      setErrorMessage('Something went wrong. Please try again.')
+    } finally {
       setIsSearching(false)
-      return
     }
+  }
 
-    setOrder(data.order)
-    setIsSearching(false)
+  const handleRefresh = async () => {
+    if (!order) return
+    setIsRefreshing(true)
+    try {
+      const { ok, data } = await lookup()
+      if (ok) setOrder(data.order)
+    } finally {
+      setIsRefreshing(false)
+    }
   }
 
   const getStatusIcon = (status: string) => {
-    const config = statusConfig[status as keyof typeof statusConfig]
+    const config = statusConfig[status as keyof typeof statusConfig] ?? statusConfig.ordered
     const Icon = config.icon
     return <Icon className={`w-5 h-5 ${config.color}`} />
   }
 
+  const getStatusProgress = (status: string) => {
+    const statuses = ['ordered', 'processing', 'shipped', 'delivered']
+    return Math.max(0, statuses.indexOf(status) + 1) / statuses.length * 100
+  }
+
+  const inputClass =
+    'w-full rounded-lg border border-final-off-white/15 bg-final-black px-4 py-3 text-final-off-white placeholder:text-final-muted transition-colors focus:border-final-off-white/60 focus:outline-none'
+
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header */}
           <motion.div
@@ -85,70 +93,61 @@ export default function TrackOrderPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-final-off-white mb-4">
-              <span className="gradient-text">TRACK</span> YOUR ORDER
+            <h1 className="display text-4xl md:text-6xl text-final-off-white mb-4">
+              <span className="heading-muted">TRACK</span> YOUR ORDER
             </h1>
-            <p className="text-xl text-final-off-white/70 max-w-2xl mx-auto">
-              Enter your order ID or email address to track your Final Heaven order status and delivery.
+            <p className="text-lg text-final-muted max-w-2xl mx-auto">
+              Enter your order number and the email you ordered with.
             </p>
           </motion.div>
 
           {/* Search Section */}
-          <motion.div
+          <motion.form
+            onSubmit={handleSearch}
+            noValidate
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30 mb-12"
+            className="mb-12 rounded-xl border border-final-off-white/10 bg-final-gray p-6 md:p-8"
           >
-            <div className="flex flex-col lg:flex-row gap-4 items-center">
-              {/* Search Type Toggle */}
-              <div className="flex bg-final-gray rounded-lg p-1">
-                <button
-                  onClick={() => setSearchType('orderId')}
-                  className={`px-4 py-2 rounded-md transition-all duration-300 ${
-                    searchType === 'orderId'
-                      ? 'bg-final-accent text-final-black'
-                      : 'text-final-off-white hover:text-final-accent'
-                  }`}
-                >
-                  Order ID
-                </button>
-                <button
-                  onClick={() => setSearchType('email')}
-                  className={`px-4 py-2 rounded-md transition-all duration-300 ${
-                    searchType === 'email'
-                      ? 'bg-final-accent text-final-black'
-                      : 'text-final-off-white hover:text-final-accent'
-                  }`}
-                >
-                  Email
-                </button>
-              </div>
-
-              {/* Search Input */}
-              <div className="relative flex-1 max-w-md">
-                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-final-off-white/50 w-5 h-5" />
+            <div className="grid gap-5 md:grid-cols-[1fr_1fr_auto] md:items-end">
+              <div>
+                <label htmlFor="track-reference" className="mb-2 block text-sm font-medium text-final-off-white/80">
+                  Order or tracking number
+                </label>
                 <input
-                  type={searchType === 'email' ? 'email' : 'text'}
-                  placeholder={searchType === 'orderId' ? 'Enter Order ID (e.g., FH123456)' : 'Enter your email'}
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent transition-colors"
+                  id="track-reference"
+                  type="text"
+                  autoComplete="off"
+                  autoCapitalize="characters"
+                  spellCheck={false}
+                  placeholder="FH-7K2Q9XWMRA"
+                  value={reference}
+                  onChange={(e) => setReference(e.target.value)}
+                  className={`${inputClass} font-mono uppercase`}
                 />
               </div>
-
-              {/* Search Button */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleSearch}
-                disabled={isSearching}
-                className="bg-final-accent text-final-black px-8 py-3 rounded-lg font-bold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
-              >
-                {isSearching ? 'Searching...' : 'Track Order'}
-              </motion.button>
+              <div>
+                <label htmlFor="track-email" className="mb-2 block text-sm font-medium text-final-off-white/80">
+                  Email address
+                </label>
+                <input
+                  id="track-email"
+                  type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={inputClass}
+                />
+              </div>
+              <button type="submit" disabled={isSearching} className="btn-primary disabled:opacity-60">
+                <FiSearch className="h-4 w-4" />
+                {isSearching ? 'Searching' : 'Track order'}
+              </button>
             </div>
-          </motion.div>
+          </motion.form>
 
           {/* Order Details */}
           {order && (
@@ -158,6 +157,45 @@ export default function TrackOrderPage() {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
+              {/* Refresh Button */}
+              <div className="flex justify-end">
+                <button
+                  onClick={handleRefresh}
+                  disabled={isRefreshing}
+                  className="flex items-center gap-2 px-4 py-2 bg-final-accent/20 text-final-accent rounded-lg hover:bg-final-accent/30 transition-colors disabled:opacity-50"
+                >
+                  <FiRefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                  {isRefreshing ? 'Refreshing...' : 'Refresh Status'}
+                </button>
+              </div>
+
+              {/* Status Progress Bar */}
+              <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
+                <h3 className="text-sm font-semibold text-final-off-white/70 mb-4">Delivery Progress</h3>
+                <div className="w-full bg-final-gray rounded-full h-2 mb-6 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${getStatusProgress(order.status)}%` }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className="h-full bg-gradient-to-r from-final-accent to-yellow-400"
+                  />
+                </div>
+                <div className="grid grid-cols-4 gap-2 text-center">
+                  {['ordered', 'processing', 'shipped', 'delivered'].map((status) => (
+                    <div key={status} className="flex flex-col items-center">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
+                        ['ordered', 'processing', 'shipped', 'delivered'].indexOf(status) <= ['ordered', 'processing', 'shipped', 'delivered'].indexOf(order.status)
+                          ? statusConfig[status as keyof typeof statusConfig].bg
+                          : 'bg-final-gray'
+                      }`}>
+                        {getStatusIcon(status)}
+                      </div>
+                      <span className="text-xs text-final-off-white/70 capitalize">{status}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Order Summary */}
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -171,7 +209,7 @@ export default function TrackOrderPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Total</h3>
-                    <p className="text-lg font-bold text-final-accent">${order.total}</p>
+                    <p className="text-lg font-bold text-final-accent">{formatCurrency(order.total)}</p>
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Status</h3>
@@ -193,7 +231,7 @@ export default function TrackOrderPage() {
                         <h4 className="font-semibold text-final-off-white">{item.name}</h4>
                         <p className="text-final-off-white/70">Quantity: {item.quantity}</p>
                       </div>
-                      <span className="text-lg font-bold text-final-accent">${item.price}</span>
+                      <span className="text-lg font-bold text-final-accent">{formatCurrency(item.price)}</span>
                     </div>
                   ))}
                 </div>
@@ -206,9 +244,9 @@ export default function TrackOrderPage() {
                   <div>
                     <h4 className="font-semibold text-final-off-white mb-2 flex items-center space-x-2">
                       <FiMapPin className="w-5 h-5 text-final-accent" />
-                      <span>Shipping Address</span>
+                      <span>Shipping to</span>
                     </h4>
-                    <p className="text-final-off-white/70">{order.shipping_address}</p>
+                    <p className="text-final-off-white/70">{[order.shipping_city, order.shipping_country].filter(Boolean).join(', ') || 'On file'}</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-final-off-white mb-2">Tracking Number</h4>
@@ -246,7 +284,7 @@ export default function TrackOrderPage() {
           )}
 
           {/* No Order Found */}
-          {searchValue && !order && !isSearching && (
+          {errorMessage && !order && !isSearching && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -257,7 +295,7 @@ export default function TrackOrderPage() {
               </div>
               <h3 className="text-2xl font-semibold text-final-off-white mb-2">Order not found</h3>
               <p className="text-final-off-white/70 mb-4">
-                We couldn't find an order with the provided {searchType === 'orderId' ? 'Order ID' : 'email'}.
+                {errorMessage}
               </p>
               <p className="text-final-off-white/50 text-sm">
                 Please check your information and try again, or contact support if you need assistance.
@@ -268,4 +306,13 @@ export default function TrackOrderPage() {
       </div>
     </Layout>
   )
-} 
+}
+
+// useSearchParams needs a Suspense boundary for the page to prerender.
+export default function TrackOrderPage() {
+  return (
+    <Suspense>
+      <TrackOrderContent />
+    </Suspense>
+  )
+}

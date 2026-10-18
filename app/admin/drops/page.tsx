@@ -7,7 +7,6 @@ import {
   FiTrendingUp, FiStar, FiDollarSign, FiPackage, FiSettings, FiArrowRight,
   FiCheck, FiX, FiAlertCircle, FiImage, FiTag
 } from 'react-icons/fi'
-import { Layout } from '@/components/layout/Layout'
 
 const statusConfig = {
   draft: { color: 'text-gray-400', bg: 'bg-gray-400/20', label: 'Draft' },
@@ -384,8 +383,8 @@ export default function DropsAdminPage() {
   }
 
   return (
-    <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+    <>
+      <div className="pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <motion.div
@@ -396,8 +395,8 @@ export default function DropsAdminPage() {
           >
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-4xl font-bold text-final-off-white mb-2">
-                  <span className="gradient-text">DROPS</span> MANAGEMENT
+                <h1 className="display text-3xl md:text-4xl text-final-off-white mb-2">
+                  <span className="heading-muted">DROPS</span> MANAGEMENT
                 </h1>
                 <p className="text-final-off-white/70">
                   Schedule, manage, and track your product drops
@@ -763,6 +762,6 @@ export default function DropsAdminPage() {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   )
 } 

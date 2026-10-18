@@ -1,121 +1,102 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { requireAdmin } from '@/lib/auth'
+import { BadRequest, handle, int, readJson, text, url } from '@/lib/api'
 
-const getSupabase = () => createSupabaseServerClient()
+// Per-request only: never cached or prerendered.
+export const dynamic = 'force-dynamic'
 
-export async function GET() {
-  try {
-    const { data, error } = await getSupabase()
-      .from('drops')
-      .select('*')
-      .order('release_date', { ascending: false })
+const STATUSES = ['draft', 'scheduled', 'published', 'archived']
+const ID = /^[A-Za-z0-9_-]{1,64}$/
 
-    if (error) throw error
-
-    return NextResponse.json({ drops: data || [] })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
+const textList = (value: unknown, field: string) => {
+  if (value === undefined || value === null) return []
+  if (!Array.isArray(value) || value.length > 100) throw new BadRequest(`${field} must be a list of up to 100 items.`)
+  return value.map((v) => text(v, field, { max: 100, required: true })!)
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json()
-    const {
-      id,
-      name,
-      description,
-      release_date,
-      release_time,
-      status,
-      preview_image,
-      members_only,
-      early_access_hours,
-      products,
-      tags,
-    } = body
+/** Validates and whitelists drop columns; `partial` keeps only keys present in the body. */
+function dropColumns(body: Record<string, unknown>, partial: boolean) {
+  const has = (key: string) => !partial || key in body
+  const out: Record<string, unknown> = {}
 
-    if (!id || !name || !release_date || !release_time) {
-      return NextResponse.json(
-        { error: 'Missing required fields: id, name, release_date, release_time' },
-        { status: 400 }
-      )
+  if (has('name')) out.name = text(body.name, 'Name', { max: 200, required: true })
+  if (has('description')) out.description = text(body.description, 'Description', { max: 5000 })
+  if (has('release_date')) {
+    const date = text(body.release_date, 'Release date', { max: 10, required: true })!
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new BadRequest('Release date must be YYYY-MM-DD.')
+    out.release_date = date
+  }
+  if (has('release_time')) {
+    const time = text(body.release_time, 'Release time', { max: 8, required: true })!
+    if (!/^\d{2}:\d{2}(:\d{2})?$/.test(time)) throw new BadRequest('Release time must be HH:MM.')
+    out.release_time = time
+  }
+  if (has('status')) {
+    const status = body.status ?? 'draft'
+    if (typeof status !== 'string' || STATUSES.indexOf(status) === -1) {
+      throw new BadRequest(`Status must be one of: ${STATUSES.join(', ')}.`)
     }
-
-    const { data, error } = await getSupabase()
-      .from('drops')
-      .insert({
-        id,
-        name,
-        description,
-        release_date,
-        release_time,
-        status: status || 'draft',
-        preview_image,
-        members_only: members_only || false,
-        early_access_hours: early_access_hours || 24,
-        products: products || [],
-        tags: tags || [],
-      })
-      .select()
-      .single()
-
-    if (error) throw error
-
-    return NextResponse.json({ drop: data }, { status: 201 })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    out.status = status
   }
+  if (has('preview_image')) out.preview_image = url(body.preview_image, 'Preview image')
+  if (has('members_only')) out.members_only = body.members_only === true
+  if (has('early_access_hours')) out.early_access_hours = int(body.early_access_hours ?? 24, 'Early access hours', { min: 0, max: 720 })
+  if (has('products')) out.products = textList(body.products, 'Products')
+  if (has('tags')) out.tags = textList(body.tags, 'Tags')
+  return out
 }
 
-export async function PUT(req: NextRequest) {
-  try {
-    const body = await req.json()
-    const { id, ...updates } = body
+export const GET = handle('admin.drops.list', async () => {
+  const { admin, denied } = await requireAdmin()
+  if (denied) return denied
 
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Drop ID is required' },
-        { status: 400 }
-      )
-    }
+  const { data, error } = await admin.supabase.from('drops').select('*').order('release_date', { ascending: false })
+  if (error) throw error
+  return NextResponse.json({ drops: data || [] })
+})
 
-    const { data, error } = await getSupabase()
-      .from('drops')
-      .update(updates)
-      .eq('id', id)
-      .select()
-      .single()
+export const POST = handle('admin.drops.create', async (req: NextRequest) => {
+  const { admin, denied } = await requireAdmin()
+  if (denied) return denied
 
-    if (error) throw error
+  const body = await readJson(req)
+  if (typeof body.id !== 'string' || !ID.test(body.id)) throw new BadRequest('Drop ID is required.')
+  const { data, error } = await admin.supabase
+    .from('drops')
+    .insert({ id: body.id, ...dropColumns(body, false) })
+    .select()
+    .single()
+  if (error) throw error
+  return NextResponse.json({ drop: data }, { status: 201 })
+})
 
-    return NextResponse.json({ drop: data })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-}
+export const PUT = handle('admin.drops.update', async (req: NextRequest) => {
+  const { admin, denied } = await requireAdmin()
+  if (denied) return denied
 
-export async function DELETE(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url)
-    const id = searchParams.get('id')
+  const body = await readJson(req)
+  if (typeof body.id !== 'string' || !ID.test(body.id)) throw new BadRequest('Drop ID is required.')
+  const updates = dropColumns(body, true)
+  if (!Object.keys(updates).length) throw new BadRequest('Nothing to update.')
 
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Drop ID is required' },
-        { status: 400 }
-      )
-    }
+  const { data, error } = await admin.supabase
+    .from('drops')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', body.id)
+    .select()
+    .single()
+  if (error) throw error
+  return NextResponse.json({ drop: data })
+})
 
-    const { error } = await getSupabase()
-      .from('drops')
-      .delete()
-      .eq('id', id)
+export const DELETE = handle('admin.drops.delete', async (req: NextRequest) => {
+  const { admin, denied } = await requireAdmin()
+  if (denied) return denied
 
-    if (error) throw error
+  const id = new URL(req.url).searchParams.get('id') || ''
+  if (!ID.test(id)) throw new BadRequest('Drop ID is required.')
 
-    return NextResponse.json({ message: 'Drop deleted' })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-}
+  const { error } = await admin.supabase.from('drops').delete().eq('id', id)
+  if (error) throw error
+  return NextResponse.json({ message: 'Drop deleted' })
+})

@@ -59,6 +59,7 @@ create table if not exists products (
   colors jsonb default '[]',
   sizes jsonb default '[]',
   tags jsonb default '[]',
+  product_url text,
   card_size text default 'medium',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -87,3 +88,8 @@ create table if not exists drops (
 create index if not exists idx_drops_status on drops(status);
 create index if not exists idx_drops_release_date on drops(release_date);
 
+
+-- SECURITY: after creating these tables, run
+--   supabase/migrations/20261018120000_enable_rls_and_admin_policies.sql
+-- It enables row level security on every table and sets the grants and policies.
+-- Without it, the public key can read and change every row, including orders.

@@ -31,3 +31,13 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local debug dumps (may contain customer data)
+admin-debug*.json
+admin-orders.json
+order-check.json
+resp.json
+tmp-*.js
+
+# Supabase CLI local state
+supabase/.temp/

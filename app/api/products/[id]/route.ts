@@ -1,31 +1,20 @@
 import { NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { createSupabasePublicClient } from '@/lib/supabase/server'
+import { handle } from '@/lib/api'
 
-const getSupabase = () => createSupabaseServerClient()
-
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  try {
-    const { data, error } = await getSupabase()
-      .from('products')
-      .select('*')
-      .eq('id', params.id)
-      .single()
-
-    if (error) {
-      if (error.code === 'PGRST116') {
-        return NextResponse.json({ product: null }, { status: 404 })
-      }
-      throw error
-    }
-
-    return NextResponse.json({ product: data })
-  } catch (error: any) {
-    if (error?.code === 'PGRST116') {
-      return NextResponse.json(
-        { error: "Supabase table 'public.products' was not found. Apply the schema from supabase/schema.sql to your database." },
-        { status: 500 }
-      )
-    }
-    return NextResponse.json({ error: error.message }, { status: 500 })
+export const GET = handle('products.get', async (_req: Request, { params }: { params: { id: string } }) => {
+  if (!/^[A-Za-z0-9_-]{1,64}$/.test(params.id)) {
+    return NextResponse.json({ product: null }, { status: 404 })
   }
-}
+
+  const { data, error } = await createSupabasePublicClient()
+    .from('products')
+    .select('*')
+    .eq('id', params.id)
+    .eq('status', 'active')
+    .maybeSingle()
+  if (error) throw error
+  if (!data) return NextResponse.json({ product: null }, { status: 404 })
+
+  return NextResponse.json({ product: data })
+})

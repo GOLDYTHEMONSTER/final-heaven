@@ -77,7 +77,7 @@ export default function NewDropsPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
+      <div className="min-h-screen bg-final-black pt-24">
         {/* Hero Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
@@ -86,8 +86,8 @@ export default function NewDropsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-final-off-white mb-6">
-                <span className="gradient-text">NEW</span> DROPS
+              <h1 className="display text-5xl md:text-7xl text-final-off-white mb-6">
+                <span className="heading-muted">NEW</span> DROPS
               </h1>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto">
                 Fresh arrivals in streetwear, shoes, accessories, and vape-ready lifestyle goods.

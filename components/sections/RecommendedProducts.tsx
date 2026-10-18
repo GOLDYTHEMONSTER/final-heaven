@@ -188,9 +188,8 @@ export function RecommendedProducts({
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-4xl font-bold text-final-off-white mb-3">{title}</h2>
-          <div className="h-1 w-16 bg-gradient-to-r from-final-accent to-transparent rounded-full" />
-          <p className="text-final-off-white/60 mt-4 text-lg">{subtitle}</p>
+          <h2 className="display text-2xl sm:text-3xl md:text-5xl text-final-off-white">{title}</h2>
+          <p className="mt-4 max-w-[60ch] text-final-muted">{subtitle}</p>
         </motion.div>
 
         <motion.div
@@ -198,7 +197,7 @@ export function RecommendedProducts({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4"
         >
           {recommendations.map((product) => (
             <motion.div key={product.id} variants={itemVariants}>
@@ -216,7 +215,7 @@ export function RecommendedProducts({
         >
           <Link
             href="/shop"
-            className="px-8 py-3 bg-final-accent text-final-black font-semibold rounded-lg hover:bg-final-accent/90 transition-colors"
+            className="btn-secondary"
           >
             Explore More
           </Link>

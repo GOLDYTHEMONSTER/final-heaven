@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { FiTrash2, FiDownload, FiRefreshCw, FiEye, FiShoppingCart, FiSearch, FiTrendingUp, FiActivity, FiPackage } from 'react-icons/fi'
-import { Layout } from '@/components/layout/Layout'
+import { FiTrash2, FiDownload, FiRefreshCw, FiEye, FiShoppingCart, FiShoppingBag, FiSearch, FiTrendingUp, FiActivity, FiPackage } from 'react-icons/fi'
 import { useInterestStore } from '@/lib/stores/interestStore'
 
 interface TrackingStats {
@@ -97,41 +96,20 @@ export default function TrackingPage() {
 
   if (!stats) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center pt-24">
+      <>
+        <div className="flex min-h-[60vh] items-center justify-center">
           <div className="text-center">
             <div className="w-16 h-16 border-4 border-final-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-final-off-white text-lg">Loading tracking data…</p>
           </div>
         </div>
-      </Layout>
+      </>
     )
   }
 
   return (
-    <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-final-black via-final-gray to-final-dark-gray pt-24">
-        {/* Admin Navigation */}
-        <div className="border-b border-final-light-gray/20 bg-final-black/50 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex gap-8 py-4">
-              <Link
-                href="/admin"
-                className="flex items-center gap-2 text-final-off-white/60 hover:text-final-off-white font-semibold border-b-2 border-transparent pb-4 transition-colors"
-              >
-                <FiPackage className="w-5 h-5" />
-                Products
-              </Link>
-              <Link
-                href="/admin/tracking"
-                className="flex items-center gap-2 text-final-off-white font-semibold border-b-2 border-final-accent pb-4"
-              >
-                <FiActivity className="w-5 h-5" />
-                User Tracking
-              </Link>
-            </div>
-          </div>
-        </div>
+    <>
+      <div className="pb-16">
 
         {/* Header */}
         <section className="py-12 px-4 sm:px-6 lg:px-8 border-b border-final-light-gray/20">
@@ -143,7 +121,7 @@ export default function TrackingPage() {
             >
               <div className="flex items-center gap-3 mb-4">
                 <FiActivity className="w-8 h-8 text-final-accent" />
-                <h1 className="text-4xl font-bold text-final-off-white">User Tracking Dashboard</h1>
+                <h1 className="display text-3xl md:text-4xl text-final-off-white">User Tracking Dashboard</h1>
               </div>
               <p className="text-final-off-white/60">Monitor and manage user interest data and browsing analytics</p>
             </motion.div>
@@ -394,6 +372,6 @@ export default function TrackingPage() {
           </motion.div>
         </div>
       )}
-    </Layout>
+    </>
   )
 }

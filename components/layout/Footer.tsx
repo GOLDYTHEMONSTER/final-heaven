@@ -1,9 +1,37 @@
 'use client'
 
 import Link from 'next/link'
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { FiInstagram, FiTwitter, FiFacebook } from 'react-icons/fi'
-import { motion } from 'framer-motion'
+import { LogoMark } from '@/components/ui/LogoMark'
+
+// Add the real profile URLs here; an icon only renders once its URL is set.
+const socials = [
+  { name: 'Instagram', href: '', icon: FiInstagram },
+  { name: 'Twitter', href: '', icon: FiTwitter },
+  { name: 'Facebook', href: '', icon: FiFacebook },
+].filter((s) => s.href)
+
+const columns = [
+  {
+    title: 'Shop',
+    links: [
+      { name: 'Shop All', href: '/shop' },
+      { name: 'New Drops', href: '/new-drops' },
+      { name: 'Membership', href: '/membership' },
+      { name: 'Track Order', href: '/track-order' },
+    ],
+  },
+  {
+    title: 'Support',
+    links: [
+      { name: 'Contact Us', href: '/contact' },
+      { name: 'Shipping Info', href: '/shipping' },
+      { name: 'Returns', href: '/returns' },
+      { name: 'Size Guide', href: '/size-guide' },
+    ],
+  },
+]
 
 export function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState('')
@@ -21,193 +49,119 @@ export function Footer() {
     setNewsletterStatus('loading')
     setNewsletterMessage('')
 
-    const response = await fetch('/api/newsletter', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: newsletterEmail.trim() }),
-    })
-    const data = await response.json()
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: newsletterEmail.trim() }),
+      })
+      const data = await response.json().catch(() => ({}))
 
-    if (!response.ok) {
+      if (!response.ok) {
+        setNewsletterStatus('error')
+        setNewsletterMessage(data.error || 'Subscription failed. Please try again.')
+        return
+      }
+
+      setNewsletterStatus('success')
+      setNewsletterMessage(data.message || 'Subscribed successfully!')
+      setNewsletterEmail('')
+    } catch {
       setNewsletterStatus('error')
-      setNewsletterMessage(data.error || 'Subscription failed. Please try again.')
-      return
+      setNewsletterMessage('Subscription failed. Please try again.')
     }
-
-    setNewsletterStatus('success')
-    setNewsletterMessage(data.message || 'Subscribed successfully!')
-    setNewsletterEmail('')
   }
 
   return (
-    <footer className="relative bg-gradient-to-t from-final-gray to-final-black border-t border-final-light-gray/30 overflow-hidden">
-      {/* Background RGB glow elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 90, 180],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-1/4 left-1/4 w-48 h-48 bg-gradient-radial from-red-500/15 via-orange-500/10 to-transparent rounded-full blur-3xl"
-          style={{
-            boxShadow: '0 0 40px rgba(255, 0, 0, 0.2), 0 0 80px rgba(255, 0, 0, 0.1)',
-            animation: 'rgb-glow 10s linear infinite'
-          }}
-        />
-        <motion.div
-          animate={{
-            scale: [1.1, 1, 1.1],
-            rotate: [180, 270, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-radial from-blue-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl"
-          style={{
-            boxShadow: '0 0 50px rgba(0, 0, 255, 0.2), 0 0 100px rgba(0, 0, 255, 0.1)',
-            animation: 'rgb-glow 14s linear infinite reverse'
-          }}
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [90, 180, 270],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-1/2 right-1/3 w-32 h-32 bg-gradient-radial from-green-500/15 via-yellow-500/10 to-transparent rounded-full blur-3xl"
-          style={{
-            boxShadow: '0 0 30px rgba(0, 255, 0, 0.2), 0 0 60px rgba(0, 255, 0, 0.1)',
-            animation: 'rgb-glow 12s linear infinite'
-          }}
-        />
-      </div>
-
-      {/* Footer content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold gradient-text mb-4 neon-logo">FINAL HEAVEN</h3>
-            <p className="text-final-off-white/70 mb-4 max-w-md">
+    <footer className="border-t border-final-off-white/10">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-12">
+          <div className="col-span-2 md:col-span-4">
+            <Link href="/" className="inline-flex items-center gap-3" aria-label="Final Heaven home">
+              <LogoMark size={32} />
+              <span className="display text-lg tracking-[0.02em]">Final Heaven</span>
+            </Link>
+            <p className="mt-5 max-w-[36ch] text-sm leading-relaxed text-final-muted">
               Discover premium streetwear and lifestyle goods with a modern edge.
               Early access, special drops, and the best in urban fashion.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-final-off-white hover:text-final-accent transition-colors hover:neon-text">
-                <FiInstagram className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-final-off-white hover:text-final-accent transition-colors hover:neon-text">
-                <FiTwitter className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-final-off-white hover:text-final-accent transition-colors hover:neon-text">
-                <FiFacebook className="w-6 h-6" />
-              </a>
-            </div>
+            {socials.length > 0 && (
+              <div className="mt-6 flex gap-2">
+                {socials.map(({ name, href, icon: Icon }) => (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name}
+                    className="grid h-10 w-10 place-items-center rounded-full border border-final-off-white/15 text-final-muted transition-colors hover:border-final-off-white/40 hover:text-final-off-white"
+                  >
+                    <Icon className="h-[18px] w-[18px]" />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-final-off-white mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/shop" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Shop All
-                </Link>
-              </li>
-              <li>
-                <Link href="/new-drops" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  New Drops
-                </Link>
-              </li>
-              <li>
-                <Link href="/membership" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Membership
-                </Link>
-              </li>
-              <li>
-                <Link href="/track-order" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Track Order
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {columns.map((column) => (
+            <nav key={column.title} aria-label={column.title} className="md:col-span-2">
+              <h4 className="text-sm font-semibold">{column.title}</h4>
+              <ul className="mt-4 space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-final-muted transition-colors hover:text-final-off-white">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
-          {/* Support */}
-          <div>
-            <h4 className="text-lg font-semibold text-final-off-white mb-4">Support</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/contact" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/shipping" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Shipping Info
-                </Link>
-              </li>
-              <li>
-                <Link href="/returns" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Returns
-                </Link>
-              </li>
-              <li>
-                <Link href="/size-guide" className="text-final-off-white/70 hover:text-final-accent transition-colors">
-                  Size Guide
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-semibold text-final-off-white mb-4">Newsletter</h4>
-            <p className="text-final-off-white/70 text-sm mb-4">
+          <div className="col-span-2 md:col-span-4">
+            <h4 className="text-sm font-semibold">Newsletter</h4>
+            <p className="mt-4 text-sm text-final-muted">
               Get drop alerts, restock notices, and exclusive updates straight to your inbox.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                value={newsletterEmail}
-                onChange={(event) => setNewsletterEmail(event.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                placeholder="Your email"
-              />
-              <button
-                type="submit"
-                disabled={newsletterStatus === 'loading'}
-                className="px-5 py-3 bg-final-accent text-final-black rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
+            <form onSubmit={handleNewsletterSubmit} className="mt-5" noValidate>
+              <label htmlFor="newsletter-email" className="mb-2 block text-xs font-medium text-final-off-white/80">
+                Email address
+              </label>
+              <div className="flex gap-2">
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  value={newsletterEmail}
+                  onChange={(event) => setNewsletterEmail(event.target.value)}
+                  aria-invalid={newsletterStatus === 'error'}
+                  aria-describedby={newsletterMessage ? 'newsletter-message' : undefined}
+                  className="min-w-0 flex-1 rounded-lg border border-final-off-white/15 bg-final-gray px-4 py-3 text-sm text-final-off-white placeholder:text-final-muted/70 transition-colors focus:border-final-off-white/50 focus:outline-none"
+                  placeholder="you@example.com"
+                />
+                <button type="submit" disabled={newsletterStatus === 'loading'} className="btn-primary px-5 disabled:opacity-60">
+                  {newsletterStatus === 'loading' ? 'Joining' : 'Subscribe'}
+                </button>
+              </div>
+              <p
+                id="newsletter-message"
+                role="status"
+                className={`mt-3 min-h-[1.25rem] text-sm ${newsletterStatus === 'success' ? 'text-final-off-white' : 'text-final-ember'}`}
               >
-                Subscribe
-              </button>
-            </form>
-            {newsletterMessage && (
-              <p className={`mt-3 text-sm ${newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'}`}>
                 {newsletterMessage}
               </p>
-            )}
+            </form>
           </div>
         </div>
 
-        <div className="border-t border-final-light-gray/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-final-off-white/50 text-sm">
-            © 2024 Final Heaven. All rights reserved.
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-final-off-white/50 hover:text-final-accent transition-colors text-sm">
+        <div className="mt-12 flex flex-col gap-4 border-t border-final-off-white/10 pt-8 text-xs text-final-muted md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} Final Heaven. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="transition-colors hover:text-final-off-white">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-final-off-white/50 hover:text-final-accent transition-colors text-sm">
+            <Link href="/terms" className="transition-colors hover:text-final-off-white">
               Terms of Service
             </Link>
           </div>
@@ -215,4 +169,4 @@ export function Footer() {
       </div>
     </footer>
   )
-} 
+}

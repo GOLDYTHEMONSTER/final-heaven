@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabaseClient'
+import { createSupabasePublicClient } from '@/lib/supabase/server'
 
-const getSupabase = () => createSupabaseServerClient()
+const getSupabase = () => createSupabasePublicClient()
+const strings = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string').slice(0, 50) : [])
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const { viewedCategories, viewedTags, limit = 4, excludeProductId } = body
+    const body = await req.json().catch(() => ({}))
+    const viewedCategories = strings(body?.viewedCategories)
+    const viewedTags = strings(body?.viewedTags)
+    const limit = Math.min(Math.max(Number.isInteger(body?.limit) ? body.limit : 4, 1), 12)
+    const excludeProductId = typeof body?.excludeProductId === 'string' ? body.excludeProductId : undefined
 
     // Fetch all active products
     const { data: allProducts, error: fetchError } = await getSupabase()
@@ -64,6 +68,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ products: scoredProducts })
   } catch (error: any) {
     console.error('Error fetching suggestions:', error)
-    return NextResponse.json({ error: error.message, products: [] }, { status: 500 })
+    return NextResponse.json({ error: 'Something went wrong.', products: [] }, { status: 500 })
   }
 }
