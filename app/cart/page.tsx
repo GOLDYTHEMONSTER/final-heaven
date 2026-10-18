@@ -19,7 +19,7 @@ export default function CartPage() {
   const [promoInput, setPromoInput] = useState(promoCode)
   useEffect(() => setPromoInput(promoCode), [promoCode])
   // Prices, discount and availability come from the server: exactly what checkout will charge.
-  const { quote, loading } = useQuote(items, promoCode)
+  const { quote, loading, error: quoteError } = useQuote(items, promoCode)
   const subtotal = quote ? Number(quote.subtotal) : total
   const discount = quote ? Number(quote.discount) : 0
   const finalTotal = quote ? Number(quote.total) : total
@@ -250,8 +250,12 @@ export default function CartPage() {
                   </Link>
                 ) : (
                   <button type="button" disabled className="block w-full rounded-lg bg-final-accent py-4 text-center text-lg font-bold text-final-black opacity-50">
-                    {lineIssues ? 'FIX YOUR CART TO CONTINUE' : 'CHECKING PRICES…'}
+                    {lineIssues ? 'FIX YOUR CART TO CONTINUE' : quoteError ? 'CHECKOUT UNAVAILABLE' : 'CHECKING PRICES…'}
                   </button>
+                )}
+
+                {quoteError && !loading && (
+                  <p role="alert" className="mt-3 text-center text-sm text-red-400">We couldn’t check prices right now. Please refresh in a moment.</p>
                 )}
 
                 {/* Security Notice */}

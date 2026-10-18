@@ -33,7 +33,7 @@ export default function CheckoutPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'redirecting' | 'error'>('idle')
   const [message, setMessage] = useState('')
   // The server's price: exactly what Flutterwave will charge.
-  const { quote, loading: pricing } = useQuote(items, promoCode, email)
+  const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email)
   const lineIssues = quote?.lines.some((l) => l.issue) ?? false
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -236,13 +236,16 @@ export default function CheckoutPage() {
                         ? 'Starting payment…'
                         : quote
                           ? `Pay ${formatCurrency(quote.total)}`
-                          : 'Checking prices…'}
+                          : quoteError ? 'Checkout unavailable' : 'Checking prices…'}
                   </button>
                   <p className="flex items-center justify-center gap-1.5 text-sm text-final-muted">
                     <FiLock className="h-4 w-4" /> Card, bank transfer or USSD on Flutterwave&apos;s secure page
                   </p>
                 </form>
 
+                {quoteError && !pricing && (
+                  <p className="mt-5 text-sm text-red-400" role="alert">We couldn’t check prices right now, so payment is paused. Please refresh in a moment.</p>
+                )}
                 {lineIssues && (
                   <p className="mt-5 flex items-start gap-1.5 text-sm text-red-400" role="alert">
                     <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
