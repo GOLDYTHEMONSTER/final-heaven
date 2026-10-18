@@ -301,11 +301,17 @@ function TrackOrderContent() {
                     <p className="text-final-off-white/70">{[order.shipping_city, order.shipping_country].filter(Boolean).join(', ') || 'On file'}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-final-off-white mb-2">Tracking Number</h4>
-                    <p className="text-final-accent font-mono">{order.tracking_number}</p>
-                    <p className="text-final-off-white/70 text-sm mt-1">
-                      Estimated Delivery: TBD
-                    </p>
+                    <h4 className="font-semibold text-final-off-white mb-2">Courier tracking</h4>
+                    {order.shipping_reference ? (
+                      <>
+                        <p className="text-final-off-white">{order.shipping_carrier || 'Courier'}</p>
+                        <p className="font-mono text-final-off-white/80">{order.shipping_reference}</p>
+                        <p className="mt-1 text-sm text-final-muted">Use this reference on the courier’s website for live updates.</p>
+                      </>
+                    ) : (
+                      <p className="text-sm text-final-muted">Added here once your order ships.</p>
+                    )}
+                    <p className="mt-3 text-xs text-final-muted">Our reference: <span className="font-mono">{order.tracking_number}</span></p>
                   </div>
                 </div>
               </div>

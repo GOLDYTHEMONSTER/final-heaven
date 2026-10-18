@@ -30,6 +30,8 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
+  // Lets a production build run beside a dev server (NEXT_DIST_DIR=.next-build).
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   poweredByHeader: false,
   images: {
     // Next 14's image optimizer has unpatched critical advisories (fixed only in

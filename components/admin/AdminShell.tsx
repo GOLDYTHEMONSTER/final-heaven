@@ -4,17 +4,18 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiPackage, FiShoppingBag } from 'react-icons/fi'
+import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiPackage, FiShoppingBag, FiUsers } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
 // Each section is shown only to staff holding its permission. Hiding is a
 // convenience: the API and RLS enforce the same permissions.
 const nav = [
+  { name: 'Analytics', href: '/admin/analytics', icon: FiActivity, permission: 'analytics.read' },
   { name: 'Products', href: '/admin', icon: FiPackage, permission: 'products.read' },
   { name: 'Orders', href: '/admin/orders', icon: FiShoppingBag, permission: 'orders.read' },
   { name: 'Drops', href: '/admin/drops', icon: FiCalendar, permission: 'products.read' },
-  { name: 'Tracking', href: '/admin/tracking', icon: FiActivity, permission: 'analytics.read' },
+  { name: 'Customers', href: '/admin/customers', icon: FiUsers, permission: 'customers.read' },
 ]
 
 function useSignOut() {

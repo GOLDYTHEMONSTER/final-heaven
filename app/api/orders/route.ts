@@ -4,6 +4,7 @@ import { BadRequest, email, handle, int, readJson, reference, text } from '@/lib
 import { fromMinor } from '@/lib/money'
 import { priceOrder, type CartLine } from '@/lib/orders'
 import { getStorefront } from '@/lib/tenancy'
+import { POLICY } from '@/lib/legal'
 import { rateLimit } from '@/lib/rate-limit'
 import { paymentDeps, siteUrl } from '@/lib/payments'
 import { startPayment } from '@/lib/payments/service'
@@ -46,18 +47,22 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
   const shippingState = text(body.shippingState, 'State', { max: 100 })
   const shippingPostalCode = text(body.shippingPostalCode, 'Postal code', { max: 20, required: true })
   const shippingCountry = text(body.shippingCountry, 'Country', { max: 100, required: true })
+  if (shippingCountry!.toLowerCase() !== POLICY.shipsTo.toLowerCase()) throw new BadRequest(`We deliver within ${POLICY.shipsTo} only.`)
   const lines = parseItems(body.items)
+  if (body.termsAccepted !== true) throw new BadRequest('Please accept the Terms of Sale and Returns Policy to place your order.')
 
   const store = await getStorefront()
   const db = createSupabaseServiceClient()
   const { data: products, error: productError } = await db
     .from('products')
-    .select('id, name, price, stock, status, images')
+    .select('id, name, price, stock, status, images, category')
     .eq('store_id', store.storeId)
     .in('id', [...new Set(lines.map((l) => l.id))])
   if (productError) throw productError
 
-  const priced = priceOrder(lines, products ?? [], store.currency)
+  // Hidden categories can't be bought even by calling the API directly.
+  const available = (products ?? []).filter((p) => !store.hiddenCategories.includes(p.category))
+  const priced = priceOrder(lines, available, store.currency)
   const orderNumber = reference('FH')
   const now = new Date().toISOString()
 
@@ -78,6 +83,8 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
     subtotal: fromMinor(priced.subtotalMinor, store.currency),
     total: fromMinor(priced.totalMinor, store.currency),
     order_items: priced.items,
+    terms_version: POLICY.termsVersion,
+    terms_accepted_at: now,
     timeline: [{ status: 'pending_payment', date: now.slice(0, 10), time: now.slice(11, 16), description: 'Order placed' }],
   }).select('id, tracking_number').single()
   if (insertError) throw insertError
@@ -117,7 +124,7 @@ export const GET = handle('orders.track', async (req: NextRequest) => {
   const store = await getStorefront()
   const { data, error } = await createSupabaseServiceClient()
     .from('orders')
-    .select('order_number, tracking_number, email, status, payment_status, currency, created_at, total, order_items, timeline, shipping_city, shipping_country')
+    .select('order_number, tracking_number, email, status, payment_status, currency, created_at, total, order_items, timeline, shipping_city, shipping_country, shipping_carrier, shipping_reference')
     .eq('store_id', store.storeId)
     // `ref` is validated to [A-Z0-9-] above, so it can't inject PostgREST filter syntax.
     .or(`order_number.eq.${ref},tracking_number.eq.${ref}`)

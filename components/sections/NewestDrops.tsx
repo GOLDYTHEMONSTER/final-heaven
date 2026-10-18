@@ -50,7 +50,7 @@ export function NewestDrops() {
               Newest <span className="heading-muted">drops</span>
             </h2>
             <p className="mt-4 max-w-[48ch] text-final-muted">
-              Fresh from the underground. Limited quantities, and members get 24 hours early access.
+              Fresh from the underground. Limited quantities, so when they’re gone, they’re gone.
             </p>
           </div>
           <Link
@@ -85,10 +85,10 @@ export function NewestDrops() {
           <div className="rounded-xl border border-dashed border-final-off-white/15 px-6 py-16 text-center">
             <p className="text-lg font-semibold">No drops live right now.</p>
             <p className="mx-auto mt-2 max-w-[40ch] text-final-muted">
-              New pieces land weekly. Members hear about them first.
+              New pieces are on the way. Join the waitlist to hear first.
             </p>
             <Link href="/membership" className="btn-primary mt-6">
-              Become a member
+              Join the waitlist
             </Link>
           </div>
         )}

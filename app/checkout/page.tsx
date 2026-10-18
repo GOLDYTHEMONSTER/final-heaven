@@ -1,22 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
 import { Layout } from '@/components/layout/Layout'
+import { track } from '@/lib/analytics'
+import { POLICY } from '@/lib/legal'
 
 export default function CheckoutPage() {
   const router = useRouter()
   const { items, total, clearCart } = useCart()
+  const trackedCheckout = useRef(false)
+  useEffect(() => {
+    if (items.length && !trackedCheckout.current) {
+      trackedCheckout.current = true
+      track('checkout_started')
+    }
+  }, [items.length])
   const [email, setEmail] = useState('')
   const [shippingAddress, setShippingAddress] = useState('')
   const [city, setCity] = useState('')
   const [stateValue, setStateValue] = useState('')
   const [postalCode, setPostalCode] = useState('')
-  const [country, setCountry] = useState('')
+  // We deliver within Nigeria only (lib/legal.ts), so the country is fixed.
+  const country = POLICY.shipsTo
+  const [termsAccepted, setTermsAccepted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
   const [orderConfirmation, setOrderConfirmation] = useState<{
@@ -40,6 +51,11 @@ export default function CheckoutPage() {
       setStatus('error')
       return
     }
+    if (!termsAccepted) {
+      setMessage('Please accept the Terms of Sale and Returns Policy.')
+      setStatus('error')
+      return
+    }
 
     setStatus('loading')
     setMessage('')
@@ -52,6 +68,7 @@ export default function CheckoutPage() {
       shippingPostalCode: postalCode,
       shippingCountry: country,
       items,
+      termsAccepted,
     }
 
     const response = await fetch('/api/orders', {
@@ -179,12 +196,23 @@ export default function CheckoutPage() {
                         id="country"
                         type="text"
                         value={country}
-                        onChange={(event) => setCountry(event.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                        placeholder="Country"
+                        readOnly
+                        aria-describedby="country-note"
+                        className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-muted focus:outline-none"
                       />
+                      <p id="country-note" className="mt-1 text-xs text-final-muted">We deliver within {POLICY.shipsTo} only.</p>
                     </div>
                   </div>
+
+                  <label className="flex items-start gap-3 text-sm text-final-muted">
+                    <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required className="mt-0.5 h-4 w-4 shrink-0 accent-final-ember" />
+                    <span>
+                      I agree to the <Link href="/terms" target="_blank" className="underline underline-offset-2 hover:text-final-off-white">Terms of Sale</Link> and{' '}
+                      <Link href="/returns" target="_blank" className="underline underline-offset-2 hover:text-final-off-white">Returns Policy</Link>.
+                      We use your details to process your order as described in our{' '}
+                      <Link href="/privacy" target="_blank" className="underline underline-offset-2 hover:text-final-off-white">Privacy Policy</Link>.
+                    </span>
+                  </label>
 
                   <button
                     type="submit"

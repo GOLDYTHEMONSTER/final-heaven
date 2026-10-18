@@ -9,7 +9,7 @@ import { SearchBar } from '@/components/ui/SearchBar'
 import { RecommendedProducts } from '@/components/sections/RecommendedProducts'
 import { useInterestStore } from '@/lib/stores/interestStore'
 
-const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
+const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories']
 const sortOptions = [
   { value: 'newest', label: 'Newest First' },
   { value: 'price-low', label: 'Price: Low to High' },

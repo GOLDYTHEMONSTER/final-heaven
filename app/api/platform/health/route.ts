@@ -28,7 +28,7 @@ export const GET = handle('platform.health', async () => {
     count(db.from('payment_events').select('id', { head: true, count: 'exact' }).eq('status', 'failed')),
     count(db.from('payments').select('id', { head: true, count: 'exact' }).in('status', ['initiated', 'pending']).lt('created_at', hourAgo)),
     count(db.from('payment_events').select('id', { head: true, count: 'exact' }).eq('status', 'failed').gte('received_at', dayAgo)),
-    db.from('audit_events').select('occurred_at, metadata').eq('action', 'job.payments_reconciled')
+    db.from('audit_events').select('occurred_at, metadata').in('action', ['job.daily_completed', 'job.payments_reconciled'])
       .order('occurred_at', { ascending: false }).limit(1).maybeSingle(),
   ])
   const dbMs = Date.now() - started
@@ -44,8 +44,8 @@ export const GET = handle('platform.health', async () => {
     },
     jobs: {
       reconcileConfigured: Boolean(process.env.CRON_SECRET),
-      lastReconcile: lastRun.data?.occurred_at ?? null,
-      lastReconcileSummary: lastRun.data?.metadata ?? null,
+      lastDailyJob: lastRun.data?.occurred_at ?? null,
+      lastDailyJobSummary: lastRun.data?.metadata ?? null,
     },
     time: new Date().toISOString(),
   }, { headers: { 'Cache-Control': 'private, no-store' } })

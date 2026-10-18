@@ -1,7 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { FiChevronDown, FiRefreshCw } from 'react-icons/fi'
+import { Suspense, useCallback, useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { FiChevronDown, FiRefreshCw, FiSearch } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 
 type Transition = { from_status: string; to_status: string; requires_payment: boolean }
@@ -84,7 +85,50 @@ function RecordPayment({ order, onDone }: { order: Order; onDone: (message: stri
   )
 }
 
-export default function AdminOrdersPage() {
+/** Courier and tracking reference, shown to the customer on Track Order. */
+function ShipmentForm({ order, onSaved }: { order: Order; onSaved: (o: Order) => void }) {
+  const [carrier, setCarrier] = useState(order.shipping_carrier ?? '')
+  const [ref, setRef] = useState(order.shipping_reference ?? '')
+  const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [error, setError] = useState('')
+  async function save(e: React.FormEvent) {
+    e.preventDefault()
+    setState('saving')
+    const res = await fetch('/api/admin/orders', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderNumber: order.order_number, shippingCarrier: carrier, shippingReference: ref }),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) { setState('error'); setError(data?.error || 'Could not save.'); return }
+    setState('saved')
+    onSaved(data.order)
+  }
+  const field = 'w-full rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm focus:border-final-off-white/60 focus:outline-none'
+  return (
+    <form onSubmit={save} className="space-y-2">
+      <h4 className="text-xs uppercase tracking-[0.12em] text-final-muted">Shipment</h4>
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="text-xs text-final-muted">Courier
+          <input value={carrier} onChange={(e) => { setCarrier(e.target.value); setState('idle') }} placeholder="e.g. GIG Logistics" className={`${field} mt-1`} />
+        </label>
+        <label className="text-xs text-final-muted">Tracking reference
+          <input value={ref} onChange={(e) => { setRef(e.target.value); setState('idle') }} placeholder="Courier's tracking number" className={`${field} mt-1`} />
+        </label>
+      </div>
+      <div className="flex items-center gap-3">
+        <button type="submit" disabled={state === 'saving'} className="btn-secondary px-4 py-1.5">{state === 'saving' ? 'Saving' : 'Save shipment'}</button>
+        {state === 'saved' && <span role="status" className="text-xs text-final-muted">Saved. The customer sees this on Track Order.</span>}
+        {state === 'error' && <span role="alert" className="text-xs text-final-ember">{error}</span>}
+      </div>
+    </form>
+  )
+}
+
+function AdminOrders() {
+  const params = useSearchParams()
+  const [q, setQ] = useState(params.get('q') ?? '')
+  const [filters, setFilters] = useState({ q: params.get('q') ?? '', status: params.get('status') ?? '', payment: params.get('payment') ?? '' })
   const [orders, setOrders] = useState<Order[]>([])
   const [transitions, setTransitions] = useState<Transition[]>([])
   const [can, setCan] = useState({ update: false, recordPayment: false })
@@ -97,7 +141,8 @@ export default function AdminOrdersPage() {
 
   const fetchOrders = useCallback(async () => {
     try {
-      const res = await fetch('/api/admin/orders', { cache: 'no-store' })
+      const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v) as [string, string][])
+      const res = await fetch(`/api/admin/orders?${qs}`, { cache: 'no-store' })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) return setBanner({ tone: 'error', text: data?.error || 'Unable to load orders.' })
       setOrders(data.orders || [])
@@ -109,7 +154,7 @@ export default function AdminOrdersPage() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [filters])
 
   useEffect(() => { fetchOrders() }, [fetchOrders])
   useEffect(() => {
@@ -163,6 +208,33 @@ export default function AdminOrdersPage() {
         </div>
       </div>
 
+<form
+        role="search"
+        onSubmit={(e) => { e.preventDefault(); setFilters((f) => ({ ...f, q: q.trim() })) }}
+        className="mb-6 flex flex-wrap items-center gap-2"
+      >
+        <label htmlFor="order-search" className="sr-only">Search orders</label>
+        <div className="relative">
+          <FiSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-final-muted" />
+          <input id="order-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Order number, tracking or email"
+            className="w-72 rounded-lg border border-final-off-white/15 bg-final-black py-2 pl-9 pr-3 text-sm focus:border-final-off-white/60 focus:outline-none" />
+        </div>
+        <select aria-label="Filter by status" value={filters.status} onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}
+          className="rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm">
+          <option value="">All statuses</option>
+          {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+        </select>
+        <select aria-label="Filter by payment" value={filters.payment} onChange={(e) => setFilters((f) => ({ ...f, payment: e.target.value }))}
+          className="rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm">
+          <option value="">All payments</option>
+          {Object.entries(PAYMENT_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+        </select>
+        <button type="submit" className="btn-secondary px-4 py-2">Search</button>
+        {(filters.q || filters.status || filters.payment) && (
+          <button type="button" onClick={() => { setQ(''); setFilters({ q: '', status: '', payment: '' }) }} className="text-sm text-final-muted underline underline-offset-4 hover:text-final-off-white">Clear</button>
+        )}
+      </form>
+
       {banner && (
         <div role={banner.tone === 'error' ? 'alert' : 'status'}
           className={`mb-6 flex items-start justify-between gap-4 rounded-lg border p-4 text-sm ${
@@ -180,8 +252,8 @@ export default function AdminOrdersPage() {
       )}
       {!loading && orders.length === 0 && !banner && (
         <div className="rounded-xl border border-dashed border-final-off-white/15 px-6 py-16 text-center">
-          <p className="font-semibold">No orders yet</p>
-          <p className="mt-1 text-sm text-final-muted">New orders from the store appear here automatically.</p>
+          <p className="font-semibold">{filters.q || filters.status || filters.payment ? 'No orders match these filters' : 'No orders yet'}</p>
+          <p className="mt-1 text-sm text-final-muted">{filters.q || filters.status || filters.payment ? 'Try clearing a filter.' : 'New orders from the store appear here automatically.'}</p>
         </div>
       )}
 
@@ -259,6 +331,11 @@ export default function AdminOrdersPage() {
                       ))}
                     </ol>
                   </div>
+{can.update && ['confirmed', 'processing', 'shipped', 'delivered'].includes(order.status) && (
+                    <div className="md:col-span-3">
+                      <ShipmentForm order={order} onSaved={(o) => setOrders((prev) => prev.map((x) => (x.order_number === o.order_number ? o : x)))} />
+                    </div>
+                  )}
                   {canPay && (
                     <div className="md:col-span-3">
                       <RecordPayment order={order} onDone={(text) => { setBanner({ tone: 'info', text }); fetchOrders() }} />
@@ -271,5 +348,13 @@ export default function AdminOrdersPage() {
         })}
       </ul>
     </div>
+  )
+}
+
+export default function AdminOrdersPage() {
+  return (
+    <Suspense>
+      <AdminOrders />
+    </Suspense>
   )
 }

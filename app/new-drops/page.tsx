@@ -6,7 +6,7 @@ import { FiFilter, FiGrid, FiList, FiLayers, FiSearch, FiClock } from 'react-ico
 import { Layout } from '@/components/layout/Layout'
 import { ProductCard } from '@/components/ui/ProductCard'
 
-const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
+const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories']
 const sortOptions = [
   { value: 'newest', label: 'Newest First' },
   { value: 'price-low', label: 'Price: Low to High' },
@@ -90,7 +90,7 @@ export default function NewDropsPage() {
                 <span className="heading-muted">NEW</span> DROPS
               </h1>
               <p className="text-xl text-final-off-white/70 max-w-3xl mx-auto">
-                Fresh arrivals in streetwear, shoes, accessories, and vape-ready lifestyle goods.
+                Fresh arrivals in streetwear, shoes and accessories.
               </p>
               <div className="flex items-center justify-center gap-2 mt-6 text-final-accent">
                 <FiClock className="w-5 h-5" />

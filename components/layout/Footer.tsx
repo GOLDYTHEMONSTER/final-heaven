@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { FiInstagram, FiTwitter, FiFacebook } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
+import { NEWSLETTER_CONSENT } from '@/lib/consent'
+import { BUSINESS } from '@/lib/legal'
 
 // Add the real profile URLs here; an icon only renders once its URL is set.
 const socials = [
@@ -28,7 +30,6 @@ const columns = [
       { name: 'Contact Us', href: '/contact' },
       { name: 'Shipping Info', href: '/shipping' },
       { name: 'Returns', href: '/returns' },
-      { name: 'Size Guide', href: '/size-guide' },
     ],
   },
 ]
@@ -37,12 +38,18 @@ export function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [newsletterMessage, setNewsletterMessage] = useState('')
+  const [consent, setConsent] = useState(false)
 
   const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!newsletterEmail.trim()) {
       setNewsletterStatus('error')
       setNewsletterMessage('Enter a valid email to subscribe.')
+      return
+    }
+    if (!consent) {
+      setNewsletterStatus('error')
+      setNewsletterMessage('Please tick the box to agree to receive emails.')
       return
     }
 
@@ -53,7 +60,7 @@ export function Footer() {
       const response = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: newsletterEmail.trim() }),
+        body: JSON.stringify({ email: newsletterEmail.trim(), consent, source: 'footer' }),
       })
       const data = await response.json().catch(() => ({}))
 
@@ -66,6 +73,7 @@ export function Footer() {
       setNewsletterStatus('success')
       setNewsletterMessage(data.message || 'Subscribed successfully!')
       setNewsletterEmail('')
+      setConsent(false)
     } catch {
       setNewsletterStatus('error')
       setNewsletterMessage('Subscription failed. Please try again.')
@@ -82,8 +90,7 @@ export function Footer() {
               <span className="display text-lg tracking-[0.02em]">Final Heaven</span>
             </Link>
             <p className="mt-5 max-w-[36ch] text-sm leading-relaxed text-final-muted">
-              Discover premium streetwear and lifestyle goods with a modern edge.
-              Early access, special drops, and the best in urban fashion.
+              Limited-run streetwear, shoes and accessories, released in small drops.
             </p>
             {socials.length > 0 && (
               <div className="mt-6 flex gap-2">
@@ -144,6 +151,13 @@ export function Footer() {
                   {newsletterStatus === 'loading' ? 'Joining' : 'Subscribe'}
                 </button>
               </div>
+              <label className="mt-3 flex items-start gap-2 text-xs text-final-muted">
+                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-final-ember" />
+                <span>
+                  {NEWSLETTER_CONSENT} See our{' '}
+                  <Link href="/privacy" className="underline underline-offset-2 hover:text-final-off-white">Privacy Policy</Link>.
+                </span>
+              </label>
               <p
                 id="newsletter-message"
                 role="status"
@@ -156,13 +170,18 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-final-off-white/10 pt-8 text-xs text-final-muted md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Final Heaven. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {BUSINESS.legalName ?? 'Final Heaven'}{BUSINESS.registrationNumber ? ` (${BUSINESS.registrationNumber})` : ''}. All rights reserved.
+          </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="transition-colors hover:text-final-off-white">
               Privacy Policy
             </Link>
             <Link href="/terms" className="transition-colors hover:text-final-off-white">
-              Terms of Service
+              Terms of Sale
+            </Link>
+            <Link href="/returns" className="transition-colors hover:text-final-off-white">
+              Returns
             </Link>
           </div>
         </div>

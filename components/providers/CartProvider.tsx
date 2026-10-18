@@ -2,6 +2,7 @@
 
 import { createContext, useContext, ReactNode } from 'react'
 import { useCartStore } from '@/lib/stores/cartStore'
+import { track } from '@/lib/analytics'
 
 interface CartContextType {
   items: any[]
@@ -21,7 +22,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Memoize computed values to prevent unnecessary re-renders
   const contextValue = {
     items: cart.items,
-    addItem: cart.addItem,
+    // Every add-to-cart in the store goes through here, so it is tracked once.
+    addItem: (item: any) => {
+      cart.addItem(item)
+      track('add_to_cart', { productId: item?.id })
+    },
     removeItem: cart.removeItem,
     updateQuantity: cart.updateQuantity,
     clearCart: cart.clearCart,

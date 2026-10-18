@@ -2,7 +2,14 @@ import 'server-only'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { HttpError } from '@/lib/api'
 
-export type StoreContext = { tenantId: string; storeId: string; storeSlug: string; currency: string }
+export type StoreContext = {
+  tenantId: string
+  storeId: string
+  storeSlug: string
+  currency: string
+  /** Categories withheld from sale (e.g. pending legal review). Enforced by RLS for public reads and by checkout. */
+  hiddenCategories: string[]
+}
 
 let cached: { value: StoreContext; at: number } | null = null
 const TTL_MS = 5 * 60_000
@@ -17,13 +24,19 @@ export async function getStorefront(): Promise<StoreContext> {
   const slug = process.env.STOREFRONT_SLUG || 'final-heaven'
   const { data, error } = await createSupabasePublicClient()
     .from('stores')
-    .select('id, tenant_id, slug, currency')
+    .select('id, tenant_id, slug, currency, hidden_categories')
     .eq('slug', slug)
     .eq('status', 'active')
     .maybeSingle()
   if (error) throw error
   if (!data) throw new HttpError(503, 'This store is not available right now.')
-  const value = { tenantId: data.tenant_id, storeId: data.id, storeSlug: data.slug, currency: data.currency }
+  const value = {
+    tenantId: data.tenant_id,
+    storeId: data.id,
+    storeSlug: data.slug,
+    currency: data.currency,
+    hiddenCategories: (data.hidden_categories as string[] | null) ?? [],
+  }
   cached = { value, at: Date.now() }
   return value
 }

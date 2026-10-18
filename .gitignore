@@ -41,3 +41,4 @@ tmp-*.js
 
 # Supabase CLI local state
 supabase/.temp/
+.next-build/

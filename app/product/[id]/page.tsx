@@ -3,40 +3,16 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { FiShoppingCart, FiHeart, FiShare2, FiZoomIn, FiStar, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi'
+import { FiShoppingCart, FiHeart, FiShare2, FiZoomIn, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
 import { RecommendedProducts } from '@/components/sections/RecommendedProducts'
 import { useInterestStore } from '@/lib/stores/interestStore'
+import { track } from '@/lib/analytics'
+import { PolicySummary } from '@/components/legal/PolicySummary'
+import { POLICY } from '@/lib/legal'
 
-// Mock reviews data
-const reviews = [
-  {
-    id: 1,
-    user: 'Alex K.',
-    rating: 5,
-    date: '2024-01-15',
-    comment: 'Absolutely love this hoodie! The quality is amazing and the neon accents are perfect. Fits true to size.',
-    verified: true
-  },
-  {
-    id: 2,
-    user: 'Sarah M.',
-    rating: 4,
-    date: '2024-01-10',
-    comment: 'Great hoodie, very comfortable. The material feels premium. Only giving 4 stars because it runs slightly large.',
-    verified: true
-  },
-  {
-    id: 3,
-    user: 'Mike R.',
-    rating: 5,
-    date: '2024-01-08',
-    comment: 'This is my third Final Heaven piece and they never disappoint. The attention to detail is incredible.',
-    verified: true
-  }
-]
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const [selectedImage, setSelectedImage] = useState(0)
@@ -44,7 +20,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [selectedColor, setSelectedColor] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [isImageZoomed, setIsImageZoomed] = useState(false)
-  const [activeTab, setActiveTab] = useState<'description' | 'reviews' | 'shipping'>('description')
+  const [activeTab, setActiveTab] = useState<'description' | 'shipping'>('description')
   const [product, setProduct] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [allProducts, setAllProducts] = useState<any[]>([])
@@ -59,6 +35,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         const res = await fetch(`/api/products/${params.id}`)
         const data = await res.json()
         setProduct(data.product)
+        if (data.product?.id) track('product_view', { productId: data.product.id })
         
         // Load all products for recommendations
         const allRes = await fetch('/api/products')
@@ -166,21 +143,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     })
   }
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <FiStar
-        key={i}
-        className={`w-4 h-4 ${
-          i < Math.floor(rating) 
-            ? 'text-yellow-400 fill-current' 
-            : i < rating 
-              ? 'text-yellow-400 fill-current opacity-50' 
-              : 'text-final-off-white/30'
-        }`}
-      />
-    ))
-  }
-
   return (
     <Layout>
       <div className="min-h-screen bg-final-black pt-24">
@@ -252,14 +214,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <div className="space-y-8">
               {/* Header */}
               <div>
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="flex items-center space-x-2">
-                    {renderStars(product.rating || 0)}
-                    <span className="text-final-off-white/70">({product.reviews || 0} reviews)</span>
-                  </div>
-                  <span className="text-final-accent font-semibold">• {product.sales || 0} sold</span>
-                </div>
-
                 <h1 className="text-4xl font-bold text-final-off-white mb-4">{product.name}</h1>
                 
                 <div className="flex items-center space-x-4 mb-6">
@@ -361,11 +315,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <div className="flex items-center space-x-4 text-final-off-white/70">
                 <div className="flex items-center space-x-2">
                   <FiTruck className="w-5 h-5" />
-                  <span>Free shipping on orders over $50</span>
+                  <span>Delivery within {POLICY.shipsTo}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <FiShield className="w-5 h-5" />
-                  <span>30-day returns</span>
+                  <span>{POLICY.returnWindowDays}-day returns</span>
                 </div>
               </div>
             </div>
@@ -376,7 +330,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <div className="flex space-x-1 bg-final-gray rounded-lg p-1 mb-8">
               {[
                 { id: 'description', label: 'Description' },
-                { id: 'reviews', label: 'Reviews' },
                 { id: 'shipping', label: 'Shipping & Returns' }
               ].map((tab: any) => (
                 <button
@@ -416,60 +369,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </div>
               )}
 
-              {activeTab === 'reviews' && (
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-2xl font-bold text-final-off-white">Customer Reviews</h3>
-                    <div className="flex items-center space-x-2">
-                      {renderStars(product.rating || 0)}
-                      <span className="text-final-off-white/70">({product.reviews || 0} reviews)</span>
-                    </div>
-                  </div>
-                  <div className="space-y-6">
-                    {reviews.map((review: any) => (
-                      <div key={review.id} className="border-b border-final-light-gray/20 pb-6 last:border-b-0">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center space-x-2">
-                            <span className="font-semibold text-final-off-white">{review.user}</span>
-                            {review.verified && (
-                              <span className="bg-final-accent text-final-black text-xs px-2 py-1 rounded">Verified</span>
-                            )}
-                          </div>
-                          <span className="text-final-off-white/50 text-sm">{review.date}</span>
-                        </div>
-                        <div className="flex items-center space-x-2 mb-3">
-                          {renderStars(review.rating)}
-                        </div>
-                        <p className="text-final-off-white/70">{review.comment}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {activeTab === 'shipping' && (
                 <div className="space-y-6">
                   <h3 className="text-2xl font-bold text-final-off-white">Shipping & Returns</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="text-lg font-semibold text-final-off-white mb-3">Shipping Information</h4>
-                      <ul className="space-y-2 text-final-off-white/70">
-                        <li>• Free shipping on orders over $50</li>
-                        <li>• Standard shipping: 3-5 business days</li>
-                        <li>• Express shipping: 1-2 business days</li>
-                        <li>• International shipping available</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-final-off-white mb-3">Return Policy</h4>
-                      <ul className="space-y-2 text-final-off-white/70">
-                        <li>• 30-day return window</li>
-                        <li>• Items must be unworn and unwashed</li>
-                        <li>• Free returns for US customers</li>
-                        <li>• Refund processed within 5-7 days</li>
-                      </ul>
-                    </div>
-                  </div>
+                  <PolicySummary />
                 </div>
               )}
             </div>

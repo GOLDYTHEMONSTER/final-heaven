@@ -6,9 +6,9 @@ import { FiArrowRight, FiUsers, FiClock, FiGift } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 
 const benefits = [
-  { icon: FiClock, title: '24h early access', description: 'Shop new drops before anyone else.' },
-  { icon: FiGift, title: 'Exclusive discounts', description: 'Up to 30% off member-only items.' },
-  { icon: FiUsers, title: 'Private community', description: 'Join our members-only Discord server.' },
+  { icon: FiClock, title: 'Early access', description: 'A head start on new drops.' },
+  { icon: FiGift, title: 'Member-only pieces', description: 'Some releases set aside for members.' },
+  { icon: FiUsers, title: 'Community', description: 'Hear about drops and events first.' },
 ]
 
 export function MembershipCTA() {
@@ -33,10 +33,10 @@ export function MembershipCTA() {
             community
           </h2>
           <p className="mt-6 max-w-[42ch] text-final-muted md:text-lg">
-            Early access to limited drops, member-only pieces and prices, and a community that cares about the details.
+            Membership is coming soon. Join the waitlist and we’ll tell you first when it opens. Here’s what we’re planning.
           </p>
           <Link href="/membership" className="btn-primary group mt-9">
-            Become a member
+            Join the waitlist
             <FiArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
         </div>
