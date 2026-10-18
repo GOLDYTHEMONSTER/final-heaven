@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const isDev = process.env.NODE_ENV !== 'production'
+// Vercel preview deployments inject the Vercel Toolbar (comments, feedback).
+// Its hosts are allowed there only, per Vercel's CSP guidance; production
+// (VERCEL_ENV=production) and local builds keep the strict policy.
+const isPreview = process.env.VERCEL_ENV === 'preview'
+const toolbar = (...hosts) => (isPreview ? ' ' + hosts.join(' ') : '')
 
 // 'unsafe-inline' scripts are needed by Next 14's inline bootstrap without nonces;
 // 'unsafe-eval' only in dev for React Refresh. Images may come from any https host
@@ -9,11 +14,12 @@ const isDev = process.env.NODE_ENV !== 'production'
 // va.vercel-scripts.com, allowed in development only.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ''}`,
-  "style-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ''}${toolbar('https://vercel.live')}`,
+  `style-src 'self' 'unsafe-inline'${toolbar('https://vercel.live')}`,
   "img-src 'self' data: blob: https:",
-  "font-src 'self' data:",
-  "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+  `font-src 'self' data:${toolbar('https://vercel.live', 'https://assets.vercel.com')}`,
+  `connect-src 'self' https://*.supabase.co wss://*.supabase.co${toolbar('https://vercel.live', 'wss://ws-us3.pusher.com')}`,
+  `frame-src 'self'${toolbar('https://vercel.live')}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

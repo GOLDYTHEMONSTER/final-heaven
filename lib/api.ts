@@ -150,7 +150,10 @@ export function handle<A extends unknown[]>(context: string, fn: (...args: A) =>
       // Some responses (e.g. Response.redirect) have immutable headers.
     }
     if (res.status >= 400 && res.status < 500) {
-      logger.info('request.rejected', { context, requestId, status: res.status, ms: Date.now() - started })
+      // The reason (e.g. "Request body is too large.") is safe to log: these
+      // messages are written for the customer and contain no personal data.
+      const reason = await res.clone().json().then((b) => b?.error).catch(() => undefined)
+      logger.info('request.rejected', { context, requestId, status: res.status, reason, ms: Date.now() - started })
     }
     return res
   }

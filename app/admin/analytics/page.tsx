@@ -67,14 +67,18 @@ export default function AnalyticsPage() {
   const s = data
   const daily: { day: string; paidOrders: number; gross: number; visitors: number }[] = s?.daily ?? []
   const traffic = s?.traffic ?? {}
+  // Every step is a tracked visitor at their furthest step that day, so the
+  // funnel is one population and can only narrow. Sales KPIs above come from
+  // all orders, including customers whose browser blocks tracking.
   const funnel = s ? [
     { label: 'Visitors', value: num(traffic.visitorDays) },
-    { label: 'Viewed a product', value: num(traffic.productViewers) },
+    { label: 'Looked at a product', value: num(traffic.productViewers) },
     { label: 'Added to cart', value: num(traffic.addedToCart) },
     { label: 'Started checkout', value: num(traffic.startedCheckout) },
-    { label: 'Placed an order', value: num(s.orders.placed) },
-    { label: 'Paid', value: num(s.orders.paid) },
+    { label: 'Placed an order', value: num(traffic.placedOrder) },
+    { label: 'Paid', value: num(traffic.paidVisitors) },
   ] : []
+  const trackingQuiet = s && (!s.lastEventAt || Date.now() - new Date(s.lastEventAt).getTime() > 24 * 3_600_000)
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
@@ -95,6 +99,14 @@ export default function AnalyticsPage() {
       </div>
 
       {error && <div role="alert" className="mb-6 rounded-lg border border-final-ember/40 p-4 text-sm text-final-ember">{error}</div>}
+      {trackingQuiet && (
+        <div role="status" className="mb-6 rounded-lg border border-final-ember/40 p-4 text-sm">
+          <p className="font-semibold text-final-ember">Visitor tracking hasn’t recorded anything in the last 24 hours</p>
+          <p className="mt-1 text-final-muted">
+            If the shop has had visitors, tracking may not be set up on the live server yet. Sales and order figures are unaffected.
+          </p>
+        </div>
+      )}
 
       {!s && loading && (
         <div className="grid gap-4 md:grid-cols-4" aria-label="Loading analytics">
@@ -117,7 +129,7 @@ export default function AnalyticsPage() {
               <Stat label="Paid orders" value={count(num(s.orders.paid))} note={`of ${count(num(s.orders.placed))} placed`} />
               <Stat label="Average order" value={naira(num(s.sales.averageOrderValue))} />
               <Stat label="Visitors" value={count(num(traffic.visitorDays))} note="unique per day" />
-              <Stat label="Conversion" value={pct(num(s.orders.paid), num(traffic.visitorDays))} note="paid orders ÷ visitors" />
+              <Stat label="Conversion" value={pct(num(traffic.paidVisitors), num(traffic.visitorDays))} note="visitors who paid ÷ visitors" />
             </div>
           </section>
 
@@ -143,9 +155,10 @@ export default function AnalyticsPage() {
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
-            <Card title="Funnel" subtitle="Each step as a share of visitors.">
+            <Card title="Funnel" subtitle="How far each visitor got, as a share of visitors.">
               <BarList emphasise={funnel.length - 1} format={count}
                 rows={funnel.map((f) => ({ ...f, note: pct(f.value, funnel[0].value) }))} />
+              <p className="mt-4 text-xs text-final-muted">Counts visitors whose browser allows anonymous statistics. Sales figures above include every order.</p>
             </Card>
             <Card title="Top products" subtitle="By revenue from paid orders.">
               {s.topProducts.length ? (
@@ -198,7 +211,8 @@ export default function AnalyticsPage() {
               <div><dt className="font-medium text-final-off-white">Paid orders</dt><dd>Orders placed in the period with a verified payment. Awaiting-payment and older unverified orders are excluded.</dd></div>
               <div><dt className="font-medium text-final-off-white">Average order</dt><dd>Gross sales ÷ paid orders.</dd></div>
               <div><dt className="font-medium text-final-off-white">Visitors</dt><dd>People counted once per day, anonymously (no cookies). Someone visiting on three days counts three times.</dd></div>
-              <div><dt className="font-medium text-final-off-white">Conversion</dt><dd>Paid orders ÷ visitors, for the same period.</dd></div>
+              <div><dt className="font-medium text-final-off-white">Conversion</dt><dd>Visitors who completed a verified payment ÷ visitors, both from anonymous statistics, so the two always describe the same people.</dd></div>
+              <div><dt className="font-medium text-final-off-white">Funnel</dt><dd>Each visitor counts at every step up to the furthest they reached that day. A quick add from the shop grid counts as having looked at a product.</dd></div>
               <div><dt className="font-medium text-final-off-white">New vs returning</dt><dd>New: their first ever paid order is in this period. Returning: two or more paid orders in total.</dd></div>
               <div><dt className="font-medium text-final-off-white">Not counted</dt><dd>Visitors with Do Not Track or Global Privacy Control on, and known bots.</dd></div>
               <div><dt className="font-medium text-final-off-white">Tracking started</dt><dd>{s.trackingSince ? new Date(s.trackingSince).toLocaleDateString('en-GB') : 'No visits recorded yet'}. Visitor figures before then are zero.</dd></div>

@@ -6,7 +6,7 @@ import { logger } from '@/lib/log'
 
 export const dynamic = 'force-dynamic'
 
-const EVENTS = new Set(['page_view', 'product_view', 'add_to_cart', 'checkout_started'])
+const EVENTS = new Set(['page_view', 'product_view', 'add_to_cart', 'checkout_started', 'order_placed', 'payment_completed'])
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|monitor|curl|wget|python|axios|node-fetch/i
 const NO_CONTENT = () => new Response(null, { status: 204 })
 

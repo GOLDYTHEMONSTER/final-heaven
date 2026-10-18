@@ -67,17 +67,30 @@ export default function CheckoutPage() {
       shippingState: stateValue,
       shippingPostalCode: postalCode,
       shippingCountry: country,
-      items,
+      // Only what the server uses: it prices from the catalogue. Cart items also
+      // carry the product photo, which alone can exceed the request size limit.
+      items: items.map((item: { id: string; size?: string | null; quantity: number }) => ({
+        id: item.id,
+        size: item.size ?? null,
+        quantity: item.quantity,
+      })),
       termsAccepted,
     }
 
-    const response = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-
-    const data = await response.json()
+    let response: Response
+    let data: any = {}
+    try {
+      response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      data = await response.json().catch(() => ({}))
+    } catch {
+      setStatus('error')
+      setMessage('We couldn’t reach the shop. Check your connection and try again.')
+      return
+    }
 
     if (!response.ok) {
       setStatus('error')
@@ -85,6 +98,7 @@ export default function CheckoutPage() {
       return
     }
 
+    track('order_placed')
     setStatus('success')
     setOrderConfirmation({
       orderNumber: data.orderNumber,

@@ -5,6 +5,7 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { FiCheck, FiClock, FiX } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
+import { track } from '@/lib/analytics'
 
 type Result =
   | { state: 'checking' }
@@ -43,7 +44,11 @@ function PaymentResult() {
           body: JSON.stringify({ reference, transactionId }),
         })
         const data = await res.json().catch(() => ({}))
-        if (res.ok && data.paymentStatus === 'paid') return setResult({ state: 'paid', orderNumber: data.orderNumber })
+        if (res.ok && data.paymentStatus === 'paid') {
+          // Only after the server verified the payment with Flutterwave.
+          track('payment_completed')
+          return setResult({ state: 'paid', orderNumber: data.orderNumber })
+        }
         if (res.ok && data.paymentStatus === 'failed') return setResult({ state: 'failed', orderNumber: data.orderNumber })
         // Still processing at Flutterwave, or briefly unreachable: check a few more times.
         if (tries < 5 && (res.ok || res.status === 503)) return void setTimeout(check, 3000)
