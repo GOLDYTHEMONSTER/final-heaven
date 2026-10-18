@@ -3,12 +3,13 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { BadRequest, email, handle, readJson, text } from '@/lib/api'
 import { getStorefront } from '@/lib/tenancy'
 import { rateLimit } from '@/lib/rate-limit'
+import { sendQueuedEmails } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
 const TOPICS = ['order', 'return', 'privacy', 'other']
 
-/** Contact form. Stored for staff in Admin → Messages. */
+/** Contact form. Stored for staff in Admin → Messages, and emailed to STAFF_ALERT_EMAIL when set. */
 export const POST = handle('contact.create', async (req: NextRequest) => {
   const limited = await rateLimit(req, 'contact.create', 5, 3600)
   if (limited) return limited
@@ -30,5 +31,6 @@ export const POST = handle('contact.create', async (req: NextRequest) => {
     tenant_id: store.tenantId, store_id: store.storeId, name, email: from, topic, order_number: orderNumber, message,
   })
   if (error) throw error
+  await sendQueuedEmails() // staff alert, with reply-to set to the customer
   return NextResponse.json({ ok: true }, { status: 201 })
 })

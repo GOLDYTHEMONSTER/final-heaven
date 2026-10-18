@@ -4,6 +4,7 @@ import { BadRequest, handle, readJson, text } from '@/lib/api'
 import { rateLimit } from '@/lib/rate-limit'
 import { paymentDeps } from '@/lib/payments'
 import { confirmPayment } from '@/lib/payments/service'
+import { sendQueuedEmails } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,6 +28,8 @@ export const POST = handle('payments.verify', async (req: NextRequest) => {
     const status = result.reason === 'unknown_reference' ? 404 : result.reason === 'reference_mismatch' ? 400 : 503
     return NextResponse.json({ error: 'We couldn’t confirm this payment yet.', reason: result.reason }, { status })
   }
+  // A payment just applied has queued the receipt and the staff alert.
+  if (result.outcome === 'applied' || result.outcome === 'applied_to_cancelled_order') await sendQueuedEmails()
 
   const { data: order, error } = await createSupabaseServiceClient()
     .from('orders').select('order_number, status, payment_status').eq('id', result.payment.orderId).single()

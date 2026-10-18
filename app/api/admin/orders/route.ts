@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requirePermission } from '@/lib/auth'
 import { BadRequest, handle, readJson, text } from '@/lib/api'
+import { sendQueuedEmails } from '@/lib/email'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
@@ -77,5 +78,7 @@ export const PUT = handle('admin.orders.update', async (req: NextRequest) => {
     .maybeSingle()
   if (error) throw error
   if (!data) return NextResponse.json({ error: 'Order not found.' }, { status: 404 })
+  // Marking an order shipped queues the customer's shipping notice.
+  if (updates.status === 'shipped') await sendQueuedEmails()
   return NextResponse.json({ order: data })
 })

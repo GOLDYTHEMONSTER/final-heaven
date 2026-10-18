@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { paymentDeps } from '@/lib/payments'
 import { handleWebhook } from '@/lib/payments/service'
 import { handle } from '@/lib/api'
+import { sendQueuedEmails } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,5 +17,6 @@ export const POST = handle('webhooks.flutterwave', async (req: NextRequest) => {
   const raw = await req.text()
   if (raw.length > 256_000) return NextResponse.json({ error: 'payload too large' }, { status: 413 })
   const result = await handleWebhook(paymentDeps(), req.headers, raw)
+  if (result.httpStatus === 200 && !result.body.duplicate) await sendQueuedEmails()
   return NextResponse.json(result.body, { status: result.httpStatus })
 })

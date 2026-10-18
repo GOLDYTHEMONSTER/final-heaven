@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requirePermission } from '@/lib/auth'
 import { BadRequest, handle, readJson, text } from '@/lib/api'
 import { toMinor } from '@/lib/money'
+import { sendQueuedEmails } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -40,5 +41,6 @@ export const POST = handle('admin.orders.record_payment', async (req: NextReques
     p_order_number: orderNumber, p_amount_minor: amountMinor, p_currency: order.currency, p_method: method, p_note: note,
   })
   if (error) throw error
+  await sendQueuedEmails() // the customer's receipt
   return NextResponse.json({ paymentId }, { status: 201 })
 })

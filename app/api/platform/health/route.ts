@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 
 /**
  * Operational health for platform admins: payment pipeline backlog, stuck
- * payments and the last reconciliation run. Counts and timestamps only, no
+ * payments, the email queue and the last reconciliation run. Counts and timestamps only, no
  * customer or order details, and access is audited by the caller's session.
  */
 export const GET = handle('platform.health', async () => {
@@ -23,13 +23,15 @@ export const GET = handle('platform.health', async () => {
     return count ?? 0
   }
 
-  const [received, failed, stuck, failedToday, lastRun] = await Promise.all([
+  const [received, failed, stuck, failedToday, lastRun, emailsQueued, emailsFailed] = await Promise.all([
     count(db.from('payment_events').select('id', { head: true, count: 'exact' }).eq('status', 'received')),
     count(db.from('payment_events').select('id', { head: true, count: 'exact' }).eq('status', 'failed')),
     count(db.from('payments').select('id', { head: true, count: 'exact' }).in('status', ['initiated', 'pending']).lt('created_at', hourAgo)),
     count(db.from('payment_events').select('id', { head: true, count: 'exact' }).eq('status', 'failed').gte('received_at', dayAgo)),
     db.from('audit_events').select('occurred_at, metadata').in('action', ['job.daily_completed', 'job.payments_reconciled'])
       .order('occurred_at', { ascending: false }).limit(1).maybeSingle(),
+    count(db.from('email_outbox').select('id', { head: true, count: 'exact' }).in('status', ['queued', 'sending'])),
+    count(db.from('email_outbox').select('id', { head: true, count: 'exact' }).eq('status', 'failed')),
   ])
   const dbMs = Date.now() - started
 
@@ -41,6 +43,12 @@ export const GET = handle('platform.health', async () => {
       webhookEventsFailed: failed,
       webhookFailuresLast24h: failedToday,
       paymentsOpenOverOneHour: stuck,
+    },
+    email: {
+      providerConfigured: Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM),
+      staffAlertsConfigured: Boolean(process.env.STAFF_ALERT_EMAIL),
+      queued: emailsQueued,
+      failed: emailsFailed,
     },
     jobs: {
       reconcileConfigured: Boolean(process.env.CRON_SECRET),
