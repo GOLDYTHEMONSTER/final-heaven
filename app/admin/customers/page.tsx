@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
+import { useLiveReload } from '@/components/admin/activity'
+import { TrendStrip } from '@/components/admin/Trends'
 import { FiChevronDown, FiSearch } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 
@@ -85,6 +87,7 @@ export default function CustomersPage() {
   }, [query, page])
 
   useEffect(() => { load() }, [load])
+  useLiveReload('orders', load)
 
   const pages = Math.max(1, Math.ceil(total / 50))
 
@@ -105,6 +108,8 @@ export default function CustomersPage() {
           <button className="btn-secondary px-4 py-2">Search</button>
         </form>
       </div>
+
+      <TrendStrip group="customers" title="Customer trends" />
 
       {error && <div role="alert" className="mb-6 rounded-lg border border-final-ember/40 p-4 text-sm text-final-ember">{error}</div>}
 

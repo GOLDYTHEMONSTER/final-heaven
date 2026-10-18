@@ -1,9 +1,11 @@
 'use client'
 
-import { Suspense, useCallback, useEffect, useState } from 'react'
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { FiChevronDown, FiRefreshCw, FiSearch } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
+import { useLiveReload } from '@/components/admin/activity'
+import { TrendStrip } from '@/components/admin/Trends'
 
 type Transition = { from_status: string; to_status: string; requires_payment: boolean }
 type Order = Record<string, any>
@@ -138,6 +140,9 @@ function AdminOrders() {
   const [expanded, setExpanded] = useState<string | null>(null)
   const [autoRefresh, setAutoRefresh] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  // Orders that arrived while this page was open get a "New" marker.
+  const seenIds = useRef<Set<string> | null>(null)
+  const [arrived, setArrived] = useState<Set<string>>(new Set())
 
   const fetchOrders = useCallback(async () => {
     try {
@@ -145,7 +150,14 @@ function AdminOrders() {
       const res = await fetch(`/api/admin/orders?${qs}`, { cache: 'no-store' })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) return setBanner({ tone: 'error', text: data?.error || 'Unable to load orders.' })
-      setOrders(data.orders || [])
+      const list: Order[] = data.orders || []
+      if (seenIds.current === null) seenIds.current = new Set(list.map((o) => o.order_number))
+      const fresh = list.filter((o) => !seenIds.current!.has(o.order_number)).map((o) => o.order_number)
+      if (fresh.length) {
+        fresh.forEach((n) => seenIds.current!.add(n))
+        setArrived((prev) => new Set([...prev, ...fresh]))
+      }
+      setOrders(list)
       setTransitions(data.transitions || [])
       setCan(data.can || { update: false, recordPayment: false })
       setLastUpdated(new Date())
@@ -157,6 +169,7 @@ function AdminOrders() {
   }, [filters])
 
   useEffect(() => { fetchOrders() }, [fetchOrders])
+  useLiveReload('orders', fetchOrders)
   useEffect(() => {
     if (!autoRefresh) return
     const interval = setInterval(fetchOrders, 10000)
@@ -207,6 +220,8 @@ function AdminOrders() {
           </button>
         </div>
       </div>
+
+      <TrendStrip group="orders" title="Sales and fulfilment trends" />
 
 <form
         role="search"
@@ -266,7 +281,12 @@ function AdminOrders() {
             <li key={order.order_number} className="bg-final-gray">
               <div className="grid grid-cols-2 items-center gap-3 p-4 md:grid-cols-[1.4fr_0.9fr_0.8fr_0.8fr_1.2fr_auto]">
                 <div className="col-span-2 min-w-0 md:col-span-1">
-                  <p className="font-mono text-sm font-semibold">{order.order_number}</p>
+                  <p className="flex items-center gap-2 font-mono text-sm font-semibold">
+                    {order.order_number}
+                    {arrived.has(order.order_number) && (
+                      <span className="rounded-full bg-final-ember px-1.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wide text-final-black">New</span>
+                    )}
+                  </p>
                   <p className="truncate text-xs text-final-muted">{order.email}</p>
                 </div>
                 <p className="text-sm text-final-muted">{new Date(order.created_at).toLocaleDateString()}</p>

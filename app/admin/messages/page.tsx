@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
+import { useLiveReload } from '@/components/admin/activity'
+import { TrendStrip } from '@/components/admin/Trends'
 
 type Message = {
   id: string
@@ -41,6 +43,7 @@ export default function MessagesPage() {
   }, [filter])
 
   useEffect(() => { load() }, [load])
+  useLiveReload('messages', load)
 
   async function setStatus(id: string, status: Message['status']) {
     const res = await fetch('/api/admin/messages', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, status }) })
@@ -65,6 +68,8 @@ export default function MessagesPage() {
           ))}
         </div>
       </div>
+
+      <TrendStrip group="messages" title="Inbox trends" />
 
       {error && <div role="alert" className="mb-6 rounded-lg border border-final-ember/40 p-4 text-sm text-final-ember">{error}</div>}
       {loading && !messages.length && <div className="space-y-2">{[0, 1].map((i) => <div key={i} className="skeleton h-24 rounded-xl" />)}</div>}

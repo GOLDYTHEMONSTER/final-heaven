@@ -25,6 +25,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <AdminShell
       email={staff.email ?? ''}
+      tenantId={staff.tenant.tenantId}
       tenantName={staff.tenant.tenantName}
       permissions={staff.tenant.permissions}
     >

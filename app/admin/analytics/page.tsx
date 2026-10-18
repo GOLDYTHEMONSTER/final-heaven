@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { BarList, ColumnChart, DataTable, LineChart } from '@/components/admin/charts'
+import { useLiveReload } from '@/components/admin/activity'
 import { formatCurrency } from '@/lib/utils/format'
 
 type Summary = Record<string, any>
@@ -63,6 +64,7 @@ export default function AnalyticsPage() {
   }, [])
 
   useEffect(() => { load(range) }, [range, load])
+  useLiveReload('orders', () => load(range))
 
   const s = data
   const daily: { day: string; paidOrders: number; gross: number; visitors: number }[] = s?.daily ?? []
