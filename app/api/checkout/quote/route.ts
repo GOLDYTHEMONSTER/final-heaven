@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic'
  * customer can fix them before paying.
  */
 export const POST = handle('checkout.quote', async (req: NextRequest) => {
-  const limited = await rateLimit(req, 'checkout.quote', 60, 600)
+  const limited = await rateLimit(req, 'checkout.quote', 300, 600)
   if (limited) return limited
 
   const body = await readJson(req, 16_000)
@@ -31,7 +31,7 @@ export const POST = handle('checkout.quote', async (req: NextRequest) => {
     currency: quote.currency,
     lines: quote.lines.map((l) => ({
       id: l.id, name: l.name, size: l.size, color: l.color, quantity: l.quantity, unitPrice: m(l.unitMinor),
-      lineTotal: m(l.lineMinor), image: l.image, preorder: l.preorder, shipsOn: l.shipsOn, issue: l.issue,
+      lineTotal: m(l.lineMinor), preorder: l.preorder, shipsOn: l.shipsOn, issue: l.issue,
     })),
     subtotal: m(quote.subtotalMinor),
     discount: m(quote.discountMinor),

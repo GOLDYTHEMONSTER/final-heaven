@@ -172,7 +172,9 @@ export function priceOrder(lines: CartLine[], products: CatalogueProduct[], curr
   return {
     ...quote,
     items: quote.lines.map((l) => ({
-      id: l.id, name: l.name, price: l.price, quantity: l.quantity, size: l.size, color: l.color, image: l.image,
+      // Embedded (data:) images are left out: they can be hundreds of KB each and nothing reads them from an order.
+      id: l.id, name: l.name, price: l.price, quantity: l.quantity, size: l.size, color: l.color,
+      image: l.image && !l.image.startsWith('data:') ? l.image : null,
       ...(l.preorder ? { preorder: true, ships_on: l.shipsOn } : {}),
     })),
   }

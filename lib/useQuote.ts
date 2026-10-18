@@ -10,7 +10,7 @@ export type ServerQuote = {
   currency: string
   lines: {
     id: string; name: string; size: string | null; color: string | null; quantity: number
-    unitPrice: string; lineTotal: string; image: string | null; preorder: boolean; shipsOn: string | null; issue: string | null
+    unitPrice: string; lineTotal: string; preorder: boolean; shipsOn: string | null; issue: string | null
   }[]
   subtotal: string
   discount: string
@@ -29,10 +29,14 @@ export function useQuote(items: CartItem[], promoCode: string, email?: string) {
   const [quote, setQuote] = useState<ServerQuote | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // The email only matters for "one use per customer" promo codes, so it's
+  // sent (and re-priced on) only when a code is applied and the address looks
+  // complete, not on every keystroke.
+  const promoEmail = promoCode && email && /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email.trim()) ? email.trim() : null
   const payload = JSON.stringify({
     items: items.map((i) => ({ id: i.id, size: i.size ?? null, color: i.color ?? null, quantity: i.quantity })),
     promoCode: promoCode || null,
-    email: email || null,
+    email: promoEmail,
   })
 
   useEffect(() => {
@@ -41,22 +45,37 @@ export function useQuote(items: CartItem[], promoCode: string, email?: string) {
       return
     }
     const controller = new AbortController()
+    const pause = (ms: number) => new Promise((r) => setTimeout(r, ms))
     const timer = setTimeout(async () => {
       setLoading(true)
-      try {
-        const res = await fetch('/api/checkout/quote', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, signal: controller.signal,
-        })
-        const data = await res.json().catch(() => ({}))
-        if (!res.ok) throw new Error(data?.error || 'We couldn’t price your cart.')
-        setQuote(data)
-        setError(null)
-      } catch (e) {
-        if ((e as Error).name !== 'AbortError') setError((e as Error).message)
-      } finally {
-        setLoading(false)
+      // A busy moment (rate limit, network blip) is retried quietly before the customer sees an error.
+      for (let attempt = 1; ; attempt++) {
+        try {
+          const res = await fetch('/api/checkout/quote', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, signal: controller.signal,
+          })
+          const data = await res.json()
+          // A newer request replaced this one mid-download: ignore whatever arrived.
+          if (controller.signal.aborted) return
+          if (!res.ok) throw new Error(data?.error || 'We couldn’t price your cart.')
+          if (!Array.isArray(data?.lines)) throw new Error('We couldn’t price your cart.')
+          setQuote(data)
+          setError(null)
+          setLoading(false)
+          return
+        } catch (e) {
+          if (controller.signal.aborted) return // superseded; the newer request reports its own result
+          if (attempt < 4) {
+            await pause(1500 * attempt)
+            if (controller.signal.aborted) return
+            continue
+          }
+          setError((e as Error).message || 'We couldn’t price your cart.')
+          setLoading(false)
+          return
+        }
       }
-    }, 250)
+    }, 300)
     return () => {
       clearTimeout(timer)
       controller.abort()
