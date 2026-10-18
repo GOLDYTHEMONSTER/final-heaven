@@ -34,7 +34,7 @@ export default function CheckoutPage() {
   const [message, setMessage] = useState('')
   // The server's price: exactly what Flutterwave will charge.
   const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email)
-  const lineIssues = quote?.lines.some((l) => l.issue) ?? false
+  const lineIssues = quote?.lines?.some((l) => l.issue) ?? false
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

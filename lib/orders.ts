@@ -107,6 +107,7 @@ export function quoteCart(
         issue: 'An item in your cart is no longer available. Please remove it.' }
     }
     const state = purchaseState(product, today)
+    const name = product.name.trim()
     const unitMinor = toMinor(product.price, currency)
     const images = Array.isArray(product.images) ? (product.images as { url?: string }[]) : []
     const sizes = stringList(product.sizes)
@@ -115,7 +116,7 @@ export function quoteCart(
       ...base,
       size: sizes.length ? line.size : null,
       color: colors.length ? (line.color ?? null) : null,
-      name: product.name,
+      name: name,
       unitMinor,
       lineMinor: unitMinor * line.quantity,
       price: Number(product.price),
@@ -124,13 +125,13 @@ export function quoteCart(
       shipsOn: state.state === 'preorder' ? state.shipsOn : null,
       issue: null,
     }
-    if (!canBuy(state)) out.issue = unavailableReason(product.name, state)
+    if (!canBuy(state)) out.issue = unavailableReason(name, state)
     else if ('maxQuantity' in state && quantityById.get(line.id)! > state.maxQuantity) {
       out.issue = state.state === 'preorder'
-        ? `Only ${state.maxQuantity} of ${product.name} left to pre-order.`
-        : `Only ${state.maxQuantity} left of ${product.name}.`
-    } else if (sizes.length && (!line.size || !sizes.includes(line.size))) out.issue = `Choose a size for ${product.name}.`
-    else if (colors.length && (!line.color || !colors.includes(line.color))) out.issue = `Choose a colour for ${product.name}.`
+        ? `Only ${state.maxQuantity} of ${name} left to pre-order.`
+        : `Only ${state.maxQuantity} left of ${name}.`
+    } else if (sizes.length && (!line.size || !sizes.includes(line.size))) out.issue = `Choose a size for ${name}.`
+    else if (colors.length && (!line.color || !colors.includes(line.color))) out.issue = `Choose a colour for ${name}.`
     if (!out.issue) subtotalMinor += out.lineMinor
     return out
   })

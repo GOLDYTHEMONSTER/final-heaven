@@ -89,4 +89,4 @@ export function useQuote(items: CartItem[], promoCode: string, email?: string) {
 
 /** The quote line for the cart item at `index` (the server answers in cart order; cart lines are unique). */
 export const quoteLineAt = (quote: ServerQuote | null, items: CartItem[], index: number) =>
-  quote && quote.lines.length === items.length && quote.lines[index]?.id === items[index]?.id ? quote.lines[index] : undefined
+  quote && Array.isArray(quote.lines) && quote.lines.length === items.length && quote.lines[index]?.id === items[index]?.id ? quote.lines[index] : undefined

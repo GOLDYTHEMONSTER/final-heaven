@@ -23,7 +23,7 @@ export default function CartPage() {
   const subtotal = quote ? Number(quote.subtotal) : total
   const discount = quote ? Number(quote.discount) : 0
   const finalTotal = quote ? Number(quote.total) : total
-  const lineIssues = quote?.lines.some((l) => l.issue) ?? false
+  const lineIssues = quote?.lines?.some((l) => l.issue) ?? false
   const canCheckout = !!quote && !lineIssues && !loading
 
   if (items.length === 0) {

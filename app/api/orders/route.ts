@@ -36,15 +36,16 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
   const promoCode = parsePromoCode(body.promoCode)
   if (body.termsAccepted !== true) throw new BadRequest('Please accept the Terms of Sale and Returns Policy to place your order.')
 
-  const deps = paymentDeps()
-  if (!deps.provider) {
-    return NextResponse.json({ error: 'Online payment is unavailable right now, so we can’t take orders. Please try again shortly.' }, { status: 503 })
-  }
-
+  // The cart is checked first, so the customer hears the real problem (stock, availability, promo).
   const store = await getStorefront()
   const db = createSupabaseServiceClient()
   const { products, options } = await quoteForStore(db, store, { lines, promoCode, email: customerEmail })
   const priced = priceOrder(lines, products, store.currency, options)
+
+  const deps = paymentDeps()
+  if (!deps.provider) {
+    return NextResponse.json({ error: 'Online payment is unavailable right now, so we can’t take orders. Please try again shortly.' }, { status: 503 })
+  }
 
   const checkoutRef = reference('CHK', 12)
   const { data: checkout, error: insertError } = await db.from('checkouts').insert({
