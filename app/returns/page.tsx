@@ -38,7 +38,7 @@ export default function ReturnsPage() {
 
       <Section title="How to start a return">
         <ol className="ml-5 list-decimal space-y-2">
-          <li>Contact us: <ContactLine />. Include your order number, the item and the reason.</li>
+          <li>Get in touch: <ContactLine topic="return" />. Include your order number, the item and the reason.</li>
           <li>We’ll reply with the return address and what to do next. Please don’t send anything back before we’ve replied.</li>
           <li>Pack the item securely and keep your proof of postage.</li>
         </ol>

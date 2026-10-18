@@ -29,7 +29,7 @@ export default function ShippingPage() {
           <li>If your parcel arrives damaged, or doesn’t arrive, contact us within {POLICY.faultReportDays} days of the expected delivery date and we’ll investigate with the courier.</li>
           <li>Please double-check your delivery address at checkout. If you spot a mistake, contact us straight away, before the order ships.</li>
         </ul>
-        <p>Contact us: <ContactLine />.</p>
+        <p>To reach us, <ContactLine topic="order" />.</p>
       </Section>
     </LegalPage>
   )

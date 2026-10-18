@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Detail, LegalPage, Section } from '@/components/legal/LegalPage'
+import { BusinessIdentity, ContactLine, LegalPage, Section } from '@/components/legal/LegalPage'
 import { BUSINESS, RETENTION } from '@/lib/legal'
 
 export const metadata: Metadata = { title: 'Privacy Policy - Final Heaven' }
@@ -18,8 +18,8 @@ export default function PrivacyPage() {
       intro="This policy explains what personal data we collect, why, and the rights you have under the Nigeria Data Protection Act 2023.">
       <Section title="Who is responsible for your data">
         <p>
-          <Detail value={BUSINESS.legalName} label="registered business name" />, trading as Final Heaven, at <Detail value={BUSINESS.address} label="business address" />,
-          is responsible for your personal data. For any privacy question or request, contact <Detail value={BUSINESS.privacyContact ?? BUSINESS.email} label="privacy contact" />.
+          <BusinessIdentity /> We are responsible for the personal data described here. For any privacy question or request,{' '}
+          {BUSINESS.privacyContact ? <>contact {BUSINESS.privacyContact}</> : <ContactLine topic="privacy" />}.
         </p>
       </Section>
 
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
           <li>send your data to you or another organisation in a common format</li>
           <li>withdraw your consent at any time, for example by unsubscribing from emails</li>
         </ul>
-        <p>Contact <Detail value={BUSINESS.privacyContact ?? BUSINESS.email} label="privacy contact" /> with your order number so we can find your records. We’ll reply promptly and within the time the law requires. We may ask you to confirm it’s you before we act.</p>
+        <p>To make a request, {BUSINESS.privacyContact ? <>contact {BUSINESS.privacyContact}</> : <ContactLine topic="privacy" />} and include your order number so we can find your records. We’ll reply promptly and within the time the law requires. We may ask you to confirm it’s you before we act.</p>
         <p>If you’re unhappy with how we’ve handled your data, you can complain to the Nigeria Data Protection Commission (ndpc.gov.ng).</p>
       </Section>
 

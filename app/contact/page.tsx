@@ -1,21 +1,36 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Detail, LegalPage, Section } from '@/components/legal/LegalPage'
+import { BusinessIdentity, LegalPage, Section } from '@/components/legal/LegalPage'
+import { ContactForm } from '@/components/legal/ContactForm'
 import { BUSINESS } from '@/lib/legal'
 
 export const metadata: Metadata = { title: 'Contact - Final Heaven' }
 
-export default function ContactPage() {
+const TOPICS = ['order', 'return', 'privacy', 'other']
+
+export default function ContactPage({ searchParams }: { searchParams: { topic?: string } }) {
+  const topic = TOPICS.includes(searchParams.topic ?? '') ? searchParams.topic : 'order'
+  const direct = [
+    BUSINESS.email && { label: 'Email', value: <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a> },
+    BUSINESS.phone && { label: 'Phone', value: BUSINESS.phone },
+    BUSINESS.address && { label: 'Address', value: BUSINESS.address },
+  ].filter(Boolean) as { label: string; value: React.ReactNode }[]
+
   return (
-    <LegalPage title="Contact" current="/contact" intro="Questions about an order, a return or your data? Get in touch.">
-      <Section title="Get in touch">
-        <dl className="grid gap-4 sm:grid-cols-2">
-          <div><dt className="text-sm text-final-muted">Email</dt><dd className="mt-1"><Detail value={BUSINESS.email} label="support email" /></dd></div>
-          <div><dt className="text-sm text-final-muted">Phone</dt><dd className="mt-1"><Detail value={BUSINESS.phone} label="support phone" /></dd></div>
-          <div className="sm:col-span-2"><dt className="text-sm text-final-muted">Address</dt><dd className="mt-1"><Detail value={BUSINESS.address} label="business address" /></dd></div>
-        </dl>
-        <p>Please include your order number if your message is about an order.</p>
+    <LegalPage title="Contact" current="/contact" intro="Questions about an order, a return or your data? Send us a message and we’ll reply by email.">
+      <Section title="Send us a message">
+        <ContactForm defaultTopic={topic} />
       </Section>
+
+      {direct.length > 0 && (
+        <Section title="Other ways to reach us">
+          <dl className="grid gap-4 sm:grid-cols-2">
+            {direct.map((d) => (
+              <div key={d.label}><dt className="text-sm text-final-muted">{d.label}</dt><dd className="mt-1">{d.value}</dd></div>
+            ))}
+          </dl>
+        </Section>
+      )}
 
       <Section title="Quick answers">
         <ul>
@@ -25,11 +40,8 @@ export default function ContactPage() {
         </ul>
       </Section>
 
-      <Section title="Business details">
-        <p>
-          Final Heaven is operated by <Detail value={BUSINESS.legalName} label="registered business name" />,
-          CAC registration <Detail value={BUSINESS.registrationNumber} label="CAC number" />.
-        </p>
+      <Section title="About us">
+        <p><BusinessIdentity /></p>
       </Section>
     </LegalPage>
   )

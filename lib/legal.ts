@@ -1,7 +1,11 @@
 // Business identity and store policies: the one source for the legal pages,
 // checkout, footer and order records. Policy decisions were made by the owner
-// on 18 Oct 2026. `null` values are not known yet; pages show them as
-// "to be added" rather than inventing them. Fill these in before launch.
+// on 18 Oct 2026.
+//
+// Start-up friendly: every business detail is optional. Pages only mention a
+// detail once it is set, and customers reach the store through the contact
+// form (Admin -> Messages) until an email or phone is published. Add details
+// here as the business gets them, e.g. after CAC business-name registration.
 
 export const BUSINESS = {
   tradingName: 'Final Heaven',
@@ -37,16 +41,4 @@ export const RETENTION = {
   analytics: '13 months, as anonymous daily counts that cannot identify you',
   newsletter: 'until you unsubscribe',
   abuseProtection: '2 days',
-}
-
-/** Missing details, for the pre-launch checklist. */
-export function missingBusinessDetails() {
-  return Object.entries({
-    'Registered business name': BUSINESS.legalName,
-    'CAC registration number': BUSINESS.registrationNumber,
-    'Business address': BUSINESS.address,
-    'Support email': BUSINESS.email,
-    'Support phone': BUSINESS.phone,
-    'Privacy contact': BUSINESS.privacyContact,
-  }).filter(([, v]) => !v).map(([k]) => k)
 }

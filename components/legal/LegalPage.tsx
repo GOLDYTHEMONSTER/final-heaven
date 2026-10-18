@@ -2,21 +2,29 @@ import Link from 'next/link'
 import { Layout } from '@/components/layout/Layout'
 import { BUSINESS, POLICY } from '@/lib/legal'
 
-/** A business detail, or a visible marker that it still has to be filled in (lib/legal.ts). */
-export function Detail({ value, label }: { value: string | null; label: string }) {
-  if (value) return <>{value}</>
+/**
+ * How to reach us: the support email if one is set, otherwise the contact
+ * form (start-ups often don't publish an email, phone or address yet).
+ */
+export function ContactLine({ topic }: { topic?: 'order' | 'return' | 'privacy' | 'other' }) {
+  const formLink = <Link href={topic ? `/contact?topic=${topic}` : '/contact'}>our contact form</Link>
+  if (!BUSINESS.email) return <>use {formLink}</>
   return (
-    <span className="rounded border border-dashed border-final-ember/60 px-1 text-final-ember" title="Set this in lib/legal.ts">
-      [{label} to be added]
-    </span>
+    <>
+      email <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+      {BUSINESS.phone && <>, call {BUSINESS.phone}</>}, or use {formLink}
+    </>
   )
 }
 
-export function ContactLine() {
+/** Who runs Final Heaven, using only the details that exist. */
+export function BusinessIdentity() {
   return (
     <>
-      email <Detail value={BUSINESS.email} label="support email" />
-      {BUSINESS.phone && <>, or call {BUSINESS.phone}</>}
+      Final Heaven is an independent streetwear brand based in Nigeria
+      {BUSINESS.legalName && <>, operated by {BUSINESS.legalName}</>}
+      {BUSINESS.registrationNumber && <>, registered with the Corporate Affairs Commission under number {BUSINESS.registrationNumber}</>}
+      {BUSINESS.address && <>, at {BUSINESS.address}</>}.
     </>
   )
 }

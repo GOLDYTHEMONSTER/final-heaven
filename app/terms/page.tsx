@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ContactLine, Detail, LegalPage, Section } from '@/components/legal/LegalPage'
+import { BusinessIdentity, ContactLine, LegalPage, Section } from '@/components/legal/LegalPage'
 import { BUSINESS, POLICY } from '@/lib/legal'
 
 export const metadata: Metadata = { title: 'Terms of Sale - Final Heaven' }
@@ -11,9 +11,7 @@ export default function TermsPage() {
       intro="These terms apply when you buy from Final Heaven. Please read them before placing an order.">
       <Section title="Who we are">
         <p>
-          Final Heaven is operated by <Detail value={BUSINESS.legalName} label="registered business name" />,
-          registered with the Corporate Affairs Commission under number <Detail value={BUSINESS.registrationNumber} label="CAC number" />,
-          at <Detail value={BUSINESS.address} label="business address" />. To contact us, <ContactLine />.
+          <BusinessIdentity /> To contact us, <ContactLine />.
         </p>
       </Section>
 

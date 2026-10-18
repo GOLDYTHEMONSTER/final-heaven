@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiPackage, FiShoppingBag, FiUsers } from 'react-icons/fi'
+import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiMail, FiPackage, FiShoppingBag, FiUsers } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
@@ -16,6 +16,7 @@ const nav = [
   { name: 'Orders', href: '/admin/orders', icon: FiShoppingBag, permission: 'orders.read' },
   { name: 'Drops', href: '/admin/drops', icon: FiCalendar, permission: 'products.read' },
   { name: 'Customers', href: '/admin/customers', icon: FiUsers, permission: 'customers.read' },
+  { name: 'Messages', href: '/admin/messages', icon: FiMail, permission: 'customers.read' },
 ]
 
 function useSignOut() {

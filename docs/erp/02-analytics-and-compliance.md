@@ -66,11 +66,11 @@ The job is idempotent and safe to re-run. It never touches financial records. Th
 
 ## Before launch: still needed from you
 
-Fill these in `lib/legal.ts`. The pages show a visible "[... to be added]" marker until you do:
-- Registered business name and CAC number (RC or BN)
-- Business address
-- Support email and phone
-- Privacy contact (often the owner)
+Adjusted for a start-up (18 Oct 2026). Business details in `lib/legal.ts` are optional: pages mention each one only once it's set, and customers reach you through the **contact form** (Admin → Messages) until you publish an email or phone. Nothing shows as missing.
+
+Still worth doing:
+- **Register the business name with the CAC** when you can. Trading under a name generally requires it in Nigeria. Then add the name and BN/RC number to `lib/legal.ts`.
+- Add a support email when you have one (it then appears next to the contact form).
 - Confirm the defaults I set: **5 business days** to issue refunds and **7 days** to report faulty or damaged items or non-delivery
 - Have a Nigerian lawyer review the Terms, Privacy Policy and the vape question (age restriction and advertising rules for nicotine products)
 - Confirm the 6-year record retention with your accountant
