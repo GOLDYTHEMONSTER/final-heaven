@@ -25,7 +25,7 @@ export default function ShopPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(true)
-  const { trackProductView, addFavoriteCategory } = useInterestStore()
+  const { addFavoriteCategory } = useInterestStore()
 
   useEffect(() => {
     async function loadProducts() {

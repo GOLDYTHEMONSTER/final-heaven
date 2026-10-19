@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { 
-  FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX, 
-  FiBarChart, FiShoppingBag, FiTrendingUp, FiAlertCircle, FiActivity
+import {
+  FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX,
+  FiTrendingUp, FiAlertCircle
 } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'

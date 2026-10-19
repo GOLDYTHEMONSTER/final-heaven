@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { FiShoppingCart, FiHeart, FiShare2, FiZoomIn, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi'
+import { FiHeart, FiShare2, FiZoomIn, FiTruck, FiShield } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'

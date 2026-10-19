@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: { width: string; height: string } }
 ) {
-  const url = new URL(req.url)
   const width = parseInt(params.width) || 400
   const height = parseInt(params.height) || 500
 
