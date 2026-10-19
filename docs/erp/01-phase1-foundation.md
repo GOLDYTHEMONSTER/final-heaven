@@ -35,7 +35,7 @@ The storefront, cart, checkout form, admin pages and product APIs; Supabase Auth
 | Area | Files |
 | --- | --- |
 | Migration | `supabase/migrations/20261018130000_phase1_tenancy_rbac_payments.sql` |
-| Domain libraries | `lib/auth.ts`, `lib/tenancy.ts`, `lib/audit.ts`, `lib/rate-limit.ts`, `lib/log.ts`, `lib/money.ts`, `lib/orders.ts`, `lib/api.ts`, `lib/payments/{types,flutterwave,service,store,index}.ts`, `lib/supabase/middleware.ts` |
+| Domain libraries | `lib/auth.ts`, `lib/tenancy.ts`, `lib/audit.ts`, `lib/rate-limit.ts`, `lib/log.ts`, `lib/money.ts`, `lib/checkout/` (was `lib/orders.ts`), `lib/api.ts`, `lib/payments/{types,flutterwave,service,store,index}.ts`, `lib/supabase/middleware.ts` |
 | API | `app/api/orders`, `app/api/payments/{start,verify}`, `app/api/webhooks/flutterwave`, `app/api/cron/payments`, `app/api/health`, `app/api/platform/health`, `app/api/admin/{products,drops,orders,orders/payments}`, `app/api/{products,products/[id],products/suggestions,drops,newsletter}` |
 | UI | `app/checkout/page.tsx`, `app/checkout/complete/page.tsx`, `app/track-order/page.tsx`, `app/cart/page.tsx`, `app/admin/layout.tsx`, `app/admin/orders/page.tsx`, `components/admin/AdminShell.tsx`, `app/login/LoginForm.tsx` |
 | Config | `vercel.json` (daily cron), `.eslintrc.json`, `vitest.config.ts`, `tsconfig.json` (`lib: esnext`), `.env.local.example`, `package.json` (`test`, `typecheck`) |

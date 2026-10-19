@@ -1,6 +1,6 @@
 # Checkout: orders exist only after payment
 
-Migration: `supabase/migrations/20261018190000_orders_after_payment.sql`. Code: `lib/catalog.ts`, `lib/orders.ts`, `lib/checkout.ts`, `app/api/orders`, `app/api/checkout/quote`, `app/api/payments/*`. Tests: `tests/unit/checkout-rules.test.ts`, `tests/db/checkout-orders.test.ts`.
+Migration: `supabase/migrations/20261018190000_orders_after_payment.sql`. Code: the Checkout module `lib/checkout/` (`quote`, `begin`, `resume`; Supabase adapter in `supabase-store.ts`), the catalogue rules `lib/catalog.ts`, and the endpoints `app/api/orders`, `app/api/checkout/quote`, `app/api/payments/*`. Tests: `tests/unit/checkout.test.ts` (through the module interface), `tests/unit/checkout-rules.test.ts`, `tests/db/checkout-orders.test.ts`. Decision: `docs/adr/0001-orders-exist-only-after-payment.md`. Terms: `GLOSSARY.md`.
 
 ## The flow
 
@@ -23,7 +23,7 @@ Checks that apply whichever path places the order:
 
 ## What the server enforces
 
-These rules live in `lib/catalog.ts` and `lib/orders.ts`, and are used both for the storefront button and for checkout.
+These rules live in `lib/catalog.ts` (purchase state, shown by the storefront) and inside the Checkout module (`lib/checkout/pricing.ts`), which enforces them at checkout.
 
 | Rule | Behaviour |
 |---|---|

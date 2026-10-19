@@ -1,6 +1,5 @@
-// Cart pricing, kept pure so it can be tested without a database. The same
-// quote drives the cart and checkout pages and the amount sent to Flutterwave.
-import { BadRequest } from '@/lib/api'
+// Pricing rules inside the Checkout module: pure, so the module's own tests
+// can exercise every case. Only the Checkout module calls these.
 import { formatMinor, toMinor } from '@/lib/money'
 import { canBuy, purchaseState, stringList, unavailableReason, type CatalogueProduct } from '@/lib/catalog'
 
@@ -163,20 +162,21 @@ export function quoteCart(
   }
 }
 
-/** The quote, or a 400 naming the first problem. Used when placing an order. */
-export function priceOrder(lines: CartLine[], products: CatalogueProduct[], currency: string,
-  opts: Parameters<typeof quoteCart>[3]) {
-  const quote = quoteCart(lines, products, currency, opts)
+/** The first thing stopping this quote from being paid, in words for the shopper; null when it can be paid. */
+export function quoteProblem(quote: Quote): string | null {
   const issue = quote.lines.find((l) => l.issue)?.issue ?? quote.promoError
-  if (issue) throw new BadRequest(issue)
-  if (quote.totalMinor < toMinor(MIN_CHARGE_MAJOR, currency)) throw new BadRequest('Your order total is too small to pay online.')
-  return {
-    ...quote,
-    items: quote.lines.map((l) => ({
-      // Embedded (data:) images are left out: they can be hundreds of KB each and nothing reads them from an order.
-      id: l.id, name: l.name, price: l.price, quantity: l.quantity, size: l.size, color: l.color,
-      image: l.image && !l.image.startsWith('data:') ? l.image : null,
-      ...(l.preorder ? { preorder: true, ships_on: l.shipsOn } : {}),
-    })),
-  }
+  if (issue) return issue
+  if (!quote.lines.length) return 'Your cart is empty.'
+  if (quote.totalMinor < toMinor(MIN_CHARGE_MAJOR, quote.currency)) return 'Your order total is too small to pay online.'
+  return null
+}
+
+/** The lines as saved on a checkout, and later on its order. */
+export function orderItems(quote: Quote) {
+  return quote.lines.map((l) => ({
+    // Embedded (data:) images are left out: they can be hundreds of KB each and nothing reads them from an order.
+    id: l.id, name: l.name, price: l.price, quantity: l.quantity, size: l.size, color: l.color,
+    image: l.image && !l.image.startsWith('data:') ? l.image : null,
+    ...(l.preorder ? { preorder: true, ships_on: l.shipsOn } : {}),
+  }))
 }

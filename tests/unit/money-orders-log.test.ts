@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest'
 import { fromMinor, toMinor } from '@/lib/money'
-import { priceOrder } from '@/lib/orders'
 import { scrub } from '@/lib/log'
 
 describe('money', () => {
@@ -26,27 +25,6 @@ describe('money', () => {
     expect(fromMinor(2499990, 'NGN')).toBe('24999.90')
     expect(fromMinor(5, 'NGN')).toBe('0.05')
     expect(fromMinor(1005, 'XOF')).toBe('1005')
-  })
-})
-
-describe('order pricing', () => {
-  const catalogue = [
-    { id: 'shoe', name: 'Shoe', price: '24999.90', stock: 3, status: 'active', images: [{ url: '/s.png' }] },
-    { id: 'tee', name: 'Tee', price: 18500, stock: null, status: 'active', images: [] },
-    { id: 'old', name: 'Old', price: 100, stock: 5, status: 'draft', images: [] },
-  ]
-
-  it('uses catalogue prices, never anything from the cart', () => {
-    const priced = priceOrder([{ id: 'shoe', size: 'M', quantity: 2 }, { id: 'tee', size: null, quantity: 1 }], catalogue, 'NGN', { today: '2026-10-18' })
-    expect(priced.totalMinor).toBe(2 * 2499990 + 1850000)
-    expect(priced.items[0]).toMatchObject({ id: 'shoe', price: 24999.9, quantity: 2, image: '/s.png' })
-  })
-
-  it('refuses unavailable products and overselling, counting all sizes of a product', () => {
-    expect(() => priceOrder([{ id: 'old', size: null, quantity: 1 }], catalogue, 'NGN', { today: '2026-10-18' })).toThrow(/no longer available/)
-    expect(() => priceOrder([{ id: 'ghost', size: null, quantity: 1 }], catalogue, 'NGN', { today: '2026-10-18' })).toThrow(/no longer available/)
-    expect(() => priceOrder([{ id: 'shoe', size: 'M', quantity: 2 }, { id: 'shoe', size: 'L', quantity: 2 }], catalogue, 'NGN', { today: '2026-10-18' }))
-      .toThrow(/Only 3 left/)
   })
 })
 
