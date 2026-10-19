@@ -20,6 +20,34 @@ export type CatalogueProduct = {
   colors?: unknown
 }
 
+/** A product as the storefront receives it from /api/products (see toPublicProduct). */
+export interface Product {
+  id: string
+  name: string
+  price: number
+  originalPrice?: number
+  images?: { url: string; color?: string }[]
+  image?: string // legacy, for backward compatibility
+  category: string
+  description?: string
+  isNew?: boolean
+  isLimited?: boolean
+  isTrending?: boolean
+  membersOnly?: boolean
+  releaseDate?: string
+  rating?: number
+  reviews?: number
+  sales?: number
+  stock: number
+  status: 'active' | 'draft' | 'archived'
+  colors?: string[]
+  sizes?: string[]
+  tags?: string[]
+  cardSize?: 'large' | 'medium' | 'small'
+  /** From the server: whether and how this can be bought right now. */
+  purchase?: PurchaseState
+}
+
 export type PurchaseState =
   | { state: 'available'; maxQuantity: number }
   | { state: 'preorder'; shipsOn: string; maxQuantity: number }

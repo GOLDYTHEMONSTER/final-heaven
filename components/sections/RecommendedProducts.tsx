@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useInterestStore } from '@/lib/stores/interestStore'
-import { Product } from '@/lib/stores/productStore'
+import type { Product } from '@/lib/catalog'
 
 interface RecommendedProductsProps {
   currentProductId?: string // Exclude this product from suggestions

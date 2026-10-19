@@ -34,8 +34,6 @@ function TrackOrderContent() {
   const [isSearching, setIsSearching] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [paying, setPaying] = useState(false)
-  const [payError, setPayError] = useState('')
 
   // Checkout links here with ?orderNumber=; the customer still confirms their email.
   useEffect(() => {
@@ -81,32 +79,6 @@ function TrackOrderContent() {
       setIsRefreshing(false)
     }
   }
-
-  // Customer-initiated payment for an unpaid order; reuses a recent checkout link.
-  const payNow = async () => {
-    if (!order) return
-    setPaying(true)
-    setPayError('')
-    try {
-      const res = await fetch('/api/payments/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderNumber: order.order_number, email: email.trim() }),
-      })
-      const data = await res.json().catch(() => ({}))
-      if (res.ok && data.paymentUrl) {
-        window.location.href = data.paymentUrl
-        return
-      }
-      setPayError(data?.error || 'Payment is unavailable right now. Please try again shortly.')
-    } catch {
-      setPayError('Payment is unavailable right now. Please try again shortly.')
-    } finally {
-      setPaying(false)
-    }
-  }
-
-  const needsPayment = order && order.status === 'pending_payment' && ['unpaid', 'failed', 'pending'].includes(order.payment_status)
 
   const getStatusIcon = (status: string) => {
     const config = cfg(status)
@@ -260,19 +232,6 @@ function TrackOrderContent() {
                   </div>
                 </div>
               </div>
-
-              {needsPayment && (
-                <div className="rounded-xl border border-final-off-white/10 bg-final-gray p-6 md:flex md:items-center md:justify-between md:gap-6">
-                  <div>
-                    <h3 className="font-semibold">This order is waiting for payment</h3>
-                    <p className="mt-1 text-sm text-final-muted">Pay securely with Flutterwave. It’s confirmed as soon as payment is verified.</p>
-                    {payError && <p role="alert" className="mt-2 text-sm text-final-ember">{payError}</p>}
-                  </div>
-                  <button type="button" onClick={payNow} disabled={paying} className="btn-primary mt-4 shrink-0 md:mt-0 disabled:opacity-60">
-                    {paying ? 'Opening checkout' : `Pay ${formatCurrency(order.total)}`}
-                  </button>
-                </div>
-              )}
 
               {/* Order Items */}
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">

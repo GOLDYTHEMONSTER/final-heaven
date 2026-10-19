@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiCheck, FiPlus } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
-import { Product } from '@/lib/stores/productStore'
+import type { Product } from '@/lib/catalog'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
 function blockedLabel(product: Product) {
