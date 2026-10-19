@@ -71,7 +71,8 @@ export default function AdminPage() {
       return true
     } catch (error) {
       console.error('Failed to save product:', error)
-      alert('Failed to save product')
+      // Show the server's reason (e.g. "Original price must be higher than the price").
+      alert((error as Error).message || 'Failed to save product')
       return false
     }
   }
