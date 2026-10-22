@@ -16,6 +16,8 @@ The logo sheet and ready-to-use logo files. Open **logo-sheet.pdf** (or `.png`) 
 | `logo/apple-touch-icon-180.png` | iPhone home-screen icon |
 | `logo/favicon-32.png` | Browser tab icon |
 | `source/logo-*-original.png` | The original full-size artwork, untrimmed |
+| `products/` | Product image sources and transparent cut-outs. The store photos themselves are in `public/products/` (see `products/README.md`) |
+| `social/` | Instagram feed, portrait and Story creatives, with captions, links and tests (see `social/README.md`) |
 
 White files go on dark backgrounds, black files on light ones. All PNGs have transparent backgrounds except the app icons and `mark-neon-on-ink.png`.
 
