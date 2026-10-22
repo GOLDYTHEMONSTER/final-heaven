@@ -1,22 +1,23 @@
 # Product images: Gothic Angel Print hoodie and T-shirt
 
-**Store photos** (4:5, 1200 × 1500, neutral `#ECEAE6` background, same scale for every view of a product) are in `public/products/`, so the site can serve them at `/products/...` once deployed:
+**Store photos** (4:5, 1200 × 1500, neutral `#ECEAE6` background) are in `public/products/`, so the site serves them at `/products/...` once deployed. The store uses the `-v2` set:
 
 | | Black | White |
 |---|---|---|
-| Hoodie | `gothic-angel-hoodie-black-front.jpg`, `-black-back.jpg` | `gothic-angel-hoodie-white-front.jpg`, `-white-back.jpg` |
-| T-shirt | `gothic-angel-tee-black-front.jpg`, `-black-back.jpg` | `gothic-angel-tee-white-front.jpg`, `-white-back.jpg` |
+| Hoodie | `gothic-angel-hoodie-black-front-v2.jpg`, `-black-back-v2.jpg` | `gothic-angel-hoodie-white-front-v2.jpg`, `-white-back-v2.jpg` |
+| T-shirt | `gothic-angel-tee-black-front-v2.jpg`, `-black-back-v2.jpg` | `gothic-angel-tee-white-front-v2.jpg`, `-white-back-v2.jpg` |
 
-- `cutouts/`: the same eight garments on a transparent background, for ads and posts.
+- `cutouts/`: the first-version garments on a transparent background. Their fronts still show a faint outline of the old FH monogram behind the mark (and the white tee back a grey "II"), so don't use them where that would show; they were kept only as shape references.
 - `source/`: the store's original images (copied from the product records as they were on 22 Oct 2026), plus the back-print artwork. They are kept unchanged.
 
-## How they were made
+## v2 (22 Oct 2026): generated with Higgsfield
 
-These are edits of the existing mockups, not new photography; the Higgsfield integration wasn't connected.
-1. Each garment was cut out from its mockup.
-2. On every front, the old FH monogram was covered with matching fabric and replaced by the current mark (`public/brand/logo-*.png`), in the same position and at a similar size: white on black garments, black on white.
-3. Backs are unchanged.
+Each photo was generated with GPT Image 2.5 (2k, medium quality) on Higgsfield as a ghost-mannequin product shot, then resized to 1200 × 1500. References: the garment cut-out for shape, plus the clean mark (`brand/logo/mark-*.png`) for fronts or the back-print artwork for backs. The prompts told the model to leave out the old-monogram outline in the cut-outs.
 
-**The white T-shirt back** had no reference image. It was made from the white T-shirt mockup, the same template as the black one, with the black tee's back print inverted to black ink: the same print in the same place, as on the white hoodie. Please confirm that the white T-shirt is sold with that back print before using this image.
+Checks on every image: the front shows only the three-star mark on plain fabric, verified on crops with contrast boosted 5×; the back print matches the artwork, including the "-DylanUnsual" tag spelled as printed. The white T-shirt back has the print in black ink (confirmed by the owner).
 
-**Resolution:** the source mockups are 1280 × 914 with both views side by side, so the garments were enlarged about 1.6×. That's sharp enough for the store and social media, not for print. Real product photos would improve them.
+These are generated images, not photographs of the real garments.
+
+## v1: edited mockups (superseded)
+
+The files without `-v2` are edits of the store's mockups: each garment was cut out, and on the fronts the old FH monogram was painted over and the current mark placed on top. The cover-up didn't fully hide the monogram, which is why v2 was made. They were also enlarged about 1.6× from 1280 × 914 sources. They are kept so the store can be rolled back.
