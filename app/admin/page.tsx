@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX,
-  FiTrendingUp, FiAlertCircle
+  FiTrendingUp, FiAlertCircle, FiStar
 } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
@@ -182,6 +182,11 @@ export default function AdminPage() {
       setForm((f: any) => ({ ...f, images: f.images.filter((_: any, i: number) => i !== idx) }))
     }
 
+    // The first image is the main one: shop cards and the product page open on it.
+    function handleImageMain(idx: number) {
+      setForm((f: any) => ({ ...f, images: [f.images[idx], ...f.images.filter((_: any, i: number) => i !== idx)] }))
+    }
+
     function handleImageColor(idx: number, color: string) {
       setForm((f: any) => ({ ...f, images: f.images.map((img: any, i: number) => i === idx ? { ...img, color } : img) }))
     }
@@ -291,6 +296,7 @@ export default function AdminPage() {
               </div>
               <div>
                 <label className="block text-final-off-white/70 text-sm mb-1">Product Images</label>
+                <p className="text-xs text-final-off-white/50 mb-2">The main image is the one shoppers see first. Click the star on any image to make it the main one.</p>
                 <div
                   onDragOver={e => { e.preventDefault(); setDragActive(true) }}
                   onDragLeave={e => { e.preventDefault(); setDragActive(false) }}
@@ -310,7 +316,12 @@ export default function AdminPage() {
                   <div className="flex flex-wrap gap-4 mt-2 w-full justify-center">
                     {form.images && form.images.map((img: any, idx: number) => (
                       <div key={idx} className="relative group">
-                        <img src={img.url} alt={`Product image ${idx + 1}`} className="w-24 h-24 object-cover rounded border border-final-light-gray/30" />
+                        <img src={img.url} alt={`Product image ${idx + 1}`} className={`w-24 h-24 object-cover rounded border ${idx === 0 ? 'border-final-accent' : 'border-final-light-gray/30'}`} />
+                        {idx === 0 ? (
+                          <span className="absolute top-1 left-1 bg-final-accent text-final-black text-[10px] font-semibold uppercase rounded px-1.5 py-0.5">Main</span>
+                        ) : (
+                          <button type="button" onClick={() => handleImageMain(idx)} title="Set as main image" aria-label={`Set image ${idx + 1} as main image`} className="absolute top-1 left-1 bg-final-black/70 text-final-off-white rounded-full w-6 h-6 flex items-center justify-center opacity-80 group-hover:opacity-100 hover:bg-final-accent hover:text-final-black"><FiStar className="w-3.5 h-3.5" /></button>
+                        )}
                         <button type="button" onClick={() => handleImageRemove(idx)} className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-80 group-hover:opacity-100"><FiX className="w-4 h-4" /></button>
                         {form.colors && form.colors.length > 0 && (
                           <select value={img.color || ''} onChange={e => handleImageColor(idx, e.target.value)} className="mt-1 block w-full bg-final-gray border border-final-light-gray/30 rounded px-2 py-1 text-xs text-final-off-white focus:outline-none focus:border-final-accent">
