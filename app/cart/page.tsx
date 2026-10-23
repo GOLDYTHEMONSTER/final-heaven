@@ -9,7 +9,7 @@ import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
 import { lineKey } from '@/lib/stores/cartStore'
-import { formatDay } from '@/lib/catalog'
+import { formatDay, optionLabel } from '@/lib/catalog'
 import { quoteLineAt, useQuote } from '@/lib/useQuote'
 
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
@@ -119,7 +119,7 @@ export default function CartPage() {
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-semibold text-final-off-white mb-1">{item.name}</h3>
                           <p className="text-final-off-white/70 mb-2">
-                            {[size ? `Size ${size}` : null, color ? `Colour ${color}` : null].filter(Boolean).join(' · ')}
+                            {[size ? `Size ${size}` : null, color ? optionLabel(color) : null].filter(Boolean).join(' · ')}
                           </p>
                           <p className="text-xl font-bold text-final-accent">{formatCurrency(line ? Number(line.unitPrice) : item.price)}</p>
                           {line?.preorder && line.shipsOn && (

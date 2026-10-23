@@ -2,7 +2,7 @@
 // Every value that came from a customer is HTML-escaped. Light layout with
 // table markup and inline styles, which is what email clients render reliably.
 import { BUSINESS, POLICY } from '@/lib/legal'
-import { formatDay } from '@/lib/catalog'
+import { formatDay, optionLabel } from '@/lib/catalog'
 
 export type OrderEmailData = {
   orderNumber: string
@@ -90,7 +90,7 @@ ${rows.filter(([, v]) => v).map(([k, v]) => `<tr><td style="padding:6px 0;color:
 
 const shipDate = (d: string) => formatDay(d)
 const itemDetails = (i: OrderEmailData['items'][number]) =>
-  [i.size ? `Size ${i.size}` : null, i.color ? `Colour ${i.color}` : null, i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null]
+  [i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null, i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null]
     .filter(Boolean).join(' · ')
 
 function itemsTable(o: OrderEmailData) {

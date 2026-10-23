@@ -279,7 +279,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-final-off-white mb-3">Color</h3>
+                  <h3 className="text-lg font-semibold text-final-off-white mb-3">{product.tags?.includes('set') ? 'Your picks' : 'Color'}</h3>
                   <div className="flex flex-wrap gap-3">
                     {product.colors.map((color: string) => (
                       <button
