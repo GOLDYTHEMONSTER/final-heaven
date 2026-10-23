@@ -1,7 +1,7 @@
 import { HeroSection } from '@/components/sections/HeroSection'
 import { DropReel } from '@/components/sections/DropReel'
 import { ValueStrip } from '@/components/sections/ValueStrip'
-import { NewestDrops } from '@/components/sections/NewestDrops'
+import { DiscoveryFeed } from '@/components/sections/DiscoveryFeed'
 import { MembershipCTA } from '@/components/sections/MembershipCTA'
 import { Layout } from '@/components/layout/Layout'
 
@@ -12,7 +12,7 @@ export default function Home() {
         <HeroSection />
         <DropReel />
         <ValueStrip />
-        <NewestDrops />
+        <DiscoveryFeed />
         <MembershipCTA />
       </main>
     </Layout>

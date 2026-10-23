@@ -225,6 +225,12 @@ a {
   100% { transform: translateX(100%); }
 }
 
+/* Discovery feed: new tiles settle in. */
+@keyframes feedIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

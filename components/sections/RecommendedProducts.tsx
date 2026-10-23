@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useInterestStore } from '@/lib/stores/interestStore'
+import { buildProfile, rankProducts } from '@/lib/discovery'
 import type { Product } from '@/lib/catalog'
 
 interface RecommendedProductsProps {
@@ -26,100 +27,22 @@ export function RecommendedProducts({
   variant = 'default',
   className = ''
 }: RecommendedProductsProps) {
-  const [recommendations, setRecommendations] = useState<Product[]>([])
-  const [isLoading, setIsLoading] = useState(true)
   const { interests } = useInterestStore()
 
-  useEffect(() => {
-    // Calculate recommendations based on user interests
-    const calculateRecommendations = () => {
-      if (interests.viewedProducts.length === 0 && interests.cartAdditions.length === 0) {
-        // No user history - show trending products
-        setRecommendations(
-          allProducts
-            .filter((p) => p.isTrending || p.isNew)
-            .filter((p) => p.id !== currentProductId)
-            .sort((a, b) => (b.isTrending ? 1 : 0) - (a.isTrending ? 1 : 0))
-            .slice(0, limit)
-        )
-        return
-      }
-
-      const scores = new Map<string, number>()
-
-      // Score all products based on user interests
-      allProducts.forEach((product) => {
-        if (product.id === currentProductId) return // Skip current product
-
-        let score = 0
-
-        // Check viewed products for category/tag matches
-        interests.viewedProducts.forEach((view) => {
-          // Category match
-          if (view.category === product.category) {
-            score += 10
-          }
-
-          // Tag matches
-          if (product.tags && view.tags) {
-            const sharedTags = product.tags.filter((tag) => view.tags.includes(tag))
-            score += sharedTags.length * 5
-          }
-
-          // Time spent weight - if user spent time, it matters more
-          if (view.timeSpent > 15000) {
-            score += 3
-          }
-        })
-
-        // Recent cart additions
-        if (interests.cartAdditions.includes(product.id)) {
-          score += 2
+  // Ranked by lib/discovery: the current product's category and tags count most, so these are
+  // genuinely related; the shopper's own browsing breaks ties; the diversity rule keeps one
+  // category from filling the row.
+  const recommendations = useMemo(() => {
+    const base = buildProfile(interests)
+    const current = allProducts.find((p) => p.id === currentProductId)
+    const profile = current
+      ? {
+          ...base,
+          categories: { ...base.categories, [current.category]: 10 },
+          tags: { ...base.tags, ...Object.fromEntries((current.tags ?? []).map((t) => [t, 10])) },
         }
-
-        // Trending/New boost
-        if (product.isTrending) score += 5
-        if (product.isNew) score += 3
-
-        // Rating boost for highly rated products
-        if (product.rating && product.rating >= 4.5) {
-          score += 2
-        }
-
-        if (score > 0) {
-          scores.set(product.id, score)
-        }
-      })
-
-      // If no scored products, show trending/new
-      if (scores.size === 0) {
-        setRecommendations(
-          allProducts
-            .filter((p) => p.id !== currentProductId)
-            .sort((a, b) => {
-              if (a.isTrending && !b.isTrending) return -1
-              if (b.isTrending && !a.isTrending) return 1
-              if (a.isNew && !b.isNew) return -1
-              return 0
-            })
-            .slice(0, limit)
-        )
-        return
-      }
-
-      // Get top recommendations
-      const topRecommendations = Array.from(scores.entries())
-        .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
-        .slice(0, limit)
-        .map(([productId]) => allProducts.find((p) => p.id === productId))
-        .filter((p): p is Product => p !== undefined)
-
-      setRecommendations(topRecommendations)
-    }
-
-    setIsLoading(true)
-    calculateRecommendations()
-    setIsLoading(false)
+      : base
+    return rankProducts(allProducts.filter((p) => p.id !== currentProductId), profile, { seed: 1, limit })
   }, [interests, allProducts, currentProductId, limit])
 
   if (recommendations.length === 0) {

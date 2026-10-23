@@ -44,6 +44,7 @@ export interface Product {
   sizes?: string[]
   tags?: string[]
   cardSize?: 'large' | 'medium' | 'small'
+  createdAt?: string
   /** From the server: whether and how this can be bought right now. */
   purchase?: PurchaseState
 }

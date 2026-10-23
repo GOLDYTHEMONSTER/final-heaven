@@ -172,9 +172,13 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
     )
   }
 
+  // A second view (usually the front) is revealed on hover, only where there is a pointer to hover with.
+  const secondImage = product.images?.[1]?.url
+
   return (
     <article className="group relative">
-      <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-final-dark-gray">
+      {/* 4:5 matches the store photos, so garments aren't cropped. */}
+      <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-final-dark-gray">
         <Link href={href} aria-label={product.name} className="absolute inset-0">
           <Image
             src={mainImage}
@@ -184,6 +188,16 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
             sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
+          {secondImage && (
+            <Image
+              src={secondImage}
+              alt=""
+              fill
+              unoptimized
+              sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+              className="hidden object-cover opacity-0 transition-opacity duration-500 ease-out motion-reduce:transition-none [@media(hover:hover)]:block [@media(hover:hover)]:group-hover:opacity-100"
+            />
+          )}
         </Link>
         <Badges product={product} />
         {/* Always visible on touch screens; revealed on hover or keyboard focus with a pointer. */}

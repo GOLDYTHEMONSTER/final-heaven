@@ -14,6 +14,8 @@ export interface UserInterestData {
   searchHistory: string[]
   cartAdditions: string[] // product IDs
   favoritedCategories: string[]
+  /** Chosen in "What are you into?" on the homepage feed. Optional; older saved data has none. */
+  pickedCategories?: string[]
 }
 
 interface InterestStore {
@@ -23,6 +25,7 @@ interface InterestStore {
   addToSearchHistory: (query: string) => void
   trackCartAddition: (productId: string) => void
   addFavoriteCategory: (category: string) => void
+  togglePickedCategory: (category: string) => void
   getRecentCategories: (limit?: number) => string[]
   getMostViewedCategories: () => { category: string; count: number }[]
   getRelatedProductIds: (category: string, tags: string[], limit?: number) => string[]
@@ -135,6 +138,18 @@ export const useInterestStore = create<InterestStore>()(
               ...state.interests,
               favoritedCategories: [...state.interests.favoritedCategories, category]
             }
+          }
+        })
+      },
+
+      togglePickedCategory: (category) => {
+        set((state) => {
+          const picked = state.interests.pickedCategories ?? []
+          return {
+            interests: {
+              ...state.interests,
+              pickedCategories: picked.includes(category) ? picked.filter((c) => c !== category) : [...picked, category],
+            },
           }
         })
       },
