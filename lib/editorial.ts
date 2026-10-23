@@ -1,5 +1,5 @@
 // Campaign tiles the discovery feed mixes in between products. Only images we
-// already have (Drop 01 posts, close-ups and the full-set image), in three
+// already have (Drop 01 posts and close-ups), in three
 // shapes so the feed has rhythm. Each links somewhere real; captions state
 // facts only. Add or reorder entries here.
 
@@ -16,8 +16,6 @@ export type EditorialTile = {
 }
 
 export const EDITORIAL: EditorialTile[] = [
-  { key: 'full-set', src: '/products/drop-01-set/drop-01-full-set.jpg', ratio: 4 / 5, href: '/drop-01',
-    alt: 'Drop 01 full set: three tees, a choice of hoodie and a choice of cap', kicker: 'Drop 01', title: 'The full set · ₦80,000' },
   { key: 'mark-wide', src: '/drops/drop-01/reel-05-the-mark-close.jpg', ratio: 16 / 9, href: '/drop-01',
     alt: 'The three-star mark printed on the chest of a black hoodie', kicker: 'The mark', title: 'On the front of every piece' },
   { key: 'faith-square', src: '/editorial/square-move-in-faith.jpg', ratio: 1, href: '/product/p1792678401433',

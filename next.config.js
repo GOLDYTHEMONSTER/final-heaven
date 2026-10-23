@@ -47,6 +47,10 @@ const nextConfig = {
     // framework upgrade. Product images were already unoptimized.
     unoptimized: true,
   },
+  // The old New Drops page is now the shop's "New in" view.
+  async redirects() {
+    return [{ source: '/new-drops', destination: '/shop?new=1', permanent: true }]
+  },
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },

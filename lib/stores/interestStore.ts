@@ -26,9 +26,6 @@ interface InterestStore {
   trackCartAddition: (productId: string) => void
   addFavoriteCategory: (category: string) => void
   togglePickedCategory: (category: string) => void
-  getRecentCategories: (limit?: number) => string[]
-  getMostViewedCategories: () => { category: string; count: number }[]
-  getRelatedProductIds: (category: string, tags: string[], limit?: number) => string[]
   clearInterests: () => void
 }
 
@@ -152,77 +149,6 @@ export const useInterestStore = create<InterestStore>()(
             },
           }
         })
-      },
-
-      getRecentCategories: (limit = 5) => {
-        const { interests } = get()
-        const categoryMap = new Map<string, number>()
-
-        // Count categories from recent views (weight by recency)
-        interests.viewedProducts.slice(-20).forEach((view, index) => {
-          const weight = index + 1 // More recent = higher weight
-          categoryMap.set(view.category, (categoryMap.get(view.category) || 0) + weight)
-        })
-
-        return Array.from(categoryMap.entries())
-          .sort(([, a], [, b]) => b - a)
-          .slice(0, limit)
-          .map(([category]) => category)
-      },
-
-      getMostViewedCategories: () => {
-        const { interests } = get()
-        const categoryMap = new Map<string, number>()
-
-        interests.viewedProducts.forEach((view) => {
-          categoryMap.set(view.category, (categoryMap.get(view.category) || 0) + 1)
-        })
-
-        return Array.from(categoryMap.entries())
-          .map(([category, count]) => ({ category, count }))
-          .sort((a, b) => b.count - a.count)
-      },
-
-      getRelatedProductIds: (category, tags, limit = 5) => {
-        const { interests } = get()
-        const productScores = new Map<string, number>()
-
-        // Score products based on:
-        // 1. Same category (higher weight)
-        // 2. Shared tags
-        // 3. Recent views
-        interests.viewedProducts.forEach((view, index) => {
-          if (view.productId === category) return // Skip if same product
-
-          let score = 0
-
-          // Category match (high priority)
-          if (view.category === category) {
-            score += 10
-          }
-
-          // Tag matches
-          const sharedTags = view.tags.filter((tag) => tags.includes(tag))
-          score += sharedTags.length * 5
-
-          // Recency bonus
-          const recencyBonus = Math.max(0, 10 - (interests.viewedProducts.length - index) * 0.5)
-          score += recencyBonus
-
-          // Popularity (time spent)
-          if (view.timeSpent > 10000) {
-            score += 3
-          }
-
-          if (score > 0) {
-            productScores.set(view.productId, (productScores.get(view.productId) || 0) + score)
-          }
-        })
-
-        return Array.from(productScores.entries())
-          .sort(([, a], [, b]) => b - a)
-          .slice(0, limit)
-          .map(([productId]) => productId)
       },
 
       clearInterests: () => {

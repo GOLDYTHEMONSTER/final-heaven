@@ -11,7 +11,6 @@ import { LogoMark } from '@/components/ui/LogoMark'
 const navItems = [
   { name: 'Drop 01', href: '/drop-01' },
   { name: 'Shop', href: '/shop' },
-  { name: 'New Drops', href: '/new-drops' },
   { name: 'Membership', href: '/membership' },
   { name: 'Track Order', href: '/track-order' },
 ]

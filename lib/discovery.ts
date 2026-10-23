@@ -17,6 +17,9 @@ export type FeedProfile = {
   viewed: string[]
 }
 
+/** sessionStorage key for the per-tab ranking seed, shared by the feed and the shop. */
+export const FEED_SEED_KEY = 'fh-feed-seed'
+
 export const EMPTY_PROFILE: FeedProfile = { categories: {}, tags: {}, picked: [], viewed: [] }
 
 /** Every factor in one place, so the balance between them can be tuned. */

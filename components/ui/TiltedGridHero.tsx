@@ -155,6 +155,8 @@ export function TiltedGridHero({
   // only changes when the tile wraps, which is out of sight, so a resize
   // never swaps an image on screen either.
   const [shown, setShown] = React.useState<Record<number, number>>({});
+  // The tiles remount when the loop changes size (see the render), so their laps start again.
+  React.useEffect(() => setShown({}), [layout?.columns, layout?.sweep]);
 
   React.useEffect(() => {
     const el = ref.current;
@@ -239,7 +241,10 @@ export function TiltedGridHero({
           WebkitMaskImage: mask,
         }}
       >
-        {Array.from({ length: columns }, (_, t) => {
+        {/* Tiles are placed by sharing one start time. If the loop changes size they
+            remount together (the key), or tiles added later would run out of phase
+            and leave a hole in the row; none mount before the first measurement. */}
+        {layout && <React.Fragment key={`${columns}:${sweep}`}>{Array.from({ length: columns }, (_, t) => {
           // Tile `columns - 1` starts nearest the exit and tile 0 furthest
           // back, so this numbers tiles in the order they come on.
           const first = columns - 1 - t;
@@ -307,7 +312,7 @@ export function TiltedGridHero({
               ))}
             </div>
           );
-        })}
+        })}</React.Fragment>}
       </div>
 
       {children}

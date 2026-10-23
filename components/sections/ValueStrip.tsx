@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FiRefreshCw, FiLayers, FiMapPin } from 'react-icons/fi'
 
 const items = [
-  { icon: FiRefreshCw, title: 'New drops weekly', body: 'Fresh pieces land every week.', href: '/new-drops' },
+  { icon: FiRefreshCw, title: 'New drops weekly', body: 'Fresh pieces land every week.', href: '/shop?new=1' },
   { icon: FiLayers, title: 'Curated, limited runs', body: 'Small quantities, picked piece by piece.', href: '/shop' },
   { icon: FiMapPin, title: 'Track every order', body: 'Follow your order from checkout to door.', href: '/track-order' },
 ]

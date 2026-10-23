@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FiRotateCw, FiSearch, FiSliders, FiX } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useInterestStore } from '@/lib/stores/interestStore'
-import { buildProfile, rankProducts } from '@/lib/discovery'
+import { EMPTY_PROFILE, FEED_SEED_KEY, buildProfile, rankProducts, type FeedProfile } from '@/lib/discovery'
 import type { Product } from '@/lib/catalog'
 
 /* ── Shop ────────────────────────────────────────────────────────
@@ -30,7 +30,6 @@ const SORTS: { value: Sort; label: string }[] = [
 const COLLECTIONS: Record<string, string> = { 'drop-01': 'Drop 01' }
 
 const SCROLL_KEY = 'fh-shop-scroll'
-const SEED_KEY = 'fh-feed-seed'
 
 const csv = (v: string | null) => (v ? v.split(',').filter(Boolean) : [])
 const isSet = (p: Product) => p.tags?.includes('set')
@@ -66,19 +65,31 @@ export function ShopView() {
   const router = useRouter()
   const pathname = usePathname()
   const params = useSearchParams()
-  const { interests, addFavoriteCategory, addToSearchHistory } = useInterestStore()
+  const addFavoriteCategory = useInterestStore((s) => s.addFavoriteCategory)
+  const addToSearchHistory = useInterestStore((s) => s.addToSearchHistory)
 
   const [products, setProducts] = useState<Product[]>([])
   const [status, setStatus] = useState<Status>('loading')
   const [sheetOpen, setSheetOpen] = useState(false)
+
+  // Featured uses the homepage feed's ranking for this shopper, fixed for the visit
+  // so the order doesn't reshuffle while they browse.
+  const [featured, setFeatured] = useState<{ seed: number; profile: FeedProfile }>({ seed: 1, profile: EMPTY_PROFILE })
+  useEffect(() => {
+    let seed = 1
+    try { seed = Number(sessionStorage.getItem(FEED_SEED_KEY)) || 1 } catch {}
+    setFeatured({ seed, profile: buildProfile(useInterestStore.getState().interests) })
+  }, [])
 
   // The URL is the state.
   const q = params.get('q') ?? ''
   const category = params.get('category') ?? ''
   const collection = params.get('collection') ?? ''
   const onlyNew = params.get('new') === '1'
-  const sizes = csv(params.get('size'))
-  const colors = csv(params.get('color'))
+  const sizeParam = params.get('size')
+  const colorParam = params.get('color')
+  const sizes = useMemo(() => csv(sizeParam), [sizeParam])
+  const colors = useMemo(() => csv(colorParam), [colorParam])
   const inStock = params.get('instock') === '1'
   const min = Number(params.get('min')) || 0
   const max = Number(params.get('max')) || 0
@@ -148,16 +159,9 @@ export function ShopView() {
       case 'newest': return [...filtered].sort((a, b) => Date.parse(b.createdAt ?? '0') - Date.parse(a.createdAt ?? '0'))
       case 'price-asc': return [...filtered].sort((a, b) => a.price - b.price)
       case 'price-desc': return [...filtered].sort((a, b) => b.price - a.price)
-      default: {
-        // Featured: the same ranking as the homepage feed, for this shopper, this session.
-        let seed = 1
-        try { seed = Number(sessionStorage.getItem(SEED_KEY)) || 1 } catch {}
-        return rankProducts(filtered, buildProfile(interests), { seed })
-      }
+      default: return rankProducts(filtered, featured.profile, { seed: featured.seed })
     }
-    // interests only matter for the Featured order
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [products, q, category, collection, onlyNew, sizes.join(), colors.join(), inStock, min, max, sort, sort === 'featured' ? interests : null])
+  }, [products, q, category, collection, onlyNew, sizes, colors, inStock, min, max, sort, featured])
 
   // Back from a product: return to where you were in the list.
   useEffect(() => {

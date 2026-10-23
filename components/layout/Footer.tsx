@@ -19,7 +19,7 @@ const columns = [
     title: 'Shop',
     links: [
       { name: 'Shop All', href: '/shop' },
-      { name: 'New Drops', href: '/new-drops' },
+      { name: 'New In', href: '/shop?new=1' },
       { name: 'Membership', href: '/membership' },
       { name: 'Track Order', href: '/track-order' },
     ],
