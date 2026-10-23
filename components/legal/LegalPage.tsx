@@ -21,7 +21,8 @@ export function ContactLine({ topic }: { topic?: 'order' | 'return' | 'privacy' 
 export function BusinessIdentity() {
   return (
     <>
-      Final Heaven is an independent streetwear brand based in Nigeria
+      Final Heaven is a streetwear brand based in Nigeria
+      {BUSINESS.parentCompany && <>, a property of {BUSINESS.parentCompany}</>}
       {BUSINESS.legalName && <>, operated by {BUSINESS.legalName}</>}
       {BUSINESS.registrationNumber && <>, registered with the Corporate Affairs Commission under number {BUSINESS.registrationNumber}</>}
       {BUSINESS.address && <>, at {BUSINESS.address}</>}.

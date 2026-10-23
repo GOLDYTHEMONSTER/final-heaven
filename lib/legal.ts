@@ -9,6 +9,8 @@
 
 export const BUSINESS = {
   tradingName: 'Final Heaven',
+  /** The group that owns the brand. */
+  parentCompany: 'Fego Group of Companies' as string | null,
   /** Registered name as it appears with the Corporate Affairs Commission. */
   legalName: null as string | null,
   /** CAC registration number (RC for a company, BN for a business name). */
