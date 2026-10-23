@@ -34,13 +34,13 @@ export function DropReelBand() {
   )
 }
 
-/** "Three tees. A hoodie. A cap." with the line breaks kept on phones. */
+/** "Eight tees. Three hoodies. A cap." with the line breaks kept on phones. */
 export function DropHeadline({ as: Tag = 'h2', id }: { as?: 'h1' | 'h2'; id?: string }) {
   return (
-    <Tag id={id} className="display mt-4 text-[10vw] sm:text-6xl md:text-7xl">
-      Three tees.
+    <Tag id={id} className="display mt-4 text-[8vw] sm:text-5xl md:text-6xl lg:text-7xl">
+      Eight tees.
       <br />
-      <span className="text-final-muted">A&nbsp;hoodie. A&nbsp;cap.</span>
+      <span className="text-final-muted">Three&nbsp;hoodies. A&nbsp;cap.</span>
     </Tag>
   )
 }

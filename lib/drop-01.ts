@@ -5,7 +5,7 @@
 
 export const DROP_01 = {
   setId: 'p1792716318708',
-  /** All three are in every set. The Gothic Angel Tee comes in black. */
+  /** The three tees in every full set. The Gothic Angel Tee comes in black. */
   tees: ['p1792678401431', 'p1792678401432', 'p1779109863726'],
   /** The customer picks one. The Gothic Angel Hoodie comes in black. */
   hoodies: [
@@ -13,6 +13,8 @@ export const DROP_01 = {
     { id: 'p1792678401433', pick: 'Move in Faith hoodie' },
     { id: 'p1778969625006', pick: 'Gothic Angel hoodie' },
   ],
+  /** More Drop 01 tees, sold on their own (not part of the full set). */
+  moreTees: ['p1792717233095', 'p1792717233096', 'p1792717233097', 'p1792717233098', 'p1792717233099'],
   /** One cap product in three colours; the customer picks one. */
   cap: {
     id: 'p1792716318709',
@@ -28,7 +30,7 @@ export const DROP_01 = {
 export const setOption = (hoodie: string, cap: string) => `${hoodie} + ${cap}`
 
 /** Every piece in the drop that is also sold on its own. */
-export const DROP_01_PIECES = [...DROP_01.tees, ...DROP_01.hoodies.map((h) => h.id), DROP_01.cap.id]
+export const DROP_01_PIECES = [...DROP_01.tees, ...DROP_01.moreTees, ...DROP_01.hoodies.map((h) => h.id), DROP_01.cap.id]
 
 const reel = (file: string, alt: string) => ({ src: `/drops/drop-01/${file}`, alt })
 
@@ -48,4 +50,9 @@ export const DROP_01_REEL = [
   reel('reel-14-cap-grey.jpg', 'Grey trucker cap with the three-star mark'),
   reel('reel-08-angel-wings-flatlay.jpg', 'Angel Wings Tee in navy laid flat, back print showing'),
   reel('reel-09-varsity-close.jpg', 'Close-up of the ember-trimmed 07 on the Varsity Hoodie'),
+  reel('reel-15-spray-mark.jpg', 'Spray Mark Tee in white, the sprayed three-star mark on the back'),
+  reel('reel-16-sculpted.jpg', 'Sculpted Tee in black, a marble angel cut into strips on the back'),
+  reel('reel-17-see-you-in-heaven.jpg', 'See You in Heaven Tee in black, three stacked marble studies on the back'),
+  reel('reel-18-ascend.jpg', 'Ascend Tee in sage, sun through cloud panels on the back'),
+  reel('reel-19-heaven-smoke.jpg', 'Heaven Smoke Tee in brown, HEAVEN stacked with a smoke cherub on the back'),
 ]
