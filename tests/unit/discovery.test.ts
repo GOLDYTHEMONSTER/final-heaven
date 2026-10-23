@@ -65,6 +65,37 @@ describe('rankProducts', () => {
   })
 })
 
+describe('fresh products first', () => {
+  const day = 86_400_000
+  const at = (daysAgo: number) => new Date(NOW - daysAgo * day).toISOString()
+  const shop = [
+    p('old-tee', 'T-Shirts', { createdAt: at(30) }),
+    p('old-hood', 'Hoodies', { createdAt: at(40) }),
+    p('chain', 'Accessories', { createdAt: at(0.1) }),
+    p('console', 'Gadgets', { createdAt: at(0.2) }),
+    p('new-tee', 'T-Shirts', { createdAt: at(2) }),
+    p('new-gone', 'T-Shirts', { createdAt: at(1), purchase: { state: 'sold_out' } }),
+  ]
+
+  it('opens the first page with what was just added, newest first', () => {
+    const ids = rankProducts(shop, EMPTY_PROFILE, { seed: 4, now: NOW, freshFirst: true, limit: 4 }).map((x) => x.id)
+    expect(ids.slice(0, 3)).toEqual(['chain', 'console', 'new-tee'])
+    expect(ids).not.toContain('new-gone')
+  })
+
+  it('orders just-in products by fit when the shopper has interests', () => {
+    const tees = { ...EMPTY_PROFILE, categories: { 'T-Shirts': 5 } }
+    const ids = rankProducts(shop, tees, { seed: 4, now: NOW, freshFirst: true, limit: 3 }).map((x) => x.id)
+    expect(ids[0]).toBe('new-tee')
+    expect(ids).toEqual(expect.arrayContaining(['chain', 'console']))
+  })
+
+  it('only applies to the first page', () => {
+    const ids = rankProducts(shop, EMPTY_PROFILE, { seed: 4, now: NOW, freshFirst: true, exclude: ['old-tee'] }).map((x) => x.id)
+    expect(new Set(ids).size).toBe(shop.length - 1)
+  })
+})
+
 describe('buildProfile', () => {
   it('weights recent views above old ones and keeps the profile small', () => {
     const day = 86_400_000

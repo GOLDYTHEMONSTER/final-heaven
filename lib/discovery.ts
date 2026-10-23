@@ -48,6 +48,10 @@ export const FEED_WEIGHTS = {
 
 const RECENT_DAYS = 60
 const DIVERSITY_WINDOW = 3
+/** A product added this recently counts as just in. */
+export const FRESH_DAYS = 7
+/** How many just-in products lead the first page of the feed. */
+export const FRESH_SLOTS = 4
 
 /** A stable 0..1 value for a seed and an id (FNV-1a, then scaled). */
 export function jitter(seed: number, id: string) {
@@ -91,7 +95,15 @@ export type RankOptions = {
   tail?: string[]
   limit?: number
   now?: number
+  /**
+   * Lead with up to FRESH_SLOTS products added in the last FRESH_DAYS that can
+   * be bought: newest first, or by fit when the shopper has interests. Only on
+   * a first page (nothing excluded), so later pages are ranked as usual.
+   */
+  freshFirst?: boolean
 }
+
+const hasInterests = (p: FeedProfile) => Object.keys(p.categories).length > 0 || Object.keys(p.tags).length > 0 || p.picked.length > 0
 
 /**
  * Orders products by score, then picks greedily so the same category doesn't
@@ -100,12 +112,29 @@ export type RankOptions = {
  */
 export function rankProducts(products: Product[], profile: FeedProfile, opts: RankOptions): Product[] {
   const exclude = new Set(opts.exclude ?? [])
-  const pool = products
+  const now = opts.now ?? Date.now()
+  let pool = products
     .filter((p) => !exclude.has(p.id))
-    .map((p) => ({ p, s: scoreProduct(p, profile, opts.seed, opts.now) }))
+    .map((p) => ({ p, s: scoreProduct(p, profile, opts.seed, now) }))
   const limit = Math.min(opts.limit ?? pool.length, pool.length)
   const recent = [...(opts.tail ?? [])].slice(-DIVERSITY_WINDOW)
   const out: Product[] = []
+
+  if (opts.freshFirst && exclude.size === 0) {
+    const added = (p: Product) => Date.parse(p.createdAt ?? '') || 0
+    const state = (p: Product) => p.purchase?.state
+    const fresh = pool
+      .filter(({ p }) => now - added(p) < FRESH_DAYS * 86_400_000 && (state(p) === 'available' || state(p) === 'preorder'))
+      .sort(hasInterests(profile) ? (a, b) => b.s - a.s : (a, b) => added(b.p) - added(a.p))
+      .slice(0, Math.min(FRESH_SLOTS, limit))
+    const ids = new Set(fresh.map(({ p }) => p.id))
+    pool = pool.filter(({ p }) => !ids.has(p.id))
+    for (const { p } of fresh) {
+      out.push(p)
+      recent.push(p.category)
+      if (recent.length > DIVERSITY_WINDOW) recent.shift()
+    }
+  }
 
   while (out.length < limit) {
     let best = -1

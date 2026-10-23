@@ -159,7 +159,7 @@ export function ShopView() {
       case 'newest': return [...filtered].sort((a, b) => Date.parse(b.createdAt ?? '0') - Date.parse(a.createdAt ?? '0'))
       case 'price-asc': return [...filtered].sort((a, b) => a.price - b.price)
       case 'price-desc': return [...filtered].sort((a, b) => b.price - a.price)
-      default: return rankProducts(filtered, featured.profile, { seed: featured.seed })
+      default: return rankProducts(filtered, featured.profile, { seed: featured.seed, freshFirst: true })
     }
   }, [products, q, category, collection, onlyNew, sizes, colors, inStock, min, max, sort, featured])
 

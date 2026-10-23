@@ -52,7 +52,17 @@ export const POST = handle('feed.next', async (req: Request) => {
 
   const today = storeToday(store.timeZone)
   const all = (data || []).map((p) => toPublicProduct(p, today))
-  const products = rankProducts(all, profile, { seed, exclude, tail, limit })
+
+  // `since`: only products added after that time, newest first. A restored feed uses it
+  // to pick up anything added since it was saved.
+  const since = typeof body.since === 'string' ? Date.parse(body.since) : NaN
+  if (!Number.isNaN(since)) {
+    const seen = new Set(exclude)
+    const added = all.filter((p) => !seen.has(p.id) && Date.parse(p.createdAt ?? '') > since).slice(0, limit)
+    return NextResponse.json({ products: added }, { headers: { 'Cache-Control': 'private, no-store' } })
+  }
+
+  const products = rankProducts(all, profile, { seed, exclude, tail, limit, freshFirst: true })
   const remaining = all.length - new Set([...exclude, ...products.map((p) => p.id)]).size
 
   return NextResponse.json({

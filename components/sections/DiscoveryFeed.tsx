@@ -20,7 +20,7 @@ import type { Product } from '@/lib/catalog'
 
 type Item = { kind: 'product'; product: Product } | { kind: 'editorial'; tile: EditorialTile }
 type Status = 'loading' | 'ready' | 'error'
-type Saved = { seed: number; items: Item[]; done: boolean; categories: string[]; rows: number; y: number; at: number }
+type Saved = { seed: number; items: Item[]; done: boolean; categories: string[]; rows: number; y: number; at: number; fetchedAt?: string }
 
 const FIRST_BATCH = 14
 const NEXT_BATCH = 8
@@ -115,6 +115,8 @@ export function DiscoveryFeed() {
   const [rows, setRows] = useState(FIRST_ROWS)
   const [pickerHidden, setPickerHidden] = useState(true)
   const [seed, setSeed] = useState<number | null>(null)
+  // When the feed was last fetched, so a restored feed can ask what was added since.
+  const [fetchedAt, setFetchedAt] = useState<string | undefined>()
 
   const wrapRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -161,6 +163,7 @@ export function DiscoveryFeed() {
         if (++count % EDITORIAL_EVERY === 0 && editorial < EDITORIAL.length) next.push({ kind: 'editorial', tile: EDITORIAL[editorial++] })
       }
       if (reset) setRows(FIRST_ROWS)
+      setFetchedAt(new Date().toISOString())
       setItems(next)
       setDone(data.done)
       setCategories(data.categories)
@@ -183,8 +186,21 @@ export function DiscoveryFeed() {
       setDone(saved.done)
       setCategories(saved.categories)
       setRows(saved.rows ?? FIRST_ROWS)
+      setFetchedAt(saved.fetchedAt)
       setStatus('ready')
       requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, saved.y)))
+      // Anything added to the shop since this feed was fetched goes to the top.
+      if (saved.fetchedAt) {
+        const ids = saved.items.flatMap((i) => (i.kind === 'product' ? [i.product.id] : []))
+        fetch('/api/feed', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ seed, since: saved.fetchedAt, exclude: ids, limit: 8 }) })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((d: { products?: Product[] } | null) => {
+            setFetchedAt(new Date().toISOString())
+            if (d?.products?.length) setItems((cur) => [...d.products!.map((product) => ({ kind: 'product' as const, product })), ...cur])
+          })
+          .catch(() => {})
+      }
     } else {
       load(true)
     }
@@ -194,8 +210,8 @@ export function DiscoveryFeed() {
   // change and again on the click that leaves (before the next page scrolls to the top).
   const save = useCallback(() => {
     if (seed === null || !items.length) return
-    session.set(STATE_KEY, { seed, items, done, categories, rows, y: window.scrollY, at: Date.now() } satisfies Saved)
-  }, [seed, items, done, categories, rows])
+    session.set(STATE_KEY, { seed, items, done, categories, rows, y: window.scrollY, at: Date.now(), fetchedAt } satisfies Saved)
+  }, [seed, items, done, categories, rows, fetchedAt])
   useEffect(() => {
     save()
     window.addEventListener('pagehide', save)
