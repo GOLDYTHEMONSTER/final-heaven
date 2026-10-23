@@ -9,3 +9,9 @@
 - Handle shown as `finalheaven.shop`; swap in the real Instagram handle if it differs.
 
 Suggested caption: You came looking. You found something better. Hoodie, chain, console: all at finalheaven.shop. Link in bio.
+
+### Reel (5 s, 1080 × 1920, with sound)
+
+`01-breakout-reel-5s-1080x1920.mp4`: the Story image brought to life on Higgsfield (Cinema Studio Video, start frame = the Story). The page holds still; the model bursts through the post (it shatters), lands grinning close to the lens, and the chain swings past the camera, leaving the empty post behind. `01-breakout-reel-frames.png` shows eight frames from it. Loops well; post with the Story image as the cover.
+
+A 10-second multi-shot version (chain and console close-ups) was also tried; the page text warped and the console changed shape, so it isn't used.
