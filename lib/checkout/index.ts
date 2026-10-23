@@ -184,6 +184,8 @@ export function checkout(deps: CheckoutDeps) {
 
 const MAX_LINES = 50
 const MAX_QUANTITY = 20
+// A colour, or a set's picks ("Tees: a, b, c · Hoodie: d · Cap: e", see lib/sets).
+const MAX_OPTION = 160
 
 /** Cart lines from a request, merged per product, size and colour so quantity limits can't be dodged. */
 export function parseCart(value: unknown): CartLine[] {
@@ -194,7 +196,7 @@ export function parseCart(value: unknown): CartLine[] {
     const item = (raw ?? {}) as Record<string, unknown>
     const id = text(item.id, 'Item id', { max: 100, required: true })!
     const size = text(item.size, 'Size', { max: 20 })
-    const color = text(item.color, 'Colour', { max: 40 })
+    const color = text(item.color, 'Colour', { max: MAX_OPTION })
     const quantity = int(item.quantity, 'Quantity', { min: 1, max: MAX_QUANTITY })
     const key = `${id}::${size ?? ''}::${color ?? ''}`
     const line = merged.get(key) ?? { id, size, color, quantity: 0 }

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { formatSetPick, isValidSetPick, setColors, setGroups } from '@/lib/sets'
 import { DROP_01_SET, DROP_01_SET_COLORS } from '@/lib/drop-01'
 import { quoteCart } from '@/lib/checkout/pricing'
+import { parseCart } from '@/lib/checkout'
 
 const pick = (tees: string[], hoodie = 'Varsity 07', cap = 'Red') =>
   formatSetPick(DROP_01_SET, { Tees: tees, Hoodie: [hoodie], Cap: [cap] })
@@ -52,5 +53,13 @@ describe('checkout with a set', () => {
   it('asks for the picks again when they are incomplete or from the old set', () => {
     expect(quote(pick(['Big Mark'])).lines[0].issue).toMatch(/picks/)
     expect(quote('Varsity 07 hoodie + Red cap').lines[0].issue).toMatch(/picks/)
+  })
+})
+
+describe('reading a cart with a set', () => {
+  it('accepts the longest possible set pick', () => {
+    const longest = formatSetPick(DROP_01_SET, Object.fromEntries(DROP_01_SET.map((g) => [g.name, [...g.choices].sort((a, b) => b.length - a.length).slice(0, g.count)])))
+    expect(isValidSetPick(DROP_01_SET, longest)).toBe(true)
+    expect(parseCart([{ id: 'set', size: 'L', color: longest, quantity: 1 }])[0].color).toBe(longest)
   })
 })
