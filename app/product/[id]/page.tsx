@@ -260,7 +260,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
               {/* A set is put together on its own page (picks from each group), not chosen here. */}
               {isSet ? (
-                <Link href="/drop-01#set" className="block w-full rounded-lg bg-final-accent py-4 text-center text-lg font-bold text-final-black transition-all duration-300 hover:shadow-lg hover:shadow-final-accent/25">
+                <Link href="/drop-01#set" className="block w-full rounded-lg bg-final-accent py-4 text-center text-lg font-bold text-final-black transition-[color,background-color,border-color,box-shadow,transform] duration-300 hover:shadow-lg hover:shadow-final-accent/25">
                   BUILD YOUR SET
                 </Link>
               ) : (<>
