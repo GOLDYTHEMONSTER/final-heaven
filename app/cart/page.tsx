@@ -96,7 +96,8 @@ export default function CartPage() {
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       className="bg-final-dark-gray/50 backdrop-blur-sm rounded-lg p-6 border border-final-light-gray/30"
                     >
-                      <div className="flex items-center space-x-4">
+                      {/* Phones: photo and details, with quantity and remove on their own line beneath. */}
+                      <div className="flex flex-wrap items-center gap-4 sm:flex-nowrap">
                         {/* Product Image */}
                         <div className="relative w-24 h-32 bg-final-gray rounded-lg overflow-hidden flex-shrink-0">
                           <Image
@@ -116,7 +117,7 @@ export default function CartPage() {
                         </div>
 
                         {/* Product Info */}
-                        <div className="flex-1 min-w-0">
+                        <div className="min-w-0 flex-1 basis-[calc(100%-7rem)] sm:basis-auto">
                           <h3 className="text-lg font-semibold text-final-off-white mb-1">{item.name}</h3>
                           <p className="text-final-off-white/70 mb-2">
                             {[size ? `Size ${size}` : null, color ? optionLabel(color) : null].filter(Boolean).join(' · ')}
@@ -133,6 +134,7 @@ export default function CartPage() {
                           )}
                         </div>
 
+                        <div className="flex w-full items-center justify-between pl-28 sm:w-auto sm:justify-start sm:gap-4 sm:pl-0">
                         {/* Quantity Controls */}
                         <div className="flex items-center space-x-3">
                           <button
@@ -162,6 +164,7 @@ export default function CartPage() {
                         >
                           <FiTrash2 className="w-5 h-5" />
                         </button>
+                        </div>
                       </div>
                     </motion.div>
                     )
