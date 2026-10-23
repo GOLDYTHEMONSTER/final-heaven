@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FiHeart, FiShare2, FiZoomIn, FiTruck, FiShield } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
@@ -12,7 +13,8 @@ import { useInterestStore } from '@/lib/stores/interestStore'
 import { track } from '@/lib/analytics'
 import { PolicySummary } from '@/components/legal/PolicySummary'
 import { POLICY } from '@/lib/legal'
-import { formatDay } from '@/lib/catalog'
+import { formatDay, stringList } from '@/lib/catalog'
+import { setGroups } from '@/lib/sets'
 
 
 export default function ProductPage({ params }: { params: { id: string } }) {
@@ -106,6 +108,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       </Layout>
     )
   }
+
+  const isSet = !!setGroups(stringList(product.colors))
 
   // Use images array from product, fallback to legacy image
   const images = product.images && product.images.length > 0
@@ -254,6 +258,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </p>
               </div>
 
+              {/* A set is put together on its own page (picks from each group), not chosen here. */}
+              {isSet ? (
+                <Link href="/drop-01#set" className="block w-full rounded-lg bg-final-accent py-4 text-center text-lg font-bold text-final-black transition-all duration-300 hover:shadow-lg hover:shadow-final-accent/25">
+                  BUILD YOUR SET
+                </Link>
+              ) : (<>
               {/* Size Selection */}
               {product.sizes && product.sizes.length > 0 && (
                 <div>
@@ -279,7 +289,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-final-off-white mb-3">{product.tags?.includes('set') ? 'Your picks' : 'Color'}</h3>
+                  <h3 className="text-lg font-semibold text-final-off-white mb-3">Color</h3>
                   <div className="flex flex-wrap gap-3">
                     {product.colors.map((color: string) => (
                       <button
@@ -334,6 +344,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               >
                 {buttonLabel}
               </motion.button>
+              </>)}
               {purchase.state === 'preorder' && (
                 <p className="text-sm text-final-muted">Pay now to reserve yours. It ships from {shipsOn}; we&apos;ll email you when it does.</p>
               )}

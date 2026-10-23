@@ -91,8 +91,8 @@ export function storeToday(timeZone = 'Africa/Lagos', now = new Date()) {
 export const stringList = (v: unknown): string[] =>
   Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x.trim() !== '') : []
 
-/** How a line's option reads: a colour ("Colour black") or a set's picks ("Picks: Varsity 07 hoodie + Grey cap"). */
-export const optionLabel = (option: string) => (option.includes(' + ') ? `Picks: ${option}` : `Colour ${option}`)
+/** How a line's option reads: a colour ("Colour black") or a set's picks, which already name their groups. */
+export const optionLabel = (option: string) => (option.includes(': ') ? option : `Colour ${option}`)
 
 /** A sale is shown only when the original price is genuinely higher. */
 export function saleOriginalPrice(p: Pick<CatalogueProduct, 'price' | 'original_price'>): number | null {

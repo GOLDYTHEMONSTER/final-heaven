@@ -7,7 +7,8 @@ import { DropHeadline, DropReelBand } from '@/components/sections/DropReel'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
-import { DROP_01, DROP_01_PIECES, setOption } from '@/lib/drop-01'
+import { DROP_01, DROP_01_PIECES, DROP_01_SET } from '@/lib/drop-01'
+import { formatSetPick } from '@/lib/sets'
 import type { Product } from '@/lib/catalog'
 
 const firstImage = (p?: Product) => p?.images?.[0]?.url ?? ''
@@ -61,6 +62,7 @@ export function Drop01() {
   const { addItem } = useCart()
   const [products, setProducts] = useState<Record<string, Product>>({})
   const [loaded, setLoaded] = useState(false)
+  const [tees, setTees] = useState<string[]>([])
   const [hoodie, setHoodie] = useState<string | null>(null)
   const [cap, setCap] = useState<string | null>(null)
   const [size, setSize] = useState<string | null>(null)
@@ -75,34 +77,42 @@ export function Drop01() {
   }, [])
 
   // Any change to the picks is a new set, so the "added" note no longer applies.
-  useEffect(() => setAdded(false), [hoodie, cap, size])
+  useEffect(() => setAdded(false), [tees, hoodie, cap, size])
+
+  // Tap a tee to add it; once three are picked, tapping another swaps out the earliest pick.
+  const toggleTee = (id: string) => setTees((cur) =>
+    cur.includes(id) ? cur.filter((t) => t !== id) : [...(cur.length >= DROP_01.teeCount ? cur.slice(1) : cur), id])
 
   const set = products[DROP_01.setId]
   const capProduct = products[DROP_01.cap.id]
+  const teePicks = DROP_01.tees.filter((t) => tees.includes(t.id))
   const hoodiePick = DROP_01.hoodies.find((h) => h.id === hoodie)
   const capPick = DROP_01.cap.colours.find((c) => c.colour === cap)
   const sizes = set?.sizes?.length ? set.sizes : ['S', 'M', 'L', 'XL']
 
   // What the picked pieces cost on their own, from the live prices.
   const separately = useMemo(() => {
-    const ids = [...DROP_01.tees, hoodie ?? DROP_01.hoodies[0].id]
+    // Until three tees are picked, price the first three.
+    const teeIds = tees.length === DROP_01.teeCount ? tees : DROP_01.tees.slice(0, DROP_01.teeCount).map((t) => t.id)
+    const ids = [...teeIds, hoodie ?? DROP_01.hoodies[0].id]
     const total = ids.reduce((sum, id) => sum + (products[id]?.price ?? 0), 0) + (capProduct?.price ?? 0)
     return total
-  }, [products, hoodie, capProduct])
+  }, [products, tees, hoodie, capProduct])
 
   const purchase = set?.purchase
   const buyable = purchase?.state === 'available' || purchase?.state === 'preorder'
-  const missing = !hoodiePick ? 'Pick a hoodie' : !capPick ? 'Pick a cap' : !size ? 'Pick your size' : null
+  const teesLeft = DROP_01.teeCount - teePicks.length
+  const missing = teesLeft > 0 ? `Pick ${teesLeft} more ${teesLeft === 1 ? 'tee' : 'tees'}` : !hoodiePick ? 'Pick a hoodie' : !capPick ? 'Pick a cap' : !size ? 'Pick your size' : null
 
   const addSet = () => {
-    if (!set || !hoodiePick || !capPick || !size || !buyable) return
+    if (!set || teesLeft > 0 || !hoodiePick || !capPick || !size || !buyable) return
     addItem({
       id: set.id,
       name: set.name,
       price: set.price,
       image: firstImage(set),
       size,
-      color: setOption(hoodiePick.pick, capPick.pick),
+      color: formatSetPick(DROP_01_SET, { Tees: teePicks.map((t) => t.pick), Hoodie: [hoodiePick.pick], Cap: [capPick.pick] }),
       quantity: 1,
     })
     setAdded(true)
@@ -135,21 +145,16 @@ export function Drop01() {
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-final-muted">The full set</p>
           <h2 id="set-title" className="display mt-3 text-5xl md:text-6xl">₦80,000</h2>
-          <p className="mt-4 text-final-muted">All three tees, plus the hoodie and cap you choose. Four steps.</p>
+          <p className="mt-4 text-final-muted">Any three tees, one hoodie and one cap: you choose. Four steps.</p>
         </div>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-12">
           <div className="space-y-10 lg:col-span-8">
-            <Step n={1} title="Your three tees" hint="All three come in the set. The Gothic Angel Tee comes in black.">
-              <div className="grid grid-cols-3 gap-3">
-                {DROP_01.tees.map((id) => (
-                  <div key={id} className="overflow-hidden rounded-xl border border-final-light-gray/40">
-                    <div className="aspect-[4/5] bg-final-gray">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- small static product shots */}
-                      {firstImage(products[id]) ? <img src={firstImage(products[id])} alt="" className="h-full w-full object-cover" /> : null}
-                    </div>
-                    <p className="px-3 py-2.5 text-sm font-medium text-final-off-white">{products[id]?.name ?? '…'}</p>
-                  </div>
+            <Step n={1} title={`Pick your three tees · ${teePicks.length} of ${DROP_01.teeCount}`} hint="Any three of the eight. The Gothic Angel Tee comes in black.">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {DROP_01.tees.map((t) => (
+                  <Choice key={t.id} image={firstImage(products[t.id])} label={t.pick}
+                    selected={tees.includes(t.id)} onSelect={() => toggleTee(t.id)} />
                 ))}
               </div>
             </Step>
@@ -157,7 +162,7 @@ export function Drop01() {
             <Step n={2} title="Pick your hoodie" hint="Choose one. The Gothic Angel Hoodie comes in black.">
               <div className="grid grid-cols-3 gap-3">
                 {DROP_01.hoodies.map((h) => (
-                  <Choice key={h.id} image={firstImage(products[h.id])} label={h.pick.replace(/ hoodie$/, '')}
+                  <Choice key={h.id} image={firstImage(products[h.id])} label={h.pick}
                     selected={hoodie === h.id} onSelect={() => setHoodie(h.id)} />
                 ))}
               </div>
@@ -166,7 +171,7 @@ export function Drop01() {
             <Step n={3} title="Pick your cap" hint="Choose one colour. One size fits all.">
               <div className="grid grid-cols-3 gap-3">
                 {DROP_01.cap.colours.map((c) => (
-                  <Choice key={c.colour} image={imageFor(capProduct, c.colour)} label={c.pick.replace(/ cap$/, '')}
+                  <Choice key={c.colour} image={imageFor(capProduct, c.colour)} label={c.pick}
                     selected={cap === c.colour} onSelect={() => setCap(c.colour)} />
                 ))}
               </div>
@@ -191,9 +196,9 @@ export function Drop01() {
             <div className="rounded-2xl border border-final-light-gray/40 bg-final-dark-gray p-6 lg:sticky lg:top-24">
               <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-final-muted">Your set</h3>
               <ul className="mt-5 space-y-3 text-sm">
-                <li className="flex justify-between gap-4"><span className="text-final-muted">Tees</span><span className="text-right text-final-off-white">Big Mark, Angel Wings, Gothic Angel</span></li>
-                <li className="flex justify-between gap-4"><span className="text-final-muted">Hoodie</span><span className="text-final-off-white">{hoodiePick?.pick.replace(/ hoodie$/, '') ?? '—'}</span></li>
-                <li className="flex justify-between gap-4"><span className="text-final-muted">Cap</span><span className="text-final-off-white">{capPick?.pick.replace(/ cap$/, '') ?? '—'}</span></li>
+                <li className="flex justify-between gap-4"><span className="text-final-muted">Tees</span><span className="text-right text-final-off-white">{teePicks.length ? teePicks.map((t) => t.pick).join(', ') : '—'}</span></li>
+                <li className="flex justify-between gap-4"><span className="text-final-muted">Hoodie</span><span className="text-final-off-white">{hoodiePick?.pick ?? '—'}</span></li>
+                <li className="flex justify-between gap-4"><span className="text-final-muted">Cap</span><span className="text-final-off-white">{capPick?.pick ?? '—'}</span></li>
                 <li className="flex justify-between gap-4"><span className="text-final-muted">Size</span><span className="text-final-off-white">{size ?? '—'}</span></li>
               </ul>
               <div className="mt-6 border-t border-final-light-gray/40 pt-5">

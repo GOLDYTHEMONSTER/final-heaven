@@ -2,6 +2,7 @@
 // can exercise every case. Only the Checkout module calls these.
 import { formatMinor, toMinor } from '@/lib/money'
 import { canBuy, purchaseState, stringList, unavailableReason, type CatalogueProduct } from '@/lib/catalog'
+import { isValidSetPick, setGroups } from '@/lib/sets'
 
 export type { CatalogueProduct } from '@/lib/catalog'
 
@@ -130,7 +131,11 @@ export function quoteCart(
         ? `Only ${state.maxQuantity} of ${name} left to pre-order.`
         : `Only ${state.maxQuantity} left of ${name}.`
     } else if (sizes.length && (!line.size || !sizes.includes(line.size))) out.issue = `Choose a size for ${name}.`
-    else if (colors.length && (!line.color || !colors.includes(line.color))) out.issue = `Choose a colour for ${name}.`
+    else if (colors.length) {
+      const groups = setGroups(colors)
+      if (groups) { if (!isValidSetPick(groups, line.color)) out.issue = `Choose your picks for ${name} again.` }
+      else if (!line.color || !colors.includes(line.color)) out.issue = `Choose a colour for ${name}.`
+    }
     if (!out.issue) subtotalMinor += out.lineMinor
     return out
   })

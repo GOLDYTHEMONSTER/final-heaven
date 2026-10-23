@@ -1,36 +1,52 @@
 // Drop 01 in one place: which products it is, how the full set is put
 // together, and the images the reel streams. The set is one product whose
-// "colour" options are the customer's picks (see setOption), so checkout
-// validates and records them like any other option.
+// options are groups of picks (see lib/sets): any 3 tees, 1 hoodie, 1 cap.
+
+import { setColors, type SetGroup } from '@/lib/sets'
+
+type Pick = { id: string; pick: string }
 
 export const DROP_01 = {
   setId: 'p1792716318708',
-  /** The three tees in every full set. The Gothic Angel Tee comes in black. */
-  tees: ['p1792678401431', 'p1792678401432', 'p1779109863726'],
+  /** The customer picks any three for the set. The Gothic Angel Tee comes in black. */
+  tees: [
+    { id: 'p1792678401431', pick: 'Big Mark' },
+    { id: 'p1792678401432', pick: 'Angel Wings' },
+    { id: 'p1779109863726', pick: 'Gothic Angel' },
+    { id: 'p1792717233095', pick: 'Spray Mark' },
+    { id: 'p1792717233096', pick: 'Sculpted' },
+    { id: 'p1792717233097', pick: 'See You in Heaven' },
+    { id: 'p1792717233098', pick: 'Ascend' },
+    { id: 'p1792717233099', pick: 'Heaven Smoke' },
+  ] as Pick[],
+  teeCount: 3,
   /** The customer picks one. The Gothic Angel Hoodie comes in black. */
   hoodies: [
-    { id: 'p1792678401434', pick: 'Varsity 07 hoodie' },
-    { id: 'p1792678401433', pick: 'Move in Faith hoodie' },
-    { id: 'p1778969625006', pick: 'Gothic Angel hoodie' },
-  ],
-  /** More Drop 01 tees, sold on their own (not part of the full set). */
-  moreTees: ['p1792717233095', 'p1792717233096', 'p1792717233097', 'p1792717233098', 'p1792717233099'],
+    { id: 'p1792678401434', pick: 'Varsity 07' },
+    { id: 'p1792678401433', pick: 'Move in Faith' },
+    { id: 'p1778969625006', pick: 'Gothic Angel' },
+  ] as Pick[],
   /** One cap product in three colours; the customer picks one. */
   cap: {
     id: 'p1792716318709',
     colours: [
-      { colour: 'grey', pick: 'Grey cap' },
-      { colour: 'red', pick: 'Red cap' },
-      { colour: 'green', pick: 'Green cap' },
+      { colour: 'grey', pick: 'Grey' },
+      { colour: 'red', pick: 'Red' },
+      { colour: 'green', pick: 'Green' },
     ],
   },
 }
 
-/** The set's option for a hoodie and cap pick, e.g. "Varsity 07 hoodie + Grey cap". Must match the set product's colours. */
-export const setOption = (hoodie: string, cap: string) => `${hoodie} + ${cap}`
+/** The full set's option groups. The set product's colors must equal DROP_01_SET_COLORS. */
+export const DROP_01_SET: SetGroup[] = [
+  { name: 'Tees', count: DROP_01.teeCount, choices: DROP_01.tees.map((t) => t.pick) },
+  { name: 'Hoodie', count: 1, choices: DROP_01.hoodies.map((h) => h.pick) },
+  { name: 'Cap', count: 1, choices: DROP_01.cap.colours.map((c) => c.pick) },
+]
+export const DROP_01_SET_COLORS = setColors(DROP_01_SET)
 
 /** Every piece in the drop that is also sold on its own. */
-export const DROP_01_PIECES = [...DROP_01.tees, ...DROP_01.moreTees, ...DROP_01.hoodies.map((h) => h.id), DROP_01.cap.id]
+export const DROP_01_PIECES = [...DROP_01.tees.map((t) => t.id), ...DROP_01.hoodies.map((h) => h.id), DROP_01.cap.id]
 
 const reel = (file: string, alt: string) => ({ src: `/drops/drop-01/${file}`, alt })
 
