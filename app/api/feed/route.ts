@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { BadRequest, handle, readJson } from '@/lib/api'
+import { rateLimit } from '@/lib/rate-limit'
 import { getStorefront } from '@/lib/tenancy'
 import { storeToday, toPublicProduct } from '@/lib/catalog'
 import { EMPTY_PROFILE, rankProducts, type FeedProfile } from '@/lib/discovery'
@@ -29,6 +30,10 @@ const weights = (v: unknown, max: number) => {
  * so the feed never repeats a product and ends when the catalogue runs out.
  */
 export const POST = handle('feed.next', async (req: Request) => {
+  // Generous: mobile carriers put many shoppers behind one IP address.
+  const limited = await rateLimit(req, 'feed', 300, 600)
+  if (limited) return limited
+
   const body = await readJson(req, 16_000)
   const seed = Number(body.seed)
   if (!Number.isInteger(seed) || seed < 0 || seed > 2 ** 31) throw new BadRequest('A numeric seed is required.')

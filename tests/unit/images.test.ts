@@ -25,4 +25,11 @@ describe('image copies', () => {
     expect(sized('data:image/jpeg;base64,xyz', 640)).toBe('data:image/jpeg;base64,xyz')
     expect(sized('/brand/logo-white.png', 640)).toBe('/brand/logo-white.png')
   })
+
+  it('use the 640 px copy saved beside each photo uploaded from the admin', () => {
+    const up = 'https://x.supabase.co/storage/v1/object/public/product-images/t1/abc.jpg'
+    expect(sized(up, 640)).toBe('https://x.supabase.co/storage/v1/object/public/product-images/t1/abc-640.jpg')
+    expect(sized(up, 1200)).toBe(up) // uploads are stored at most 1200 px wide
+    expect(sized('https://x.supabase.co/storage/v1/object/public/other/abc.jpg', 640)).toBe('https://x.supabase.co/storage/v1/object/public/other/abc.jpg')
+  })
 })

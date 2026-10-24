@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
+import { uploadProductImage } from '@/lib/admin/upload'
 
 const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
 const statuses = ['All', 'Active', 'Draft', 'Archived']
@@ -146,6 +147,7 @@ export default function AdminPage() {
       tags: []
     })
     const [dragActive, setDragActive] = useState(false)
+    const [uploading, setUploading] = useState(0)
     const [colorInput, setColorInput] = useState('')
     const [tagInput, setTagInput] = useState('')
 
@@ -170,17 +172,20 @@ export default function AdminPage() {
       setForm((f: any) => ({ ...f, [name]: value.split(',').map((v: string) => v.trim()).filter(v => v) }))
     }
 
-    function handleImageFiles(files: FileList | null) {
+    // Photos are uploaded to storage straight away; the product keeps only their URLs.
+    async function handleImageFiles(files: FileList | null) {
       if (!files) return
-      Array.from(files).forEach(file => {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader()
-          reader.onload = (ev) => {
-            setForm((f: any) => ({ ...f, images: [...(f.images || []), { url: ev.target?.result as string }] }))
-          }
-          reader.readAsDataURL(file)
+      for (const file of Array.from(files).filter((f) => f.type.startsWith('image/'))) {
+        setUploading((n) => n + 1)
+        try {
+          const url = await uploadProductImage(file)
+          setForm((f: any) => ({ ...f, images: [...(f.images || []), { url }] }))
+        } catch (error) {
+          alert((error as Error).message)
+        } finally {
+          setUploading((n) => n - 1)
         }
-      })
+      }
     }
 
     function handleImageDrop(e: React.DragEvent<HTMLDivElement>) {
@@ -322,7 +327,9 @@ export default function AdminPage() {
                   className={`relative w-full border-2 border-dashed ${dragActive ? 'border-final-accent' : 'border-final-accent/50'} rounded-lg p-4 mb-2 flex flex-col items-center justify-center cursor-pointer bg-final-gray/40`}
                   style={{ minHeight: 120 }}
                 >
-                  <span className="text-final-off-white/60 text-sm mb-2">Drag & drop images here, or click to select</span>
+                  <span className="text-final-off-white/60 text-sm mb-2" aria-live="polite">
+                    {uploading > 0 ? `Uploading ${uploading} photo${uploading > 1 ? 's' : ''}…` : 'Drag & drop images here, or click to select'}
+                  </span>
                   <input
                     type="file"
                     accept="image/*"
@@ -503,11 +510,12 @@ export default function AdminPage() {
                 >
                   Cancel
                 </button>
-                <button 
-                  type="submit" 
-                  className="bg-final-accent text-final-black px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300"
+                <button
+                  type="submit"
+                  disabled={uploading > 0}
+                  className="bg-final-accent text-final-black px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
                 >
-                  {isNew ? 'Create Product' : 'Save Changes'}
+                  {uploading > 0 ? 'Uploading photos…' : isNew ? 'Create Product' : 'Save Changes'}
                 </button>
               </div>
             </form>
