@@ -38,6 +38,7 @@ export const POST = handle('checkout.quote', async (req: NextRequest) => {
   const body = await readJson(req, 16_000)
   const email = typeof body.email === 'string' && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(body.email.trim())
     ? body.email.trim().toLowerCase().slice(0, 254) : null
-  const quote = await (await checkoutForRequest(req)).quote({ lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), email })
-  return NextResponse.json(quoteJson(quote), { headers: { 'Cache-Control': 'private, no-store' } })
+  const checkout = await checkoutForRequest(req)
+  const quote = await checkout.quote({ lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), email })
+  return NextResponse.json({ ...quoteJson(quote), payments: checkout.payments() }, { headers: { 'Cache-Control': 'private, no-store' } })
 })

@@ -15,6 +15,7 @@ function blockedLabel(product: Product) {
     case 'sold_out': return 'Sold out'
     case 'coming_soon': return 'Coming soon'
     case 'members_only': return 'Members only'
+    case 'paused':
     case 'unavailable': return 'Unavailable'
     default: return null
   }

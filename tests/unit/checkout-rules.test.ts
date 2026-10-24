@@ -26,6 +26,10 @@ describe('purchase state', () => {
     expect(purchaseState(catalogue[3], TODAY)).toEqual({ state: 'preorder', shipsOn: '2026-12-01', maxQuantity: 2 })
     expect(purchaseState({ ...catalogue[3], preorder_limit: 0 }, TODAY).state).toBe('sold_out')
   })
+  it('blocks a product paused from the admin, whatever its stock or pre-order', () => {
+    expect(purchaseState({ ...catalogue[0], purchases_paused: true }, TODAY)).toEqual({ state: 'paused' })
+    expect(purchaseState({ ...catalogue[3], purchases_paused: true }, TODAY)).toEqual({ state: 'paused' })
+  })
   it('is sold out at zero stock and unavailable when not active', () => {
     expect(purchaseState(catalogue[4], TODAY).state).toBe('sold_out')
     expect(purchaseState({ ...base, id: 'x', name: 'X', status: 'draft' }, TODAY).state).toBe('unavailable')

@@ -3,6 +3,7 @@
 //   quote(cart)          the server's price for a cart, problems per line
 //   begin(cart, buyer)   save a Checkout and get its payment link
 //   resume(ref, email)   a payment link again for an unpaid Checkout
+//   payments()           whether checkout takes payments now (launch day, store pause)
 //
 // Guarantees (tested through this interface, tests/unit/checkout.test.ts):
 //  - prices come only from the catalogue, never from the cart;
@@ -11,21 +12,29 @@
 //  - begin prices the cart once, and the saved total is the amount Flutterwave
 //    is asked to charge;
 //  - begin creates a Checkout, never an Order: the Order is placed only when
-//    Payments verifies the payment (docs/adr/0001).
+//    Payments verifies the payment (docs/adr/0001);
+//  - no payment starts before the store's launch day or while the store is
+//    paused (Shop.paymentsOpenOn, Shop.purchasesPaused).
 //
 // Behind it: the purchase and pricing rules (./pricing, lib/catalog), the
 // CheckoutStore seam (Supabase in production, in-memory in tests) and the
 // CheckoutPayments seam (Flutterwave through lib/payments, a fake in tests).
 import { BadRequest, int, reference, text } from '@/lib/api'
 import { fromMinor, toMinor } from '@/lib/money'
-import { storeToday, type CatalogueProduct } from '@/lib/catalog'
+import { paymentsClosed, paymentsState, storeToday, type CatalogueProduct, type PaymentsState } from '@/lib/catalog'
 import { POLICY } from '@/lib/legal'
 import { orderItems, quoteCart, quoteProblem, type CartLine, type PromoContext, type Quote } from './pricing'
 
 export type { CartLine, Quote, QuoteLine, PromoCode, PromoContext } from './pricing'
 
-/** The storefront a Checkout belongs to. */
-export type Shop = { tenantId: string; storeId: string; currency: string; hiddenCategories: string[]; timeZone: string }
+/**
+ * The storefront a Checkout belongs to. Payments open on paymentsOpenOn
+ * (YYYY-MM-DD; null = no launch day yet) unless staff pause the store.
+ */
+export type Shop = {
+  tenantId: string; storeId: string; currency: string; hiddenCategories: string[]; timeZone: string
+  paymentsOpenOn: string | null; purchasesPaused: boolean
+}
 
 export type Buyer = {
   email: string
@@ -110,6 +119,11 @@ export function checkout(deps: CheckoutDeps) {
   const ref = deps.newReference ?? reference
   const { shop } = deps
 
+  /** Whether checkout takes payments now, and if not, why. */
+  function payments(): PaymentsState {
+    return paymentsState(shop, storeToday(shop.timeZone, now()))
+  }
+
   async function quote({ lines, promoCode = null, email = null }: { lines: CartLine[]; promoCode?: string | null; email?: string | null }): Promise<Quote> {
     const ids = [...new Set(lines.map((l) => l.id))]
     const [rows, promo] = await Promise.all([
@@ -125,6 +139,8 @@ export function checkout(deps: CheckoutDeps) {
     const priced = await quote({ lines, promoCode, email: buyer.email })
     const problem = quoteProblem(priced)
     if (problem) return { ok: false, reason: 'cart_invalid', message: problem, quote: priced }
+    const state = payments()
+    if (!state.open) return { ok: false, reason: 'payment_unavailable', message: paymentsClosed(state).message }
     if (!deps.payments.available()) return { ok: false, reason: 'payment_unavailable', message: PAYMENT_UNAVAILABLE }
 
     const m = (minor: number) => fromMinor(minor, shop.currency)
@@ -167,6 +183,8 @@ export function checkout(deps: CheckoutDeps) {
     if (saved.status !== 'open' || now().getTime() - new Date(saved.createdAt).getTime() > RESUME_HOURS * 3_600_000) {
       return { ok: false, reason: 'expired', message: 'This checkout has expired. Please start again from your cart.' }
     }
+    const state = payments()
+    if (!state.open) return { ok: false, reason: 'payment_unavailable', message: paymentsClosed(state).message }
     const payment = await deps.payments.start({
       checkoutId: saved.id, tenantId: saved.tenantId, amountMinor: toMinor(saved.total, saved.currency), currency: saved.currency, email,
     })
@@ -175,7 +193,7 @@ export function checkout(deps: CheckoutDeps) {
       : { ok: false, reason: 'payment_unavailable', message: 'Payment is unavailable right now. Please try again shortly.' }
   }
 
-  return { quote, begin, resume }
+  return { quote, begin, resume, payments }
 }
 
 // ---------------------------------------------------------------------------

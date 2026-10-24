@@ -12,6 +12,8 @@ export type CatalogueProduct = {
   images: unknown
   category?: string
   members_only?: boolean | null
+  /** Paused from the admin: still shown, can't be bought. */
+  purchases_paused?: boolean | null
   release_date?: string | null
   preorder?: boolean | null
   preorder_ships_on?: string | null
@@ -55,10 +57,12 @@ export type PurchaseState =
   | { state: 'sold_out' }
   | { state: 'coming_soon'; releaseDate: string }
   | { state: 'members_only' }
+  | { state: 'paused' }
   | { state: 'unavailable' }
 
 export function purchaseState(p: CatalogueProduct, today: string): PurchaseState {
   if (p.status !== 'active') return { state: 'unavailable' }
+  if (p.purchases_paused) return { state: 'paused' }
   // Membership isn't live yet, so members-only items can't be bought by anyone.
   if (p.members_only) return { state: 'members_only' }
   if (p.preorder && p.preorder_ships_on) {
@@ -79,6 +83,7 @@ export function unavailableReason(name: string, s: PurchaseState): string {
     case 'members_only': return `${name} is for members only.`
     case 'coming_soon': return `${name} isn’t released yet.`
     case 'sold_out': return `${name} is sold out.`
+    case 'paused': return `${name} can’t be bought right now.`
     default: return `${name} is no longer available.`
   }
 }
@@ -98,6 +103,22 @@ export const optionLabel = (option: string) => (option.includes(': ') ? option :
 export function saleOriginalPrice(p: Pick<CatalogueProduct, 'price' | 'original_price'>): number | null {
   const original = p.original_price == null ? NaN : Number(p.original_price)
   return Number.isFinite(original) && original > Number(p.price) ? original : null
+}
+
+/** Whether checkout takes payments: not before the store's launch day, nor while staff pause the store (lib/checkout). */
+export type PaymentsState = { open: boolean; closedFor: 'launch' | 'paused' | null; opensOn: string | null }
+
+/** The store's switches on a given store day (YYYY-MM-DD). Before launch wins over a pause: it says when. */
+export function paymentsState(s: { paymentsOpenOn: string | null; purchasesPaused: boolean }, today: string): PaymentsState {
+  const opensOn = s.paymentsOpenOn?.slice(0, 10) ?? null
+  const closedFor = opensOn == null || today < opensOn ? 'launch' : s.purchasesPaused ? 'paused' : null
+  return { open: closedFor == null, closedFor, opensOn }
+}
+
+/** Why checkout isn't taking payments, as a button label and a sentence. */
+export function paymentsClosed(p: PaymentsState) {
+  if (p.closedFor === 'paused') return { label: 'Purchases paused', message: 'Purchases are paused right now. Please check back soon.' }
+  return { label: 'Checkout opens at launch', message: p.opensOn ? `Checkout opens on ${formatDay(p.opensOn)}.` : 'Checkout opens on launch day.' }
 }
 
 /** The public shape of a product: camelCase, no internal columns, with its purchase state. */

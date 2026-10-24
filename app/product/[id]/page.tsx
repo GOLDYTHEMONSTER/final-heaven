@@ -139,6 +139,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     coming_soon: purchase.releaseDate
       ? `COMING ${formatDay(purchase.releaseDate, { day: 'numeric', month: 'long' }).toUpperCase()}` : 'COMING SOON',
     members_only: 'MEMBERS ONLY',
+    paused: 'NOT AVAILABLE RIGHT NOW',
     unavailable: 'UNAVAILABLE',
   }[purchase.state as string] ?? 'UNAVAILABLE'
 

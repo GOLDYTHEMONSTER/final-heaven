@@ -83,7 +83,7 @@ export function scoreProduct(p: Product, profile: FeedProfile, seed: number, now
   if (!profile.viewed.includes(p.id)) score += w.unseen
   const state = p.purchase?.state
   if (state === 'available' || state === 'preorder') score += w.buyable
-  else if (state === 'sold_out' || state === 'unavailable') score += w.blocked
+  else if (state === 'sold_out' || state === 'paused' || state === 'unavailable') score += w.blocked
   return score + w.explore * jitter(seed, p.id)
 }
 

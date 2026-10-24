@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX,
-  FiTrendingUp, FiAlertCircle, FiStar
+  FiTrendingUp, FiAlertCircle, FiStar, FiPause, FiPlay
 } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
@@ -73,6 +73,24 @@ export default function AdminPage() {
       // Show the server's reason (e.g. "Original price must be higher than the price").
       alert((error as Error).message || 'Failed to save product')
       return false
+    }
+  }
+
+  // A paused product stays in the store; checkout refuses it until it's resumed.
+  async function togglePaused(product: any) {
+    const paused = !product.purchases_paused
+    if (paused && !confirm(`Pause purchases of ${product.name}? It stays in the store, but nobody can buy it until you resume.`)) return
+    try {
+      const res = await fetch('/api/admin/products', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: product.id, purchases_paused: paused }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) throw new Error(data?.error || 'Failed to update product')
+      setProducts((list) => list.map((p) => (p.id === product.id ? data.product : p)))
+    } catch (error) {
+      alert((error as Error).message)
     }
   }
 
@@ -462,6 +480,9 @@ export default function AdminPage() {
                 <label className="flex items-center gap-2 text-final-off-white/80">
                   <input type="checkbox" name="members_only" checked={form.members_only} onChange={handleChange} /> Members only (can&apos;t be bought until membership launches)
                 </label>
+                <label className="flex items-center gap-2 text-final-off-white/80">
+                  <input type="checkbox" name="purchases_paused" checked={!!form.purchases_paused} onChange={handleChange} /> Pause purchases (still shown in the store; nobody can buy it)
+                </label>
               </div>
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 text-final-off-white/80">
@@ -661,6 +682,7 @@ export default function AdminPage() {
                                 {product.is_limited && <span className="bg-red-500 text-white text-xs px-1 rounded">LIMITED</span>}
                                 {product.is_trending && <span className="bg-orange-500 text-white text-xs px-1 rounded">TRENDING</span>}
                                 {product.members_only && <span className="bg-purple-500 text-white text-xs px-1 rounded">MEMBERS</span>}
+                                {product.purchases_paused && <span className="bg-yellow-400 text-final-black text-xs px-1 rounded">PAUSED</span>}
                               </div>
                             </div>
                           </div>
@@ -699,8 +721,17 @@ export default function AdminPage() {
                             <button className="w-8 h-8 bg-final-accent/20 text-final-accent rounded flex items-center justify-center hover:bg-final-accent hover:text-final-black transition-colors">
                               <FiEye className="w-4 h-4" />
                             </button>
-                            <button 
-                              className="w-8 h-8 bg-blue-500/20 text-blue-400 rounded flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors" 
+                            <button
+                              type="button"
+                              title={product.purchases_paused ? 'Resume purchases' : 'Pause purchases'}
+                              aria-label={`${product.purchases_paused ? 'Resume' : 'Pause'} purchases of ${product.name}`}
+                              className="w-8 h-8 bg-yellow-400/20 text-yellow-400 rounded flex items-center justify-center hover:bg-yellow-400 hover:text-final-black transition-colors"
+                              onClick={() => togglePaused(product)}
+                            >
+                              {product.purchases_paused ? <FiPlay className="w-4 h-4" /> : <FiPause className="w-4 h-4" />}
+                            </button>
+                            <button
+                              className="w-8 h-8 bg-blue-500/20 text-blue-400 rounded flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors"
                               onClick={() => setEditingProduct(product)}
                             >
                               <FiEdit className="w-4 h-4" />

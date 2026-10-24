@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import type { CartItem } from '@/lib/stores/cartStore'
+import type { PaymentsState } from '@/lib/catalog'
 
 /** Where /checkout/complete finds the checkout to retry if the payment doesn't go through. */
 export const PENDING_CHECKOUT_KEY = 'fh-pending-checkout'
@@ -19,6 +20,8 @@ export type ServerQuote = {
   promo: { code: string; description: string | null } | null
   promoError: string | null
   ok: boolean
+  /** Whether checkout takes payments now (launch day, store pause). */
+  payments: PaymentsState
 }
 
 /**

@@ -45,7 +45,7 @@ function productColumns(body: Record<string, unknown>, partial: boolean) {
   if (has('stock')) out.stock = int(body.stock ?? 0, 'Stock', { min: 0, max: 1_000_000 })
   if (has('status')) out.status = oneOf(body.status, STATUSES, 'Status', 'active')
   if (has('card_size')) out.card_size = oneOf(body.card_size, CARD_SIZES, 'Card size', 'medium')
-  for (const flag of ['is_new', 'is_limited', 'is_trending', 'members_only'] as const) {
+  for (const flag of ['is_new', 'is_limited', 'is_trending', 'members_only', 'purchases_paused'] as const) {
     if (has(flag)) out[flag] = bool(body[flag])
   }
   if (has('release_date')) {

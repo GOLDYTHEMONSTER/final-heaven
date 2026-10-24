@@ -9,7 +9,7 @@ import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
 import { lineKey } from '@/lib/stores/cartStore'
-import { formatDay, optionLabel } from '@/lib/catalog'
+import { formatDay, optionLabel, paymentsClosed } from '@/lib/catalog'
 import { quoteLineAt, useQuote } from '@/lib/useQuote'
 
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
@@ -24,7 +24,8 @@ export default function CartPage() {
   const discount = quote ? Number(quote.discount) : 0
   const finalTotal = quote ? Number(quote.total) : total
   const lineIssues = quote?.lines?.some((l) => l.issue) ?? false
-  const canCheckout = !!quote && !lineIssues && !loading
+  const closed = quote?.payments?.open === false ? paymentsClosed(quote.payments) : null // before launch day, or paused
+  const canCheckout = !!quote && !lineIssues && !loading && !closed
 
   if (items.length === 0) {
     return (
@@ -253,8 +254,12 @@ export default function CartPage() {
                   </Link>
                 ) : (
                   <button type="button" disabled className="block w-full rounded-lg bg-final-accent py-4 text-center text-lg font-bold text-final-black opacity-50">
-                    {lineIssues ? 'FIX YOUR CART TO CONTINUE' : quoteError ? 'CHECKOUT UNAVAILABLE' : 'CHECKING PRICES…'}
+                    {lineIssues ? 'FIX YOUR CART TO CONTINUE' : closed ? closed.label.toUpperCase() : quoteError ? 'CHECKOUT UNAVAILABLE' : 'CHECKING PRICES…'}
                   </button>
+                )}
+
+                {closed && !lineIssues && (
+                  <p className="mt-3 text-center text-sm text-final-muted">{closed.message} Your cart stays saved on this device.</p>
                 )}
 
                 {quoteError && !loading && (

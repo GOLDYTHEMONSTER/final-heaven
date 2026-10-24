@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiMail, FiPackage, FiShoppingBag, FiTag, FiUsers } from 'react-icons/fi'
+import { FiActivity, FiCalendar, FiExternalLink, FiLogOut, FiMail, FiPackage, FiShoppingBag, FiSliders, FiTag, FiUsers } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { ActivityBell, ActivityProvider, LiveStatus, NavBadge, type Section } from '@/components/admin/activity'
@@ -19,6 +19,7 @@ const nav: { name: string; href: string; icon: typeof FiActivity; permission: st
   { name: 'Promo codes', href: '/admin/promos', icon: FiTag, permission: 'products.read' },
   { name: 'Customers', href: '/admin/customers', icon: FiUsers, permission: 'customers.read', section: 'customers' },
   { name: 'Messages', href: '/admin/messages', icon: FiMail, permission: 'customers.read', section: 'messages' },
+  { name: 'Store', href: '/admin/store', icon: FiSliders, permission: 'settings.manage' },
 ]
 
 function useSignOut() {

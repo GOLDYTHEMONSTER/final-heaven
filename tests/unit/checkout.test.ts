@@ -1,4 +1,4 @@
-// The Checkout module, through its interface: quote, begin, resume.
+// The Checkout module, through its interface: quote, begin, resume, payments.
 // In-memory CheckoutStore and a fake CheckoutPayments; nothing leaves the process.
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
@@ -16,6 +16,7 @@ const CATALOGUE = [
   { ...base, id: 'gone', name: 'Gone', stock: 0 },
   { ...base, id: 'vape', name: 'Vape', category: 'Vapes' },
   { ...base, id: 'odd', name: 'Odd', price: 3333.33 },
+  { ...base, id: 'held', name: 'Held', purchases_paused: true },
 ]
 const promo = (over: Partial<PromoContext['promo']> = {}, uses = 0, customerUses = 0): PromoContext => ({
   uses, customerUses,
@@ -52,9 +53,9 @@ function fakePayments(over: Partial<CheckoutPayments> = {}) {
 
 let mem: ReturnType<typeof memoryStore>
 let payments: CheckoutPayments
-const shop = { tenantId: 't1', storeId: 's1', currency: 'NGN', hiddenCategories: ['Vapes'], timeZone: 'Africa/Lagos' }
+const shop = { tenantId: 't1', storeId: 's1', currency: 'NGN', hiddenCategories: ['Vapes'], timeZone: 'Africa/Lagos', paymentsOpenOn: '2026-10-01' as string | null, purchasesPaused: false }
 let refs = 0
-const make = (now = NOW) => checkout({ store: mem.store, payments, shop, now: () => now, newReference: (prefix) => `${prefix}-TEST${++refs}` })
+const make = (now = NOW, over: Partial<typeof shop> = {}) => checkout({ store: mem.store, payments, shop: { ...shop, ...over }, now: () => now, newReference: (prefix) => `${prefix}-TEST${++refs}` })
 
 beforeEach(() => {
   mem = memoryStore({ SAVE10: promo() })
@@ -220,5 +221,52 @@ describe('reading a cart from a request', () => {
     expect(parseCart([tee(2), tee(3)])).toEqual([{ id: 'tee', size: 'M', color: 'black', quantity: 5 }])
     expect(() => parseCart([tee(15), tee(10)])).toThrow(/up to 20/)
     expect(() => parseCart([])).toThrow(/empty/)
+  })
+})
+
+describe('launch day and pauses', () => {
+  it('takes no payments before a launch day is set, but still prices the cart', async () => {
+    const c = make(NOW, { paymentsOpenOn: null })
+    expect(c.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: null })
+    expect((await c.quote({ lines: [tee(1)] })).ok).toBe(true)
+    expect(await c.begin({ lines: [tee(1)], buyer })).toEqual({ ok: false, reason: 'payment_unavailable', message: 'Checkout opens on launch day.' })
+    expect(mem.store.save).not.toHaveBeenCalled()
+    expect(payments.start).not.toHaveBeenCalled()
+  })
+
+  it('names the launch day until it comes, then opens at midnight in the store’s time zone', async () => {
+    const before = make(new Date('2026-10-31T22:30:00Z'), { paymentsOpenOn: '2026-11-01' }) // 23:30 in Lagos
+    expect(before.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: '2026-11-01' })
+    expect(await before.begin({ lines: [tee(1)], buyer })).toMatchObject({ ok: false, message: 'Checkout opens on 1 November 2026.' })
+    const after = make(new Date('2026-10-31T23:30:00Z'), { paymentsOpenOn: '2026-11-01' }) // 00:30 on 1 Nov in Lagos
+    expect(after.payments().open).toBe(true)
+    expect(await after.begin({ lines: [tee(1)], buyer })).toMatchObject({ ok: true })
+  })
+
+  it('takes no payments while the store is paused, and says so', async () => {
+    const c = make(NOW, { purchasesPaused: true })
+    expect(c.payments()).toEqual({ open: false, closedFor: 'paused', opensOn: '2026-10-01' })
+    expect(await c.begin({ lines: [tee(1)], buyer })).toEqual({ ok: false, reason: 'payment_unavailable', message: 'Purchases are paused right now. Please check back soon.' })
+    expect(payments.start).not.toHaveBeenCalled()
+  })
+
+  it('refuses a paused product in a quote, while the rest of the cart can still be bought', async () => {
+    const q = await make().quote({ lines: [tee(1), { id: 'held', size: null, quantity: 1 }] })
+    expect(q.lines.map((l) => l.issue)).toEqual([null, 'Held can’t be bought right now.'])
+    expect(q.ok).toBe(false)
+  })
+
+  it('still reports a cart problem first', async () => {
+    const r = await make(NOW, { paymentsOpenOn: null }).begin({ lines: [{ id: 'gone', size: null, quantity: 1 }], buyer })
+    expect(r).toMatchObject({ ok: false, reason: 'cart_invalid' })
+  })
+
+  it('gives no payment link for an earlier Checkout while payments are closed', async () => {
+    const r = await make().begin({ lines: [tee(1)], buyer })
+    if (!r.ok) throw new Error('begin failed')
+    expect(await make(NOW, { paymentsOpenOn: null }).resume({ reference: r.checkout, email: buyer.email }))
+      .toEqual({ ok: false, reason: 'payment_unavailable', message: 'Checkout opens on launch day.' })
+    expect(await make(NOW, { purchasesPaused: true }).resume({ reference: r.checkout, email: buyer.email }))
+      .toMatchObject({ ok: false, reason: 'payment_unavailable', message: expect.stringMatching(/paused/) })
   })
 })

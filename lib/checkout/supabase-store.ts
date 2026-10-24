@@ -7,7 +7,7 @@ import { startPayment } from '@/lib/payments/service'
 import { checkout, type CheckoutPayments, type CheckoutStore, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
-  'id, name, price, original_price, stock, status, images, category, members_only, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors'
+  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors'
 const PAID = ['paid', 'partially_refunded', 'refunded']
 
 /** CheckoutStore on Supabase. Server-only: uses the service key. */
@@ -83,12 +83,22 @@ function flutterwavePayments(req: Request): CheckoutPayments {
   }
 }
 
+/**
+ * The store's launch day and pause switch, read on every request (getStorefront
+ * is cached) so a pause from the admin applies at once.
+ */
+async function sellingSwitches(storeId: string, db: SupabaseClient = createSupabaseServiceClient()) {
+  const { data, error } = await db.from('stores').select('payments_open_on, purchases_paused').eq('id', storeId).single()
+  if (error) throw error
+  return { paymentsOpenOn: (data.payments_open_on as string | null) ?? null, purchasesPaused: data.purchases_paused === true }
+}
+
 /** The Checkout module wired for this request: Supabase, Flutterwave, this storefront. */
 export async function checkoutForRequest(req: Request) {
   const s = await getStorefront()
   return checkout({
     store: supabaseCheckoutStore(),
     payments: flutterwavePayments(req),
-    shop: { tenantId: s.tenantId, storeId: s.storeId, currency: s.currency, hiddenCategories: s.hiddenCategories, timeZone: s.timeZone },
+    shop: { tenantId: s.tenantId, storeId: s.storeId, currency: s.currency, hiddenCategories: s.hiddenCategories, timeZone: s.timeZone, ...(await sellingSwitches(s.storeId)) },
   })
 }

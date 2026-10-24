@@ -9,7 +9,7 @@ import { formatCurrency } from '@/lib/utils/format'
 import { Layout } from '@/components/layout/Layout'
 import { track } from '@/lib/analytics'
 import { POLICY } from '@/lib/legal'
-import { formatDay } from '@/lib/catalog'
+import { formatDay, paymentsClosed } from '@/lib/catalog'
 import { PENDING_CHECKOUT_KEY, quoteLineAt, useQuote } from '@/lib/useQuote'
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
@@ -35,6 +35,7 @@ export default function CheckoutPage() {
   // The server's price: exactly what Flutterwave will charge.
   const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email)
   const lineIssues = quote?.lines?.some((l) => l.issue) ?? false
+  const closed = quote?.payments?.open === false ? paymentsClosed(quote.payments) : null // before launch day, or paused
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -138,7 +139,13 @@ export default function CheckoutPage() {
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-final-dark-gray/50 backdrop-blur-sm rounded-xl p-8 border border-final-light-gray/30">
                 <h1 className="display text-3xl md:text-4xl text-final-off-white mb-6">Checkout</h1>
-                <p className="text-final-off-white/70 mb-6">Enter your delivery details, then pay securely on Flutterwave. Your order is placed once payment is confirmed. No account is required.</p>
+                {closed ? (
+                  <p className="mb-6 rounded-lg border border-final-ember/40 bg-final-ember/10 px-4 py-3 text-final-off-white" role="status">
+                    {closed.message} Your cart stays saved on this device.
+                  </p>
+                ) : (
+                  <p className="text-final-off-white/70 mb-6">Enter your delivery details, then pay securely on Flutterwave. Your order is placed once payment is confirmed. No account is required.</p>
+                )}
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-final-off-white/80 mb-2" htmlFor="email">Email</label>
@@ -227,14 +234,16 @@ export default function CheckoutPage() {
 
                   <button
                     type="submit"
-                    disabled={status === 'loading' || status === 'redirecting' || !quote?.ok || pricing}
+                    disabled={status === 'loading' || status === 'redirecting' || !quote?.ok || pricing || !!closed}
                     className="w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
                   >
                     {status === 'redirecting'
                       ? 'Taking you to Flutterwave…'
                       : status === 'loading'
                         ? 'Starting payment…'
-                        : quote
+                        : closed
+                          ? closed.label
+                          : quote
                           ? `Pay ${formatCurrency(quote.total)}`
                           : quoteError ? 'Checkout unavailable' : 'Checking prices…'}
                   </button>
