@@ -8,6 +8,7 @@ import sharp from 'sharp'
 const WIDTHS = [640, 1200] // keep in step with IMAGE_WIDTHS in lib/images.ts
 const ROOTS = ['public/products', 'public/drops', 'public/editorial']
 const PHOTO = /\.(jpe?g|png)$/i
+const CARD_BUDGET = 80 * 1024
 
 const photos = (dir) => readdirSync(dir).flatMap((name) => {
   const path = join(dir, name)
@@ -20,7 +21,11 @@ for (const photo of ROOTS.flatMap(photos)) {
   for (const width of WIDTHS) {
     const out = photo.replace(PHOTO, `-${width}.webp`)
     try { if (statSync(out).mtimeMs >= changed) continue } catch {}
-    await sharp(photo).resize({ width, withoutEnlargement: true }).webp({ quality: 78 }).toFile(out)
+    // Card-sized copies stay within the 80 KB budget: busy photos get a lower quality, never below 60.
+    for (const quality of width === 640 ? [78, 70, 62, 60] : [78]) {
+      const { size } = await sharp(photo).resize({ width, withoutEnlargement: true }).webp({ quality }).toFile(out)
+      if (size <= CARD_BUDGET) break
+    }
     made++
   }
 }

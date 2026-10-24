@@ -218,3 +218,32 @@ describe('integration settings and payment inbox', () => {
     expect(await errorOf(probe(db, user(f.users.ownerA), (tx) => tx.query(`select 1 from public.payment_events`)))).toMatch(/permission denied/)
   })
 })
+
+describe('store selling switches (launch day, pause all purchases)', () => {
+  const pause = (tx: { query: PGlite['query'] }, storeId: string) =>
+    tx.query<{ id: string }>(`update public.stores set purchases_paused = true, payments_open_on = '2026-11-01' where id = $1 returning id`, [storeId])
+      .then((r) => r.rows.length)
+
+  it('owners and administrators change them for their own store', async () => {
+    expect(await probe(db, user(f.users.ownerA), (tx) => pause(tx, f.storeA))).toBe(1)
+    expect(await probe(db, user(f.users.adminA), (tx) => pause(tx, f.storeA))).toBe(1)
+  })
+
+  it('staff without settings.manage, other tenants and outsiders change nothing', async () => {
+    for (const who of [f.users.financeA, f.users.supportA, f.users.readonlyA, f.users.ownerB, f.users.outsider]) {
+      expect(await probe(db, user(who), (tx) => pause(tx, f.storeA)), who).toBe(0)
+    }
+  })
+
+  it('cannot be used to change anything else on the store', async () => {
+    expect(await errorOf(probe(db, user(f.users.ownerA), (tx) =>
+      tx.query(`update public.stores set name = 'Renamed' where id = $1`, [f.storeA])))).toMatch(/permission denied/)
+  })
+
+  it('the public can read them but not change them', async () => {
+    const row = await probe(db, { kind: 'anon' }, (tx) =>
+      tx.query<{ paused: boolean }>(`select purchases_paused as paused from public.stores where id = $1`, [f.storeA]).then((r) => r.rows[0]))
+    expect(row).toEqual({ paused: false })
+    expect(await errorOf(probe(db, { kind: 'anon' }, (tx) => pause(tx, f.storeA)))).toMatch(/permission denied/)
+  })
+})

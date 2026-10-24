@@ -6,7 +6,12 @@ import { paymentsState, storeToday } from '@/lib/catalog'
 
 export const dynamic = 'force-dynamic'
 
-const DATE = /^\d{4}-\d{2}-\d{2}$/
+/** A real calendar day as YYYY-MM-DD (rejects 2026-02-31). */
+function isDay(v: unknown): v is string {
+  if (typeof v !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false
+  const d = new Date(`${v}T00:00:00Z`)
+  return !Number.isNaN(d.getTime()) && d.toISOString().startsWith(v)
+}
 const COLUMNS = 'payments_open_on, purchases_paused'
 
 // The store's selling switches: its launch day and a pause on all purchases.
@@ -38,7 +43,7 @@ export const PUT = handle('admin.store.update', async (req: NextRequest) => {
   const updates: Record<string, unknown> = {}
   if ('payments_open_on' in body) {
     const day = body.payments_open_on
-    if (day !== null && (typeof day !== 'string' || !DATE.test(day))) throw new BadRequest('Launch day must be a date (YYYY-MM-DD), or empty.')
+    if (day !== null && !isDay(day)) throw new BadRequest('Launch day must be a date (YYYY-MM-DD), or empty.')
     updates.payments_open_on = day
   }
   if ('purchases_paused' in body) {
