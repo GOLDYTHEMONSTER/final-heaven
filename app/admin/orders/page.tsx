@@ -169,10 +169,12 @@ function AdminOrders() {
   }, [filters])
 
   useEffect(() => { fetchOrders() }, [fetchOrders])
+  // New orders reload the list at once through the activity feed (useLiveReload),
+  // so this is only a slow safety net, and skipped while the tab is hidden.
   useLiveReload('orders', fetchOrders)
   useEffect(() => {
     if (!autoRefresh) return
-    const interval = setInterval(fetchOrders, 10000)
+    const interval = setInterval(() => { if (!document.hidden) fetchOrders() }, 60_000)
     return () => clearInterval(interval)
   }, [autoRefresh, fetchOrders])
 
