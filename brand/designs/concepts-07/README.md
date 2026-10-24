@@ -11,6 +11,18 @@ Full suits (blazer and trousers) on an invisible mannequin, generated with GPT I
 | `suit-05-wings-tuxedo.jpg` | Black tuxedo blazer (front and back) | Satin shawl lapel, silver mark pin; large black angel wings embroidered on the back with a silver edge and the mark between them |
 | `suit-06-navy-crest-blazer.jpg` | Navy blazer with cream trousers | Cream piping on lapels and pockets, cream shield crest with the navy mark on the breast pocket |
 
+## suit-02 colourways
+
+Same double-breasted cut as `suit-02-cream-double-breasted.jpg`; `suit-02-colourways.jpg` shows all six side by side.
+
+| File | Suit | Buttons | Lapel mark |
+|---|---|---|---|
+| `suit-02b-navy-double-breasted.jpg` | Navy | Dark brown horn | Cream |
+| `suit-02c-black-double-breasted.jpg` | Black | Black horn | Silver-white |
+| `suit-02d-brown-double-breasted.jpg` | Chocolate brown | Cream horn | Cream |
+| `suit-02e-burgundy-double-breasted.jpg` | Burgundy | Black horn | Black (subtle) |
+| `suit-02f-sage-double-breasted.jpg` | Sage green | Dark brown horn | Dark brown |
+
 Notes before production:
 - The star pinstripe (suit-04) needs a custom-woven or printed fabric; send the mill a vector of the dash and star spacing.
 - The wing embroidery (suit-05) is a large, costly embroidery; get a sample and price before listing.
