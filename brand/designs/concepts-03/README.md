@@ -23,3 +23,16 @@ Known issues before any of these go further:
 - **tee-17**: the outline letters have a faint grey drip fill. Decide whether to keep it or print a clean single line.
 - **tee-18**: the small paragraph is "lorem ipsum" placeholder text and needs real copy. The bike stats belong to a fictional bike ("FH-07 SERAPH"), not a product claim.
 - **All**: kanji 天国 means "heaven" (tengoku); check it with a native reader before printing.
+
+## Added 24 Oct: front photo-collage tees
+
+From an owner reference: a full-front, high-contrast black-and-white photocopy print with a crest. The reference used real models, so these figures are invented and the crest carries the three-star mark.
+
+| File | Tee | Front | Back |
+|---|---|---|---|
+| `tee-19-zine-angels.jpg` | Black | Xerox-style print of two winged girls (one standing, one sitting) around a winged crest with the mark and a "FINAL HEAVEN" banner; "FINAL HEAVEN" down the left sleeve | Small white mark below the collar |
+| `tee-20-zine-crest.jpg` | Black | Xerox-style night street photo of two laughing young men under a crowned, winged crest with the mark and "FINAL HEAVEN"; "SEE YOU IN HEAVEN" down the left sleeve | Small white mark below the collar |
+
+Known issues:
+- **tee-20**: the sneakers look like Nike Air Max (swoosh-like panels). Redraw them as plain, unbranded sneakers before production.
+- **Both**: the figures are AI-generated, not real people. Keep it that way; never swap in a photo of a real person without their written permission.
