@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
   FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX,
@@ -10,7 +10,8 @@ import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
 import { uploadProductImage } from '@/lib/admin/upload'
 
-const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Jackets', 'Sweaters', 'Shoes', 'Accessories', 'Vapes']
+// The usual categories, plus any a product already uses, so editing never swaps a category.
+const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Gadgets', 'Sets', 'Vapes']
 const statuses = ['All', 'Active', 'Draft', 'Archived']
 
 export default function AdminPage() {
@@ -21,6 +22,10 @@ export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [showAddProduct, setShowAddProduct] = useState(false)
   const [editingProduct, setEditingProduct] = useState<any>(null)
+  const categories = useMemo(
+    () => Array.from(new Set([...BASE_CATEGORIES, ...products.map((p) => p.category).filter(Boolean)])),
+    [products],
+  )
 
   // Fetch products from API on mount
   useEffect(() => {
@@ -311,7 +316,7 @@ export default function AdminPage() {
                     required
                     className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
                   >
-                    {categories.slice(1).map(cat => (
+                    {categories.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>
@@ -631,7 +636,7 @@ export default function AdminPage() {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
                 >
-                  {categories.map((category) => (
+                  {['All', ...categories].map((category) => (
                     <option key={category} value={category}>{category}</option>
                   ))}
                 </select>
