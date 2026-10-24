@@ -518,7 +518,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={uploading > 0}
-                  className="bg-final-accent text-final-black px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50"
+                  className="bg-final-accent text-final-black px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-final-accent/25 transition-[color,background-color,border-color,box-shadow,transform] duration-300 disabled:opacity-50"
                 >
                   {uploading > 0 ? 'Uploading photos…' : isNew ? 'Create Product' : 'Save Changes'}
                 </button>
