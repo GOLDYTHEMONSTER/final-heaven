@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { sized } from '@/lib/images'
 import Link from 'next/link'
 import { FiTrash2, FiArrowLeft, FiLock, FiAlertCircle } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
@@ -102,7 +103,7 @@ export default function CartPage() {
                         {/* Product Image */}
                         <div className="relative w-24 h-32 bg-final-gray rounded-lg overflow-hidden flex-shrink-0">
                           <Image
-                            src={item.image || '/api/placeholder/400/500'}
+                            src={sized(item.image || '/api/placeholder/400/500', 640)}
                             alt={item.name}
                             fill
                             sizes="96px"

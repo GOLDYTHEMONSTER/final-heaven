@@ -1,0 +1,27 @@
+// Makes the WebP copies lib/images.ts serves: every photo in public/products,
+// drops and editorial at each width in IMAGE_WIDTHS (never upscaled). Existing
+// copies newer than their photo are kept. Run with `npm run images`.
+import { readdirSync, statSync } from 'node:fs'
+import { join } from 'node:path'
+import sharp from 'sharp'
+
+const WIDTHS = [640, 1200] // keep in step with IMAGE_WIDTHS in lib/images.ts
+const ROOTS = ['public/products', 'public/drops', 'public/editorial']
+const PHOTO = /\.(jpe?g|png)$/i
+
+const photos = (dir) => readdirSync(dir).flatMap((name) => {
+  const path = join(dir, name)
+  return statSync(path).isDirectory() ? photos(path) : PHOTO.test(name) ? [path] : []
+})
+
+let made = 0
+for (const photo of ROOTS.flatMap(photos)) {
+  const changed = statSync(photo).mtimeMs
+  for (const width of WIDTHS) {
+    const out = photo.replace(PHOTO, `-${width}.webp`)
+    try { if (statSync(out).mtimeMs >= changed) continue } catch {}
+    await sharp(photo).resize({ width, withoutEnlargement: true }).webp({ quality: 78 }).toFile(out)
+    made++
+  }
+}
+console.log(`${made} image copies made`)

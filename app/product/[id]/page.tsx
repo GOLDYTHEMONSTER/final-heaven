@@ -15,6 +15,7 @@ import { PolicySummary } from '@/components/legal/PolicySummary'
 import { POLICY } from '@/lib/legal'
 import { formatDay, stringList } from '@/lib/catalog'
 import { setGroups } from '@/lib/sets'
+import { sized } from '@/lib/images'
 
 
 export default function ProductPage({ params }: { params: { id: string } }) {
@@ -177,9 +178,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {/* Main Image */}
               <div className="relative aspect-[3/4] bg-final-dark-gray rounded-xl overflow-hidden border border-final-light-gray/30">
                 <Image
-                  src={mainImage}
+                  src={sized(mainImage, 1200)}
                   alt={product.name}
                   fill
+                  priority
                   className="object-cover cursor-zoom-in"
                   onClick={() => setIsImageZoomed(!isImageZoomed)}
                 />
@@ -224,7 +226,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     }`}
                   >
                     <Image
-                      src={image}
+                      src={sized(image, 640)}
                       alt={`${product.name} ${index + 1}`}
                       fill
                       className="object-cover"

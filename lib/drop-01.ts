@@ -3,6 +3,7 @@
 // options are groups of picks (see lib/sets): any 3 tees, 1 hoodie, 1 cap.
 
 import { setColors, type SetGroup } from '@/lib/sets'
+import { sized } from '@/lib/images'
 
 type Pick = { id: string; pick: string }
 
@@ -48,7 +49,7 @@ export const DROP_01_SET_COLORS = setColors(DROP_01_SET)
 /** Every piece in the drop that is also sold on its own. */
 export const DROP_01_PIECES = [...DROP_01.tees.map((t) => t.id), ...DROP_01.hoodies.map((h) => h.id), DROP_01.cap.id]
 
-const reel = (file: string, alt: string) => ({ src: `/drops/drop-01/${file}`, alt })
+const reel = (file: string, alt: string) => ({ src: sized(`/drops/drop-01/${file}`, 640), alt })
 
 // Close-ups alternate with flat-lays and caps so each piece shows its print and its shape.
 export const DROP_01_REEL = [

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { handle } from '@/lib/api'
 import { getStorefront } from '@/lib/tenancy'
-import { storeToday, toPublicProduct } from '@/lib/catalog'
+import { CATALOGUE_CACHE, storeToday, toPublicProduct } from '@/lib/catalog'
 
 // Public catalogue: only active products, whatever the query string says.
 // RLS enforces the same rule in the database. Each product carries its
@@ -21,5 +21,5 @@ export const GET = handle('products.list', async (req: Request) => {
   if (error) throw error
 
   const today = storeToday(store.timeZone)
-  return NextResponse.json({ products: (data || []).map((p) => toPublicProduct(p, today)) })
+  return NextResponse.json({ products: (data || []).map((p) => toPublicProduct(p, today)) }, { headers: CATALOGUE_CACHE })
 })

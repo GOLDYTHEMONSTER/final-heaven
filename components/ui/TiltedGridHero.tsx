@@ -176,10 +176,16 @@ export function TiltedGridHero({
     return () => ro.disconnect();
   }, [tileHeight, aspectRatio, gap, bend]);
 
-  // Fetch every image up front. A tile picks up its next one just before
-  // it comes back into view, too late to start loading it then.
+  // Fetch every image ahead: a tile picks up its next one just before it
+  // comes back into view, too late to start loading it then. Only once the
+  // page has loaded, so the reel doesn't hold up what's on screen.
   React.useEffect(() => {
-    for (const { src } of images) new Image().src = src;
+    const fetchAll = () => {
+      for (const { src } of images) new Image().src = src;
+    };
+    if (document.readyState === "complete") return fetchAll();
+    window.addEventListener("load", fetchAll, { once: true });
+    return () => window.removeEventListener("load", fetchAll);
   }, [images]);
 
   const { columns, sweep, unit, limit } =

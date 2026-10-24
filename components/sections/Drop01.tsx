@@ -9,6 +9,7 @@ import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
 import { DROP_01, DROP_01_PIECES, DROP_01_SET } from '@/lib/drop-01'
 import { formatSetPick } from '@/lib/sets'
+import { sized } from '@/lib/images'
 import type { Product } from '@/lib/catalog'
 
 const firstImage = (p?: Product) => p?.images?.[0]?.url ?? ''
@@ -43,7 +44,7 @@ function Choice({ image, label, sub, selected, onSelect }: { image: string; labe
     >
       <div className="aspect-[4/5] bg-final-gray">
         {/* eslint-disable-next-line @next/next/no-img-element -- small static product shots */}
-        {image ? <img src={image} alt="" className="h-full w-full object-cover" /> : null}
+        {image ? <img src={sized(image, 640)} alt="" loading="lazy" className="h-full w-full object-cover" /> : null}
       </div>
       <div className="flex items-center justify-between gap-2 px-3 py-2.5">
         <span className="text-sm font-medium text-final-off-white">{label}</span>

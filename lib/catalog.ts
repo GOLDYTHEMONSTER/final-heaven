@@ -121,6 +121,9 @@ export function paymentsClosed(p: PaymentsState) {
   return { label: 'Checkout opens at launch', message: p.opensOn ? `Checkout opens on ${formatDay(p.opensOn)}.` : 'Checkout opens on launch day.' }
 }
 
+/** For public catalogue responses: the CDN may serve them a minute old, as checkout always re-prices. */
+export const CATALOGUE_CACHE = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=600' }
+
 /** The public shape of a product: camelCase, no internal columns, with its purchase state. */
 export function toPublicProduct(row: Record<string, any>, today: string) {
   return {

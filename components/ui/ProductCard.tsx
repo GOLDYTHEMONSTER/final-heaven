@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { sized } from '@/lib/images'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiCheck, FiPlus } from 'react-icons/fi'
@@ -141,7 +142,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
       <article className="group relative flex gap-5 rounded-xl border border-final-off-white/10 bg-final-gray p-3 transition-colors duration-200 hover:border-final-off-white/20">
         <Link href={href} className="relative aspect-[4/5] w-32 shrink-0 overflow-hidden rounded-lg bg-final-dark-gray sm:w-40">
           <Image
-            src={mainImage}
+            src={sized(mainImage, 640)}
             alt={product.name}
             fill
             unoptimized
@@ -182,7 +183,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
       <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-final-dark-gray">
         <Link href={href} aria-label={product.name} className="absolute inset-0">
           <Image
-            src={mainImage}
+            src={sized(mainImage, 640)}
             alt={product.name}
             fill
             unoptimized
@@ -191,7 +192,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
           />
           {secondImage && (
             <Image
-              src={secondImage}
+              src={sized(secondImage, 640)}
               alt=""
               fill
               unoptimized

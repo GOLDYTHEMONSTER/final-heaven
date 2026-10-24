@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
+import { sized } from '@/lib/images'
 import Link from 'next/link'
 import { FiArrowRight, FiChevronDown, FiRotateCw, FiX } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
@@ -82,7 +83,7 @@ function EditorialCard({ tile }: { tile: EditorialTile }) {
   return (
     <Link href={tile.href} className="group block">
       <div className="relative overflow-hidden rounded-xl bg-final-dark-gray" style={{ aspectRatio: String(tile.ratio) }}>
-        <Image src={tile.src} alt={tile.alt} fill unoptimized sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 25vw"
+        <Image src={sized(tile.src, 640)} alt={tile.alt} fill unoptimized sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 25vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none" />
       </div>
       <p className="mt-2.5 text-[11px] uppercase tracking-[0.12em] text-final-ember">{tile.kicker}</p>
