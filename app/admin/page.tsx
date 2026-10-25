@@ -12,7 +12,7 @@ import { uploadProductImage } from '@/lib/admin/upload'
 import { SourcingFields, toSource, type Supplier } from '@/components/admin/SourcingFields'
 
 // The usual categories, plus any a product already uses, so editing never swaps a category.
-const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Gadgets', 'Sets', 'Vapes']
+const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Grillz', 'Gadgets', 'Sets', 'Vapes']
 const statuses = ['All', 'Active', 'Draft', 'Archived']
 
 export default function AdminPage() {
