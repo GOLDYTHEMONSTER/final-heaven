@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requirePermission } from '@/lib/auth'
 import { audit } from '@/lib/audit'
 import { BadRequest, handle, int, money, readJson, requestIdOf, text, url } from '@/lib/api'
+import { SOURCE_SELECT, saveSource, sourceFields } from '@/lib/sourcing'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
@@ -66,7 +67,6 @@ function productColumns(body: Record<string, unknown>, partial: boolean) {
   }
   if (has('preorder_limit')) out.preorder_limit = int(body.preorder_limit ?? 0, 'Pre-order quantity', { min: 0, max: 100_000 })
   if (out.preorder === true && !out.preorder_ships_on) throw new BadRequest('Set the date pre-orders ship from.')
-  if (has('product_url')) out.product_url = url(body.product_url, 'Product link')
   if (has('colors')) out.colors = list(body.colors, 'Colors')
   if (has('sizes')) out.sizes = list(body.sizes, 'Sizes')
   if (has('tags')) out.tags = list(body.tags, 'Tags')
@@ -89,7 +89,8 @@ export const GET = handle('admin.products.list', async () => {
   const { staff, denied } = await requirePermission('products.read')
   if (denied) return denied
 
-  const { data, error } = await staff.supabase.from('products').select('*')
+  // Sourcing comes from the staff-only product_sources table (lib/sourcing).
+  const { data, error } = await staff.supabase.from('products').select(`*, ${SOURCE_SELECT}`)
     .eq('tenant_id', staff.tenant.tenantId).order('created_at', { ascending: false })
   if (error) throw error
   return NextResponse.json({ products: data || [] })
@@ -102,15 +103,17 @@ export const POST = handle('admin.products.create', async (req: NextRequest) => 
 
   const body = await readJson(req, 64_000)
   const id = typeof body.id === 'string' && ID.test(body.id) ? body.id : `p${Date.now()}`
+  const source = 'source' in body ? sourceFields(body.source) : null
   const { data, error } = await staff.supabase
     .from('products')
     .insert({ id, ...productColumns(body, false), tenant_id: staff.tenant.tenantId, store_id: staff.tenant.storeId })
     .select()
     .single()
   if (error) throw error
+  if (source) await saveSource(staff.supabase, staff.tenant.tenantId, id, source)
   await audit({ tenantId: staff.tenant.tenantId, action: 'product.created', entityType: 'product', entityId: id,
     actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { name: data.name, price: data.price } })
-  return NextResponse.json({ product: data }, { status: 201 })
+  return NextResponse.json({ product: { ...data, source } }, { status: 201 })
 })
 
 export const PUT = handle('admin.products.update', async (req: NextRequest) => {
@@ -120,20 +123,24 @@ export const PUT = handle('admin.products.update', async (req: NextRequest) => {
   const body = await readJson(req, 64_000)
   if (typeof body.id !== 'string' || !ID.test(body.id)) throw new BadRequest('Product ID is required.')
   const updates = productColumns(body, true)
-  if (!Object.keys(updates).length) throw new BadRequest('Nothing to update.')
+  const hasSource = 'source' in body
+  const source = hasSource ? sourceFields(body.source) : null
+  if (!Object.keys(updates).length && !hasSource) throw new BadRequest('Nothing to update.')
 
   const { data, error } = await staff.supabase
     .from('products')
     .update({ ...updates, updated_at: new Date().toISOString() })
     .eq('id', body.id)
     .eq('tenant_id', staff.tenant.tenantId)
-    .select()
+    .select(`*, ${SOURCE_SELECT}`)
     .maybeSingle()
   if (error) throw error
   if (!data) return NextResponse.json({ error: 'Product not found.' }, { status: 404 })
+  if (hasSource) await saveSource(staff.supabase, staff.tenant.tenantId, body.id, source)
   await audit({ tenantId: staff.tenant.tenantId, action: 'product.updated', entityType: 'product', entityId: body.id,
-    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { fields: Object.keys(updates) } })
-  return NextResponse.json({ product: data })
+    actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req),
+    metadata: { fields: [...Object.keys(updates), ...(hasSource ? ['source'] : [])] } })
+  return NextResponse.json({ product: { ...data, source: hasSource ? source : data.source } })
 })
 
 export const DELETE = handle('admin.products.delete', async (req: NextRequest) => {

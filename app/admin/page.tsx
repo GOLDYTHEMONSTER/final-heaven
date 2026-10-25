@@ -9,6 +9,7 @@ import {
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
 import { uploadProductImage } from '@/lib/admin/upload'
+import { SourcingFields, toSource, type Supplier } from '@/components/admin/SourcingFields'
 
 // The usual categories, plus any a product already uses, so editing never swaps a category.
 const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Gadgets', 'Sets', 'Vapes']
@@ -22,6 +23,9 @@ export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [showAddProduct, setShowAddProduct] = useState(false)
   const [editingProduct, setEditingProduct] = useState<any>(null)
+  const [suppliers, setSuppliers] = useState<Supplier[]>([])
+  const [selectedSupplier, setSelectedSupplier] = useState('All')
+  const supplierName = useMemo(() => new Map(suppliers.map((s) => [s.id, s.name])), [suppliers])
   const categories = useMemo(
     () => Array.from(new Set([...BASE_CATEGORIES, ...products.map((p) => p.category).filter(Boolean)])),
     [products],
@@ -30,6 +34,10 @@ export default function AdminPage() {
   // Fetch products from API on mount
   useEffect(() => {
     fetchProducts()
+    fetch('/api/admin/suppliers').then((r) => r.json()).then((d) => setSuppliers(d.suppliers ?? [])).catch(() => {})
+    // Opened from a supplier's product count on the Suppliers page.
+    const supplier = new URLSearchParams(window.location.search).get('supplier')
+    if (supplier) setSelectedSupplier(supplier)
   }, [])
 
   async function fetchProducts() {
@@ -118,7 +126,9 @@ export default function AdminPage() {
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory
     const matchesStatus = selectedStatus === 'All' || product.status === selectedStatus.toLowerCase()
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    return matchesCategory && matchesStatus && matchesSearch
+    const supplierId = product.source?.supplier_id ?? ''
+    const matchesSupplier = selectedSupplier === 'All' || (selectedSupplier === 'none' ? !supplierId : supplierId === selectedSupplier)
+    return matchesCategory && matchesStatus && matchesSearch && matchesSupplier
   })
 
   const getStatusColor = (status: string) => {
@@ -137,14 +147,14 @@ export default function AdminPage() {
   }
 
   function ProductEditorModal({ product, onClose, onSave, isNew = false }: { product: any, onClose: () => void, onSave: (p: any) => Promise<boolean>, isNew?: boolean }) {
-    const [form, setForm] = useState<any>(product ? { ...product, images: product.images || [] } : {
+    const [form, setForm] = useState<any>(product ? { ...product, images: product.images || [], source: toSource(product.source) } : {
       id: '',
       name: '',
       price: 0,
       images: [],
       category: 'T-Shirts',
       description: '',
-      product_url: '',
+      source: toSource(null),
       stock: 0,
       status: 'active',
       colors: [],
@@ -258,17 +268,12 @@ export default function AdminPage() {
                   className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" 
                 />
               </div>
-              <div>
-                <label className="block text-final-off-white/70 text-sm mb-1">Staff reference link (optional, never shown to customers; they always pay through checkout)</label>
-                <input
-                  name="product_url"
-                  type="url"
-                  value={form.product_url || ''}
-                  onChange={handleChange}
-                  placeholder="https://..."
-                  className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
-                />
-              </div>
+              <SourcingFields
+                value={form.source}
+                onChange={(source) => setForm((f: any) => ({ ...f, source }))}
+                suppliers={suppliers}
+                onSupplierAdded={(s) => setSuppliers((list) => [...list, s].sort((a, b) => a.name.localeCompare(b.name)))}
+              />
               <div className="flex gap-4">
                 <div className="flex-1">
                   <label className="block text-final-off-white/70 text-sm mb-1">Price *</label>
@@ -649,6 +654,16 @@ export default function AdminPage() {
                     <option key={status} value={status}>{status}</option>
                   ))}
                 </select>
+                <select
+                  aria-label="Supplier"
+                  value={selectedSupplier}
+                  onChange={(e) => setSelectedSupplier(e.target.value)}
+                  className="bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent"
+                >
+                  <option value="All">All suppliers</option>
+                  <option value="none">No supplier</option>
+                  {suppliers.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+                </select>
               </div>
               <input
                 type="text"
@@ -675,7 +690,7 @@ export default function AdminPage() {
                     <tr>
                       <th className="text-left p-4 text-final-off-white font-semibold">Product</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Category</th>
-                      <th className="text-left p-4 text-final-off-white font-semibold">Link</th>
+                      <th className="text-left p-4 text-final-off-white font-semibold">Supplier</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Price</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Stock</th>
                       <th className="text-left p-4 text-final-off-white font-semibold">Status</th>
@@ -700,24 +715,20 @@ export default function AdminPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="p-4 text-final-off-white">
-                          {product.product_url ? (
-                            <div className="flex flex-col gap-1">
-                              <a href={product.product_url} target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 underline text-sm truncate max-w-[220px]">
-                                {product.product_url}
-                              </a>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(product.product_url)
-                                }}
-                                className="text-xs text-final-off-white/70 hover:text-final-off-white"
-                              >
-                                Copy link
-                              </button>
+                        <td className="p-4 text-sm text-final-off-white/80">{product.category}</td>
+                        <td className="p-4 text-sm text-final-off-white">
+                          {product.source ? (
+                            <div className="flex max-w-[220px] flex-col gap-0.5">
+                              <span>{supplierName.get(product.source.supplier_id) ?? <span className="text-final-off-white/50">No supplier</span>}</span>
+                              <span className="flex flex-wrap gap-x-2 text-xs text-final-off-white/60">
+                                {product.source.listing_url && (
+                                  <a href={product.source.listing_url} target="_blank" rel="noreferrer" className="underline hover:text-final-off-white">Listing</a>
+                                )}
+                                {product.source.unit_cost != null && <span>{product.source.cost_currency} {Number(product.source.unit_cost).toFixed(2)}</span>}
+                              </span>
                             </div>
                           ) : (
-                            <span className="text-final-off-white/70 text-sm">No link</span>
+                            <span className="text-final-off-white/50">Not set</span>
                           )}
                         </td>
                         <td className="p-4 text-final-accent font-bold">{formatCurrency(product.price)}</td>

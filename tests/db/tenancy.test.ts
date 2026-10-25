@@ -247,3 +247,41 @@ describe('store selling switches (launch day, pause all purchases)', () => {
     expect(await errorOf(probe(db, { kind: 'anon' }, (tx) => pause(tx, f.storeA)))).toMatch(/permission denied/)
   })
 })
+
+describe('suppliers and product sourcing (staff only)', () => {
+  const addSupplier = (tx: { query: PGlite['query'] }, tenantId: string) =>
+    tx.query<{ id: string }>(`insert into public.suppliers (tenant_id, name, url) values ($1, 'Test Factory', 'https://example.com') returning id`, [tenantId])
+      .then((r) => r.rows[0].id)
+
+  it('the public can read neither suppliers nor product sourcing', async () => {
+    for (const table of ['suppliers', 'product_sources']) {
+      expect(await errorOf(probe(db, { kind: 'anon' }, (tx) => tx.query(`select 1 from public.${table}`))), table).toMatch(/permission denied/)
+    }
+  })
+
+  it('product writers add suppliers and sourcing for their own business', async () => {
+    const n = await probe(db, user(f.users.ownerA), async (tx) => {
+      const supplierId = await addSupplier(tx, f.tenantA)
+      await tx.query(`insert into public.product_sources (product_id, tenant_id, supplier_id, unit_cost) values ('pA1', $1, $2, 12.5)`, [f.tenantA, supplierId])
+      return tx.query<{ n: number }>(`select count(*)::int n from public.product_sources where product_id = 'pA1'`).then((r) => r.rows[0].n)
+    })
+    expect(n).toBe(1)
+  })
+
+  it('nobody adds suppliers to another business, and staff without products.write add none', async () => {
+    expect(await errorOf(probe(db, user(f.users.ownerB), (tx) => addSupplier(tx, f.tenantA)))).toMatch(/row-level security/)
+    expect(await errorOf(probe(db, user(f.users.supportA), (tx) => addSupplier(tx, f.tenantA)))).toMatch(/row-level security/)
+  })
+
+  it('another business sees none of this one\'s suppliers', async () => {
+    await one(db, `insert into public.suppliers (tenant_id, name) values ($1, 'Only A')`, [f.tenantA])
+    const n = await probe(db, user(f.users.ownerB), (tx) =>
+      tx.query<{ n: number }>(`select count(*)::int n from public.suppliers where tenant_id = $1`, [f.tenantA]).then((r) => r.rows[0].n))
+    expect(n).toBe(0)
+  })
+
+  it('products no longer carry a public sourcing link', async () => {
+    const cols = await db.query<{ column_name: string }>(`select column_name from information_schema.columns where table_schema = 'public' and table_name = 'products' and column_name = 'product_url'`)
+    expect(cols.rows).toHaveLength(0)
+  })
+})
