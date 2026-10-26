@@ -236,7 +236,7 @@ create policy "Product writers remove collection links" on public.collection_pro
 update public.products p set source_type = 'wholesale'
   from public.stores s
  where s.id = p.store_id and s.slug = 'final-heaven'
-   and p.category in ('Accessories', 'Gadgets', 'Grillz', 'Gifts', 'Vapes')
+   and p.category in ('Accessories', 'Gadgets', 'Grillz', 'Gifts', 'Pendants', 'Vapes')
    and not coalesce(p.tags, '[]'::jsonb) ? 'drop-01';
 
 commit;
