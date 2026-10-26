@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FiHeart, FiShare2, FiZoomIn, FiTruck, FiShield } from 'react-icons/fi'
+import { FiTruck, FiShield } from 'react-icons/fi'
+import { ProductGallery, type GalleryImage } from '@/components/product/ProductGallery'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
@@ -16,7 +17,6 @@ import { POLICY } from '@/lib/legal'
 import { formatDay, stringList, type Product } from '@/lib/catalog'
 import { sourceLabel, supplyLabel } from '@/lib/collections'
 import { setGroups } from '@/lib/sets'
-import { sized } from '@/lib/images'
 
 
 /** Who makes it (originals and labels), and, when it's made to order, that it ships only once made. */
@@ -52,16 +52,23 @@ function Provenance({ product }: { product: Product }) {
 }
 
 export function ProductView({ params }: { params: { id: string } }) {
-  const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [quantity, setQuantity] = useState(1)
-  const [isImageZoomed, setIsImageZoomed] = useState(false)
+  const [zoomIndex, setZoomIndex] = useState<number | null>(null)
   const [activeTab, setActiveTab] = useState<'description' | 'shipping'>('description')
   const [product, setProduct] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [allProducts, setAllProducts] = useState<any[]>([])
   const timeStartRef = useRef<number>(Date.now())
+
+  // Escape closes the full-size photo.
+  useEffect(() => {
+    if (zoomIndex === null) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setZoomIndex(null)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [zoomIndex])
   const { addItem } = useCart()
   const { trackProductView, updateTimeSpent, addFavoriteCategory, trackCartAddition } = useInterestStore()
 
@@ -145,20 +152,12 @@ export function ProductView({ params }: { params: { id: string } }) {
 
   const isSet = !!setGroups(stringList(product.colors))
 
-  // Use images array from product, fallback to legacy image
-  const images = product.images && product.images.length > 0
-    ? product.images.map((img: any) => img.url)
-    : product.image
-      ? [product.image]
-      : []
-
-  // Find the image index for the selected color
-  const colorImageIndex = selectedColor && product.images
-    ? product.images.findIndex((img: any) => img.color === selectedColor)
-    : -1
-
-  const mainImageIndex = colorImageIndex >= 0 ? colorImageIndex : selectedImage
-  const mainImage = images[mainImageIndex] || images[0] || ''
+  // Every photo, each with its colour when it shows one (legacy products have a single `image`).
+  const galleryImages: GalleryImage[] = product.images && product.images.length > 0
+    ? product.images.filter((img: any) => img?.url).map((img: any) => ({ url: img.url, color: img.color || undefined }))
+    : product.image ? [{ url: product.image }] : []
+  // The cart shows the chosen colour's photo when there is one.
+  const mainImage = (selectedColor && galleryImages.find((img) => img.color === selectedColor)?.url) || galleryImages[0]?.url || ''
 
   // From the server, by the same rules checkout enforces.
   const purchase = product.purchase ?? { state: 'unavailable' }
@@ -203,71 +202,24 @@ export function ProductView({ params }: { params: { id: string } }) {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-final-black pt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Product Images */}
-            <div className="space-y-6">
-              {/* Main Image */}
-              <div className="relative aspect-[3/4] bg-final-dark-gray rounded-xl overflow-hidden border border-final-light-gray/30">
-                <Image
-                  src={sized(mainImage, 1200)}
-                  alt={product.name}
-                  fill
-                  priority
-                  className="object-cover cursor-zoom-in"
-                  onClick={() => setIsImageZoomed(!isImageZoomed)}
-                />
-                <div className="absolute top-4 right-4 flex space-x-2">
-                  <button className="p-3 bg-final-black/50 backdrop-blur-sm rounded-full text-final-off-white hover:bg-final-accent hover:text-final-black transition-all duration-300">
-                    <FiHeart className="w-5 h-5" />
-                  </button>
-                  <button className="p-3 bg-final-black/50 backdrop-blur-sm rounded-full text-final-off-white hover:bg-final-accent hover:text-final-black transition-all duration-300">
-                    <FiShare2 className="w-5 h-5" />
-                  </button>
-                  <button 
-                    className="p-3 bg-final-black/50 backdrop-blur-sm rounded-full text-final-off-white hover:bg-final-accent hover:text-final-black transition-all duration-300"
-                    onClick={() => setIsImageZoomed(!isImageZoomed)}
-                  >
-                    <FiZoomIn className="w-5 h-5" />
-                  </button>
+      <div className="min-h-screen bg-final-black pt-20 md:pt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-2 md:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+            {/* Product Images: swipe between photos; colour photos follow the colour picker. */}
+            <ProductGallery
+              images={galleryImages}
+              name={product.name}
+              color={selectedColor}
+              onColor={(c) => { if (stringList(product.colors).includes(c)) setSelectedColor(c) }}
+              onZoom={setZoomIndex}
+              badges={(product.membersOnly || product.isLimited) && (
+                <div className="pointer-events-none absolute left-3 top-3">
+                  <span className={`rounded-full px-3 py-1 text-xs font-bold text-final-black ${product.membersOnly ? 'bg-final-accent' : 'bg-final-ember'}`}>
+                    {product.membersOnly ? 'MEMBERS ONLY' : 'LIMITED'}
+                  </span>
                 </div>
-                {product.membersOnly && (
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-final-accent text-final-black text-sm font-bold px-3 py-1 rounded-full">
-                      MEMBERS ONLY
-                    </span>
-                  </div>
-                )}
-                {product.isLimited && !product.membersOnly && (
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-final-ember text-final-black text-sm font-bold px-3 py-1 rounded-full">
-                      LIMITED
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Thumbnail Images */}
-              <div className="flex space-x-4">
-                {images.map((image: string, index: number) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`relative aspect-square w-20 bg-final-dark-gray rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-                      mainImageIndex === index ? 'border-final-accent scale-105' : 'border-transparent hover:border-final-accent/50'
-                    }`}
-                  >
-                    <Image
-                      src={sized(image, 640)}
-                      alt={`${product.name} ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
+              )}
+            />
 
             {/* Product Info */}
             <div className="space-y-8">
@@ -457,23 +409,30 @@ export function ProductView({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {/* Image Zoom Modal */}
-        {isImageZoomed && (
-          <div 
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
-            onClick={() => setIsImageZoomed(false)}
+        {/* Full size: the photo that was tapped. */}
+        {zoomIndex !== null && galleryImages[zoomIndex] && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${product.name}, full size`}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+            onClick={() => setZoomIndex(null)}
           >
-            <div className="relative max-w-4xl max-h-full">
+            <div className="relative max-h-full max-w-4xl">
               <Image
-                src={mainImage}
+                src={galleryImages[zoomIndex].url}
                 alt={product.name}
-                width={800}
-                height={1000}
-                className="object-contain max-h-[90vh]"
+                width={1200}
+                height={1500}
+                unoptimized
+                className="max-h-[90vh] w-auto object-contain"
               />
               <button
-                onClick={() => setIsImageZoomed(false)}
-                className="absolute top-4 right-4 text-white text-3xl hover:text-final-accent transition-colors"
+                type="button"
+                autoFocus
+                aria-label="Close"
+                onClick={() => setZoomIndex(null)}
+                className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-black/50 text-2xl text-white active:scale-90"
               >
                 ×
               </button>

@@ -377,7 +377,7 @@ export function ShopView() {
 
             {status === 'ready' && results.length > 0 && (
               <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3" onClickCapture={rememberScroll}>
-                {results.map((p) => <ProductCard key={p.id} product={p} />)}
+                {results.map((p) => <div key={p.id} className="cv-card"><ProductCard product={p} /></div>)}
               </div>
             )}
           </div>

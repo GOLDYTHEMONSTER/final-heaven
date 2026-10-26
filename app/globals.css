@@ -225,6 +225,33 @@ a {
   100% { transform: translateX(100%); }
 }
 
+/* Endless animations stop while their element is off-screen (lib/usePauseOffscreen):
+   nobody sees them, and every frame they repaint competes with scrolling. */
+[data-offscreen],
+[data-offscreen] * {
+  animation-play-state: paused !important;
+}
+/* The neon glow is a blur; re-drawing it every frame is the costly part, so
+   only the sharp tube drifts and the glow keeps a steady colour. */
+.neon-mark__glow .neon-mark__tube {
+  animation: none;
+}
+
+/* Swipeable strips: scroll without a visible bar. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Long product grids: the browser skips laying out and painting cards far
+   off-screen, and remembers each card's size so the scrollbar doesn't jump. */
+.cv-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 440px;
+}
+
 /* Discovery feed: new tiles settle in. */
 @keyframes feedIn {
   from { opacity: 0; transform: translateY(8px); }

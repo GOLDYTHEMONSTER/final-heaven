@@ -49,7 +49,7 @@ export default async function CollectionPage({ params }: { params: { slug: strin
           </p>
         ) : (
           <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
-            {products.map((p) => <li key={p.id}><ProductCard product={p} /></li>)}
+            {products.map((p) => <li key={p.id} className="cv-card"><ProductCard product={p} /></li>)}
           </ul>
         )}
       </main>

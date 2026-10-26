@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { usePauseOffscreen } from "@/lib/usePauseOffscreen";
 
 /* ── the curved row ──────────────────────────────────────────────
  * Scroll Tilted Grid turned on its side, with the tilt drawn as a curve.
@@ -140,6 +141,8 @@ export function TiltedGridHero({
   ...props
 }: React.ComponentProps<"div"> & TiltedGridHeroProps) {
   const ref = React.useRef<HTMLDivElement>(null);
+  // The reel never stops on its own; off-screen it pauses (data-offscreen, globals.css).
+  usePauseOffscreen(ref);
   const id = React.useId().replace(/[^a-zA-Z0-9]/g, "");
   const orbit = `tgh-o-${id}`;
   const tile = `tgh-t-${id}`;

@@ -1,3 +1,8 @@
+'use client'
+
+import { useRef } from 'react'
+import { usePauseOffscreen } from '@/lib/usePauseOffscreen'
+
 /**
  * The brand mark as a neon sign: the one place the site glows.
  *
@@ -6,11 +11,14 @@
  * Three layers, back to front: a blurred glow, the coloured tube, and a
  * white-hot core, which is how real neon reads. On load it "ignites" with a
  * short flicker, once. With reduced motion: no flicker, no drift, static glow.
- * Styles: .neon-mark in app/globals.css.
+ * The drift pauses while the mark is off-screen. Styles: .neon-mark in app/globals.css.
  */
 export function NeonMark({ className = '', label }: { className?: string; label?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  usePauseOffscreen(ref)
   return (
     <span
+      ref={ref}
       className={`neon-mark ${className}`}
       role={label ? 'img' : undefined}
       aria-label={label}
