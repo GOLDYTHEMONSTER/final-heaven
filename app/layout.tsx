@@ -12,10 +12,16 @@ const archivo = Archivo({
   variable: '--font-archivo',
 })
 
+const SITE = process.env.SITE_URL || 'https://www.finalheaven.shop'
+const DESCRIPTION = 'Curated streetwear finds, Final Heaven originals, thrift, accessories and new drops, at prices that make sense. Delivered across Nigeria.'
+
 export const metadata: Metadata = {
-  title: 'Final Heaven - Urban Streetwear',
-  description: 'Shop premium urban streetwear, shoes, accessories, and lifestyle goods with effortless style.',
-  keywords: 'streetwear, urban fashion, shoes, accessories, lifestyle',
+  metadataBase: new URL(SITE),
+  title: 'Final Heaven · Streetwear finds, originals and drops',
+  description: DESCRIPTION,
+  keywords: 'streetwear, thrift, vintage, Final Heaven, Lagos, Nigeria, accessories, jewellery, drops',
+  openGraph: { siteName: 'Final Heaven', type: 'website', title: 'Final Heaven', description: DESCRIPTION, locale: 'en_NG' },
+  twitter: { card: 'summary_large_image' },
 }
 
 export const viewport: Viewport = {

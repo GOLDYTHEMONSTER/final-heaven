@@ -8,6 +8,7 @@ import { ProductCard } from '@/components/ui/ProductCard'
 import { useInterestStore } from '@/lib/stores/interestStore'
 import { EMPTY_PROFILE, FEED_SEED_KEY, buildProfile, rankProducts, type FeedProfile } from '@/lib/discovery'
 import type { Product } from '@/lib/catalog'
+import { CONDITIONS, CONDITION_LABELS, SOURCE_TYPES, type Condition } from '@/lib/collections'
 
 /* ── Shop ────────────────────────────────────────────────────────
  * The whole catalogue with search, category chips, filters and sorting.
@@ -29,6 +30,11 @@ const SORTS: { value: Sort; label: string }[] = [
 /** Tags that are collections, shown as chips. */
 const COLLECTIONS: Record<string, string> = { 'drop-01': 'Drop 01' }
 
+/** Where pieces come from, as the filter names them. */
+const SOURCE_NAMES: Record<string, string> = {
+  original: 'Final Heaven Originals', thrift: 'Thrift', independent: 'Independent labels', wholesale: 'Finds', consignment: 'Consigned',
+}
+
 const SCROLL_KEY = 'fh-shop-scroll'
 
 const csv = (v: string | null) => (v ? v.split(',').filter(Boolean) : [])
@@ -37,7 +43,8 @@ const buyable = (p: Product) => p.purchase?.state === 'available' || p.purchase?
 
 function matches(p: Product, q: string) {
   if (!q) return true
-  const hay = [p.name, p.category, p.description, ...(p.tags ?? []), ...(p.colors ?? [])].join(' ').toLowerCase()
+  const condition = p.condition ? CONDITION_LABELS[p.condition as Condition] : ''
+  const hay = [p.name, p.category, p.description, p.brand?.name, condition, ...(p.tags ?? []), ...(p.colors ?? [])].join(' ').toLowerCase()
   return q.toLowerCase().split(/\s+/).filter(Boolean).every((word) => hay.includes(word))
 }
 
@@ -90,6 +97,11 @@ export function ShopView() {
   const colorParam = params.get('color')
   const sizes = useMemo(() => csv(sizeParam), [sizeParam])
   const colors = useMemo(() => csv(colorParam), [colorParam])
+  const sourceParam = params.get('source')
+  const conditionParam = params.get('condition')
+  const sources = useMemo(() => csv(sourceParam), [sourceParam])
+  const conditions = useMemo(() => csv(conditionParam), [conditionParam])
+  const brand = params.get('brand') ?? ''
   const inStock = params.get('instock') === '1'
   const min = Number(params.get('min')) || 0
   const max = Number(params.get('max')) || 0
@@ -141,6 +153,9 @@ export function ShopView() {
       // A set's options are its picks, not colours.
       colors: Array.from(new Set(products.filter((p) => !isSet(p)).flatMap((p) => p.colors ?? []))).sort(),
       hasNew: products.some((p) => p.isNew),
+      sources: SOURCE_TYPES.filter((t) => products.some((p) => (p.sourceType ?? 'original') === t)),
+      conditions: CONDITIONS.filter((c) => products.some((p) => p.condition === c)),
+      brands: Array.from(new Map(products.filter((p) => p.brand).map((p) => [p.brand!.slug, p.brand!.name])).entries()).sort((a, b) => a[1].localeCompare(b[1])),
     }
   }, [products])
 
@@ -152,6 +167,9 @@ export function ShopView() {
       && (!onlyNew || p.isNew)
       && (!sizes.length || sizes.some((s) => p.sizes?.includes(s)))
       && (!colors.length || colors.some((c) => p.colors?.includes(c)))
+      && (!sources.length || sources.includes(p.sourceType ?? 'original'))
+      && (!conditions.length || (!!p.condition && conditions.includes(p.condition)))
+      && (!brand || p.brand?.slug === brand)
       && (!inStock || buyable(p))
       && (!min || p.price >= min)
       && (!max || p.price <= max))
@@ -161,7 +179,7 @@ export function ShopView() {
       case 'price-desc': return [...filtered].sort((a, b) => b.price - a.price)
       default: return rankProducts(filtered, featured.profile, { seed: featured.seed, freshFirst: true })
     }
-  }, [products, q, category, collection, onlyNew, sizes, colors, inStock, min, max, sort, featured])
+  }, [products, q, category, collection, onlyNew, sizes, colors, sources, conditions, brand, inStock, min, max, sort, featured])
 
   // Back from a product: return to where you were in the list.
   useEffect(() => {
@@ -190,7 +208,7 @@ export function ShopView() {
     return () => { document.body.style.overflow = overflow; window.removeEventListener('keydown', onKey) }
   }, [sheetOpen])
 
-  const toggleIn = (key: 'size' | 'color', list: string[], value: string) =>
+  const toggleIn = (key: 'size' | 'color' | 'source' | 'condition', list: string[], value: string) =>
     setParams({ [key]: (list.includes(value) ? list.filter((v) => v !== value) : [...list, value]).join(',') || null })
 
   const active: { label: string; clear: () => void }[] = [
@@ -200,14 +218,38 @@ export function ShopView() {
     ...(onlyNew ? [{ label: 'New in', clear: () => setParams({ new: null }) }] : []),
     ...sizes.map((s) => ({ label: `Size ${s}`, clear: () => toggleIn('size', sizes, s) })),
     ...colors.map((c) => ({ label: c, clear: () => toggleIn('color', colors, c) })),
+    ...sources.map((v) => ({ label: SOURCE_NAMES[v] ?? v, clear: () => toggleIn('source', sources, v) })),
+    ...conditions.map((v) => ({ label: CONDITION_LABELS[v as Condition] ?? v, clear: () => toggleIn('condition', conditions, v) })),
+    ...(brand ? [{ label: facets.brands.find(([slug]) => slug === brand)?.[1] ?? brand, clear: () => setParams({ brand: null }) }] : []),
     ...(inStock ? [{ label: 'In stock', clear: () => setParams({ instock: null }) }] : []),
     ...(min || max ? [{ label: `₦${min.toLocaleString()} – ${max ? `₦${max.toLocaleString()}` : 'any'}`, clear: () => setParams({ min: null, max: null }) }] : []),
   ]
   const clearAll = () => router.replace(pathname, { scroll: false })
-  const filterCount = sizes.length + colors.length + (inStock ? 1 : 0) + (min || max ? 1 : 0)
+  const filterCount = sizes.length + colors.length + sources.length + conditions.length + (brand ? 1 : 0) + (inStock ? 1 : 0) + (min || max ? 1 : 0)
 
   const filters = (
     <div className="space-y-6">
+      {facets.sources.length > 1 && (
+        <FilterGroup title="From">
+          <div className="flex flex-wrap gap-2">
+            {facets.sources.map((v) => <Chip key={v} active={sources.includes(v)} onClick={() => toggleIn('source', sources, v)}>{SOURCE_NAMES[v]}</Chip>)}
+          </div>
+        </FilterGroup>
+      )}
+      {facets.conditions.length > 0 && (
+        <FilterGroup title="Condition">
+          <div className="flex flex-wrap gap-2">
+            {facets.conditions.map((v) => <Chip key={v} active={conditions.includes(v)} onClick={() => toggleIn('condition', conditions, v)}>{CONDITION_LABELS[v]}</Chip>)}
+          </div>
+        </FilterGroup>
+      )}
+      {facets.brands.length > 0 && (
+        <FilterGroup title="Label">
+          <div className="flex flex-wrap gap-2">
+            {facets.brands.map(([slug, name]) => <Chip key={slug} active={brand === slug} onClick={() => setParams({ brand: brand === slug ? null : slug })}>{name}</Chip>)}
+          </div>
+        </FilterGroup>
+      )}
       {facets.sizes.length > 1 && (
         <FilterGroup title="Size">
           <div className="flex flex-wrap gap-2">

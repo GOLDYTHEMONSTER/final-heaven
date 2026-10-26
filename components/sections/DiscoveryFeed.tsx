@@ -255,7 +255,7 @@ export function DiscoveryFeed() {
   const initialLoading = status === 'loading' && !items.length
 
   return (
-    <section className="py-16 md:py-24" aria-labelledby="discover-heading" onClickCapture={save}>
+    <section id="discover" className="scroll-mt-16 py-16 md:py-24" aria-labelledby="discover-heading" onClickCapture={save}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div>

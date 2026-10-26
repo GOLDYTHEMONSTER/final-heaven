@@ -9,6 +9,7 @@ import { FiCheck, FiPlus } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import type { Product } from '@/lib/catalog'
+import { CONDITION_LABELS, type Condition } from '@/lib/collections'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
 function blockedLabel(product: Product) {
@@ -22,6 +23,19 @@ function blockedLabel(product: Product) {
   }
 }
 
+/** The small line above the name: condition for pre-owned pieces, the label for independent ones, else the category. */
+function metaLine(product: Product) {
+  const condition = product.condition ? CONDITION_LABELS[product.condition as Condition] : null
+  if (product.sourceType === 'thrift' || product.sourceType === 'consignment') return condition ?? product.category
+  if (product.sourceType === 'independent' && product.brand) return product.brand.name
+  return product.category
+}
+
+/** "One of one" / "Last one" only when exactly one is really in stock. */
+const lastOne = (product: Product) =>
+  product.purchase?.state === 'available' && product.purchase.maxQuantity === 1
+    ? (product.sourceType === 'thrift' ? 'One of one' : 'Last one') : null
+
 interface ProductCardProps {
   product: Product
   viewMode?: 'grid' | 'list'
@@ -32,7 +46,8 @@ const PLACEHOLDER = '/api/placeholder/400/500'
 function Badges({ product }: { product: Product }) {
   const preorder = product.purchase?.state === 'preorder'
   const blocked = blockedLabel(product)
-  if (!product.isNew && !product.isLimited && !product.membersOnly && !preorder && !blocked) return null
+  const single = lastOne(product)
+  if (!product.isNew && !product.isLimited && !product.membersOnly && !preorder && !blocked && !single) return null
   return (
     <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
       {blocked && blocked !== 'Members only' && (
@@ -43,6 +58,11 @@ function Badges({ product }: { product: Product }) {
       {preorder && (
         <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
           Pre-order
+        </span>
+      )}
+      {single && (
+        <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
+          {single}
         </span>
       )}
       {product.isNew && (
@@ -153,7 +173,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
         </Link>
 
         <div className="flex min-w-0 flex-1 flex-col py-1">
-          <p className="text-xs uppercase tracking-[0.12em] text-final-muted">{product.category}</p>
+          <p className="text-xs uppercase tracking-[0.12em] text-final-muted">{metaLine(product)}</p>
           <h3 className="mt-1 text-lg font-semibold leading-snug">
             <Link href={href} className="after:absolute after:inset-0">
               {product.name}
@@ -209,7 +229,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
       </div>
 
       <div className="mt-3 min-w-0">
-        <p className="text-[11px] uppercase tracking-[0.12em] text-final-muted">{product.category}</p>
+        <p className="text-[11px] uppercase tracking-[0.12em] text-final-muted">{metaLine(product)}</p>
         <h3 className="mt-1 truncate text-[15px] font-medium">
           <Link href={href} className="transition-colors hover:text-final-muted">
             {product.name}

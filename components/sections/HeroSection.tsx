@@ -24,10 +24,10 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_55%_at_72%_38%,rgb(255_255_255/0.07),transparent_70%)]"
       />
 
-      <div className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 md:grid-cols-12 md:py-16 lg:px-8">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 md:min-h-[72dvh] md:grid-cols-12 md:gap-10 md:py-16 lg:px-8">
         <div className="order-2 md:order-1 md:col-span-7">
           <motion.p {...enter(0.15)} className="text-xs font-medium uppercase tracking-[0.24em] text-final-muted">
-            Streetwear. Premium drops.
+            Originals · Thrift · Labels · Finds
           </motion.p>
 
           <motion.h1 {...enter(0.22, 24)} className="display mt-5 text-[13vw] md:text-[7.5vw] xl:text-[7rem]">
@@ -37,16 +37,16 @@ export function HeroSection() {
           </motion.h1>
 
           <motion.p {...enter(0.32)} className="mt-6 max-w-[34ch] text-base leading-relaxed text-final-muted md:text-lg">
-            Limited-run streetwear, shoes and accessories, released in small drops.
+            Curated streetwear finds, Final Heaven originals and new drops, at prices that make sense.
           </motion.p>
 
           <motion.div {...enter(0.4)} className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/drop-01" className="btn-primary group">
-              Shop the drop
+            <Link href="#discover" className="btn-primary group">
+              Explore the feed
               <FiArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
-            <Link href="/membership" className="btn-secondary">
-              Join the waitlist
+            <Link href="/shop" className="btn-secondary">
+              Shop all
             </Link>
           </motion.div>
         </div>
@@ -57,7 +57,7 @@ export function HeroSection() {
           transition={{ type: 'spring', bounce: 0, duration: 1.1 }}
           className="order-1 flex justify-center md:order-2 md:col-span-5 md:justify-end"
         >
-          <NeonMark className="h-[150px] sm:h-[220px] md:h-[min(56vh,460px)]" />
+          <NeonMark className="h-[110px] sm:h-[200px] md:h-[min(52vh,440px)]" />
         </motion.div>
       </div>
     </section>

@@ -47,9 +47,19 @@ export interface Product {
   tags?: string[]
   cardSize?: 'large' | 'medium' | 'small'
   createdAt?: string
+  /** Where it comes from: original, thrift, wholesale, independent or consignment (lib/collections). */
+  sourceType?: string
+  /** For pre-owned pieces: new_with_tags … fair, and what's worth knowing about it. */
+  condition?: string
+  conditionNotes?: string
+  /** Its label, when it has a published one. */
+  brand?: { id: string; name: string; slug: string }
   /** From the server: whether and how this can be bought right now. */
   purchase?: PurchaseState
 }
+
+/** The columns the storefront reads for a product, with its published brand. */
+export const PUBLIC_PRODUCT_SELECT = '*, brand:brands(id, name, slug)'
 
 export type PurchaseState =
   | { state: 'available'; maxQuantity: number }
@@ -149,6 +159,10 @@ export function toPublicProduct(row: Record<string, any>, today: string) {
     tags: stringList(row.tags),
     cardSize: row.card_size ?? undefined,
     createdAt: row.created_at,
+    sourceType: row.source_type ?? 'original',
+    condition: row.condition ?? undefined,
+    conditionNotes: row.condition_notes ?? undefined,
+    brand: row.brand ? { id: row.brand.id, name: row.brand.name, slug: row.brand.slug } : undefined,
     purchase: purchaseState(row as CatalogueProduct, today),
   }
 }

@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server'
-import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { BadRequest, handle, readJson } from '@/lib/api'
 import { rateLimit } from '@/lib/rate-limit'
-import { getStorefront } from '@/lib/tenancy'
-import { storeToday, toPublicProduct } from '@/lib/catalog'
+import { publicProducts } from '@/lib/storefront'
 import { EMPTY_PROFILE, rankProducts, type FeedProfile } from '@/lib/discovery'
 
 // Per-request: the order depends on the shopper's profile and what they've already seen.
@@ -49,14 +47,7 @@ export const POST = handle('feed.next', async (req: Request) => {
     viewed: strings(raw.viewed, 30),
   }
 
-  const store = await getStorefront()
-  const { data, error } = await createSupabasePublicClient()
-    .from('products').select('*').eq('store_id', store.storeId).eq('status', 'active')
-    .order('created_at', { ascending: false }).limit(500)
-  if (error) throw error
-
-  const today = storeToday(store.timeZone)
-  const all = (data || []).map((p) => toPublicProduct(p, today))
+  const all = await publicProducts()
 
   // `since`: only products added after that time, newest first. A restored feed uses it
   // to pick up anything added since it was saved.
