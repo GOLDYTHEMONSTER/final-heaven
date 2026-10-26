@@ -29,7 +29,11 @@ function collectionFields(body: Record<string, unknown>, partial: boolean) {
   }
   if (has('description')) out.description = text(body.description, 'Description', { max: 600 })
   if (has('cover_image')) out.cover_image = url(body.cover_image, 'Cover image')
-  if (has('rule')) out.rule = parseRule(body.rule)
+  if (has('rule')) {
+    out.rule = parseRule(body.rule)
+    // The table caps a rule at 2,000 characters; say so rather than fail on the constraint.
+    if (JSON.stringify(out.rule ?? null).length > 2000) throw new BadRequest('That rule is too long: use fewer categories or tags.')
+  }
   if (has('status')) {
     if (body.status !== 'draft' && body.status !== 'published') throw new BadRequest('Status must be draft or published.')
     out.status = body.status
