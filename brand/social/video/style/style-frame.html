@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  Style frame for the November videos: one frozen moment of the glitch look.
+  ?look=rose | outerwear | ice picks the photo and the type.
+  Render: chrome --headless --screenshot --window-size=1080,1920 "style-frame.html?look=rose"
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=block');
+:root { --ink:#0A0A0B; --paper:#F2F1EE; --ember:#E8613C; --pink:#FF3D9A; --cyan:#38D6FF; --muted:#A3A3A8; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--ink); color:var(--paper); }
+body { position:relative; font-family:'Archivo', sans-serif; }
+
+/* The photo, graded hard: crushed blacks, bright highlights. */
+.plate { position:absolute; inset:0; overflow:hidden; }
+.plate img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:url(#split) contrast(1.35) brightness(.95); }
+/* Torn bands: the same photo, a strip of it shoved sideways. */
+.tear { position:absolute; inset:0; overflow:hidden; }
+.tear img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.6) saturate(1.3); }
+.scan { position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 2px, transparent 2px 5px); mix-blend-mode:multiply; }
+.grain { position:absolute; inset:0; opacity:.22; mix-blend-mode:overlay; }
+.vignette { position:absolute; inset:0; background:
+  linear-gradient(180deg, rgba(10,10,11,.75) 0%, rgba(10,10,11,0) 22%, rgba(10,10,11,0) 40%, rgba(10,10,11,.88) 58%, rgba(10,10,11,.98) 76%, rgba(10,10,11,.98) 100%); }
+
+/* Broadcast chrome, inside Instagram's safe area (250px top, 340px bottom). */
+.hud { position:absolute; left:64px; right:64px; top:250px; display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:22px; letter-spacing:.14em; text-transform:uppercase; }
+.rec::before { content:''; display:inline-block; width:14px; height:14px; border-radius:50%; background:var(--ember); margin-right:12px; vertical-align:1px; }
+.copy { position:absolute; left:64px; right:64px; bottom:340px; }
+.kicker { font-family:'JetBrains Mono', monospace; font-size:24px; letter-spacing:.16em; text-transform:uppercase; color:var(--paper); }
+.title { font-weight:800; font-stretch:125%; text-transform:uppercase; letter-spacing:-0.03em; line-height:.88; font-size:150px; margin-top:22px;
+  text-shadow: -7px 0 var(--pink), 7px 0 var(--cyan); }
+/* One line of the title slips, like a bad frame. */
+.slip { display:block; transform:translateX(26px); clip-path:inset(0 0 0 0); }
+.price { margin-top:34px; display:flex; align-items:baseline; gap:22px; font-weight:800; font-stretch:125%; font-size:64px; }
+.was { font-size:34px; color:var(--muted); text-decoration:line-through; text-decoration-thickness:3px; font-weight:600; }
+.meta { margin-top:18px; font-family:'JetBrains Mono', monospace; font-size:22px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.bar { position:absolute; left:0; right:0; height:6px; background:var(--paper); mix-blend-mode:difference; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <!-- Pulls the red and the cyan apart: the colour-split glitch. -->
+  <filter id="split" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+    <feOffset in="r" dx="-14" dy="0" result="r2"/>
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" result="gb"/>
+    <feOffset in="gb" dx="10" dy="0" result="gb2"/>
+    <feBlend in="r2" in2="gb2" mode="screen"/>
+  </filter>
+  <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</svg>
+
+<div class="plate"><img id="photo" alt=""></div>
+<div class="tear"><img class="dup" alt=""></div>
+<div class="tear"><img class="dup" alt=""></div>
+<div class="tear"><img class="dup" alt=""></div>
+<div class="scan"></div>
+<svg class="grain" width="1080" height="1920"><rect width="100%" height="100%" filter="url(#noise)"/></svg>
+<div class="vignette"></div>
+<div class="bar" id="bar"></div>
+
+<div class="hud"><span class="rec">FH · TX</span><span id="code"></span></div>
+<div class="copy">
+  <div class="kicker" id="kicker"></div>
+  <div class="title" id="title"></div>
+  <div class="price" id="price"></div>
+  <div class="meta" id="meta"></div>
+</div>
+
+<script>
+const looks = {
+  rose: { photo: '../../shoot-02/w-longstem-black.jpg', pos: '50% 30%', tears: [[31, 63, -46], [47, 50.5, 72], [58, 40.2, -120]], bar: 38, code: '00:00:03:12',
+    kicker: 'For her · six pieces', title: ['The rose', 'line'],
+    price: '₦17,000 <span class="was">₦45,000</span>', meta: 'Sizes XS–L · finalheaven.shop' },
+  outerwear: { photo: '../../shoot-02/m-brokenstar.jpg', pos: '50% 30%', tears: [[24, 72, 58], [36, 61, -84], [44, 54.5, 130]], bar: 33, code: '00:00:07:04',
+    kicker: 'Broken-star tape', title: ['Outer', 'wear'],
+    price: '₦65,000 <span class="was" style="text-decoration:none">jacket + pants</span>', meta: 'Sizes S–XL · finalheaven.shop' },
+  ice: { photo: '../../../../public/products/iced-ghost-pendant/iced-ghost-pendant-silver.jpg', pos: '50% 50%', top: 60, tears: [[30, 66, 40], [41, 56.5, -64], [47, 51, 96]], bar: 27, code: '00:00:01:20',
+    kicker: 'Iced ghost pendant', title: ['Ice', 'cold'],
+    price: '₦25,000', meta: 'Gold or silver · 24" rope chain' },
+}
+const look = looks[new URLSearchParams(location.search).get('look')] ?? looks.rose
+for (const img of [document.getElementById('photo'), ...document.querySelectorAll('.dup')]) {
+  img.src = look.photo; img.style.objectPosition = look.pos
+}
+// Product shots are 4:5 on a light studio wall: shown whole, high in the frame, so the type sits under them.
+if (look.top != null) for (const el of document.querySelectorAll('.plate, .tear')) { el.style.top = look.top + 'px'; el.style.bottom = 'auto'; el.style.height = '1350px' }
+document.querySelectorAll('.tear').forEach((el, i) => {
+  const [top, bottom, dx] = look.tears[i]
+  el.style.clipPath = `inset(${top}% 0 ${bottom}% 0)`; el.style.transform = `translateX(${dx}px)`
+})
+document.getElementById('bar').style.top = look.bar + '%'
+document.getElementById('code').textContent = look.code
+document.getElementById('kicker').textContent = look.kicker
+document.getElementById('title').innerHTML = `${look.title[0]}<span class="slip">${look.title[1]}</span>`
+document.getElementById('price').innerHTML = look.price
+document.getElementById('meta').textContent = look.meta
+</script>
+</body>
+</html>
