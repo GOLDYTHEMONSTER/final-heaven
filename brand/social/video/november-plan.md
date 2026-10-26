@@ -113,16 +113,16 @@ Each video is ready at least three days before its date, so there's time to chec
 
 ## Budget
 
-Balance on 26 Oct: **38.5 credits**. On 23 Oct, Cinema Studio Video cost 8 credits for a 5-second clip and 18 for a 10-second multi-shot. Sound off may cost less.
+Balance on 26 Oct: **38.5 credits**. Cinema Studio Video costs **5 credits** for a 5-second clip with sound off (quoted 26 Oct); with sound on it was 8.
 
 | Item | Credits |
 |---|---|
-| 3 hero clips (Rose Line, Outerwear, Channel 17), 5 s each | about 24 |
+| 3 hero clips (Rose Line, Outerwear, Channel 17), 5 s each, sound off | 15 |
 | Background removal, about 5 Ice products | about 5 |
-| One retry | about 8 |
-| **Total** | **about 37** |
+| Two retries | 10 |
+| **Total** | **about 30** |
 
-That uses nearly the whole balance. To keep spending safe, start with the Rose Line clip alone (about 8 credits) and check it. If it holds up, do the other two. If a clip doesn't pass the frame check, the video can still be made fully in code from the still photo (camera moves, glitch and type), at no cost.
+To keep spending safe, start with the Rose Line clip alone (5 credits, generated 26 Oct) and check it. If it holds up, do the other two. If a clip doesn't pass the frame check, the video can still be made fully in code from the still photo (camera moves, glitch and type), at no cost.
 
 ## Order of work
 
