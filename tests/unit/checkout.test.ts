@@ -3,7 +3,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   checkout, parseCart, RESUME_HOURS,
-  type CheckoutPayments, type CheckoutStore, type NewCheckout, type PromoContext, type SavedCheckout,
+  type CheckoutPayments, type CheckoutStore, type Held, type NewCheckout, type PromoContext, type SavedCheckout,
 } from '@/lib/checkout'
 
 const NOW = new Date('2026-10-18T12:00:00Z')
@@ -29,21 +29,47 @@ const promo = (over: Partial<PromoContext['promo']> = {}, uses = 0, customerUses
 const buyer = { email: 'ada@x.test', shippingAddress: '1 Test St', shippingCity: 'Lagos', shippingState: 'Lagos', shippingPostalCode: '100001', shippingCountry: 'Nigeria' }
 const tee = (quantity = 1) => ({ id: 'tee', size: 'M', color: 'black', quantity })
 
+/**
+ * In-memory CheckoutStore, holding stock like the database does: open
+ * Checkouts hold their lines; `others` are holds by other shoppers.
+ */
 function memoryStore(promos: Record<string, PromoContext> = {}) {
   const saved = new Map<string, NewCheckout & SavedCheckout>()
+  const others = new Map<string, number>()
+  const heldBy = (productId: string, except?: string) =>
+    (others.get(productId) ?? 0) + [...saved.values()].filter((c) => c.status === 'open' && c.id !== except)
+      .flatMap((c) => c.items).filter((i) => i.id === productId && !i.preorder).reduce((t, i) => t + i.quantity, 0)
+  const check = (items: NewCheckout['items'], except?: string): Held | null => {
+    for (const i of items) {
+      const p = CATALOGUE.find((x) => x.id === i.id)
+      if (!p || i.preorder) continue
+      const free = p.stock - heldBy(i.id, except)
+      if (free < i.quantity) return { productId: i.id, free: Math.max(0, free) }
+    }
+    return null
+  }
   const store: CheckoutStore = {
     products: vi.fn(async (_storeId, ids) => CATALOGUE.filter((p) => ids.includes(p.id))),
     giftProducts: vi.fn(async (_storeId, category) => CATALOGUE.filter((p) => p.category === category)),
     promo: vi.fn(async (_tenant, code) => promos[code] ?? null),
     save: vi.fn(async (c) => {
+      const held = check(c.items)
+      if (held) return { ok: false as const, held }
       const id = `chk-${saved.size + 1}`
       saved.set(c.reference, { ...c, id, status: 'open', orderId: null, createdAt: NOW.toISOString() })
-      return { id }
+      return { ok: true as const, id }
     }),
     find: vi.fn(async (_storeId, reference) => saved.get(reference) ?? null),
     expire: vi.fn(async (id) => { for (const c of saved.values()) if (c.id === id) c.status = 'expired' }),
+    renewHold: vi.fn(async (id) => {
+      const c = [...saved.values()].find((x) => x.id === id)
+      if (!c || c.status !== 'open') return 'closed' as const
+      return check(c.items, id) ?? 'renewed' as const
+    }),
+    holds: vi.fn(async (_storeId: string, ids: string[]) =>
+      ids.map((productId) => ({ productId, preorder: false, quantity: heldBy(productId) })).filter((h) => h.quantity > 0)),
   }
-  return { store, saved }
+  return { store, saved, others }
 }
 
 function fakePayments(over: Partial<CheckoutPayments> = {}) {
@@ -190,6 +216,35 @@ describe('begin', () => {
     const r = await make().begin({ lines: [tee(1)], buyer })
     expect(r).toMatchObject({ ok: false, reason: 'payment_unavailable', message: expect.stringMatching(/Nothing was charged/) })
     expect([...mem.saved.values()][0].status).toBe('expired')
+  })
+})
+
+describe('holding the last pieces', () => {
+  it('a quote counts what other shoppers are holding, and says when the last ones are in a checkout', async () => {
+    mem.others.set('tee', 4)
+    expect((await make().quote({ lines: [tee(2)] })).lines[0].issue).toBe('Only 1 left of Tee.')
+    mem.others.set('tee', 5)
+    expect((await make().quote({ lines: [tee(1)] })).lines[0].issue).toBe('The last Tee is in someone else’s checkout right now. It may come back within 30 minutes.')
+  })
+
+  it('refuses a checkout when someone else holds the last pieces by the time it is saved, and starts no payment', async () => {
+    mem.store.holds = vi.fn(async () => []) // free when priced...
+    mem.others.set('tee', 5) // ...taken by the time it's saved
+    const r = await make().begin({ lines: [tee(1)], buyer })
+    expect(r).toMatchObject({ ok: false, reason: 'cart_invalid', message: 'The last Tee is in someone else’s checkout right now. It may come back within 30 minutes.' })
+    expect(payments.start).not.toHaveBeenCalled()
+    mem.others.set('tee', 3)
+    expect(await make().begin({ lines: [tee(3)], buyer })).toMatchObject({ ok: false, message: 'Only 2 of Tee can be bought right now. Please change the quantity.' })
+  })
+
+  it('resuming holds the lines again, or says something went while the shopper was away', async () => {
+    const r = await make().begin({ lines: [tee(5)], buyer })
+    if (!r.ok) throw new Error('begin failed')
+    expect(await make().resume({ reference: r.checkout, email: buyer.email })).toMatchObject({ ok: true })
+    mem.others.set('tee', 1)
+    expect(await make().resume({ reference: r.checkout, email: buyer.email }))
+      .toMatchObject({ ok: false, reason: 'expired', message: 'Something in this checkout was bought while you were away. Please start again from your cart.' })
+    expect(payments.start).toHaveBeenCalledTimes(2) // begin and the first resume only
   })
 })
 

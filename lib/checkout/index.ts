@@ -86,10 +86,24 @@ export interface CheckoutStore {
   giftProducts(storeId: string, category: string): Promise<CatalogueProduct[]>
   /** The promo code and its uses on paid orders (overall, and by this email when given). */
   promo(tenantId: string, code: string, email: string | null): Promise<PromoContext | null>
-  save(checkout: NewCheckout): Promise<{ id: string }>
+  /**
+   * Saves a Checkout holding its lines (HOLD_MINUTES). Refused, naming the
+   * product and how many are still free, when other live holds leave too few.
+   */
+  save(checkout: NewCheckout): Promise<{ ok: true; id: string } | { ok: false; held: Held }>
   find(storeId: string, reference: string): Promise<SavedCheckout | null>
   expire(id: string): Promise<void>
+  /** Renews an open Checkout's hold: 'closed' when it isn't open any more, or the line that's no longer free. */
+  renewHold(id: string): Promise<'renewed' | 'closed' | Held>
+  /** Units of these products held by live Checkouts (pre-order allowance counted apart). */
+  holds(storeId: string, ids: string[]): Promise<{ productId: string; preorder: boolean; quantity: number }[]>
 }
+
+/** A line that can't be held: the product, and how many of it are still free. */
+export type Held = { productId: string; free: number }
+
+/** How long a Checkout keeps its lines for its shopper (set in the database, 20261026130000_checkout_holds.sql). */
+export const HOLD_MINUTES = 30
 
 /** Getting a payment link for a Checkout; Flutterwave via lib/payments in production. */
 export interface CheckoutPayments {
@@ -140,9 +154,35 @@ export function checkout(deps: CheckoutDeps) {
       shop.giftCategory ? deps.store.giftProducts(shop.storeId, shop.giftCategory) : Promise.resolve([]),
     ])
     // Hidden categories, and gift pieces, can't be bought even by calling the API directly.
-    const products = rows.filter((p) => !shop.hiddenCategories.includes(p.category) && p.category !== shop.giftCategory)
-    const giftOffer = giftProducts.length ? { minMinor: toMinor(shop.giftMinSubtotal, shop.currency), products: giftProducts } : null
-    return quoteCart(lines, products, shop.currency, { today: storeToday(shop.timeZone, now()), promo, promoCode, now: now(), giftOffer, giftPick: gift })
+    const sellable = rows.filter((p) => !shop.hiddenCategories.includes(p.category) && p.category !== shop.giftCategory)
+
+    // What's really left: stock (or pre-order allowance) less other shoppers' live holds.
+    const held = new Map<string, number>()
+    const heldIds = [...new Set([...sellable, ...giftProducts].map((p) => p.id))]
+    for (const h of heldIds.length ? await deps.store.holds(shop.storeId, heldIds) : []) held.set(`${h.productId}:${h.preorder}`, h.quantity)
+    const lessHolds = <T extends CatalogueProduct>(p: T): T => {
+      const stock = held.get(`${p.id}:false`) ?? 0
+      const pre = held.get(`${p.id}:true`) ?? 0
+      if (!stock && !pre) return p
+      return {
+        ...p,
+        ...(p.stock != null && stock ? { stock: Math.max(0, p.stock - stock) } : {}),
+        ...(p.preorder_limit != null && pre ? { preorder_limit: Math.max(0, p.preorder_limit - pre) } : {}),
+      }
+    }
+    const products = sellable.map(lessHolds)
+    const giftOffer = giftProducts.length ? { minMinor: toMinor(shop.giftMinSubtotal, shop.currency), products: giftProducts.map(lessHolds) } : null
+    const priced = quoteCart(lines, products, shop.currency, { today: storeToday(shop.timeZone, now()), promo, promoCode, now: now(), giftOffer, giftPick: gift })
+
+    // "Sold out" because someone else is checking out with the last pieces says so: they may come back.
+    for (const line of priced.lines) {
+      const real = sellable.find((p) => p.id === line.id)
+      const after = products.find((p) => p.id === line.id)
+      if (line.issue && real && after && real !== after && line.issue.endsWith('is sold out.')) {
+        line.issue = `The last ${line.name} is in someone else’s checkout right now. It may come back within ${HOLD_MINUTES} minutes.`
+      }
+    }
+    return priced
   }
 
   async function begin({ lines, promoCode = null, gift = null, buyer }:
@@ -156,7 +196,7 @@ export function checkout(deps: CheckoutDeps) {
 
     const m = (minor: number) => fromMinor(minor, shop.currency)
     const checkoutRef = ref('CHK', 12)
-    const { id } = await deps.store.save({
+    const saved = await deps.store.save({
       ...buyer,
       tenantId: shop.tenantId,
       storeId: shop.storeId,
@@ -174,6 +214,15 @@ export function checkout(deps: CheckoutDeps) {
       termsVersion: POLICY.termsVersion,
       termsAcceptedAt: now().toISOString(),
     })
+    // Someone else started a checkout for the last pieces between pricing and saving.
+    if (!saved.ok) {
+      const name = [...priced.lines, ...(priced.gift?.line ? [priced.gift.line] : [])].find((l) => l.id === saved.held.productId)?.name ?? 'An item'
+      const message = saved.held.free > 0
+        ? `Only ${saved.held.free} of ${name} can be bought right now. Please change the quantity.`
+        : `The last ${name} is in someone else’s checkout right now. It may come back within ${HOLD_MINUTES} minutes.`
+      return { ok: false, reason: 'cart_invalid', message, quote: priced }
+    }
+    const id = saved.id
 
     const payment = await deps.payments.start({
       checkoutId: id, tenantId: shop.tenantId, amountMinor: priced.totalMinor, currency: shop.currency, email: buyer.email,
@@ -196,6 +245,12 @@ export function checkout(deps: CheckoutDeps) {
     }
     const state = payments()
     if (!state.open) return { ok: false, reason: 'payment_unavailable', message: paymentsClosed(state).message }
+    // Paying again holds the lines again, but only if nobody has taken them meanwhile.
+    const hold = await deps.store.renewHold(saved.id)
+    if (hold === 'closed') return { ok: false, reason: 'expired', message: 'This checkout has expired. Please start again from your cart.' }
+    if (hold !== 'renewed') {
+      return { ok: false, reason: 'expired', message: 'Something in this checkout was bought while you were away. Please start again from your cart.' }
+    }
     const payment = await deps.payments.start({
       checkoutId: saved.id, tenantId: saved.tenantId, amountMinor: toMinor(saved.total, saved.currency), currency: saved.currency, email,
     })

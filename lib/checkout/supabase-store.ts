@@ -4,11 +4,17 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { getStorefront } from '@/lib/tenancy'
 import { paymentDeps, siteUrl } from '@/lib/payments'
 import { startPayment } from '@/lib/payments/service'
-import { checkout, type CheckoutPayments, type CheckoutStore, type PromoCode } from './index'
+import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
   'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors'
 const PAID = ['paid', 'partially_refunded', 'refunded']
+
+/** The line a hold check refused ("held:<product id>", units still free in details), or null for any other error. */
+function heldLine(error: { message?: string; details?: string | null } | null): Held | null {
+  const match = error?.message?.match(/^held:(.+)$/)
+  return match ? { productId: match[1], free: Math.max(0, Number(error?.details) || 0) } : null
+}
 
 /** CheckoutStore on Supabase. Server-only: uses the service key. */
 export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseServiceClient()): CheckoutStore {
@@ -45,16 +51,34 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
     },
 
     async save(c) {
-      const { data, error } = await db.from('checkouts').insert({
+      // open_checkout locks the products and checks other live holds before saving (20261026130000_checkout_holds.sql).
+      const { data, error } = await db.rpc('open_checkout', { p: {
         tenant_id: c.tenantId, store_id: c.storeId, reference: c.reference, order_number: c.orderNumber,
         tracking_number: c.trackingNumber, email: c.email, shipping_address: c.shippingAddress,
         shipping_city: c.shippingCity, shipping_state: c.shippingState, shipping_postal_code: c.shippingPostalCode,
         shipping_country: c.shippingCountry, currency: c.currency, items: c.items, subtotal: c.subtotal,
         discount: c.discount, total: c.total, promo_code_id: c.promoCodeId, promo_code: c.promoCode,
         is_preorder: c.isPreorder, terms_version: c.termsVersion, terms_accepted_at: c.termsAcceptedAt,
-      }).select('id').single()
+      } })
+      const held = heldLine(error)
+      if (held) return { ok: false, held }
       if (error) throw error
-      return { id: data.id }
+      return { ok: true, id: data as string }
+    },
+
+    async renewHold(id) {
+      const { data, error } = await db.rpc('renew_checkout_hold', { p_id: id })
+      const held = heldLine(error)
+      if (held) return held
+      if (error) throw error
+      return data === true ? 'renewed' : 'closed'
+    },
+
+    async holds(storeId, ids) {
+      const { data, error } = await db.rpc('checkout_holds', { p_store: storeId, p_products: ids })
+      if (error) throw error
+      return ((data ?? []) as { product_id: string; preorder: boolean; quantity: number }[])
+        .map((h) => ({ productId: h.product_id, preorder: h.preorder, quantity: Number(h.quantity) }))
     },
 
     async find(storeId, reference) {
