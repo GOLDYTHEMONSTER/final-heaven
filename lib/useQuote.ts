@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import type { CartItem } from '@/lib/stores/cartStore'
+import type { CartItem, GiftChoice } from '@/lib/stores/cartStore'
 import type { PaymentsState } from '@/lib/catalog'
 
 /** Where /checkout/complete finds the checkout to retry if the payment doesn't go through. */
@@ -19,16 +19,23 @@ export type ServerQuote = {
   isPreorder: boolean
   promo: { code: string; description: string | null } | null
   promoError: string | null
+  /** The store's free gift: whether this cart earns it, the pieces on offer and the one picked. */
+  gift: {
+    min: string; eligible: boolean
+    options: { id: string; name: string; image: string | null; colors: string[]; value: string; available: boolean }[]
+    line: { id: string; name: string; color: string | null } | null
+    issue: string | null
+  } | null
   ok: boolean
   /** Whether checkout takes payments now (launch day, store pause). */
   payments: PaymentsState
 }
 
 /**
- * The server's price for the cart, refreshed whenever the cart or promo code
- * changes. The browser's own prices are only a fallback while this loads.
+ * The server's price for the cart, refreshed whenever the cart, promo code or
+ * gift changes. The browser's own prices are only a fallback while this loads.
  */
-export function useQuote(items: CartItem[], promoCode: string, email?: string) {
+export function useQuote(items: CartItem[], promoCode: string, email?: string, gift: GiftChoice | null = null) {
   const [quote, setQuote] = useState<ServerQuote | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -40,6 +47,7 @@ export function useQuote(items: CartItem[], promoCode: string, email?: string) {
     items: items.map((i) => ({ id: i.id, size: i.size ?? null, color: i.color ?? null, quantity: i.quantity })),
     promoCode: promoCode || null,
     email: promoEmail,
+    gift,
   })
 
   useEffect(() => {

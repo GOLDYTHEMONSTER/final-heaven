@@ -17,9 +17,14 @@ export interface CartItem {
 /** One cart line per product, size and colour. */
 export const lineKey = (i: Pick<CartItem, 'id' | 'size' | 'color'>) => `${i.id}::${i.size ?? ''}::${i.color ?? ''}`
 
+/** The free gift picked in the cart; the server decides whether the cart earns it. */
+export type GiftChoice = { id: string; color: string | null }
+
 interface CartStore {
   items: CartItem[]
   promoCode: string
+  gift: GiftChoice | null
+  setGift: (gift: GiftChoice | null) => void
   addItem: (item: CartItem) => void
   removeItem: (key: string) => void
   updateQuantity: (key: string, quantity: number) => void
@@ -34,6 +39,8 @@ export const useCartStore = create<CartStore>()(
     (set, get) => ({
       items: [],
       promoCode: '',
+      gift: null,
+      setGift: (gift) => set({ gift }),
       addItem: (item) => {
         const { items } = get()
         const key = lineKey(item)
@@ -47,14 +54,14 @@ export const useCartStore = create<CartStore>()(
       updateQuantity: (key, quantity) =>
         set({ items: get().items.map((i) => (lineKey(i) === key ? { ...i, quantity: Math.max(1, Math.min(20, quantity)) } : i)) }),
       setPromoCode: (code) => set({ promoCode: code.trim().toUpperCase() }),
-      clearCart: () => set({ items: [], promoCode: '' }),
+      clearCart: () => set({ items: [], promoCode: '', gift: null }),
       getTotal: () => get().items.reduce((sum, item) => sum + item.price * item.quantity, 0),
       getItemCount: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
     }),
     {
       name: 'final-heaven-cart',
-      // Only persist items and the promo code, not computed values
-      partialize: (state) => ({ items: state.items, promoCode: state.promoCode }),
+      // Only persist items, the promo code and the gift, not computed values
+      partialize: (state) => ({ items: state.items, promoCode: state.promoCode, gift: state.gift }),
     }
   )
 )

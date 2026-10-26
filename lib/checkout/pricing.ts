@@ -38,7 +38,17 @@ export type QuoteLine = {
   preorder: boolean
   shipsOn: string | null
   issue: string | null
+  /** The free gift: never charged, never counted in the subtotal. */
+  gift?: true
 }
+
+/** The free gift a shopper picked: one of the store's gift pieces. */
+export type GiftPick = { id: string; color?: string | null }
+
+/** The store's free-gift offer: the pieces on offer and the subtotal that earns one. */
+export type GiftOffer = { minMinor: number; products: CatalogueProduct[] }
+
+export type GiftOption = { id: string; name: string; image: string | null; colors: string[]; valueMinor: number; available: boolean }
 
 export type Quote = {
   lines: QuoteLine[]
@@ -49,7 +59,13 @@ export type Quote = {
   isPreorder: boolean
   promo: { id: string; code: string; description: string | null; discountMinor: number } | null
   promoError: string | null
-  /** True when every line can be bought and any promo code entered applies. */
+  /**
+   * The free gift, when the store offers one: whether this cart earns it (its
+   * subtotal reaches minMinor), the pieces to pick from, and the picked one as
+   * a line at no charge. A pick is ignored until the cart earns a gift.
+   */
+  gift: { minMinor: number; eligible: boolean; options: GiftOption[]; line: QuoteLine | null; issue: string | null } | null
+  /** True when every line can be bought, any promo code entered applies and any gift picked can be given. */
   ok: boolean
 }
 
@@ -91,8 +107,8 @@ export function quoteCart(
   lines: CartLine[],
   products: CatalogueProduct[],
   currency: string,
-  { today, promo = null, promoCode = null, now = new Date() }:
-    { today: string; promo?: PromoContext | null; promoCode?: string | null; now?: Date }
+  { today, promo = null, promoCode = null, now = new Date(), giftOffer = null, giftPick = null }:
+    { today: string; promo?: PromoContext | null; promoCode?: string | null; now?: Date; giftOffer?: GiftOffer | null; giftPick?: GiftPick | null }
 ): Quote {
   const byId = new Map(products.map((p) => [p.id, p]))
   const quantityById = new Map<string, number>()
@@ -153,6 +169,7 @@ export function quoteCart(
     }
   }
 
+  const gift = giftOffer ? quoteGift(giftOffer, giftPick, subtotalMinor, currency, today) : null
   const issues = quoted.some((l) => l.issue)
   return {
     lines: quoted,
@@ -163,25 +180,50 @@ export function quoteCart(
     isPreorder: quoted.some((l) => l.preorder && !l.issue),
     promo: promoResult,
     promoError,
-    ok: !issues && !promoError && quoted.length > 0,
+    gift,
+    ok: !issues && !promoError && !gift?.issue && quoted.length > 0,
   }
+}
+
+/** The gift offer for a subtotal (minor units of what's being bought), and the picked gift as a free line. */
+function quoteGift(offer: GiftOffer, pick: GiftPick | null, subtotalMinor: number, currency: string, today: string): NonNullable<Quote['gift']> {
+  const firstImage = (p: CatalogueProduct) => (Array.isArray(p.images) ? (p.images as { url?: string }[])[0]?.url : null) ?? null
+  const options = offer.products.map((p): GiftOption => ({
+    id: p.id, name: p.name.trim(), image: firstImage(p), colors: stringList(p.colors),
+    valueMinor: toMinor(p.price, currency), available: canBuy(purchaseState(p, today)),
+  }))
+  const eligible = subtotalMinor > 0 && subtotalMinor >= offer.minMinor
+  if (!pick || !eligible) return { minMinor: offer.minMinor, eligible, options, line: null, issue: null }
+
+  const option = options.find((o) => o.id === pick.id)
+  if (!option || !option.available) return { minMinor: offer.minMinor, eligible, options, line: null, issue: 'Your free gift is no longer available. Please pick another.' }
+  if (option.colors.length && (!pick.color || !option.colors.includes(pick.color))) {
+    return { minMinor: offer.minMinor, eligible, options, line: null, issue: `Choose a colour for your free ${option.name}.` }
+  }
+  const line: QuoteLine = {
+    id: option.id, name: option.name, size: null, color: option.colors.length ? pick.color! : null, quantity: 1,
+    unitMinor: 0, lineMinor: 0, price: 0, image: option.image, preorder: false, shipsOn: null, issue: null, gift: true,
+  }
+  return { minMinor: offer.minMinor, eligible, options, line, issue: null }
 }
 
 /** The first thing stopping this quote from being paid, in words for the shopper; null when it can be paid. */
 export function quoteProblem(quote: Quote): string | null {
-  const issue = quote.lines.find((l) => l.issue)?.issue ?? quote.promoError
+  const issue = quote.lines.find((l) => l.issue)?.issue ?? quote.promoError ?? quote.gift?.issue
   if (issue) return issue
   if (!quote.lines.length) return 'Your cart is empty.'
   if (quote.totalMinor < toMinor(MIN_CHARGE_MAJOR, quote.currency)) return 'Your order total is too small to pay online.'
   return null
 }
 
-/** The lines as saved on a checkout, and later on its order. */
+/** The lines as saved on a checkout, and later on its order: the free gift goes last, at price 0. */
 export function orderItems(quote: Quote) {
-  return quote.lines.map((l) => ({
+  const lines = quote.gift?.line ? [...quote.lines, quote.gift.line] : quote.lines
+  return lines.map((l) => ({
     // Embedded (data:) images are left out: they can be hundreds of KB each and nothing reads them from an order.
     id: l.id, name: l.name, price: l.price, quantity: l.quantity, size: l.size, color: l.color,
     image: l.image && !l.image.startsWith('data:') ? l.image : null,
     ...(l.preorder ? { preorder: true, ships_on: l.shipsOn } : {}),
+    ...(l.gift ? { gift: true } : {}),
   }))
 }

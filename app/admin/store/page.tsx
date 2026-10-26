@@ -3,8 +3,13 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { formatDay, type PaymentsState } from '@/lib/catalog'
+import { formatCurrency } from '@/lib/utils/format'
 
-type Selling = { paymentsOpenOn: string | null; purchasesPaused: boolean; today: string; payments: PaymentsState }
+type Selling = {
+  paymentsOpenOn: string | null; purchasesPaused: boolean; today: string; payments: PaymentsState
+  giftCategory: string | null; giftMinSubtotal: number
+}
+type Changes = { payments_open_on?: string | null; purchases_paused?: boolean; gift_category?: string | null; gift_min_subtotal?: number }
 
 const field = 'rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm text-final-off-white focus:border-final-off-white/40 focus:outline-none'
 const button = 'rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-50'
@@ -24,6 +29,8 @@ function status(s: Selling) {
 export default function StoreSellingPage() {
   const [selling, setSelling] = useState<Selling | null>(null)
   const [launchDay, setLaunchDay] = useState('')
+  const [giftCategory, setGiftCategory] = useState('Gifts')
+  const [giftMin, setGiftMin] = useState('0')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
@@ -31,20 +38,25 @@ export default function StoreSellingPage() {
     fetch('/api/admin/store').then(async (res) => {
       const data = await res.json().catch(() => null)
       if (!res.ok) throw new Error(data?.error || 'Couldn’t load the store’s settings.')
-      setSelling(data)
-      setLaunchDay(data.paymentsOpenOn ?? '')
+      show(data)
     }).catch((e) => setError((e as Error).message))
   }, [])
 
-  async function save(changes: { payments_open_on?: string | null; purchases_paused?: boolean }) {
+  function show(data: Selling) {
+    setSelling(data)
+    setLaunchDay(data.paymentsOpenOn ?? '')
+    setGiftCategory(data.giftCategory ?? 'Gifts')
+    setGiftMin(String(data.giftMinSubtotal ?? 0))
+  }
+
+  async function save(changes: Changes) {
     setSaving(true)
     setError('')
     try {
       const res = await fetch('/api/admin/store', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(changes) })
       const data = await res.json().catch(() => null)
       if (!res.ok) throw new Error(data?.error || 'Couldn’t save.')
-      setSelling(data)
-      setLaunchDay(data.paymentsOpenOn ?? '')
+      show(data)
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -129,6 +141,42 @@ export default function StoreSellingPage() {
             >
               {selling.purchasesPaused ? 'Resume purchases' : 'Pause all purchases'}
             </button>
+          </section>
+
+          <section className="rounded-xl border border-final-off-white/10 bg-final-gray p-5">
+            <h2 className="font-semibold">Free gift with orders</h2>
+            <p className="mt-1 text-sm text-final-muted">
+              {selling.giftCategory
+                ? `On: customers pick one piece from “${selling.giftCategory}”, free, ${selling.giftMinSubtotal > 0 ? `on orders of ${formatCurrency(selling.giftMinSubtotal)} or more` : 'with every order'}.`
+                : 'Off.'}{' '}
+              Gift pieces are products in this category on the{' '}
+              <Link href="/admin" className="underline underline-offset-2 hover:text-final-off-white">Products</Link> page: they never show in the store,
+              their price is shown as what the gift is worth, and each one given is taken from stock.
+            </p>
+            <form
+              className="mt-4 flex flex-wrap items-end gap-3"
+              onSubmit={(e) => { e.preventDefault(); save({ gift_category: giftCategory.trim() || null, gift_min_subtotal: Number(giftMin) || 0 }) }}
+            >
+              <label className="text-sm text-final-muted">Category
+                <input value={giftCategory} onChange={(e) => setGiftCategory(e.target.value)} maxLength={60} required className={`${field} mt-1 block w-40`} />
+              </label>
+              <label className="text-sm text-final-muted">Minimum order (₦, 0 = every order)
+                <input type="number" min="0" step="100" value={giftMin} onChange={(e) => setGiftMin(e.target.value)} className={`${field} mt-1 block w-40`} />
+              </label>
+              <button type="submit" disabled={saving} className={`${button} bg-final-off-white text-final-black hover:bg-final-off-white/90`}>
+                {selling.giftCategory ? 'Save' : 'Turn on'}
+              </button>
+              {selling.giftCategory && (
+                <button
+                  type="button"
+                  disabled={saving}
+                  onClick={() => confirm('Turn off the free gift? Orders already paid keep theirs.') && save({ gift_category: null })}
+                  className={`${button} text-final-muted hover:text-final-off-white`}
+                >
+                  Turn off
+                </button>
+              )}
+            </form>
           </section>
         </div>
       )}

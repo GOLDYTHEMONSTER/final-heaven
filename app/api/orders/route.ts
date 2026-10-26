@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { BadRequest, email, handle, readJson, text } from '@/lib/api'
 import { fromMinor } from '@/lib/money'
-import { parseCart, parsePromoCode } from '@/lib/checkout'
+import { parseCart, parseGift, parsePromoCode } from '@/lib/checkout'
 import { checkoutForRequest } from '@/lib/checkout/supabase-store'
 import { getStorefront } from '@/lib/tenancy'
 import { POLICY } from '@/lib/legal'
@@ -33,7 +33,7 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
   if (body.termsAccepted !== true) throw new BadRequest('Please accept the Terms of Sale and Returns Policy to place your order.')
 
   const result = await (await checkoutForRequest(req)).begin({
-    lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), buyer,
+    lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), gift: parseGift(body.gift), buyer,
   })
   if (!result.ok) {
     return NextResponse.json({ error: result.message, reason: result.reason }, { status: result.reason === 'cart_invalid' ? 400 : 503 })
@@ -82,7 +82,7 @@ export const GET = handle('orders.track', async (req: NextRequest) => {
   const { email: _omit, order_items, ...order } = data
   const items = (Array.isArray(order_items) ? order_items : []).map((item: Record<string, unknown>) => ({
     name: item.name, quantity: item.quantity, size: item.size ?? null, color: item.color ?? null, price: item.price,
-    image: item.image ?? null, preorder: Boolean(item.preorder), shipsOn: item.ships_on ?? null,
+    image: item.image ?? null, preorder: Boolean(item.preorder), shipsOn: item.ships_on ?? null, gift: Boolean(item.gift),
   }))
 
   return NextResponse.json(

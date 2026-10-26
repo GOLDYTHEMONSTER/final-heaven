@@ -248,6 +248,40 @@ describe('store selling switches (launch day, pause all purchases)', () => {
   })
 })
 
+describe('free gift with orders (store setting, gift pieces kept out of the store)', () => {
+  beforeAll(async () => {
+    await db.query(`insert into public.products (id, name, price, category, status, tenant_id, store_id)
+                    values ('gift1', 'Heart Pendant', 15000, 'Gifts', 'active', $1, $2)`, [f.tenantA, f.storeA])
+    await db.query(`update public.stores set gift_category = 'Gifts' where id = $1`, [f.storeA])
+  })
+  afterAll(async () => {
+    await db.query(`update public.stores set gift_category = null, gift_min_subtotal = 0 where id = $1`, [f.storeA])
+    await db.query(`delete from public.products where id = 'gift1'`)
+  })
+  const setGift = (tx: { query: PGlite['query'] }, storeId: string) =>
+    tx.query<{ id: string }>(`update public.stores set gift_category = 'Gifts', gift_min_subtotal = 20000 where id = $1 returning id`, [storeId])
+      .then((r) => r.rows.length)
+
+  it('gift pieces never show to the public, but staff still see them', async () => {
+    const pub = await probe(db, { kind: 'anon' }, (tx) => count(tx, `select count(*)::int as n from public.products where id = 'gift1'`))
+    const staff = await probe(db, user(f.users.ownerA), (tx) => count(tx, `select count(*)::int as n from public.products where id = 'gift1'`))
+    expect([pub, staff]).toEqual([0, 1])
+  })
+
+  it('only staff with settings.manage change the setting, for their own store', async () => {
+    expect(await probe(db, user(f.users.ownerA), (tx) => setGift(tx, f.storeA))).toBe(1)
+    for (const who of [f.users.financeA, f.users.supportA, f.users.ownerB, f.users.outsider]) {
+      expect(await probe(db, user(who), (tx) => setGift(tx, f.storeA)), who).toBe(0)
+    }
+    expect(await errorOf(probe(db, { kind: 'anon' }, (tx) => setGift(tx, f.storeA)))).toMatch(/permission denied/)
+  })
+
+  it('the minimum order can’t be negative', async () => {
+    expect(await errorOf(probe(db, user(f.users.ownerA), (tx) =>
+      tx.query(`update public.stores set gift_min_subtotal = -1 where id = $1`, [f.storeA])))).toMatch(/check constraint/)
+  })
+})
+
 describe('suppliers and product sourcing (staff only)', () => {
   const addSupplier = (tx: { query: PGlite['query'] }, tenantId: string) =>
     tx.query<{ id: string }>(`insert into public.suppliers (tenant_id, name, url) values ($1, 'Test Factory', 'https://example.com') returning id`, [tenantId])

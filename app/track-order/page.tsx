@@ -242,11 +242,11 @@ function TrackOrderContent() {
                       <div>
                         <h4 className="font-semibold text-final-off-white">{item.name}</h4>
                         <p className="text-final-off-white/70">
-                          {[`Quantity: ${item.quantity}`, item.size ? `Size ${item.size}` : null, item.color ? optionLabel(item.color) : null].filter(Boolean).join(' · ')}
+                          {[item.gift ? 'Free gift' : null, `Quantity: ${item.quantity}`, item.size ? `Size ${item.size}` : null, item.color ? optionLabel(item.color) : null].filter(Boolean).join(' · ')}
                         </p>
                         {item.preorder && item.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDay(item.shipsOn)}</p>}
                       </div>
-                      <span className="text-lg font-bold text-final-accent">{formatCurrency(item.price)}</span>
+                      <span className="text-lg font-bold text-final-accent">{item.gift ? 'Free' : formatCurrency(item.price)}</span>
                     </div>
                   ))}
                 </div>

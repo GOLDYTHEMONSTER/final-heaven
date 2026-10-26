@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requirePermission } from '@/lib/auth'
 import { audit } from '@/lib/audit'
-import { BadRequest, handle, readJson, requestIdOf } from '@/lib/api'
+import { BadRequest, handle, money, readJson, requestIdOf, text } from '@/lib/api'
 import { paymentsState, storeToday } from '@/lib/catalog'
 
 export const dynamic = 'force-dynamic'
@@ -12,15 +12,19 @@ function isDay(v: unknown): v is string {
   const d = new Date(`${v}T00:00:00Z`)
   return !Number.isNaN(d.getTime()) && d.toISOString().startsWith(v)
 }
-const COLUMNS = 'payments_open_on, purchases_paused'
+const COLUMNS = 'payments_open_on, purchases_paused, gift_category, gift_min_subtotal'
 
-// The store's selling switches: its launch day and a pause on all purchases.
+// The store's selling switches: its launch day, a pause on all purchases and
+// the free gift with orders (a category of pieces, and the spend that earns one).
 // Checkout reads them on every request (lib/checkout/supabase-store), so a
 // change applies at once. Per-product pauses are on the products API.
 
-function selling(row: { payments_open_on: string | null; purchases_paused: boolean }) {
+function selling(row: { payments_open_on: string | null; purchases_paused: boolean; gift_category: string | null; gift_min_subtotal: number | string }) {
   const switches = { paymentsOpenOn: row.payments_open_on, purchasesPaused: row.purchases_paused }
-  return { ...switches, today: storeToday(), payments: paymentsState(switches, storeToday()) }
+  return {
+    ...switches, today: storeToday(), payments: paymentsState(switches, storeToday()),
+    giftCategory: row.gift_category, giftMinSubtotal: Number(row.gift_min_subtotal),
+  }
 }
 
 export const GET = handle('admin.store.get', async () => {
@@ -50,6 +54,8 @@ export const PUT = handle('admin.store.update', async (req: NextRequest) => {
     if (typeof body.purchases_paused !== 'boolean') throw new BadRequest('Pause must be on or off.')
     updates.purchases_paused = body.purchases_paused
   }
+  if ('gift_category' in body) updates.gift_category = text(body.gift_category, 'Gift category', { max: 60 }) || null
+  if ('gift_min_subtotal' in body) updates.gift_min_subtotal = money(body.gift_min_subtotal ?? 0, 'Minimum order for a gift')
   if (!Object.keys(updates).length) throw new BadRequest('Nothing to update.')
 
   const { data, error } = await staff.supabase.from('stores')

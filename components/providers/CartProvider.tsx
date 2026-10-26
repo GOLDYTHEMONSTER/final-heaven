@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, ReactNode } from 'react'
-import { useCartStore, type CartItem } from '@/lib/stores/cartStore'
+import { useCartStore, type CartItem, type GiftChoice } from '@/lib/stores/cartStore'
 import { track } from '@/lib/analytics'
 
 interface CartContextType {
@@ -11,6 +11,8 @@ interface CartContextType {
   updateQuantity: (key: string, quantity: number) => void
   promoCode: string
   setPromoCode: (code: string) => void
+  gift: GiftChoice | null
+  setGift: (gift: GiftChoice | null) => void
   clearCart: () => void
   total: number
   itemCount: number
@@ -32,6 +34,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     updateQuantity: cart.updateQuantity,
     promoCode: cart.promoCode,
     setPromoCode: cart.setPromoCode,
+    gift: cart.gift ?? null,
+    setGift: cart.setGift,
     clearCart: cart.clearCart,
     total: cart.getTotal(),
     itemCount: cart.getItemCount(),

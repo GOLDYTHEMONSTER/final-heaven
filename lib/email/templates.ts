@@ -15,7 +15,7 @@ export type OrderEmailData = {
   isPreorder?: boolean
   /** Lines the shop couldn't fully cover from stock when the order was paid. */
   stockShortfall?: { name: string; size: string | null; missing: number }[] | null
-  items: { name: string; quantity: number; size: string | null; color?: string | null; price: number | string; preorder?: boolean; shipsOn?: string | null }[]
+  items: { name: string; quantity: number; size: string | null; color?: string | null; price: number | string; preorder?: boolean; shipsOn?: string | null; gift?: boolean }[]
   trackingNumber: string
   shippingCity: string | null
   shippingState: string | null
@@ -90,15 +90,18 @@ ${rows.filter(([, v]) => v).map(([k, v]) => `<tr><td style="padding:6px 0;color:
 
 const shipDate = (d: string) => formatDay(d)
 const itemDetails = (i: OrderEmailData['items'][number]) =>
-  [i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null, i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null]
+  [i.gift ? 'Free gift' : null, i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null, i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null]
     .filter(Boolean).join(' · ')
+
+const lineAmount = (i: OrderEmailData['items'][number], currency: string) =>
+  i.gift ? 'Free' : formatMoney(Number(i.price) * i.quantity, currency)
 
 function itemsTable(o: OrderEmailData) {
   const discount = Number(o.discount ?? 0)
   const rows = o.items.map((i) => `<tr>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${itemDetails(i) ? `<br><span style="color:${C.muted};font-size:12px;">${escapeHtml(itemDetails(i))}</span>` : ''}</td>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.muted};text-align:center;white-space:nowrap;">× ${escapeHtml(i.quantity)}</td>
-<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};text-align:right;white-space:nowrap;">${escapeHtml(formatMoney(Number(i.price) * i.quantity, o.currency))}</td>
+<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};text-align:right;white-space:nowrap;">${escapeHtml(lineAmount(i, o.currency))}</td>
 </tr>`).join('\n')
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;font-size:14px;">
 ${rows}
@@ -110,7 +113,7 @@ ${discount > 0 ? `<tr><td colspan="2" style="padding:12px 0 0;color:${C.muted};"
 }
 
 const itemsText = (o: OrderEmailData) => [
-  ...o.items.map((i) => `- ${i.name}${itemDetails(i) ? ` (${itemDetails(i)})` : ''} × ${i.quantity}  ${formatMoney(Number(i.price) * i.quantity, o.currency)}`),
+  ...o.items.map((i) => `- ${i.name}${itemDetails(i) ? ` (${itemDetails(i)})` : ''} × ${i.quantity}  ${lineAmount(i, o.currency)}`),
   ...(Number(o.discount ?? 0) > 0 ? [`Discount${o.promoCode ? ` (${o.promoCode})` : ''}: -${formatMoney(Number(o.discount), o.currency)}`] : []),
 ].join('\n')
 

@@ -19,6 +19,13 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
       return data ?? []
     },
 
+    async giftProducts(storeId, category) {
+      const { data, error } = await db.from('products').select(PRODUCT_COLUMNS)
+        .eq('store_id', storeId).eq('category', category).eq('status', 'active').order('created_at').limit(40)
+      if (error) throw error
+      return data ?? []
+    },
+
     async promo(tenantId, code, email) {
       const { data: promo, error } = await db.from('promo_codes')
         .select('id, code, description, kind, value, min_subtotal, starts_at, ends_at, max_uses, once_per_customer, active')
@@ -84,13 +91,17 @@ function flutterwavePayments(req: Request): CheckoutPayments {
 }
 
 /**
- * The store's launch day and pause switch, read on every request (getStorefront
- * is cached) so a pause from the admin applies at once.
+ * The store's launch day, pause switch and free-gift offer, read on every
+ * request (getStorefront is cached) so a change from the admin applies at once.
  */
 async function sellingSwitches(storeId: string, db: SupabaseClient = createSupabaseServiceClient()) {
-  const { data, error } = await db.from('stores').select('payments_open_on, purchases_paused').eq('id', storeId).single()
+  const { data, error } = await db.from('stores')
+    .select('payments_open_on, purchases_paused, gift_category, gift_min_subtotal').eq('id', storeId).single()
   if (error) throw error
-  return { paymentsOpenOn: (data.payments_open_on as string | null) ?? null, purchasesPaused: data.purchases_paused === true }
+  return {
+    paymentsOpenOn: (data.payments_open_on as string | null) ?? null, purchasesPaused: data.purchases_paused === true,
+    giftCategory: (data.gift_category as string | null) ?? null, giftMinSubtotal: data.gift_min_subtotal ?? 0,
+  }
 }
 
 /** The Checkout module wired for this request: Supabase, Flutterwave, this storefront. */

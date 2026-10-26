@@ -12,19 +12,20 @@ import { Layout } from '@/components/layout/Layout'
 import { lineKey } from '@/lib/stores/cartStore'
 import { formatDay, optionLabel, paymentsClosed } from '@/lib/catalog'
 import { quoteLineAt, useQuote } from '@/lib/useQuote'
+import { GiftPicker } from '@/components/cart/GiftPicker'
 
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, total, clearCart, promoCode, setPromoCode } = useCart()
+  const { items, removeItem, updateQuantity, total, clearCart, promoCode, setPromoCode, gift, setGift } = useCart()
   const [promoInput, setPromoInput] = useState(promoCode)
   useEffect(() => setPromoInput(promoCode), [promoCode])
-  // Prices, discount and availability come from the server: exactly what checkout will charge.
-  const { quote, loading, error: quoteError } = useQuote(items, promoCode)
+  // Prices, discount, availability and the free gift come from the server: exactly what checkout will charge.
+  const { quote, loading, error: quoteError } = useQuote(items, promoCode, undefined, gift)
   const subtotal = quote ? Number(quote.subtotal) : total
   const discount = quote ? Number(quote.discount) : 0
   const finalTotal = quote ? Number(quote.total) : total
-  const lineIssues = quote?.lines?.some((l) => l.issue) ?? false
+  const lineIssues = (quote?.lines?.some((l) => l.issue) ?? false) || !!quote?.gift?.issue
   const closed = quote?.payments?.open === false ? paymentsClosed(quote.payments) : null // before launch day, or paused
   const canCheckout = !!quote && !lineIssues && !loading && !closed
 
@@ -174,6 +175,8 @@ export default function CartPage() {
                 </AnimatePresence>
               </div>
 
+              {quote?.gift && <GiftPicker offer={quote.gift} subtotal={subtotal} gift={gift} setGift={setGift} />}
+
               {/* Continue Shopping */}
               <div className="mt-8">
                 <Link href="/shop">
@@ -231,6 +234,12 @@ export default function CartPage() {
                     <div className="flex justify-between text-final-accent">
                       <span>Discount{quote?.promo ? ` (${quote.promo.code})` : ''}</span>
                       <span>-{formatCurrency(discount)}</span>
+                    </div>
+                  )}
+                  {quote?.gift?.line && (
+                    <div className="flex justify-between gap-3 text-final-off-white/70">
+                      <span>Gift: {quote.gift.line.name}{quote.gift.line.color ? ` (${quote.gift.line.color})` : ''}</span>
+                      <span className="shrink-0 text-final-accent">Free</span>
                     </div>
                   )}
                   <div className="flex justify-between text-final-off-white/70">

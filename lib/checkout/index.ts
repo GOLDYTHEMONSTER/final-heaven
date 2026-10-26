@@ -14,7 +14,9 @@
 //  - begin creates a Checkout, never an Order: the Order is placed only when
 //    Payments verifies the payment (docs/adr/0001);
 //  - no payment starts before the store's launch day or while the store is
-//    paused (Shop.paymentsOpenOn, Shop.purchasesPaused).
+//    paused (Shop.paymentsOpenOn, Shop.purchasesPaused);
+//  - gift pieces (Shop.giftCategory) are never sold: one is added free, as the
+//    last line, only when the cart earns it.
 //
 // Behind it: the purchase and pricing rules (./pricing, lib/catalog), the
 // CheckoutStore seam (Supabase in production, in-memory in tests) and the
@@ -23,17 +25,20 @@ import { BadRequest, int, reference, text } from '@/lib/api'
 import { fromMinor, toMinor } from '@/lib/money'
 import { paymentsClosed, paymentsState, storeToday, type CatalogueProduct, type PaymentsState } from '@/lib/catalog'
 import { POLICY } from '@/lib/legal'
-import { orderItems, quoteCart, quoteProblem, type CartLine, type PromoContext, type Quote } from './pricing'
+import { orderItems, quoteCart, quoteProblem, type CartLine, type GiftPick, type PromoContext, type Quote } from './pricing'
 
-export type { CartLine, Quote, QuoteLine, PromoCode, PromoContext } from './pricing'
+export type { CartLine, GiftOption, GiftPick, Quote, QuoteLine, PromoCode, PromoContext } from './pricing'
 
 /**
  * The storefront a Checkout belongs to. Payments open on paymentsOpenOn
- * (YYYY-MM-DD; null = no launch day yet) unless staff pause the store.
+ * (YYYY-MM-DD; null = no launch day yet) unless staff pause the store. When
+ * giftCategory is set, a cart whose subtotal reaches giftMinSubtotal earns one
+ * free piece from that category.
  */
 export type Shop = {
   tenantId: string; storeId: string; currency: string; hiddenCategories: string[]; timeZone: string
   paymentsOpenOn: string | null; purchasesPaused: boolean
+  giftCategory: string | null; giftMinSubtotal: number | string
 }
 
 export type Buyer = {
@@ -77,6 +82,8 @@ export type SavedCheckout = {
 /** Persistence the module needs; Supabase in production (./supabase-store), in-memory in tests. */
 export interface CheckoutStore {
   products(storeId: string, ids: string[]): Promise<(CatalogueProduct & { category: string })[]>
+  /** The active pieces in the store's gift category. */
+  giftProducts(storeId: string, category: string): Promise<CatalogueProduct[]>
   /** The promo code and its uses on paid orders (overall, and by this email when given). */
   promo(tenantId: string, code: string, email: string | null): Promise<PromoContext | null>
   save(checkout: NewCheckout): Promise<{ id: string }>
@@ -124,19 +131,23 @@ export function checkout(deps: CheckoutDeps) {
     return paymentsState(shop, storeToday(shop.timeZone, now()))
   }
 
-  async function quote({ lines, promoCode = null, email = null }: { lines: CartLine[]; promoCode?: string | null; email?: string | null }): Promise<Quote> {
+  async function quote({ lines, promoCode = null, email = null, gift = null }:
+    { lines: CartLine[]; promoCode?: string | null; email?: string | null; gift?: GiftPick | null }): Promise<Quote> {
     const ids = [...new Set(lines.map((l) => l.id))]
-    const [rows, promo] = await Promise.all([
+    const [rows, promo, giftProducts] = await Promise.all([
       deps.store.products(shop.storeId, ids),
       promoCode ? deps.store.promo(shop.tenantId, promoCode, email) : Promise.resolve(null),
+      shop.giftCategory ? deps.store.giftProducts(shop.storeId, shop.giftCategory) : Promise.resolve([]),
     ])
-    // Hidden categories can't be bought even by calling the API directly.
-    const products = rows.filter((p) => !shop.hiddenCategories.includes(p.category))
-    return quoteCart(lines, products, shop.currency, { today: storeToday(shop.timeZone, now()), promo, promoCode, now: now() })
+    // Hidden categories, and gift pieces, can't be bought even by calling the API directly.
+    const products = rows.filter((p) => !shop.hiddenCategories.includes(p.category) && p.category !== shop.giftCategory)
+    const giftOffer = giftProducts.length ? { minMinor: toMinor(shop.giftMinSubtotal, shop.currency), products: giftProducts } : null
+    return quoteCart(lines, products, shop.currency, { today: storeToday(shop.timeZone, now()), promo, promoCode, now: now(), giftOffer, giftPick: gift })
   }
 
-  async function begin({ lines, promoCode = null, buyer }: { lines: CartLine[]; promoCode?: string | null; buyer: Buyer }): Promise<BeginResult> {
-    const priced = await quote({ lines, promoCode, email: buyer.email })
+  async function begin({ lines, promoCode = null, gift = null, buyer }:
+    { lines: CartLine[]; promoCode?: string | null; gift?: GiftPick | null; buyer: Buyer }): Promise<BeginResult> {
+    const priced = await quote({ lines, promoCode, email: buyer.email, gift })
     const problem = quoteProblem(priced)
     if (problem) return { ok: false, reason: 'cart_invalid', message: problem, quote: priced }
     const state = payments()
@@ -223,6 +234,14 @@ export function parseCart(value: unknown): CartLine[] {
     merged.set(key, line)
   }
   return [...merged.values()]
+}
+
+/** The free gift picked in the cart, if any: a piece id and, where it has colours, one of them. */
+export function parseGift(value: unknown): GiftPick | null {
+  if (value == null) return null
+  if (typeof value !== 'object' || Array.isArray(value)) throw new BadRequest('That free gift isn’t valid.')
+  const item = value as Record<string, unknown>
+  return { id: text(item.id, 'Gift', { max: 100, required: true })!, color: text(item.color, 'Gift colour', { max: MAX_OPTION }) }
 }
 
 export function parsePromoCode(value: unknown): string | null {

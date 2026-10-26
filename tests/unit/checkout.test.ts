@@ -17,6 +17,9 @@ const CATALOGUE = [
   { ...base, id: 'vape', name: 'Vape', category: 'Vapes' },
   { ...base, id: 'odd', name: 'Odd', price: 3333.33 },
   { ...base, id: 'held', name: 'Held', purchases_paused: true },
+  { ...base, id: 'heart', name: 'Heart Pendant', category: 'Gifts', price: 15000, colors: ['Red', 'Black'] },
+  { ...base, id: 'cross', name: 'Cross Pendant', category: 'Gifts', price: 15000 },
+  { ...base, id: 'gonegift', name: 'Gone Gift', category: 'Gifts', stock: 0 },
 ]
 const promo = (over: Partial<PromoContext['promo']> = {}, uses = 0, customerUses = 0): PromoContext => ({
   uses, customerUses,
@@ -30,6 +33,7 @@ function memoryStore(promos: Record<string, PromoContext> = {}) {
   const saved = new Map<string, NewCheckout & SavedCheckout>()
   const store: CheckoutStore = {
     products: vi.fn(async (_storeId, ids) => CATALOGUE.filter((p) => ids.includes(p.id))),
+    giftProducts: vi.fn(async (_storeId, category) => CATALOGUE.filter((p) => p.category === category)),
     promo: vi.fn(async (_tenant, code) => promos[code] ?? null),
     save: vi.fn(async (c) => {
       const id = `chk-${saved.size + 1}`
@@ -53,7 +57,7 @@ function fakePayments(over: Partial<CheckoutPayments> = {}) {
 
 let mem: ReturnType<typeof memoryStore>
 let payments: CheckoutPayments
-const shop = { tenantId: 't1', storeId: 's1', currency: 'NGN', hiddenCategories: ['Vapes'], timeZone: 'Africa/Lagos', paymentsOpenOn: '2026-10-01' as string | null, purchasesPaused: false }
+const shop = { tenantId: 't1', storeId: 's1', currency: 'NGN', hiddenCategories: ['Vapes'], timeZone: 'Africa/Lagos', paymentsOpenOn: '2026-10-01' as string | null, purchasesPaused: false, giftCategory: null as string | null, giftMinSubtotal: 0 }
 let refs = 0
 const make = (now = NOW, over: Partial<typeof shop> = {}) => checkout({ store: mem.store, payments, shop: { ...shop, ...over }, now: () => now, newReference: (prefix) => `${prefix}-TEST${++refs}` })
 
@@ -186,6 +190,61 @@ describe('begin', () => {
     const r = await make().begin({ lines: [tee(1)], buyer })
     expect(r).toMatchObject({ ok: false, reason: 'payment_unavailable', message: expect.stringMatching(/Nothing was charged/) })
     expect([...mem.saved.values()][0].status).toBe('expired')
+  })
+})
+
+describe('free gift', () => {
+  const gifts = (over: Partial<typeof shop> = {}) => make(NOW, { giftCategory: 'Gifts', ...over })
+
+  it('offers the gift pieces, at their value, once the cart has something to pay for', async () => {
+    const q = await gifts().quote({ lines: [tee(1)] })
+    expect(q.gift).toMatchObject({ eligible: true, minMinor: 0, line: null, issue: null })
+    expect(q.gift!.options.map((o) => [o.id, o.valueMinor, o.available])).toEqual([
+      ['heart', 1_500_000, true], ['cross', 1_500_000, true], ['gonegift', 1_000_000, false],
+    ])
+    const empty = await gifts().quote({ lines: [{ id: 'gone', size: null, quantity: 1 }] })
+    expect(empty.gift!.eligible).toBe(false)
+  })
+
+  it('adds the picked gift last, free, and charges only for the cart', async () => {
+    const r = await gifts().begin({ lines: [tee(1)], gift: { id: 'heart', color: 'Red' }, buyer })
+    expect(r.ok).toBe(true)
+    const saved = [...mem.saved.values()][0]
+    expect(saved).toMatchObject({ subtotal: '10000.00', total: '10000.00' })
+    expect(saved.items).toHaveLength(2)
+    expect(saved.items[1]).toMatchObject({ id: 'heart', name: 'Heart Pendant', price: 0, quantity: 1, color: 'Red', size: null, gift: true })
+    expect(payments.start).toHaveBeenCalledWith(expect.objectContaining({ amountMinor: 1_000_000 }))
+  })
+
+  it('holds the gift back until the cart reaches the minimum, without blocking payment', async () => {
+    const below = await gifts({ giftMinSubtotal: 20000 }).quote({ lines: [tee(1)], gift: { id: 'cross' } })
+    expect(below.gift).toMatchObject({ eligible: false, minMinor: 2_000_000, line: null, issue: null })
+    expect(below.ok).toBe(true)
+    const at = await gifts({ giftMinSubtotal: 20000 }).quote({ lines: [tee(2)], gift: { id: 'cross' } })
+    expect(at.gift!.line).toMatchObject({ id: 'cross', color: null, unitMinor: 0 })
+  })
+
+  it('refuses a gift that is gone, or without a colour it needs, naming why', async () => {
+    const gone = await gifts().begin({ lines: [tee(1)], gift: { id: 'gonegift' }, buyer })
+    expect(gone).toMatchObject({ ok: false, reason: 'cart_invalid', message: 'Your free gift is no longer available. Please pick another.' })
+    const colour = await gifts().quote({ lines: [tee(1)], gift: { id: 'heart', color: 'Green' } })
+    expect(colour.gift!.issue).toBe('Choose a colour for your free Heart Pendant.')
+    expect(colour.ok).toBe(false)
+    const notAGift = await gifts().quote({ lines: [tee(1)], gift: { id: 'tee', color: 'black' } })
+    expect(notAGift.gift!.issue).toMatch(/no longer available/)
+  })
+
+  it('never sells gift pieces as cart lines', async () => {
+    const q = await gifts().quote({ lines: [{ id: 'heart', size: null, color: 'Red', quantity: 1 }] })
+    expect(q.lines[0].issue).toMatch(/no longer available/)
+  })
+
+  it('offers nothing, and ignores a pick, when the store has no gift', async () => {
+    const q = await make().quote({ lines: [tee(1)], gift: { id: 'heart', color: 'Red' } })
+    expect(q.gift).toBeNull()
+    expect(mem.store.giftProducts).not.toHaveBeenCalled()
+    await make().begin({ lines: [tee(1)], gift: { id: 'heart', color: 'Red' }, buyer })
+    expect([...mem.saved.values()][0].items).toHaveLength(1)
   })
 })
 

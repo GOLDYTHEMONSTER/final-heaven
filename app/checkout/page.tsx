@@ -14,7 +14,7 @@ import { PENDING_CHECKOUT_KEY, quoteLineAt, useQuote } from '@/lib/useQuote'
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CheckoutPage() {
-  const { items, total, promoCode, setPromoCode } = useCart()
+  const { items, total, promoCode, setPromoCode, gift } = useCart()
   const trackedCheckout = useRef(false)
   useEffect(() => {
     if (items.length && !trackedCheckout.current) {
@@ -33,8 +33,8 @@ export default function CheckoutPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'redirecting' | 'error'>('idle')
   const [message, setMessage] = useState('')
   // The server's price: exactly what Flutterwave will charge.
-  const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email)
-  const lineIssues = quote?.lines?.some((l) => l.issue) ?? false
+  const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email, gift)
+  const lineIssues = (quote?.lines?.some((l) => l.issue) ?? false) || !!quote?.gift?.issue
   const closed = quote?.payments?.open === false ? paymentsClosed(quote.payments) : null // before launch day, or paused
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -75,6 +75,7 @@ export default function CheckoutPage() {
         quantity: item.quantity,
       })),
       promoCode: promoCode || null,
+      gift,
       termsAccepted,
     }
 
@@ -258,7 +259,7 @@ export default function CheckoutPage() {
                 {lineIssues && (
                   <p className="mt-5 flex items-start gap-1.5 text-sm text-red-400" role="alert">
                     <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                    <span>Some items in your cart can&apos;t be bought right now. <Link href="/cart" className="underline underline-offset-2">Review your cart</Link></span>
+                    <span>{quote?.gift?.issue ?? 'Some items in your cart can’t be bought right now.'} <Link href="/cart" className="underline underline-offset-2">Review your cart</Link></span>
                   </p>
                 )}
                 {promoCode && quote?.promoError && (
@@ -294,6 +295,19 @@ export default function CheckoutPage() {
                       </div>
                     )
                   })}
+                  {quote?.gift?.line ? (
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="font-semibold text-final-off-white">{quote.gift.line.name}</p>
+                        <p className="text-final-off-white/70 text-sm">{['Free gift', quote.gift.line.color].filter(Boolean).join(' • ')}</p>
+                      </div>
+                      <p className="shrink-0 text-final-accent font-bold">Free</p>
+                    </div>
+                  ) : quote?.gift?.eligible && quote.gift.options.some((o) => o.available) && (
+                    <p className="rounded-lg border border-final-accent/40 px-3 py-2 text-sm text-final-off-white/80">
+                      Your order comes with a free gift. <Link href="/cart" className="underline underline-offset-2 hover:text-final-off-white">Pick it in your cart</Link>
+                    </p>
+                  )}
                 </div>
                 <div className="border-t border-final-light-gray/30 mt-6 pt-6">
                   <div className="flex justify-between text-final-off-white/70 mb-2">
