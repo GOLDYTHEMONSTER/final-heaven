@@ -289,6 +289,7 @@ export default function CheckoutPage() {
                           <p className="font-semibold text-final-off-white">{item.name}</p>
                           <p className="text-final-off-white/70 text-sm">{details}</p>
                           {line?.preorder && line.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDate(line.shipsOn)}</p>}
+                          {line?.madeToOrderDays && <p className="text-sm text-final-ember">Made to order · ships about {line.madeToOrderDays} days after payment</p>}
                           {line?.issue && <p className="text-sm text-red-400">{line.issue}</p>}
                         </div>
                         <p className="shrink-0 text-final-accent font-bold">{formatCurrency(line ? Number(line.lineTotal) : item.price * item.quantity)}</p>

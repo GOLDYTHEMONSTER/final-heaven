@@ -17,6 +17,7 @@ const CATALOGUE = [
   { ...base, id: 'vape', name: 'Vape', category: 'Vapes' },
   { ...base, id: 'odd', name: 'Odd', price: 3333.33 },
   { ...base, id: 'held', name: 'Held', purchases_paused: true },
+  { ...base, id: 'mto', name: 'Custom Tee', fulfilment: 'made_to_order', lead_time_days: 10 },
   { ...base, id: 'heart', name: 'Heart Pendant', category: 'Gifts', price: 15000, colors: ['Red', 'Black'] },
   { ...base, id: 'cross', name: 'Cross Pendant', category: 'Gifts', price: 15000 },
   { ...base, id: 'gonegift', name: 'Gone Gift', category: 'Gifts', stock: 0 },
@@ -202,6 +203,15 @@ describe('begin', () => {
   it('refuses a promo code that does not apply, naming why', async () => {
     const r = await make().begin({ lines: [tee(1)], promoCode: 'NOPE', buyer })
     expect(r).toMatchObject({ ok: false, reason: 'cart_invalid', message: 'That promo code isn’t valid.' })
+  })
+
+  it('says on every line, and on the saved Checkout, when an item is made to order and how long it takes', async () => {
+    const q = await make().quote({ lines: [{ id: 'mto', size: null, quantity: 1 }, tee(1)] })
+    expect(q.lines.map((l) => l.madeToOrderDays)).toEqual([10, null])
+    await make().begin({ lines: [{ id: 'mto', size: null, quantity: 1 }, tee(1)], buyer })
+    const items = [...mem.saved.values()][0].items
+    expect(items[0]).toMatchObject({ id: 'mto', made_to_order: true, lead_time_days: 10 })
+    expect(items[1]).not.toHaveProperty('made_to_order')
   })
 
   it('marks pre-orders on the Checkout and its lines', async () => {

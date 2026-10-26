@@ -1,4 +1,4 @@
-// The marketplace catalogue: product source and condition, brands, collections.
+// The catalogue (new products only): source, supply, review before sale, brands, collections.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import type { PGlite } from '@electric-sql/pglite'
 import { createTestDb, errorOf, one, probe } from './harness'
@@ -32,17 +32,35 @@ beforeAll(async () => {
 })
 afterAll(() => db.close())
 
-describe('product source and condition', () => {
-  it('existing products are original merchandise by default', async () => {
-    const row = await one<{ source_type: string; condition: string | null }>(db, `select source_type, condition from public.products where id = 'pA1'`)
-    expect(row).toEqual({ source_type: 'original', condition: null })
+describe('product source, supply and review', () => {
+  it('existing products are Final Heaven originals, in stock and ready to ship', async () => {
+    const row = await one<{ source_type: string; fulfilment: string; lead_time_days: number | null }>(db,
+      `select source_type, fulfilment, lead_time_days from public.products where id = 'pA1'`)
+    expect(row).toEqual({ source_type: 'original', fulfilment: 'stock', lead_time_days: null })
   })
 
-  it('a thrift piece must state its condition, from the allowed list', async () => {
-    expect(await errorOf(db.query(`update public.products set source_type = 'thrift' where id = 'pA1'`))).toMatch(/products_thrift_condition_check/)
-    expect(await errorOf(db.query(`update public.products set condition = 'mint' where id = 'pA1'`))).toMatch(/check constraint/)
-    await db.query(`update public.products set source_type = 'thrift', condition = 'good', condition_notes = 'Small mark on the left cuff.' where id = 'pA1'`)
-    await db.query(`update public.products set source_type = 'original', condition = null, condition_notes = null where id = 'pA1'`)
+  it('only new-product sources are allowed, and made to order always says how long it takes', async () => {
+    expect(await errorOf(db.query(`update public.products set source_type = 'thrift' where id = 'pA1'`))).toMatch(/check constraint/)
+    expect(await errorOf(db.query(`update public.products set fulfilment = 'made_to_order' where id = 'pA1'`))).toMatch(/products_made_to_order_lead_time_check/)
+    await db.query(`update public.products set source_type = 'local_maker', fulfilment = 'made_to_order', lead_time_days = 10 where id = 'pA1'`)
+    await db.query(`update public.products set source_type = 'original', fulfilment = 'stock', lead_time_days = null where id = 'pA1'`)
+  })
+
+  it('a product waiting for review, or refused, can’t go on sale; an approved one can', async () => {
+    await db.query(`insert into public.product_sources (product_id, tenant_id, review_status) values ('pA2', $1, 'pending')`, [f.tenantA])
+    expect(await errorOf(db.query(`update public.products set status = 'active' where id = 'pA2'`))).toMatch(/review_pending/)
+    await db.query(`update public.product_sources set review_status = 'rejected' where product_id = 'pA2'`)
+    expect(await errorOf(db.query(`update public.products set status = 'active' where id = 'pA2'`))).toMatch(/review_pending/)
+    await db.query(`update public.product_sources set review_status = 'approved' where product_id = 'pA2'`)
+    await db.query(`update public.products set status = 'active' where id = 'pA2'`)
+    // Reopening a review means taking the product off sale first.
+    expect(await errorOf(db.query(`update public.product_sources set review_status = 'pending' where product_id = 'pA2'`))).toMatch(/off sale/)
+    await db.query(`update public.products set status = 'draft' where id = 'pA2'`)
+    await db.query(`delete from public.product_sources where product_id = 'pA2'`)
+  })
+
+  it('sourcing details stay staff-only', async () => {
+    expect(await errorOf(probe(db, anon, (tx) => tx.query(`select review_status, incoming_quantity, fx_rate from public.product_sources`)))).toMatch(/permission denied/)
   })
 
   it('a product can only carry its own business\'s brand', async () => {

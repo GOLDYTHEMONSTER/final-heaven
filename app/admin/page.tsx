@@ -10,6 +10,7 @@ import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
 import { uploadProductImage } from '@/lib/admin/upload'
 import { SourcingFields, toSource, type Supplier } from '@/components/admin/SourcingFields'
+import { ProductOriginFields } from '@/components/admin/ProductOriginFields'
 
 // The usual categories, plus any a product already uses, so editing never swaps a category.
 const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Grillz', 'Gadgets', 'Sets', 'Vapes']
@@ -24,6 +25,7 @@ export default function AdminPage() {
   const [showAddProduct, setShowAddProduct] = useState(false)
   const [editingProduct, setEditingProduct] = useState<any>(null)
   const [suppliers, setSuppliers] = useState<Supplier[]>([])
+  const [brands, setBrands] = useState<{ id: string; name: string }[]>([])
   const [selectedSupplier, setSelectedSupplier] = useState('All')
   const supplierName = useMemo(() => new Map(suppliers.map((s) => [s.id, s.name])), [suppliers])
   const categories = useMemo(
@@ -35,6 +37,7 @@ export default function AdminPage() {
   useEffect(() => {
     fetchProducts()
     fetch('/api/admin/suppliers').then((r) => r.json()).then((d) => setSuppliers(d.suppliers ?? [])).catch(() => {})
+    fetch('/api/admin/brands').then((r) => r.json()).then((d) => setBrands(d.brands ?? [])).catch(() => {})
     // Opened from a supplier's product count on the Suppliers page.
     const supplier = new URLSearchParams(window.location.search).get('supplier')
     if (supplier) setSelectedSupplier(supplier)
@@ -113,12 +116,17 @@ export default function AdminPage() {
 
     try {
       const res = await fetch(`/api/admin/products?id=${id}`, { method: 'DELETE' })
-      if (!res.ok) throw new Error('Failed to delete product')
-
-      setProducts(products.filter(p => p.id !== id))
+      const data = await res.json().catch(() => null)
+      if (!res.ok) throw new Error(data?.error || 'Failed to delete product')
+      // Products on past orders are archived (hidden) rather than deleted, so order history stays whole.
+      if (data?.archived) {
+        setProducts(products.map(p => p.id === id ? { ...p, status: 'archived' } : p))
+        alert(data.message)
+      } else {
+        setProducts(products.filter(p => p.id !== id))
+      }
     } catch (error) {
-      console.error('Failed to delete product:', error)
-      alert('Failed to delete product')
+      alert((error as Error).message || 'Failed to delete product')
     }
   }
 
@@ -155,6 +163,11 @@ export default function AdminPage() {
       category: 'T-Shirts',
       description: '',
       source: toSource(null),
+      source_type: 'original',
+      fulfilment: 'stock',
+      lead_time_days: '',
+      brand_id: '',
+      sku: '',
       stock: 0,
       status: 'active',
       colors: [],
@@ -268,7 +281,13 @@ export default function AdminPage() {
                   className="w-full bg-final-gray border border-final-light-gray/30 rounded-lg px-4 py-2 text-final-off-white focus:outline-none focus:border-final-accent" 
                 />
               </div>
+              <ProductOriginFields
+                value={form}
+                onChange={(patch) => setForm((f: any) => ({ ...f, ...patch }))}
+                brands={brands}
+              />
               <SourcingFields
+                price={Number(form.price) || 0}
                 value={form.source}
                 onChange={(source) => setForm((f: any) => ({ ...f, source }))}
                 suppliers={suppliers}
@@ -739,6 +758,10 @@ export default function AdminPage() {
                           <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(product.status)}`}>
                             {product.status}
                           </span>
+                          {(product.source?.review_status === 'pending' || product.source?.review_status === 'rejected') && (
+                            <span className="mt-1 block text-[11px] text-yellow-400">{product.source.review_status === 'pending' ? 'needs review' : 'refused'}</span>
+                          )}
+                          {product.fulfilment === 'made_to_order' && <span className="mt-1 block text-[11px] text-final-muted">made to order</span>}
                         </td>
                         <td className="p-4">
                           <div className="flex items-center space-x-2">

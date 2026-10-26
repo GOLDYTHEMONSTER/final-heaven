@@ -27,7 +27,7 @@ export function HeroSection() {
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 md:min-h-[72dvh] md:grid-cols-12 md:gap-10 md:py-16 lg:px-8">
         <div className="order-2 md:order-1 md:col-span-7">
           <motion.p {...enter(0.15)} className="text-xs font-medium uppercase tracking-[0.24em] text-final-muted">
-            Originals · Thrift · Labels · Finds
+            Originals · Labels · Accessories · Drops
           </motion.p>
 
           <motion.h1 {...enter(0.22, 24)} className="display mt-5 text-[13vw] md:text-[7.5vw] xl:text-[7rem]">
@@ -37,7 +37,7 @@ export function HeroSection() {
           </motion.h1>
 
           <motion.p {...enter(0.32)} className="mt-6 max-w-[34ch] text-base leading-relaxed text-final-muted md:text-lg">
-            Curated streetwear finds, Final Heaven originals and new drops, at prices that make sense.
+            Curated streetwear and accessories, Final Heaven originals and new drops, at prices that make sense.
           </motion.p>
 
           <motion.div {...enter(0.4)} className="mt-9 flex flex-col gap-3 sm:flex-row">

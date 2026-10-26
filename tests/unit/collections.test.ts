@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { collectionProducts, matchesRule, parseRule, sourceLabel } from '@/lib/collections'
+import { collectionProducts, matchesRule, parseRule, slugify, sourceLabel, supplyLabel } from '@/lib/collections'
 import type { Product } from '@/lib/catalog'
 
 const p = (id: string, over: Partial<Product> = {}): Product => ({
@@ -12,8 +12,8 @@ describe('collection rules', () => {
     expect(parseRule(null)).toBeNull()
     expect(parseRule({})).toBeNull()
     expect(parseRule({ categories: [], sources: ['nope'] })).toBeNull()
-    expect(parseRule({ sources: ['thrift', 'bogus'], maxPrice: 10000, minPrice: -5, tags: ['Night'], extra: 1, newOnly: 'yes' }))
-      .toEqual({ sources: ['thrift'], maxPrice: 10000, tags: ['night'] })
+    expect(parseRule({ sources: ['local_maker', 'thrift'], maxPrice: 10000, minPrice: -5, tags: ['Night'], extra: 1, newOnly: 'yes' }))
+      .toEqual({ sources: ['local_maker'], maxPrice: 10000, tags: ['night'] })
   })
 
   it('matches only when every condition holds', () => {
@@ -22,8 +22,8 @@ describe('collection rules', () => {
     expect(matchesRule(p('b', { category: 'Jackets', price: 55000 }), rule)).toBe(false)
     expect(matchesRule(p('c', { category: 'Hoodies', price: 45000 }), rule)).toBe(false)
     expect(matchesRule(p('d', { tags: ['After-Hours'] }), parseRule({ tags: ['after-hours'] })!)).toBe(true)
-    expect(matchesRule(p('e', { sourceType: 'thrift' }), parseRule({ sources: ['thrift'] })!)).toBe(true)
-    expect(matchesRule(p('f'), parseRule({ sources: ['thrift'] })!)).toBe(false)
+    expect(matchesRule(p('e', { sourceType: 'independent' }), parseRule({ sources: ['independent'] })!)).toBe(true)
+    expect(matchesRule(p('f'), parseRule({ sources: ['independent'] })!)).toBe(false)
   })
 })
 
@@ -44,12 +44,24 @@ describe('a collection’s products', () => {
   })
 })
 
+describe('slugs', () => {
+  it('are lower-case words joined by hyphens', () => {
+    expect(slugify('After Hours')).toBe('after-hours')
+    expect(slugify('  Lagos Label Co. — 2026! ')).toBe('lagos-label-co-2026')
+    expect(slugify('!!!')).toBe('')
+  })
+})
+
 describe('source labels', () => {
-  it('names originals, thrift and labels, and says nothing about how stock was bought', () => {
+  it('names originals and labels, and says nothing about how bought-in stock was sourced', () => {
     expect(sourceLabel({ sourceType: 'original' })).toBe('Final Heaven Original')
-    expect(sourceLabel({ sourceType: 'thrift' })).toBe('Thrift find')
     expect(sourceLabel({ sourceType: 'independent', brand: { id: 'x', name: 'Lagos Label', slug: 'lagos-label' } })).toBe('Lagos Label')
-    expect(sourceLabel({ sourceType: 'wholesale' })).toBeNull()
-    expect(sourceLabel({ sourceType: 'consignment' })).toBeNull()
+    for (const sourceType of ['wholesale', 'distributor', 'local_maker']) expect(sourceLabel({ sourceType })).toBeNull()
+  })
+
+  it('labels made-to-order products with their lead time, and nothing else', () => {
+    expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 10 })).toBe('Made to order · ships in about 10 days')
+    expect(supplyLabel({ fulfilment: 'stock' })).toBeNull()
+    expect(supplyLabel({})).toBeNull()
   })
 })

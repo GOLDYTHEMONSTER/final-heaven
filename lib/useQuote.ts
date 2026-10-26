@@ -11,7 +11,7 @@ export type ServerQuote = {
   currency: string
   lines: {
     id: string; name: string; size: string | null; color: string | null; quantity: number
-    unitPrice: string; lineTotal: string; preorder: boolean; shipsOn: string | null; issue: string | null
+    unitPrice: string; lineTotal: string; preorder: boolean; shipsOn: string | null; madeToOrderDays: number | null; issue: string | null
   }[]
   subtotal: string
   discount: string

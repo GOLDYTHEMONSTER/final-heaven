@@ -1,8 +1,13 @@
--- Marketplace catalogue: where a product comes from, its condition, its brand,
--- and collections that group products without copying them.
+-- Marketplace catalogue (new products only): where a product comes from, how
+-- it's supplied, its label, its review before publishing, and collections that
+-- group products without copying them.
 --
---   products.source_type   original | thrift | wholesale | independent | consignment
---   products.condition     for pre-owned pieces (required for thrift)
+--   products.source_type   original | wholesale | independent | distributor | local_maker
+--   products.fulfilment    stock (ready to ship) | made_to_order (made after the
+--                          order, lead_time_days to make); pre-orders keep their
+--                          own columns (preorder, preorder_ships_on)
+--   product_sources        staff-only: review status, stock on order, lead time,
+--                          image permission, landed-cost parts
 --   brands                 independent labels; public once published
 --   collections            curated groups ("shop by mood", drops, labels): a
 --                          hand-picked list (collection_products) and/or a rule
@@ -34,20 +39,65 @@ create table public.brands (
 create index brands_tenant_idx on public.brands (tenant_id);
 
 -- ----------------------------------------------------------------------------
--- Products: source, condition, brand, SKU
+-- Products: source, how it's supplied, label, SKU
 -- ----------------------------------------------------------------------------
 alter table public.products
   add column source_type text not null default 'original'
-    check (source_type in ('original', 'thrift', 'wholesale', 'independent', 'consignment')),
-  add column condition text
-    check (condition is null or condition in ('new_with_tags', 'new_without_tags', 'excellent', 'good', 'fair')),
-  add column condition_notes text check (condition_notes is null or length(condition_notes) <= 1000),
+    check (source_type in ('original', 'wholesale', 'independent', 'distributor', 'local_maker')),
+  add column fulfilment text not null default 'stock' check (fulfilment in ('stock', 'made_to_order')),
+  add column lead_time_days integer check (lead_time_days is null or lead_time_days between 1 and 180),
   add column brand_id uuid references public.brands (id) on delete set null,
   add column sku text check (sku is null or length(sku) between 1 and 60);
 
--- A pre-owned piece always says what condition it's in.
-alter table public.products add constraint products_thrift_condition_check
-  check (source_type <> 'thrift' or condition is not null);
+-- Made to order always says how long making it takes.
+alter table public.products add constraint products_made_to_order_lead_time_check
+  check (fulfilment <> 'made_to_order' or lead_time_days is not null);
+
+-- ----------------------------------------------------------------------------
+-- Sourcing (staff-only): review before publishing, stock on order, lead time,
+-- image permission, and the parts of the landed cost.
+-- ----------------------------------------------------------------------------
+alter table public.product_sources
+  add column review_status text not null default 'not_required'
+    check (review_status in ('not_required', 'pending', 'approved', 'rejected')),
+  add column review_notes text check (review_notes is null or length(review_notes) <= 2000),
+  add column incoming_quantity integer not null default 0 check (incoming_quantity between 0 and 1000000),
+  add column incoming_eta date,
+  add column supplier_lead_time_days integer check (supplier_lead_time_days is null or supplier_lead_time_days between 0 and 365),
+  add column image_permission text not null default 'unknown'
+    check (image_permission in ('own', 'supplier_permitted', 'unknown')),
+  add column fx_rate numeric(14,6) check (fx_rate is null or fx_rate > 0),
+  add column shipping_cost_ngn numeric(12,2) check (shipping_cost_ngn is null or shipping_cost_ngn >= 0),
+  add column customs_cost_ngn numeric(12,2) check (customs_cost_ngn is null or customs_cost_ngn >= 0),
+  add column other_cost_ngn numeric(12,2) check (other_cost_ngn is null or other_cost_ngn >= 0);
+
+-- A product waiting for (or refused at) review can't be put on sale.
+create or replace function private.check_product_review() returns trigger
+language plpgsql security definer set search_path = '' as $$
+begin
+  if new.status = 'active' and exists (
+    select 1 from public.product_sources s where s.product_id = new.id and s.review_status in ('pending', 'rejected')) then
+    raise exception 'review_pending: this product needs its review approved before it goes on sale.' using errcode = '23514';
+  end if;
+  return new;
+end $$;
+revoke all on function private.check_product_review() from public, anon, authenticated;
+create trigger products_review_gate before insert or update of status on public.products
+  for each row execute function private.check_product_review();
+
+-- And a review can't be reopened on a product that's already on sale: take it off sale first.
+create or replace function private.check_source_review() returns trigger
+language plpgsql security definer set search_path = '' as $$
+begin
+  if new.review_status in ('pending', 'rejected') and exists (
+    select 1 from public.products p where p.id = new.product_id and p.status = 'active') then
+    raise exception 'review_pending: take this product off sale (draft) before marking it for review.' using errcode = '23514';
+  end if;
+  return new;
+end $$;
+revoke all on function private.check_source_review() from public, anon, authenticated;
+create trigger product_sources_review_gate before insert or update of review_status on public.product_sources
+  for each row execute function private.check_source_review();
 
 create unique index products_store_sku_idx on public.products (store_id, sku) where sku is not null;
 create index products_brand_idx on public.products (brand_id) where brand_id is not null;

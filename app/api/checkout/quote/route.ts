@@ -21,7 +21,7 @@ function quoteJson(quote: Quote) {
     currency: quote.currency,
     lines: quote.lines.map((l) => ({
       id: l.id, name: l.name, size: l.size, color: l.color, quantity: l.quantity, unitPrice: m(l.unitMinor),
-      lineTotal: m(l.lineMinor), preorder: l.preorder, shipsOn: l.shipsOn, issue: l.issue,
+      lineTotal: m(l.lineMinor), preorder: l.preorder, shipsOn: l.shipsOn, madeToOrderDays: l.madeToOrderDays, issue: l.issue,
     })),
     subtotal: m(quote.subtotalMinor),
     discount: m(quote.discountMinor),

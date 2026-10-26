@@ -15,7 +15,10 @@ export type OrderEmailData = {
   isPreorder?: boolean
   /** Lines the shop couldn't fully cover from stock when the order was paid. */
   stockShortfall?: { name: string; size: string | null; missing: number }[] | null
-  items: { name: string; quantity: number; size: string | null; color?: string | null; price: number | string; preorder?: boolean; shipsOn?: string | null; gift?: boolean }[]
+  items: {
+    name: string; quantity: number; size: string | null; color?: string | null; price: number | string
+    preorder?: boolean; shipsOn?: string | null; gift?: boolean; madeToOrderDays?: number | null
+  }[]
   trackingNumber: string
   shippingCity: string | null
   shippingState: string | null
@@ -90,7 +93,9 @@ ${rows.filter(([, v]) => v).map(([k, v]) => `<tr><td style="padding:6px 0;color:
 
 const shipDate = (d: string) => formatDay(d)
 const itemDetails = (i: OrderEmailData['items'][number]) =>
-  [i.gift ? 'Free gift' : null, i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null, i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null]
+  [i.gift ? 'Free gift' : null, i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null,
+    i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null,
+    i.madeToOrderDays ? `Made to order, ships about ${i.madeToOrderDays} days after payment` : null]
     .filter(Boolean).join(' · ')
 
 const lineAmount = (i: OrderEmailData['items'][number], currency: string) =>

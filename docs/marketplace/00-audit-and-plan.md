@@ -4,57 +4,63 @@ Audit of 26 Oct 2026, before the marketplace work. Next.js 14.2 (App Router), Ty
 Supabase (Postgres + RLS + Storage), Flutterwave, Vercel. Branch `phase-1-foundation`, pushed to
 `master` after each approved change.
 
+**Business model (owner's correction, 26 Oct):** new products only. Final Heaven is not a thrift or
+second-hand store. Products come from wholesale suppliers, local manufacturers, authorised
+distributors, independent labels and Final Heaven's own designs, sold from stock, made to order, or
+on pre-order. Nothing second-hand-specific is built.
+
 ## Baseline
 
-- `npm run typecheck`, `npm run lint` (only `<img>` warnings), `npm run build`, `npm test`: all pass
-  (240 tests: unit tests, plus database tests against the real migrations in PGlite).
-- Git: clean apart from untracked `.mcp.json`, `.codex/`, `brand/print/` (not ours to commit).
+- `npm run typecheck`, `npm run lint` (only `<img>` warnings), `npm run build` and `npm test` all pass.
+  The tests are unit tests plus database tests against the real migrations in PGlite.
 - Catalogue: 56 products, all active; 10 are hidden free-gift pendants.
 
-## What already works (keep it)
+## What already works (kept)
 
-| Area | How it works today |
+| Area | How it works |
 |---|---|
-| Checkout | `lib/checkout`: the server prices every cart from the catalogue (never the browser), checks stock, release dates, pauses, promo codes, the free gift. Payments open only from the launch day (none is set yet). |
+| Checkout | `lib/checkout`: the server prices every cart from the catalogue (never the browser), checks stock, release dates, pauses, promo codes and the free gift. Payments open only from the launch day (none is set yet). |
 | Payments | Flutterwave. An Order exists only after a verified payment (`docs/adr/0001`); webhook and verify are idempotent (`orders.checkout_id` unique, `payment_events`). |
-| Stock | Taken when the order is paid, by the `order_stock` trigger, once per order; shortfalls are recorded for staff, and cancellations put stock back. |
-| Discovery feed | Homepage "For you": server-ranked batches (`/api/feed`, `lib/discovery`), no repeats, campaign tiles between products, local interest profile, no account needed. |
-| Shop | `/shop`: search, category chips, size/colour/price/stock filters, sort; URL-driven. Filters run in the browser over at most 500 products. |
-| Admin | Products (with sourcing), orders, drops, promo codes, customers, analytics, suppliers, store switches; permissions enforced by RLS and route checks. |
-| Images | Local WebP copies (640/1200) and admin uploads to Storage with a 640 copy. |
+| Stock | Taken once per order by the `order_stock` trigger when it's paid; shortfalls are recorded; cancellations put stock back. |
+| Discovery feed | Homepage "For you": server-ranked batches (`/api/feed`), no repeats, campaign tiles, local interest profile, no account needed. |
+| Shop | `/shop`: search, categories, filters and sort, all held in the URL. |
+| Admin | Products, orders, drops, promo codes, customers, analytics, suppliers, store switches; RLS plus route permission checks. |
 
-## Gaps against the directive
+## Done in this round
 
-1. **Product model:** no source type (original / thrift / wholesale / independent / consignment), condition, condition notes, brand or SKU.
-2. **Collections and brands:** there are none; the homepage can't show "shop by mood" or partner labels.
-3. **Overselling one-of-ones:** stock is only taken after payment. Two shoppers can pay for the last
-   piece at the same time; the second order is recorded as "stock short" and needs a refund.
-   Thrift needs a hold at checkout.
-4. **Per-size stock:** one stock number covers every size, so one size can oversell.
-5. **Landed cost and margin:** sourcing records one unit cost; there's no shipping, customs, prep, FX rate or margin.
-6. **Consignment terms:** suppliers have no ownership model or commission.
-7. **SEO:** the product page renders in the browser only (no per-product title, description,
-   Open Graph or structured data); there's no sitemap or robots file; the site title says "Urban Streetwear".
-8. **Shop scale:** filtering in the browser is fine up to a few hundred products; it needs server paging beyond that.
-9. **Admin delete:** products are hard-deleted (orders keep their own copy of each line, so history survives, but archiving is safer).
-10. **Review flag:** listings sourced from third parties have no "needs review" step before publishing.
-
-## Plan, in order
-
-| # | Phase | Status |
+| # | Change | Where |
 |---|---|---|
-| 1 | Product model: source, condition, notes, brand, SKU; brands; collections (migration, RLS, tests) | in progress |
-| 2 | Storefront: collection pages, homepage sections (latest drop, shop by mood, originals, labels), shop filters for source/condition/brand, product page details | to do |
-| 3 | SEO: server-rendered product metadata, Open Graph, JSON-LD, sitemap, robots, site title | to do |
-| 4 | Inventory integrity: checkout holds for the last pieces, per-size stock | to do |
-| 5 | Admin: new product fields, collections and brands editors, landed cost and margin, consignment terms, archive instead of delete | to do |
-| 6 | Shop at scale: server-side filtering and paging | to do |
-| 7 | Full regression: tests, browser on phone and desktop, security review | to do |
+| 1 | Product source (original, wholesale, distributor, local maker, independent label), supply (in stock, or made to order with a lead time), label, SKU | `20261026120000_marketplace_catalogue.sql`, `lib/collections.ts` |
+| 2 | Review before sale (staff-only): a listing marked "needs review" or "refused" can't be put on sale, enforced in the database | same migration; `lib/sourcing.ts`; product editor |
+| 3 | Staff-only sourcing: stock on order and expected date, supplier lead time, image permission, landed-cost parts with the recorded exchange rate; landed cost and gross margin in the editor | `lib/landed-cost.ts`, `SourcingFields` |
+| 4 | Labels (brands) and collections (hand-picked and/or rule-based), public once published, admin pages | `/admin/brands`, `/admin/collections`, `/brands/[slug]`, `/collections` |
+| 5 | Homepage: shorter hero, Shop by mood, Final Heaven Originals, Labels, Upcoming drops (each hidden when there's nothing real to show) | `app/page.tsx`, `components/home` |
+| 6 | Shop: "From" (Originals / Labels / Curated) and "Ready to ship" filters; cards and pages say "Made to order" and "Last one" only when true | `ShopView`, `ProductCard`, `ProductView` |
+| 7 | Made to order disclosed on cart, checkout, the order, tracking, the admin and the receipt | `lib/checkout/pricing.ts` and the pages |
+| 8 | Checkout holds: the last pieces can't be sold twice (30-minute hold, row locks) | `20261026130000_checkout_holds.sql` |
+| 9 | SEO: server-rendered product metadata, Open Graph, schema.org Product (new condition, real availability, no ratings), sitemap, robots | `app/product/[id]/page.tsx`, `app/sitemap.ts`, `app/robots.ts` |
+| 10 | Deleting a product that's on orders archives it instead | `app/api/admin/products` |
+
+## Deploy order (must be followed)
+
+1. Apply `20261026120000_marketplace_catalogue.sql`, then `20261026130000_checkout_holds.sql`
+   (dry-run each first, with their own `begin`/`commit` stripped).
+2. Then deploy the code: it reads the new columns and saves checkouts through `open_checkout`.
+
+## Still to do
+
+| Priority | Item |
+|---|---|
+| High | Per-size (variant) stock: one stock number still covers every size |
+| High | Browser checks of the new pages against real data (blocked until the migrations are applied) |
+| Medium | Categories managed in the admin (today: free text plus a suggested list; new categories work without code changes) |
+| Medium | Supplier catalogue import into draft products, with review "needs review" by default |
+| Medium | Shop paging on the server once the catalogue passes a few hundred products |
+| Low | Consignment or partner settlement (not needed while everything is bought or made for us) |
 
 ## Decisions needed from the owner
 
-- **Third-party designs:** the Iced Ghost Pendant reproduces the Scream "Ghostface" mask. The
-  directive's sourcing rules (section 8) say not to sell unauthorised protected designs; it went live
-  on 26 Oct by the owner's decision. Keep or unpublish?
-- **Real photos for thrift:** store photos so far are generated studio shots of factory products.
-  One-of-one thrift pieces need real photos of the actual item.
+- **Iced Ghost Pendant:** it reproduces the Scream "Ghostface" mask. Under the IP rules it should be
+  marked "needs review" (which takes it off sale) or removed. It went live on 26 Oct by the owner's
+  decision, and I haven't changed it.
+- **Gift pendants and grillz:** generic designs; no issue found.

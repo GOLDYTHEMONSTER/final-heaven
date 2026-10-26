@@ -7,7 +7,7 @@ import { startPayment } from '@/lib/payments/service'
 import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
-  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors'
+  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors, fulfilment, lead_time_days'
 const PAID = ['paid', 'partially_refunded', 'refunded']
 
 /** The line a hold check refused ("held:<product id>", units still free in details), or null for any other error. */

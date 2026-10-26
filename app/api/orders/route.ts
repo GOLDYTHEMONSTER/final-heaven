@@ -83,6 +83,7 @@ export const GET = handle('orders.track', async (req: NextRequest) => {
   const items = (Array.isArray(order_items) ? order_items : []).map((item: Record<string, unknown>) => ({
     name: item.name, quantity: item.quantity, size: item.size ?? null, color: item.color ?? null, price: item.price,
     image: item.image ?? null, preorder: Boolean(item.preorder), shipsOn: item.ships_on ?? null, gift: Boolean(item.gift),
+    madeToOrderDays: item.made_to_order ? Number(item.lead_time_days) || null : null,
   }))
 
   return NextResponse.json(

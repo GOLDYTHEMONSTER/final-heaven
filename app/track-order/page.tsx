@@ -245,6 +245,7 @@ function TrackOrderContent() {
                           {[item.gift ? 'Free gift' : null, `Quantity: ${item.quantity}`, item.size ? `Size ${item.size}` : null, item.color ? optionLabel(item.color) : null].filter(Boolean).join(' · ')}
                         </p>
                         {item.preorder && item.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDay(item.shipsOn)}</p>}
+                        {item.madeToOrderDays && <p className="text-sm text-final-ember">Made to order · ships about {item.madeToOrderDays} days after payment</p>}
                       </div>
                       <span className="text-lg font-bold text-final-accent">{item.gift ? 'Free' : formatCurrency(item.price)}</span>
                     </div>

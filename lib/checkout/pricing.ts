@@ -37,6 +37,8 @@ export type QuoteLine = {
   image: string | null
   preorder: boolean
   shipsOn: string | null
+  /** Made after the order: about this many days before it ships. Null when it ships from stock. */
+  madeToOrderDays: number | null
   issue: string | null
   /** The free gift: never charged, never counted in the subtotal. */
   gift?: true
@@ -119,7 +121,7 @@ export function quoteCart(
     const product = byId.get(line.id)
     const base = { id: line.id, size: line.size, color: line.color ?? null, quantity: line.quantity }
     if (!product) {
-      return { ...base, name: 'This item', unitMinor: 0, lineMinor: 0, price: 0, image: null, preorder: false, shipsOn: null,
+      return { ...base, name: 'This item', unitMinor: 0, lineMinor: 0, price: 0, image: null, preorder: false, shipsOn: null, madeToOrderDays: null,
         issue: 'An item in your cart is no longer available. Please remove it.' }
     }
     const state = purchaseState(product, today)
@@ -139,6 +141,7 @@ export function quoteCart(
       image: images[0]?.url ?? null,
       preorder: state.state === 'preorder',
       shipsOn: state.state === 'preorder' ? state.shipsOn : null,
+      madeToOrderDays: product.fulfilment === 'made_to_order' ? Number(product.lead_time_days) || null : null,
       issue: null,
     }
     if (!canBuy(state)) out.issue = unavailableReason(name, state)
@@ -202,7 +205,7 @@ function quoteGift(offer: GiftOffer, pick: GiftPick | null, subtotalMinor: numbe
   }
   const line: QuoteLine = {
     id: option.id, name: option.name, size: null, color: option.colors.length ? pick.color! : null, quantity: 1,
-    unitMinor: 0, lineMinor: 0, price: 0, image: option.image, preorder: false, shipsOn: null, issue: null, gift: true,
+    unitMinor: 0, lineMinor: 0, price: 0, image: option.image, preorder: false, shipsOn: null, madeToOrderDays: null, issue: null, gift: true,
   }
   return { minMinor: offer.minMinor, eligible, options, line, issue: null }
 }
@@ -224,6 +227,7 @@ export function orderItems(quote: Quote) {
     id: l.id, name: l.name, price: l.price, quantity: l.quantity, size: l.size, color: l.color,
     image: l.image && !l.image.startsWith('data:') ? l.image : null,
     ...(l.preorder ? { preorder: true, ships_on: l.shipsOn } : {}),
+    ...(l.madeToOrderDays ? { made_to_order: true, lead_time_days: l.madeToOrderDays } : {}),
     ...(l.gift ? { gift: true } : {}),
   }))
 }

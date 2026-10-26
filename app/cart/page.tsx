@@ -129,6 +129,9 @@ export default function CartPage() {
                           {line?.preorder && line.shipsOn && (
                             <p className="mt-1 text-sm text-final-ember">Pre-order · ships from {formatDate(line.shipsOn)}</p>
                           )}
+                          {line?.madeToOrderDays && (
+                            <p className="mt-1 text-sm text-final-ember">Made to order · ships about {line.madeToOrderDays} days after payment</p>
+                          )}
                           {line?.issue && (
                             <p className="mt-2 flex items-start gap-1.5 text-sm text-red-400" role="alert">
                               <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />

@@ -332,6 +332,7 @@ function AdminOrders() {
                             {item.name} × {item.quantity}
                             {[item.size, item.color].some(Boolean) ? ` (${[item.size, item.color].filter(Boolean).join(', ')})` : ''}
                             {item.preorder && <span className="ml-1 text-xs text-final-ember">pre-order{item.ships_on ? `, ships ${item.ships_on}` : ''}</span>}
+                            {item.made_to_order && <span className="ml-1 text-xs text-final-ember">made to order{item.lead_time_days ? `, ~${item.lead_time_days} days` : ''}</span>}
                             {item.gift && <span className="ml-1 text-xs text-final-accent">free gift</span>}
                           </span>
                           <span className="tabular-nums text-final-muted">{item.gift ? 'Free' : formatCurrency(item.price)}</span>

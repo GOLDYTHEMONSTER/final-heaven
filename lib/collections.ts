@@ -4,27 +4,30 @@
 // same product can sit in many collections. Pure: callers pass the products.
 import type { Product } from '@/lib/catalog'
 
-export const SOURCE_TYPES = ['original', 'thrift', 'wholesale', 'independent', 'consignment'] as const
+/** Where a product comes from. Final Heaven sells new products only. */
+export const SOURCE_TYPES = ['original', 'wholesale', 'independent', 'distributor', 'local_maker'] as const
 export type SourceType = (typeof SOURCE_TYPES)[number]
 
-export const CONDITIONS = ['new_with_tags', 'new_without_tags', 'excellent', 'good', 'fair'] as const
-export type Condition = (typeof CONDITIONS)[number]
+/** How it's supplied: ready to ship from stock, or made after the order (pre-orders have their own fields). */
+export const FULFILMENTS = ['stock', 'made_to_order'] as const
+export type Fulfilment = (typeof FULFILMENTS)[number]
 
-/** How a condition reads to a shopper. */
-export const CONDITION_LABELS: Record<Condition, string> = {
-  new_with_tags: 'New with tags',
-  new_without_tags: 'New without tags',
-  excellent: 'Pre-owned, excellent',
-  good: 'Pre-owned, good',
-  fair: 'Pre-owned, fair',
+/** A URL-safe slug from a name: "Lagos Label Co." -> "lagos-label-co". */
+export function slugify(name: string) {
+  return name.toLowerCase().normalize('NFKD').replace(/[^\w\s-]/g, '').trim().replace(/[\s_-]+/g, '-').replace(/^-|-$/g, '').slice(0, 80)
 }
 
-/** How a product's origin reads to a shopper; wholesale and consignment say nothing of how they were bought. */
+/** How a product's origin reads to a shopper; how bought-in stock was sourced is never shown. */
 export function sourceLabel(p: Pick<Product, 'sourceType' | 'brand'>): string | null {
   if (p.sourceType === 'original') return 'Final Heaven Original'
-  if (p.sourceType === 'thrift') return 'Thrift find'
   if (p.sourceType === 'independent') return p.brand ? p.brand.name : 'Independent label'
   return null
+}
+
+/** "Made to order · ships in about N days" for made-to-order products; null for stock. */
+export function supplyLabel(p: Pick<Product, 'fulfilment' | 'leadTimeDays'>): string | null {
+  if (p.fulfilment !== 'made_to_order') return null
+  return p.leadTimeDays ? `Made to order · ships in about ${p.leadTimeDays} days` : 'Made to order'
 }
 
 /** The rule part of a collection: every condition given must hold. */

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { publicProduct } from '@/lib/storefront'
-import { CONDITION_LABELS, type Condition } from '@/lib/collections'
 import { ProductView } from './ProductView'
 
 // Re-rendered at most once a minute: price and availability in the metadata stay current.
@@ -26,8 +25,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 function structuredData(product: NonNullable<Awaited<ReturnType<typeof publicProduct>>>) {
   const site = process.env.SITE_URL || 'https://www.finalheaven.shop'
   const state = product.purchase?.state
-  const availability = state === 'available' ? 'InStock' : state === 'preorder' ? 'PreOrder' : state === 'sold_out' ? 'SoldOut' : 'OutOfStock'
-  const used = product.condition && !product.condition.startsWith('new_')
+  const availability = state === 'available' ? (product.fulfilment === 'made_to_order' ? 'MadeToOrder' : 'InStock')
+    : state === 'preorder' ? 'PreOrder' : state === 'sold_out' ? 'SoldOut' : 'OutOfStock'
   const brand = product.brand?.name ?? (product.sourceType === 'original' ? 'Final Heaven' : null)
   return {
     '@context': 'https://schema.org',
@@ -43,9 +42,9 @@ function structuredData(product: NonNullable<Awaited<ReturnType<typeof publicPro
       priceCurrency: 'NGN',
       price: product.price,
       availability: `https://schema.org/${availability}`,
-      itemCondition: `https://schema.org/${used ? 'UsedCondition' : 'NewCondition'}`,
+      // Everything Final Heaven sells is new.
+      itemCondition: 'https://schema.org/NewCondition',
     },
-    ...(product.condition ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Condition', value: CONDITION_LABELS[product.condition as Condition] }] } : {}),
   }
 }
 

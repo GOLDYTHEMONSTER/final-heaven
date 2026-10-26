@@ -20,6 +20,9 @@ export type CatalogueProduct = {
   preorder_limit?: number | null
   sizes?: unknown
   colors?: unknown
+  /** stock, or made_to_order (made after the order, in lead_time_days). */
+  fulfilment?: string | null
+  lead_time_days?: number | null
 }
 
 /** A product as the storefront receives it from /api/products (see toPublicProduct). */
@@ -47,11 +50,11 @@ export interface Product {
   tags?: string[]
   cardSize?: 'large' | 'medium' | 'small'
   createdAt?: string
-  /** Where it comes from: original, thrift, wholesale, independent or consignment (lib/collections). */
+  /** Where it comes from: original, wholesale, independent, distributor or local_maker (lib/collections). */
   sourceType?: string
-  /** For pre-owned pieces: new_with_tags … fair, and what's worth knowing about it. */
-  condition?: string
-  conditionNotes?: string
+  /** stock (ready to ship) or made_to_order (made after the order, in about leadTimeDays). */
+  fulfilment?: string
+  leadTimeDays?: number
   /** Its label, when it has a published one. */
   brand?: { id: string; name: string; slug: string }
   /** From the server: whether and how this can be bought right now. */
@@ -160,8 +163,8 @@ export function toPublicProduct(row: Record<string, any>, today: string) {
     cardSize: row.card_size ?? undefined,
     createdAt: row.created_at,
     sourceType: row.source_type ?? 'original',
-    condition: row.condition ?? undefined,
-    conditionNotes: row.condition_notes ?? undefined,
+    fulfilment: row.fulfilment ?? 'stock',
+    leadTimeDays: row.lead_time_days ?? undefined,
     brand: row.brand ? { id: row.brand.id, name: row.brand.name, slug: row.brand.slug } : undefined,
     purchase: purchaseState(row as CatalogueProduct, today),
   }

@@ -14,16 +14,16 @@ import { track } from '@/lib/analytics'
 import { PolicySummary } from '@/components/legal/PolicySummary'
 import { POLICY } from '@/lib/legal'
 import { formatDay, stringList, type Product } from '@/lib/catalog'
-import { CONDITION_LABELS, sourceLabel, type Condition } from '@/lib/collections'
+import { sourceLabel, supplyLabel } from '@/lib/collections'
 import { setGroups } from '@/lib/sets'
 import { sized } from '@/lib/images'
 
 
-/** Where the piece comes from and, for pre-owned pieces, its condition and anything worth knowing. */
+/** Who makes it (originals and labels), and, when it's made to order, that it ships only once made. */
 function Provenance({ product }: { product: Product }) {
   const source = sourceLabel(product)
-  const condition = product.condition ? CONDITION_LABELS[product.condition as Condition] : null
-  if (!source && !condition) return null
+  const supply = supplyLabel(product)
+  if (!source && !supply) return null
   return (
     <dl className="mt-6 grid gap-x-6 gap-y-3 border-t border-final-light-gray/30 pt-5 text-sm sm:grid-cols-[auto_1fr]">
       {source && (
@@ -36,12 +36,14 @@ function Provenance({ product }: { product: Product }) {
           </dd>
         </>
       )}
-      {condition && (
+      {supply && (
         <>
-          <dt className="text-final-muted">Condition</dt>
+          <dt className="text-final-muted">Supply</dt>
           <dd className="text-final-off-white">
-            {condition}
-            {product.conditionNotes && <p className="mt-1 text-final-off-white/70">{product.conditionNotes}</p>}
+            {supply}
+            <p className="mt-1 text-final-off-white/70">
+              We make this after you order{product.leadTimeDays ? `, so it ships about ${product.leadTimeDays} days after payment` : ''}. It doesn’t ship straight away.
+            </p>
           </dd>
         </>
       )}
