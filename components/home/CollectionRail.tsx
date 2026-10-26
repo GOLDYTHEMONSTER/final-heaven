@@ -41,7 +41,8 @@ export function CollectionRail({ items }: { items: { collection: Collection; pro
         </Link>
       </div>
 
-      <ul className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+      {/* Five fit one row on wide screens; otherwise rows of four. */}
+      <ul className={`-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 ${shown.length === 5 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'}`}>
         {shown.map(({ collection, products }) => (
           <li key={collection.id} className="w-[72vw] shrink-0 snap-start sm:w-auto">
             <Link href={`/collections/${collection.slug}`} className="group block">
