@@ -11,9 +11,10 @@ Short videos for the November launch, in a cinematic style with glitchy, high-co
 Status (27 Oct):
 
 - The motion toolkit (`_build/`) is built.
-- **00 Signal** is rendered (`00-signal/`).
-- The Rose Line hero clip is generated and checked (`01-rose-line/`).
-- 5 credits have been spent so far.
+- **All videos are made (27 Oct):** 00 Signal, 01 Rose Line, 02 Outerwear, 03 Ice, 04 Channel 17, and four browsing clips (05) in place of the single "Checkout open" film.
+- Every sales video also has a launch-day version (`&live=1`).
+- Posting guide, captions and links: `README.md`.
+- Credits spent: 15 for three hero clips, about 5 for the Ice cutouts.
 
 ## The idea
 

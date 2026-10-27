@@ -1,0 +1,15 @@
+{
+  "title": "03 · Ice",
+  "scenes": [
+    { "kind": "cutout", "dur": 2.4, "srcs": ["cutouts/heart-set-black.png"], "beats": [1.0],
+      "caption": { "kicker": "Heart Pendant Set · all 10", "title": "Ten<br>hearts", "price": "₦25,000", "note": "Red or black · single pendants ₦7,500" } },
+    { "kind": "cutout", "dur": 2.4, "srcs": ["cutouts/ghost-silver.png", "cutouts/ghost-gold.png"],
+      "caption": { "kicker": "Iced Ghost Pendant", "title": "Ice<br>cold", "price": "₦25,000", "note": "Gold or silver · 24\" rope chain" } },
+    { "kind": "cutout", "dur": 2.0, "srcs": ["cutouts/cuban-gold.png"],
+      "caption": { "kicker": "Iced Cuban Bracelet", "title": "On the<br>wrist", "price": "₦20,000", "note": "Gold or silver" } },
+    { "kind": "cutout", "dur": 2.0, "srcs": ["cutouts/fang-grillz.png"],
+      "caption": { "kicker": "Iced Fang Grillz", "title": "Bite", "price": "₦10,000", "note": "Top and bottom set" } },
+    { "kind": "end", "dur": 3.0, "kicker": "Pendants · bracelets · grillz", "title": "Ice",
+      "lines": [["Heart Pendant Set, all 10", "₦25,000"], ["Iced Ghost Pendant", "₦25,000"], ["Iced Cuban Bracelet", "₦20,000"], ["Grillz sets", "₦10,000"]] }
+  ]
+}

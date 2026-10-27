@@ -1,0 +1,223 @@
+<!doctype html>
+<!--
+  The collection Reels (01 Rose Line, 02 Outerwear, 03 Ice, 04 Channel 17), FH · TX style.
+  ?dir=<folder> loads ../<folder>/reel.json: a list of scenes, each one of
+    hero     the Higgsfield clip (frames in _frames/hero), letterboxed, opening up on the beat
+    photo    a still with a slow push-in and a caption
+    cutout   a product cut out on black with a light sweep across it
+    channel  a fast flick through stills, like changing TV channels
+    end      the end card
+  Every cut between scenes tears with a colour split. Prices and names live in reel.json:
+  check them against the live store before every render.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=block');
+:root { --ink:#0A0A0B; --paper:#F2F1EE; --ember:#E8613C; --pink:255 61 154; --cyan:56 214 255; --muted:#A3A3A8; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--ink); color:var(--paper); font-family:'Archivo', sans-serif; }
+.full { position:absolute; inset:0; }
+.mono { font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:.16em; }
+.display { font-weight:800; font-stretch:125%; text-transform:uppercase; letter-spacing:-0.035em; line-height:.9; }
+.split { text-shadow:calc(var(--s, 3px) * -1) 0 rgb(var(--pink)), var(--s, 3px) 0 rgb(var(--cyan)); }
+
+#scene { overflow:hidden; }
+#scene img.cover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+/* The hero clip is 4:5: it sits in the band that the 4:5 feed crop keeps (y 285–1635). */
+#hero { position:absolute; left:0; top:285px; width:1080px; height:1350px; overflow:hidden; }
+#hero img { width:100%; height:100%; object-fit:cover; }
+.bar { position:absolute; left:0; right:0; background:#000; }
+#barTop { top:0; } #barBottom { bottom:0; }
+#cut { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 42%, #24242a 0%, #0A0A0B 62%); }
+#cut .item { position:absolute; left:110px; right:110px; top:330px; height:860px; }
+#cut .item img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 30px 60px rgba(0,0,0,.6)); }
+#cut .sweep { position:absolute; inset:0; -webkit-mask-size:contain; mask-size:contain; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center;
+  background:linear-gradient(105deg, transparent 0%, transparent 40%, rgba(255,255,255,.85) 50%, transparent 60%, transparent 100%); background-size:300% 100%; mix-blend-mode:screen; }
+#chan { position:absolute; left:64px; top:310px; padding:10px 22px; background:#000; font-size:60px; font-weight:600; }
+
+#ghostR, #ghostC { mix-blend-mode:screen; opacity:0; }
+.tear { visibility:hidden; background:var(--ink); overflow:hidden; }
+#static { width:100%; height:100%; image-rendering:pixelated; opacity:0; }
+#grain { opacity:.12; mix-blend-mode:overlay; }
+#scan { background:repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 2px, transparent 2px 5px); }
+#shade { background:linear-gradient(180deg, rgba(10,10,11,.55) 0%, transparent 18%, transparent 55%, rgba(10,10,11,.9) 78%, rgba(10,10,11,.95) 100%); }
+
+#hud { position:absolute; top:250px; left:64px; right:64px; display:flex; justify-content:space-between; font-size:24px; }
+#hud .rec::before { content:''; display:inline-block; width:14px; height:14px; border-radius:50%; background:var(--ember); margin-right:12px; vertical-align:1px; }
+#copy { position:absolute; left:64px; right:64px; bottom:380px; }
+#copy .kicker { font-size:26px; color:var(--paper); }
+#copy .title { font-size:104px; margin-top:20px; }
+#copy .price { margin-top:26px; font-weight:800; font-stretch:125%; font-size:58px; display:flex; gap:20px; align-items:baseline; }
+#copy .was { font-size:32px; color:var(--muted); text-decoration:line-through; text-decoration-thickness:3px; font-weight:600; }
+#copy .note { margin-top:14px; font-size:22px; color:var(--muted); }
+
+#end { opacity:0; background:var(--ink); }
+#end .copy { position:absolute; left:64px; right:64px; top:470px; }
+#end .kicker { font-size:28px; }
+#end .title { font-size:150px; margin-top:28px; }
+#end .lines { margin-top:60px; display:grid; gap:22px; }
+#end .lines div { display:flex; justify-content:space-between; gap:24px; font-size:34px; border-top:1px solid rgba(242,241,238,.22); padding-top:20px; }
+#end .lines b { font-weight:800; font-stretch:125%; font-size:44px; }
+#end .foot { margin-top:70px; font-size:26px; color:var(--muted); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="onlyR" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
+  <filter id="onlyC" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
+  <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</svg>
+
+<div id="world" class="full">
+  <div id="scene" class="full">
+    <img class="cover" id="photo" alt="">
+    <div id="hero"><img id="heroImg" alt=""><div class="bar" id="barTop"></div><div class="bar" id="barBottom"></div></div>
+    <div id="cut"><div class="item"><img id="cutImg" alt=""><div class="sweep" id="sweep"></div></div></div>
+    <div id="chan" class="mono"></div>
+  </div>
+  <div id="shade" class="full"></div>
+  <div id="copy"><div class="mono kicker"></div><div class="display split title"></div><div class="price"></div><div class="mono note"></div></div>
+</div>
+<div id="ghostR" class="full" style="filter:url(#onlyR)"></div>
+<div id="ghostC" class="full" style="filter:url(#onlyC)"></div>
+<div id="tears"></div>
+<div id="end" class="full">
+  <div class="copy">
+    <div class="mono kicker"></div>
+    <div class="display split title"></div>
+    <div class="lines"></div>
+    <div class="mono foot">finalheaven.shop · checkout opens Fri 13 Nov</div>
+  </div>
+</div>
+<canvas id="static" class="full" width="216" height="384"></canvas>
+<div id="scan" class="full"></div>
+<svg id="grain" class="full" width="1080" height="1920"><rect width="100%" height="100%" filter="url(#noise)"/></svg>
+<div id="hud" class="mono"><span class="rec">FH · TX</span><span id="tc"></span></div>
+
+<script src="fx.js"></script>
+<script>
+const { seg, clamp, easeOut, hit, frame, staticNoise, tears, timecode } = FX
+const $ = (s) => document.querySelector(s)
+let R, scenes, LEN, base
+
+const show = (el, on) => (el.style.display = on ? '' : 'none')
+async function setSrc(img, url) {
+  if (!url) return
+  const abs = new URL(url, location.href).href
+  if (img.src !== abs) { img.src = abs; await img.decode().catch(() => {}) }
+}
+
+// Tear and colour-split copies are clones of #world, refreshed on the frames that need them.
+// The clones keep their ids so the #id styles still size them; the originals come first in the
+// document, so $('#x') keeps finding the original.
+const tearLayers = [0, 1, 2].map(() => { const el = document.createElement('div'); el.className = 'tear full'; $('#tears').appendChild(el); return el })
+function copyWorld(into) {
+  into.replaceChildren($('#world').cloneNode(true))
+}
+
+window.renderFrame = async (t) => {
+  const s = scenes.find((x) => t >= x.from && t < x.to) ?? scenes[scenes.length - 1]
+  const p = seg(t, s.from, s.to)
+  const local = t - s.from
+  show($('#photo'), s.kind === 'photo' || s.kind === 'channel')
+  show($('#hero'), s.kind === 'hero')
+  show($('#cut'), s.kind === 'cutout')
+  show($('#chan'), s.kind === 'channel')
+  $('#shade').style.opacity = s.kind === 'cutout' ? 0.6 : 1
+
+  if (s.kind === 'hero') {
+    const f = Math.min(s.frames - 1, Math.floor(local * 24))
+    await setSrc($('#heroImg'), `${base}_frames/hero/${String(f + 1).padStart(4, '0')}.jpg`)
+    // Letterboxed to 2.39:1 at first; the bars open on the beat.
+    const open = easeOut(seg(t, s.from + (s.openAt ?? 1.0), s.from + (s.openAt ?? 1.0) + 0.35))
+    const bar = (1350 - 1080 / 2.39) / 2 * (1 - open)
+    $('#barTop').style.height = $('#barBottom').style.height = bar + 'px'
+    $('#heroImg').style.transform = `scale(${1.04 - 0.04 * p})`
+  }
+  if (s.kind === 'photo') {
+    await setSrc($('#photo'), base + s.src)
+    $('#photo').style.objectPosition = s.pos ?? '50% 30%'
+    $('#photo').style.transform = `scale(${1.02 + 0.08 * p})`
+  }
+  if (s.kind === 'channel') {
+    const i = Math.min(s.srcs.length - 1, Math.floor(local / s.each))
+    await setSrc($('#photo'), base + s.srcs[i])
+    $('#photo').style.objectPosition = '50% 50%'
+    $('#photo').style.transform = 'none'
+    $('#chan').textContent = `CH ${String(i + 1).padStart(2, '0')}`
+  }
+  if (s.kind === 'cutout') {
+    const i = s.srcs.length > 1 ? Math.floor(local / ((s.to - s.from) / s.srcs.length)) % s.srcs.length : 0
+    await setSrc($('#cutImg'), base + s.srcs[i])
+    const mask = `url("${new URL(base + s.srcs[i], location.href).href}")`
+    $('#sweep').style.webkitMaskImage = $('#sweep').style.maskImage = mask
+    $('#sweep').style.backgroundPosition = `${100 - 100 * easeOut(seg(local, 0.15, 1.1))}% 0`
+    $('#cutImg').style.transform = `scale(${1.06 - 0.06 * easeOut(seg(local, 0, 0.5))})`
+  }
+
+  // Caption for this scene.
+  const c = s.caption
+  $('#copy').style.opacity = c && s.kind !== 'end' ? 1 : 0
+  if (c && $('#copy').dataset.key !== s.from + '') {
+    $('#copy').dataset.key = s.from + ''
+    $('#copy .kicker').textContent = c.kicker ?? ''
+    $('#copy .title').innerHTML = c.title ?? ''
+    $('#copy .price').innerHTML = c.price ? `${c.price}${c.was ? ` <span class="was">${c.was}</span>` : ''}` : ''
+    $('#copy .note').textContent = c.note ?? ''
+  }
+  $('#copy').style.transform = `translateY(${(1 - easeOut(seg(local, 0, 0.3))) * 30}px)`
+  $('#copy .title').style.setProperty('--s', local < 0.12 ? '16px' : '3px')
+
+  // End card.
+  const endOn = s.kind === 'end'
+  $('#end').style.opacity = endOn ? 1 : 0
+  if (endOn) {
+    $('#end .kicker').textContent = s.kicker
+    $('#end .title').innerHTML = s.title
+    $('#end .lines').innerHTML = s.lines.map(([a, b]) => `<div><span class="mono">${a}</span><b>${b}</b></div>`).join('')
+    $('#end .title').style.setProperty('--s', local < 0.12 || hit(local, 0.5) ? '18px' : '4px')
+  }
+
+  // Static at the very start and end; a tear and colour split on every cut.
+  const st = t < 0.35 ? 1 - seg(t, 0.15, 0.35) : t > LEN - 0.3 ? seg(t, LEN - 0.3, LEN) : 0
+  $('#static').style.opacity = st
+  if (st > 0) staticNoise($('#static'), frame(t) * 7919 + 5, 0.55)
+  const cutNow = scenes.some((x) => x.from > 0 && hit(t, x.from, 3)) || (s.kind === 'channel' && hit(local % s.each, 0, 2))
+  const extra = (s.beats ?? []).some((b) => hit(local, b, 2))
+  const amount = cutNow ? 1 : extra ? 0.45 : 0
+  const split = cutNow ? 30 : extra ? 14 : 0
+  if (amount) { tearLayers.forEach(copyWorld); copyWorld($('#ghostR')); copyWorld($('#ghostC')) }
+  tears(tearLayers, frame(t) * 131 + 17, amount)
+  $('#ghostR').style.opacity = $('#ghostC').style.opacity = split ? 0.8 : 0
+  $('#ghostR').style.transform = `translateX(${-split}px)`
+  $('#ghostC').style.transform = `translateX(${split}px)`
+  if (s.kind === 'channel' && hit(local % s.each, 0, 2)) { $('#static').style.opacity = 0.7; staticNoise($('#static'), frame(t) * 31 + 1, 0.6) }
+
+  // &live=1: the version for after launch day, when checkout is open.
+  if (endOn && new URLSearchParams(location.search).get('live')) $('#end .foot').textContent = 'finalheaven.shop · checkout is open'
+  $('#hud').style.opacity = endOn ? 0 : 1
+  $('#tc').textContent = timecode(t)
+}
+
+window.ready = fetch(`../${new URLSearchParams(location.search).get('dir')}/reel.json`).then((r) => r.json()).then(async (json) => {
+  R = json
+  base = `../${new URLSearchParams(location.search).get('dir')}/`
+  let at = 0
+  scenes = R.scenes.map((x) => { const s = { ...x, from: at, to: at + x.dur }; at += x.dur; return s })
+  LEN = Math.round(at * 30) / 30
+  window.duration = LEN
+  window.cues = [
+    { at: 0, kind: 'hiss', dur: 0.4 },
+    ...scenes.filter((s) => s.from > 0).map((s) => ({ at: s.from, kind: s.kind === 'end' ? 'boom' : 'zap' })),
+    ...scenes.flatMap((s) => (s.beats ?? []).map((b) => ({ at: s.from + b, kind: 'tick' }))),
+    ...scenes.filter((s) => s.kind === 'channel').flatMap((s) => s.srcs.map((_, i) => ({ at: s.from + i * s.each, kind: 'zap' }))),
+    { at: LEN - 0.3, kind: 'hiss', dur: 0.3 },
+  ]
+  await Promise.all([FX.ready(), document.fonts.load('800 100px Archivo'), document.fonts.load('400 20px "JetBrains Mono"')])
+  await window.renderFrame(0)
+})
+</script>
+</body>
+</html>

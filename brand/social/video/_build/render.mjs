@@ -22,7 +22,6 @@ const flag = (name, fallback) => {
   return i === -1 ? fallback : Number(args[i + 1])
 }
 const [composition, out] = args.filter((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--'))
-const SECONDS = flag('seconds', 8)
 const FPS = flag('fps', 30)
 const W = 1080, H = 1920
 const FFMPEG = process.env.FFMPEG ?? 'ffmpeg'
@@ -37,7 +36,9 @@ const server = createServer(async (req, res) => {
   res.writeHead(200, { 'content-type': TYPES[extname(path)] ?? 'application/octet-stream' }).end(await readFile(path))
 })
 await new Promise((r) => server.listen(0, '127.0.0.1', r))
-const pageUrl = `http://127.0.0.1:${server.address().port}/${relative(root, resolve(composition)).replaceAll('\\', '/')}`
+// A query string (?clip=home) passes through to the page.
+const [compPath, query] = composition.split('?')
+const pageUrl = `http://127.0.0.1:${server.address().port}/${relative(root, resolve(compPath)).replaceAll('\\', '/')}${query ? `?${query}` : ''}`
 
 const port = 9300 + Math.floor(Math.random() * 500)
 const chrome = spawn(CHROME, ['--headless=new', '--hide-scrollbars', '--force-color-profile=srgb', `--remote-debugging-port=${port}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'cdp-'))}`, 'about:blank'], { stdio: 'ignore' })
@@ -70,6 +71,8 @@ await send('Page.navigate', { url: pageUrl })
 for (let i = 0; i < 100 && !(await evaluate('typeof window.renderFrame === "function" && !!window.ready')); i++) await sleep(100)
 await evaluate('window.ready')
 const cues = (await evaluate('window.cues ?? []')) ?? []
+// Length: --seconds, else the page's own window.duration (a composition whose length depends on its capture).
+const SECONDS = flag('seconds', null) ?? (await evaluate('window.duration ?? null')) ?? 8
 
 // Frames go straight into ffmpeg as JPEGs; audio is built alongside from the cues.
 const audio = soundtrack(cues, SECONDS)

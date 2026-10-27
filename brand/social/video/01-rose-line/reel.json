@@ -1,0 +1,19 @@
+{
+  "title": "01 · The Rose Line",
+  "scenes": [
+    { "kind": "hero", "dur": 4.6, "frames": 121, "openAt": 1.0, "beats": [2.0, 3.0, 4.0],
+      "caption": { "kicker": "For her · six pieces", "title": "The Rose<br>Line", "price": "₦17,000", "was": "₦45,000", "note": "Sizes XS–L" } },
+    { "kind": "photo", "dur": 1.2, "src": "../../shoot-02/w-ringer-cream.jpg",
+      "caption": { "kicker": "Rose Ringer Baby Tee", "title": "Cream,<br>red trim", "price": "₦17,000" } },
+    { "kind": "photo", "dur": 1.2, "src": "../../shoot-02/w-waffle-navy.jpg",
+      "caption": { "kicker": "Rose Waffle Tank", "title": "Navy<br>waffle", "price": "₦17,000" } },
+    { "kind": "photo", "dur": 1.2, "src": "../../shoot-02/w-crop-white.jpg",
+      "caption": { "kicker": "Heaven Sent Crop Top", "title": "A rose<br>with wings", "price": "₦17,000" } },
+    { "kind": "photo", "dur": 1.2, "src": "../../shoot-02/w-trio-pink.jpg",
+      "caption": { "kicker": "Rose Trio Ringer Baby Tee", "title": "Three<br>roses", "price": "₦17,000" } },
+    { "kind": "photo", "dur": 1.2, "src": "../../shoot-02/w-rosetank-black.jpg",
+      "caption": { "kicker": "Rose Tank", "title": "Black,<br>red trim", "price": "₦17,000" } },
+    { "kind": "end", "dur": 3.0, "kicker": "The Rose Line · six pieces", "title": "₦17,000<br>each",
+      "lines": [["Was", "₦45,000"], ["Sizes", "XS–L"], ["Pieces", "6"]] }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "title": "04 · Channel 17",
+  "scenes": [
+    { "kind": "channel", "dur": 3.2, "each": 0.4,
+      "srcs": [
+        "../../../../public/products/seraph-spec-tee/seraph-spec-tee-white-back.jpg",
+        "../../../../public/products/awaken-tee/awaken-tee-black-back.jpg",
+        "../../../../public/products/holy-ground-tee/holy-ground-tee-black-back.jpg",
+        "../../../../public/products/seraph-helm-tee/seraph-helm-tee-black-back.jpg",
+        "../../../../public/products/celestial-glyphs-tee/celestial-glyphs-tee-black-back.jpg",
+        "../../../../public/products/heaven-blade-tee/heaven-blade-tee-black-back.jpg",
+        "../../../../public/products/chrome-flames-07-tee/chrome-flames-07-tee-black-back.jpg",
+        "../../../../public/products/heaven-outline-tee/heaven-outline-tee-black-back.jpg"
+      ],
+      "caption": { "kicker": "₦17k tees · eight back prints", "title": "Channel<br>17", "price": "₦17,000", "was": "₦45,000" } },
+    { "kind": "hero", "dur": 4.6, "frames": 121, "openAt": 0.8, "beats": [2.0, 3.0, 4.0],
+      "caption": { "kicker": "Heaven Outline Tee", "title": "The city<br>above", "price": "₦17,000", "was": "₦45,000", "note": "Relaxed oversized fit · sizes S–XL" } },
+    { "kind": "photo", "dur": 1.6, "src": "../../shoot-02/m-holy-ground.jpg", "pos": "50% 30%",
+      "caption": { "kicker": "Holy Ground Tee", "title": "Faith is<br>quiet", "price": "₦17,000", "was": "₦45,000" } },
+    { "kind": "end", "dur": 3.0, "kicker": "Eight back prints", "title": "₦17K<br>tees",
+      "lines": [["Each", "₦17,000"], ["Was", "₦45,000"], ["Sizes", "S–XL"]] }
+  ]
+}

@@ -42,3 +42,11 @@ tmp-*.js
 # Supabase CLI local state
 supabase/.temp/
 .next-build/
+
+# Captured screen frames for the videos: large, and re-made with brand/social/video/_build/capture.mjs
+brand/social/video/**/_frames/
+# Rendered videos: big, and re-made from their sources with brand/social/video/_build/render.mjs.
+# The Higgsfield hero clips are kept, since they cost credits to make again.
+brand/social/video/**/*.mp4
+!brand/social/video/**/hero-raw-5s.mp4
+brand/social/video/**/*-live-frames.png
