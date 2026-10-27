@@ -9,6 +9,7 @@ import { FiCheck, FiPlus } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import type { Product } from '@/lib/catalog'
+import { HypeTag } from '@/components/hype/Hype'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
 function blockedLabel(product: Product) {
@@ -189,6 +190,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
           {product.sizes && product.sizes.length > 0 && (
             <p className="mt-2 text-xs text-final-muted">Sizes {product.sizes.join(' / ')}</p>
           )}
+          <HypeTag productId={product.id} />
           <div className="relative z-10 mt-auto flex items-center justify-between gap-4 pt-4">
             <Price product={product} large />
             {addButton}
@@ -242,6 +244,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
         <div className="mt-1.5">
           <Price product={product} />
         </div>
+        <HypeTag productId={product.id} />
       </div>
     </article>
   )

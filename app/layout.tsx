@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Archivo } from 'next/font/google'
 import './globals.css'
+import './hype.css'
 import { Providers } from './providers'
 import { VercelAnalytics } from '@/components/analytics/VercelAnalytics'
 

@@ -7,6 +7,7 @@ import { audit } from '@/lib/audit'
 import { handle } from '@/lib/api'
 import { logger } from '@/lib/log'
 import { sendQueuedEmails } from '@/lib/email'
+import { refreshHype } from '@/lib/hype-server'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -22,6 +23,8 @@ export const maxDuration = 60
  *  3. Retention: expire analytics (13 months), rate-limit windows (2 days),
  *     old analytics salts and the email log (13 months). Financial records
  *     are never touched.
+ *  4. Hype: re-score every hyped product, so momentum fades as hypes age
+ *     (lib/hype). Skipped quietly where Hype isn't set up.
  */
 export const GET = handle('cron.daily', async (req: NextRequest) => {
   const secret = process.env.CRON_SECRET
@@ -45,6 +48,13 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
   } catch (error) {
     result.retention = { error: (error as Error).message }
     logger.error('cron.retention_failed', { error })
+  }
+
+  try {
+    result.hype = await refreshHype()
+  } catch (error) {
+    result.hype = { error: (error as Error).message }
+    logger.warn('cron.hype_failed', { error })
   }
 
   await audit({ tenantId: null, action: 'job.daily_completed', actor: { type: 'job' }, metadata: { ...result, ms: Date.now() - started } })

@@ -50,7 +50,8 @@ export default function PrivacyPage() {
       <Section title="Cookies and storage on your device">
         <ul>
           <li>Your cart is saved in your browser’s local storage so it’s still there when you come back. It stays on your device until you check out.</li>
-          <li>Staff who sign in to manage the shop get a sign-in cookie. Shoppers don’t.</li>
+          <li>Staff who sign in to manage the shop get a sign-in cookie.</li>
+          <li>If you tap Hype on a product, we set one cookie holding a random number, so each browser’s hype counts once per product. It isn’t linked to your name, orders or anything else, and we store only a scrambled form of it. Shoppers who never tap Hype get no cookie.</li>
           <li>Because we only use what’s strictly necessary for the shop to work, we don’t show a cookie banner.</li>
         </ul>
       </Section>

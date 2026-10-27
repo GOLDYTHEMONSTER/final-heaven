@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { formatDay, type PaymentsState } from '@/lib/catalog'
 import { formatCurrency } from '@/lib/utils/format'
+import { HypeSwitch } from '@/components/admin/HypeSwitch'
 
 type Selling = {
   paymentsOpenOn: string | null; purchasesPaused: boolean; today: string; payments: PaymentsState
@@ -178,6 +179,7 @@ export default function StoreSellingPage() {
               )}
             </form>
           </section>
+          <HypeSwitch />
         </div>
       )}
     </div>

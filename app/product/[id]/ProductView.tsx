@@ -17,6 +17,7 @@ import { POLICY } from '@/lib/legal'
 import { formatDay, stringList, type Product } from '@/lib/catalog'
 import { sourceLabel, supplyLabel } from '@/lib/collections'
 import { setGroups } from '@/lib/sets'
+import { HypeMeter } from '@/components/hype/Hype'
 
 
 /** Who makes it (originals and labels), and, when it's made to order, that it ships only once made. */
@@ -245,6 +246,7 @@ export function ProductView({ params }: { params: { id: string } }) {
                   {product.description}
                 </p>
                 <Provenance product={product} />
+                <div className="mt-6"><HypeMeter productId={product.id} category={product.category} /></div>
               </div>
 
               {/* A set is put together on its own page (picks from each group), not chosen here. */}
