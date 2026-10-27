@@ -10,6 +10,7 @@ export type Permission =
   | 'refunds.request' | 'refunds.approve' | 'finance.read' | 'finance.export'
   | 'customers.read' | 'customers.update' | 'analytics.read' | 'audit.read'
   | 'users.manage' | 'settings.manage'
+  | 'shipping.read' | 'shipping.manage' | 'finance.adjust'
 
 export type TenantAccess = {
   tenantId: string

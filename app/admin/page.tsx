@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useCallback, useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
   FiPackage, FiPlus, FiEdit, FiTrash2, FiEye, FiCheck, FiX,
@@ -11,6 +11,7 @@ import { formatCurrency } from '@/lib/utils/format'
 import { uploadProductImage } from '@/lib/admin/upload'
 import { SourcingFields, toSource, type Supplier } from '@/components/admin/SourcingFields'
 import { ProductOriginFields } from '@/components/admin/ProductOriginFields'
+import { ShippingFields } from '@/components/admin/ShippingFields'
 
 // The usual categories, plus any a product already uses, so editing never swaps a category.
 const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Grillz', 'Gadgets', 'Sets', 'Vapes']
@@ -43,6 +44,16 @@ export default function AdminPage() {
     if (supplier) setSelectedSupplier(supplier)
   }, [])
 
+  // Opened from a product in Shipping's pricing health lists.
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get('edit')
+    const found = id && products.find((p) => p.id === id)
+    if (found) {
+      setEditingProduct(found)
+      window.history.replaceState(null, '', window.location.pathname)
+    }
+  }, [products])
+
   async function fetchProducts() {
     try {
       setLoading(true)
@@ -61,9 +72,11 @@ export default function AdminPage() {
       const isNew = !product.id
       const method = isNew ? 'POST' : 'PUT'
       const newId = `p${Date.now()}`
+      // The shipping profile is saved on its own, once the product exists.
+      const { shipping, ...fields } = product
       const body = isNew
-        ? { ...product, id: newId }
-        : product
+        ? { ...fields, id: newId }
+        : fields
 
       const res = await fetch('/api/admin/products', {
         method,
@@ -77,6 +90,16 @@ export default function AdminPage() {
       }
 
       const data = await res.json()
+      if (shipping?.dirty && shipping.canManage) {
+        const saved = await fetch('/api/admin/shipping/products', {
+          method: 'PUT', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productId: data.product.id, profiles: shipping.profiles }),
+        })
+        if (!saved.ok) {
+          const e = await saved.json().catch(() => null)
+          alert(`The product was saved, but its shipping profile wasn’t: ${e?.error || 'please try again'}`)
+        }
+      }
       if (isNew) {
         setProducts([data.product, ...products])
       } else {
@@ -163,6 +186,7 @@ export default function AdminPage() {
       category: 'T-Shirts',
       description: '',
       source: toSource(null),
+      shipping: null,
       source_type: 'original',
       fulfilment: 'stock',
       lead_time_days: '',
@@ -174,6 +198,7 @@ export default function AdminPage() {
       sizes: [],
       tags: []
     })
+    const setShipping = useCallback((shipping: any) => setForm((f: any) => ({ ...f, shipping })), [])
     const [dragActive, setDragActive] = useState(false)
     const [uploading, setUploading] = useState(0)
     const [colorInput, setColorInput] = useState('')
@@ -292,6 +317,15 @@ export default function AdminPage() {
                 onChange={(source) => setForm((f: any) => ({ ...f, source }))}
                 suppliers={suppliers}
                 onSupplierAdded={(s) => setSuppliers((list) => [...list, s].sort((a, b) => a.name.localeCompare(b.name)))}
+              />
+              <ShippingFields
+                productId={isNew ? null : form.id}
+                price={Number(form.price) || 0}
+                category={form.category}
+                source={form.source}
+                sizes={form.sizes ?? []}
+                value={form.shipping ?? null}
+                onChange={setShipping}
               />
               <div className="flex gap-4">
                 <div className="flex-1">

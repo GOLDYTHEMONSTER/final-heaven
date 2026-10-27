@@ -186,7 +186,7 @@ export function SourcingFields({ value, onChange, suppliers, onSupplierAdded, pr
             </div>
           )}
           <div>
-            <label className={label} htmlFor="source-ship">Shipping (₦/unit)</label>
+            <label className={label} htmlFor="source-ship">China-side shipping (₦/unit)</label>
             <input id="source-ship" type="number" step="0.01" min="0" value={value.shipping_cost_ngn} onChange={set('shipping_cost_ngn')} className={field} />
           </div>
           <div>
@@ -198,6 +198,7 @@ export function SourcingFields({ value, onChange, suppliers, onSupplierAdded, pr
             <input id="source-other" type="number" step="0.01" min="0" value={value.other_cost_ngn} onChange={set('other_cost_ngn')} className={field} />
           </div>
         </div>
+        <p className="text-xs text-final-off-white/50">China-side shipping is getting it to the forwarder. International freight comes from the shipping profile below, so it isn’t counted twice.</p>
         <p className="rounded-lg bg-final-black/40 p-3 text-xs text-final-off-white/80">
           {cost.ok && margin
             ? <>Landed cost {formatCurrency(cost.landed)} · gross profit {formatCurrency(margin.profit)}{margin.marginPct != null ? ` (${margin.marginPct}%)` : ''} at {formatCurrency(Number(price) || 0)}. Gross only: ads, payment fees and running costs aren&apos;t included.</>

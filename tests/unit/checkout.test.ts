@@ -3,8 +3,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   checkout, parseCart, RESUME_HOURS,
-  type CheckoutPayments, type CheckoutStore, type Held, type NewCheckout, type PromoContext, type SavedCheckout,
+  type CheckoutPayments, type CheckoutStore, type Held, type NewCheckout, type PromoContext, type SavedCheckout, type ShippingInputs,
 } from '@/lib/checkout'
+import { DEFAULT_SETTINGS, type Profile } from '@/lib/shipping/engine'
 
 const NOW = new Date('2026-10-18T12:00:00Z')
 const base = { status: 'active', images: [], stock: 5, price: 10000, category: 'Tees' }
@@ -392,5 +393,60 @@ describe('launch day and pauses', () => {
       .toEqual({ ok: false, reason: 'payment_unavailable', message: 'Checkout opens on launch day.' })
     expect(await make(NOW, { purchasesPaused: true }).resume({ reference: r.checkout, email: buyer.email }))
       .toMatchObject({ ok: false, reason: 'payment_unavailable', message: expect.stringMatching(/paused/) })
+  })
+})
+
+describe('shipping allocation', () => {
+  // The brief's illustrative ₦12,000/kg, as test data only.
+  const rate = { id: 'air-1', method: 'air' as const, provider: 'Test Cargo', currency: 'NGN', fxRate: null, billingUnit: 'kg' as const, ratePerUnit: 12000,
+    volumetricDivisor: null, minChargeable: null, roundingIncrement: null, minShipmentCharge: null, surchargePerUnit: null, handlingPerShipment: null,
+    clearanceIncluded: true, clearancePerUnit: null, insurancePct: null, contingencyPct: null, typicalShipmentUnits: null,
+    effectiveFrom: '2026-10-01', effectiveTo: null, status: 'active' as const, confirmed: true }
+  const profile = (productId: string, weightKg: number): Profile => ({
+    productId, variant: '', method: 'air', weightKg, lengthCm: null, widthCm: null, heightCm: null, packagingKg: null, dataStatus: 'verified', classKey: null,
+    valueTier: 'standard', targetPct: null, minContributionKobo: null, maxContributionKobo: null, adjustmentFactor: 1, clearanceEligible: true,
+    subsidyEligible: true, platformContributionKobo: null, competitorPriceKobo: null, override: null })
+  const inputs = (over: Partial<ShippingInputs['context']> = {}): ShippingInputs => ({
+    context: { today: '2026-10-18', now: NOW, settings: DEFAULT_SETTINGS, classes: [], rates: [rate], campaigns: [], seaFreightKobo: {}, ...over },
+    profiles: [profile('tee', 0.2), profile('heart', 0.05)], costs: {}, categories: { tee: 'Tees', heart: 'Gifts' },
+  })
+
+  it('saves the order’s allocation with the Checkout and leaves the total exactly as priced', async () => {
+    mem.store.shipping = vi.fn(async () => inputs())
+    const r = await make().begin({ lines: [tee(2)], promoCode: 'SAVE10', buyer })
+    expect(r.ok).toBe(true)
+    const saved = [...mem.saved.values()][0]
+    expect(saved).toMatchObject({ subtotal: '20000.00', discount: '2000.00', total: '18000.00' })
+    expect(payments.start).toHaveBeenCalledWith(expect.objectContaining({ amountMinor: 1_800_000 }))
+    expect(saved.shipping).toMatchObject({ status: 'estimated', rates: { air: { id: 'air-1' } } })
+    expect(saved.shipping!.lines[0]).toMatchObject({ productId: 'tee', quantity: 2, freightKobo: 480_000, contributionKobo: 240_000, discountKobo: 200_000 })
+  })
+
+  it('allocates freight to the free gift too, with nothing to recover it from', async () => {
+    mem.store.shipping = vi.fn(async () => inputs())
+    await make(NOW, { giftCategory: 'Gifts' }).begin({ lines: [tee(1)], gift: { id: 'heart', color: 'Red' }, buyer })
+    const s = [...mem.saved.values()][0].shipping!
+    expect(s.lines.map((l) => [l.productId, l.gift, l.freightKobo, l.contributionKobo])).toEqual([['tee', false, 240_000, 120_000], ['heart', true, 60_000, 0]])
+  })
+
+  it('ignores anything a shopper sends about prices or contributions', async () => {
+    mem.store.shipping = vi.fn(async () => inputs())
+    const lines = parseCart([{ id: 'tee', size: 'M', color: 'black', quantity: 1, price: 1, contribution: 0, shippingContribution: 999999, freight: 0 }])
+    expect(lines).toEqual([{ id: 'tee', size: 'M', color: 'black', quantity: 1 }])
+    await make().begin({ lines, buyer })
+    expect([...mem.saved.values()][0].shipping!.lines[0]).toMatchObject({ contributionKobo: 120_000, freightKobo: 240_000 })
+  })
+
+  it('still takes the order, with no allocation, when shipping can’t be worked out', async () => {
+    mem.store.shipping = vi.fn(async () => { throw new Error('database unavailable') })
+    const r = await make().begin({ lines: [tee(1)], buyer })
+    expect(r.ok).toBe(true)
+    expect([...mem.saved.values()][0]).toMatchObject({ total: '10000.00', shipping: null })
+  })
+
+  it('with no rate set, the allocation says it is incomplete rather than guessing', async () => {
+    mem.store.shipping = vi.fn(async () => inputs({ rates: [] }))
+    await make().begin({ lines: [tee(1)], buyer })
+    expect([...mem.saved.values()][0].shipping).toMatchObject({ status: 'incomplete', totals: { freightKobo: 0 } })
   })
 })

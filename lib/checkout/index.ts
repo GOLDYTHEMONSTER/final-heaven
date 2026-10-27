@@ -16,7 +16,11 @@
 //  - no payment starts before the store's launch day or while the store is
 //    paused (Shop.paymentsOpenOn, Shop.purchasesPaused);
 //  - gift pieces (Shop.giftCategory) are never sold: one is added free, as the
-//    last line, only when the cart earns it.
+//    last line, only when the cart earns it;
+//  - begin saves the order's shipping allocation (lib/shipping/engine) with the
+//    Checkout, worked out from the same server prices; it never changes the
+//    total, and checkout doesn't wait on it: if it can't be worked out, the
+//    Checkout is saved without one.
 //
 // Behind it: the purchase and pricing rules (./pricing, lib/catalog), the
 // CheckoutStore seam (Supabase in production, in-memory in tests) and the
@@ -25,6 +29,8 @@ import { BadRequest, int, reference, text } from '@/lib/api'
 import { fromMinor, toMinor } from '@/lib/money'
 import { paymentsClosed, paymentsState, storeToday, type CatalogueProduct, type PaymentsState } from '@/lib/catalog'
 import { POLICY } from '@/lib/legal'
+import { logger } from '@/lib/log'
+import { allocateOrder, type Context, type Costs, type Profile, type Snapshot } from '@/lib/shipping/engine'
 import { orderItems, quoteCart, quoteProblem, type CartLine, type GiftPick, type PromoContext, type Quote } from './pricing'
 
 export type { CartLine, GiftOption, GiftPick, Quote, QuoteLine, PromoCode, PromoContext } from './pricing'
@@ -66,7 +72,12 @@ export type NewCheckout = Buyer & {
   isPreorder: boolean
   termsVersion: string
   termsAcceptedAt: string
+  /** How the order's price is shared out to freight recovery, reserve and platform (staff-only). */
+  shipping: Snapshot | null
 }
+
+/** What the shipping allocation needs for some products: policy, rates, campaigns, profiles, costs, categories. */
+export type ShippingInputs = { context: Context; profiles: Profile[]; costs: Record<string, Costs | null>; categories: Record<string, string> }
 
 export type SavedCheckout = {
   id: string
@@ -97,6 +108,8 @@ export interface CheckoutStore {
   renewHold(id: string): Promise<'renewed' | 'closed' | Held>
   /** Units of these products held by live Checkouts (pre-order allowance counted apart). */
   holds(storeId: string, ids: string[]): Promise<{ productId: string; preorder: boolean; quantity: number }[]>
+  /** Inputs for the shipping allocation; absent where shipping isn't tracked. */
+  shipping?(tenantId: string, storeId: string, ids: string[], at: { now: Date; today: string }): Promise<ShippingInputs>
 }
 
 /** A line that can't be held: the product, and how many of it are still free. */
@@ -185,6 +198,21 @@ export function checkout(deps: CheckoutDeps) {
     return priced
   }
 
+  /** The order's shipping allocation, or null when it can't be worked out: checkout never waits on it. */
+  async function allocate(priced: Quote): Promise<Snapshot | null> {
+    if (!deps.store.shipping || shop.currency !== 'NGN') return null
+    try {
+      const lines = priced.gift?.line ? [...priced.lines, priced.gift.line] : priced.lines
+      const input = await deps.store.shipping(shop.tenantId, shop.storeId, [...new Set(lines.map((l) => l.id))],
+        { now: now(), today: storeToday(shop.timeZone, now()) })
+      return allocateOrder(lines.map((l) => ({ productId: l.id, size: l.size, quantity: l.quantity, unitKobo: l.unitMinor, category: input.categories[l.id] ?? null, gift: l.gift })),
+        priced.discountMinor, input.context, input.profiles, input.costs)
+    } catch (e) {
+      logger.error('checkout.shipping_allocation_failed', { error: e })
+      return null
+    }
+  }
+
   async function begin({ lines, promoCode = null, gift = null, buyer }:
     { lines: CartLine[]; promoCode?: string | null; gift?: GiftPick | null; buyer: Buyer }): Promise<BeginResult> {
     const priced = await quote({ lines, promoCode, email: buyer.email, gift })
@@ -213,6 +241,7 @@ export function checkout(deps: CheckoutDeps) {
       isPreorder: priced.isPreorder,
       termsVersion: POLICY.termsVersion,
       termsAcceptedAt: now().toISOString(),
+      shipping: await allocate(priced),
     })
     // Someone else started a checkout for the last pieces between pricing and saving.
     if (!saved.ok) {

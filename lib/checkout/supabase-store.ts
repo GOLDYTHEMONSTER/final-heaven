@@ -4,6 +4,7 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { getStorefront } from '@/lib/tenancy'
 import { paymentDeps, siteUrl } from '@/lib/payments'
 import { startPayment } from '@/lib/payments/service'
+import { loadContext, loadProducts } from '@/lib/shipping/store'
 import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
@@ -58,7 +59,7 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
         shipping_city: c.shippingCity, shipping_state: c.shippingState, shipping_postal_code: c.shippingPostalCode,
         shipping_country: c.shippingCountry, currency: c.currency, items: c.items, subtotal: c.subtotal,
         discount: c.discount, total: c.total, promo_code_id: c.promoCodeId, promo_code: c.promoCode,
-        is_preorder: c.isPreorder, terms_version: c.termsVersion, terms_accepted_at: c.termsAcceptedAt,
+        is_preorder: c.isPreorder, terms_version: c.termsVersion, terms_accepted_at: c.termsAcceptedAt, shipping: c.shipping,
       } })
       const held = heldLine(error)
       if (held) return { ok: false, held }
@@ -79,6 +80,16 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
       if (error) throw error
       return ((data ?? []) as { product_id: string; preorder: boolean; quantity: number }[])
         .map((h) => ({ productId: h.product_id, preorder: h.preorder, quantity: Number(h.quantity) }))
+    },
+
+    async shipping(tenantId, storeId, ids, at) {
+      const [context, products, categories] = await Promise.all([
+        loadContext(db, tenantId, at.now, at.today),
+        loadProducts(db, tenantId, ids),
+        db.from('products').select('id, category').eq('store_id', storeId).in('id', ids),
+      ])
+      if (categories.error) throw categories.error
+      return { context, ...products, categories: Object.fromEntries((categories.data ?? []).map((p) => [p.id, p.category])) }
     },
 
     async find(storeId, reference) {

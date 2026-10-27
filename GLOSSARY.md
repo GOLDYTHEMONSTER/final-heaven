@@ -43,3 +43,30 @@ _Avoid_: discount (a discount comes from a promo code)
 **Promo code**:
 A code a shopper enters to take a percentage or fixed amount off the cart, with its own dates and limits.
 _Avoid_: coupon, voucher, discount code
+
+### Shipping and cost recovery
+
+**Shipping contribution**:
+The part of a product's price set aside for international freight. Internal only: customers see one price.
+_Avoid_: shipping fee, delivery charge
+
+**Freight recovery**:
+The part of the shipping contribution that pays freight. The recovery target is the share of freight it aims to cover (50% unless changed).
+_Avoid_: shipping profit
+
+**Logistics reserve**:
+A balance set aside from contributions for freight surprises (re-weighing, rate rises). Never revenue.
+_Avoid_: buffer, profit
+
+**Platform contribution**:
+The platform's own share of a price. Held while its order is open; earned once the order is delivered.
+_Avoid_: commission, fee
+
+**Unfunded freight**:
+Freight that no contribution, subsidy or reserve draw pays for, so the margin absorbs it. Always shown.
+_Avoid_: loss, gap (alone)
+
+**Shipment**:
+A consolidated air shipment of paid orders, or an inventory batch (sea, or stock bought in by air), reconciled against the forwarder's invoice.
+_Avoid_: delivery (that's the courier to the customer)
+
