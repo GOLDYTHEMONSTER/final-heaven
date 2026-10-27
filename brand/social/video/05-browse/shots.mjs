@@ -47,7 +47,7 @@ export default {
     swipes: [{ at: 0.8, dur: 0.7, from: [0.82, 0.36], to: [0.18, 0.36] }],
   },
 
-  // Pick a size, add the Long-Stem Rose Tank to the cart, open the cart: ₦17,000, checkout opens 13 November.
+  // Pick a size, add the Long-Stem Rose Tank to the cart, open the cart: ₦17,000, checkout opens in November.
   cart: {
     url: '/product/p1792844704816',
     seconds: 7,

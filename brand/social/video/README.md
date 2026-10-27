@@ -1,6 +1,6 @@
 # FH · TX: the November videos
 
-Eight short vertical videos for the launch on **Friday 13 November**. The plan behind them is in `november-plan.md`.
+Eight short vertical videos for the launch in **November** (the exact day is kept back on purpose). The plan behind them is in `november-plan.md`.
 
 Each video comes as:
 
@@ -14,10 +14,10 @@ Prices and names were checked against the live store on 27 Oct 2026. **If a pric
 
 ## Two versions of every sales video
 
-- **Before launch (now to Thu 12 Nov):** the files as listed. The end cards say "checkout opens Fri 13 Nov" / "13.11".
+- **Before launch (now to Thu 12 Nov):** the files as listed. The end cards say "checkout opens this November" / "NOV · Date drops soon".
 - **From launch day:** render the same video with `&live=1`. Its end card says checkout is open (browse clips: "OPEN · card, bank transfer, USSD").
 
-Before posting the first one, set the checkout opening date in Admin → Store to 13 November, so the videos tell the truth.
+The videos name no day, only November: checkout must open in November for them to tell the truth. When the day is set in Admin → Store, announce it separately.
 
 ## The videos
 
@@ -55,7 +55,7 @@ The browsing clips are real screen captures of the live store (`_build/capture.m
 | Sat 7 Nov | `browse-swipe` | Story |
 | Mon 9 Nov | `02-outerwear` | Reel |
 | Wed 11 Nov | `browse-mood` | Story |
-| **Fri 13 Nov** | `browse-cart` (live) + `00-signal` as a Story | Reel + Story |
+| **Launch day** | `browse-cart` (live) + `00-signal` as a Story | Reel + Story |
 | Sun 15 Nov | `04-channel-17` (live) | Reel |
 | Wed 18 Nov | `03-ice` (live) | Reel |
 | Sat 21 Nov | `01-rose-line` (live), re-post | Story |
@@ -67,7 +67,7 @@ Use tagged links so Admin → Analytics shows which video brought visitors. Base
 
 | Video | Campaign | Link to | Caption |
 |---|---|---|---|
-| 00 Signal | `nov-signal` | `/` | Signal incoming. Checkout opens Friday 13 November. finalheaven.shop |
+| 00 Signal | `nov-signal` | `/` | Signal incoming. Checkout opens this November. finalheaven.shop |
 | 01 Rose Line | `nov-rose-line` | `/collections` | The Rose Line. Six pieces for her, ₦17,000 each (was ₦45,000). Sizes XS–L. Link in bio. |
 | 02 Outerwear | `nov-outerwear` | `/shop?category=Tracksuits` | Broken-star tape, sleeve to ankle. Tracksuits ₦65,000, Football Track Jacket ₦45,000. Sizes S–XL. |
 | 03 Ice | `nov-ice` | `/shop?category=Pendants` | Ice. All ten hearts ₦25,000, the Iced Ghost Pendant ₦25,000, the Cuban bracelet ₦20,000, grillz ₦10,000 a set. |

@@ -40,7 +40,9 @@ Refusals to try:
 - an option over 160 characters;
 - a `price` field in the request (it must be ignored).
 
-Checkout is closed until `stores.payments_open_on` is set. Launch is planned for Fri 13 Nov 2026.
+Checkout is closed until `stores.payments_open_on` is set. Launch is planned for November 2026; the public date is kept vague ("November").
+
+The shipping split (contribution, recovery, reserve, platform share) is internal: the quote response must never contain it, and checkout totals must not change because of it. See `docs/erp/06-shipping.md`.
 
 ### Browser checks
 
@@ -59,4 +61,4 @@ Run the scripts in `scripts/audit/` (they need Chrome; analytics are blocked whi
 
 - Social packs are in `brand/social/`; videos in `brand/social/video/` (see `november-plan.md`).
 - Prices in them must match the live store on the day.
-- The Signal teaser promises checkout opens 13 Nov: set `payments_open_on` before it's posted (Mon 2 Nov).
+- The videos promise only that checkout opens in November (no day): it must open in November. Announce the day separately once `payments_open_on` is set.

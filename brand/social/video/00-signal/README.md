@@ -16,15 +16,15 @@ Every frame is drawn in code, so this cost 0 credits. Timeline, at 120 BPM:
 | 3.0 s, 3.5 s | Small glitches |
 | 4.0 s | The drop: a hard tear and a boom |
 | 4.3 s | FINAL HEAVEN / November transmission |
-| 5.3 s | CHECKOUT OPENS 13.11, Friday 13 November |
+| 5.3 s | CHECKOUT OPENS NOV, "Date drops soon" |
 | 6.9 s | The picture switches off like an old TV |
 | 7.6 s | Static returns, so the loop runs straight into the start |
 
 The sound is synthesised (hiss, zaps, a boom and beat ticks); there's no music, so nothing needs a licence. Add a track in Instagram when posting and turn the original audio down to about 30%.
 
-**Before posting (Mon 2 Nov):** the store's checkout opening date must really be set to Friday 13 November (Admin → Store). The video promises it.
+**Before posting (Mon 2 Nov):** the video promises only "November", so checkout must open in November. The exact day is kept back on purpose; announce it separately once it's set in Admin → Store.
 
-Caption: Signal incoming. Checkout opens Friday 13 November. finalheaven.shop
+Caption: Signal incoming. Checkout opens this November. finalheaven.shop
 
 ## Rendering
 

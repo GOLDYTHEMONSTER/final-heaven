@@ -102,14 +102,14 @@ Text stays inside Instagram's safe area: 250 px from the top and 340 px from the
 
 ## November calendar (proposed)
 
-Checkout is closed for now (the store has no opening date set). So the plan works back from a launch day: **Friday 13 November** (agreed 26 Oct). The date suits the ghost pendant and the gothic hearts.
+Checkout is closed for now (the store has no opening date set). So the plan works back from a launch day in November. The day was first agreed as Fri 13 Nov (26 Oct); on 27 Oct it was kept vague in public: videos say only "November". The date suits the ghost pendant and the gothic hearts.
 
 | Date | Post | Note |
 |---|---|---|
 | Mon 2 Nov | 00 Signal (teaser) | Reveals the date |
-| Thu 5 Nov | 01 Rose Line, 6 s preview | "Browse now, checkout opens 13.11" |
+| Thu 5 Nov | 01 Rose Line, 6 s preview | "Browse now, checkout opens this November" |
 | Mon 9 Nov | 02 Outerwear, 6 s preview | Same |
-| **Fri 13 Nov** | **05 Checkout open + 01 Rose Line (full)** | Launch day; checkout opens that morning |
+| **Launch day** | **05 Checkout open + 01 Rose Line (full)** | Launch day; checkout opens that morning |
 | Sun 15 Nov | 02 Outerwear (full) | |
 | Wed 18 Nov | 03 Ice | |
 | Sat 21 Nov | 04 Channel 17 | |
