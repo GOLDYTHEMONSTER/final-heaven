@@ -8,7 +8,12 @@ Short videos for the November launch, in a cinematic style with glitchy, high-co
 - Store screens are real phone recordings.
 - Transitions are cut to the beat.
 
-Status: plan only. Nothing has been generated and no credits have been spent.
+Status (27 Oct):
+
+- The motion toolkit (`_build/`) is built.
+- **00 Signal** is rendered (`00-signal/`).
+- The Rose Line hero clip is generated and checked (`01-rose-line/`).
+- 5 credits have been spent so far.
 
 ## The idea
 
