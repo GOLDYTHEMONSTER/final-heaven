@@ -16,8 +16,14 @@ Project details for the ship-audit skill.
 - **Tests:** `npm run typecheck`, `npm run lint` (the only warnings are about `<img>` in the admin pages, from before this file), and `npx vitest run`. The database tests run in PGlite and touch nothing live.
 - **Database, read-only:** `PGOPTIONS="-c default_transaction_read_only=on" psql "$SUPABASE_CONNECTION_STRING"`.
 - **Migrations:**
-  - The files carry their own `begin;`/`commit;`. Strip them before a `begin; … rollback;` dry run, or the dry run really applies the migration.
-  - Apply a migration before deploying the code that reads it.
+  - Use `node scripts/db-migrate.mjs`:
+    - `status` shows which migrations are live;
+    - `preflight` fails if the code needs one that isn't;
+    - `apply <file>` checks preconditions, rehearses in a rolled-back transaction, applies, then confirms with a probe.
+  - Every new migration needs a probe in that script.
+  - Run `preflight` before every push.
+  - The files carry their own `begin;`/`commit;`. Strip them before a hand-made `begin; … rollback;` dry run, or the dry run really applies the migration.
+  - Apply a migration before deploying the code that reads it, except where the script marks it "after deploy", like the staff MFA lock.
 - **Vercel logs:** the project is on a different Vercel account from this machine's CLI, so `vercel logs` can't reach it. Ask the user to check the dashboard if logs are needed.
 
 ### Money path
