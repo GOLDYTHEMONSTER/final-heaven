@@ -230,11 +230,12 @@
   .group:hover .fh-cardframe__sheen, .group:focus-within .fh-cardframe__sheen { animation: fh-card-sheen 1.1s ease-out 0.2s both; }
   .group:hover .fh-cardframe__embers i, .group:focus-within .fh-cardframe__embers i { animation: fh-frame-ember 2.8s ease-out calc(var(--i) * -0.35s) infinite; }
 }
-/* Touch screens have no hover: the frame plays while the card is pressed and
-   held (data-revealed, lib/useTouchReveal), and only loads once the card is
-   near the screen (data-near). */
+/* Touch screens have no hover: the frame plays while the card is held, or once
+   by itself when the card rests mid-screen (data-revealed; data-peek slows the
+   fade, lib/useTouchReveal), and only loads once the card is near (data-near). */
 @media (hover: none) {
   .fh-cardframe { display: none; }
+  .group[data-peek] .fh-cardframe, .group[data-peek] .fh-cardframe-photo, .group[data-peek] .fh-cardframe__mat { transition-duration: 0.9s; }
   .group[data-near] .fh-cardframe { display: block; }
   .group[data-revealed] .fh-cardframe { opacity: 1; transform: none; }
   .group[data-revealed] .fh-cardframe-hides { opacity: 0; }

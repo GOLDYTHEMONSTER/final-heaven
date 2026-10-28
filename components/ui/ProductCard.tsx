@@ -110,7 +110,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   useEffect(() => () => clearTimeout(timer.current), [])
   // Elite, Iconic and Legendary products show their rank frame on hover (only while Hype is on).
   const frame = useCardFrame(product.id)
-  // A second view (usually the front) is revealed on hover; on touch screens, by pressing and holding the card.
+  // A second view (usually the front) is revealed on hover; on touch screens, by holding the card, and once by itself when the card rests mid-screen.
   const secondImage = product.images?.[1]?.url
   const cardRef = useRef<HTMLElement>(null)
   const { near } = useTouchReveal(cardRef, viewMode === 'grid' && (Boolean(secondImage) || Boolean(frame)))
@@ -229,7 +229,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
               fill
               unoptimized
               sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-              className={`${near ? 'block' : 'hidden'} object-cover opacity-0 transition-opacity duration-500 ease-out motion-reduce:transition-none group-data-[revealed]:opacity-100 [@media(hover:hover)]:block [@media(hover:hover)]:group-hover:opacity-100`}
+              className={`${near ? 'block' : 'hidden'} object-cover opacity-0 transition-opacity duration-500 ease-out motion-reduce:transition-none group-data-[revealed]:opacity-100 group-data-[peek]:duration-[900ms] [@media(hover:hover)]:block [@media(hover:hover)]:group-hover:opacity-100`}
             />
           )}
         </Link>
