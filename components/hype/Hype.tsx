@@ -91,15 +91,14 @@ export function CardFrame({ rank, geometry }: { rank: Rank; geometry: CardFrameG
   )
 }
 
-/** On a product card: the crest, rank and score, once a product has any hype. */
+/** On a product card: the crest and score, once a product has any hype. The rank's name is on the product page. */
 export function HypeTag({ productId }: { productId: string }) {
   const { enabled, data, tier } = useHype(productId)
   if (!enabled || !data || data.hypes < 1) return null
   return (
     <p className="mt-2 flex items-center gap-2" aria-label={`Hype ${Math.round(data.score)}, ${rankLabel(data.rank)}${tier ? ` ${TIER_NUMERALS[tier]}` : ''}`}>
       <RankCrest rank={data.rank} size={30} />
-      <span className="fh-score text-[15px]">{Math.round(data.score)}</span>
-      <span className="text-final-muted"><RankName rank={data.rank} tier={tier} early={data.early} /></span>
+      <span className="fh-num text-[20px]" data-rank={data.rank}>{Math.round(data.score)}</span>
     </p>
   )
 }
@@ -131,7 +130,7 @@ export function HypeMeter({ productId, category }: { productId: string; category
         <RankCrest key={`${rank}-${tier}-${climb}`} rank={rank} tier={tier} size={92} climb={climb} />
         <div className="min-w-0">
           <div className="flex items-baseline gap-2">
-            <span key={`s${score}`} className={`fh-score text-4xl ${climb ? 'is-tick' : ''}`}>{score}</span>
+            <span key={`s${score}`} className={`fh-score fh-num text-4xl ${climb ? 'is-tick' : ''}`} data-rank={rank}>{score}</span>
             <span className="text-xs text-final-muted">hype</span>
           </div>
           <RankName rank={rank} tier={tier} early={data?.early} />
