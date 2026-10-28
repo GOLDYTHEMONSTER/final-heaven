@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react'
 import type { CartItem, GiftChoice } from '@/lib/stores/cartStore'
 import type { PaymentsState } from '@/lib/catalog'
+import type { DeliveryOption } from '@/lib/delivery'
+
+type Estimate = { minDays: number; maxDays: number; from: string | null; to: string | null }
 
 /** Where /checkout/complete finds the checkout to retry if the payment doesn't go through. */
 export const PENDING_CHECKOUT_KEY = 'fh-pending-checkout'
@@ -15,6 +18,8 @@ export type ServerQuote = {
   }[]
   subtotal: string
   discount: string
+  /** The delivery chosen and its fee (part of total); Express (expressFee) only when something comes from China. */
+  delivery: { option: DeliveryOption; fee: string; expressFee: string | null; estimates: { standard: Estimate; express?: Estimate } }
   total: string
   isPreorder: boolean
   promo: { code: string; description: string | null } | null
@@ -32,10 +37,10 @@ export type ServerQuote = {
 }
 
 /**
- * The server's price for the cart, refreshed whenever the cart, promo code or
- * gift changes. The browser's own prices are only a fallback while this loads.
+ * The server's price for the cart, refreshed whenever the cart, promo code,
+ * gift or delivery changes. The browser's own prices are only a fallback while this loads.
  */
-export function useQuote(items: CartItem[], promoCode: string, email?: string, gift: GiftChoice | null = null) {
+export function useQuote(items: CartItem[], promoCode: string, email?: string, gift: GiftChoice | null = null, delivery: DeliveryOption = 'standard') {
   const [quote, setQuote] = useState<ServerQuote | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -48,6 +53,7 @@ export function useQuote(items: CartItem[], promoCode: string, email?: string, g
     promoCode: promoCode || null,
     email: promoEmail,
     gift,
+    delivery,
   })
 
   useEffect(() => {

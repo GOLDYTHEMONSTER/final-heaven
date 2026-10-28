@@ -72,6 +72,18 @@ describe('templates', () => {
     expect(staff.text).toContain('STOCK SHORT: Tee (M): 1 missing')
   })
 
+  it('shows Express delivery and its fee, the expected dates, and tells staff to send it by air', () => {
+    const o = { ...ORDER, total: '27499.90', deliveryOption: 'express', deliveryFee: '2500.00',
+      deliveryEstimate: { minDays: 10, maxDays: 17, from: '2026-11-23', to: '2026-11-30' } }
+    const r = orderPaidEmail(o, 'https://s.test')
+    expect(r.html).toContain('Express delivery (by air)')
+    expect(r.html).toContain('₦2,500.00')
+    expect(r.text).toContain('Expected: Mon 23 Nov – Mon 30 Nov')
+    expect(staffOrderPaidEmail(o, 'https://s.test').text).toContain('Delivery: Express, send by air')
+    // Standard, free delivery adds no line.
+    expect(orderPaidEmail(ORDER, 'https://s.test').text).not.toMatch(/Express|Expected:/)
+  })
+
   it('flags a payment on a cancelled order for refund', () => {
     expect(staffOrderPaidEmail({ ...ORDER, status: 'cancelled' }, 'https://s.test').subject).toMatch(/refund needed/)
   })

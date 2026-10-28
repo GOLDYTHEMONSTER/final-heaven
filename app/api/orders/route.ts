@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { BadRequest, email, handle, readJson, text } from '@/lib/api'
 import { fromMinor } from '@/lib/money'
-import { parseCart, parseGift, parsePromoCode } from '@/lib/checkout'
+import { parseCart, parseDelivery, parseGift, parsePromoCode } from '@/lib/checkout'
 import { checkoutForRequest } from '@/lib/checkout/supabase-store'
 import { getStorefront } from '@/lib/tenancy'
 import { POLICY } from '@/lib/legal'
@@ -33,7 +33,7 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
   if (body.termsAccepted !== true) throw new BadRequest('Please accept the Terms of Sale and Returns Policy to place your order.')
 
   const result = await (await checkoutForRequest(req)).begin({
-    lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), gift: parseGift(body.gift), buyer,
+    lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), gift: parseGift(body.gift), delivery: parseDelivery(body.delivery), buyer,
   })
   if (!result.ok) {
     return NextResponse.json({ error: result.message, reason: result.reason }, { status: result.reason === 'cart_invalid' ? 400 : 503 })
@@ -66,7 +66,7 @@ export const GET = handle('orders.track', async (req: NextRequest) => {
   const store = await getStorefront()
   const { data, error } = await createSupabaseServiceClient()
     .from('orders')
-    .select('order_number, tracking_number, email, status, payment_status, currency, created_at, subtotal, discount, promo_code, total, is_preorder, order_items, timeline, shipping_city, shipping_country, shipping_carrier, shipping_reference')
+    .select('order_number, tracking_number, email, status, payment_status, currency, created_at, subtotal, discount, promo_code, delivery_option, delivery_fee, delivery_estimate, total, is_preorder, order_items, timeline, shipping_city, shipping_country, shipping_carrier, shipping_reference')
     .eq('store_id', store.storeId)
     .neq('status', 'pending_payment') // unpaid legacy orders were never placed
     // `ref` is validated to [A-Z0-9-] above, so it can't inject PostgREST filter syntax.

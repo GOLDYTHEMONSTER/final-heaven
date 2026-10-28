@@ -2,6 +2,8 @@
 // storefront (what the button says) and checkout (what the server accepts).
 // Pure: the caller supplies the store's local date.
 
+import type { ProductDelivery } from '@/lib/delivery'
+
 export type CatalogueProduct = {
   id: string
   name: string
@@ -23,6 +25,8 @@ export type CatalogueProduct = {
   /** stock, or made_to_order (made after the order, in lead_time_days). */
   fulfilment?: string | null
   lead_time_days?: number | null
+  /** original, wholesale, independent, distributor or local_maker: wholesale and distributor pieces are ordered in, not made. */
+  source_type?: string | null
 }
 
 /** A product as the storefront receives it from /api/products (see toPublicProduct). */
@@ -59,6 +63,8 @@ export interface Product {
   brand?: { id: string; name: string; slug: string }
   /** From the server: whether and how this can be bought right now. */
   purchase?: PurchaseState
+  /** On the product's own page: when it should arrive, and Express when it comes from China (lib/delivery). */
+  delivery?: ProductDelivery
 }
 
 /** The columns the storefront reads for a product, with its published brand. */

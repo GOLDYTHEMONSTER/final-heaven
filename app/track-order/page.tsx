@@ -7,6 +7,7 @@ import { FiSearch, FiPackage, FiTruck, FiCheckCircle, FiClock, FiMapPin, FiRefre
 import { Layout } from '@/components/layout/Layout'
 import { formatCurrency } from '@/lib/utils/format'
 import { formatDay, optionLabel } from '@/lib/catalog'
+import { arrivalText } from '@/lib/delivery'
 
 // Fulfilment status (separate from payment status). 'ordered' is the legacy
 // name for pending_payment and still appears in older order timelines.
@@ -221,6 +222,12 @@ function TrackOrderContent() {
                   <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Total</h3>
                     <p className="text-lg font-bold text-final-accent">{formatCurrency(order.total)}</p>
+                    {order.delivery_option === 'express' && (
+                      <p className="mt-1 text-sm text-final-muted">Includes Express by air, {formatCurrency(order.delivery_fee)}</p>
+                    )}
+                    {order.delivery_estimate && !['delivered', 'cancelled'].includes(order.status) && (
+                      <p className="mt-1 text-sm text-final-muted">Expected {arrivalText(order.delivery_estimate)}</p>
+                    )}
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-final-off-white/70 mb-1">Status</h3>
@@ -245,7 +252,7 @@ function TrackOrderContent() {
                           {[item.gift ? 'Free gift' : null, `Quantity: ${item.quantity}`, item.size ? `Size ${item.size}` : null, item.color ? optionLabel(item.color) : null].filter(Boolean).join(' · ')}
                         </p>
                         {item.preorder && item.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDay(item.shipsOn)}</p>}
-                        {item.madeToOrderDays && <p className="text-sm text-final-ember">Made to order · ships about {item.madeToOrderDays} days after payment</p>}
+                        {item.madeToOrderDays && <p className="text-sm text-final-ember">Ships about {item.madeToOrderDays} days after payment</p>}
                       </div>
                       <span className="text-lg font-bold text-final-accent">{item.gift ? 'Free' : formatCurrency(item.price)}</span>
                     </div>

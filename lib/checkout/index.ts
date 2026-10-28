@@ -17,6 +17,9 @@
 //    paused (Shop.paymentsOpenOn, Shop.purchasesPaused);
 //  - gift pieces (Shop.giftCategory) are never sold: one is added free, as the
 //    last line, only when the cart earns it;
+//  - delivery (lib/delivery): Express by air is offered only when something
+//    comes from China, priced by the server from its own shipping weights, and
+//    added to the total the shopper pays;
 //  - begin saves the order's shipping allocation (lib/shipping/engine) with the
 //    Checkout, worked out from the same server prices; it never changes the
 //    total, and checkout doesn't wait on it: if it can't be worked out, the
@@ -31,9 +34,11 @@ import { paymentsClosed, paymentsState, storeToday, type CatalogueProduct, type 
 import { POLICY } from '@/lib/legal'
 import { logger } from '@/lib/log'
 import { allocateOrder, type Context, type Costs, type Profile, type Snapshot } from '@/lib/shipping/engine'
+import { DELIVERY_OPTIONS, orderDayFor, type DeliveryOption } from '@/lib/delivery'
 import { orderItems, quoteCart, quoteProblem, type CartLine, type GiftPick, type PromoContext, type Quote } from './pricing'
 
-export type { CartLine, GiftOption, GiftPick, Quote, QuoteLine, PromoCode, PromoContext } from './pricing'
+export type { CartLine, GiftOption, GiftPick, Quote, QuoteDelivery, QuoteLine, PromoCode, PromoContext } from './pricing'
+export type { DeliveryOption } from '@/lib/delivery'
 
 /**
  * The storefront a Checkout belongs to. Payments open on paymentsOpenOn
@@ -74,6 +79,11 @@ export type NewCheckout = Buyer & {
   termsAcceptedAt: string
   /** How the order's price is shared out to freight recovery, reserve and platform (staff-only). */
   shipping: Snapshot | null
+  deliveryOption: DeliveryOption
+  /** Part of total. */
+  deliveryFee: string
+  /** When the order should arrive, as quoted. */
+  deliveryEstimate: { minDays: number; maxDays: number; from: string | null; to: string | null }
 }
 
 /** What the shipping allocation needs for some products: policy, rates, campaigns, profiles, costs, categories. */
@@ -110,6 +120,8 @@ export interface CheckoutStore {
   holds(storeId: string, ids: string[]): Promise<{ productId: string; preorder: boolean; quantity: number }[]>
   /** Inputs for the shipping allocation; absent where shipping isn't tracked. */
   shipping?(tenantId: string, storeId: string, ids: string[], at: { now: Date; today: string }): Promise<ShippingInputs>
+  /** Chargeable kg of one unit of each product (null: no packed weight yet), for pricing Express. */
+  weights?(tenantId: string, ids: string[]): Promise<Record<string, number | null>>
 }
 
 /** A line that can't be held: the product, and how many of it are still free. */
@@ -158,8 +170,10 @@ export function checkout(deps: CheckoutDeps) {
     return paymentsState(shop, storeToday(shop.timeZone, now()))
   }
 
-  async function quote({ lines, promoCode = null, email = null, gift = null }:
-    { lines: CartLine[]; promoCode?: string | null; email?: string | null; gift?: GiftPick | null }): Promise<Quote> {
+  const orderDay = () => orderDayFor(payments(), storeToday(shop.timeZone, now()))
+
+  async function quote({ lines, promoCode = null, email = null, gift = null, delivery = 'standard' }:
+    { lines: CartLine[]; promoCode?: string | null; email?: string | null; gift?: GiftPick | null; delivery?: DeliveryOption }): Promise<Quote> {
     const ids = [...new Set(lines.map((l) => l.id))]
     const [rows, promo, giftProducts] = await Promise.all([
       deps.store.products(shop.storeId, ids),
@@ -185,7 +199,25 @@ export function checkout(deps: CheckoutDeps) {
     }
     const products = sellable.map(lessHolds)
     const giftOffer = giftProducts.length ? { minMinor: toMinor(shop.giftMinSubtotal, shop.currency), products: giftProducts.map(lessHolds) } : null
-    const priced = quoteCart(lines, products, shop.currency, { today: storeToday(shop.timeZone, now()), promo, promoCode, now: now(), giftOffer, giftPick: gift })
+
+    // Express is priced on the chargeable weight of the items that come from China, from the server's own profiles.
+    const orderedIn = products.filter((p) => p.fulfilment === 'made_to_order' && !p.preorder && (p.source_type === 'wholesale' || p.source_type === 'distributor'))
+    let expressKg: number | null = null
+    let weightIncomplete = false
+    if (orderedIn.length && deps.store.weights) {
+      const kg = await deps.store.weights(shop.tenantId, orderedIn.map((p) => p.id))
+      expressKg = 0
+      for (const l of lines) {
+        if (!orderedIn.some((p) => p.id === l.id)) continue
+        const unit = kg[l.id]
+        if (unit == null) weightIncomplete = true
+        else expressKg += unit * l.quantity
+      }
+    } else if (orderedIn.length) weightIncomplete = true
+    const priced = quoteCart(lines, products, shop.currency, {
+      today: storeToday(shop.timeZone, now()), promo, promoCode, now: now(), giftOffer, giftPick: gift,
+      delivery, expressKg, weightIncomplete, orderDay: orderDay(),
+    })
 
     // "Sold out" because someone else is checking out with the last pieces says so: they may come back.
     for (const line of priced.lines) {
@@ -213,9 +245,9 @@ export function checkout(deps: CheckoutDeps) {
     }
   }
 
-  async function begin({ lines, promoCode = null, gift = null, buyer }:
-    { lines: CartLine[]; promoCode?: string | null; gift?: GiftPick | null; buyer: Buyer }): Promise<BeginResult> {
-    const priced = await quote({ lines, promoCode, email: buyer.email, gift })
+  async function begin({ lines, promoCode = null, gift = null, delivery = 'standard', buyer }:
+    { lines: CartLine[]; promoCode?: string | null; gift?: GiftPick | null; delivery?: DeliveryOption; buyer: Buyer }): Promise<BeginResult> {
+    const priced = await quote({ lines, promoCode, email: buyer.email, gift, delivery })
     const problem = quoteProblem(priced)
     if (problem) return { ok: false, reason: 'cart_invalid', message: problem, quote: priced }
     const state = payments()
@@ -242,6 +274,9 @@ export function checkout(deps: CheckoutDeps) {
       termsVersion: POLICY.termsVersion,
       termsAcceptedAt: now().toISOString(),
       shipping: await allocate(priced),
+      deliveryOption: priced.delivery.option,
+      deliveryFee: m(priced.delivery.feeMinor),
+      deliveryEstimate: priced.delivery.estimates[priced.delivery.option as 'standard'],
     })
     // Someone else started a checkout for the last pieces between pricing and saving.
     if (!saved.ok) {
@@ -326,6 +361,13 @@ export function parseGift(value: unknown): GiftPick | null {
   if (typeof value !== 'object' || Array.isArray(value)) throw new BadRequest('That free gift isn’t valid.')
   const item = value as Record<string, unknown>
   return { id: text(item.id, 'Gift', { max: 100, required: true })!, color: text(item.color, 'Gift colour', { max: MAX_OPTION }) }
+}
+
+/** The delivery the shopper chose: standard unless they asked for Express. */
+export function parseDelivery(value: unknown): DeliveryOption {
+  if (value == null || value === '') return 'standard'
+  if (!(DELIVERY_OPTIONS as unknown[]).includes(value)) throw new BadRequest('Choose standard or express delivery.')
+  return value as DeliveryOption
 }
 
 export function parsePromoCode(value: unknown): string | null {

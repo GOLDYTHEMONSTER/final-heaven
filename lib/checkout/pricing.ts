@@ -3,6 +3,7 @@
 import { formatMinor, toMinor } from '@/lib/money'
 import { canBuy, purchaseState, stringList, unavailableReason, type CatalogueProduct } from '@/lib/catalog'
 import { isValidSetPick, setGroups } from '@/lib/sets'
+import { estimate, expressAvailable, expressFee, supplyOf, type DeliveryOption, type Supply } from '@/lib/delivery'
 
 export type { CatalogueProduct } from '@/lib/catalog'
 
@@ -40,8 +41,21 @@ export type QuoteLine = {
   /** Made after the order: about this many days before it ships. Null when it ships from stock. */
   madeToOrderDays: number | null
   issue: string | null
+  /** How it reaches the customer: in stock, made, ordered in from China, or a pre-order (lib/delivery). */
+  supply: Supply
   /** The free gift: never charged, never counted in the subtotal. */
   gift?: true
+}
+
+/** Delivery for a quote: the options on offer, the one chosen, its fee and when the order should arrive. */
+export type QuoteDelivery = {
+  option: DeliveryOption
+  /** Express is offered only when something comes from China; null otherwise. */
+  expressFeeMinor: number | null
+  feeMinor: number
+  estimates: Record<DeliveryOption, ReturnType<typeof estimate>> | { standard: ReturnType<typeof estimate> }
+  /** The weight Express was priced on is incomplete (a product has no packed weight yet): the base fee applies to it. */
+  weightIncomplete: boolean
 }
 
 /** The free gift a shopper picked: one of the store's gift pieces. */
@@ -57,7 +71,9 @@ export type Quote = {
   currency: string
   subtotalMinor: number
   discountMinor: number
+  /** Subtotal less discount plus delivery. */
   totalMinor: number
+  delivery: QuoteDelivery
   isPreorder: boolean
   promo: { id: string; code: string; description: string | null; discountMinor: number } | null
   promoError: string | null
@@ -109,8 +125,15 @@ export function quoteCart(
   lines: CartLine[],
   products: CatalogueProduct[],
   currency: string,
-  { today, promo = null, promoCode = null, now = new Date(), giftOffer = null, giftPick = null }:
-    { today: string; promo?: PromoContext | null; promoCode?: string | null; now?: Date; giftOffer?: GiftOffer | null; giftPick?: GiftPick | null }
+  { today, promo = null, promoCode = null, now = new Date(), giftOffer = null, giftPick = null, delivery = 'standard', expressKg = null, weightIncomplete = false, orderDay = null }:
+    { today: string; promo?: PromoContext | null; promoCode?: string | null; now?: Date; giftOffer?: GiftOffer | null; giftPick?: GiftPick | null
+      /** The delivery the shopper chose; Express falls back to standard when nothing in the cart comes from China. */
+      delivery?: DeliveryOption
+      /** Chargeable weight (kg) of the ordered-in items, from the server's shipping profiles. */
+      expressKg?: number | null
+      weightIncomplete?: boolean
+      /** The day an order placed now counts from (today, or launch day while checkout is closed); null: no dates yet. */
+      orderDay?: string | null }
 ): Quote {
   const byId = new Map(products.map((p) => [p.id, p]))
   const quantityById = new Map<string, number>()
@@ -122,7 +145,7 @@ export function quoteCart(
     const base = { id: line.id, size: line.size, color: line.color ?? null, quantity: line.quantity }
     if (!product) {
       return { ...base, name: 'This item', unitMinor: 0, lineMinor: 0, price: 0, image: null, preorder: false, shipsOn: null, madeToOrderDays: null,
-        issue: 'An item in your cart is no longer available. Please remove it.' }
+        supply: { kind: 'stock' }, issue: 'An item in your cart is no longer available. Please remove it.' }
     }
     const state = purchaseState(product, today)
     const name = product.name.trim()
@@ -142,6 +165,7 @@ export function quoteCart(
       preorder: state.state === 'preorder',
       shipsOn: state.state === 'preorder' ? state.shipsOn : null,
       madeToOrderDays: product.fulfilment === 'made_to_order' ? Number(product.lead_time_days) || null : null,
+      supply: supplyOf(product, state),
       issue: null,
     }
     if (!canBuy(state)) out.issue = unavailableReason(name, state)
@@ -174,12 +198,26 @@ export function quoteCart(
 
   const gift = giftOffer ? quoteGift(giftOffer, giftPick, subtotalMinor, currency, today) : null
   const issues = quoted.some((l) => l.issue)
+
+  // Delivery: Express (air) only when something comes from China; its fee is the server's, by weight.
+  const supplies = quoted.filter((l) => !l.issue).map((l) => l.supply)
+  const canExpress = expressAvailable(supplies)
+  const option: DeliveryOption = delivery === 'express' && canExpress ? 'express' : 'standard'
+  const expressFeeMinor = canExpress ? expressFee(expressKg) : null
+  const feeMinor = option === 'express' ? expressFeeMinor! : 0
+  const deliveryQuote: QuoteDelivery = {
+    option, expressFeeMinor, feeMinor, weightIncomplete: canExpress && weightIncomplete,
+    estimates: canExpress
+      ? { standard: estimate(supplies, 'standard', orderDay), express: estimate(supplies, 'express', orderDay) }
+      : { standard: estimate(supplies, 'standard', orderDay) },
+  }
   return {
     lines: quoted,
     currency,
     subtotalMinor,
     discountMinor,
-    totalMinor: subtotalMinor - discountMinor,
+    totalMinor: subtotalMinor - discountMinor + feeMinor,
+    delivery: deliveryQuote,
     isPreorder: quoted.some((l) => l.preorder && !l.issue),
     promo: promoResult,
     promoError,
@@ -205,7 +243,7 @@ function quoteGift(offer: GiftOffer, pick: GiftPick | null, subtotalMinor: numbe
   }
   const line: QuoteLine = {
     id: option.id, name: option.name, size: null, color: option.colors.length ? pick.color! : null, quantity: 1,
-    unitMinor: 0, lineMinor: 0, price: 0, image: option.image, preorder: false, shipsOn: null, madeToOrderDays: null, issue: null, gift: true,
+    unitMinor: 0, lineMinor: 0, price: 0, image: option.image, preorder: false, shipsOn: null, madeToOrderDays: null, supply: { kind: 'stock' }, issue: null, gift: true,
   }
   return { minMinor: offer.minMinor, eligible, options, line, issue: null }
 }

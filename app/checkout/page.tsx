@@ -11,6 +11,8 @@ import { track } from '@/lib/analytics'
 import { POLICY } from '@/lib/legal'
 import { formatDay, paymentsClosed } from '@/lib/catalog'
 import { PENDING_CHECKOUT_KEY, quoteLineAt, useQuote } from '@/lib/useQuote'
+import type { DeliveryOption } from '@/lib/delivery'
+import { DeliveryChoice } from '@/components/cart/DeliveryChoice'
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CheckoutPage() {
@@ -30,10 +32,16 @@ export default function CheckoutPage() {
   // We deliver within Nigeria only (lib/legal.ts), so the country is fixed.
   const country = POLICY.shipsTo
   const [termsAccepted, setTermsAccepted] = useState(false)
+  const [delivery, setDelivery] = useState<DeliveryOption>('standard')
   const [status, setStatus] = useState<'idle' | 'loading' | 'redirecting' | 'error'>('idle')
   const [message, setMessage] = useState('')
   // The server's price: exactly what Flutterwave will charge.
-  const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email, gift)
+  const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email, gift, delivery)
+  // Express is offered only when something comes from China; otherwise the choice goes back to standard.
+  const expressFee = quote?.delivery?.expressFee ?? null
+  useEffect(() => {
+    if (quote && expressFee == null && delivery === 'express') setDelivery('standard')
+  }, [quote, expressFee, delivery])
   const lineIssues = (quote?.lines?.some((l) => l.issue) ?? false) || !!quote?.gift?.issue
   const closed = quote?.payments?.open === false ? paymentsClosed(quote.payments) : null // before launch day, or paused
 
@@ -76,6 +84,7 @@ export default function CheckoutPage() {
       })),
       promoCode: promoCode || null,
       gift,
+      delivery,
       termsAccepted,
     }
 
@@ -223,6 +232,8 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
+                  {quote?.delivery && <DeliveryChoice delivery={quote.delivery} value={delivery} onChange={setDelivery} />}
+
                   <label className="flex items-start gap-3 text-sm text-final-muted">
                     <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required className="mt-0.5 h-4 w-4 shrink-0 accent-final-ember" />
                     <span>
@@ -289,7 +300,7 @@ export default function CheckoutPage() {
                           <p className="font-semibold text-final-off-white">{item.name}</p>
                           <p className="text-final-off-white/70 text-sm">{details}</p>
                           {line?.preorder && line.shipsOn && <p className="text-sm text-final-ember">Pre-order · ships from {formatDate(line.shipsOn)}</p>}
-                          {line?.madeToOrderDays && <p className="text-sm text-final-ember">Made to order · ships about {line.madeToOrderDays} days after payment</p>}
+                          {line?.madeToOrderDays && <p className="text-sm text-final-ember">Ships about {line.madeToOrderDays} days after payment</p>}
                           {line?.issue && <p className="text-sm text-red-400">{line.issue}</p>}
                         </div>
                         <p className="shrink-0 text-final-accent font-bold">{formatCurrency(line ? Number(line.lineTotal) : item.price * item.quantity)}</p>
@@ -322,8 +333,8 @@ export default function CheckoutPage() {
                     </div>
                   )}
                   <div className="flex justify-between text-final-off-white/70 mb-2">
-                    <span>Shipping</span>
-                    <span>Free</span>
+                    <span>{quote?.delivery.option === 'express' ? 'Express delivery' : 'Delivery'}</span>
+                    <span>{quote && Number(quote.delivery.fee) > 0 ? formatCurrency(quote.delivery.fee) : 'Free'}</span>
                   </div>
                   <div className="flex justify-between text-xl font-bold text-final-off-white">
                     <span>Total</span>

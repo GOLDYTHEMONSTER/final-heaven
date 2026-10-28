@@ -9,6 +9,7 @@ import { FiCheck, FiPlus } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import type { Product } from '@/lib/catalog'
+import { orderedIn } from '@/lib/collections'
 import { CardFrame, CardFrameMat, HypeTag, useCardFrame } from '@/components/hype/Hype'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
@@ -62,7 +63,7 @@ function Badges({ product, underFrame = false }: { product: Product; underFrame?
       )}
       {made && (
         <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
-          Made to order
+          {orderedIn(product) ? (product.leadTimeDays ? `Ships in ~${product.leadTimeDays} days` : 'Ordered in') : 'Made to order'}
         </span>
       )}
       {single && (

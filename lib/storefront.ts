@@ -1,7 +1,8 @@
 import 'server-only'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { getStorefront } from '@/lib/tenancy'
-import { PUBLIC_PRODUCT_SELECT, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
+import { PUBLIC_PRODUCT_SELECT, paymentsState, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
+import { orderDayFor, productDelivery, supplyOf } from '@/lib/delivery'
 import { collectionProducts, parseRule, type CollectionRule } from '@/lib/collections'
 
 // Public catalogue reads, shared by the API routes and the server-rendered
@@ -30,14 +31,24 @@ export async function publicProducts({ category, isNew }: { category?: string | 
   return (data || []).map((p) => toPublicProduct(p, today) as Product)
 }
 
-/** One active product, or null. */
+/** One active product with its delivery estimate, or null. */
 export async function publicProduct(id: string): Promise<Product | null> {
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) return null
   const store = await getStorefront()
-  const { data, error } = await createSupabasePublicClient().from('products').select(PUBLIC_PRODUCT_SELECT)
-    .eq('store_id', store.storeId).eq('id', id).eq('status', 'active').maybeSingle()
+  const db = createSupabasePublicClient()
+  const [{ data, error }, shop] = await Promise.all([
+    db.from('products').select(PUBLIC_PRODUCT_SELECT).eq('store_id', store.storeId).eq('id', id).eq('status', 'active').maybeSingle(),
+    db.from('stores').select('payments_open_on, purchases_paused').eq('id', store.storeId).single(),
+  ])
   if (error) throw error
-  return data ? (toPublicProduct(data, storeToday(store.timeZone)) as Product) : null
+  if (shop.error) throw shop.error
+  if (!data) return null
+  const today = storeToday(store.timeZone)
+  const product = toPublicProduct(data, today) as Product
+  // Dates count from today, or from launch day while checkout waits for it.
+  const payments = paymentsState({ paymentsOpenOn: shop.data.payments_open_on ?? null, purchasesPaused: shop.data.purchases_paused === true }, today)
+  product.delivery = productDelivery(supplyOf(data, product.purchase!), orderDayFor(payments, today))
+  return product
 }
 
 const toCollection = (r: Record<string, any>): Collection => ({

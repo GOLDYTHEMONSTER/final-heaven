@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { collectionProducts, matchesRule, parseRule, slugify, sourceLabel, supplyLabel } from '@/lib/collections'
+import { collectionProducts, matchesRule, parseRule, slugify, orderedIn, sourceLabel, supplyLabel, supplyNote } from '@/lib/collections'
 import type { Product } from '@/lib/catalog'
 
 const p = (id: string, over: Partial<Product> = {}): Product => ({
@@ -61,7 +61,15 @@ describe('source labels', () => {
 
   it('labels made-to-order products with their lead time, and nothing else', () => {
     expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 10 })).toBe('Made to order · ships in about 10 days')
+    expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'original' })).toBe('Made to order · ships in about 14 days')
     expect(supplyLabel({ fulfilment: 'stock' })).toBeNull()
     expect(supplyLabel({})).toBeNull()
+  })
+
+  it('never says a bought-in piece is made: it is ordered in after payment', () => {
+    expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'wholesale' })).toBe('Ordered in · ships in about 14 days')
+    expect(supplyNote({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'wholesale' })).toBe('We order this in for you once you’ve paid, so it ships about 14 days after payment. It doesn’t ship straight away.')
+    expect(supplyNote({ fulfilment: 'made_to_order', leadTimeDays: 10, sourceType: 'original' })).toMatch(/^We make this after you order/)
+    expect(orderedIn({ fulfilment: 'stock', sourceType: 'wholesale' })).toBe(false)
   })
 })

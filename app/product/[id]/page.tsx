@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { orderedIn } from '@/lib/collections'
 import { publicProduct } from '@/lib/storefront'
 import { ProductView } from './ProductView'
 
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 function structuredData(product: NonNullable<Awaited<ReturnType<typeof publicProduct>>>) {
   const site = process.env.SITE_URL || 'https://www.finalheaven.shop'
   const state = product.purchase?.state
-  const availability = state === 'available' ? (product.fulfilment === 'made_to_order' ? 'MadeToOrder' : 'InStock')
+  const availability = state === 'available' ? (orderedIn(product) ? 'BackOrder' : product.fulfilment === 'made_to_order' ? 'MadeToOrder' : 'InStock')
     : state === 'preorder' ? 'PreOrder' : state === 'sold_out' ? 'SoldOut' : 'OutOfStock'
   const brand = product.brand?.name ?? (product.sourceType === 'original' ? 'Final Heaven' : null)
   return {

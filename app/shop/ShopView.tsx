@@ -274,7 +274,7 @@ export function ShopView() {
         {facets.madeToOrder && (
           <label className="mt-3 flex cursor-pointer items-center gap-3 text-sm">
             <input type="checkbox" checked={readyOnly} onChange={(e) => setParams({ ready: e.target.checked ? '1' : null })} className="h-4 w-4 accent-final-off-white" />
-            Ready to ship (not made to order)
+            Ready to ship now
           </label>
         )}
       </FilterGroup>

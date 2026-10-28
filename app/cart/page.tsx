@@ -12,6 +12,7 @@ import { Layout } from '@/components/layout/Layout'
 import { lineKey } from '@/lib/stores/cartStore'
 import { formatDay, optionLabel, paymentsClosed } from '@/lib/catalog'
 import { quoteLineAt, useQuote } from '@/lib/useQuote'
+import { arrivalText } from '@/lib/delivery'
 import { GiftPicker } from '@/components/cart/GiftPicker'
 
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
@@ -130,7 +131,7 @@ export default function CartPage() {
                             <p className="mt-1 text-sm text-final-ember">Pre-order · ships from {formatDate(line.shipsOn)}</p>
                           )}
                           {line?.madeToOrderDays && (
-                            <p className="mt-1 text-sm text-final-ember">Made to order · ships about {line.madeToOrderDays} days after payment</p>
+                            <p className="mt-1 text-sm text-final-ember">Ships about {line.madeToOrderDays} days after payment</p>
                           )}
                           {line?.issue && (
                             <p className="mt-2 flex items-start gap-1.5 text-sm text-red-400" role="alert">
@@ -245,9 +246,19 @@ export default function CartPage() {
                       <span className="shrink-0 text-final-accent">Free</span>
                     </div>
                   )}
-                  <div className="flex justify-between text-final-off-white/70">
-                    <span>Shipping</span>
-                    <span>Free</span>
+                  <div className="text-final-off-white/70">
+                    <div className="flex justify-between">
+                      <span>Delivery</span>
+                      <span>Free</span>
+                    </div>
+                    {quote?.delivery && (
+                      <p className="mt-1 text-sm text-final-muted">
+                        Get it {arrivalText(quote.delivery.estimates.standard)}
+                        {quote.delivery.expressFee != null && quote.delivery.estimates.express
+                          ? `, or ${arrivalText(quote.delivery.estimates.express)} by Express (+${formatCurrency(quote.delivery.expressFee)}) at checkout.`
+                          : '.'}
+                      </p>
+                    )}
                   </div>
                   <div className="border-t border-final-light-gray/30 pt-4">
                     <div className="flex justify-between text-xl font-bold text-final-off-white">

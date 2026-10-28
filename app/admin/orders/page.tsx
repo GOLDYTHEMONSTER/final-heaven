@@ -6,6 +6,7 @@ import { FiChevronDown, FiRefreshCw, FiSearch } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useLiveReload } from '@/components/admin/activity'
 import { TrendStrip } from '@/components/admin/Trends'
+import { arrivalText } from '@/lib/delivery'
 
 type Transition = { from_status: string; to_status: string; requires_payment: boolean }
 type Order = Record<string, any>
@@ -341,6 +342,12 @@ function AdminOrders() {
                     </ul>
                     {Number(order.discount) > 0 && (
                       <p className="mt-2 text-sm text-final-muted">Discount{order.promo_code ? ` (${order.promo_code})` : ''}: -{formatCurrency(order.discount)}</p>
+                    )}
+                    {order.delivery_option === 'express' && (
+                      <p className="mt-2 text-sm font-semibold text-final-accent">Express: send by air · {formatCurrency(order.delivery_fee)} paid</p>
+                    )}
+                    {order.delivery_estimate && (
+                      <p className="mt-1 text-sm text-final-muted">Promised to arrive {arrivalText(order.delivery_estimate)}</p>
                     )}
                     {Array.isArray(order.stock_shortfall) && order.stock_shortfall.length > 0 && (
                       <p role="alert" className="mt-2 rounded-md border border-final-ember/40 p-2 text-xs text-final-ember">

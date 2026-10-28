@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { handle, readJson } from '@/lib/api'
 import { fromMinor } from '@/lib/money'
-import { parseCart, parseGift, parsePromoCode, type Quote } from '@/lib/checkout'
+import { parseCart, parseDelivery, parseGift, parsePromoCode, type Quote } from '@/lib/checkout'
 import { checkoutForRequest } from '@/lib/checkout/supabase-store'
 import { rateLimit } from '@/lib/rate-limit'
 
@@ -25,6 +25,12 @@ function quoteJson(quote: Quote) {
     })),
     subtotal: m(quote.subtotalMinor),
     discount: m(quote.discountMinor),
+    delivery: {
+      option: quote.delivery.option,
+      fee: m(quote.delivery.feeMinor),
+      expressFee: quote.delivery.expressFeeMinor == null ? null : m(quote.delivery.expressFeeMinor),
+      estimates: quote.delivery.estimates,
+    },
     total: m(quote.totalMinor),
     isPreorder: quote.isPreorder,
     promo: quote.promo ? { code: quote.promo.code, description: quote.promo.description } : null,
@@ -47,6 +53,6 @@ export const POST = handle('checkout.quote', async (req: NextRequest) => {
   const email = typeof body.email === 'string' && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(body.email.trim())
     ? body.email.trim().toLowerCase().slice(0, 254) : null
   const checkout = await checkoutForRequest(req)
-  const quote = await checkout.quote({ lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), email, gift: parseGift(body.gift) })
+  const quote = await checkout.quote({ lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), email, gift: parseGift(body.gift), delivery: parseDelivery(body.delivery) })
   return NextResponse.json({ ...quoteJson(quote), payments: checkout.payments() }, { headers: { 'Cache-Control': 'private, no-store' } })
 })

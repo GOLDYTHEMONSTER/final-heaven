@@ -2,7 +2,7 @@
 // In-memory CheckoutStore and a fake CheckoutPayments; nothing leaves the process.
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
-  checkout, parseCart, RESUME_HOURS,
+  checkout, parseCart, parseDelivery, RESUME_HOURS,
   type CheckoutPayments, type CheckoutStore, type Held, type NewCheckout, type PromoContext, type SavedCheckout, type ShippingInputs,
 } from '@/lib/checkout'
 import { DEFAULT_SETTINGS, type Profile } from '@/lib/shipping/engine'
@@ -19,6 +19,7 @@ const CATALOGUE = [
   { ...base, id: 'odd', name: 'Odd', price: 3333.33 },
   { ...base, id: 'held', name: 'Held', purchases_paused: true },
   { ...base, id: 'mto', name: 'Custom Tee', fulfilment: 'made_to_order', lead_time_days: 10 },
+  { ...base, id: 'lamp', name: 'Galaxy Projector', price: 18000, fulfilment: 'made_to_order', lead_time_days: 14, source_type: 'wholesale' },
   { ...base, id: 'heart', name: 'Heart Pendant', category: 'Gifts', price: 15000, colors: ['Red', 'Black'] },
   { ...base, id: 'cross', name: 'Cross Pendant', category: 'Gifts', price: 15000 },
   { ...base, id: 'gonegift', name: 'Gone Gift', category: 'Gifts', stock: 0 },
@@ -448,5 +449,56 @@ describe('shipping allocation', () => {
     mem.store.shipping = vi.fn(async () => inputs({ rates: [] }))
     await make().begin({ lines: [tee(1)], buyer })
     expect([...mem.saved.values()][0].shipping).toMatchObject({ status: 'incomplete', totals: { freightKobo: 0 } })
+  })
+})
+
+describe('delivery', () => {
+  const lamp = (quantity = 1) => ({ id: 'lamp', size: null, quantity })
+
+  it('in-stock orders have standard delivery only, free, and say when they arrive', async () => {
+    const q = await make().quote({ lines: [tee(1)], delivery: 'express' })
+    expect(q.delivery).toMatchObject({ option: 'standard', expressFeeMinor: null, feeMinor: 0 })
+    expect(q.delivery.estimates.standard).toEqual({ minDays: 3, maxDays: 7, from: '2026-10-21', to: '2026-10-25' })
+    expect(q.totalMinor).toBe(1_000_000)
+  })
+
+  it('Express is offered for items from China and adds its fee to the total that is charged', async () => {
+    mem.store.weights = vi.fn(async () => ({ lamp: 0.6 }))
+    const standard = await make().quote({ lines: [lamp(1)] })
+    expect(standard.delivery).toMatchObject({ option: 'standard', expressFeeMinor: 250_000, feeMinor: 0 })
+    expect(standard.delivery.estimates).toMatchObject({ standard: { minDays: 14, maxDays: 21 }, express: { minDays: 10, maxDays: 17 } })
+
+    const r = await make().begin({ lines: [lamp(1)], delivery: 'express', buyer })
+    expect(r.ok).toBe(true)
+    const saved = [...mem.saved.values()][0]
+    expect(saved).toMatchObject({ subtotal: '18000.00', deliveryOption: 'express', deliveryFee: '2500.00', total: '20500.00' })
+    expect(saved.deliveryEstimate).toMatchObject({ minDays: 10, maxDays: 17 })
+    expect(payments.start).toHaveBeenCalledWith(expect.objectContaining({ amountMinor: 2_050_000 }))
+  })
+
+  it('prices Express on the server’s weights: ₦1,000 more per extra kg or part', async () => {
+    mem.store.weights = vi.fn(async () => ({ lamp: 0.6 }))
+    const q = await make().quote({ lines: [lamp(4)], delivery: 'express' }) // 2.4 kg
+    expect(q.delivery.feeMinor).toBe(450_000)
+    expect(q.totalMinor).toBe(4 * 1_800_000 + 450_000)
+  })
+
+  it('charges the base fee, never less, when a product has no packed weight yet, and says so', async () => {
+    mem.store.weights = vi.fn(async () => ({ lamp: null }))
+    const q = await make().quote({ lines: [lamp(3)], delivery: 'express' })
+    expect(q.delivery).toMatchObject({ feeMinor: 250_000, weightIncomplete: true })
+  })
+
+  it('counts dates from launch day while checkout is closed, and gives days when there is no launch day', async () => {
+    const before = await make(NOW, { paymentsOpenOn: '2026-11-13' }).quote({ lines: [tee(1)] })
+    expect(before.delivery.estimates.standard).toMatchObject({ from: '2026-11-16', to: '2026-11-20' })
+    const none = await make(NOW, { paymentsOpenOn: null }).quote({ lines: [tee(1)] })
+    expect(none.delivery.estimates.standard).toMatchObject({ from: null, to: null, minDays: 3, maxDays: 7 })
+  })
+
+  it('reads only standard or express from a request', () => {
+    expect(parseDelivery(undefined)).toBe('standard')
+    expect(parseDelivery('express')).toBe('express')
+    expect(() => parseDelivery('overnight')).toThrow('Choose standard or express delivery.')
   })
 })

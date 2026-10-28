@@ -3,6 +3,7 @@
 // table markup and inline styles, which is what email clients render reliably.
 import { BUSINESS, POLICY } from '@/lib/legal'
 import { formatDay, optionLabel } from '@/lib/catalog'
+import { arrivalText } from '@/lib/delivery'
 
 export type OrderEmailData = {
   orderNumber: string
@@ -12,6 +13,11 @@ export type OrderEmailData = {
   promoCode?: string | null
   total: number | string
   currency: string
+  /** standard or express (by air); the fee is part of total. */
+  deliveryOption?: string
+  deliveryFee?: number | string
+  /** When it should arrive, as quoted at checkout. */
+  deliveryEstimate?: { minDays: number; maxDays: number; from: string | null; to: string | null } | null
   isPreorder?: boolean
   /** Lines the shop couldn't fully cover from stock when the order was paid. */
   stockShortfall?: { name: string; size: string | null; missing: number }[] | null
@@ -95,14 +101,18 @@ const shipDate = (d: string) => formatDay(d)
 const itemDetails = (i: OrderEmailData['items'][number]) =>
   [i.gift ? 'Free gift' : null, i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null,
     i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null,
-    i.madeToOrderDays ? `Made to order, ships about ${i.madeToOrderDays} days after payment` : null]
+    i.madeToOrderDays ? `Ships about ${i.madeToOrderDays} days after payment` : null]
     .filter(Boolean).join(' · ')
 
 const lineAmount = (i: OrderEmailData['items'][number], currency: string) =>
   i.gift ? 'Free' : formatMoney(Number(i.price) * i.quantity, currency)
 
+const deliveryName = (o: OrderEmailData) => (o.deliveryOption === 'express' ? 'Express delivery (by air)' : 'Delivery')
+const arriving = (o: OrderEmailData) => (o.deliveryEstimate ? arrivalText(o.deliveryEstimate) : null)
+
 function itemsTable(o: OrderEmailData) {
   const discount = Number(o.discount ?? 0)
+  const deliveryFee = Number(o.deliveryFee ?? 0)
   const rows = o.items.map((i) => `<tr>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${itemDetails(i) ? `<br><span style="color:${C.muted};font-size:12px;">${escapeHtml(itemDetails(i))}</span>` : ''}</td>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.muted};text-align:center;white-space:nowrap;">× ${escapeHtml(i.quantity)}</td>
@@ -112,6 +122,8 @@ function itemsTable(o: OrderEmailData) {
 ${rows}
 ${discount > 0 ? `<tr><td colspan="2" style="padding:12px 0 0;color:${C.muted};">Discount${o.promoCode ? ` (${escapeHtml(o.promoCode)})` : ''}</td>
 <td style="padding:12px 0 0;color:${C.muted};text-align:right;white-space:nowrap;">-${escapeHtml(formatMoney(discount, o.currency))}</td></tr>` : ''}
+${deliveryFee > 0 ? `<tr><td colspan="2" style="padding:12px 0 0;color:${C.muted};">${escapeHtml(deliveryName(o))}</td>
+<td style="padding:12px 0 0;color:${C.muted};text-align:right;white-space:nowrap;">${escapeHtml(formatMoney(deliveryFee, o.currency))}</td></tr>` : ''}
 <tr><td colspan="2" style="padding:12px 0 0;color:${C.ink};font-weight:700;">Total paid</td>
 <td style="padding:12px 0 0;color:${C.ink};font-weight:700;text-align:right;white-space:nowrap;">${escapeHtml(formatMoney(o.total, o.currency))}</td></tr>
 </table>`
@@ -120,6 +132,7 @@ ${discount > 0 ? `<tr><td colspan="2" style="padding:12px 0 0;color:${C.muted};"
 const itemsText = (o: OrderEmailData) => [
   ...o.items.map((i) => `- ${i.name}${itemDetails(i) ? ` (${itemDetails(i)})` : ''} × ${i.quantity}  ${lineAmount(i, o.currency)}`),
   ...(Number(o.discount ?? 0) > 0 ? [`Discount${o.promoCode ? ` (${o.promoCode})` : ''}: -${formatMoney(Number(o.discount), o.currency)}`] : []),
+  ...(Number(o.deliveryFee ?? 0) > 0 ? [`${deliveryName(o)}: ${formatMoney(Number(o.deliveryFee), o.currency)}`] : []),
 ].join('\n')
 
 function customerFooter(site: string) {
@@ -146,6 +159,7 @@ export function orderPaidEmail(o: OrderEmailData, site: string): RenderedEmail {
         ['Order number', o.orderNumber],
         ['Tracking number', o.trackingNumber],
         ['Delivering to', [o.shippingCity, o.shippingState].filter(Boolean).join(', ') || null],
+        ['Expected', arriving(o)],
       ]),
       button(trackUrl(site, o.orderNumber), 'Track your order'),
       p(`<span style="font-size:13px;color:${C.muted};">To track it, enter your order number and this email address. Returns are accepted within ${POLICY.returnWindowDays} days of delivery; see our <a href="${escapeHtml(site)}/returns" style="color:${C.muted};">returns policy</a>.</span>`),
@@ -162,6 +176,7 @@ export function orderPaidEmail(o: OrderEmailData, site: string): RenderedEmail {
     '',
     `Order number: ${o.orderNumber}`,
     `Tracking number: ${o.trackingNumber}`,
+    ...(arriving(o) ? [`Expected: ${arriving(o)}`] : []),
     '',
     `Track your order: ${trackUrl(site, o.orderNumber)}`,
     `Returns are accepted within ${POLICY.returnWindowDays} days of delivery: ${site}/returns`,
@@ -183,6 +198,7 @@ export function orderShippedEmail(o: OrderEmailData, site: string): RenderedEmai
         ['Shipment reference', o.shippingReference],
         ['Tracking number', o.trackingNumber],
         ['Delivering to', [o.shippingCity, o.shippingState].filter(Boolean).join(', ') || null],
+        ['Expected', arriving(o)],
       ]),
       button(trackUrl(site, o.orderNumber), 'Track your order'),
     ].join('\n'),
@@ -195,6 +211,7 @@ export function orderShippedEmail(o: OrderEmailData, site: string): RenderedEmai
     o.shippingCarrier ? `Courier: ${o.shippingCarrier}` : null,
     o.shippingReference ? `Shipment reference: ${o.shippingReference}` : null,
     `Tracking number: ${o.trackingNumber}`,
+    ...(arriving(o) ? [`Expected: ${arriving(o)}`] : []),
     '',
     `Track your order: ${trackUrl(site, o.orderNumber)}`,
     '',
@@ -224,6 +241,8 @@ export function staffOrderPaidEmail(o: OrderEmailData, site: string): RenderedEm
         ['Order number', o.orderNumber],
         ['Customer', o.email],
         ['Delivering to', [o.shippingCity, o.shippingState].filter(Boolean).join(', ') || null],
+        ['Delivery', o.deliveryOption === 'express' ? 'Express: send by air' : null],
+        ['Promised', arriving(o)],
       ]),
       button(link, 'Open in admin'),
     ].join('\n'),
@@ -238,6 +257,7 @@ export function staffOrderPaidEmail(o: OrderEmailData, site: string): RenderedEm
     `Total paid: ${amount}`,
     `Order: ${o.orderNumber}`,
     `Customer: ${o.email}`,
+    ...(o.deliveryOption === 'express' ? ['Delivery: Express, send by air'] : []),
     '',
     `Open in admin: ${link}`,
   ].join('\n')

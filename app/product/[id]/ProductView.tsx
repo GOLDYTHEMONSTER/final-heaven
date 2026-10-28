@@ -15,12 +15,13 @@ import { track } from '@/lib/analytics'
 import { PolicySummary } from '@/components/legal/PolicySummary'
 import { POLICY } from '@/lib/legal'
 import { formatDay, stringList, type Product } from '@/lib/catalog'
-import { sourceLabel, supplyLabel } from '@/lib/collections'
+import { sourceLabel, supplyLabel, supplyNote } from '@/lib/collections'
 import { setGroups } from '@/lib/sets'
 import { HypeMeter } from '@/components/hype/Hype'
+import { DeliveryEstimate } from '@/components/product/DeliveryEstimate'
 
 
-/** Who makes it (originals and labels), and, when it's made to order, that it ships only once made. */
+/** Who makes it (originals and labels), and, when it's made or ordered in after payment, that it doesn't ship straight away. */
 function Provenance({ product }: { product: Product }) {
   const source = sourceLabel(product)
   const supply = supplyLabel(product)
@@ -42,9 +43,7 @@ function Provenance({ product }: { product: Product }) {
           <dt className="text-final-muted">Supply</dt>
           <dd className="text-final-off-white">
             {supply}
-            <p className="mt-1 text-final-off-white/70">
-              We make this after you order{product.leadTimeDays ? `, so it ships about ${product.leadTimeDays} days after payment` : ''}. It doesn’t ship straight away.
-            </p>
+            <p className="mt-1 text-final-off-white/70">{supplyNote(product)}</p>
           </dd>
         </>
       )}
@@ -342,6 +341,8 @@ export function ProductView({ params }: { params: { id: string } }) {
               {purchase.state === 'members_only' && (
                 <p className="text-sm text-final-muted">This piece is reserved for Final Heaven members. <a href="/membership" className="underline underline-offset-2">Join the waitlist</a> to hear when membership opens.</p>
               )}
+
+              {buyable && product.delivery && <DeliveryEstimate delivery={product.delivery} />}
 
               {/* Shipping Info */}
               <div className="flex items-center space-x-4 text-final-off-white/70">

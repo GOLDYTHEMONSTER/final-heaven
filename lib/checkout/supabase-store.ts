@@ -4,12 +4,15 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { getStorefront } from '@/lib/tenancy'
 import { paymentDeps, siteUrl } from '@/lib/payments'
 import { startPayment } from '@/lib/payments/service'
-import { loadContext, loadProducts } from '@/lib/shipping/store'
+import { loadContext, loadProducts, toRate } from '@/lib/shipping/store'
+import { activeRate, chargeable } from '@/lib/shipping/engine'
 import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
-  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors, fulfilment, lead_time_days'
+  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors, fulfilment, lead_time_days, source_type'
 const PAID = ['paid', 'partially_refunded', 'refunded']
+
+const num = (v: unknown) => (v == null ? null : Number(v))
 
 /** The line a hold check refused ("held:<product id>", units still free in details), or null for any other error. */
 function heldLine(error: { message?: string; details?: string | null } | null): Held | null {
@@ -60,6 +63,7 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
         shipping_country: c.shippingCountry, currency: c.currency, items: c.items, subtotal: c.subtotal,
         discount: c.discount, total: c.total, promo_code_id: c.promoCodeId, promo_code: c.promoCode,
         is_preorder: c.isPreorder, terms_version: c.termsVersion, terms_accepted_at: c.termsAcceptedAt, shipping: c.shipping,
+        delivery_option: c.deliveryOption, delivery_fee: c.deliveryFee, delivery_estimate: c.deliveryEstimate,
       } })
       const held = heldLine(error)
       if (held) return { ok: false, held }
@@ -90,6 +94,24 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
       ])
       if (categories.error) throw categories.error
       return { context, ...products, categories: Object.fromEntries((categories.data ?? []).map((p) => [p.id, p.category])) }
+    },
+
+    async weights(tenantId, ids) {
+      // The general profile of each product, priced on the air rate's volumetric divisor (lib/shipping/engine).
+      const [profiles, rates] = await Promise.all([
+        db.from('product_shipping_profiles').select('product_id, weight_kg, packaging_kg, length_cm, width_cm, height_cm').eq('tenant_id', tenantId).eq('variant', '').in('product_id', ids),
+        db.from('shipping_rates').select('*').eq('tenant_id', tenantId).eq('method', 'air'),
+      ])
+      if (profiles.error) throw profiles.error
+      if (rates.error) throw rates.error
+      const air = activeRate((rates.data ?? []).map(toRate), 'air', new Date().toISOString().slice(0, 10)).rate
+      const out: Record<string, number | null> = Object.fromEntries(ids.map((id) => [id, null]))
+      for (const p of profiles.data ?? []) {
+        const c = chargeable({ weightKg: num(p.weight_kg), packagingKg: num(p.packaging_kg), lengthCm: num(p.length_cm), widthCm: num(p.width_cm), heightCm: num(p.height_cm) },
+          { billingUnit: 'kg', volumetricDivisor: air?.volumetricDivisor ?? null })
+        out[p.product_id] = c.ok ? c.units : null
+      }
+      return out
     },
 
     async find(storeId, reference) {
