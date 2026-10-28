@@ -5,7 +5,8 @@ import { supabasePublishableKey, supabaseUrl } from './env'
 /**
  * Refreshes the Supabase session cookie and turns signed-out visitors away
  * from the admin area (pages redirect to /login, API routes get a 401).
- * It only checks for a valid session: which tenant and which permissions a
+ * Signed in means a valid session that passed MFA (aal2); /login finishes
+ * the second step for a password-only session. Which tenant and which permissions a
  * user has is decided per request by app/admin/layout.tsx, every admin route
  * (requirePermission) and RLS, which this middleware never replaces.
  */
@@ -29,7 +30,8 @@ export async function updateSession(request: NextRequest) {
 
   // Nothing may run between creating the client and this call.
   const { data } = await supabase.auth.getClaims()
-  const signedIn = Boolean(data?.claims?.sub)
+  // Admin needs the second step (authenticator code) too: a password alone is aal1.
+  const signedIn = Boolean(data?.claims?.sub) && data?.claims?.aal === 'aal2'
   const { pathname } = request.nextUrl
 
   // Any redirect or 401 must carry over the refreshed cookies from `response`.

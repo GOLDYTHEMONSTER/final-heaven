@@ -32,6 +32,7 @@ Price changes, stock and on/off switches after that are quicker in Admin.
 | `fulfilment` | `stock` (ships from Nigeria) or `made_to_order` (made or ordered in after payment) |
 | `lead_time_days` | Days before it ships, for `made_to_order` |
 | `source_type` | `original`, `wholesale` or `distributor` (ordered in from China: offers Express by air), `independent`, `local_maker` |
+| `ships_by_air` | `false` for items that can't fly (lithium batteries: power banks): sea freight only, and an order holding one loses Express. Leave it out otherwise |
 | `preorder`, `preorder_ships_on`, `preorder_limit` | A dated pre-order |
 | `photos` | `[{ "file": "white.jpg", "color": "White" }]`, first is the cover; `url` is filled in on upload |
 | `source` | Staff only: `listing_url`, `unit_cost`, `cost_currency` (CNY, USD, NGN), `fx_rate` (₦ per unit), `image_permission`, `notes` |

@@ -133,6 +133,8 @@ const columns = {
   is_new: p.is_new ?? true, is_limited: p.is_limited ?? false, fulfilment: p.fulfilment ?? 'stock',
   lead_time_days: p.lead_time_days ?? null, source_type: p.source_type ?? 'original',
   preorder: p.preorder ?? false, preorder_ships_on: p.preorder_ships_on ?? null, preorder_limit: p.preorder_limit ?? 0,
+  // Only when the folder says so: sea freight only (lithium batteries) is false.
+  ...('ships_by_air' in p ? { ships_by_air: p.ships_by_air !== false } : {}),
 }
 if (p.id) {
   // An update keeps the product's status: publishing is its own step.

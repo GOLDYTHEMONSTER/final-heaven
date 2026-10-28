@@ -43,8 +43,9 @@ export const TENANT_COOKIE = 'fh_tenant'
 export async function getStaffContext(): Promise<StaffContext | null> {
   const supabase = createSupabaseServerClient()
   const { data: auth, error } = await supabase.auth.getClaims()
-  const claims = auth?.claims as { sub?: string; email?: string } | undefined
-  if (error || !claims?.sub) return null
+  const claims = auth?.claims as { sub?: string; email?: string; aal?: string } | undefined
+  // Staff must have passed MFA. The database enforces the same (private.mfa_verified).
+  if (error || !claims?.sub || claims.aal !== 'aal2') return null
 
   const { data, error: accessError } = await supabase.rpc('my_tenant_access')
   if (accessError) throw accessError

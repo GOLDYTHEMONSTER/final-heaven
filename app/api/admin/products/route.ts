@@ -83,6 +83,7 @@ function productColumns(body: Record<string, unknown>, partial: boolean) {
   // Where it comes from, and whether it ships from stock or is made after the order (lib/collections).
   if (has('source_type')) out.source_type = oneOf(body.source_type, SOURCE_TYPES, 'Source', 'original')
   if (has('fulfilment')) out.fulfilment = oneOf(body.fulfilment, FULFILMENTS, 'Supply', 'stock')
+  if (has('ships_by_air')) out.ships_by_air = body.ships_by_air !== false && body.ships_by_air !== 'false'
   if (has('lead_time_days')) {
     out.lead_time_days = body.lead_time_days === null || body.lead_time_days === '' || body.lead_time_days === undefined
       ? null : int(body.lead_time_days, 'Lead time (days)', { min: 1, max: 180 })

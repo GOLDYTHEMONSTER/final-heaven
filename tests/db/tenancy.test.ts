@@ -68,6 +68,33 @@ describe('reads are tenant-scoped', () => {
   })
 })
 
+describe('staff access needs a second factor (aal2)', () => {
+  it('an owner signed in with a password only (aal1) is staff nowhere', async () => {
+    const res = await probe(db, { kind: 'user', id: f.users.ownerA, aal: 'aal1' }, async (tx) => ({
+      orders: await count(tx, `select count(*)::int n from public.orders`),
+      drafts: await count(tx, `select count(*)::int n from public.products where status <> 'active'`),
+      access: (await tx.query(`select * from public.my_tenant_access()`)).rows.length,
+      updated: (await tx.query(`update public.products set price = 1 where tenant_id = $1`, [f.tenantA])).affectedRows,
+    }))
+    expect(res).toEqual({ orders: 0, drafts: 0, access: 0, updated: 0 })
+  })
+
+  it('a platform admin without aal2 is not a platform admin', async () => {
+    const v = await probe(db, { kind: 'user', id: f.users.platform, aal: 'aal1' }, (tx) =>
+      tx.query<{ v: boolean }>(`select public.am_platform_admin() as v`).then((r) => r.rows[0].v))
+    expect(v).toBe(false)
+  })
+
+  it('a token with no aal claim counts as aal1', async () => {
+    const access = await db.transaction(async (tx) => {
+      await tx.query(`set local role authenticated`)
+      await tx.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify({ sub: f.users.ownerA, role: 'authenticated' })])
+      return (await tx.query(`select * from public.my_tenant_access()`)).rows.length
+    })
+    expect(access).toBe(0)
+  })
+})
+
 describe('writes are tenant-scoped', () => {
   it('cannot update or delete another tenant’s rows (0 rows affected)', async () => {
     const res = await probe(db, user(f.users.ownerA), async (tx) => ({

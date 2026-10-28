@@ -9,7 +9,8 @@
 //   pre-order                      from its ship date, then 3–7 days
 //
 // Express is offered only when an order has ordered-in items: it is the air
-// freight. It costs ₦2,500 for the first kg of those items (chargeable
+// freight. An item that can't fly (ships_by_air off: lithium batteries) takes
+// Express away from the whole order, which travels together. It costs ₦2,500 for the first kg of those items (chargeable
 // weight) and ₦1,000 for each further kg or part of one. These are the
 // owner's rules of 28 Oct 2026.
 
@@ -29,7 +30,7 @@ export const DELIVERY_OPTIONS: DeliveryOption[] = ['standard', 'express']
 export type Supply =
   | { kind: 'stock' }
   | { kind: 'made'; leadDays: number }
-  | { kind: 'ordered_in' }
+  | { kind: 'ordered_in'; seaOnly?: true }
   | { kind: 'preorder'; shipsOn: string }
 
 type Window = { min: number; max: number }
@@ -49,13 +50,13 @@ function lineWindow(s: Supply, option: DeliveryOption): Window {
 
 /** How a product reaches the customer, from its catalogue row and purchase state (lib/catalog purchaseState). */
 export function supplyOf(
-  p: { fulfilment?: string | null; source_type?: string | null; lead_time_days?: number | null },
+  p: { fulfilment?: string | null; source_type?: string | null; lead_time_days?: number | null; ships_by_air?: boolean | null },
   state: { state: string; shipsOn?: string },
 ): Supply {
   if (state.state === 'preorder' && state.shipsOn) return { kind: 'preorder', shipsOn: state.shipsOn }
   if (p.fulfilment === 'made_to_order') {
     return p.source_type === 'wholesale' || p.source_type === 'distributor'
-      ? { kind: 'ordered_in' }
+      ? (p.ships_by_air === false ? { kind: 'ordered_in', seaOnly: true } : { kind: 'ordered_in' })
       : { kind: 'made', leadDays: Number(p.lead_time_days) || 0 }
   }
   return { kind: 'stock' }
@@ -81,8 +82,9 @@ export function productDelivery(supply: Supply, orderDay: string | null) {
 }
 export type ProductDelivery = ReturnType<typeof productDelivery>
 
-/** Whether an order can choose Express: only when something in it comes from China by air. */
-export const expressAvailable = (supplies: Supply[]) => supplies.some((s) => s.kind === 'ordered_in')
+/** Whether an order can choose Express: something in it comes from China, and nothing in it is sea freight only. */
+export const expressAvailable = (supplies: Supply[]) =>
+  supplies.some((s) => s.kind === 'ordered_in') && !supplies.some((s) => s.kind === 'ordered_in' && s.seaOnly)
 
 /**
  * When the order should arrive, ordered on `orderDay`: the latest of its lines,

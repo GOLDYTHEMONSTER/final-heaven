@@ -9,7 +9,7 @@ import { activeRate, chargeable } from '@/lib/shipping/engine'
 import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
-  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors, fulfilment, lead_time_days, source_type'
+  'id, name, price, original_price, stock, status, images, category, members_only, purchases_paused, release_date, preorder, preorder_ships_on, preorder_limit, sizes, colors, fulfilment, lead_time_days, source_type, ships_by_air'
 const PAID = ['paid', 'partially_refunded', 'refunded']
 
 const num = (v: unknown) => (v == null ? null : Number(v))

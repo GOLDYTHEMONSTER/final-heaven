@@ -1,6 +1,6 @@
 // Delivery estimates and the Express fee (lib/delivery), as agreed on 28 Oct 2026.
 import { describe, expect, it } from 'vitest'
-import { arrivalText, estimate, expressAvailable, expressFee } from '@/lib/delivery'
+import { arrivalText, estimate, expressAvailable, expressFee, supplyOf } from '@/lib/delivery'
 
 const day = '2026-11-13'
 
@@ -36,6 +36,15 @@ describe('express', () => {
     expect(expressAvailable([{ kind: 'stock' }])).toBe(false)
     expect(expressAvailable([{ kind: 'stock' }, { kind: 'ordered_in' }])).toBe(true)
     expect(expressAvailable([{ kind: 'preorder', shipsOn: day }])).toBe(false)
+  })
+
+  it('is taken away from the whole order by an item that can’t fly', () => {
+    expect(expressAvailable([{ kind: 'ordered_in', seaOnly: true }])).toBe(false)
+    expect(expressAvailable([{ kind: 'ordered_in' }, { kind: 'ordered_in', seaOnly: true }])).toBe(false)
+    expect(supplyOf({ fulfilment: 'made_to_order', source_type: 'wholesale', ships_by_air: false }, { state: 'available' }))
+      .toEqual({ kind: 'ordered_in', seaOnly: true })
+    expect(supplyOf({ fulfilment: 'made_to_order', source_type: 'wholesale', ships_by_air: null }, { state: 'available' }))
+      .toEqual({ kind: 'ordered_in' })
   })
 
   it('costs ₦2,500 for the first kg, then ₦1,000 per extra kg or part of one', () => {

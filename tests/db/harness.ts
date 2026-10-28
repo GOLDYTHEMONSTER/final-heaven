@@ -53,7 +53,7 @@ export async function createTestDb({ stopBefore }: { stopBefore?: string } = {})
 
 export type Actor =
   | { kind: 'anon' }
-  | { kind: 'user'; id: string }
+  | { kind: 'user'; id: string; aal?: 'aal1' | 'aal2' }
   | { kind: 'service' }
 
 /**
@@ -64,7 +64,8 @@ export type Actor =
 export async function as<T>(db: PGlite, actor: Actor, fn: (tx: Transaction) => Promise<T>): Promise<T> {
   return db.transaction(async (tx) => {
     const role = actor.kind === 'anon' ? 'anon' : actor.kind === 'service' ? 'service_role' : 'authenticated'
-    const claims = actor.kind === 'user' ? { sub: actor.id, role: 'authenticated' } : { role }
+    // Users have passed MFA unless a test says otherwise: staff access needs aal2.
+    const claims = actor.kind === 'user' ? { sub: actor.id, role: 'authenticated', aal: actor.aal ?? 'aal2' } : { role }
     await tx.query(`set local role ${role}`)
     await tx.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify(claims)])
     return fn(tx)

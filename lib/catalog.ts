@@ -27,6 +27,8 @@ export type CatalogueProduct = {
   lead_time_days?: number | null
   /** original, wholesale, independent, distributor or local_maker: wholesale and distributor pieces are ordered in, not made. */
   source_type?: string | null
+  /** False: sea freight only, no Express by air (lithium batteries). */
+  ships_by_air?: boolean | null
 }
 
 /** A product as the storefront receives it from /api/products (see toPublicProduct). */

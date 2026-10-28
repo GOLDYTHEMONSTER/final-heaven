@@ -18,7 +18,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const staff = await getStaffContext()
   if (!staff) {
     const { data } = await createSupabaseServerClient().auth.getClaims()
-    if (!data?.claims?.sub) redirect('/login?next=/admin')
+    if (!data?.claims?.sub || data.claims.aal !== 'aal2') redirect('/login?next=/admin')
     return <NoAccess email={(data.claims.email as string) ?? ''} />
   }
 
