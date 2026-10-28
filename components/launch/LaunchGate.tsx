@@ -6,6 +6,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { FiArrowRight, FiX } from 'react-icons/fi'
 import { NeonMark } from '@/components/ui/NeonMark'
 import { LAUNCH_CONSENT } from '@/lib/consent'
+import { LAUNCH_WINDOW } from '@/lib/catalog'
+import { loadLaunch } from '@/lib/useLaunch'
 import type { LaunchState } from '@/lib/launch'
 import { Countdown, timeLeft, useNow } from './Countdown'
 
@@ -33,9 +35,8 @@ export function LaunchGate() {
 
   useEffect(() => {
     let cancelled = false
-    fetch('/api/launch')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((s: LaunchState | null) => {
+    loadLaunch()
+      .then((s) => {
         if (cancelled || !s || s.open) return
         setLaunch(s)
         const seen = read()
@@ -218,7 +219,7 @@ function LaunchSheet({ launch, target, now, joined, onJoined, onClose }: {
                 ? 'You’re on the list. We’ll email you the moment the doors open.'
                 : opensOn
                   ? `Doors open ${opensOn}. Join the waitlist and we’ll email you the moment they do.`
-                  : 'Doors open in November. Join the waitlist and we’ll email you the moment they do.'}
+                  : `Doors open in ${LAUNCH_WINDOW}. Join the waitlist and we’ll email you the moment they do.`}
             </p>
           </div>
 
@@ -230,7 +231,7 @@ function LaunchSheet({ launch, target, now, joined, onJoined, onClose }: {
                 <span className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-final-muted sm:text-[11px]">
                   <span className="launch-dot" aria-hidden /> Opening
                 </span>
-                <span className="display text-[1.45rem] leading-none sm:text-[1.9rem]">November</span>
+                <span className="display text-[1.45rem] leading-none sm:text-[1.9rem]">{LAUNCH_WINDOW}</span>
               </div>
             )}
           </motion.div>

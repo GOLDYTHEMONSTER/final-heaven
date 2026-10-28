@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { FiArrowRight, FiCheck } from 'react-icons/fi'
-import { DropHeadline, DropReelBand } from '@/components/sections/DropReel'
+import { DropHeadline, DropKicker, DropReelBand } from '@/components/sections/DropReel'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
@@ -126,7 +126,7 @@ export function Drop01() {
       {/* 1. What the drop is, in one line. */}
       <section className="py-12 sm:py-16">
         <div className="px-4 text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.24em] text-final-ember">Drop 01 · Live now</p>
+          <DropKicker />
           <DropHeadline as="h1" />
         </div>
         <div className="my-6 sm:my-8">

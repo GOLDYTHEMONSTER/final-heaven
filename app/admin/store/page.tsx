@@ -19,11 +19,37 @@ function status(s: Selling) {
   if (s.payments.open) return { label: 'Open', tone: 'text-green-400', detail: 'Customers can check out and pay.' }
   if (s.payments.closedFor === 'paused') return { label: 'Paused', tone: 'text-yellow-400', detail: 'Nobody can pay until you resume. The store still shows everything and customers can fill their carts.' }
   return {
-    label: 'Closed until launch',
+    label: s.purchasesPaused ? 'Closed until launch, then paused' : 'Closed until launch',
     tone: 'text-final-ember',
-    detail: s.paymentsOpenOn
+    detail: (s.paymentsOpenOn
       ? `Checkout opens on ${formatDay(s.paymentsOpenOn)} (midnight, Lagos time). Until then customers can browse and fill their carts.`
-      : 'No launch day set. Customers can browse and fill their carts, but checkout stays closed until you set one.',
+      : 'No launch day set. Customers can browse and fill their carts, but checkout stays closed until you set one.')
+      + (s.purchasesPaused ? ' Purchases are also paused, so it won’t open on launch day until you resume.' : ''),
+  }
+}
+
+/** The pause switch, described by what it does today (it never contradicts the Checkout status above). */
+function pauseCopy(s: Selling) {
+  const beforeLaunch = s.payments.closedFor === 'launch'
+  if (beforeLaunch && s.purchasesPaused) return {
+    text: 'On: checkout is closed until launch anyway, and it will stay closed on launch day until you resume. Carts are kept.',
+    button: 'Resume (open on launch day)',
+    confirm: '',
+  }
+  if (beforeLaunch) return {
+    text: 'Not needed yet: checkout is already closed until launch. Turning this on would keep it closed on launch day too, until you resume.',
+    button: 'Keep closed after launch',
+    confirm: 'Keep checkout closed after launch day? It will stay shut until you resume.',
+  }
+  if (s.purchasesPaused) return {
+    text: 'On: nobody can pay. The store stays visible and carts are kept.',
+    button: 'Resume purchases',
+    confirm: '',
+  }
+  return {
+    text: 'Stops every payment, e.g. while you restock or fix a problem. The store stays visible and carts are kept.',
+    button: 'Pause all purchases',
+    confirm: 'Pause all purchases? Nobody can pay until you resume.',
   }
 }
 
@@ -126,21 +152,19 @@ export default function StoreSellingPage() {
 
           <section className="rounded-xl border border-final-off-white/10 bg-final-gray p-5">
             <h2 className="font-semibold">Pause all purchases</h2>
-            <p className="mt-1 text-sm text-final-muted">
-              Stops every payment, e.g. while you restock or fix a problem. The store stays visible and carts are kept.
-              {selling.purchasesPaused && selling.payments.closedFor === 'launch' && ' It takes effect after launch day.'}
-            </p>
+            {/* What the switch does right now: before launch checkout is already closed, so pausing only keeps it shut after launch day. */}
+            <p className="mt-1 text-sm text-final-muted">{pauseCopy(selling).text}</p>
             <button
               type="button"
               disabled={saving}
               onClick={() => {
                 const pause = !selling.purchasesPaused
-                if (pause && !confirm('Pause all purchases? Nobody can pay until you resume.')) return
+                if (pause && !confirm(pauseCopy(selling).confirm)) return
                 save({ purchases_paused: pause })
               }}
               className={`${button} mt-4 ${selling.purchasesPaused ? 'bg-green-500 text-final-black hover:bg-green-400' : 'bg-yellow-400 text-final-black hover:bg-yellow-300'}`}
             >
-              {selling.purchasesPaused ? 'Resume purchases' : 'Pause all purchases'}
+              {pauseCopy(selling).button}
             </button>
           </section>
 

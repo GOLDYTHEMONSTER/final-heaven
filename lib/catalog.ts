@@ -136,10 +136,17 @@ export function paymentsState(s: { paymentsOpenOn: string | null; purchasesPause
   return { open: closedFor == null, closedFor, opensOn }
 }
 
+/**
+ * When the store opens, in public wording, while no launch day is set. Kept
+ * vague on purpose (the videos promise only "November"); every "coming soon"
+ * message uses this, so they can't disagree.
+ */
+export const LAUNCH_WINDOW = 'November'
+
 /** Why checkout isn't taking payments, as a button label and a sentence. */
 export function paymentsClosed(p: PaymentsState) {
   if (p.closedFor === 'paused') return { label: 'Purchases paused', message: 'Purchases are paused right now. Please check back soon.' }
-  return { label: 'Checkout opens at launch', message: p.opensOn ? `Checkout opens on ${formatDay(p.opensOn)}.` : 'Checkout opens on launch day.' }
+  return { label: 'Checkout opens at launch', message: p.opensOn ? `Checkout opens on ${formatDay(p.opensOn)}.` : `Checkout opens in ${LAUNCH_WINDOW}.` }
 }
 
 /** For public catalogue responses: the CDN may serve them a minute old, as checkout always re-prices. */

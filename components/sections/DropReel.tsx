@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
 import { TiltedGridHero } from '@/components/ui/TiltedGridHero'
 import { DROP_01_REEL } from '@/lib/drop-01'
+import { LAUNCH_WINDOW, formatDay } from '@/lib/catalog'
+import { useLaunch } from '@/lib/useLaunch'
 
 /**
  * The curved Drop 01 reel on its own, with no text over it: text sits above
@@ -34,6 +36,21 @@ export function DropReelBand() {
   )
 }
 
+/**
+ * The drop's status line. It follows the store: "Live now" only once checkout
+ * is open; before that it says when it opens, so it never contradicts the
+ * "Coming soon" launch gate. Just "Drop 01" while the state loads.
+ */
+export function DropKicker() {
+  const launch = useLaunch()
+  const when = launch?.opensOn ? formatDay(launch.opensOn) : LAUNCH_WINDOW
+  return (
+    <p className="text-xs font-medium uppercase tracking-[0.24em] text-final-ember">
+      {!launch ? 'Drop 01' : launch.open ? 'Drop 01 · Live now' : `Drop 01 · Opening ${when}`}
+    </p>
+  )
+}
+
 /** "Eight tees. Three hoodies. A cap." with the line breaks kept on phones. */
 export function DropHeadline({ as: Tag = 'h2', id }: { as?: 'h1' | 'h2'; id?: string }) {
   return (
@@ -49,7 +66,7 @@ export function DropReel() {
   return (
     <section id="drop-01" aria-labelledby="drop-reel-title" className="scroll-mt-16 border-y border-final-light-gray/40 py-14 sm:py-20">
       <div className="px-4 text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.24em] text-final-ember">Drop 01 · Live now</p>
+        <DropKicker />
         <DropHeadline id="drop-reel-title" />
       </div>
       <div className="my-6 sm:my-8">

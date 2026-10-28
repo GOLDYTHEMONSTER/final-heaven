@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { FiArrowRight } from 'react-icons/fi'
-import type { LaunchState } from '@/lib/launch'
+import { LAUNCH_WINDOW } from '@/lib/catalog'
+import { useLaunch } from '@/lib/useLaunch'
 import { Countdown, useNow } from './Countdown'
 import { OPEN_LAUNCH_GATE } from './LaunchGate'
 
@@ -11,10 +11,7 @@ import { OPEN_LAUNCH_GATE } from './LaunchGate'
  * day isn't set), and a way onto the waitlist. Same state as the launch gate.
  */
 export function CheckoutCountdown() {
-  const [launch, setLaunch] = useState<LaunchState | null>(null)
-  useEffect(() => {
-    fetch('/api/launch').then((r) => (r.ok ? r.json() : null)).then(setLaunch).catch(() => {})
-  }, [])
+  const launch = useLaunch()
   const target = launch?.opensAt ? Date.parse(launch.opensAt) : null
   const now = useNow(Boolean(target))
 
@@ -25,7 +22,7 @@ export function CheckoutCountdown() {
       </div>
       <div className="relative">
         <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-final-muted">
-          <span className="launch-dot" aria-hidden /> Checkout opens {target ? 'in' : 'in November'}
+          <span className="launch-dot" aria-hidden /> Checkout opens {target ? 'in' : `in ${LAUNCH_WINDOW}`}
         </p>
         <div className="mt-4">
           {target ? (
