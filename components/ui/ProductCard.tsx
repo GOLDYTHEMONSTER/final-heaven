@@ -9,7 +9,7 @@ import { FiCheck, FiPlus } from 'react-icons/fi'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import type { Product } from '@/lib/catalog'
-import { HypeTag } from '@/components/hype/Hype'
+import { CardFrame, CardFrameMat, HypeTag, useCardFrame } from '@/components/hype/Hype'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
 function blockedLabel(product: Product) {
@@ -42,14 +42,14 @@ interface ProductCardProps {
 
 const PLACEHOLDER = '/api/placeholder/400/500'
 
-function Badges({ product }: { product: Product }) {
+function Badges({ product, underFrame = false }: { product: Product; underFrame?: boolean }) {
   const preorder = product.purchase?.state === 'preorder'
   const blocked = blockedLabel(product)
   const single = lastOne(product)
   const made = madeToOrder(product) && !blocked
   if (!product.isNew && !product.isLimited && !product.membersOnly && !preorder && !blocked && !single && !made) return null
   return (
-    <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
+    <div className={`pointer-events-none absolute left-3 top-3 z-10 flex flex-col items-start gap-1.5 ${underFrame ? 'fh-cardframe-hides' : ''}`}>
       {blocked && blocked !== 'Members only' && (
         <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
           {blocked}
@@ -106,6 +106,8 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   const timer = useRef<ReturnType<typeof setTimeout>>()
 
   useEffect(() => () => clearTimeout(timer.current), [])
+  // Elite, Iconic and Legendary products show their rank frame on hover (only while Hype is on).
+  const frame = useCardFrame(product.id)
 
   const mainImage = product.images?.[0]?.url || product.image || PLACEHOLDER
   const href = `/product/${product.id}`
@@ -207,7 +209,8 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
     <article className="group relative">
       {/* 4:5 matches the store photos, so garments aren't cropped. */}
       <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-final-dark-gray">
-        <Link href={href} aria-label={product.name} className="absolute inset-0">
+        {frame && <CardFrameMat geometry={frame.geometry} photo={sized(mainImage, 640)} />}
+        <Link href={href} aria-label={product.name} className={`absolute inset-0 ${frame ? 'fh-cardframe-photo' : ''}`} style={frame?.photoStyle}>
           <Image
             src={sized(mainImage, 640)}
             alt={product.name}
@@ -227,9 +230,10 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
             />
           )}
         </Link>
-        <Badges product={product} />
+        {frame && <CardFrame rank={frame.rank} geometry={frame.geometry} />}
+        <Badges product={product} underFrame={Boolean(frame)} />
         {/* Always visible on touch screens; revealed on hover or keyboard focus with a pointer. */}
-        <div className="absolute bottom-3 right-3 transition-[opacity,transform] duration-200 ease-out [@media(hover:hover)]:translate-y-1 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within:translate-y-0 [@media(hover:hover)]:group-focus-within:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100">
+        <div style={frame?.buttonStyle} className={`${frame ? 'fh-cardframe-button' : ''} absolute bottom-3 right-3 z-10 transition-[opacity,transform] duration-200 ease-out [@media(hover:hover)]:translate-y-1 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within:translate-y-0 [@media(hover:hover)]:group-focus-within:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100`}>
           {addButton}
         </div>
       </div>

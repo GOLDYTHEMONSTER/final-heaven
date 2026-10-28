@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { RankBadge } from '@/components/hype/Hype'
-import type { Rank } from '@/lib/hype'
+import { RankCrest, RankName } from '@/components/hype/Hype'
+import { hypeTier, type Rank } from '@/lib/hype'
 
 // Hype on or off for the store (Store settings), with the most-hyped products.
 // Off by default: scores start at zero, so it's worth switching on once the
@@ -50,6 +50,11 @@ export function HypeSwitch() {
             </button>
             <span className="text-sm">{state.enabled ? 'On: shoppers can hype products' : 'Off: nothing shows in the store'}</span>
           </div>
+          {state.enabled && (
+            <p className="mt-2 text-xs text-final-muted">
+              Product pages show the Hype button within seconds (reload any page that was already open). Cards show a score only once that product has been hyped.
+            </p>
+          )}
           {error && <p role="alert" className="mt-2 text-sm text-final-ember">{error}</p>}
           {!!state.top?.length && (
             <ul className="mt-4 divide-y divide-final-off-white/5 text-sm">
@@ -58,7 +63,8 @@ export function HypeSwitch() {
                   <span className="truncate">{t.products?.name ?? t.product_id}</span>
                   <span className="flex shrink-0 items-center gap-2 text-xs text-final-muted tabular-nums">
                     {t.hypes} hypes · {t.hypes_7d} this week · <strong className="text-final-off-white">{Math.round(Number(t.score))}</strong>
-                    <RankBadge rank={t.rank} early={t.early} className="!text-[9px]" />
+                    <RankCrest rank={t.rank} size={26} />
+                    <RankName rank={t.rank} tier={hypeTier(Number(t.score), t.rank, t.early)} early={t.early} />
                   </span>
                 </li>
               ))}

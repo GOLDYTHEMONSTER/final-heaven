@@ -8,8 +8,9 @@ export const dynamic = 'force-dynamic'
 
 const ID = /^[A-Za-z0-9_-]{1,64}$/
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|monitor|curl|wget|python|axios|node-fetch/i
-// "Off" is the same for everyone, so the CDN keeps it for a minute: no function call per page view while Hype is off.
-const OFF = () => NextResponse.json({ enabled: false }, { headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' } })
+// "Off" is the same for everyone, so the CDN keeps it briefly: few function calls while Hype is off, and
+// switching it on shows within seconds (no stale-while-revalidate, which kept "off" for minutes).
+const OFF = () => NextResponse.json({ enabled: false }, { headers: { 'Cache-Control': 'public, s-maxage=10' } })
 
 /**
  * Hype scores for some products (?ids=a,b,c, up to 60), and which of them

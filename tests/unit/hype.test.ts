@@ -1,6 +1,6 @@
 // Hype scores and ranks (lib/hype).
 import { describe, expect, it } from 'vitest'
-import { HYPE_RULES, RANKS, hypeRank, hypeScore, rose } from '@/lib/hype'
+import { HYPE_RULES, RANKS, climbed, hypeRank, hypeScore, hypeTier, rose } from '@/lib/hype'
 
 const DAY = 86_400_000
 const now = new Date('2026-11-20T12:00:00Z')
@@ -46,6 +46,25 @@ describe('hype rank', () => {
     expect(hypeRank(95, 300, 'iconic', new Date(now.getTime() - 8 * DAY), now).rank).toBe('legendary')
     expect(hypeRank(95, 300, 'trending', null, now).rank).toBe('iconic')
     expect(hypeRank(91, 300, 'legendary', null, now).rank).toBe('legendary')
+  })
+
+  it('splits each middle rank into tiers I-V; Unseen and Legendary have none', () => {
+    expect(hypeTier(10, 'emerging')).toBe(1)
+    expect(hypeTier(13, 'emerging')).toBe(2) // band 10-25, 3 points a tier
+    expect(hypeTier(24.9, 'emerging')).toBe(5)
+    expect(hypeTier(75, 'iconic')).toBe(1)
+    expect(hypeTier(89, 'iconic')).toBe(5)
+    expect(hypeTier(59, 'elite')).toBe(1) // held by hysteresis just under the floor
+    expect(hypeTier(94, 'emerging', true)).toBe(5) // early: top tier of the rank it can show
+    expect(hypeTier(0, 'unseen')).toBeNull()
+    expect(hypeTier(95, 'legendary')).toBeNull()
+  })
+
+  it('tells a new rank from a new tier', () => {
+    expect(climbed({ rank: 'elite', tier: 5 }, { rank: 'iconic', tier: 1 })).toBe('rank')
+    expect(climbed({ rank: 'elite', tier: 2 }, { rank: 'elite', tier: 3 })).toBe('tier')
+    expect(climbed({ rank: 'elite', tier: 3 }, { rank: 'elite', tier: 3 })).toBeNull()
+    expect(climbed({ rank: 'elite', tier: 3 }, { rank: 'trending', tier: 5 })).toBeNull()
   })
 
   it('knows when a rank rose', () => {

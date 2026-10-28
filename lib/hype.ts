@@ -73,6 +73,29 @@ export function hypeRank(score: number, total: number, previous: Rank = 'unseen'
   return { rank: RANKS[i].key, early }
 }
 
+/**
+ * Tiers I-V inside a rank (Emerging to Iconic): the rank's score band in five
+ * equal steps, so products climb more often. Unseen and Legendary have none.
+ * A rank held back for evidence ("Early") shows its top tier.
+ */
+export function hypeTier(score: number, rank: Rank, early = false): number | null {
+  const i = index(rank)
+  if (rank === 'unseen' || rank === 'legendary' || i < 0) return null
+  if (early) return 5
+  const min = RANKS[i].min
+  const step = (RANKS[i + 1].min - min) / 5
+  return Math.min(5, Math.max(1, 1 + Math.floor((score - min) / step)))
+}
+
+export const TIER_NUMERALS = ['', 'I', 'II', 'III', 'IV', 'V']
+
+/** What changed between two standings: a new rank, a new tier, or neither. */
+export function climbed(before: { rank: Rank; tier: number | null }, after: { rank: Rank; tier: number | null }): 'rank' | 'tier' | null {
+  if (index(after.rank) > index(before.rank)) return 'rank'
+  if (after.rank === before.rank && (after.tier ?? 0) > (before.tier ?? 0)) return 'tier'
+  return null
+}
+
 export const rankLabel = (rank: Rank) => RANKS[index(rank)]?.label ?? 'Unseen'
 export const isRank = (v: unknown): v is Rank => RANKS.some((r) => r.key === v)
 export const rose = (from: Rank, to: Rank) => index(to) > index(from)

@@ -1,8 +1,8 @@
 # Hype, phase 1: anonymous community scores
 
-Migration: `supabase/migrations/20261028100000_product_hype.sql`. Code: the rules `lib/hype.ts` (pure), the server side `lib/hype-server.ts`, the endpoints `app/api/hype` (public) and `app/api/admin/hype` (the switch), the browser hook `lib/useHype.ts`, the components `components/hype/Hype.tsx` and `components/admin/HypeSwitch.tsx`, and the styles `app/hype.css`. Design draft: `brand/hype/draft.html` (`?board=ranks` or `?board=frames`; renderable with `brand/social/video/_build/render.mjs`). Tests: `tests/unit/hype.test.ts`, `tests/db/hype.test.ts`.
+Migration: `supabase/migrations/20261028100000_product_hype.sql`. Code: the rules `lib/hype.ts` (pure), the server side `lib/hype-server.ts`, the endpoints `app/api/hype` (public) and `app/api/admin/hype` (the switch), the browser hook `lib/useHype.ts`, the components `components/hype/Hype.tsx` and `components/admin/HypeSwitch.tsx`, the styles `app/hype.css`, and the art (below). Design draft: `brand/hype/draft.html` (`?board=ranks` or `?board=frames`; renderable with `brand/social/video/_build/render.mjs`). Tests: `tests/unit/hype.test.ts`, `tests/unit/hype-frames.test.ts`, `tests/db/hype.test.ts`.
 
-This is phase 1 of the Hype Culture concept: the Hype button, the score and the ranks. The anonymous interest profile (phase 2) already exists in the browser (`lib/stores/interestStore.ts`, `lib/discovery.ts`); a hype now also counts as interest in its category. Discovery Frames are drafted in `app/hype.css` and the draft, but are not earned yet (phase 4).
+This is phase 1 of the Hype Culture concept: the Hype button, the score and the ranks. The anonymous interest profile (phase 2) already exists in the browser (`lib/stores/interestStore.ts`, `lib/discovery.ts`); a hype now also counts as interest in its category. Discovery Frames are drawn (the art is in `public/hype`) but not earned yet (phase 4).
 
 ## How it works
 
@@ -29,3 +29,25 @@ Every number is a named constant in `lib/hype.ts` (`RANKS`, `HYPE_RULES`), to tu
 1. Apply the migration (dry-run first; see CLAUDE.md).
 2. Decide when: scores start at zero. The suggestion is after the November launch, once there are visitors.
 3. Switch it on in Admin → Store. The top ten hyped products show there.
+
+## Crests, tiers and frames
+
+- **Art:** seven rank crests and twelve frames (three rank frames, nine Discovery Frames), original illustrations in the brand's language (halos, wings, sacred hearts, chrome, ember). Made with Higgsfield (GPT Image 2.5, medium, transparent; 11.5 credits on 27 Oct 2026). No text in the art: tier numerals are drawn in code.
+- **Sources:** `brand/hype/art/*.webp`. `node scripts/hype-art.mjs` builds the store files and `lib/hype-art.ts` (each frame's measured opening and border).
+  - Store files go in `public/hype`: crests at 160 and 384 px, frames at 400 and 800 px.
+  - They total about 1.9 MB, and each is fetched only where it's shown.
+- **Tiers:** Emerging to Iconic each split their score band into tiers I–V (`hypeTier`); Unseen and Legendary have none.
+  - A tap that climbs a tier flips the numeral medallion.
+  - A tap that climbs a rank slams the new crest in with a flash, a shockwave and sparks.
+- **Motion, in code (`app/hype.css`):**
+  - a glow behind every crest;
+  - turning rays behind Iconic and Legendary;
+  - a sheen masked to the crest's own shape;
+  - embers (Trending, Legendary) or sparkles (Elite, Iconic).
+- **Product cards:** at rest a card is unchanged apart from the crest badge under the price. On hover or keyboard focus, Elite, Iconic and Legendary cards show their frame:
+  - the frame fades in around the image and the photo eases back into its opening;
+  - a soft blurred copy of the photo fills the rest of the opening;
+  - labels step aside, and the add button moves to the photo's corner.
+
+  Everything stays inside the card's own image box (`lib/hype-frames.ts`), so nothing around it is covered. Touch screens never show the frame and never load it.
+- **Reduced motion:** every animation stops; ranks, tiers and frames still read.

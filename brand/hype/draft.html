@@ -5,165 +5,170 @@
 <meta name="viewport" content="width=1080">
 <title>Hype ranks and frames</title>
 <!--
-  Draft board for Hype: the seven ranks, a rank-up, the Hype button tap and the
-  nine Discovery Frames. Uses the store's own styles (app/hype.css). Plays live
-  in a browser; window.renderFrame(t) makes it renderable to video with
-  brand/social/video/_build/render.mjs. ?board=ranks or ?board=frames shows one
-  1080 × 1920 board; with neither, both scroll.
+  Draft boards for Hype, built from the store's own art (public/hype, made by
+  scripts/hype-art.mjs) and styles (app/hype.css). ?board=ranks: the crest
+  ladder with tiers and a rank-up; ?board=frames: product cards at rest (only
+  the crest badge) and on hover (the rank frame wraps the photo, inside the
+  card). With neither, both scroll. Plays live in a browser;
+  window.renderFrame(t) makes it renderable to video with
+  brand/social/video/_build/render.mjs.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../app/hype.css">
 <style>
-  :root { --bg: 10 10 11; --fg: 242 241 238; --fg-muted: 163 163 168; }
+  :root { --bg: 10 10 11; --fg: 242 241 238; --fg-muted: 163 163 168; --font-archivo: 'Archivo'; }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1080px; background: rgb(var(--bg)); color: rgb(var(--fg)); font-family: 'Archivo', system-ui, sans-serif; }
-  .fh-hype-scope { --fh-mono: 'JetBrains Mono', ui-monospace, monospace; padding: 72px 64px; }
-  .kicker { font: 700 18px/1 var(--fh-mono); letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-muted)); }
-  h1 { margin-top: 18px; font-size: 76px; line-height: 0.92; font-stretch: 125%; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; }
-  h2 { font: 700 16px/1 var(--fh-mono); letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-muted)); margin: 56px 0 22px; }
   body.one { height: 1920px; overflow: hidden; }
   body.one section { display: none; }
   body[data-board='ranks'] section[data-board='ranks'], body[data-board='frames'] section[data-board='frames'] { display: block; }
-  section { position: relative; min-height: 1920px; }
-  .ladder { display: grid; grid-template-columns: 330px 150px 1fr; row-gap: 34px; align-items: center; }
-  .ladder .fh-rank { font-size: 24px; justify-self: start; }
-  .range { font: 500 24px var(--fh-mono); color: rgb(var(--fg-muted)); font-variant-numeric: tabular-nums; }
-  .meaning { font-size: 28px; color: rgb(var(--fg) / 0.85); }
-  .moment { display: grid; grid-template-columns: 400px 1fr; gap: 44px; align-items: center; }
-  .card { position: relative; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: #141416; }
-  .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .moment h3 { font-size: 40px; font-stretch: 115%; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; }
-  .price { margin-top: 6px; font-size: 26px; color: rgb(var(--fg-muted)); }
-  .meterRow { margin-top: 26px; display: flex; align-items: center; gap: 18px; }
-  .meterRow .fh-score { font-size: 64px; }
-  .badgeSlot { position: relative; height: 40px; }
-  .badgeSlot .fh-rank { position: absolute; left: 0; top: 0; font-size: 17px; }
-  .fh-meter { margin-top: 16px; height: 5px; }
+  section { position: relative; min-height: 1920px; padding: 72px 64px; }
+  .fh-hype-scope { --fh-mono: 'JetBrains Mono', ui-monospace, monospace; }
+  .kicker { font: 700 18px/1 var(--fh-mono); letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-muted)); }
+  h1 { margin-top: 18px; font-size: 76px; line-height: 0.92; font-stretch: 125%; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; }
+  h2 { font: 700 16px/1 var(--fh-mono); letter-spacing: 0.22em; text-transform: uppercase; color: rgb(var(--fg-muted)); margin: 54px 0 30px; }
+  .ladder { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 46px; justify-items: center; text-align: center; }
+  .ladder figure { display: grid; justify-items: center; gap: 22px; }
+  .ladder figcaption { font: 700 17px/1.4 var(--fh-mono); letter-spacing: 0.16em; text-transform: uppercase; }
+  .ladder figcaption span { display: block; font-weight: 500; font-size: 15px; color: rgb(var(--fg-muted)); letter-spacing: 0.1em; }
+  .moment { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: center; }
+  .slot { position: relative; width: 220px; height: 220px; }
+  .slot > span, .slot .fh-crest { position: absolute; inset: 0; }
+  .scoreRow { display: flex; align-items: baseline; gap: 14px; }
+  .scoreRow .fh-score { font-size: 84px; }
+  .rankName { font: 700 20px var(--fh-mono); letter-spacing: 0.18em; text-transform: uppercase; }
+  .fh-meter { margin-top: 18px; height: 5px; }
   .fh-meter > i { transition: none; }
-  .note { margin-top: 16px; font-size: 20px; color: rgb(var(--fg-muted)); }
-  .moment .fh-hype { margin-top: 26px; height: 64px; font-size: 18px; padding: 0 26px; }
+  .note { margin-top: 14px; font-size: 20px; color: rgb(var(--fg-muted)); }
+  .moment .fh-hype { margin-top: 24px; height: 64px; font-size: 18px; padding: 0 26px; }
   .moment .fh-hype__flame { width: 26px; height: 26px; }
-  .frames { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 46px; padding: 14px 10px 0; }
-  .frames figure { display: grid; gap: 22px; }
-  .frames .fh-frame__label { font-size: 12px; }
-  .frames figcaption { font: 700 14px var(--fh-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-muted)); }
-  .frames .card { border-radius: 8px; overflow: visible; }
-  .frames .card img { border-radius: 8px; }
+  /* A product card as the store draws it (components/ui/ProductCard, lib/hype-frames). */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
-  .cards .card { aspect-ratio: 1; }
-  .cards .meta { margin-top: 14px; display: flex; align-items: center; gap: 12px; }
-  .cards .fh-score { font-size: 30px; }
-  .cards .fh-rank { font-size: 13px; }
-  .cards p { margin-top: 8px; font-size: 20px; color: rgb(var(--fg-muted)); }
+  .card .box { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 8px; background: rgb(26 26 29); }
+  .card .photo { position: absolute; inset: 0; }
+  .card .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .meta { margin-top: 14px; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: rgb(var(--fg-muted)); }
+  .card h3 { margin-top: 6px; font-size: 20px; font-weight: 500; }
+  .card .price { margin-top: 6px; font-size: 20px; font-weight: 600; }
+  .card .tag { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
+  .card .tag .fh-score { font-size: 18px; }
+  .card .tag .rk { font: 700 12px var(--fh-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-muted)); }
+  .card .add { position: absolute; z-index: 10; width: 44px; height: 44px; border-radius: 50%; background: rgb(var(--fg)); color: rgb(var(--bg)); display: grid; place-items: center; font-size: 26px; }
+  /* In the draft the hover state is drawn on by class (the store uses :hover). */
+  .card.on .fh-cardframe { opacity: 1; transform: none; }
+  .card.on .fh-cardframe__mat { opacity: 1; }
+  .card.on .fh-cardframe__sheen { animation: fh-card-sheen 1.1s ease-out var(--fh-delay, 0.2s) both; }
+  .card.on .fh-cardframe__embers i { animation: fh-frame-ember 2.8s ease-out calc(var(--i) * -0.35s) infinite; }
+  .label { margin: 0 0 14px; font: 700 14px var(--fh-mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--fg-muted)); }
   .foot { position: absolute; left: 64px; right: 64px; bottom: 54px; display: flex; justify-content: space-between; font: 500 15px var(--fh-mono); letter-spacing: 0.14em; color: rgb(var(--fg-muted)); text-transform: uppercase; }
 </style>
 </head>
-<body>
-<main class="fh-hype-scope">
+<body class="fh-hype-scope">
 <section data-board="ranks">
   <p class="kicker">Final Heaven · Hype · draft 1 of 2</p>
   <h1>Ranks</h1>
-
-  <h2>Seven ranks · quiet at the bottom, alive at the top</h2>
+  <h2>Seven ranks · tiers I–V from Emerging to Iconic</h2>
   <div class="ladder" id="ladder"></div>
 
   <h2>Rank up · a tap tips it over</h2>
   <div class="moment">
-    <div class="card"><img src="../../public/products/iced-ghost-pendant/iced-ghost-pendant-gold-640.webp" alt=""></div>
+    <div class="slot"><span id="before"></span><span id="after" style="visibility: hidden"></span></div>
     <div>
-      <h3>Iced Ghost Pendant</h3>
-      <p class="price">₦25,000</p>
-      <div class="meterRow">
-        <span class="fh-score" id="score">88</span>
-        <div class="badgeSlot">
-          <span class="fh-rank" data-rank="iconic" id="before"><span class="fh-rank__glyph"></span>Iconic</span>
-          <span class="fh-rank is-rankup" data-rank="legendary" id="after" style="--fh-delay: 3.1s; visibility: hidden">
-            <span class="fh-rank__glyph"></span>Legendary<span class="fh-rank__ring"></span>
-          </span>
-        </div>
-      </div>
+      <div class="scoreRow"><span class="fh-score" id="score">88</span><span class="rankName" id="rankName">Iconic V</span></div>
       <div class="fh-meter" id="meter" style="--fh-score: 88"><i></i></div>
-      <p class="note">Community hype, not a rating · <span id="hypes">212</span> hypes, 31 this week</p>
+      <p class="note">Community hype, not a rating · <span id="hypes">212</span> hypes</p>
       <button class="fh-hype is-burst" data-state="idle" id="hype" style="--fh-delay: 2.4s">
         <span class="fh-hype__sparks"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></span>
         <svg class="fh-hype__flame" viewBox="0 0 24 24"><path d="M12 22c4.4 0 7-2.9 7-6.6 0-3.4-2.1-5.6-3.6-7.6-.4 1.6-1.3 2.8-2.4 3.3.2-3-1.1-6.2-4-8.1.2 3.2-1.6 5.4-3.1 7.5C4.7 12.2 5 13.3 5 15.4 5 19.1 7.6 22 12 22z"/></svg>
-        Hype <span class="fh-hype__count" id="count">212</span>
+        <span id="hypeLabel">Hype</span>
       </button>
     </div>
   </div>
-
-  <h2>On a card · a high score with little evidence says early</h2>
-  <div class="cards">
-    <figure><div class="card"><img src="../../public/products/heaven-outline-tee/heaven-outline-tee-black-back-640.webp" alt=""></div>
-      <div class="meta"><span class="fh-score">31</span><span class="fh-rank" data-rank="buzzing"><span class="fh-rank__glyph"><i></i><i></i><i></i></span>Buzzing</span></div><p>Heaven Outline Tee</p></figure>
-    <figure><div class="card"><img src="../../public/products/black-arabic-dial-watch/black-arabic-dial-watch-angle-640.webp" alt=""></div>
-      <div class="meta"><span class="fh-score">94</span><span class="fh-rank" data-rank="emerging"><span class="fh-rank__glyph"></span>Emerging<span class="fh-rank__early">Early</span></span></div><p>4 hypes so far</p></figure>
-    <figure><div class="card"><img src="../../public/products/broken-star-tracksuit/broken-star-tracksuit-cream-back-640.webp" alt=""></div>
-      <div class="meta"><span class="fh-score">66</span><span class="fh-rank" data-rank="elite"><span class="fh-rank__glyph"></span>Elite</span></div><p>Broken Star Tracksuit</p></figure>
-  </div>
-
-  <div class="foot"><span>Animations stop for reduced motion</span><span>finalheaven.shop</span></div>
+  <div class="foot"><span>Original art · motion stops for reduced motion</span><span>finalheaven.shop</span></div>
 </section>
 
 <section data-board="frames">
   <p class="kicker">Final Heaven · Hype · draft 2 of 2</p>
-  <h1>Discovery<br>frames</h1>
-  <h2>Private to the visitor · earned by exploring, never bought</h2>
-  <div class="frames" id="frames"></div>
-  <div class="foot"><span>Animations stop for reduced motion</span><span>finalheaven.shop</span></div>
+  <h1>Frames</h1>
+  <h2>At rest · a clean card, the crest under the price</h2>
+  <div class="cards" id="rest"></div>
+  <h2>On hover · the frame wraps the photo, inside the card</h2>
+  <div class="cards" id="hover"></div>
+  <div class="foot"><span>Phones: crest only · nothing overlaps the page</span><span>finalheaven.shop</span></div>
 </section>
-</main>
 
-<script>
-const RANKS = [
-  ['unseen', '0–9', 'Newly discovered'],
-  ['emerging', '10–24', 'Early interest'],
-  ['buzzing', '25–39', 'Growing attention'],
-  ['trending', '40–59', 'Strong momentum'],
-  ['elite', '60–74', 'A community favourite'],
-  ['iconic', '75–89', 'A major favourite'],
-  ['legendary', '90–100', 'Exceptional, and sustained'],
-]
-const ladder = document.getElementById('ladder')
-for (const [rank, range, meaning] of RANKS) {
-  const glyph = rank === 'buzzing' ? '<i></i><i></i><i></i>' : ''
-  ladder.insertAdjacentHTML('beforeend',
-    `<span class="fh-rank" data-rank="${rank}"><span class="fh-rank__glyph">${glyph}</span>${rank}</span>` +
-    `<span class="range">${range}</span><span class="meaning">${meaning}</span>`)
+<script type="module">
+const P = '../../public/products/'
+const NUMERALS = ['', 'I', 'II', 'III', 'IV', 'V']
+const crest = (rank, size, tier, extra = '') => {
+  const src = `../../public/hype/crest-${rank}-${size > 96 ? 384 : 160}.webp`
+  const sparkles = [[18, 22], [78, 18], [62, 62], [30, 70], [86, 48], [10, 50]].map(([x, y], i) => `<i style="--i:${i};--x:${x}%;--y:${y}%"></i>`).join('')
+  const burst = Array.from({ length: 12 }, (_, i) => `<i style="--i:${i}"></i>`).join('')
+  return `<span class="fh-crest ${extra}" data-rank="${rank}" style="--crest:${size}px;--fh-crest-src:url(${src})">` +
+    `<span class="fh-crest__glow"></span><span class="fh-crest__rays"></span><span class="fh-crest__shock"></span>` +
+    `<img class="fh-crest__art" src="${src}" alt=""><span class="fh-crest__sheen"></span><span class="fh-crest__fx">${sparkles}</span>` +
+    `<span class="fh-crest__flash"></span><span class="fh-crest__burst">${burst}</span>` +
+    (tier ? `<span class="fh-crest__tier">${NUMERALS[tier]}</span>` : '') + `</span>`
 }
 
-const FRAMES = [
-  ['first-find', 'First find', 'heaven-outline-tee/heaven-outline-tee-black-back-640.webp'],
-  ['wide-eyes', 'Wide eyes', 'black-arabic-dial-watch/black-arabic-dial-watch-angle-640.webp'],
-  ['deep-dive', 'Deep dive', 'broken-star-tracksuit/broken-star-tracksuit-cream-back-640.webp'],
-  ['hidden-gem', 'Hidden gem found', 'all-seeing-heart-pendant/all-seeing-heart-pendant-640.webp'],
-  ['taste-expanding', 'Taste expanding', 'iced-fang-grillz/iced-fang-grillz-640.webp'],
-  ['heat-seeker', 'Heat seeker', 'chrome-flames-07-tee/chrome-flames-07-tee-black-back-640.webp'],
-  ['curator', 'Curator', 'heart-pendant-set/heart-pendant-set-black-640.webp'],
-  ['rare-sight', 'Rare sight', 'gothic-angel-hoodie/gothic-angel-hoodie-black-back-640.webp'],
-  ['hunt-complete', 'Hunt complete', 'iced-cuban-bracelet/iced-cuban-bracelet-gold-640.webp'],
-]
-const frames = document.getElementById('frames')
-FRAMES.forEach(([frame, name, img], i) => {
-  const label = frame === 'hunt-complete' ? '' : `<span class="fh-frame__label">${name}</span>`
-  frames.insertAdjacentHTML('beforeend',
-    `<figure><div class="card fh-frame" data-frame="${frame}" style="--fh-delay:${(0.6 + i * 0.35).toFixed(2)}s">` +
-    `<img src="../../public/products/${img}" alt="">${label}</div><figcaption>${name}</figcaption></figure>`)
-})
+// The frames' geometry from the store's generated file, laid out as lib/hype-frames.ts does.
+const text = await (await fetch('../../lib/hype-art.ts')).text()
+const OPENINGS = JSON.parse(text.slice(text.lastIndexOf('}> = ') + 5))
+const pct = (n) => `${(n * 100).toFixed(3)}%`
+function geometry(name) {
+  const f = OPENINGS[name], A = 1.25
+  const s = Math.min(1, A / f.aspect)
+  const left = (1 - s) / 2, top = (A - f.aspect * s) / 2
+  const open = { x: left + f.x * s, y: top + f.y * f.aspect * s, w: f.w * s, h: f.h * f.aspect * s }
+  const k = Math.min(open.w, open.h / A)
+  const cx = open.x + open.w / 2 - 0.5, cy = (open.y + open.h / 2) / A - 0.5
+  return {
+    art: `left:${pct(left)};top:${pct(top / A)};width:${pct(s)};height:${pct(f.aspect * s / A)}`,
+    opening: `left:${pct(open.x)};top:${pct(open.y / A)};width:${pct(open.w)};height:${pct(open.h / A)}`,
+    photo: `transform:translate(${pct(cx)},${pct(cy)}) scale(${k})`,
+    button: `right:${pct(0.5 - cx - k / 2 + 0.03)};bottom:${pct(0.5 - cy - k / 2 + 0.03)}`,
+  }
+}
 
-// The timeline: before 2.4 s idle; the tap at 2.4 s; the count and score roll at
-// 2.5 / 3.1 s, when the rank tips from Iconic to Legendary.
+const CARDS = [
+  ['legendary', null, 93, 'heart-pendant-set/heart-pendant-set-black-640.webp', 'Pendants', 'Heart Pendant Set — All 10', '₦25,000'],
+  ['iconic', 5, 88, 'iced-ghost-pendant/iced-ghost-pendant-gold-640.webp', 'Accessories', 'Iced Ghost Pendant', '₦25,000'],
+  ['elite', 3, 66, 'all-seeing-heart-pendant/all-seeing-heart-pendant-640.webp', 'Pendants', 'All-Seeing Heart Pendant', '₦7,500'],
+]
+const card = ([rank, tier, score, img, cat, name, price], on) => {
+  const g = geometry(rank)
+  const src = `../../public/hype/frame-${rank}-800.webp`
+  const embers = rank === 'legendary' ? `<span class="fh-cardframe__embers">${Array.from({ length: 8 }, (_, i) => `<i style="--i:${i}"></i>`).join('')}</span>` : ''
+  return `<article class="card ${on ? 'on' : ''}"><div class="box">` +
+    `<span class="fh-cardframe__mat" style="${g.opening};background-image:url(${P}${img})"></span>` +
+    `<div class="photo" style="${on ? g.photo : ''}"><img src="${P}${img}" alt=""></div>` +
+    `<span class="fh-cardframe"><img class="fh-cardframe__art" src="${src}" style="${g.art}" alt=""><span class="fh-cardframe__sheen" style="${g.art};--fh-frame-src:url(${src})"></span>${embers}</span>` +
+    (on ? `<span class="add" style="${g.button}">+</span>` : '') +
+    `</div><p class="meta">${cat}</p><h3>${name}</h3><p class="price">${price}</p>` +
+    `<p class="tag">${crest(rank, 30, null)}<span class="fh-score">${score}</span><span class="rk">${rank}${tier ? ' ' + NUMERALS[tier] : ''}</span></p></article>`
+}
+document.getElementById('rest').innerHTML = CARDS.map((c) => card(c, false)).join('')
+document.getElementById('hover').innerHTML = CARDS.map((c) => card(c, true)).join('')
+
+const LADDER = [['unseen', null, '0–9'], ['emerging', 2, '10–24'], ['buzzing', 3, '25–39'], ['trending', 4, '40–59'], ['elite', 1, '60–74'], ['iconic', 5, '75–89'], ['legendary', null, '90–100']]
+document.getElementById('ladder').innerHTML = LADDER.map(([rank, tier, band]) =>
+  `<figure>${crest(rank, 170, tier)}<figcaption>${rank}${tier ? ' ' + NUMERALS[tier] : ''}<span>${band}</span></figcaption></figure>`).join('')
+document.getElementById('before').innerHTML = crest('iconic', 220, 5)
+document.getElementById('after').innerHTML = crest('legendary', 220, null, 'is-rankup')
+document.querySelector('#after .fh-crest').style.setProperty('--fh-delay', '3s')
+
+// The timeline: the tap at 2.4 s; at 3 s the rank tips from Iconic V to Legendary.
 const $ = (id) => document.getElementById(id)
 function state(t) {
-  const tapped = t >= 2.4
+  const tapped = t >= 2.4, up = t >= 3
   $('hype').dataset.state = tapped ? 'on' : 'idle'
-  $('count').textContent = tapped ? '213' : '212'
+  $('hypeLabel').textContent = tapped ? 'Hyped' : 'Hype'
   $('hypes').textContent = tapped ? '213' : '212'
-  const up = t >= 3.1
   $('score').textContent = up ? '91' : '88'
   $('score').className = up ? 'fh-score is-tick' : 'fh-score'
-  $('score').style.setProperty('--fh-delay', '3.1s')
+  $('score').style.setProperty('--fh-delay', '3s')
+  $('rankName').textContent = up ? 'Legendary' : 'Iconic V'
   $('meter').style.setProperty('--fh-score', up ? 91 : 88)
   $('before').style.visibility = up ? 'hidden' : 'visible'
   $('after').style.visibility = up ? 'visible' : 'hidden'
@@ -171,18 +176,15 @@ function state(t) {
 
 const board = new URLSearchParams(location.search).get('board')
 if (board) { document.body.classList.add('one'); document.body.dataset.board = board }
-window.duration = board === 'frames' ? 8 : 10
-window.cues = [{ at: 2.4, kind: 'tick', dur: 0.1 }, { at: 3.1, kind: 'zap', dur: 0.3 }]
+window.duration = board === 'frames' ? 5 : 8
+window.cues = board === 'frames' ? [] : [{ at: 2.4, kind: 'tick', dur: 0.1 }, { at: 3, kind: 'boom', dur: 0.6 }]
 let rendering = false
 function draw(t) {
   state(t)
   for (const a of document.getAnimations()) { a.pause(); a.currentTime = t * 1000 }
 }
-// The renderer calls this; from then on the live loop stands aside.
 window.renderFrame = (t) => { rendering = true; draw(t) }
 window.ready = Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))])
-
-// Live in a browser: loop the timeline.
 if (!navigator.webdriver) {
   const start = performance.now()
   const loop = (now) => { if (rendering) return; draw(((now - start) / 1000) % window.duration); requestAnimationFrame(loop) }

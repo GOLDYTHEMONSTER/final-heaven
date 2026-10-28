@@ -1,14 +1,16 @@
 'use client'
 
 import { useCallback, useEffect, useSyncExternalStore } from 'react'
-import type { Rank } from '@/lib/hype'
+import { climbed, hypeTier, type Rank } from '@/lib/hype'
 
 // Hype in the browser. Every card and product page asks for its product's
 // score through useHype; requests made in the same moment go to /api/hype as
 // one call. While Hype is off the server says so and nothing is shown.
 
 export type HypeData = { score: number; rank: Rank; early: boolean; hypes: number }
-type Entry = { data: HypeData | null; mine: boolean; pending: boolean; rankedUp: boolean }
+type Climb = 'rank' | 'tier' | null
+type Entry = { data: HypeData | null; mine: boolean; pending: boolean; climb: Climb }
+const standing = (d: HypeData | null) => ({ rank: d?.rank ?? 'unseen' as Rank, tier: d ? hypeTier(d.score, d.rank, d.early) : null })
 
 const entries = new Map<string, Entry>()
 const listeners = new Set<() => void>()
@@ -33,10 +35,10 @@ function request(id: string) {
       const bodies = await Promise.all(chunks.map((c) => fetch(`/api/hype?ids=${c.map(encodeURIComponent).join(',')}`).then((r) => r.json())))
       enabled = bodies.every((b) => b.enabled === true)
       for (const body of bodies) {
-        for (const pid of Object.keys(body.products ?? {})) entries.set(pid, { data: body.products[pid], mine: (body.mine ?? []).includes(pid), pending: false, rankedUp: false })
-        for (const pid of body.mine ?? []) entries.set(pid, { ...(entries.get(pid) ?? { data: null, pending: false, rankedUp: false }), mine: true })
+        for (const pid of Object.keys(body.products ?? {})) entries.set(pid, { data: body.products[pid], mine: (body.mine ?? []).includes(pid), pending: false, climb: null })
+        for (const pid of body.mine ?? []) entries.set(pid, { ...(entries.get(pid) ?? { data: null, pending: false, climb: null as Climb }), mine: true })
       }
-      for (const pid of ids) if (!entries.has(pid)) entries.set(pid, { data: null, mine: false, pending: false, rankedUp: false })
+      for (const pid of ids) if (!entries.has(pid)) entries.set(pid, { data: null, mine: false, pending: false, climb: null })
     } catch {
       // Hype is decoration: if it can't load, the store simply shows none.
     }
@@ -60,7 +62,7 @@ export function useHype(productId: string) {
       const body = await res.json().catch(() => ({}))
       if (!res.ok || body.enabled === false) throw new Error(body.error)
       const data = { score: body.score, rank: body.rank, early: body.early, hypes: body.hypes }
-      entries.set(productId, { data, mine: true, pending: false, rankedUp: body.rankedUp === true })
+      entries.set(productId, { data, mine: true, pending: false, climb: climbed(standing(current.data), standing(data)) })
       notify()
       return body.status === 'accepted' ? 'accepted' : 'duplicate'
     } catch {
@@ -70,5 +72,6 @@ export function useHype(productId: string) {
     }
   }, [productId])
 
-  return { enabled: enabled === true, data: entry?.data ?? null, mine: entry?.mine ?? false, pending: entry?.pending ?? false, rankedUp: entry?.rankedUp ?? false, hype }
+  const data = entry?.data ?? null
+  return { enabled: enabled === true, data, tier: standing(data).tier, mine: entry?.mine ?? false, pending: entry?.pending ?? false, climb: entry?.climb ?? null, hype }
 }
