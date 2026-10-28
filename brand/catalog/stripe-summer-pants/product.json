@@ -1,0 +1,65 @@
+{
+  "name": "Side-Stripe Summer Pants",
+  "category": "Pants",
+  "description": "Thin, cool pants for hot days, in a light quick-dry \"ice silk\" fabric that drapes. Bold stripes run down each side over angled panel seams, with a drawstring waist and a loose, wide straight leg.\n\nFour colourways: cream with red, grey with navy, black with white, and navy with yellow.\n\nThey run about a size small: if you're between sizes, go one up.",
+  "price": 18000,
+  "stock": 20,
+  "colors": [
+    "Cream & Red",
+    "Grey & Navy",
+    "Black & White",
+    "Navy & Yellow"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "pants",
+    "summer",
+    "wide-leg",
+    "streetwear",
+    "stripes"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "cream-red.jpg",
+      "color": "Cream & Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/48de950f-4dac-4acb-90a6-85d86fb6c321.jpg"
+    },
+    {
+      "file": "grey-navy.jpg",
+      "color": "Grey & Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bf9fba82-dce5-496f-9097-f630eef527a2.jpg"
+    },
+    {
+      "file": "black-white.jpg",
+      "color": "Black & White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7c348482-59c9-4314-b371-abe8332ffcd5.jpg"
+    },
+    {
+      "file": "navy-yellow.jpg",
+      "color": "Navy & Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bce334ee-b69e-4117-9c06-03571d191662.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1036451352726",
+    "unit_cost": 19.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "¥13.8 with the first-order coupon. Sizes M–3XL assumed (size chart not seen). Three side stripes resemble an Adidas trademark: generic name at the owner's choice. Photos cropped to keep the models' branded sneakers (Adidas-style, LV) out of frame."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793211677659"
+}

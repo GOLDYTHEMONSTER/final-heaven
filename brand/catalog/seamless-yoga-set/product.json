@@ -1,0 +1,63 @@
+{
+  "name": "Seamless Yoga Set — Long Sleeve",
+  "category": "Ladies",
+  "description": "A two-piece seamless set for the gym, yoga or the street: a cropped long-sleeve top with thumbholes, and high-waist leggings shaped with contour seams that lift and sculpt. Knitted without side seams, in a stretchy, quick-dry fabric that wicks sweat away.\n\nIt fits close to the body. If you prefer it less snug, or you're between sizes, go one up.",
+  "price": 25000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Royal Blue",
+    "Sky Blue",
+    "Rose"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "tags": [
+    "ladies",
+    "gym",
+    "yoga",
+    "set",
+    "activewear"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/77ee5bf1-24e6-4f04-a518-b5d3f383ed7c.jpg"
+    },
+    {
+      "file": "royal-blue.jpg",
+      "color": "Royal Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/86cf8e18-31d9-493f-bba3-45712addf162.jpg"
+    },
+    {
+      "file": "sky-blue.jpg",
+      "color": "Sky Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/633e56f3-6865-48c5-85e2-18d297b0932b.jpg"
+    },
+    {
+      "file": "rose.jpg",
+      "color": "Rose",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e6aa2aaa-6ab8-42c9-966a-77592de9168f.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=693106812920",
+    "unit_cost": 49.9,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Price per set (top + leggings); ¥40.9 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: model cut out locally, Chinese text, inset and colour dots removed, on a plain grey backdrop."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793211873571"
+}

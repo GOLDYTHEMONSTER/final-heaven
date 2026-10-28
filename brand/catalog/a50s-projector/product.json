@@ -1,0 +1,44 @@
+{
+  "name": "A50S Smart Projector",
+  "category": "Gadgets",
+  "description": "A compact projector that runs Android and connects to Wi-Fi, so it plays films and shows without a laptop. It throws a 50 to 200 inch picture at native 1080p (it accepts 4K video), with 360 ANSI lumens and a 2500:1 contrast ratio, so it looks best in a dim or dark room.\n\nAuto keystone squares the picture up when the projector sits at an angle, and the stand turns all the way round, so it can point at a wall or the ceiling.\n\nDual-band Wi-Fi 6 (2.4 GHz and 5 GHz) and Bluetooth 5.0. About 17.6 × 18.3 × 7.4 cm. Comes with a UK 3-pin plug.",
+  "price": 150000,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "projector",
+    "home-cinema",
+    "android",
+    "wifi"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "front.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/dfbee17b-2685-4d17-91ad-7cb37cf5241a.jpg"
+    },
+    {
+      "file": "glow.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/eeeb3e3e-4fb0-4dfb-be7f-68feaf27eafd.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1082101957648",
+    "unit_cost": 415,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Order the UK plug. ¥375 with the first-order coupon. Supplier photos cleaned locally; the app-logo row (YouTube, Netflix, Google Play) and the spec collage left out. The listing also claims '7200 lumens', which contradicts its own 360 ANSI figure: not used. No streaming apps are promised by name."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793204879465"
+}

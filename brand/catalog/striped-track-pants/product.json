@@ -1,0 +1,57 @@
+{
+  "name": "Striped Track Pants",
+  "category": "Pants",
+  "description": "Wide-leg track pants in black, with grey stripes down each side and curved grey piping that sweeps across the legs. An elastic drawstring waist, and a long, loose cut that stacks over your shoes. Made from a light, quick-dry softshell fabric.\n\nThey run about a size small: if you're between sizes, go one up.",
+  "price": 25000,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "pants",
+    "track-pants",
+    "wide-leg",
+    "streetwear",
+    "stripes"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "front.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7782284a-959f-47c5-9c44-0a1392b283bf.jpg"
+    },
+    {
+      "file": "side.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c77933a4-dc0b-426d-bde5-77fb185789fd.jpg"
+    },
+    {
+      "file": "back.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7a22f1ec-f74c-4967-a334-5846b22069e1.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=907895226219",
+    "unit_cost": 38,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "¥32 with the first-order coupon, ¥37 from 10 pieces. Sizes M–3XL assumed (size chart not seen): check against the listing when ordering. Three side stripes resemble an Adidas trademark: listed under a generic name at the owner's choice. The 'Mujie' word on the hip is the maker's label. Photos: supplier model shots cropped to 4:5."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793210836554"
+}

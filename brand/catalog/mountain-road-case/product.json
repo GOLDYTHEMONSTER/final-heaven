@@ -1,0 +1,82 @@
+{
+  "name": "Mountain Road Phone Case",
+  "category": "Accessories",
+  "description": "A soft, shockproof iPhone case with full coverage and a raised rim around the cameras, printed with a mountain road scene. In 7 colours: Black, Green, Mocha, Wine and Pink carry the \"See for yourself\" mountains; Cream Desert and Hot Pink Desert carry a desert road.\n\nChoose your model: iPhone 13 Pro, 14 Pro, 15 Pro, 16 Pro or 17 Pro.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Cream Desert",
+    "Green",
+    "Mocha",
+    "Wine",
+    "Hot Pink Desert",
+    "Pink"
+  ],
+  "sizes": [
+    "iPhone 13 Pro",
+    "iPhone 14 Pro",
+    "iPhone 15 Pro",
+    "iPhone 16 Pro",
+    "iPhone 17 Pro"
+  ],
+  "tags": [
+    "phone case",
+    "iphone",
+    "accessories",
+    "mountains"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2251d245-7a84-4fc7-ae2f-d3a4eb7da587.jpg"
+    },
+    {
+      "file": "cream-desert.jpg",
+      "color": "Cream Desert",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4c343943-9607-4f2c-83b1-24576ffc379b.jpg"
+    },
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0e3392f9-bb99-45ad-8ceb-574e5f41b13d.jpg"
+    },
+    {
+      "file": "mocha.jpg",
+      "color": "Mocha",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6b164f76-daa2-4a05-8075-96554b64e9ab.jpg"
+    },
+    {
+      "file": "wine.jpg",
+      "color": "Wine",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f771c5d0-75cc-4768-8b7d-d0d6f83e8afe.jpg"
+    },
+    {
+      "file": "hot-pink-desert.jpg",
+      "color": "Hot Pink Desert",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0fec6bf6-65dd-4d01-bbf5-7922f6bc1cb2.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d26b0f82-5e3d-4244-95df-b8873131aae9.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://qr.1688.com/s/yedrCS1C",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Unit cost not seen yet (the screenshots had no price). Prints carry a third-party logo; listed under a generic name at the owner's choice."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793200799074"
+}

@@ -56,3 +56,4 @@ brand/catalog/*/*.jpg
 brand/catalog/*/*.jpeg
 brand/catalog/*/*.png
 brand/catalog/*/*.webp
+brand/catalog/*/supplier/

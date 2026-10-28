@@ -1,0 +1,49 @@
+{
+  "name": "Satellite Sky Projector — USB",
+  "category": "Gadgets",
+  "description": "A little satellite that turns your ceiling or wall into a night sky: the moon, a galaxy, a sunset over the hills, whales and more. It comes with picture slides you swap to change the scene.\n\nIt runs from any USB port (a laptop, a power bank, a phone charger or a car), so there are no batteries to change. The bendy neck points it wherever you want the picture. Best in a dark room.",
+  "price": 10000,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "projector",
+    "galaxy",
+    "night-light",
+    "usb"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/142ee9e5-4819-4523-a95e-b59591c34795.jpg"
+    },
+    {
+      "file": "sunset-room.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f6d29d48-0f4f-4e15-8c0e-15de8cc53534.jpg"
+    },
+    {
+      "file": "moon-bedroom.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/93d51b8b-6cdf-47f8-93c5-fb9b76af3a78.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1077779815678",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Supplier price not seen. Slide count not stated on the page until confirmed (listing images show sets of 10 to 25 designs). One listing photo shows a USB-C plug; the main shot is USB-A. Photos: white shot cut out locally; room shots cropped to leave out Chinese text and slide thumbnails."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793205517115"
+}

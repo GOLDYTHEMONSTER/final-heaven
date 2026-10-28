@@ -1,0 +1,98 @@
+{
+  "name": "Character Case for AirPods Pro",
+  "category": "Accessories",
+  "description": "A playful character case for AirPods Pro, in 10 designs.\n\nChoose your model: Pro 1 (the first AirPods Pro), Pro 2 or Pro 3. Not sure which you have? With your AirPods connected, your iPhone shows the model in Settings, under their name.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Skull Bunny Pendant",
+    "Skull Bunny Headphones",
+    "Bow Kitty Headphones",
+    "Flower Bunny Headphones",
+    "Yellow Bunny Headphones",
+    "Shark Onesie Cat",
+    "Little Dino",
+    "Soot Ball",
+    "Sunhat Penguin",
+    "Chef Toast"
+  ],
+  "sizes": [
+    "Pro 1",
+    "Pro 2",
+    "Pro 3"
+  ],
+  "tags": [
+    "airpods",
+    "case",
+    "cute",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "skull-bunny-pendant.jpg",
+      "color": "Skull Bunny Pendant",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/372ca8b5-0574-4504-a71e-a90f46484141.jpg"
+    },
+    {
+      "file": "skull-bunny-headphones.jpg",
+      "color": "Skull Bunny Headphones",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ad78da19-291a-459e-9e7f-20c1a89c744b.jpg"
+    },
+    {
+      "file": "bow-kitty-headphones.jpg",
+      "color": "Bow Kitty Headphones",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/af840d59-4046-40f0-9ae8-804901305666.jpg"
+    },
+    {
+      "file": "flower-bunny-headphones.jpg",
+      "color": "Flower Bunny Headphones",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bcda4b28-e02d-4851-a07f-35b1295a1de4.jpg"
+    },
+    {
+      "file": "yellow-bunny-headphones.jpg",
+      "color": "Yellow Bunny Headphones",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/aab80c21-b4ea-43a4-97ac-6a93734128a3.jpg"
+    },
+    {
+      "file": "shark-onesie-cat.jpg",
+      "color": "Shark Onesie Cat",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8c08e22b-9dd8-4e3a-989d-018ba03385a7.jpg"
+    },
+    {
+      "file": "little-dino.jpg",
+      "color": "Little Dino",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/47c9a833-17b2-48d7-8d97-8881b59f3f69.jpg"
+    },
+    {
+      "file": "soot-ball.jpg",
+      "color": "Soot Ball",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/810a68d0-c2de-4e99-9247-a971e436e19c.jpg"
+    },
+    {
+      "file": "sunhat-penguin.jpg",
+      "color": "Sunhat Penguin",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a2128bcb-57cc-4a23-bf34-d302360f9200.jpg"
+    },
+    {
+      "file": "chef-toast.jpg",
+      "color": "Chef Toast",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1e105025-c47e-4c42-8283-0de2f2bc4902.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://qr.1688.com/s/vp1T3NFG",
+    "unit_cost": 13,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "1688 listing of 51 styles at ¥2–¥13 each; unit cost set to the top of the range until each style's price is known. Listed with the novelty cases (earbud-cases-novelty); supplier photos in earbud-cases/supplier."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793192416899"
+}

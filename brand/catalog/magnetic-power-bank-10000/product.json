@@ -1,0 +1,66 @@
+{
+  "name": "Magnetic Power Bank — 10,000 mAh",
+  "category": "Gadgets",
+  "description": "A slim power bank that snaps onto the back of your phone and charges it wirelessly at up to 15W. It holds on magnetically to iPhone 12 and later; other phones with wireless charging need a magnetic case or ring.\n\nThe USB-C port does 20W fast charging both ways: plug in a cable to charge a second device at the same time, or to recharge the power bank itself. Four small lights show how much charge is left. 10,000 mAh, and small enough for your hand luggage on a flight.",
+  "price": 22000,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Orange",
+    "Black",
+    "Blue",
+    "Pink"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "power-bank",
+    "magnetic",
+    "wireless-charging",
+    "phone"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3bd67e08-8aa8-4fa9-a0a7-b0044605c2f6.jpg"
+    },
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2da2a7b7-a197-4e5b-ac0d-56e4718e8ae6.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6ad511a3-1c3a-4167-b12e-98427d040354.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/333d8bb5-836f-483e-9a25-0880ffc28d4f.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bf1b59f1-5c2f-4d0c-bae3-8e972546aef1.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=976641256566",
+    "unit_cost": 35,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Order the 10,000 mAh style. Cost assumed from the listing range (¥18–¥35, from ¥13 with coupon): check the Style tab. Lithium battery: Express by air must be off for this product before it goes on sale (owner chose draft until then). Name avoids \"MagSafe\" (Apple trademark). Photos: supplier renders cropped to 4:5."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793211329796"
+}

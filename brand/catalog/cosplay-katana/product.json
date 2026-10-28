@@ -1,0 +1,107 @@
+{
+  "name": "Wooden Cosplay Katana",
+  "category": "Cosplay",
+  "description": "A full-size cosplay katana with its sheath, in 12 designs. The blade is wood and not sharpened; the handle, guard and sheath are ABS plastic.\n\n100 cm long overall: a 68 cm blade (2.3 cm wide) and a 24 cm handle, with a 74 cm sheath. It weighs 0.35 kg.",
+  "price": 35000,
+  "stock": 20,
+  "colors": [
+    "Flame White",
+    "Water Blue",
+    "Thunder Yellow",
+    "Crimson Sun",
+    "Amber Flame",
+    "Midnight Black",
+    "Butterfly",
+    "Jagged White",
+    "Green Wind",
+    "Blossom Pink",
+    "Pink Moon",
+    "Silver & Gold"
+  ],
+  "sizes": [],
+  "tags": [
+    "cosplay",
+    "katana",
+    "sword",
+    "anime",
+    "wooden"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "flame-white.jpg",
+      "color": "Flame White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/01e837d3-77e4-426d-a5ed-cbd91844b646.jpg"
+    },
+    {
+      "file": "water-blue.jpg",
+      "color": "Water Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d25a7f15-ed69-4966-a83a-14b31268e57a.jpg"
+    },
+    {
+      "file": "thunder-yellow.jpg",
+      "color": "Thunder Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a118fbd3-442d-4dcb-8c45-1719c09c9385.jpg"
+    },
+    {
+      "file": "crimson-sun.jpg",
+      "color": "Crimson Sun",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/60be9dcb-f389-4052-bd1c-841a1d01287d.jpg"
+    },
+    {
+      "file": "amber-flame.jpg",
+      "color": "Amber Flame",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a3c683f3-aba6-4b63-81ee-7720c4fe3468.jpg"
+    },
+    {
+      "file": "midnight-black.jpg",
+      "color": "Midnight Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5513a696-5d7f-483b-b1c2-0dd11a53589c.jpg"
+    },
+    {
+      "file": "butterfly.jpg",
+      "color": "Butterfly",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3627e8eb-393a-452c-8258-ab722b56c5c8.jpg"
+    },
+    {
+      "file": "jagged-white.jpg",
+      "color": "Jagged White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1bc80c78-a42d-47d6-a12f-f8e545615d13.jpg"
+    },
+    {
+      "file": "green-wind.jpg",
+      "color": "Green Wind",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e36b5ad8-eecf-4ff0-b15f-3ace2e163fae.jpg"
+    },
+    {
+      "file": "blossom-pink.jpg",
+      "color": "Blossom Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/856c90da-b542-44c8-8f0e-484dfd7753e2.jpg"
+    },
+    {
+      "file": "pink-moon.jpg",
+      "color": "Pink Moon",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ce132908-72b0-4793-863c-9d4ec3ada645.jpg"
+    },
+    {
+      "file": "silver-gold.jpg",
+      "color": "Silver & Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8353a0d1-0561-413a-9db6-a1eaa2525c20.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://qr.1688.com/s/AHCgAbEx",
+    "unit_cost": 28.42,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Supplier photos cleaned locally (background removed, spec text and inset dropped). ¥19.42 with first-order coupon. Not offered: Silver Flame, Blue Edge, Mist Blue (near duplicates)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793180401190"
+}
