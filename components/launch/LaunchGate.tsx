@@ -16,6 +16,8 @@ import { Countdown, timeLeft, useNow } from './Countdown'
 // Styles: .launch-* in app/globals.css.
 
 const KEY = 'fh_launch'
+/** Dispatch on window to open the sheet from elsewhere (checkout's countdown). */
+export const OPEN_LAUNCH_GATE = 'fh:open-launch'
 const SKIP = ['/unsubscribe', '/track', '/privacy', '/terms']
 
 const read = () => { try { return localStorage.getItem(KEY) } catch { return null } }
@@ -47,6 +49,12 @@ export function LaunchGate() {
     return () => { cancelled = true }
     // Once per page load: the first visit decides, not every navigation.
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const show = () => setOpen(true)
+    window.addEventListener(OPEN_LAUNCH_GATE, show)
+    return () => window.removeEventListener(OPEN_LAUNCH_GATE, show)
   }, [])
 
   const target = launch?.opensAt ? Date.parse(launch.opensAt) : null
