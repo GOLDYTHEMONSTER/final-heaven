@@ -20,7 +20,8 @@ export function ProductRail({ id, kicker, title, description, href, linkLabel, p
           {linkLabel} <FiArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </Link>
       </div>
-      <ul className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+      {/* scroll-px keeps the snapped first card off the screen edge (snapping ignores padding otherwise). */}
+      <ul className="-mx-4 mt-8 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-4">
         {products.map((p) => (
           <li key={p.id} className="w-[62vw] shrink-0 snap-start sm:w-auto">
             <ProductCard product={p} />

@@ -1,5 +1,5 @@
 // Discovery ranking: orders products for the homepage feed, the shop's
-// "Featured" sort and related products. Pure and deterministic for a given
+// "Featured" sort and the product page's rows (related, complete the look). Pure and deterministic for a given
 // seed, so it runs the same on the server (/api/feed) and in the browser,
 // and is unit-tested. Rule-based on purpose: every factor is a named weight.
 
@@ -15,6 +15,8 @@ export type FeedProfile = {
   picked: string[]
   /** Products the shopper has already opened, most recent last. */
   viewed: string[]
+  /** Community hype score (0–100) by product id, while Hype is on. */
+  hype?: Record<string, number>
 }
 
 /** sessionStorage key for the per-tab ranking seed, shared by the feed and the shop. */
@@ -44,7 +46,31 @@ export const FEED_WEIGHTS = {
   explore: 0.9,
   /** Penalty per same-category item among the last DIVERSITY_WINDOW picks. */
   sameCategory: 1.4,
+  /** Community hype, scaled by the score (0–100): the most hyped gain this much. */
+  communityHype: 2,
 } as const
+
+/** Hyping a product says more than opening it: it counts this many views, and fades over a month, not a week. */
+export const HYPE_SIGNAL = { weight: 3, halfLifeDays: 30 }
+
+/**
+ * Categories that go with each other, for "Complete the look". Clothing pairs
+ * with clothing and the pieces worn with it; gadgets with accessories.
+ */
+export const COMPLEMENTS: Record<string, string[]> = {
+  'T-Shirts': ['Pants', 'Jackets', 'Hoodies', 'Pendants', 'Accessories'],
+  Hoodies: ['Pants', 'T-Shirts', 'Pendants', 'Accessories'],
+  Jackets: ['T-Shirts', 'Pants', 'Hoodies', 'Pendants'],
+  Pants: ['T-Shirts', 'Hoodies', 'Jackets', 'Accessories'],
+  Tracksuits: ['T-Shirts', 'Pendants', 'Accessories'],
+  Sets: ['Pendants', 'Accessories', 'Grillz'],
+  Ladies: ['Ladies', 'Accessories', 'Pendants'],
+  Pendants: ['Grillz', 'T-Shirts', 'Hoodies', 'Accessories'],
+  Grillz: ['Pendants', 'Accessories'],
+  Accessories: ['Gadgets', 'Pendants', 'T-Shirts'],
+  Gadgets: ['Accessories', 'Gadgets'],
+  Cosplay: ['Accessories', 'Gadgets'],
+}
 
 const RECENT_DAYS = 60
 const DIVERSITY_WINDOW = 3
@@ -84,6 +110,8 @@ export function scoreProduct(p: Product, profile: FeedProfile, seed: number, now
   const state = p.purchase?.state
   if (state === 'available' || state === 'preorder') score += w.buyable
   else if (state === 'sold_out' || state === 'paused' || state === 'unavailable') score += w.blocked
+  const hype = profile.hype?.[p.id]
+  if (hype) score += w.communityHype * Math.min(100, Math.max(0, hype)) / 100
   return score + w.explore * jitter(seed, p.id)
 }
 
@@ -158,12 +186,15 @@ export type InterestSignals = {
   favoritedCategories: string[]
   cartAdditions: string[]
   pickedCategories?: string[]
+  /** Products this shopper hyped. */
+  hypedProducts?: { productId: string; category: string; tags: string[]; at: number }[]
 }
 
 /**
  * Turns browsing history into a compact profile. Recent views count more
- * (half-life a week); a category opened often counts more; favourite
- * categories (from browsing a category) add a little.
+ * (half-life a week); a category opened often counts more; a hype counts as
+ * several views and fades slower (HYPE_SIGNAL); favourite categories (from
+ * browsing a category) add a little.
  */
 export function buildProfile(s: InterestSignals, now = Date.now()): FeedProfile {
   const categories: Record<string, number> = {}
@@ -172,6 +203,11 @@ export function buildProfile(s: InterestSignals, now = Date.now()): FeedProfile 
     const weight = Math.pow(0.5, Math.max(0, now - v.viewedAt) / (7 * 86_400_000))
     categories[v.category] = (categories[v.category] ?? 0) + weight
     for (const t of v.tags ?? []) tags[t] = (tags[t] ?? 0) + weight
+  }
+  for (const h of (s.hypedProducts ?? []).slice(-30)) {
+    const weight = HYPE_SIGNAL.weight * Math.pow(0.5, Math.max(0, now - h.at) / (HYPE_SIGNAL.halfLifeDays * 86_400_000))
+    categories[h.category] = (categories[h.category] ?? 0) + weight
+    for (const t of h.tags ?? []) tags[t] = (tags[t] ?? 0) + weight
   }
   for (const c of s.favoritedCategories) categories[c] = (categories[c] ?? 0) + 0.5
   const top = (m: Record<string, number>, n: number) =>

@@ -16,6 +16,8 @@ export interface UserInterestData {
   favoritedCategories: string[]
   /** Chosen in "What are you into?" on the homepage feed. Optional; older saved data has none. */
   pickedCategories?: string[]
+  /** Products hyped in this browser: a strong taste signal (lib/discovery buildProfile). Optional; older saved data has none. */
+  hypedProducts?: { productId: string; category: string; tags: string[]; at: number }[]
 }
 
 interface InterestStore {
@@ -25,6 +27,7 @@ interface InterestStore {
   addToSearchHistory: (query: string) => void
   trackCartAddition: (productId: string) => void
   addFavoriteCategory: (category: string) => void
+  trackHype: (productId: string, category: string, tags: string[]) => void
   togglePickedCategory: (category: string) => void
   clearInterests: () => void
 }
@@ -135,6 +138,22 @@ export const useInterestStore = create<InterestStore>()(
               ...state.interests,
               favoritedCategories: [...state.interests.favoritedCategories, category]
             }
+          }
+        })
+      },
+
+      trackHype: (productId, category, tags) => {
+        set((state) => {
+          const hyped = (state.interests.hypedProducts ?? []).filter((h) => h.productId !== productId)
+          const favorited = state.interests.favoritedCategories.includes(category)
+            ? state.interests.favoritedCategories
+            : [...state.interests.favoritedCategories, category]
+          return {
+            interests: {
+              ...state.interests,
+              favoritedCategories: favorited,
+              hypedProducts: [...hyped, { productId, category, tags, at: Date.now() }].slice(-30),
+            },
           }
         })
       },

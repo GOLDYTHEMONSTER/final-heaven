@@ -9,7 +9,7 @@ import { ProductGallery, type GalleryImage } from '@/components/product/ProductG
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
-import { RecommendedProducts } from '@/components/sections/RecommendedProducts'
+import { ProductDiscovery } from '@/components/product/ProductDiscovery'
 import { useInterestStore } from '@/lib/stores/interestStore'
 import { track } from '@/lib/analytics'
 import { PolicySummary } from '@/components/legal/PolicySummary'
@@ -245,7 +245,7 @@ export function ProductView({ params }: { params: { id: string } }) {
                   {product.description}
                 </p>
                 <Provenance product={product} />
-                <div className="mt-6"><HypeMeter productId={product.id} category={product.category} /></div>
+                <div className="mt-6"><HypeMeter productId={product.id} category={product.category} tags={product.tags ?? []} /></div>
               </div>
 
               {/* A set is put together on its own page (picks from each group), not chosen here. */}
@@ -443,17 +443,8 @@ export function ProductView({ params }: { params: { id: string } }) {
           </div>
         )}
 
-        {/* Recommended Products Section */}
-        {allProducts.length > 0 && (
-          <RecommendedProducts
-            currentProductId={product?.id}
-            allProducts={allProducts}
-            title="Also Check Out"
-            subtitle="Curated picks based on your current selection"
-            limit={4}
-            variant="compact"
-          />
-        )}
+        {/* Ways to keep exploring: complete the look, related (hype-aware), hyped right now, recently viewed. */}
+        {product && allProducts.length > 0 && <ProductDiscovery product={product} allProducts={allProducts} />}
       </div>
     </Layout>
   )

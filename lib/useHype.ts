@@ -75,3 +75,17 @@ export function useHype(productId: string) {
   const data = entry?.data ?? null
   return { enabled: enabled === true, data, tier: standing(data).tier, mine: entry?.mine ?? false, pending: entry?.pending ?? false, climb: entry?.climb ?? null, hype }
 }
+
+/**
+ * Community hype for many products at once, for ranking and the "Hyped right
+ * now" row. Shares the cards' batched requests; nothing while Hype is off.
+ */
+export function useHypeScores(ids: string[]) {
+  useSyncExternalStore(subscribe, () => version, () => 0)
+  const key = ids.join(',')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { for (const id of ids) request(id) }, [key])
+  const scores: Record<string, HypeData> = {}
+  if (enabled === true) for (const id of ids) { const d = entries.get(id)?.data; if (d && d.hypes > 0) scores[id] = d }
+  return { enabled: enabled === true, scores }
+}

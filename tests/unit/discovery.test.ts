@@ -114,3 +114,32 @@ describe('buildProfile', () => {
     expect(profile.viewed).toEqual(['old', 'new'])
   })
 })
+
+describe('hype in discovery', () => {
+  it('community hype lifts a product, in proportion to its score', () => {
+    const plain = scoreProduct(p('a', 'T-Shirts'), EMPTY_PROFILE, 1, NOW)
+    const hyped = scoreProduct(p('a', 'T-Shirts'), { ...EMPTY_PROFILE, hype: { a: 100 } }, 1, NOW)
+    const half = scoreProduct(p('a', 'T-Shirts'), { ...EMPTY_PROFILE, hype: { a: 50 } }, 1, NOW)
+    expect(hyped - plain).toBeCloseTo(2)
+    expect(half - plain).toBeCloseTo(1)
+  })
+
+  it('a hyped product counts as several views of its category and style, and fades slower', () => {
+    const viewed = buildProfile({ viewedProducts: [{ productId: 'v', category: 'Hoodies', tags: [], viewedAt: NOW }], favoritedCategories: [], cartAdditions: [] }, NOW)
+    const hyped = buildProfile({
+      viewedProducts: [{ productId: 'v', category: 'Hoodies', tags: [], viewedAt: NOW }],
+      favoritedCategories: [], cartAdditions: [],
+      hypedProducts: [{ productId: 'h', category: 'Pants', tags: ['stripes'], at: NOW - 14 * 86_400_000 }],
+    }, NOW)
+    expect(viewed.categories.Pants).toBeUndefined()
+    // Two weeks on, a hype (3 views, half-life 30 days) still outweighs a view from today.
+    expect(hyped.categories.Pants).toBeGreaterThan(hyped.categories.Hoodies)
+    expect(hyped.tags.stripes).toBeGreaterThan(0)
+  })
+
+  it('what a shopper hyped pulls related picks towards it', () => {
+    const profile = buildProfile({ viewedProducts: [], favoritedCategories: [], cartAdditions: [], hypedProducts: [{ productId: 'x', category: 'Hoodies', tags: [], at: NOW }] }, NOW)
+    const top = rankProducts(catalogue, profile, { seed: 7, now: NOW, limit: 1 })
+    expect(top[0].category).toBe('Hoodies')
+  })
+})

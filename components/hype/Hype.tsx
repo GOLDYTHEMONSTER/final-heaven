@@ -106,11 +106,11 @@ export function HypeTag({ productId }: { productId: string }) {
 const FLAME = 'M12 22c4.4 0 7-2.9 7-6.6 0-3.4-2.1-5.6-3.6-7.6-.4 1.6-1.3 2.8-2.4 3.3.2-3-1.1-6.2-4-8.1.2 3.2-1.6 5.4-3.1 7.5C4.7 12.2 5 13.3 5 15.4 5 19.1 7.6 22 12 22z'
 
 /** On the product page: the crest, rank, tier, score, a meter and the Hype button. */
-export function HypeMeter({ productId, category }: { productId: string; category: string }) {
+export function HypeMeter({ productId, category, tags = [] }: { productId: string; category: string; tags?: string[] }) {
   const { enabled, data, tier, mine, pending, climb, hype } = useHype(productId)
   const [burst, setBurst] = useState(0)
   const [note, setNote] = useState('')
-  const addFavoriteCategory = useInterestStore((s) => s.addFavoriteCategory)
+  const trackHype = useInterestStore((s) => s.trackHype)
   if (!enabled) return null
 
   const score = data ? Math.round(data.score) : 0
@@ -119,8 +119,9 @@ export function HypeMeter({ productId, category }: { productId: string; category
     if (mine || pending) return
     setBurst((b) => b + 1)
     const result = await hype()
-    if (result === 'accepted') { setNote(''); addFavoriteCategory(category) }
-    else if (result === 'duplicate') setNote('You’ve already hyped this.')
+    // A hype is a strong taste signal: it shapes this shopper's recommendations (lib/discovery).
+    if (result === 'accepted') { setNote(''); trackHype(productId, category, tags) }
+    else if (result === 'duplicate') { setNote('You’ve already hyped this.'); trackHype(productId, category, tags) }
     else setNote('That didn’t go through. Try again in a moment.')
   }
 
