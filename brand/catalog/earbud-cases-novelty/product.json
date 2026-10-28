@@ -70,5 +70,47 @@
     "weight_kg": null,
     "data_status": "estimated"
   },
-  "id": "p1793192423325"
+  "id": "p1793192423325",
+  "queue": {
+    "store_id": "p1793192423325",
+    "url": "https://www.finalheaven.shop/product/p1793192423325",
+    "note": "on sale before the queue existed",
+    "status": "PUBLISHED",
+    "updated": "2026-10-28T20:23:10.356Z",
+    "history": [
+      {
+        "at": "2026-10-28T20:22:53.975Z",
+        "from": null,
+        "to": "PUBLISHED",
+        "note": "on sale before the queue existed"
+      },
+      {
+        "at": "2026-10-28T20:23:10.356Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-28T20:23:10.356Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as earbud-cases-character (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2906,
+      "landed": 2906,
+      "gross": 4594,
+      "margin": 0.6124786666666667,
+      "suggested": 6500
+    }
+  }
 }

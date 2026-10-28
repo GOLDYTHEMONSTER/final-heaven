@@ -57,3 +57,4 @@ brand/catalog/*/*.jpeg
 brand/catalog/*/*.png
 brand/catalog/*/*.webp
 brand/catalog/*/supplier/
+brand/catalog/_worker/

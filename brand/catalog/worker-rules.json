@@ -1,0 +1,23 @@
+{
+  "_about": "Rules for the Product Worker (scripts/product-queue.mjs). Edit freely: nothing here is hard-coded elsewhere. Prices are suggestions; the owner sets the final price.",
+  "pricing": {
+    "target_gross_margin": 0.55,
+    "min_gross_margin": 0.35,
+    "round_to_ngn": 500,
+    "fx_note": "No default exchange rate: each product records the rate it was costed at (source.fx_rate), taken from the 1688 page's naira figure or set by the owner."
+  },
+  "categories": ["Accessories", "Cosplay", "Gadgets", "Grillz", "Hoodies", "Jackets", "Ladies", "Pants", "Pendants", "Sets", "T-Shirts", "Tracksuits"],
+  "sized_categories": ["Hoodies", "Jackets", "Ladies", "Pants", "Sets", "T-Shirts", "Tracksuits"],
+  "claims_to_review": [
+    "official", "genuine", "authentic", "licensed", "certified", "waterproof", "medical", "guaranteed",
+    "self-defense", "self-defence", "weapon",
+    "MagSafe", "Apple", "Samsung", "Nike", "Adidas", "Gucci", "Louis Vuitton", "Supreme", "Netflix", "YouTube",
+    "Sanrio", "Hello Kitty", "Marvel", "Disney", "Pokemon"
+  ],
+  "defaults": {
+    "stock": 20,
+    "fulfilment": "made_to_order",
+    "lead_time_days": 14,
+    "source_type": "wholesale"
+  }
+}

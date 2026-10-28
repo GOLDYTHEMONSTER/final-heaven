@@ -62,5 +62,46 @@
     "weight_kg": null,
     "data_status": "estimated"
   },
-  "id": "p1793211323197"
+  "id": "p1793211323197",
+  "queue": {
+    "store_id": "p1793211323197",
+    "note": "saved as a draft before the queue existed",
+    "status": "AWAITING_APPROVAL",
+    "updated": "2026-10-28T20:23:11.207Z",
+    "history": [
+      {
+        "at": "2026-10-28T20:22:57.042Z",
+        "from": null,
+        "to": "AWAITING_APPROVAL",
+        "note": "saved as a draft before the queue existed"
+      },
+      {
+        "at": "2026-10-28T20:23:11.207Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-28T20:23:11.207Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as magnetic-power-bank-10000 (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4024,
+      "landed": 4024,
+      "gross": 10976,
+      "margin": 0.731716,
+      "suggested": 9000
+    }
+  }
 }

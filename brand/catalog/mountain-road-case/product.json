@@ -78,5 +78,47 @@
     "weight_kg": null,
     "data_status": "estimated"
   },
-  "id": "p1793200799074"
+  "id": "p1793200799074",
+  "queue": {
+    "store_id": "p1793200799074",
+    "url": "https://www.finalheaven.shop/product/p1793200799074",
+    "note": "on sale before the queue existed",
+    "status": "PUBLISHED",
+    "updated": "2026-10-28T20:23:11.530Z",
+    "history": [
+      {
+        "at": "2026-10-28T20:22:59.380Z",
+        "from": null,
+        "to": "PUBLISHED",
+        "note": "on sale before the queue existed"
+      },
+      {
+        "at": "2026-10-28T20:23:11.530Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-28T20:23:11.530Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "supplier unit cost"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    }
+  }
 }
