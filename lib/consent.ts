@@ -6,3 +6,6 @@ export const NEWSLETTER_CONSENT =
 
 export const WAITLIST_CONSENT =
   'I agree to receive emails from Final Heaven about the membership launch and new drops. I can unsubscribe at any time.'
+
+export const LAUNCH_CONSENT =
+  'I agree to receive emails from Final Heaven about the store opening, new drops and offers. I can unsubscribe at any time.'

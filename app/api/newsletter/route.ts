@@ -3,12 +3,12 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { BadRequest, email, handle, readJson } from '@/lib/api'
 import { getStorefront } from '@/lib/tenancy'
 import { rateLimit } from '@/lib/rate-limit'
-import { NEWSLETTER_CONSENT, WAITLIST_CONSENT } from '@/lib/consent'
+import { LAUNCH_CONSENT, NEWSLETTER_CONSENT, WAITLIST_CONSENT } from '@/lib/consent'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
 
-const SOURCES: Record<string, string> = { footer: NEWSLETTER_CONSENT, membership_waitlist: WAITLIST_CONSENT }
+const SOURCES: Record<string, string> = { footer: NEWSLETTER_CONSENT, membership_waitlist: WAITLIST_CONSENT, launch_waitlist: LAUNCH_CONSENT }
 
 /**
  * Opt-in sign-up. Requires an explicit consent tick, and stores the exact

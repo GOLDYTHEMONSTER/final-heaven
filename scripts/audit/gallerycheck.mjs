@@ -22,6 +22,8 @@ const send = (method, params = {}) => new Promise((r) => { const i = ++id; pendi
 const ev = async (expression) => (await send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true })).result?.result?.value
 await send('Runtime.enable'); await send('Log.enable'); await send('Page.enable'); await send('Network.enable')
 await send('Network.setBlockedURLs', { urls: ['*/api/track*', '*/_vercel/insights*'] })
+// The launch gate would sit over the photos: mark it seen, as a returning visitor.
+await send('Page.addScriptToEvaluateOnNewDocument', { source: "try { localStorage.setItem('fh_launch', 'seen') } catch {}" })
 await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true })
 await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 })
 

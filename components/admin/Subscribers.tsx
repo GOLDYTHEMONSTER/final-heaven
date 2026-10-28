@@ -8,7 +8,7 @@ import { useLiveReload } from '@/components/admin/activity'
 
 type Subscriber = { email: string; source: string | null; subscribed_at: string; consented_at: string | null; unsubscribed_at: string | null }
 
-const SOURCE: Record<string, string> = { membership_waitlist: 'Membership waitlist', footer: 'Footer sign-up' }
+const SOURCE: Record<string, string> = { launch_waitlist: 'Launch waitlist', membership_waitlist: 'Membership waitlist', footer: 'Footer sign-up' }
 const date = (iso: string) => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
 // A cell starting with = + - @ would run as a spreadsheet formula: prefix it with an apostrophe.
 const cell = (raw: string) => {

@@ -2,6 +2,7 @@
 import { ReactNode } from 'react'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { LaunchGate } from '@/components/launch/LaunchGate'
 
 interface LayoutProps {
   children: ReactNode
@@ -15,6 +16,7 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </div>
       <Footer />
+      <LaunchGate />
     </div>
   )
 } 
