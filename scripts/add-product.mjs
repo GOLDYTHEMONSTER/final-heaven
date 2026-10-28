@@ -28,6 +28,8 @@ const FULFILMENTS = ['stock', 'made_to_order']
 const COST_CURRENCIES = ['CNY', 'USD', 'NGN']
 const IMAGE_PERMISSIONS = ['own', 'supplier_permitted', 'unknown']
 const CARD_SIZES = ['large', 'medium', 'small']
+// product_sources' own columns: anything else in product.json's source block stays in the file.
+const SOURCE_COLUMNS = ['listing_url', 'unit_cost', 'cost_currency', 'notes', 'image_permission', 'fx_rate', 'shipping_cost_ngn', 'customs_cost_ngn', 'other_cost_ngn', 'supplier_lead_time_days']
 const BUCKET = 'product-images'
 const CARD_BUDGET = 80 * 1024
 const DAY = /^\d{4}-\d{2}-\d{2}$/
@@ -64,6 +66,8 @@ const s = p.source ?? null
 if (s) {
   need(s.cost_currency == null || COST_CURRENCIES.includes(s.cost_currency), `source.cost_currency: one of ${COST_CURRENCIES.join(', ')}`)
   need(s.image_permission == null || IMAGE_PERMISSIONS.includes(s.image_permission), `source.image_permission: one of ${IMAGE_PERMISSIONS.join(', ')}`)
+  need(s.supplier == null || (typeof s.supplier.name === 'string' && s.supplier.name.trim().length >= 1 && s.supplier.name.length <= 120), 'source.supplier.name: the shop\'s name, up to 120 characters')
+  if (!s.supplier?.name) notes.push('no supplier: add source.supplier.name (the shop\'s name on its 1688 store page) so it shows under Admin → Suppliers')
 }
 const w = p.shipping ?? null
 const orderedIn = p.fulfilment === 'made_to_order' && ['wholesale', 'distributor'].includes(p.source_type)
@@ -72,7 +76,7 @@ if (orderedIn && !(Number(w?.weight_kg) > 0)) notes.push('no packed weight: Expr
 // Margin, when the cost is known.
 if (s?.unit_cost != null) {
   const cost = s.cost_currency === 'NGN' ? Number(s.unit_cost) : Number(s.unit_cost) * Number(s.fx_rate || NaN)
-  const extra = ['shipping_cost_ngn', 'customs_cost_ngn', 'other_cost_ngn'].reduce((t, k) => t + Number(s[k] ?? 0), 0)
+  const extra = ['china_domestic_ngn', 'shipping_cost_ngn', 'customs_cost_ngn', 'other_cost_ngn'].reduce((t, k) => t + Number(s[k] ?? 0), 0)
   if (Number.isFinite(cost)) notes.push(`landed cost ≈ ₦${Math.round(cost + extra).toLocaleString()} (goods ₦${Math.round(cost).toLocaleString()}), price ₦${Number(p.price).toLocaleString()}, gross margin ${Math.round((1 - (cost + extra) / p.price) * 100)}%`)
   else notes.push('unit cost given without fx_rate: margin unknown')
 }
@@ -95,6 +99,27 @@ const db = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 const { data: store, error: storeError } = await db.from('stores').select('id, tenant_id').eq('slug', process.env.STOREFRONT_SLUG || 'final-heaven').single()
 if (storeError) throw storeError
 const save = () => writeFileSync(file, JSON.stringify(p, null, 2) + '\n')
+
+/** The supplier by name (one per shop, matched without case), created the first time, its blanks filled in later. */
+async function supplierId(sup) {
+  const name = sup.name.trim()
+  const { data: all, error } = await db.from('suppliers').select('id, name, platform, url, contact, notes').eq('tenant_id', store.tenant_id)
+  if (error) throw error
+  const fields = { platform: sup.platform ?? '1688', url: sup.url ?? null, contact: sup.contact ?? null, notes: sup.notes ?? null }
+  const found = (all ?? []).find((x) => x.name.toLowerCase() === name.toLowerCase())
+  if (found) {
+    const fill = Object.fromEntries(Object.entries(fields).filter(([k, v]) => v != null && !found[k]))
+    if (Object.keys(fill).length) {
+      const { error: e } = await db.from('suppliers').update(fill).eq('id', found.id)
+      if (e) throw e
+    }
+    return found.id
+  }
+  const { data, error: e } = await db.from('suppliers').insert({ tenant_id: store.tenant_id, name, ...fields }).select('id').single()
+  if (e) throw e
+  console.log(`  new supplier: ${name}`)
+  return data.id
+}
 
 if (mode === '--publish') {
   if (!p.id) throw new Error('Run --apply first: this product has not been saved yet.')
@@ -150,7 +175,11 @@ if (p.id) {
   console.log(`  saved ${id} as a draft`)
 }
 if (s) {
-  const { error } = await db.from('product_sources').upsert({ product_id: p.id, tenant_id: store.tenant_id, cost_currency: 'CNY', image_permission: 'unknown', ...s }, { onConflict: 'product_id' })
+  // Only the table's own columns; China domestic shipping has none, so it counts as an other cost.
+  const row = Object.fromEntries(SOURCE_COLUMNS.filter((k) => s[k] !== undefined).map((k) => [k, s[k]]))
+  if (s.china_domestic_ngn != null) row.other_cost_ngn = Number(s.other_cost_ngn ?? 0) + Number(s.china_domestic_ngn)
+  if (s.supplier?.name) row.supplier_id = await supplierId(s.supplier)
+  const { error } = await db.from('product_sources').upsert({ product_id: p.id, tenant_id: store.tenant_id, cost_currency: 'CNY', image_permission: 'unknown', ...row }, { onConflict: 'product_id' })
   if (error) throw error
 }
 if (w && Number(w.weight_kg) > 0) {

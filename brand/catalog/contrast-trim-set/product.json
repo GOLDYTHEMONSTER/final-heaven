@@ -54,7 +54,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Price per set (bra + leggings); ¥37 with the first-order coupon, ¥44 from 200. Sizes S–XL per the owner (size chart not seen). The listing shows a 54% store return rate. Photos: supplier shots cropped to 4:5, Chinese label and colour dots left out."
+    "notes": "Price per set (bra + leggings); ¥37 with the first-order coupon, ¥44 from 200. Sizes S–XL per the owner (size chart not seen). The listing shows a 54% store return rate. Photos: supplier shots cropped to 4:5, Chinese label and colour dots left out.",
+    "supplier": {
+      "name": "Seamless activewear seller, 54% returns (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1087897043338"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -66,7 +71,7 @@
     "url": "https://www.finalheaven.shop/product/p1793214573866",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:09.404Z",
+    "updated": "2026-10-28T22:03:15.894Z",
     "history": [
       {
         "at": "2026-10-28T20:22:51.179Z",
@@ -78,10 +83,15 @@
         "at": "2026-10-28T20:23:09.404Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:15.894Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:09.404Z",
+      "at": "2026-10-28T22:03:15.894Z",
       "ok": true,
       "problems": [],
       "needs": [],

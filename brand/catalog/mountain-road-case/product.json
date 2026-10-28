@@ -72,7 +72,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Unit cost not seen yet (the screenshots had no price). Prints carry a third-party logo; listed under a generic name at the owner's choice."
+    "notes": "Unit cost not seen yet (the screenshots had no price). Prints carry a third-party logo; listed under a generic name at the owner's choice.",
+    "supplier": {
+      "name": "Phone case seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://qr.1688.com/s/yedrCS1C"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -84,7 +89,7 @@
     "url": "https://www.finalheaven.shop/product/p1793200799074",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:11.530Z",
+    "updated": "2026-10-28T22:03:17.825Z",
     "history": [
       {
         "at": "2026-10-28T20:22:59.380Z",
@@ -96,10 +101,15 @@
         "at": "2026-10-28T20:23:11.530Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:17.825Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:11.530Z",
+      "at": "2026-10-28T22:03:17.824Z",
       "ok": false,
       "problems": [],
       "needs": [

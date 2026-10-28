@@ -70,6 +70,8 @@ export function validate(p, ctx) {
   if (!(Number(p.price) > 0)) needs.push('selling price')
   if (String(p.description ?? '').trim().length < 60) needs.push('a description (at least a couple of sentences, from verified facts)')
   if (list(rules.sized_categories).includes(p.category) && !list(p.sizes).length) needs.push('sizes (from the supplier size chart)')
+  // Every bought-in product is logged against its shop (Admin → Suppliers).
+  if (['wholesale', 'distributor'].includes(p.source_type) && !String(p.source?.supplier?.name ?? '').trim()) needs.push('supplier (the shop name on its 1688 store page)')
 
   // Photos: present, used once, matching the colours.
   const photos = list(p.photos)

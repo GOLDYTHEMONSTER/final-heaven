@@ -34,7 +34,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Order the UK plug. ¥375 with the first-order coupon. Supplier photos cleaned locally; the app-logo row (YouTube, Netflix, Google Play) and the spec collage left out. The listing also claims '7200 lumens', which contradicts its own 360 ANSI figure: not used. No streaming apps are promised by name."
+    "notes": "Order the UK plug. ¥375 with the first-order coupon. Supplier photos cleaned locally; the app-logo row (YouTube, Netflix, Google Play) and the spec collage left out. The listing also claims '7200 lumens', which contradicts its own 360 ANSI figure: not used. No streaming apps are promised by name.",
+    "supplier": {
+      "name": "A50S projector seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1082101957648"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -46,7 +51,7 @@
     "url": "https://www.finalheaven.shop/product/p1793204879465",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:09.054Z",
+    "updated": "2026-10-28T22:03:15.579Z",
     "history": [
       {
         "at": "2026-10-28T20:22:46.120Z",
@@ -58,10 +63,15 @@
         "at": "2026-10-28T20:23:09.054Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:15.579Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:09.053Z",
+      "at": "2026-10-28T22:03:15.578Z",
       "ok": true,
       "problems": [],
       "needs": [],

@@ -56,7 +56,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Order the 10,000 mAh style. Cost assumed from the listing range (¥18–¥35, from ¥13 with coupon): check the Style tab. Lithium battery: Express by air must be off for this product before it goes on sale (owner chose draft until then). Name avoids \"MagSafe\" (Apple trademark). Photos: supplier renders cropped to 4:5."
+    "notes": "Order the 10,000 mAh style. Cost assumed from the listing range (¥18–¥35, from ¥13 with coupon): check the Style tab. Lithium battery: Express by air must be off for this product before it goes on sale (owner chose draft until then). Name avoids \"MagSafe\" (Apple trademark). Photos: supplier renders cropped to 4:5.",
+    "supplier": {
+      "name": "Magnetic power bank seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=976641256566"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -67,7 +72,7 @@
     "store_id": "p1793211329796",
     "note": "approved by the owner",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T21:28:03.999Z",
+    "updated": "2026-10-28T22:03:17.275Z",
     "history": [
       {
         "at": "2026-10-28T20:22:56.043Z",
@@ -112,10 +117,15 @@
         "at": "2026-10-28T21:28:03.999Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:17.275Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T21:27:55.877Z",
+      "at": "2026-10-28T22:03:17.275Z",
       "ok": true,
       "problems": [],
       "needs": [],

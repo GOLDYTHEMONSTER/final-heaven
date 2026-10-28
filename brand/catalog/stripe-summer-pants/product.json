@@ -55,7 +55,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥13.8 with the first-order coupon. Sizes M–3XL assumed (size chart not seen). Three side stripes resemble an Adidas trademark: generic name at the owner's choice. Photos cropped to keep the models' branded sneakers (Adidas-style, LV) out of frame."
+    "notes": "¥13.8 with the first-order coupon. Sizes M–3XL assumed (size chart not seen). Three side stripes resemble an Adidas trademark: generic name at the owner's choice. Photos cropped to keep the models' branded sneakers (Adidas-style, LV) out of frame.",
+    "supplier": {
+      "name": "Summer pants seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1036451352726"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -67,7 +72,7 @@
     "url": "https://www.finalheaven.shop/product/p1793211677659",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:12.387Z",
+    "updated": "2026-10-28T22:03:18.701Z",
     "history": [
       {
         "at": "2026-10-28T20:23:04.675Z",
@@ -79,10 +84,15 @@
         "at": "2026-10-28T20:23:12.387Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:18.701Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:12.387Z",
+      "at": "2026-10-28T22:03:18.701Z",
       "ok": true,
       "problems": [],
       "needs": [],

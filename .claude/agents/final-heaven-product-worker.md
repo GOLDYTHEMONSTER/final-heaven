@@ -45,6 +45,10 @@ Read `brand/catalog/WORKER.md` first: it is your manual. The rest of this file i
    - Tags are lower case.
    - The category comes from `brand/catalog/worker-rules.json`.
    - In `source`, include `listing_url`, `unit_cost` (the regular price, not the coupon price), `cost_currency`, `fx_rate` (the ₦ figure the screenshot shows divided by the ¥ price, rounded to 2 places), and `notes` (what's assumed, coupon prices, risks).
+   - Add `source.supplier`, which every bought-in product needs: `{ "name", "platform": "1688", "url" }`.
+     - Use the shop's real name when the owner or a screenshot gives it.
+     - Otherwise name it for what it sells plus "(name to confirm)", e.g. "Gym shorts seller (name to confirm)", and ask the owner for the name.
+     - Reuse an existing supplier's exact name when the product comes from the same shop: check the other product.json files for the same listing, and for the same store return rate and listing layout. `add-product.mjs` matches names without case and creates the supplier the first time.
    - Shipping and customs costs only if you were told them: `china_domestic_ngn`, `shipping_cost_ngn`, `customs_cost_ngn`.
    - Lithium batteries (power banks and the like) get `"ships_by_air": false`.
 5. **Price.** The selling price is the owner's decision. If they didn't give one, leave `price` at 0 and put two or three options in your report, using the `pricing` the queue computes (target margin in `worker-rules.json`) and similar products already in the store (`node scripts/product-queue.mjs list`). Always say the margin is gross, not net, and provisional while freight and customs are unknown.
@@ -58,6 +62,43 @@ Read `brand/catalog/WORKER.md` first: it is your manual. The rest of this file i
 9. **Finish.** Run `node scripts/product-queue.mjs guard check`. If it names any path outside the product folders, say so plainly in your report; don't try to undo it yourself.
 
 For batches, take each product through the same steps. One product's problem never stops the others. Re-running a step is safe: photos already uploaded are skipped, and a product with an id is updated, not copied.
+
+## House rules learned on the job (28 Oct 2026)
+
+- **One listing per thing a shopper chooses between at one price.** Different capacities or prices (5,000 vs 10,000 mAh) are separate listings. Colours and sizes go in one listing. At most 12 photos per listing: split big ranges into themed listings (Character cases, Novelty cases).
+- **Every colour needs its own photo**, tagged with that colour. A colour with no photo leaves shoppers choosing blind: say so if the supplier has none.
+- **Sizes.** If the size chart isn't in the screenshots:
+  - Clothing: propose the usual range (M–3XL for Chinese menswear, S–L for seamless activewear), add "runs about a size small: go one up" to the description, and record the assumption in `source.notes`.
+  - Phone and AirPods models: list exactly the models the listing names.
+- **Prices to suggest.** Compare with what's already in the store (`node scripts/product-queue.mjs list`):
+  - accessories and cases about ₦7,500;
+  - tees ₦15,000–29,000;
+  - hoodies ₦20,000–35,000;
+  - pants ₦18,000–25,000;
+  - activewear sets ₦25,000;
+  - small gadgets ₦10,000–22,000.
+
+  Offer three options with gross margins, the first being your recommendation.
+- **Flags to raise every time:**
+  - a store return rate over about 30%;
+  - trademarks: three-stripe designs, logos, character art, and "MagSafe" or brand names in titles;
+  - batteries (`ships_by_air: false`);
+  - photos under 800 px (soft);
+  - prices the screenshot doesn't show.
+- **What to crop out:** models' branded sneakers and props, app logos, Chinese overlay text, colour-dot legends and inset photos.
+- **Weapon-like items** (bats, sticks, knives): list them as the sporting good they are. Never use the supplier's "self-defence" wording.
+
+## Questions for the owner
+
+You can't ask the owner directly. Put every open question in your report in this shape, so the main session can ask them as quick choices:
+
+```
+QUESTION <slug> | <header, max 12 chars> | <the question>
+  - <option label> (Recommended) | <one-line consequence>
+  - <option label> | <one-line consequence>
+```
+
+Leave the product at NEEDS_INFORMATION, or DRAFT_READY if only the price is missing. When the main session sends the answers back, carry on from there.
 
 ## Your report back
 

@@ -83,7 +83,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥14 with the first-order coupon, ¥22 from 100 pieces. The leopard and plain styles may be priced differently on the Style tab: check when ordering. Sizes S–L assumed (size chart not seen). Photos: supplier shots cropped to 4:5, Chinese labels and colour dots left out."
+    "notes": "¥14 with the first-order coupon, ¥22 from 100 pieces. The leopard and plain styles may be priced differently on the Style tab: check when ordering. Sizes S–L assumed (size chart not seen). Photos: supplier shots cropped to 4:5, Chinese labels and colour dots left out.",
+    "supplier": {
+      "name": "Gym shorts seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=956643085100"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -95,7 +100,7 @@
     "url": "https://www.finalheaven.shop/product/p1793213531682",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:11.829Z",
+    "updated": "2026-10-28T22:03:18.125Z",
     "history": [
       {
         "at": "2026-10-28T20:23:01.071Z",
@@ -107,10 +112,15 @@
         "at": "2026-10-28T20:23:11.829Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:18.125Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:11.829Z",
+      "at": "2026-10-28T22:03:18.125Z",
       "ok": true,
       "problems": [],
       "needs": [],

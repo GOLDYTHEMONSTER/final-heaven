@@ -11,11 +11,11 @@ const rules = {
   claims_to_review: ['genuine', 'MagSafe', 'self-defence'],
 }
 const good = () => ({
-  name: 'Seamless Gym Shorts', category: 'Ladies', price: 12000,
+  name: 'Seamless Gym Shorts', category: 'Ladies', price: 12000, source_type: 'wholesale',
   description: 'High-waist seamless shorts in a stretchy, quick-dry knit, with drawstring ties at the sides.',
   sizes: ['S', 'M', 'L'], colors: ['Black', 'Coral'],
   photos: [{ file: 'black.jpg', color: 'Black' }, { file: 'coral.jpg', color: 'Coral' }],
-  source: { listing_url: 'https://qr.1688.com/s/abc', unit_cost: 23, cost_currency: 'CNY', fx_rate: 223.57 } as Record<string, unknown>,
+  source: { listing_url: 'https://qr.1688.com/s/abc', unit_cost: 23, cost_currency: 'CNY', fx_rate: 223.57, supplier: { name: 'Yiwu Activewear Co.' } } as Record<string, unknown>,
 })
 const img = (hash: string, width = 1200, height = 1500) => ({ width, height, bytes: 100_000, hash })
 const ctx = (over: Record<string, unknown> = {}) => ({
@@ -108,6 +108,11 @@ describe('product worker', () => {
     const p = { ...good(), description: `${good().description} Works with MagSafe. Genuine quality.` }
     expect(validate(p, ctx()).problems).toEqual(expect.arrayContaining([expect.stringContaining('"genuine"'), expect.stringContaining('"MagSafe"')]))
     expect(validate({ ...p, queue: { claims_reviewed: ['MagSafe', 'genuine'] } }, ctx()).problems).toEqual([])
+  })
+
+  it('a bought-in product needs its supplier logged', () => {
+    const r = validate({ ...good(), source: { ...good().source, supplier: undefined } }, ctx())
+    expect(r.needs).toContain('supplier (the shop name on its 1688 store page)')
   })
 
   it('the guard reports only new changes outside the product folders', () => {

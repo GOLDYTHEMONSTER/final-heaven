@@ -64,7 +64,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "1688 listing of 51 styles at ¥2–¥13 each; unit cost set to the top of the range until each style's price is known. Listed with the character cases (earbud-cases-character); supplier photos in earbud-cases/supplier."
+    "notes": "1688 listing of 51 styles at ¥2–¥13 each; unit cost set to the top of the range until each style's price is known. Listed with the character cases (earbud-cases-character); supplier photos in earbud-cases/supplier.",
+    "supplier": {
+      "name": "AirPods case seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://qr.1688.com/s/vp1T3NFG"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -76,7 +81,7 @@
     "url": "https://www.finalheaven.shop/product/p1793192423325",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:10.356Z",
+    "updated": "2026-10-28T22:03:16.743Z",
     "history": [
       {
         "at": "2026-10-28T20:22:53.975Z",
@@ -88,10 +93,15 @@
         "at": "2026-10-28T20:23:10.356Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:16.743Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:10.356Z",
+      "at": "2026-10-28T22:03:16.743Z",
       "ok": true,
       "problems": [],
       "needs": [],

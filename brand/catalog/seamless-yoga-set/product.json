@@ -53,7 +53,13 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Price per set (top + leggings); ¥40.9 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: model cut out locally, Chinese text, inset and colour dots removed, on a plain grey backdrop."
+    "notes": "Price per set (top + leggings); ¥40.9 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: model cut out locally, Chinese text, inset and colour dots removed, on a plain grey backdrop.",
+    "supplier": {
+      "name": "Seamless activewear seller, 54% returns (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=693106812920",
+      "notes": "Grouped with the tie-dye leggings and contrast-trim set listings: all three show the same 54% store return rate and the same listing layout. Confirm on the store page."
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -65,7 +71,7 @@
     "url": "https://www.finalheaven.shop/product/p1793211873571",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:12.098Z",
+    "updated": "2026-10-28T22:03:18.402Z",
     "history": [
       {
         "at": "2026-10-28T20:23:03.589Z",
@@ -77,10 +83,15 @@
         "at": "2026-10-28T20:23:12.098Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:18.402Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:12.098Z",
+      "at": "2026-10-28T22:03:18.402Z",
       "ok": true,
       "problems": [],
       "needs": [],

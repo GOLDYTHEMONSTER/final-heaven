@@ -97,7 +97,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Supplier photos cleaned locally (background removed, spec text and inset dropped). ¥19.42 with first-order coupon. Not offered: Silver Flame, Blue Edge, Mist Blue (near duplicates)."
+    "notes": "Supplier photos cleaned locally (background removed, spec text and inset dropped). ¥19.42 with first-order coupon. Not offered: Silver Flame, Blue Edge, Mist Blue (near duplicates).",
+    "supplier": {
+      "name": "Cosplay katana seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://qr.1688.com/s/AHCgAbEx"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -109,7 +114,7 @@
     "url": "https://www.finalheaven.shop/product/p1793180401190",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:09.749Z",
+    "updated": "2026-10-28T22:03:16.193Z",
     "history": [
       {
         "at": "2026-10-28T20:22:52.156Z",
@@ -121,10 +126,15 @@
         "at": "2026-10-28T20:23:09.749Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:16.193Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:09.749Z",
+      "at": "2026-10-28T22:03:16.193Z",
       "ok": true,
       "problems": [],
       "needs": [],

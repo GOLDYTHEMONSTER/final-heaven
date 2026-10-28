@@ -47,7 +47,12 @@
     "unit_cost": 19.2,
     "cost_currency": "CNY",
     "fx_rate": 223.57,
-    "image_permission": "unknown"
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Galaxy projector seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/799444151310.html"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -58,7 +63,7 @@
     "url": "https://www.finalheaven.shop/product/p1793175144810",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:10.618Z",
+    "updated": "2026-10-28T22:03:16.998Z",
     "history": [
       {
         "at": "2026-10-28T20:22:54.830Z",
@@ -70,10 +75,15 @@
         "at": "2026-10-28T20:23:10.618Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:16.998Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:10.618Z",
+      "at": "2026-10-28T22:03:16.998Z",
       "ok": true,
       "problems": [],
       "needs": [],

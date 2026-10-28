@@ -77,7 +77,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥29 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: white-background supplier shots cropped to 4:5; the text-overlay hero shots left out."
+    "notes": "¥29 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: white-background supplier shots cropped to 4:5; the text-overlay hero shots left out.",
+    "supplier": {
+      "name": "Seamless activewear seller, 54% returns (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=820212870375"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -89,7 +94,7 @@
     "url": "https://www.finalheaven.shop/product/p1793213829048",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:12.967Z",
+    "updated": "2026-10-28T22:03:19.252Z",
     "history": [
       {
         "at": "2026-10-28T20:23:06.701Z",
@@ -101,10 +106,15 @@
         "at": "2026-10-28T20:23:12.967Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:19.252Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:12.967Z",
+      "at": "2026-10-28T22:03:19.252Z",
       "ok": true,
       "problems": [],
       "needs": [],

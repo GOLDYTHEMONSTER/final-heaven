@@ -2,6 +2,12 @@
 
 A Claude Code subagent that prepares products while the main session keeps working on the website. It is defined in `.claude/agents/final-heaven-product-worker.md`, and this page is its manual.
 
+## The quickest way
+
+Type `/product` followed by the 1688 title and link (attach the screenshots and photos as usual). The main session hands everything to the worker in the background and goes back to development. When the worker has questions (price, sizes, the shop's name), they come back to you as quick choices.
+
+Every bought-in product is logged against its supplier (Admin → Suppliers). When the shop's name isn't known yet, the worker names it after what it sells, adds "(name to confirm)", and asks you for the real name.
+
 ## Asking for it
 
 Send the product the way you do now (screenshots, photos, the 1688 link, a price if you have one), and start with "product worker". For example:

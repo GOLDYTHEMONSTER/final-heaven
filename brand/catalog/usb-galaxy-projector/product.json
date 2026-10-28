@@ -39,7 +39,12 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Supplier price not seen. Slide count not stated on the page until confirmed (listing images show sets of 10 to 25 designs). One listing photo shows a USB-C plug; the main shot is USB-A. Photos: white shot cut out locally; room shots cropped to leave out Chinese text and slide thumbnails."
+    "notes": "Supplier price not seen. Slide count not stated on the page until confirmed (listing images show sets of 10 to 25 designs). One listing photo shows a USB-C plug; the main shot is USB-A. Photos: white shot cut out locally; room shots cropped to leave out Chinese text and slide thumbnails.",
+    "supplier": {
+      "name": "USB sky projector seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1077779815678"
+    }
   },
   "shipping": {
     "weight_kg": null,
@@ -51,7 +56,7 @@
     "url": "https://www.finalheaven.shop/product/p1793205517115",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T20:23:13.242Z",
+    "updated": "2026-10-28T22:03:19.520Z",
     "history": [
       {
         "at": "2026-10-28T20:23:07.435Z",
@@ -63,10 +68,15 @@
         "at": "2026-10-28T20:23:13.242Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-28T22:03:19.520Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:13.242Z",
+      "at": "2026-10-28T22:03:19.520Z",
       "ok": false,
       "problems": [],
       "needs": [

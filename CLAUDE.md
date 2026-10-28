@@ -2,6 +2,14 @@
 
 Streetwear store at https://www.finalheaven.shop. Built with Next.js 14, Supabase and Flutterwave, deployed on Vercel. The production branch is `master`.
 
+## Products go to the Product Worker
+
+The main session is for development. When the owner sends a product (1688 screenshots, photos, a link), hand it to the `final-heaven-product-worker` subagent in the background, the way `/product` does, and keep developing.
+- **Its manual:** `brand/catalog/WORKER.md`.
+- **Its brief:** `.claude/agents/final-heaven-product-worker.md`.
+- **Its queue:** `node scripts/product-queue.mjs list`.
+- **Your part:** relay the worker's `QUESTION` lines to the owner as quick choices, send the answers back, and only publish what the owner approves by name.
+
 ## Audit
 
 Project details for the ship-audit skill.
