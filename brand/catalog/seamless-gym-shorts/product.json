@@ -1,0 +1,93 @@
+{
+  "name": "Seamless High-Waist Gym Shorts",
+  "category": "Ladies",
+  "description": "High-waist seamless shorts for the gym, yoga or a run, in a stretchy, quick-dry knit. The tall waistband holds you in, and drawstring ties at the sides let you ruch the legs as short as you like.\n\nThe leopard prints (brown, white and black) have a scrunched back that lifts and shapes. The plain colours have a smooth, contoured back.\n\nThey fit close to the body. If you're between sizes, go one up.",
+  "price": 12000,
+  "stock": 20,
+  "colors": [
+    "Brown Leopard",
+    "White Leopard",
+    "Black Leopard",
+    "Black",
+    "Royal Blue",
+    "Orange",
+    "Coral",
+    "Magenta",
+    "Sky Blue"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "tags": [
+    "ladies",
+    "gym",
+    "shorts",
+    "activewear",
+    "leopard"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "brown-leopard.jpg",
+      "color": "Brown Leopard",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e23f5558-817d-4a90-83b2-5981c6337ee1.jpg"
+    },
+    {
+      "file": "white-leopard.jpg",
+      "color": "White Leopard",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/75b0f3e4-3a42-464c-8d9b-e76654e46af1.jpg"
+    },
+    {
+      "file": "black-leopard.jpg",
+      "color": "Black Leopard",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/290117fa-e22f-4761-b593-797ba689d11b.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3d954060-e345-4e9e-9fc2-4d395e5ad938.jpg"
+    },
+    {
+      "file": "royal-blue.jpg",
+      "color": "Royal Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e696e562-36f5-40a6-8ae3-5d9ad4a099c9.jpg"
+    },
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2162c081-e69b-43ad-9bfa-9450e8b4733c.jpg"
+    },
+    {
+      "file": "coral.jpg",
+      "color": "Coral",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4d3735eb-0459-45a0-8227-58745d08697f.jpg"
+    },
+    {
+      "file": "magenta.jpg",
+      "color": "Magenta",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/41123038-9770-450f-8f36-677d81649a59.jpg"
+    },
+    {
+      "file": "sky-blue.jpg",
+      "color": "Sky Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d454b12e-e1d3-44a0-a57d-85337ab9dc67.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=956643085100",
+    "unit_cost": 23,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "¥14 with the first-order coupon, ¥22 from 100 pieces. The leopard and plain styles may be priced differently on the Style tab: check when ordering. Sizes S–L assumed (size chart not seen). Photos: supplier shots cropped to 4:5, Chinese labels and colour dots left out."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793213531682"
+}

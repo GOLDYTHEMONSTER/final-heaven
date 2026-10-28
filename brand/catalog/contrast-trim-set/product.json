@@ -1,0 +1,64 @@
+{
+  "name": "Contrast-Trim Gym Set",
+  "category": "Ladies",
+  "description": "A two-piece set: a sports bra with double straps and contrast trim along the neckline, and high-waist leggings with a crossover V waistband edged in the same trim. The leggings shape and lift at the back.\n\nBlack and navy have cream trim, plum has lilac, and olive has lime.\n\nIt fits close to the body. If you're between sizes, go one up.",
+  "price": 25000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Plum",
+    "Olive",
+    "Navy"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "ladies",
+    "gym",
+    "set",
+    "activewear",
+    "leggings"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f087360d-46a1-45d9-a4bc-05896203dc3a.jpg"
+    },
+    {
+      "file": "plum.jpg",
+      "color": "Plum",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/711650d6-1d91-447d-b0ed-9eff71ab42ca.jpg"
+    },
+    {
+      "file": "olive.jpg",
+      "color": "Olive",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/03be642d-3398-4e54-a4ba-bafc7d93d4e6.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f78026fc-bf89-4799-8a90-0a9f606d38bf.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1087897043338",
+    "unit_cost": 46,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Price per set (bra + leggings); ¥37 with the first-order coupon, ¥44 from 200. Sizes S–XL per the owner (size chart not seen). The listing shows a 54% store return rate. Photos: supplier shots cropped to 4:5, Chinese label and colour dots left out."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793214573866"
+}

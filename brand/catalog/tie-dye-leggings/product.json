@@ -1,0 +1,87 @@
+{
+  "name": "Tie-Dye Pocket Leggings",
+  "category": "Ladies",
+  "description": "High-waist seamless leggings in a tie-dye knit, with a side pocket that holds your phone. The tall waistband smooths and holds you in, and contour seams shape and lift at the back. Stretchy and quick-dry, for the gym, yoga or everyday.\n\nThey fit close to the body. If you're between sizes, go one up.",
+  "price": 18000,
+  "stock": 20,
+  "colors": [
+    "Teal",
+    "Olive",
+    "Navy",
+    "Blue",
+    "Brown",
+    "Light Grey",
+    "White",
+    "Dark Grey"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "tags": [
+    "ladies",
+    "gym",
+    "leggings",
+    "activewear",
+    "tie-dye"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "teal.jpg",
+      "color": "Teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a9a60909-99ec-45b8-befc-7d6cfa1bf8da.jpg"
+    },
+    {
+      "file": "olive.jpg",
+      "color": "Olive",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/409fbf83-ccbf-4e86-a2eb-f8e2937bbe97.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/066925d4-1c43-4e1b-b2c8-c51bb9bb8003.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/943c674a-4c51-4d23-8f36-75b2365065e1.jpg"
+    },
+    {
+      "file": "brown.jpg",
+      "color": "Brown",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0a5ceca6-7b8e-4568-a7b5-196858477bc2.jpg"
+    },
+    {
+      "file": "light-grey.jpg",
+      "color": "Light Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3605001e-87e3-4d76-8c09-73da3721db64.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6b97e311-7c07-49df-95c2-f9ba37d0c58d.jpg"
+    },
+    {
+      "file": "dark-grey.jpg",
+      "color": "Dark Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9bfee56e-f11a-412e-b59a-d0285d5bdd26.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=820212870375",
+    "unit_cost": 38,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "¥29 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: white-background supplier shots cropped to 4:5; the text-overlay hero shots left out."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1793213829048"
+}
