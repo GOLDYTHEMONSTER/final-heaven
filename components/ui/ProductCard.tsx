@@ -110,7 +110,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   useEffect(() => () => clearTimeout(timer.current), [])
   // Elite, Iconic and Legendary products show their rank frame on hover (only while Hype is on).
   const frame = useCardFrame(product.id)
-  // A second view (usually the front) is revealed on hover; on touch screens, as the card crosses the middle of the screen.
+  // A second view (usually the front) is revealed on hover; on touch screens, by pressing and holding the card.
   const secondImage = product.images?.[1]?.url
   const cardRef = useRef<HTMLElement>(null)
   const { near } = useTouchReveal(cardRef, viewMode === 'grid' && (Boolean(secondImage) || Boolean(frame)))
@@ -209,7 +209,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   }
 
   return (
-    <article ref={cardRef} className="group relative" data-near={near ? '' : undefined}>
+    <article ref={cardRef} className="group relative [-webkit-touch-callout:none]" data-near={near ? '' : undefined}>
       {/* 4:5 matches the store photos, so garments aren't cropped. */}
       <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-final-dark-gray">
         {frame && <CardFrameMat geometry={frame.geometry} photo={sized(mainImage, 640)} />}

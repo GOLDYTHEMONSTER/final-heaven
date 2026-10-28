@@ -205,9 +205,9 @@
   .group:hover .fh-cardframe__sheen, .group:focus-within .fh-cardframe__sheen { animation: fh-card-sheen 1.1s ease-out 0.2s both; }
   .group:hover .fh-cardframe__embers i, .group:focus-within .fh-cardframe__embers i { animation: fh-frame-ember 2.8s ease-out calc(var(--i) * -0.35s) infinite; }
 }
-/* Touch screens have no hover: the frame plays as the card crosses the middle of
-   the screen (data-revealed, lib/useTouchReveal), and only loads once the card
-   is near it (data-near). */
+/* Touch screens have no hover: the frame plays while the card is pressed and
+   held (data-revealed, lib/useTouchReveal), and only loads once the card is
+   near the screen (data-near). */
 @media (hover: none) {
   .fh-cardframe { display: none; }
   .group[data-near] .fh-cardframe { display: block; }
