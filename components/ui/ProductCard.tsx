@@ -11,6 +11,7 @@ import { useCart } from '@/components/providers/CartProvider'
 import type { Product } from '@/lib/catalog'
 import { orderedIn } from '@/lib/collections'
 import { CardFrame, CardFrameMat, HypeTag, useCardFrame } from '@/components/hype/Hype'
+import { useTouchReveal } from '@/lib/useTouchReveal'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
 function blockedLabel(product: Product) {
@@ -109,6 +110,10 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   useEffect(() => () => clearTimeout(timer.current), [])
   // Elite, Iconic and Legendary products show their rank frame on hover (only while Hype is on).
   const frame = useCardFrame(product.id)
+  // A second view (usually the front) is revealed on hover; on touch screens, as the card crosses the middle of the screen.
+  const secondImage = product.images?.[1]?.url
+  const cardRef = useRef<HTMLElement>(null)
+  const { near } = useTouchReveal(cardRef, viewMode === 'grid' && (Boolean(secondImage) || Boolean(frame)))
 
   const mainImage = product.images?.[0]?.url || product.image || PLACEHOLDER
   const href = `/product/${product.id}`
@@ -203,11 +208,8 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
     )
   }
 
-  // A second view (usually the front) is revealed on hover, only where there is a pointer to hover with.
-  const secondImage = product.images?.[1]?.url
-
   return (
-    <article className="group relative">
+    <article ref={cardRef} className="group relative" data-near={near ? '' : undefined}>
       {/* 4:5 matches the store photos, so garments aren't cropped. */}
       <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-final-dark-gray">
         {frame && <CardFrameMat geometry={frame.geometry} photo={sized(mainImage, 640)} />}
@@ -227,7 +229,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
               fill
               unoptimized
               sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-              className="hidden object-cover opacity-0 transition-opacity duration-500 ease-out motion-reduce:transition-none [@media(hover:hover)]:block [@media(hover:hover)]:group-hover:opacity-100"
+              className={`${near ? 'block' : 'hidden'} object-cover opacity-0 transition-opacity duration-500 ease-out motion-reduce:transition-none group-data-[revealed]:opacity-100 [@media(hover:hover)]:block [@media(hover:hover)]:group-hover:opacity-100`}
             />
           )}
         </Link>
