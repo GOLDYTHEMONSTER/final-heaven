@@ -65,9 +65,9 @@
   "id": "p1793211323197",
   "queue": {
     "store_id": "p1793211323197",
-    "note": "saved as a draft before the queue existed",
-    "status": "AWAITING_APPROVAL",
-    "updated": "2026-10-28T20:23:11.207Z",
+    "note": "approved by the owner",
+    "status": "PUBLISHED",
+    "updated": "2026-10-28T21:28:01.934Z",
     "history": [
       {
         "at": "2026-10-28T20:22:57.042Z",
@@ -79,10 +79,43 @@
         "at": "2026-10-28T20:23:11.207Z",
         "from": "AWAITING_APPROVAL",
         "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-10-28T21:27:55.552Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-10-28T21:27:56.089Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-28T21:27:58.062Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-28T21:27:59.637Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-28T21:27:59.829Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-28T21:28:01.934Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T20:23:11.207Z",
+      "at": "2026-10-28T21:27:55.551Z",
       "ok": true,
       "problems": [],
       "needs": [],
@@ -102,6 +135,9 @@
       "gross": 10976,
       "margin": 0.731716,
       "suggested": 9000
-    }
+    },
+    "approved_at": "2026-10-28T21:27:59.635Z",
+    "published_at": "2026-10-28T21:28:01.934Z",
+    "url": "https://www.finalheaven.shop/product/p1793211323197"
   }
 }
