@@ -1,0 +1,56 @@
+{
+  "id": "p1793175144810",
+  "name": "Galaxy Projector — Bluetooth Speaker",
+  "category": "Gadgets",
+  "description": "Turns your ceiling into a moving galaxy: twinkling stars over a swirling nebula, in red, green, blue or purple. A Bluetooth speaker is built in, so it plays your music while it projects. Comes with a remote (with 1-hour and 2-hour timers) and a USB cable.",
+  "price": 18000,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "galaxy",
+    "projector",
+    "bluetooth",
+    "night-light"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "white-room.jpg",
+      "color": "White",
+      "url": "/products/galaxy-projector/galaxy-projector-white-room.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "/products/galaxy-projector/galaxy-projector-white.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "/products/galaxy-projector/galaxy-projector-black.jpg"
+    },
+    {
+      "file": "modes.jpg",
+      "color": null,
+      "url": "/products/galaxy-projector/galaxy-projector-modes.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/799444151310.html",
+    "unit_cost": 19.2,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown"
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  }
+}

@@ -50,3 +50,9 @@ brand/social/video/**/_frames/
 brand/social/video/**/*.mp4
 !brand/social/video/**/hero-raw-5s.mp4
 brand/social/video/**/*-live-frames.png
+
+# Product photos live in Supabase Storage (scripts/add-product.mjs); product.json is the record
+brand/catalog/*/*.jpg
+brand/catalog/*/*.jpeg
+brand/catalog/*/*.png
+brand/catalog/*/*.webp
