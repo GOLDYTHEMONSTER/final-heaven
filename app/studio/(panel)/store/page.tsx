@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { formatDay, type PaymentsState } from '@/lib/catalog'
 import { formatCurrency } from '@/lib/utils/format'
 import { HypeSwitch } from '@/components/admin/HypeSwitch'
+import { LaunchChecklist } from '@/components/admin/LaunchChecklist'
 
 type Selling = {
   paymentsOpenOn: string | null; purchasesPaused: boolean; today: string; payments: PaymentsState
@@ -102,6 +103,8 @@ export default function StoreSellingPage() {
           <Link href="/studio" className="underline underline-offset-2 hover:text-final-off-white">Products</Link> page.
         </p>
       </div>
+
+      <LaunchChecklist />
 
       {error && <div role="alert" className="mb-6 rounded-lg border border-final-ember/40 p-4 text-sm text-final-ember">{error}</div>}
 
