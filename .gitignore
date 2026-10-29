@@ -58,3 +58,4 @@ brand/catalog/*/*.png
 brand/catalog/*/*.webp
 brand/catalog/*/supplier/
 brand/catalog/_worker/
+.claude/worktrees/
