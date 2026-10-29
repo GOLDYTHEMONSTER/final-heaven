@@ -6,13 +6,13 @@
 //  - Never throws: callers run it after their real work is done.
 import { EmailError, type EmailSender, type OutgoingEmail } from './resend'
 import { AUDIENCES, isAudience } from './campaign'
-import { welcomeEmail } from './lifecycle'
+import { productAvailableEmail, welcomeEmail, type AlertProduct } from './lifecycle'
 import {
   orderPaidEmail, orderShippedEmail, staffMessageEmail, staffOrderPaidEmail,
   type MessageEmailData, type OrderEmailData, type RenderedEmail,
 } from './templates'
 
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome'
+export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available'
 
 export type OutboxRow = {
   id: number
@@ -21,11 +21,14 @@ export type OutboxRow = {
   orderId: string | null
   messageId: string | null
   subscriberId: string | null
+  alertId: string | null
   dedupeKey: string
   attempts: number
 }
 
 export type SubscriberEmailData = { email: string; source: string | null; unsubscribeToken: string; unsubscribed: boolean }
+/** An alert with its product as it is now; buyable is purchaseState at the time of sending. */
+export type AlertEmailData = { email: string; unsubscribeToken: string; product: AlertProduct | null; buyable: boolean }
 
 export type FinishResult =
   | { status: 'sent'; providerMessageId: string }
@@ -36,6 +39,7 @@ export interface EmailStore {
   loadOrder(id: string): Promise<OrderEmailData | null>
   loadMessage(id: string): Promise<MessageEmailData | null>
   loadSubscriber(id: string): Promise<SubscriberEmailData | null>
+  loadAlert(id: string): Promise<AlertEmailData | null>
   /** Whether this address is on the suppression list (hard bounce or spam complaint). */
   suppressed(tenantId: string, email: string): Promise<boolean>
   finish(id: number, result: FinishResult, maxAttempts: number): Promise<void>
@@ -85,6 +89,20 @@ async function compose(deps: EmailDeps, row: OutboxRow): Promise<OutgoingEmail |
       ...base([s.email], welcomeEmail({ source: s.source, site, unsubscribeUrl: `${site}/unsubscribe?token=${s.unsubscribeToken}`, reason }), config!.replyTo),
       headers: {
         'List-Unsubscribe': `<${site}/api/newsletter/unsubscribe?token=${s.unsubscribeToken}>`,
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+      },
+    }
+  }
+
+  if (row.kind === 'product.available') {
+    const a = row.alertId ? await store.loadAlert(row.alertId) : null
+    if (!a) return { skip: 'alert no longer exists (cancelled)' }
+    if (!a.product) return { skip: 'product no longer exists' }
+    if (!a.buyable) return { skip: 'product sold out or closed again before the alert was sent' }
+    return {
+      ...base([a.email], productAvailableEmail({ product: a.product, site, unsubscribeUrl: `${site}/unsubscribe?token=${a.unsubscribeToken}` }), config!.replyTo),
+      headers: {
+        'List-Unsubscribe': `<${site}/api/newsletter/unsubscribe?token=${a.unsubscribeToken}>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
     }

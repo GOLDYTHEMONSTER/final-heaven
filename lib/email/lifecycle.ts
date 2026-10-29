@@ -3,7 +3,8 @@
 // other email, so they match the store and can be unit-tested. Everything that
 // came from a customer or the catalogue is escaped by the helpers below.
 import { BUSINESS, POLICY } from '@/lib/legal'
-import { LAUNCH_WINDOW } from '@/lib/catalog'
+import { LAUNCH_WINDOW, formatDay } from '@/lib/catalog'
+import { sized } from '@/lib/images'
 import { C, button, escapeHtml, formatMoney, itemDetails, layout, lineAmount, p, type RenderedEmail } from './templates'
 
 /** Footer for emails sent because someone subscribed: why they got it, and a one-click way out. */
@@ -81,6 +82,46 @@ export function welcomeEmail({ source, site, unsubscribeUrl, reason }: { source:
       footer: subscriberFooter({ reason, unsubscribeUrl }),
     }),
     text: [c.heading, '', ...c.paras.flatMap((t) => [t, '']), `${c.cta}: ${site}/shop`, '', `You’re getting this because ${reason}.`, `Unsubscribe: ${unsubscribeUrl}`].join('\n'),
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Back in stock / drop alert
+// ---------------------------------------------------------------------------
+
+export type AlertProduct = { id: string; name: string; price: number; image: string | null; shipsOn: string | null }
+
+/** The one email an alert sends. `image` is absolute or a site path; `unsubscribeUrl` removes just this alert. */
+export function productAvailableEmail({ product, site, unsubscribeUrl }: { product: AlertProduct; site: string; unsubscribeUrl: string }): RenderedEmail {
+  const url = `${site}/product/${encodeURIComponent(product.id)}`
+  const img = product.image ? (product.image.startsWith('/') ? `${site}${sized(product.image, 640)}` : sized(product.image, 640)) : null
+  const line = product.shipsOn
+    ? `${product.name} is open for pre-order now. Pay to reserve yours; it ships from ${formatDay(product.shipsOn)}.`
+    : `${product.name} is available now. Pieces like this can go fast, so we’re telling you first.`
+  return {
+    subject: `${product.name} is available`.replace(/[\r\n]+/g, ' '),
+    html: layout({
+      preheader: `You asked us to tell you when ${product.name} is available.`,
+      heading: 'It’s here',
+      body: [
+        p(escapeHtml(line)),
+        `<a href="${escapeHtml(url)}" style="text-decoration:none;color:${C.ink};display:block;margin:4px 0 18px;">
+${img ? `<img src="${escapeHtml(img)}" width="320" alt="${escapeHtml(product.name)}" style="display:block;width:100%;max-width:320px;height:auto;border-radius:6px;background:${C.paper};">` : ''}
+<div style="padding:8px 2px 0;font-size:14px;color:${C.ink};">${escapeHtml(product.name)}</div>
+<div style="padding:2px 2px 0;font-size:14px;font-weight:700;color:${C.ink};">${escapeHtml(formatMoney(product.price, 'NGN'))}</div>
+</a>`,
+        button(url, product.shipsOn ? 'Pre-order now' : 'Get it now'),
+      ].join('\n'),
+      footer: [
+        `You’re getting this once because you asked to be told when ${escapeHtml(product.name)} is available. It’s the only email this request will send.`,
+        `<a href="${escapeHtml(unsubscribeUrl)}" style="color:${C.muted};">Cancel the request</a> if you no longer want it.`,
+        `${escapeHtml(BUSINESS.tradingName)} · ${escapeHtml(POLICY.shipsTo)}`,
+      ].join('<br>'),
+    }),
+    text: [
+      'It’s here', '', line, '', `${product.name}, ${formatMoney(product.price, 'NGN')}`, `${product.shipsOn ? 'Pre-order now' : 'Get it now'}: ${url}`, '',
+      `You’re getting this once because you asked to be told when ${product.name} is available.`, `Cancel the request: ${unsubscribeUrl}`,
+    ].join('\n'),
   }
 }
 

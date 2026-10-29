@@ -10,6 +10,7 @@ import { sendQueuedEmails } from '@/lib/email'
 import { refreshHype } from '@/lib/hype-server'
 import { getStorefront } from '@/lib/tenancy'
 import { sendLaunchEmail } from '@/lib/email/launch-store'
+import { queueProductAlerts } from '@/lib/email/alerts-store'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -25,6 +26,9 @@ export const maxDuration = 60
  *  2b. Launch email: once stores.payments_open_on has arrived, the launch
  *     waitlist gets one "We're open" email (lib/email/launch). It carries on
  *     over several runs if time or Resend's quota runs out; never twice.
+ *  2c. Product alerts ("email me when it's available"): waiting alerts whose
+ *     product can now be bought are queued, at most 30 a day, and sent. Not
+ *     while checkout is closed.
  *  3. Retention: expire analytics (13 months), rate-limit windows (2 days),
  *     old analytics salts and the email log (13 months). Financial records
  *     are never touched.
@@ -47,11 +51,19 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
   }
   result.emails = await sendQueuedEmails(50)
   try {
-    result.launchEmail = await sendLaunchEmail(await getStorefront(), started + 35_000)
+    result.launchEmail = await sendLaunchEmail(await getStorefront(), started + 25_000)
   } catch (error) {
     result.launchEmail = { error: (error as Error).message }
     logger.error('cron.launch_email_failed', { error })
   }
+  try {
+    result.alerts = await queueProductAlerts(await getStorefront())
+  } catch (error) {
+    result.alerts = { error: (error as Error).message }
+    logger.error('cron.alerts_failed', { error })
+  }
+  // Delivers what the alert step just queued (and anything else waiting), within the time left.
+  result.alertEmails = await sendQueuedEmails(60, { deadline: started + 50_000 })
   try {
     const { data, error } = await createSupabaseServiceClient().rpc('run_retention')
     if (error) throw error

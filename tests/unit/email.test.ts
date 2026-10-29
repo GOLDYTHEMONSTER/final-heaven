@@ -97,6 +97,7 @@ describe('outbox delivery', () => {
       loadOrder: vi.fn(async () => ORDER),
       loadMessage: vi.fn(async () => ({ name: 'Ada', email: 'ada@customer.test', topic: 'return', orderNumber: null, message: 'Hello there, a question.' })),
       loadSubscriber: vi.fn(async () => null),
+      loadAlert: vi.fn(async () => null),
       suppressed: vi.fn(async (_tenant: string, address: string) => suppressed.includes(address)),
       finish: vi.fn(async (id, result) => { finished.push({ id, result }) }),
     }
@@ -107,7 +108,7 @@ describe('outbox delivery', () => {
     return { deps, store, finished, sender }
   }
   const row = (id: number, kind: OutboxRow['kind'], extra: Partial<OutboxRow> = {}): OutboxRow =>
-    ({ id, tenantId: 't1', subscriberId: null, kind, orderId: kind === 'staff.message' ? null : 'o1', messageId: kind === 'staff.message' ? 'm1' : null, dedupeKey: `${kind}:${id}`, attempts: 1, ...extra })
+    ({ id, tenantId: 't1', subscriberId: null, alertId: null, kind, orderId: kind === 'staff.message' ? null : 'o1', messageId: kind === 'staff.message' ? 'm1' : null, dedupeKey: `${kind}:${id}`, attempts: 1, ...extra })
 
   it('does nothing and leaves rows queued when email is not configured', async () => {
     const { deps, store } = setup([row(1, 'order.paid')], null)

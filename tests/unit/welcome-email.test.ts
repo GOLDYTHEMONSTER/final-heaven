@@ -41,7 +41,7 @@ describe('welcome copy', () => {
 })
 
 describe('outbox sends the welcome', () => {
-  const row: OutboxRow = { id: 1, tenantId: 't1', kind: 'subscriber.welcome', orderId: null, messageId: null, subscriberId: 's1', dedupeKey: 'subscriber.welcome:s1', attempts: 1 }
+  const row: OutboxRow = { id: 1, tenantId: 't1', kind: 'subscriber.welcome', orderId: null, messageId: null, subscriberId: 's1', alertId: null, dedupeKey: 'subscriber.welcome:s1', attempts: 1 }
   function run(sub: SubscriberEmailData | null, suppressed = false) {
     const finished: FinishResult[] = []
     const send = vi.fn(async () => ({ id: 'em_w' }))

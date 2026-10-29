@@ -19,6 +19,7 @@ import { sourceLabel, supplyLabel, supplyNote } from '@/lib/collections'
 import { setGroups } from '@/lib/sets'
 import { HypeMeter } from '@/components/hype/Hype'
 import { DeliveryEstimate } from '@/components/product/DeliveryEstimate'
+import { StockAlert } from '@/components/product/StockAlert'
 
 
 /** Who makes it (originals and labels), and, when it's made or ordered in after payment, that it doesn't ship straight away. */
@@ -341,6 +342,8 @@ export function ProductView({ params }: { params: { id: string } }) {
               {purchase.state === 'members_only' && (
                 <p className="text-sm text-final-muted">This piece is reserved for Final Heaven members. <a href="/membership" className="underline underline-offset-2">Join the waitlist</a> to hear when membership opens.</p>
               )}
+
+              {!isSet && (purchase.state === 'sold_out' || purchase.state === 'coming_soon') && <StockAlert productId={product.id} />}
 
               {buyable && product.delivery && <DeliveryEstimate delivery={product.delivery} />}
 

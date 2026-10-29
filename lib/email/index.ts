@@ -4,6 +4,8 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { logger } from '@/lib/log'
 import { createResendSender } from './resend'
 import { isSuppressed } from './suppression'
+import { canBuy, purchaseState, storeToday, type CatalogueProduct } from '@/lib/catalog'
+import { ALERT_PRODUCT_COLUMNS } from './alerts-store'
 import { deliverQueuedEmails, type DeliverySummary, type EmailConfig, type EmailDeps, type EmailStore } from './outbox'
 
 /** Outbox persistence on Supabase. Server-only: uses the service key. */
@@ -13,7 +15,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
       const { data, error } = await db.rpc('claim_email_outbox', { p_limit: limit, p_max_attempts: maxAttempts })
       if (error) throw error
       return (data ?? []).map((r: Record<string, any>) => ({
-        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
+        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, alertId: r.alert_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
       }))
     },
 
@@ -51,6 +53,21 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
         .select('email, source, unsubscribe_token, unsubscribed_at').eq('id', id).maybeSingle()
       if (error) throw error
       return data ? { email: data.email, source: data.source ?? null, unsubscribeToken: data.unsubscribe_token, unsubscribed: data.unsubscribed_at != null } : null
+    },
+
+    async loadAlert(id) {
+      const { data, error } = await db.from('product_alerts')
+        .select(`email, unsubscribe_token, product:products(${ALERT_PRODUCT_COLUMNS})`).eq('id', id).maybeSingle()
+      if (error) throw error
+      if (!data) return null
+      const p = data.product as unknown as Record<string, any> | null
+      const images = Array.isArray(p?.images) ? (p!.images as { url?: string }[]) : []
+      const state = p ? purchaseState(p as CatalogueProduct, storeToday()) : null
+      return {
+        email: data.email, unsubscribeToken: data.unsubscribe_token,
+        product: p ? { id: p.id, name: p.name, price: Number(p.price), image: images[0]?.url ?? null, shipsOn: state?.state === 'preorder' ? state.shipsOn : null } : null,
+        buyable: state ? canBuy(state) : false,
+      }
     },
 
     async suppressed(tenantId, email) {
@@ -98,9 +115,12 @@ export function emailDeps(): EmailDeps {
  * queue email (payment confirmed, order shipped, message received) and by the
  * daily job as the catch-up. Never throws.
  */
-export async function sendQueuedEmails(limit = 5): Promise<DeliverySummary> {
+export async function sendQueuedEmails(limit = 5, { deadline }: { deadline?: number } = {}): Promise<DeliverySummary> {
   try {
-    return await deliverQueuedEmails(emailDeps(), { limit })
+    // With a deadline (epoch ms), claim only as many as fit: each send takes ~0.9 s with the pause for Resend's rate limit.
+    const fit = deadline == null ? limit : Math.min(limit, Math.max(0, Math.floor((deadline - Date.now()) / 900)))
+    if (fit === 0) return { configured: true, sent: 0, failed: 0, skipped: 0 }
+    return await deliverQueuedEmails(emailDeps(), { limit: fit })
   } catch (error) {
     logger.error('email.delivery_failed', { error })
     return { configured: false, sent: 0, failed: 0, skipped: 0 }
