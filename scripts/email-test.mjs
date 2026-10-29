@@ -11,9 +11,9 @@ import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const env = Object.fromEntries(readFileSync('.env.local', 'utf8').split(/\r?\n/).filter((l) => /^[A-Z_]+=/.test(l))
-  .map((l) => [l.slice(0, l.indexOf('=')), l.slice(l.indexOf('=') + 1).replace(/^["']|["']$/g, '')]))
+  .map((l) => [l.slice(0, l.indexOf('=')), l.slice(l.indexOf('=') + 1).replace(/\s+#.*$/, '').trim().replace(/^["']|["']$/g, '')]))  // an unquoted value ends at ' #'
 const KEY = env.RESEND_API_KEY
-const FROM = env.EMAIL_FROM || ''
+const FROM = process.env.EMAIL_FROM || env.EMAIL_FROM || ''
 if (!KEY) { console.error('Add RESEND_API_KEY=re_... to .env.local first.'); process.exit(1) }
 const domainOf = (from) => (from.match(/@([^>\s]+)/) ?? [])[1] ?? null
 const api = async (path, init = {}) => {
@@ -51,7 +51,7 @@ if (cmd === 'status' || cmd === 'verify') {
   let from = FROM
   try {
     const { d } = await findDomain()
-    if (!d || d.status !== 'verified') { from = 'Final Heaven <onboarding@resend.dev>'; console.log('Domain not verified yet: sending from onboarding@resend.dev (only reaches the Resend account’s own email).') }
+    if (!d || !['verified', 'partially_verified'].includes(d.status)) { from = 'Final Heaven <onboarding@resend.dev>'; console.log('Domain not verified yet: sending from onboarding@resend.dev (only reaches the Resend account’s own email).') }
   } catch { /* a sending-only key can't read domains: try EMAIL_FROM as is */ }
   const out = mkdtempSync(join(tmpdir(), 'fh-email-'))
   const r = spawnSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['vitest', 'run', 'tests/email-samples.render.test.ts'], { env: { ...process.env, EMAIL_RENDER_OUT: out }, encoding: 'utf8', shell: process.platform === 'win32' })
