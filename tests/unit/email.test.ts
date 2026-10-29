@@ -90,12 +90,13 @@ describe('templates', () => {
 })
 
 describe('outbox delivery', () => {
-  function setup(rows: OutboxRow[], sender: EmailSender | null = { send: vi.fn(async () => ({ id: 'em_1' })) }, staffTo = ['owner@x.test']) {
+  function setup(rows: OutboxRow[], sender: EmailSender | null = { send: vi.fn(async () => ({ id: 'em_1' })) }, staffTo = ['owner@x.test'], suppressed: string[] = []) {
     const finished: { id: number; result: FinishResult }[] = []
     const store: EmailStore = {
       claim: vi.fn(async () => rows),
       loadOrder: vi.fn(async () => ORDER),
       loadMessage: vi.fn(async () => ({ name: 'Ada', email: 'ada@customer.test', topic: 'return', orderNumber: null, message: 'Hello there, a question.' })),
+      suppressed: vi.fn(async (_tenant: string, address: string) => suppressed.includes(address)),
       finish: vi.fn(async (id, result) => { finished.push({ id, result }) }),
     }
     const deps: EmailDeps = {
@@ -105,7 +106,7 @@ describe('outbox delivery', () => {
     return { deps, store, finished, sender }
   }
   const row = (id: number, kind: OutboxRow['kind'], extra: Partial<OutboxRow> = {}): OutboxRow =>
-    ({ id, kind, orderId: kind === 'staff.message' ? null : 'o1', messageId: kind === 'staff.message' ? 'm1' : null, dedupeKey: `${kind}:${id}`, attempts: 1, ...extra })
+    ({ id, tenantId: 't1', kind, orderId: kind === 'staff.message' ? null : 'o1', messageId: kind === 'staff.message' ? 'm1' : null, dedupeKey: `${kind}:${id}`, attempts: 1, ...extra })
 
   it('does nothing and leaves rows queued when email is not configured', async () => {
     const { deps, store } = setup([row(1, 'order.paid')], null)
@@ -130,6 +131,16 @@ describe('outbox delivery', () => {
     const b = setup([row(2, 'staff.order_paid')], undefined, [])
     expect(await deliverQueuedEmails(b.deps)).toMatchObject({ skipped: 1, sent: 0 })
     expect(b.finished[0].result).toMatchObject({ status: 'skipped' })
+  })
+
+  it('skips a suppressed customer address without sending, but never blocks staff alerts', async () => {
+    const a = setup([row(1, 'order.paid')], undefined, undefined, ['ada@customer.test'])
+    expect(await deliverQueuedEmails(a.deps)).toMatchObject({ skipped: 1, sent: 0 })
+    expect(a.sender!.send).not.toHaveBeenCalled()
+    expect(a.finished[0].result).toMatchObject({ status: 'skipped', error: expect.stringContaining('suppressed') })
+
+    const b = setup([row(2, 'staff.message')], undefined, undefined, ['owner@x.test', 'ada@customer.test'])
+    expect(await deliverQueuedEmails(b.deps)).toMatchObject({ sent: 1 })
   })
 
   it('records failures, final only when a retry cannot help, and keeps going', async () => {

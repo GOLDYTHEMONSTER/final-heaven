@@ -3,6 +3,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { logger } from '@/lib/log'
 import { createResendSender } from './resend'
+import { isSuppressed } from './suppression'
 import { deliverQueuedEmails, type DeliverySummary, type EmailConfig, type EmailDeps, type EmailStore } from './outbox'
 
 /** Outbox persistence on Supabase. Server-only: uses the service key. */
@@ -12,7 +13,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
       const { data, error } = await db.rpc('claim_email_outbox', { p_limit: limit, p_max_attempts: maxAttempts })
       if (error) throw error
       return (data ?? []).map((r: Record<string, any>) => ({
-        id: Number(r.id), kind: r.kind, orderId: r.order_id, messageId: r.message_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
+        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
       }))
     },
 
@@ -43,6 +44,10 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
         .select('name, email, topic, order_number, message').eq('id', id).maybeSingle()
       if (error) throw error
       return data ? { name: data.name, email: data.email, topic: data.topic, orderNumber: data.order_number, message: data.message } : null
+    },
+
+    async suppressed(tenantId, email) {
+      return isSuppressed(db, tenantId, email)
     },
 
     async finish(id, result, maxAttempts) {

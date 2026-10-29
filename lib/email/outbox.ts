@@ -14,6 +14,7 @@ export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | '
 
 export type OutboxRow = {
   id: number
+  tenantId: string
   kind: OutboxKind
   orderId: string | null
   messageId: string | null
@@ -29,6 +30,8 @@ export interface EmailStore {
   claim(limit: number, maxAttempts: number): Promise<OutboxRow[]>
   loadOrder(id: string): Promise<OrderEmailData | null>
   loadMessage(id: string): Promise<MessageEmailData | null>
+  /** Whether this address is on the suppression list (hard bounce or spam complaint). */
+  suppressed(tenantId: string, email: string): Promise<boolean>
   finish(id: number, result: FinishResult, maxAttempts: number): Promise<void>
 }
 
@@ -102,6 +105,12 @@ export async function deliverQueuedEmails(deps: EmailDeps, { limit = 5 } = {}): 
       const email = await compose(deps, row)
       if ('skip' in email) {
         await store.finish(row.id, { status: 'skipped', error: email.skip }, MAX_EMAIL_ATTEMPTS)
+        summary.skipped += 1
+        continue
+      }
+      // Staff alerts go to the owner's own address; everything else goes to a customer.
+      if (!row.kind.startsWith('staff.') && await store.suppressed(row.tenantId, email.to[0])) {
+        await store.finish(row.id, { status: 'skipped', error: 'address is suppressed (bounced or complained)' }, MAX_EMAIL_ATTEMPTS)
         summary.skipped += 1
         continue
       }

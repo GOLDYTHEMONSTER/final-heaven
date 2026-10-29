@@ -33,6 +33,7 @@ const PROBES = {
   '20261028140000_staff_mfa.sql': `to_regprocedure('private.mfa_verified()') is not null`,
   '20261028150000_products_ships_by_air.sql': `exists (select 1 from information_schema.columns where table_name = 'products' and column_name = 'ships_by_air')`,
   '20261029100000_email_campaigns.sql': `to_regclass('public.email_campaigns') is not null`,
+  '20261029120000_email_events.sql': `to_regclass('public.email_events') is not null and to_regclass('public.email_suppressions') is not null`,
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).

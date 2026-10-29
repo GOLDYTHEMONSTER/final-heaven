@@ -6,6 +6,7 @@
 import 'server-only'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { EmailError, type EmailSender } from './resend'
+import { suppressedAmong } from './suppression'
 import { AUDIENCES, campaignProblems, isAudience, renderCampaign, type CampaignProduct } from './campaign'
 
 export const BATCH = 8
@@ -79,8 +80,9 @@ export async function sendCampaignStep(deps: {
       .eq('tenant_id', c.tenant_id).in('source', c.audience).is('unsubscribed_at', null).not('consented_at', 'is', null)
     if (se) throw se
     // One email per address, even if it's on two lists.
+    const blocked = await suppressedAmong(db, c.tenant_id, (subs ?? []).map((s) => s.email)) // bounced or complained: never emailed again
     const seen = new Set<string>()
-    const rows = (subs ?? []).filter((s) => !seen.has(s.email.toLowerCase()) && seen.add(s.email.toLowerCase()))
+    const rows = (subs ?? []).filter((s) => !blocked.has(s.email.toLowerCase()) && !seen.has(s.email.toLowerCase()) && seen.add(s.email.toLowerCase()))
       .map((s) => ({ campaign_id: c.id, subscriber_id: s.id, tenant_id: c.tenant_id, email: s.email }))
     if (rows.length) {
       const { error: ie } = await db.from('email_campaign_recipients').upsert(rows, { onConflict: 'campaign_id,subscriber_id', ignoreDuplicates: true })
@@ -100,8 +102,13 @@ export async function sendCampaignStep(deps: {
     .eq('campaign_id', c.id).eq('status', 'queued').limit(BATCH)
   if (qe) throw qe
 
+  const blocked = await suppressedAmong(db, c.tenant_id, (queue ?? []).map((r) => r.email))
   let paused: string | null = null
   for (const r of queue ?? []) {
+    if (blocked.has(r.email.toLowerCase())) {
+      await db.from('email_campaign_recipients').update({ status: 'skipped', last_error: 'address is suppressed (bounced or complained)' }).eq('campaign_id', c.id).eq('subscriber_id', r.subscriber_id)
+      continue
+    }
     // Still subscribed right now, and which list they came from (for the footer).
     const { data: sub, error: e1 } = await db.from('newsletter_subscribers').select('source, unsubscribe_token, unsubscribed_at').eq('id', r.subscriber_id).maybeSingle()
     if (e1) throw e1
