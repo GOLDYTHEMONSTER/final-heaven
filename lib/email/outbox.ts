@@ -5,12 +5,14 @@
 //    after an unclear failure can't deliver twice.
 //  - Never throws: callers run it after their real work is done.
 import { EmailError, type EmailSender, type OutgoingEmail } from './resend'
+import { AUDIENCES, isAudience } from './campaign'
+import { welcomeEmail } from './lifecycle'
 import {
   orderPaidEmail, orderShippedEmail, staffMessageEmail, staffOrderPaidEmail,
   type MessageEmailData, type OrderEmailData, type RenderedEmail,
 } from './templates'
 
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message'
+export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome'
 
 export type OutboxRow = {
   id: number
@@ -18,9 +20,12 @@ export type OutboxRow = {
   kind: OutboxKind
   orderId: string | null
   messageId: string | null
+  subscriberId: string | null
   dedupeKey: string
   attempts: number
 }
+
+export type SubscriberEmailData = { email: string; source: string | null; unsubscribeToken: string; unsubscribed: boolean }
 
 export type FinishResult =
   | { status: 'sent'; providerMessageId: string }
@@ -30,6 +35,7 @@ export interface EmailStore {
   claim(limit: number, maxAttempts: number): Promise<OutboxRow[]>
   loadOrder(id: string): Promise<OrderEmailData | null>
   loadMessage(id: string): Promise<MessageEmailData | null>
+  loadSubscriber(id: string): Promise<SubscriberEmailData | null>
   /** Whether this address is on the suppression list (hard bounce or spam complaint). */
   suppressed(tenantId: string, email: string): Promise<boolean>
   finish(id: number, result: FinishResult, maxAttempts: number): Promise<void>
@@ -68,6 +74,20 @@ async function compose(deps: EmailDeps, row: OutboxRow): Promise<OutgoingEmail |
     const m = row.messageId ? await store.loadMessage(row.messageId) : null
     if (!m) return { skip: 'message no longer exists' }
     return base(config!.staffTo, staffMessageEmail(m, site), m.email) // reply goes straight to the customer
+  }
+
+  if (row.kind === 'subscriber.welcome') {
+    const s = row.subscriberId ? await store.loadSubscriber(row.subscriberId) : null
+    if (!s) return { skip: 'subscriber no longer exists' }
+    if (s.unsubscribed) return { skip: 'unsubscribed before the welcome was sent' }
+    const reason = isAudience(s.source) ? AUDIENCES[s.source].reason : 'you signed up for Final Heaven emails'
+    return {
+      ...base([s.email], welcomeEmail({ source: s.source, site, unsubscribeUrl: `${site}/unsubscribe?token=${s.unsubscribeToken}`, reason }), config!.replyTo),
+      headers: {
+        'List-Unsubscribe': `<${site}/api/newsletter/unsubscribe?token=${s.unsubscribeToken}>`,
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+      },
+    }
   }
 
   const o = row.orderId ? await store.loadOrder(row.orderId) : null

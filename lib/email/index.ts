@@ -13,7 +13,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
       const { data, error } = await db.rpc('claim_email_outbox', { p_limit: limit, p_max_attempts: maxAttempts })
       if (error) throw error
       return (data ?? []).map((r: Record<string, any>) => ({
-        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
+        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
       }))
     },
 
@@ -44,6 +44,13 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
         .select('name, email, topic, order_number, message').eq('id', id).maybeSingle()
       if (error) throw error
       return data ? { name: data.name, email: data.email, topic: data.topic, orderNumber: data.order_number, message: data.message } : null
+    },
+
+    async loadSubscriber(id) {
+      const { data, error } = await db.from('newsletter_subscribers')
+        .select('email, source, unsubscribe_token, unsubscribed_at').eq('id', id).maybeSingle()
+      if (error) throw error
+      return data ? { email: data.email, source: data.source ?? null, unsubscribeToken: data.unsubscribe_token, unsubscribed: data.unsubscribed_at != null } : null
     },
 
     async suppressed(tenantId, email) {

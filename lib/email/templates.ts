@@ -104,7 +104,7 @@ export function button(href: string, label: string) {
 </tr></table>`
 }
 
-function detailRows(rows: [string, string | null][]) {
+export function detailRows(rows: [string, string | null][]) {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;font-size:14px;">
 ${rows.filter(([, v]) => v).map(([k, v]) => `<tr><td style="padding:6px 0;color:${C.muted};width:42%;">${escapeHtml(k)}</td><td style="padding:6px 0;color:${C.ink};font-weight:600;">${escapeHtml(v)}</td></tr>`).join('\n')}
 </table>`
@@ -148,7 +148,7 @@ const itemsText = (o: OrderEmailData) => [
   ...(Number(o.deliveryFee ?? 0) > 0 ? [`${deliveryName(o)}: ${formatMoney(Number(o.deliveryFee), o.currency)}`] : []),
 ].join('\n')
 
-function customerFooter(site: string) {
+export function customerFooter(site: string) {
   const contact = BUSINESS.email
     ? `Questions? Reply to this email or write to ${escapeHtml(BUSINESS.email)}.`
     : `Questions? Reply to this email or use our <a href="${escapeHtml(site)}/contact" style="color:${C.muted};">contact form</a>.`

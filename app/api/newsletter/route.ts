@@ -4,6 +4,9 @@ import { BadRequest, email, handle, readJson } from '@/lib/api'
 import { getStorefront } from '@/lib/tenancy'
 import { rateLimit } from '@/lib/rate-limit'
 import { LAUNCH_CONSENT, NEWSLETTER_CONSENT, WAITLIST_CONSENT } from '@/lib/consent'
+import { sendQueuedEmails } from '@/lib/email'
+import { WELCOME_DAILY_CAP, welcomeDecision } from '@/lib/email/lifecycle'
+import { logger } from '@/lib/log'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
@@ -13,7 +16,9 @@ const SOURCES: Record<string, string> = { footer: NEWSLETTER_CONSENT, membership
 /**
  * Opt-in sign-up. Requires an explicit consent tick, and stores the exact
  * wording agreed to and when. Someone who unsubscribed and signs up again is
- * re-subscribed with fresh consent.
+ * re-subscribed with fresh consent. A new subscriber gets one welcome email
+ * (queued, then sent at once); it is capped store-wide per day, and over the
+ * cap it is skipped rather than queued.
  */
 export const POST = handle('newsletter.subscribe', async (req: NextRequest) => {
   const limited = await rateLimit(req, 'newsletter.subscribe', 5, 600)
@@ -24,8 +29,13 @@ export const POST = handle('newsletter.subscribe', async (req: NextRequest) => {
   if (body.consent !== true) throw new BadRequest('Please tick the box to agree to receive emails.')
   const source = typeof body.source === 'string' && body.source in SOURCES ? body.source : 'footer'
   const store = await getStorefront()
+  const db = createSupabaseServiceClient()
 
-  const { error } = await createSupabaseServiceClient()
+  const { data: existing, error: findError } = await db.from('newsletter_subscribers')
+    .select('unsubscribed_at').eq('tenant_id', store.tenantId).eq('email', address).maybeSingle()
+  if (findError) throw findError
+
+  const { data: saved, error } = await db
     .from('newsletter_subscribers')
     .upsert(
       {
@@ -34,7 +44,23 @@ export const POST = handle('newsletter.subscribe', async (req: NextRequest) => {
       },
       { onConflict: 'tenant_id,email' }
     )
+    .select('id').single()
   if (error) throw error
+
+  // The welcome is a bonus: whatever goes wrong here, the sign-up itself stands.
+  const decision = welcomeDecision(existing ? { unsubscribedAt: existing.unsubscribed_at } : null, new Date())
+  if (decision.welcome) {
+    try {
+      const { error: queueError } = await db.rpc('queue_email_capped', {
+        p_tenant: store.tenantId, p_kind: 'subscriber.welcome', p_ref_col: 'subscriber_id', p_ref: saved.id,
+        p_cap: WELCOME_DAILY_CAP, p_skip_over_cap: true, p_key_suffix: decision.keySuffix,
+      })
+      if (queueError) throw queueError
+      await sendQueuedEmails(3)
+    } catch (e) {
+      logger.warn('newsletter.welcome_failed', { error: e })
+    }
+  }
 
   // Same reply for new and existing addresses, so this can't be used to check who is subscribed.
   return NextResponse.json({ message: 'Thanks. You’re on the list.' }, { status: 201 })
