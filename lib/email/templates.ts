@@ -23,7 +23,7 @@ export type OrderEmailData = {
   stockShortfall?: { name: string; size: string | null; missing: number }[] | null
   items: {
     name: string; quantity: number; size: string | null; color?: string | null; price: number | string
-    preorder?: boolean; shipsOn?: string | null; gift?: boolean; madeToOrderDays?: number | null
+    preorder?: boolean; shipsOn?: string | null; gift?: boolean; madeToOrderDays?: number | null; productId?: string | null
   }[]
   trackingNumber: string
   shippingCity: string | null

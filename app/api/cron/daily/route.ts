@@ -11,6 +11,7 @@ import { refreshHype } from '@/lib/hype-server'
 import { getStorefront } from '@/lib/tenancy'
 import { sendLaunchEmail } from '@/lib/email/launch-store'
 import { queueProductAlerts } from '@/lib/email/alerts-store'
+import { queueOrderFollowups } from '@/lib/email/followups-store'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -29,6 +30,8 @@ export const maxDuration = 60
  *  2c. Product alerts ("email me when it's available"): waiting alerts whose
  *     product can now be bought are queued, at most 30 a day, and sent. Not
  *     while checkout is closed.
+ *  2d. Delivered follow-up ("How's it fitting?"): orders delivered 3 to 14
+ *     days ago get one email, at most 30 a day.
  *  3. Retention: expire analytics (13 months), rate-limit windows (2 days),
  *     old analytics salts and the email log (13 months). Financial records
  *     are never touched.
@@ -61,6 +64,12 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
   } catch (error) {
     result.alerts = { error: (error as Error).message }
     logger.error('cron.alerts_failed', { error })
+  }
+  try {
+    result.followups = await queueOrderFollowups(await getStorefront())
+  } catch (error) {
+    result.followups = { error: (error as Error).message }
+    logger.error('cron.followups_failed', { error })
   }
   // Delivers what the alert step just queued (and anything else waiting), within the time left.
   result.alertEmails = await sendQueuedEmails(60, { deadline: started + 50_000 })

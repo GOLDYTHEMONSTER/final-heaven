@@ -5,7 +5,7 @@
 import { BUSINESS, POLICY } from '@/lib/legal'
 import { LAUNCH_WINDOW, formatDay } from '@/lib/catalog'
 import { sized } from '@/lib/images'
-import { C, button, escapeHtml, formatMoney, itemDetails, layout, lineAmount, p, type RenderedEmail } from './templates'
+import { C, button, customerFooter, escapeHtml, formatMoney, itemDetails, layout, lineAmount, p, type OrderEmailData, type RenderedEmail } from './templates'
 
 /** Footer for emails sent because someone subscribed: why they got it, and a one-click way out. */
 export function subscriberFooter({ reason, unsubscribeUrl }: { reason: string; unsubscribeUrl: string }) {
@@ -121,6 +121,44 @@ ${img ? `<img src="${escapeHtml(img)}" width="320" alt="${escapeHtml(product.nam
     text: [
       'It’s here', '', line, '', `${product.name}, ${formatMoney(product.price, 'NGN')}`, `${product.shipsOn ? 'Pre-order now' : 'Get it now'}: ${url}`, '',
       `You’re getting this once because you asked to be told when ${product.name} is available.`, `Cancel the request: ${unsubscribeUrl}`,
+    ].join('\n'),
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Delivered: "How's it fitting?"
+// ---------------------------------------------------------------------------
+
+/** Days after delivery the follow-up goes out, and how far back the daily job looks (so a first run doesn't email old orders). */
+export const FOLLOWUP_AFTER_DAYS = 3
+export const FOLLOWUP_WITHIN_DAYS = 14
+export const FOLLOWUP_DAILY_CAP = 30
+
+/** One email per delivered order: its pieces, each linking to its page, where they can Hype it. No reviews are collected. */
+export function orderFollowupEmail(o: Pick<OrderEmailData, 'orderNumber' | 'items'>, site: string): RenderedEmail {
+  const pieces = o.items.filter((i) => i.productId && !i.gift)
+  const intro = `Order ${o.orderNumber} arrived a few days ago. We hope it’s everything you wanted.`
+  const hype = 'Open a piece below and tap Hype on its page: it tells us, and everyone else, what’s worth wearing.'
+  const link = (i: OrderEmailData['items'][number]) => `${site}/product/${encodeURIComponent(i.productId!)}`
+  const returns = `Something not right? You have ${POLICY.returnWindowDays} days from delivery to return it: ${site}/returns`
+  return {
+    subject: 'How’s it fitting?',
+    html: layout({
+      preheader: `Order ${o.orderNumber} has been with you a few days. How is it?`,
+      heading: 'How’s it fitting?',
+      body: [
+        p(escapeHtml(intro)),
+        pieces.length ? p(escapeHtml(hype)) : '',
+        pieces.length ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;font-size:14px;">
+${pieces.map((i) => `<tr><td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${itemDetails(i) ? `<br><span style="color:${C.muted};font-size:12px;">${escapeHtml(itemDetails(i))}</span>` : ''}</td>
+<td style="padding:10px 0;border-bottom:1px solid ${C.line};text-align:right;white-space:nowrap;vertical-align:top;"><a href="${escapeHtml(link(i))}" style="color:${C.ink};font-weight:700;">Open</a></td></tr>`).join('\n')}
+</table>` : button(`${site}/shop`, 'Back to the shop'),
+        p(`<span style="font-size:13px;color:${C.muted};">Something not right? You have ${POLICY.returnWindowDays} days from delivery to return it. See our <a href="${escapeHtml(site)}/returns" style="color:${C.muted};">returns policy</a>, or just reply to this email.</span>`),
+      ].join('\n'),
+      footer: customerFooter(site),
+    }),
+    text: [
+      'How’s it fitting?', '', intro, '', ...(pieces.length ? [hype, '', ...pieces.map((i) => `- ${i.name}: ${link(i)}`), ''] : []), returns,
     ].join('\n'),
   }
 }

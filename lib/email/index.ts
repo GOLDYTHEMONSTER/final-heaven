@@ -33,7 +33,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
         stockShortfall: Array.isArray(data.stock_shortfall) ? data.stock_shortfall : null,
         items: items.map((i: Record<string, any>) => ({
           name: String(i.name ?? 'Item'), quantity: Number(i.quantity ?? 1), size: i.size ?? null, color: i.color ?? null,
-          price: i.price ?? 0, preorder: Boolean(i.preorder), shipsOn: i.ships_on ?? null, gift: Boolean(i.gift),
+          price: i.price ?? 0, preorder: Boolean(i.preorder), shipsOn: i.ships_on ?? null, gift: Boolean(i.gift), productId: typeof i.id === 'string' ? i.id : null,
           madeToOrderDays: i.made_to_order ? Number(i.lead_time_days) || null : null,
         })),
         trackingNumber: data.tracking_number, shippingCity: data.shipping_city, shippingState: data.shipping_state,
