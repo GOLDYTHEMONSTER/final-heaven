@@ -18,6 +18,17 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
 /**
+ * EMAIL CAPS (Resend's free plan sends 100 a day, receipts included; every
+ * automatic sender below has its own daily ceiling, counted per UTC day in the
+ * database, and skips suppressed and unsubscribed addresses):
+ *   welcome email on sign-up ......... 40  (over the cap: skipped, not queued)
+ *   checkout reminder ................ 30  (also 1 per address per 24 hours)
+ *   back-in-stock / drop alert ....... 30  (over the cap: waits for tomorrow)
+ *   delivered follow-up .............. 30  (over the cap: waits for tomorrow)
+ *   launch email ..................... the waitlist, once; carries on across days if Resend's quota stops it
+ *   staff digest ..................... 1
+ * Receipts and staff alerts are not capped: they come first in the queue.
+ *
  * Daily maintenance, scheduled in vercel.json. Vercel sends
  * `Authorization: Bearer $CRON_SECRET`. Each step is idempotent and safe to
  * re-run; one step failing doesn't stop the others.

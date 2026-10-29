@@ -6,6 +6,10 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { emailConfigFromEnv } from '@/lib/email'
 import { LIMITS, isAudience } from '@/lib/email/campaign'
 import { audienceCounts } from '@/lib/email/campaign-send'
+import { statsByCampaign, type StatsRow } from '@/lib/email/campaign-stats'
+import { logger } from '@/lib/log'
+
+const statsRow = (v: unknown) => (Array.isArray(v) ? (v as StatsRow[]) : [])
 
 export const dynamic = 'force-dynamic'
 
@@ -52,9 +56,14 @@ export const GET = handle('admin.campaigns.list', async () => {
     .eq('tenant_id', staff.tenant.tenantId).order('created_at', { ascending: false }).limit(100)
   if (error) throw error
   const config = emailConfigFromEnv()
+  const service = createSupabaseServiceClient()
+  // Delivery results from Resend's webhook. A missing table or function (migration not applied yet) only means no numbers, never a broken page.
+  const { data: statRows, error: statsError } = await service.rpc('campaign_email_stats', { p_tenant: staff.tenant.tenantId })
+  if (statsError) logger.warn('admin.campaigns.stats_unavailable', { error: statsError })
   return NextResponse.json({
     campaigns: data ?? [],
-    audiences: await audienceCounts(createSupabaseServiceClient(), staff.tenant.tenantId),
+    stats: statsByCampaign(statsRow(statRows)),
+    audiences: await audienceCounts(service, staff.tenant.tenantId),
     email: { ready: Boolean(config), from: config?.from ?? null, testTo: staff.email },
   }, { headers: { 'Cache-Control': 'private, no-store' } })
 })

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AUDIENCES, LIMITS, campaignProblems, renderCampaign, type Audience, type CampaignProduct } from '@/lib/email/campaign'
+import { STAT_LABELS, type CampaignStats } from '@/lib/email/campaign-stats'
 
 // Studio → Campaigns: write an email to the store's lists, see exactly what
 // subscribers get, send yourself a test, then send. Sending runs in small
@@ -35,6 +36,7 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
 
 export default function CampaignsPage() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([])
+  const [stats, setStats] = useState<Record<string, CampaignStats>>({})
   const [audiences, setAudiences] = useState<Record<string, number>>({})
   const [email, setEmail] = useState<{ ready: boolean; from: string | null; testTo: string | null } | null>(null)
   const [products, setProducts] = useState<StoreProduct[]>([])
@@ -48,8 +50,9 @@ export default function CampaignsPage() {
   const sending = useRef(false)
 
   const load = useCallback(async () => {
-    const data = await api<{ campaigns: Campaign[]; audiences: Record<string, number>; email: typeof email }>('/api/admin/campaigns')
+    const data = await api<{ campaigns: Campaign[]; stats?: Record<string, CampaignStats>; audiences: Record<string, number>; email: typeof email }>('/api/admin/campaigns')
     setCampaigns(data.campaigns)
+    setStats(data.stats ?? {})
     setAudiences(data.audiences)
     setEmail(data.email)
     return data.campaigns
@@ -200,6 +203,19 @@ export default function CampaignsPage() {
               {current.status === 'sent'
                 ? <>Sent to <b>{current.sent}</b> of {current.recipients}{current.failed ? `, ${current.failed} undeliverable` : ''}. Sent campaigns can’t be edited.</>
                 : <>Sending: <b>{current.sent}</b> of {current.recipients} so far.</>}
+            </div>
+          )}
+          {current && current.status !== 'draft' && (
+            <div className="rounded-lg border border-final-off-white/10 bg-final-gray p-4">
+              <dl className="grid grid-cols-5 gap-2 text-center">
+                {STAT_LABELS.map(([key, name]) => (
+                  <div key={key}>
+                    <dt className="text-[11px] font-medium uppercase tracking-[0.12em] text-final-muted">{name}</dt>
+                    <dd className={`mt-1 text-lg font-semibold ${(key === 'bounced' || key === 'complained') && (stats[current.id]?.[key] ?? 0) > 0 ? 'text-final-ember' : ''}`}>{stats[current.id]?.[key] ?? 0}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs text-final-muted">Counted as people, as Resend reports them. Opened and clicked appear only if tracking is switched on for your domain in Resend.</p>
             </div>
           )}
           <fieldset disabled={!editable || busy === 'send'} className="space-y-5 disabled:opacity-70">

@@ -39,6 +39,7 @@ const PROBES = {
   '20261029150000_checkout_reminders.sql': `exists (select 1 from information_schema.columns where table_name = 'checkouts' and column_name = 'reminder_email_id')`,
   '20261029160000_product_alerts.sql': `to_regclass('public.product_alerts') is not null`,
   '20261029170000_order_followup.sql': `to_regprocedure('public.orders_due_followup(uuid,integer,integer,integer)') is not null`,
+  '20261029180000_campaign_stats.sql': `to_regprocedure('public.campaign_email_stats(uuid)') is not null`,
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).
