@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { BarList, ColumnChart, DataTable, LineChart } from '@/components/admin/charts'
+import { BusinessOverview } from '@/components/admin/BusinessOverview'
 import { useLiveReload } from '@/components/admin/activity'
 import { formatCurrency } from '@/lib/utils/format'
 
@@ -205,6 +206,8 @@ export default function AnalyticsPage() {
               {num(s.orders.unverifiedLegacy) > 0 && <> and {count(num(s.orders.unverifiedLegacy))} older orders recorded as paid outside the system ({naira(num(s.orders.unverifiedLegacyValue))})</>}.
             </p>
           )}
+
+          <BusinessOverview range={range} />
 
           <details className="rounded-xl border border-final-off-white/10 p-5 text-sm">
             <summary className="cursor-pointer font-semibold">How these numbers are calculated</summary>

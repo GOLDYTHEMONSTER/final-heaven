@@ -40,6 +40,7 @@ const PROBES = {
   '20261029160000_product_alerts.sql': `to_regclass('public.product_alerts') is not null`,
   '20261029170000_order_followup.sql': `to_regprocedure('public.orders_due_followup(uuid,integer,integer,integer)') is not null`,
   '20261029180000_campaign_stats.sql': `to_regprocedure('public.campaign_email_stats(uuid)') is not null`,
+  '20261029190000_business_overview.sql': `to_regprocedure('public.business_overview(uuid,date,date)') is not null and to_regprocedure('public.launch_signals(uuid)') is not null`,
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).
