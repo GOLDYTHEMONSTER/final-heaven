@@ -1,0 +1,91 @@
+{
+  "name": "Beech Wood Baseball Bat",
+  "category": "Sports",
+  "description": "A baseball bat made of beech wood in its natural finish, with a flared knob at the handle end and a black script mark on the barrel. Two lengths: 64 cm and 74 cm.",
+  "price": 0,
+  "stock": 20,
+  "colors": [],
+  "sizes": [
+    "64 cm",
+    "74 cm"
+  ],
+  "tags": [
+    "sports",
+    "baseball",
+    "bat",
+    "wood"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "natural.jpg",
+      "color": null
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=802767516501",
+    "unit_cost": 20,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "¥20 per piece (≈₦4,471.41 shown); ¥15 after first-order coupon; ¥16 from 500 pieces. Whether the 74 cm costs the same as the 64 cm is not shown. Store return rate 66.8% (high). Ships from Jinhua, Zhejiang. Supplier title calls it a self-defence stick: listed as a sporting good only. Barrel carries a script signature mark (looks like \"Sunlee\"): maker mark to confirm, not in the name. Photo is the 64 cm bat with the 64CM label cut out; no photo of the 74 cm except the listing screenshot.",
+    "supplier": {
+      "name": "Beech baseball bat seller, 67% returns (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=802767516501"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-10-28T22:11:39.815Z",
+    "history": [
+      {
+        "at": "2026-10-28T22:05:38.596Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-28T22:07:47.108Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-28T22:11:39.815Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "66.8% store return rate"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-28T22:07:47.108Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": [
+        "new category \"Sports\" (not one of Accessories, Cosplay, Gadgets, Grillz, Hoodies, Jackets, Ladies, Pants, Pendants, Sets, T-Shirts, Tracksuits)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4471,
+      "landed": 4471,
+      "gross": null,
+      "margin": null,
+      "suggested": 10000
+    },
+    "note": "66.8% store return rate"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "category": "Gadgets",
+  "price": 10000,
+  "stock": 20,
+  "sizes": [],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "name": "Clip-On Open-Ear Earbuds — LED Display",
+  "description": "Open-ear earbuds that clip onto the ear instead of sitting inside it. The round charging case has an LED display that shows the battery level, and charges over USB-C. Bluetooth 5.4 with touch controls; they connect when you open the lid and work with iPhone and Android.",
+  "colors": [
+    "Champagne",
+    "Black",
+    "Purple"
+  ],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "open-ear"
+  ],
+  "photos": [
+    {
+      "file": "champagne.jpg",
+      "color": "Champagne",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e6c718a3-c8b6-47a3-9d58-3e44cc637bd9.jpg"
+    },
+    {
+      "file": "black-silver.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/60b1216c-6e65-4c7e-9171-aa2374884023.jpg"
+    },
+    {
+      "file": "purple.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9100dc0c-89e5-4941-9597-1e3fe57cce0d.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1068108576439",
+    "unit_cost": 15.9,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Seller style Q71 (skin = Champagne, black = Black with a silver case, purple). ¥15.90 ≈ ₦3,554.77 per piece (screenshot a7c5a2f6); listing shows a coupon price (¥8.90) not used. Specs from the supplier images: LED battery display, non-in-ear, open-lid connect, touch, Bluetooth 5.4, Type-C, Apple/Android compatible. Generic, unbranded. Listing title: Huaqiangbei 10th-generation clip-on open-ear earphones. Lithium battery: sea freight only. China domestic shipping from ¥3 (≈₦670.71) per order, not per item. Left out of the copy on purpose: listing hero shows an AirPods logo (never used), \"flagship certified\", Hi-Res/IMAX/\"Bluetooth 8.0\" claims, the rename feature, IPX5 and 1-year warranty (unconfirmed). Same listing also sells style D (\"Skin tone: Generation 10\", ¥14.90, AirPods Pro-shaped case with EDIFIER/Hi-Res/LDAC marks): not prepared; its originals are in clip-on-earbuds-led/supplier/style-d-not-listed/.",
+    "supplier": {
+      "name": "Clip-on earbuds seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1068108576439"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-10-29T06:29:59.676Z",
+    "history": [
+      {
+        "at": "2026-10-28T22:14:14.410Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T06:13:28.021Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T06:29:24.607Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T06:29:32.698Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T06:29:38.816Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T06:29:56.397Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T06:29:56.600Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T06:29:59.676Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T06:29:24.605Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as clip-on-earbuds-dome (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as clip-on-earbuds-pebble (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 3555,
+      "landed": 3555,
+      "gross": 6445,
+      "margin": 0.6445237,
+      "suggested": 8000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793255377125",
+    "approved_at": "2026-10-29T06:29:56.396Z",
+    "published_at": "2026-10-29T06:29:59.676Z",
+    "url": "https://www.finalheaven.shop/product/p1793255377125"
+  },
+  "id": "p1793255377125"
+}

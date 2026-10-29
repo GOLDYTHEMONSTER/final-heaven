@@ -1,0 +1,106 @@
+{
+  "name": "Light-Up Pulse Water Blaster — Shark",
+  "category": "Gadgets",
+  "description": "An electric pulse water blaster with continuous spray, automatic water intake and a light strip along the body. It has a simulated display screen and can connect to an outside water bottle. Water only. Don't aim at faces or animals. Adult supervision for young children.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "water-blaster",
+    "water-gun",
+    "toy",
+    "outdoor",
+    "summer",
+    "electric",
+    "usb-rechargeable",
+    "beach",
+    "pool"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": "White"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1089431913643",
+    "unit_cost": 62,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Water blaster factory (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1089431913643"
+    },
+    "notes": "Style code 917-1 (light version; headline on the photos reads \"pulse electric light water gun\"). Match made from the style-list thumbnails. Photos show only part of the blaster (close-up crops, soft after enlarging); no capacity, size or box contents are given for this style. Printed \"WATER GUN\" and a shark logo are on the body. Same 1688 offer (1089431913643) as the rest of the water-blaster range. MOQ unclear: the page says \"1 Box starting batch\" and lists carton counts of 12-48 pcs, so whether the price is per piece for a 1-piece order or needs a carton is unconfirmed. Prices are per piece from the style list. Store return rate not shown in the screenshots. China freight ¥4/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped toy: possible customs hold as an imitation firearm, owner to confirm with the clearing agent. Range is stated only on the 2309 box photo (8-10 m, seller figure) and used there; none is claimed for other models. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged). "
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-10-29T12:11:30.719Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:44:32.000Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T07:46:59.186Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T12:11:30.719Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "weak photos: close-ups of part of the gun only"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T07:46:59.184Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": [
+        "same supplier listing as shark-water-blaster-1l (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as shark-water-blaster-43cm (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as slim-pulse-water-blaster-43cm (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as twin-battery-water-blaster-tank (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as water-blaster-single-battery (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as water-blaster-two-tone (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 13835,
+      "landed": 13835,
+      "gross": null,
+      "margin": null,
+      "suggested": 31000
+    },
+    "note": "weak photos: close-ups of part of the gun only"
+  },
+  "ships_by_air": false
+}

@@ -1,0 +1,114 @@
+{
+  "name": "In-Ear Wireless Earbuds — Battery Display",
+  "category": "Gadgets",
+  "description": "In-ear wireless earbuds in a rounded charging case with a digital display that shows the battery level. Noise reduction on calls (ENC), and up to 30 hours of listening with the case (seller’s figure).",
+  "price": 6500,
+  "stock": 20,
+  "colors": [
+    "Cream",
+    "White",
+    "Black & Red"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "in-ear"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "cream.jpg",
+      "color": "Cream",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6a85d496-7d56-45e3-8a7c-628c66bf2bc3.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a8496f03-8652-4d54-a8a6-16a9b9b14b6a.jpg"
+    },
+    {
+      "file": "black-red.jpg",
+      "color": "Black & Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7c4be6b9-7326-46a1-8bb5-ceef0ee5b2df.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1038949704513",
+    "unit_cost": 7.9,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Sample ordered before listing: stays a draft until the sample is checked. ¥7.9 ≈ ₦1,766.21 per piece (listing screenshot bc2b7bcf); ¥0.9 after coupon (not used). 3K+ sold. Generic, unbranded. ENC = call-mic noise reduction, not ANC: never call it noise-cancelling. 30h is the seller’s figure. Left out: 官方认证 (official certification) and the 30-day free trial. Bluetooth version not shown. Photos cut from hand-held warehouse shots (fingers and background trimmed; black one is still in its plastic wrap); ask the seller for clean white-background shots. Hero image not used (video play button over the case, Chinese text). Other colours unknown. Lithium battery: sea freight only.",
+    "supplier": {
+      "name": "In-ear earbuds seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1038949704513"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "AWAITING_APPROVAL",
+    "updated": "2026-10-29T06:29:47.702Z",
+    "history": [
+      {
+        "at": "2026-10-29T06:13:50.277Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T06:15:57.279Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T06:29:25.304Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T06:29:42.841Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T06:29:47.702Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T06:29:25.304Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1766,
+      "landed": 1766,
+      "gross": 4734,
+      "margin": 0.7282764615384616,
+      "suggested": 4000
+    },
+    "note": "draft saved, not on sale",
+    "store_id": "p1793255386502"
+  },
+  "id": "p1793255386502"
+}

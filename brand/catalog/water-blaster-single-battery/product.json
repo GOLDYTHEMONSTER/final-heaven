@@ -1,0 +1,138 @@
+{
+  "name": "Pulse Water Blaster — Single Battery",
+  "category": "Gadgets",
+  "description": "An electric pulse water blaster with a 610 ml tank and one modular battery that slots into the handle. About 58 × 5 × 20 cm. The box has the blaster and a USB charging cable. Water only. Don't aim at faces or animals. Adult supervision for young children.",
+  "price": 20000,
+  "stock": 20,
+  "colors": [
+    "Blue",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "water-blaster",
+    "water-gun",
+    "toy",
+    "outdoor",
+    "summer",
+    "electric",
+    "usb-rechargeable",
+    "beach",
+    "pool"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/083d7ee6-7536-4e31-8e70-740c49d5f844.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5b4d061f-b2fd-4eac-87a1-91a849006124.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1089431913643",
+    "unit_cost": 56,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Water blaster factory (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1089431913643"
+    },
+    "notes": "Style code \"Standard 2307\" (photo label NO.2307, single battery, 610 ml, 58x5x20 cm). Supplier labels the white/orange one 蓝色 (blue) but it is white: listed as White. Photos show a blue light strip on the body, but the supplier text does not mention lights, so the copy does not either. Same 1688 offer (1089431913643) as the rest of the water-blaster range. MOQ unclear: the page says \"1 Box starting batch\" and lists carton counts of 12-48 pcs, so whether the price is per piece for a 1-piece order or needs a carton is unconfirmed. Prices are per piece from the style list. Store return rate not shown in the screenshots. China freight ¥4/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped toy: possible customs hold as an imitation firearm, owner to confirm with the clearing agent. Range is stated only on the 2309 box photo (8-10 m, seller figure) and used there; none is claimed for other models. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged). "
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-10-29T12:12:07.275Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:44:32.692Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T07:46:57.860Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T12:11:29.472Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T12:11:36.686Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T12:11:40.822Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T12:11:59.040Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T12:12:05.178Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T12:12:07.275Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T12:11:29.471Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as shark-light-up-pulse-blaster (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as shark-water-blaster-1l (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as shark-water-blaster-43cm (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as slim-pulse-water-blaster-43cm (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as twin-battery-water-blaster-tank (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as water-blaster-two-tone (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 12496,
+      "landed": 12496,
+      "gross": 7504,
+      "margin": 0.375208,
+      "suggested": 28000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793275899733",
+    "approved_at": "2026-10-29T12:11:59.040Z",
+    "published_at": "2026-10-29T12:12:07.275Z",
+    "url": "https://www.finalheaven.shop/product/p1793275899733"
+  },
+  "ships_by_air": false,
+  "id": "p1793275899733"
+}

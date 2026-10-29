@@ -1,0 +1,42 @@
+{
+  "name": "",
+  "category": "",
+  "description": "",
+  "price": 0,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "cover.jpg",
+      "color": null
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": ""
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "RECEIVED",
+    "updated": "2026-10-29T07:45:14.707Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:45:14.707Z",
+        "from": null,
+        "to": "RECEIVED"
+      }
+    ]
+  }
+}

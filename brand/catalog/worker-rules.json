@@ -6,7 +6,7 @@
     "round_to_ngn": 500,
     "fx_note": "No default exchange rate: each product records the rate it was costed at (source.fx_rate), taken from the 1688 page's naira figure or set by the owner."
   },
-  "categories": ["Accessories", "Cosplay", "Gadgets", "Grillz", "Hoodies", "Jackets", "Ladies", "Pants", "Pendants", "Sets", "T-Shirts", "Tracksuits"],
+  "categories": ["Accessories", "Cosplay", "Gadgets", "Grillz", "Hoodies", "Jackets", "Ladies", "Pants", "Pendants", "Sets", "Sports", "T-Shirts", "Tracksuits"],
   "sized_categories": ["Hoodies", "Jackets", "Ladies", "Pants", "Sets", "T-Shirts", "Tracksuits"],
   "claims_to_review": [
     "official", "genuine", "authentic", "licensed", "certified", "waterproof", "medical", "guaranteed",

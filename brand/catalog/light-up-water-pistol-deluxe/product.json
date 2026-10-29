@@ -1,0 +1,145 @@
+{
+  "name": "Light-Up Water Pistol — Deluxe Kit",
+  "category": "Gadgets",
+  "description": "An electric water pistol that comes apart into body, scope, light-up muzzle and refillable water drum, with a textured grip. Rechargeable lithium battery and a USB cable are in the box. Shoots continuous bursts when you squeeze the trigger. Water only. Not for use on faces or animals. Adult supervision for young children.",
+  "price": 9000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Blue",
+    "Red"
+  ],
+  "sizes": [],
+  "tags": [
+    "water-gun",
+    "water-pistol",
+    "toy",
+    "outdoor",
+    "summer",
+    "electric",
+    "usb-rechargeable",
+    "light-up"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9f579a9d-b86d-42ce-8b8a-9d0a1d80b8be.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8e0a6acf-5b95-41ba-b40e-d230da690cb2.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/dbe4cd06-0bc8-423a-8ce6-da0efae408ba.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1014190616395",
+    "unit_cost": 11.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Water gun seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1014190616395"
+    },
+    "notes": "Split-type style, ¥11.80 for night black, sky blue, red. Box contents from photos: gun body, scope, light-up muzzle, rechargeable lithium battery, USB cable, drum. Difference from the ¥9.80 pistol is separate muzzle piece and grip texture; no size given. Cutout photos are rough (dark toy on dark background): black and red lose part of the muzzle, blue loses the underside of the body; ask the seller for clean photos. Blue is listed as sky blue (teal-blue in photo). Same 1688 listing (offer 1014190616395) as the other water-gun styles. 27K+ sold, 3,500+ praise, repurchase rate 27.8% (the page shows repurchase, not a return rate). China shipping ¥3/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped children's toy: possible customs hold as imitation firearm, owner to confirm with clearing agent. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged). Price per style from the seller style list; ₦2,186.81 shown for ¥9.80."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-10-29T12:12:38.398Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:18:48.207Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T07:22:14.382Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:24:16.230Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T07:25:13.871Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T07:25:18.440Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T07:25:18.657Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T07:25:21.158Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T07:25:23.134Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-10-29T12:12:38.398Z",
+        "from": "PUBLISHED",
+        "to": "REJECTED",
+        "note": "replaced by the new water-blaster range, 30 Oct 2026"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T07:24:16.229Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as electric-water-blaster-compact (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as light-up-water-pistol (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2633,
+      "landed": 2633,
+      "gross": 6367,
+      "margin": 0.7074386666666667,
+      "suggested": 6000
+    },
+    "note": "replaced by the new water-blaster range, 30 Oct 2026",
+    "store_id": "p1793258717439",
+    "approved_at": "2026-10-29T07:25:18.657Z",
+    "published_at": "2026-10-29T07:25:23.134Z",
+    "url": "https://www.finalheaven.shop/product/p1793258717439"
+  },
+  "ships_by_air": false,
+  "id": "p1793258717439"
+}

@@ -1,0 +1,106 @@
+{
+  "name": "Electric Water Blaster — Compact",
+  "category": "Gadgets",
+  "description": "A compact electric water blaster with a light-up muzzle and a refillable water drum under the body. Rechargeable lithium battery and charging cable are in the box. It fires continuous bursts at the squeeze of the trigger. Water only. Not for use on faces or animals. Adult supervision for young children.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Blue",
+    "Desert Yellow",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "water-gun",
+    "water-blaster",
+    "toy",
+    "outdoor",
+    "summer",
+    "electric",
+    "usb-rechargeable",
+    "light-up"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "blue.jpg",
+      "color": "Blue"
+    },
+    {
+      "file": "desert-yellow.jpg",
+      "color": "Desert Yellow"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1014190616395",
+    "unit_cost": 16.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Water gun seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1014190616395"
+    },
+    "notes": "HOLD: \"Vector\" style, ¥16.80, blue, desert yellow, black. The toy has \"KRISS VECTOR\" printed on its body (trademark, visible in the photos) and mimics a real firearm; do not list unless the owner decides after the flag. Box contents from photos: rechargeable lithium battery, charging cable, water drum. Black here is clear grey/black. Same 1688 listing (offer 1014190616395) as the other water-gun styles. 27K+ sold, 3,500+ praise, repurchase rate 27.8% (the page shows repurchase, not a return rate). China shipping ¥3/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped children's toy: possible customs hold as imitation firearm, owner to confirm with clearing agent. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged). Price per style from the seller style list; ₦2,186.81 shown for ¥9.80."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-10-29T07:24:15.178Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:18:48.429Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T07:22:14.923Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:24:15.178Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "KRISS VECTOR trademark printed on the toy"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T07:22:14.922Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": [
+        "same supplier listing as light-up-water-pistol (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as light-up-water-pistol-deluxe (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 3749,
+      "landed": 3749,
+      "gross": null,
+      "margin": null,
+      "suggested": 8500
+    },
+    "note": "KRISS VECTOR trademark printed on the toy"
+  },
+  "ships_by_air": false
+}

@@ -1,0 +1,128 @@
+{
+  "name": "Waterproof Dive Case for HERO9–13 Action Cameras",
+  "category": "Accessories",
+  "description": "A clear waterproof housing with a top latch, a built-in mount and buttons you press through the case. It comes with a quick-release buckle and a thumbscrew. Fits GoPro HERO9, HERO10, HERO11, HERO12 and HERO13 Black (camera not included).",
+  "price": 12000,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [
+    "accessories",
+    "action camera",
+    "dive case",
+    "underwater",
+    "case"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "case-and-mount.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/87787b54-7e3e-49f2-a8e7-f164fa40b7bf.jpg"
+    },
+    {
+      "file": "back.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5227c529-bde6-4286-a2d6-9ddbc34172a5.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=846887517697",
+    "unit_cost": 18.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "notes": "¥18.5 ≈ ₦4,128.16 per set (screenshot f64b8a6b); ¥13.5 after coupon (not used). 300+ sets sold; repurchase rate 37.5%; store return rate cut off in the screenshot. No Style tab visible: owner confirmed one case fits HERO9–13, no model choice. Depth rating not shown: none claimed. Camera not included. No battery: can fly. Photos: cover is the empty case with buckle and thumbscrew (3a53497c); second is the back view (6b03e7ac), where only a small, faint GoPro mark shows on the camera. Not used: 42e79aa8, f2ad4106 and 7a99696d (camera inside, large GoPro logo; f2ad4106 and 7a99696d are the same picture with different bytes).",
+    "supplier": {
+      "name": "Action camera case seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=846887517697"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-10-29T06:55:39.663Z",
+    "history": [
+      {
+        "at": "2026-10-29T06:46:09.590Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T06:47:24.783Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T06:55:31.975Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T06:55:32.216Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T06:55:36.523Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T06:55:36.737Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T06:55:36.950Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T06:55:39.663Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "claims_reviewed": [
+      "GoPro",
+      "waterproof"
+    ],
+    "claims_note": "GoPro: compatibility statement only. waterproof: the listing sells it as a waterproof diving case; no depth rating claimed.",
+    "last_validation": {
+      "at": "2026-10-29T06:55:31.974Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4128,
+      "landed": 4128,
+      "gross": 7872,
+      "margin": 0.6559925,
+      "suggested": 9500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793256935244",
+    "approved_at": "2026-10-29T06:55:36.736Z",
+    "published_at": "2026-10-29T06:55:39.663Z",
+    "url": "https://www.finalheaven.shop/product/p1793256935244"
+  },
+  "id": "p1793256935244"
+}

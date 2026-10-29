@@ -1,0 +1,132 @@
+{
+  "stock": 20,
+  "sizes": [],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "price": 7500,
+  "category": "Gadgets",
+  "name": "Sunset Lamp — Tripod",
+  "description": "A USB-powered sunset lamp with a round head that tilts, mounted on a small tripod so you can set it on a desk or shelf and aim the glow at a wall.",
+  "colors": [
+    "Black"
+  ],
+  "tags": [
+    "gadget",
+    "sunset-lamp",
+    "tripod",
+    "night-light",
+    "usb",
+    "photography"
+  ],
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a0ecbaa7-4168-4382-a4d5-1b0182c08b8e.jpg"
+    }
+  ],
+  "notes": "Listing is a 10-style range, ¥3.3 to ¥15.5 (₦736 to ₦3,459 on the page); per-style price not shown, so unit_cost is blank. USB powered, no battery, ships by air. Return rate cut off in screenshot. Seller text claims remote switches 16 colours: not repeated. Supplier banner with certification claims cropped out and not repeated. Second photo shows flexible foam-leg tripods, which may be a different tripod type from the rigid one in the first photo; owner to confirm which ships. Cover photo is tight and shows the corner of a book prop at bottom left. No tripod height or size shown.",
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/746971198949.html",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Sunset lamp seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/746971198949.html"
+    },
+    "notes": "Listing is a 10-style range, ¥3.3 to ¥15.5 (₦736 to ₦3,459 on the page); per-style price not shown, so unit_cost is blank. USB powered, no battery, ships by air. Return rate cut off in screenshot. Seller text claims remote switches 16 colours: not repeated. Supplier banner with certification claims cropped out and not repeated. Owner chose the rigid small tripod; foam-leg photo dropped. No tripod height or size shown. Listed before the cost was known, owner approved 29 Oct 2026."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-10-29T07:21:24.116Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:03:00.103Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T07:04:19.895Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:16:30.346Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:20:38.487Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T07:21:18.795Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T07:21:21.573Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T07:21:21.805Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T07:21:22.056Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T07:21:24.116Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T07:20:38.486Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as sunset-lamp-cat-ear (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as sunset-lamp-tall-stand (fine for a different capacity or style; check it isn't a repeat)",
+        "listed with supplier unit cost unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793258480742",
+    "approved_at": "2026-10-29T07:21:21.803Z",
+    "published_at": "2026-10-29T07:21:24.116Z",
+    "url": "https://www.finalheaven.shop/product/p1793258480742"
+  },
+  "id": "p1793258480742"
+}

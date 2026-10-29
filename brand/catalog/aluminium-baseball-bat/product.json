@@ -1,0 +1,163 @@
+{
+  "name": "Aluminium Baseball Bat — Long",
+  "category": "Sports",
+  "description": "The longer of our two aluminium practice bats: a slim aluminium alloy bat with a black wrapped grip and a metal knob at the handle end. Comes in gold, blue, black, silver and red, with a large BAT print on the barrel.",
+  "price": 15000,
+  "stock": 20,
+  "colors": [
+    "Gold",
+    "Blue",
+    "Black",
+    "Silver",
+    "Red"
+  ],
+  "sizes": [],
+  "tags": [
+    "sports",
+    "baseball",
+    "bat",
+    "aluminium"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "all-colours.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5c86d64d-ddd3-496f-a10e-c87ea955fac9.jpg"
+    },
+    {
+      "file": "gold.jpg",
+      "color": "Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d7841c8a-cc6e-4e34-8883-1c1e47536b8a.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d648f9c4-eabe-4a64-963e-0fc4ffacf3b7.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b20b06e4-549f-4fc2-b050-cd136df617ad.jpg"
+    },
+    {
+      "file": "silver.jpg",
+      "color": "Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e881aadb-f1ea-491a-af59-b7d936f8b26b.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8647d175-bd0c-49f3-bd3d-523c05e74e14.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=940925158076",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "Cost not seen: no price screenshot, so unit cost and rate are unknown. Length in cm not shown. Same 1688 listing sells a shorter, thicker bat, listed separately as aluminium-baseball-bat-short (₦12,000). Blue photo cut from the all-colours group shot (1.57x, slightly soft). Supplier title: kids to adults, practice bat, drop shipping. Barrel prints BAT and a small CHUANGXIN maker mark (not a known brand). Return rate not shown. Supplier photo 2a25f6c5 duplicates e5b3b114. Listed before the cost was known, owner approved 29 Oct 2026.",
+    "supplier": {
+      "name": "Aluminium bat seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=940925158076"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-10-29T07:21:03.873Z",
+    "history": [
+      {
+        "at": "2026-10-28T22:05:38.406Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-28T22:07:46.829Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-28T22:11:53.402Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-28T22:12:11.548Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:20:36.401Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T07:20:50.306Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T07:20:59.400Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T07:20:59.642Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T07:20:59.892Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T07:21:03.873Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T07:20:36.400Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as aluminium-baseball-bat-short (fine for a different capacity or style; check it isn't a repeat)",
+        "listed with supplier unit cost and exchange rate (₦ per CNY) unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793258458146",
+    "approved_at": "2026-10-29T07:20:59.641Z",
+    "published_at": "2026-10-29T07:21:03.873Z",
+    "url": "https://www.finalheaven.shop/product/p1793258458146"
+  },
+  "id": "p1793258458146"
+}

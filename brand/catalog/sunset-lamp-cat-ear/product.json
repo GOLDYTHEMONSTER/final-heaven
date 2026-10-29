@@ -1,0 +1,138 @@
+{
+  "stock": 20,
+  "sizes": [],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "price": 7500,
+  "category": "Gadgets",
+  "name": "Mini Sunset Lamp — Cat Ear",
+  "description": "A small USB-powered lamp that casts a sunset-style circle of light on your wall. The round head sits on a short base and tilts to aim the glow, and has little ears on top. Available in black and pink. Check which versions come with a remote before you order.",
+  "colors": [
+    "Black",
+    "Pink"
+  ],
+  "tags": [
+    "gadget",
+    "sunset-lamp",
+    "mini",
+    "night-light",
+    "usb",
+    "cat-ear"
+  ],
+  "photos": [
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7a6440a7-b2b0-4894-a275-b8ef690fec4f.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ea12c289-c15f-4e6e-884a-9b2981e98d48.jpg"
+    }
+  ],
+  "notes": "Listing is a 10-style range, ¥3.3 to ¥15.5 (₦736 to ₦3,459 on the page); per-style price not shown, so unit_cost is blank. USB powered, no battery, ships by air. Return rate cut off in screenshot. Seller text claims remote switches 16 colours: not repeated. Supplier banner with certification claims cropped out and not repeated. Remote only seen on the pink photo; description kept neutral. Ear colours vary between photos (teal, orange); not stated. Photos are 800 px, soft when enlarged. Black photo has no remote; owner to confirm what each colour includes.",
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/746971198949.html",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.14,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Sunset lamp seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/746971198949.html"
+    },
+    "notes": "Listing is a 10-style range, ¥3.3 to ¥15.5 (₦736 to ₦3,459 on the page); per-style price not shown, so unit_cost is blank. USB powered, no battery, ships by air. Return rate cut off in screenshot. Seller text claims remote switches 16 colours: not repeated. Supplier banner with certification claims cropped out and not repeated. Remote only seen on the pink photo; description kept neutral. Ear colours vary between photos (teal, orange); not stated. Photos are 800 px, soft when enlarged. Black photo has no remote; owner to confirm what each colour includes. Listed before the cost was known, owner approved 29 Oct 2026."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-10-29T07:21:18.401Z",
+    "history": [
+      {
+        "at": "2026-10-29T07:02:59.705Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-10-29T07:04:18.830Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:16:29.131Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-10-29T07:20:37.742Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-10-29T07:21:11.881Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-10-29T07:21:15.686Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-10-29T07:21:15.933Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-10-29T07:21:16.185Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-10-29T07:21:18.401Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-10-29T07:20:37.740Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as sunset-lamp-tall-stand (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as sunset-lamp-tripod (fine for a different capacity or style; check it isn't a repeat)",
+        "listed with supplier unit cost unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793258474493",
+    "approved_at": "2026-10-29T07:21:15.933Z",
+    "published_at": "2026-10-29T07:21:18.401Z",
+    "url": "https://www.finalheaven.shop/product/p1793258474493"
+  },
+  "id": "p1793258474493"
+}
