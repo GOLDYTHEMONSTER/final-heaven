@@ -1,7 +1,7 @@
 // Email set-up and test sends through Resend, from this machine.
 //   node scripts/email-test.mjs status          the sending domain and which DNS records Resend still wants
 //   node scripts/email-test.mjs verify          ask Resend to check the DNS again
-//   node scripts/email-test.mjs send <to>       send the sample campaign, order-paid and order-shipped emails
+//   node scripts/email-test.mjs send <to> [campaign|order-paid|order-shipped|--all]   one sample email (campaign by default); --all sends the three
 // Reads RESEND_API_KEY and EMAIL_FROM from .env.local; never prints the key.
 // Before the domain is verified, Resend only sends from onboarding@resend.dev to
 // the account's own email, so `send` falls back to that until then.
@@ -30,7 +30,7 @@ async function findDomain() {
   return { want, list, d: list.find((x) => x.name === want) ?? null }
 }
 
-const [cmd, to] = process.argv.slice(2)
+const [cmd, to, which = 'campaign'] = process.argv.slice(2)
 if (cmd === 'status' || cmd === 'verify') {
   const { want, list, d } = await findDomain()
   if (!d) {
@@ -57,7 +57,10 @@ if (cmd === 'status' || cmd === 'verify') {
   const r = spawnSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['vitest', 'run', 'tests/email-samples.render.test.ts'], { env: { ...process.env, EMAIL_RENDER_OUT: out }, encoding: 'utf8', shell: process.platform === 'win32' })
   const files = readdirSync(out)
   if (!files.length) { console.error(`Couldn't render the samples:\n${(r.stdout ?? '') + (r.stderr ?? '')}`.slice(0, 1500)); process.exit(1) }
-  for (const f of files) {
+  // One email per test by default: every send counts against the production quota.
+  const picked = which === '--all' ? files : files.filter((f) => f === `${which}.json`)
+  if (!picked.length) { console.error(`Unknown sample ${which}: campaign, order-paid, order-shipped or --all`); process.exit(1) }
+  for (const f of picked) {
     const e = JSON.parse(readFileSync(join(out, f), 'utf8'))
     const s = await api('/emails', { method: 'POST', body: JSON.stringify({ from, to: [to], subject: `[Test] ${e.subject}`, html: e.html, text: e.text }) })
     console.log(`${f.replace('.json', '').padEnd(14)} ${s.ok ? `sent (${s.body.id})` : `failed: Resend ${s.status} ${s.body?.message ?? ''}`}`)
