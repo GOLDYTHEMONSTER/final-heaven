@@ -43,7 +43,15 @@ export type MessageEmailData = {
 
 export type RenderedEmail = { subject: string; html: string; text: string }
 
-export const C = { ink: '#0a0a0b', body: '#2c2c30', muted: '#6b6b70', line: '#e4e3df', paper: '#f2f1ee', card: '#ffffff', ember: '#e8613c' }
+// Dark, like the store: ink is the strong text colour (off-white), paper the
+// page around the email, card the email itself. Contrast checked: body on card
+// is about 13:1, muted on card about 7:1.
+export const C = { ink: '#f2f1ee', body: '#d6d5d1', muted: '#a3a3a8', line: '#2c2c30', paper: '#0a0a0b', card: '#131315', ember: '#e8613c' }
+
+/** Where email images live: the live site (emails can only load absolute https links). */
+const ASSETS = (process.env.SITE_URL || 'https://www.finalheaven.shop').replace(/\/$/, '')
+/** The animated neon mark (tools/email/neon-gif.mjs); Outlook shows its first frame. */
+export const NEON_MARK = `${ASSETS}/brand/email/neon-mark.gif`
 
 export function escapeHtml(value: unknown) {
   return String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
@@ -68,18 +76,23 @@ const TOPICS: Record<string, string> = {
 export function layout({ preheader, heading, body, footer }: { preheader: string; heading: string; body: string; footer: string }) {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light"><title>${escapeHtml(heading)}</title></head>
+<meta name="color-scheme" content="dark"><meta name="supported-color-schemes" content="dark">
+<title>${escapeHtml(heading)}</title>
+<style>:root{color-scheme:dark}a{color:${C.ink}}@media (max-width:480px){.fh-pad{padding-left:20px!important;padding-right:20px!important}.fh-h1{font-size:26px!important}}</style></head>
 <body style="margin:0;padding:0;background:${C.paper};">
 <span style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(preheader)}</span>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.paper};">
-<tr><td align="center" style="padding:24px 12px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:${C.card};border:1px solid ${C.line};border-radius:8px;overflow:hidden;font-family:Helvetica,Arial,sans-serif;">
-<tr><td style="background:${C.ink};padding:18px 28px;color:#f2f1ee;font-size:13px;font-weight:700;letter-spacing:3px;">FINAL HEAVEN</td></tr>
-<tr><td style="padding:28px 28px 8px;">
-<h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;color:${C.ink};">${escapeHtml(heading)}</h1>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.paper};" bgcolor="${C.paper}">
+<tr><td align="center" style="padding:28px 12px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="${C.card}" style="max-width:560px;background:${C.card};border:1px solid ${C.line};border-radius:14px;overflow:hidden;font-family:Helvetica,Arial,sans-serif;">
+<tr><td align="center" bgcolor="${C.paper}" style="background:${C.paper};padding:26px 28px 18px;border-bottom:1px solid ${C.line};">
+<img src="${NEON_MARK}" width="88" height="88" alt="" style="display:block;width:88px;height:88px;border:0;margin:0 auto;">
+<div style="margin-top:10px;color:${C.ink};font-size:12px;font-weight:700;letter-spacing:5px;">FINAL HEAVEN</div>
+</td></tr>
+<tr><td class="fh-pad" style="padding:30px 32px 10px;">
+<h1 class="fh-h1" style="margin:0 0 18px;font-family:'Arial Black',Helvetica,Arial,sans-serif;font-size:30px;line-height:1.05;letter-spacing:-0.5px;text-transform:uppercase;color:${C.ink};">${escapeHtml(heading)}</h1>
 ${body}
 </td></tr>
-<tr><td style="padding:20px 28px 28px;border-top:1px solid ${C.line};color:${C.muted};font-size:12px;line-height:1.6;">${footer}</td></tr>
+<tr><td class="fh-pad" style="padding:20px 32px 30px;border-top:1px solid ${C.line};color:${C.muted};font-size:12px;line-height:1.7;">${footer}</td></tr>
 </table></td></tr></table></body></html>`
 }
 
@@ -87,7 +100,7 @@ export const p = (html: string) => `<p style="margin:0 0 14px;font-size:15px;lin
 
 export function button(href: string, label: string) {
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 22px;"><tr>
-<td style="background:${C.ink};border-radius:6px;"><a href="${escapeHtml(href)}" style="display:inline-block;padding:12px 22px;color:#f2f1ee;font-size:14px;font-weight:700;text-decoration:none;">${escapeHtml(label)}</a></td>
+<td bgcolor="${C.ink}" style="background:${C.ink};border-radius:8px;"><a href="${escapeHtml(href)}" style="display:inline-block;padding:14px 26px;color:${C.paper};font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;">${escapeHtml(label)}</a></td>
 </tr></table>`
 }
 
@@ -115,8 +128,8 @@ function itemsTable(o: OrderEmailData) {
   const deliveryFee = Number(o.deliveryFee ?? 0)
   const rows = o.items.map((i) => `<tr>
 <td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${itemDetails(i) ? `<br><span style="color:${C.muted};font-size:12px;">${escapeHtml(itemDetails(i))}</span>` : ''}</td>
-<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.muted};text-align:center;white-space:nowrap;">× ${escapeHtml(i.quantity)}</td>
-<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};text-align:right;white-space:nowrap;">${escapeHtml(lineAmount(i, o.currency))}</td>
+<td style="padding:10px 12px;border-bottom:1px solid ${C.line};color:${C.muted};text-align:center;white-space:nowrap;vertical-align:top;">× ${escapeHtml(i.quantity)}</td>
+<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};text-align:right;white-space:nowrap;vertical-align:top;">${escapeHtml(lineAmount(i, o.currency))}</td>
 </tr>`).join('\n')
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;font-size:14px;">
 ${rows}
