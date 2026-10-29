@@ -6,6 +6,7 @@ import { paymentDeps, siteUrl } from '@/lib/payments'
 import { startPayment } from '@/lib/payments/service'
 import { loadContext, loadProducts, toRate } from '@/lib/shipping/store'
 import { activeRate, chargeable } from '@/lib/shipping/engine'
+import { cancelReminder, scheduleReminder } from '@/lib/email/reminders-store'
 import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
@@ -128,6 +129,7 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
     async expire(id) {
       const { error } = await db.from('checkouts').update({ status: 'expired' }).eq('id', id).is('order_id', null)
       if (error) throw error
+      await cancelReminder(id) // a cancelled checkout gets no reminder
     },
   }
 }
@@ -167,6 +169,7 @@ export async function checkoutForRequest(req: Request) {
   return checkout({
     store: supabaseCheckoutStore(),
     payments: flutterwavePayments(req),
+    reminders: { schedule: scheduleReminder },
     shop: { tenantId: s.tenantId, storeId: s.storeId, currency: s.currency, hiddenCategories: s.hiddenCategories, timeZone: s.timeZone, ...(await sellingSwitches(s.storeId)) },
   })
 }

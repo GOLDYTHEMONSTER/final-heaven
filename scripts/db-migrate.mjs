@@ -36,6 +36,7 @@ const PROBES = {
   '20261029120000_email_events.sql': `to_regclass('public.email_events') is not null and to_regclass('public.email_suppressions') is not null`,
   '20261029130000_launch_email.sql': `exists (select 1 from information_schema.columns where table_name = 'stores' and column_name = 'launch_campaign_id')`,
   '20261029140000_email_welcome.sql': `exists (select 1 from information_schema.columns where table_name = 'email_outbox' and column_name = 'subscriber_id')`,
+  '20261029150000_checkout_reminders.sql': `exists (select 1 from information_schema.columns where table_name = 'checkouts' and column_name = 'reminder_email_id')`,
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).

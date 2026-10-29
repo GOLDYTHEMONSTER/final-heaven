@@ -111,13 +111,13 @@ ${rows.filter(([, v]) => v).map(([k, v]) => `<tr><td style="padding:6px 0;color:
 }
 
 const shipDate = (d: string) => formatDay(d)
-const itemDetails = (i: OrderEmailData['items'][number]) =>
+export const itemDetails = (i: OrderEmailData['items'][number]) =>
   [i.gift ? 'Free gift' : null, i.size ? `Size ${i.size}` : null, i.color ? optionLabel(i.color) : null,
     i.preorder && i.shipsOn ? `Pre-order, ships from ${shipDate(i.shipsOn)}` : null,
     i.madeToOrderDays ? `Ships about ${i.madeToOrderDays} days after payment` : null]
     .filter(Boolean).join(' · ')
 
-const lineAmount = (i: OrderEmailData['items'][number], currency: string) =>
+export const lineAmount = (i: OrderEmailData['items'][number], currency: string) =>
   i.gift ? 'Free' : formatMoney(Number(i.price) * i.quantity, currency)
 
 const deliveryName = (o: OrderEmailData) => (o.deliveryOption === 'express' ? 'Express delivery (by air)' : 'Delivery')

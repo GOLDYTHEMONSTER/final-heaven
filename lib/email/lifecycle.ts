@@ -4,7 +4,7 @@
 // came from a customer or the catalogue is escaped by the helpers below.
 import { BUSINESS, POLICY } from '@/lib/legal'
 import { LAUNCH_WINDOW } from '@/lib/catalog'
-import { C, button, escapeHtml, layout, p, type RenderedEmail } from './templates'
+import { C, button, escapeHtml, formatMoney, itemDetails, layout, lineAmount, p, type RenderedEmail } from './templates'
 
 /** Footer for emails sent because someone subscribed: why they got it, and a one-click way out. */
 export function subscriberFooter({ reason, unsubscribeUrl }: { reason: string; unsubscribeUrl: string }) {
@@ -81,5 +81,49 @@ export function welcomeEmail({ source, site, unsubscribeUrl, reason }: { source:
       footer: subscriberFooter({ reason, unsubscribeUrl }),
     }),
     text: [c.heading, '', ...c.paras.flatMap((t) => [t, '']), `${c.cta}: ${site}/shop`, '', `You’re getting this because ${reason}.`, `Unsubscribe: ${unsubscribeUrl}`].join('\n'),
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Unfinished checkout
+// ---------------------------------------------------------------------------
+
+export type ReminderItem = Parameters<typeof itemDetails>[0]
+
+/** Only ever sent as a scheduled email, written when the checkout begins: so it always says what to do if they've already paid. */
+export function checkoutReminderEmail({ items, currency, total, site }: { items: ReminderItem[]; currency: string; total: number | string; site: string }): RenderedEmail {
+  const link = `${site}/checkout`
+  const rows = items.map((i) => `<tr>
+<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};">${escapeHtml(i.name)}${itemDetails(i) ? `<br><span style="color:${C.muted};font-size:12px;">${escapeHtml(itemDetails(i))}</span>` : ''}</td>
+<td style="padding:10px 12px;border-bottom:1px solid ${C.line};color:${C.muted};text-align:center;white-space:nowrap;vertical-align:top;">× ${escapeHtml(i.quantity)}</td>
+<td style="padding:10px 0;border-bottom:1px solid ${C.line};color:${C.ink};text-align:right;white-space:nowrap;vertical-align:top;">${escapeHtml(lineAmount(i, currency))}</td>
+</tr>`).join('\n')
+  const intro = 'You started checking out at Final Heaven and didn’t finish. Your pieces are below, if you still want them.'
+  const ignore = 'If you’ve already paid, ignore this email: your order is placed and you’ll get a receipt.'
+  return {
+    subject: 'Still thinking it over?',
+    html: layout({
+      preheader: 'Your Final Heaven checkout is waiting.',
+      heading: 'You left something behind',
+      body: [
+        p(escapeHtml(intro)),
+        `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;font-size:14px;">
+${rows}
+<tr><td colspan="2" style="padding:12px 0 0;color:${C.ink};font-weight:700;">Total</td>
+<td style="padding:12px 0 0;color:${C.ink};font-weight:700;text-align:right;white-space:nowrap;">${escapeHtml(formatMoney(total, currency))}</td></tr>
+</table>`,
+        button(link, 'Back to checkout'),
+        p(`<span style="font-size:13px;color:${C.muted};">${escapeHtml(ignore)} Prices and availability are confirmed again at checkout.</span>`),
+      ].join('\n'),
+      footer: [
+        'You’re getting this once because you started a checkout at Final Heaven. We won’t send another reminder for it.',
+        `${escapeHtml(BUSINESS.tradingName)} · ${escapeHtml(POLICY.shipsTo)}`,
+      ].join('<br>'),
+    }),
+    text: [
+      'You left something behind', '', intro, '',
+      ...items.map((i) => `- ${i.name}${itemDetails(i) ? ` (${itemDetails(i)})` : ''} × ${i.quantity}  ${lineAmount(i, currency)}`),
+      `Total: ${formatMoney(total, currency)}`, '', `Back to checkout: ${link}`, '', ignore,
+    ].join('\n'),
   }
 }

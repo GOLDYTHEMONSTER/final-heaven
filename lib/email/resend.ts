@@ -1,5 +1,7 @@
 // Resend adapter, per the official docs checked 18 Oct 2026:
 //   send: POST https://api.resend.com/emails  {from, to, subject, html, text, reply_to, tags} -> {id}
+//   scheduled: add `scheduled_at` (ISO 8601, up to 30 days ahead) to the same call -> {id}
+//   cancel a scheduled email: POST https://api.resend.com/emails/{id}/cancel (only before it is sent)
 //   `Idempotency-Key` header: the same key within 24 hours returns the first
 //   result instead of sending again, so a retried send can't double-deliver.
 // Free plan: 100 emails/day, 3,000/month, 2 requests/second.
@@ -17,6 +19,8 @@ export type OutgoingEmail = {
   tags?: { name: string; value: string }[]
   /** Extra headers, e.g. List-Unsubscribe for campaigns. */
   headers?: Record<string, string>
+  /** ISO 8601 time to send at (Resend holds it; up to 30 days ahead). */
+  scheduledAt?: string
 }
 
 export class EmailError extends Error {
@@ -25,7 +29,11 @@ export class EmailError extends Error {
   }
 }
 
-export type EmailSender = { send(email: OutgoingEmail, idempotencyKey: string): Promise<{ id: string }> }
+export type EmailSender = {
+  send(email: OutgoingEmail, idempotencyKey: string): Promise<{ id: string }>
+  /** Cancels a scheduled email that hasn't gone out (POST /emails/{id}/cancel); throws if it can't be. */
+  cancel?(id: string): Promise<void>
+}
 
 export function createResendSender({ apiKey, fetchImpl, timeoutMs = TIMEOUT_MS }: {
   apiKey: string
@@ -53,6 +61,7 @@ export function createResendSender({ apiKey, fetchImpl, timeoutMs = TIMEOUT_MS }
             ...(email.replyTo ? { reply_to: email.replyTo } : {}),
             ...(email.tags?.length ? { tags: email.tags } : {}),
             ...(email.headers ? { headers: email.headers } : {}),
+            ...(email.scheduledAt ? { scheduled_at: email.scheduledAt } : {}),
           }),
           signal: AbortSignal.timeout(timeoutMs),
           cache: 'no-store',
@@ -69,6 +78,22 @@ export function createResendSender({ apiKey, fetchImpl, timeoutMs = TIMEOUT_MS }
         throw new EmailError(`Resend ${res.status}: ${body?.message ?? 'unexpected response'}`, retryable, res.status)
       }
       return { id: body.id }
+    },
+
+    async cancel(id) {
+      let res: Response
+      try {
+        res = await doFetch(`${ENDPOINT}/${encodeURIComponent(id)}/cancel`, {
+          method: 'POST', headers: { Authorization: `Bearer ${apiKey}` }, signal: AbortSignal.timeout(timeoutMs), cache: 'no-store',
+        })
+      } catch (e) {
+        throw new EmailError(`Resend cancel failed: ${(e as Error).name}`, true)
+      }
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        // Typically "already sent" (nothing to cancel) or an unknown id.
+        throw new EmailError(`Resend ${res.status}: ${body?.message ?? 'could not cancel'}`, res.status >= 500 || res.status === 429, res.status)
+      }
     },
   }
 }

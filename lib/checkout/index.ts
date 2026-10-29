@@ -143,6 +143,8 @@ export type CheckoutDeps = {
   shop: Shop
   now?: () => Date
   newReference?: (prefix: string, length?: number) => string
+  /** Best-effort reminder for a Checkout nobody pays (lib/email/reminders). Must not throw; the shopper never waits on a failure. */
+  reminders?: { schedule(checkoutId: string, paymentsOpen: boolean): Promise<unknown> }
 }
 
 export type BeginResult =
@@ -294,6 +296,12 @@ export function checkout(deps: CheckoutDeps) {
     if (!payment.ok) {
       await deps.store.expire(id) // the shopper presses Pay again and gets a fresh Checkout
       return { ok: false, reason: 'payment_unavailable', message: FLUTTERWAVE_UNREACHABLE }
+    }
+    // Only once the shopper has a payment link: if they leave it unpaid, an email in two hours brings them back.
+    try {
+      await deps.reminders?.schedule(id, state.open)
+    } catch (e) {
+      logger.warn('checkout.reminder_failed', { error: e })
     }
     return { ok: true, checkout: checkoutRef, paymentUrl: payment.paymentUrl, quote: priced }
   }
