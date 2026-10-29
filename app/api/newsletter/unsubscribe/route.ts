@@ -16,8 +16,11 @@ export const POST = handle('newsletter.unsubscribe', async (req: NextRequest) =>
   const limited = await rateLimit(req, 'newsletter.unsubscribe', 20, 600)
   if (limited) return limited
 
-  const body = await readJson(req, 500)
-  const token = typeof body.token === 'string' ? body.token.trim() : ''
+  // Mail apps' own unsubscribe button (RFC 8058) POSTs the List-Unsubscribe
+  // address, token in the query, with a form body; the /unsubscribe page sends JSON.
+  const fromQuery = req.nextUrl.searchParams.get('token')
+  const body = fromQuery ? {} : await readJson(req, 500)
+  const token = (fromQuery ?? (typeof body.token === 'string' ? body.token : '')).trim()
   if (UUID.test(token)) {
     const { error } = await createSupabaseServiceClient().rpc('newsletter_unsubscribe', { p_token: token })
     if (error) throw error

@@ -11,6 +11,7 @@ export type Permission =
   | 'customers.read' | 'customers.update' | 'analytics.read' | 'audit.read'
   | 'users.manage' | 'settings.manage'
   | 'shipping.read' | 'shipping.manage' | 'finance.adjust'
+  | 'marketing.send'
 
 export type TenantAccess = {
   tenantId: string

@@ -15,6 +15,8 @@ export type OutgoingEmail = {
   text: string
   replyTo?: string | null
   tags?: { name: string; value: string }[]
+  /** Extra headers, e.g. List-Unsubscribe for campaigns. */
+  headers?: Record<string, string>
 }
 
 export class EmailError extends Error {
@@ -50,6 +52,7 @@ export function createResendSender({ apiKey, fetchImpl, timeoutMs = TIMEOUT_MS }
             text: email.text,
             ...(email.replyTo ? { reply_to: email.replyTo } : {}),
             ...(email.tags?.length ? { tags: email.tags } : {}),
+            ...(email.headers ? { headers: email.headers } : {}),
           }),
           signal: AbortSignal.timeout(timeoutMs),
           cache: 'no-store',

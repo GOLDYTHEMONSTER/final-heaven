@@ -151,7 +151,7 @@ describe('role restrictions', () => {
     const owner = await access(f.users.ownerA)
     expect(owner).toHaveLength(1)
     expect(owner[0].tenant_slug).toBe('final-heaven')
-    expect(owner[0].permissions).toHaveLength(21) // 18, plus shipping.read, shipping.manage, finance.adjust (20261027120000)
+    expect(owner[0].permissions).toHaveLength(22) // 18, plus shipping.read, shipping.manage, finance.adjust (20261027120000), marketing.send (20261029100000)
     const support = (await access(f.users.supportA))[0].permissions
     expect(support).toContain('refunds.request')
     expect(support).not.toContain('refunds.approve')

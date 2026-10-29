@@ -43,7 +43,7 @@ export type MessageEmailData = {
 
 export type RenderedEmail = { subject: string; html: string; text: string }
 
-const C = { ink: '#0a0a0b', body: '#2c2c30', muted: '#6b6b70', line: '#e4e3df', paper: '#f2f1ee', card: '#ffffff', ember: '#e8613c' }
+export const C = { ink: '#0a0a0b', body: '#2c2c30', muted: '#6b6b70', line: '#e4e3df', paper: '#f2f1ee', card: '#ffffff', ember: '#e8613c' }
 
 export function escapeHtml(value: unknown) {
   return String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
@@ -65,7 +65,7 @@ const TOPICS: Record<string, string> = {
   order: 'About an order', return: 'Return or refund', privacy: 'Personal data request', other: 'General enquiry',
 }
 
-function layout({ preheader, heading, body, footer }: { preheader: string; heading: string; body: string; footer: string }) {
+export function layout({ preheader, heading, body, footer }: { preheader: string; heading: string; body: string; footer: string }) {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light"><title>${escapeHtml(heading)}</title></head>
@@ -83,9 +83,9 @@ ${body}
 </table></td></tr></table></body></html>`
 }
 
-const p = (html: string) => `<p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:${C.body};">${html}</p>`
+export const p = (html: string) => `<p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:${C.body};">${html}</p>`
 
-function button(href: string, label: string) {
+export function button(href: string, label: string) {
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 22px;"><tr>
 <td style="background:${C.ink};border-radius:6px;"><a href="${escapeHtml(href)}" style="display:inline-block;padding:12px 22px;color:#f2f1ee;font-size:14px;font-weight:700;text-decoration:none;">${escapeHtml(label)}</a></td>
 </tr></table>`
