@@ -7,6 +7,7 @@
 //   node scripts/add-product.mjs brand/catalog/<slug>             check only, writes nothing
 //   node scripts/add-product.mjs brand/catalog/<slug> --apply     upload photos, save as draft
 //   node scripts/add-product.mjs brand/catalog/<slug> --publish   put the saved draft on sale
+//   node scripts/add-product.mjs brand/catalog/<slug> --unpublish take it off sale (back to a draft)
 //
 // See brand/catalog/README.md for product.json. The database's own rules
 // (lead time for made to order, sale price above price, ...) still apply.
@@ -17,8 +18,8 @@ import sharp from 'sharp'
 import { createClient } from '@supabase/supabase-js'
 
 const [dir, mode = '--check'] = process.argv.slice(2)
-if (!dir || !['--check', '--apply', '--publish'].includes(mode)) {
-  console.error('Usage: node scripts/add-product.mjs <folder> [--apply | --publish]')
+if (!dir || !['--check', '--apply', '--publish', '--unpublish'].includes(mode)) {
+  console.error('Usage: node scripts/add-product.mjs <folder> [--apply | --publish | --unpublish]')
   process.exit(1)
 }
 
@@ -119,6 +120,15 @@ async function supplierId(sup) {
   if (e) throw e
   console.log(`  new supplier: ${name}`)
   return data.id
+}
+
+if (mode === '--unpublish') {
+  // Off sale, kept as a draft (photos, sourcing and history stay): a product replaced by a newer range.
+  if (!p.id) throw new Error('This product was never saved.')
+  const { data, error } = await db.from('products').update({ status: 'draft' }).eq('id', p.id).eq('tenant_id', store.tenant_id).select('id, status').single()
+  if (error) throw error
+  console.log(`  off sale: ${data.id} is ${data.status}`)
+  process.exit(0)
 }
 
 if (mode === '--publish') {
