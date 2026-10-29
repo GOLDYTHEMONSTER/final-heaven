@@ -115,6 +115,14 @@ describe('product worker', () => {
     expect(r.needs).toContain('supplier (the shop name on its 1688 store page)')
   })
 
+  it('an unknown cost blocks a draft unless the owner approved listing without it', () => {
+    const noCost = { ...good(), source: { cost_currency: 'CNY', supplier: { name: 'X' } } }
+    expect(validate(noCost, ctx()).needs).toContain('supplier unit cost')
+    const approved = validate({ ...noCost, queue: { cost_unknown_approved: true } }, ctx())
+    expect(approved.needs).toEqual([])
+    expect(approved.notes.join()).toMatch(/owner approved/)
+  })
+
   it('the guard reports only new changes outside the product folders', () => {
     const before = ['app/page.tsx', 'brand/catalog/a/product.json']
     const after = [...before, 'brand/catalog/b/product.json', 'tools/product-photos/crop.mjs', 'components/x.tsx']

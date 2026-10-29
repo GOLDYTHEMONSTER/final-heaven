@@ -110,7 +110,12 @@ export function validate(p, ctx) {
   }
 
   const price = pricing(p, rules)
-  if (price.status === 'missing') needs.push(...price.missing.filter((m) => m.startsWith('supplier') || m.startsWith('exchange')))
+  // The owner may approve listing before the cost is known (queue.cost_unknown_approved): then it's a note, not a block.
+  if (price.status === 'missing') {
+    const gaps = price.missing.filter((m) => m.startsWith('supplier') || m.startsWith('exchange'))
+    if (p.queue?.cost_unknown_approved) notes.push(`listed with ${gaps.join(' and ')} unknown (owner approved): margin unknown`)
+    else needs.push(...gaps)
+  }
   if (price.margin != null && price.margin < Number(rules?.pricing?.min_gross_margin ?? 0.35)) {
     notes.push(`gross margin ${Math.round(price.margin * 100)}% is under the ${Math.round(Number(rules?.pricing?.min_gross_margin ?? 0.35) * 100)}% floor`)
   }
