@@ -12,18 +12,18 @@ import { ActivityBell, ActivityProvider, LiveStatus, NavBadge, type Section } fr
 // Each section is shown only to staff holding its permission. Hiding is a
 // convenience: the API and RLS enforce the same permissions.
 const nav: { name: string; href: string; icon: typeof FiActivity; permission: string; section?: Section }[] = [
-  { name: 'Analytics', href: '/admin/analytics', icon: FiActivity, permission: 'analytics.read' },
-  { name: 'Products', href: '/admin', icon: FiPackage, permission: 'products.read', section: 'products' },
-  { name: 'Orders', href: '/admin/orders', icon: FiShoppingBag, permission: 'orders.read', section: 'orders' },
-  { name: 'Collections', href: '/admin/collections', icon: FiLayers, permission: 'products.read' },
-  { name: 'Labels', href: '/admin/brands', icon: FiAward, permission: 'products.read' },
-  { name: 'Suppliers', href: '/admin/suppliers', icon: FiTruck, permission: 'products.read' },
-  { name: 'Shipping', href: '/admin/shipping', icon: FiGlobe, permission: 'shipping.read' },
-  { name: 'Drops', href: '/admin/drops', icon: FiCalendar, permission: 'products.read' },
-  { name: 'Promo codes', href: '/admin/promos', icon: FiTag, permission: 'products.read' },
-  { name: 'Customers', href: '/admin/customers', icon: FiUsers, permission: 'customers.read', section: 'customers' },
-  { name: 'Messages', href: '/admin/messages', icon: FiMail, permission: 'customers.read', section: 'messages' },
-  { name: 'Store', href: '/admin/store', icon: FiSliders, permission: 'settings.manage' },
+  { name: 'Analytics', href: '/studio/analytics', icon: FiActivity, permission: 'analytics.read' },
+  { name: 'Products', href: '/studio', icon: FiPackage, permission: 'products.read', section: 'products' },
+  { name: 'Orders', href: '/studio/orders', icon: FiShoppingBag, permission: 'orders.read', section: 'orders' },
+  { name: 'Collections', href: '/studio/collections', icon: FiLayers, permission: 'products.read' },
+  { name: 'Labels', href: '/studio/brands', icon: FiAward, permission: 'products.read' },
+  { name: 'Suppliers', href: '/studio/suppliers', icon: FiTruck, permission: 'products.read' },
+  { name: 'Shipping', href: '/studio/shipping', icon: FiGlobe, permission: 'shipping.read' },
+  { name: 'Drops', href: '/studio/drops', icon: FiCalendar, permission: 'products.read' },
+  { name: 'Promo codes', href: '/studio/promos', icon: FiTag, permission: 'products.read' },
+  { name: 'Customers', href: '/studio/customers', icon: FiUsers, permission: 'customers.read', section: 'customers' },
+  { name: 'Messages', href: '/studio/messages', icon: FiMail, permission: 'customers.read', section: 'messages' },
+  { name: 'Store', href: '/studio/store', icon: FiSliders, permission: 'settings.manage' },
 ]
 
 function useSignOut() {
@@ -32,7 +32,7 @@ function useSignOut() {
   async function signOut() {
     setSigningOut(true)
     await createSupabaseBrowserClient().auth.signOut().catch(() => {})
-    router.replace('/login')
+    router.replace('/studio/login')
     router.refresh()
   }
   return { signingOut, signOut }
@@ -74,14 +74,14 @@ export function AdminShell({
   const { signingOut, signOut } = useSignOut()
   const visibleNav = nav.filter((item) => permissions.includes(item.permission))
 
-  const isActive = (href: string) => (href === '/admin' ? pathname === '/admin' : pathname?.startsWith(href))
+  const isActive = (href: string) => (href === '/studio' ? pathname === '/studio' : pathname?.startsWith(href))
 
   return (
     <ActivityProvider tenantId={tenantId}>
     <div className="min-h-[100dvh] bg-final-black text-final-off-white">
       <header className="material sticky top-0 z-40 border-b border-final-off-white/10 bg-final-black/80 backdrop-blur-xl">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Link href="/admin" className="flex min-w-0 items-center gap-3">
+          <Link href="/studio" className="flex min-w-0 items-center gap-3">
             <LogoMark size={22} />
             <span className="display max-w-[40vw] truncate whitespace-nowrap text-[13px] tracking-[0.04em]">{tenantName}</span>
             <span className="rounded-md border border-final-off-white/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-final-muted">

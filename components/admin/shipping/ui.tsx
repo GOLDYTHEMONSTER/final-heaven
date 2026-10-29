@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-// Shared pieces of the Shipping admin (app/admin/shipping). The figures come
+// Shared pieces of the Shipping admin (app/studio/(panel)/shipping). The figures come
 // from the server (lib/shipping); nothing here calculates money.
 
 export const field = 'w-full rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm text-final-off-white focus:border-final-off-white/40 focus:outline-none'
@@ -38,8 +38,8 @@ export async function api<T = any>(path: string, init?: RequestInit & { json?: u
 export const requestKey = () => `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
 
 const TABS = [
-  ['Overview', '/admin/shipping'], ['Rates and rules', '/admin/shipping/rates'], ['Shipments', '/admin/shipping/shipments'],
-  ['Clearance', '/admin/shipping/campaigns'], ['Simulator', '/admin/shipping/simulate'], ['Ledger', '/admin/shipping/ledger'],
+  ['Overview', '/studio/shipping'], ['Rates and rules', '/studio/shipping/rates'], ['Shipments', '/studio/shipping/shipments'],
+  ['Clearance', '/studio/shipping/campaigns'], ['Simulator', '/studio/shipping/simulate'], ['Ledger', '/studio/shipping/ledger'],
 ] as const
 
 export function ShippingHeader({ title, intro, children }: { title: string; intro: React.ReactNode; children?: React.ReactNode }) {

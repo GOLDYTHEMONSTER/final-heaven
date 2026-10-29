@@ -73,7 +73,7 @@ export default function SuppliersPage() {
         <h1 className="display text-3xl md:text-4xl">Suppliers</h1>
         <p className="mt-1 text-sm text-final-muted">
           Where your products come from. Pick a supplier, the listing link and the unit cost on each product in{' '}
-          <Link href="/admin" className="underline underline-offset-2 hover:text-final-off-white">Products</Link>. Staff only; customers never see any of this.
+          <Link href="/studio" className="underline underline-offset-2 hover:text-final-off-white">Products</Link>. Staff only; customers never see any of this.
         </p>
       </div>
 
@@ -119,7 +119,7 @@ export default function SuppliersPage() {
                   {s.name}
                   {s.platform && <span className="ml-2 text-xs font-normal uppercase tracking-[0.12em] text-final-muted">{s.platform}</span>}
                 </p>
-                <Link href={`/admin?supplier=${s.id}`} className="text-sm underline underline-offset-2 hover:text-final-off-white">
+                <Link href={`/studio?supplier=${s.id}`} className="text-sm underline underline-offset-2 hover:text-final-off-white">
                   {s.products} product{s.products === 1 ? '' : 's'}
                 </Link>
               </div>

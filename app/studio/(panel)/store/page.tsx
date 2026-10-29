@@ -99,7 +99,7 @@ export default function StoreSellingPage() {
         <h1 className="display text-3xl md:text-4xl">Store</h1>
         <p className="mt-1 text-sm text-final-muted">
           Whether customers can pay. Changes apply at once. To stop sales of a single product, pause it on the{' '}
-          <Link href="/admin" className="underline underline-offset-2 hover:text-final-off-white">Products</Link> page.
+          <Link href="/studio" className="underline underline-offset-2 hover:text-final-off-white">Products</Link> page.
         </p>
       </div>
 
@@ -175,7 +175,7 @@ export default function StoreSellingPage() {
                 ? `On: customers pick one piece from “${selling.giftCategory}”, free, ${selling.giftMinSubtotal > 0 ? `on orders of ${formatCurrency(selling.giftMinSubtotal)} or more` : 'with every order'}.`
                 : 'Off.'}{' '}
               Gift pieces are products in this category on the{' '}
-              <Link href="/admin" className="underline underline-offset-2 hover:text-final-off-white">Products</Link> page: they never show in the store,
+              <Link href="/studio" className="underline underline-offset-2 hover:text-final-off-white">Products</Link> page: they never show in the store,
               their price is shown as what the gift is worth, and each one given is taken from stock.
             </p>
             <form

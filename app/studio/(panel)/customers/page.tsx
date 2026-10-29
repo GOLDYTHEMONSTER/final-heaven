@@ -48,7 +48,7 @@ function CustomerOrders({ email }: { email: string }) {
         {orders.map((o) => (
           <tr key={o.order_number}>
             <td className="py-2 font-mono text-xs">
-              <Link href={`/admin/orders?q=${encodeURIComponent(o.order_number)}`} className="underline underline-offset-4 hover:text-final-muted">{o.order_number}</Link>
+              <Link href={`/studio/orders?q=${encodeURIComponent(o.order_number)}`} className="underline underline-offset-4 hover:text-final-muted">{o.order_number}</Link>
             </td>
             <td className="py-2 text-final-muted">{date(o.created_at)}</td>
             <td className="py-2 tabular-nums">{formatCurrency(o.total)}</td>

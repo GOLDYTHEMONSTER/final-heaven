@@ -13,12 +13,12 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  // Second line of defence after the middleware: nothing under /admin renders
+  // Second line of defence after the middleware: nothing under /studio renders
   // without a verified session AND an active staff membership.
   const staff = await getStaffContext()
   if (!staff) {
     const { data } = await createSupabaseServerClient().auth.getClaims()
-    if (!data?.claims?.sub || data.claims.aal !== 'aal2') redirect('/login?next=/admin')
+    if (!data?.claims?.sub || data.claims.aal !== 'aal2') redirect('/studio/login?next=/studio')
     return <NoAccess email={(data.claims.email as string) ?? ''} />
   }
 

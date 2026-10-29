@@ -44,16 +44,16 @@ Both are cookieless and skip Do Not Track and Global Privacy Control visitors, s
 ### Vercel Web Analytics
 
 - Enable Web Analytics in the Vercel project; it collects only on Vercel deployments (in development it logs to the console).
-- **Privacy filter (`beforeSend`):** drops visitors with Do Not Track or Global Privacy Control; never sends `/admin`, `/login` or `/unsubscribe`; strips every query parameter except `utm_source`, `utm_medium` and `utm_campaign` (addresses here can carry payment references, order numbers or unsubscribe tokens). Verified in the browser.
+- **Privacy filter (`beforeSend`):** drops visitors with Do Not Track or Global Privacy Control; never sends the admin area (`/studio`, and the old `/admin` and `/login`) or `/unsubscribe`; strips every query parameter except `utm_source`, `utm_medium` and `utm_campaign` (addresses here can carry payment references, order numbers or unsubscribe tokens). Verified in the browser.
 - **CSP:** production loads from `/_vercel/insights` (same origin); the dev debug script host `va.vercel-scripts.com` is allowed in development only.
 - **Install note:** `.npmrc` sets `legacy-peer-deps=true`. `@vercel/analytics` lists SvelteKit as an optional peer and npm 11 fails trying to reconcile it with Vitest's Vite. No Svelte package is installed; a clean `npm ci` was verified.
 - **Do not remove the first-party tracker** in favour of Vercel: admin would lose visitors, conversion, funnel, sources and devices.
 
 ## Customers
 
-`/admin/customers` lists one row per customer email (lower-cased) from orders: order count, paid count and total, first and last order, latest city. Expanding a row shows that customer's orders with status and courier tracking. Requires `customers.read`. It's derived from orders until Phase 2 adds a `customers` table; nothing is merged automatically.
+`/studio/customers` lists one row per customer email (lower-cased) from orders: order count, paid count and total, first and last order, latest city. Expanding a row shows that customer's orders with status and courier tracking. Requires `customers.read`. It's derived from orders until Phase 2 adds a `customers` table; nothing is merged automatically.
 
-Orders now carry `shipping_carrier` and `shipping_reference`, set by staff with `orders.update` and shown to the customer on Track Order. `/admin/orders` has search (order number, tracking or email) and status and payment filters, and accepts them as URL parameters (`?status=shipped`).
+Orders now carry `shipping_carrier` and `shipping_reference`, set by staff with `orders.update` and shown to the customer on Track Order. `/studio/orders` has search (order number, tracking or email) and status and payment filters, and accepts them as URL parameters (`?status=shipped`).
 
 ## Retention (daily job `/api/cron/daily`)
 

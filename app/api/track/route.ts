@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     if (typeof body.url === 'string') {
       try {
         const u = new URL(body.url, 'https://placeholder.invalid')
-        if (u.pathname.startsWith('/admin') || u.pathname.startsWith('/login')) return NO_CONTENT()
+        if (/^\/(studio|admin|login)(\/|$)/.test(u.pathname)) return NO_CONTENT()
         path = u.pathname.slice(0, 300)
         utm = {
           source: clean(u.searchParams.get('utm_source'), 100),

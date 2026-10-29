@@ -228,7 +228,7 @@ export function staffOrderPaidEmail(o: OrderEmailData, site: string): RenderedEm
     : o.stockShortfall?.length
       ? `New order ${o.orderNumber} · ${amount} · stock short`
       : `New order ${o.orderNumber} · ${amount}`
-  const link = `${site}/admin/orders?q=${encodeURIComponent(o.orderNumber)}`
+  const link = `${site}/studio/orders?q=${encodeURIComponent(o.orderNumber)}`
   const html = layout({
     preheader: `${amount}${o.shippingCity ? ` · ${o.shippingCity}` : ''}`,
     heading: cancelled ? 'A payment arrived for a cancelled order' : 'New paid order, ready to fulfil',
@@ -278,7 +278,7 @@ export function staffMessageEmail(m: MessageEmailData, site: string): RenderedEm
       ]),
       `<div style="margin:0 0 20px;padding:14px 16px;background:${C.paper};border-radius:6px;font-size:14px;line-height:1.6;color:${C.ink};white-space:pre-wrap;">${escapeHtml(m.message)}</div>`,
       p('Reply to this email to answer the customer directly.'),
-      button(`${site}/admin/messages`, 'Open messages'),
+      button(`${site}/studio/messages`, 'Open messages'),
     ].join('\n'),
     footer: 'Sent to store staff by Final Heaven admin.',
   })
@@ -290,7 +290,7 @@ export function staffMessageEmail(m: MessageEmailData, site: string): RenderedEm
     m.message,
     '',
     'Reply to this email to answer the customer directly.',
-    `Open messages: ${site}/admin/messages`,
+    `Open messages: ${site}/studio/messages`,
   ].filter((l) => l !== null).join('\n')
   return { subject, html, text }
 }

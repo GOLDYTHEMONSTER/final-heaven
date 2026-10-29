@@ -136,9 +136,9 @@ export default function AnalyticsPage() {
           </section>
 
           <section className="grid gap-4 md:grid-cols-3" aria-label="Operations right now">
-            <Stat label="To fulfil now" value={count(num(s.fulfilment.toFulfil))} note="confirmed or processing" href="/admin/orders?status=confirmed" />
-            <Stat label="In transit now" value={count(num(s.fulfilment.inTransit))} note="shipped, not delivered" href="/admin/orders?status=shipped" />
-            <Stat label="Awaiting payment now" value={count(num(s.fulfilment.awaitingPaymentNow))} note="placed, not yet paid" href="/admin/orders?status=pending_payment" />
+            <Stat label="To fulfil now" value={count(num(s.fulfilment.toFulfil))} note="confirmed or processing" href="/studio/orders?status=confirmed" />
+            <Stat label="In transit now" value={count(num(s.fulfilment.inTransit))} note="shipped, not delivered" href="/studio/orders?status=shipped" />
+            <Stat label="Awaiting payment now" value={count(num(s.fulfilment.awaitingPaymentNow))} note="placed, not yet paid" href="/studio/orders?status=pending_payment" />
           </section>
 
           <div className="grid gap-6 lg:grid-cols-2">
@@ -186,7 +186,7 @@ export default function AnalyticsPage() {
                   </div>
                 ))}
               </dl>
-              <Link href="/admin/customers" className="mt-4 inline-block text-sm text-final-muted underline underline-offset-4 hover:text-final-off-white">See all customers</Link>
+              <Link href="/studio/customers" className="mt-4 inline-block text-sm text-final-muted underline underline-offset-4 hover:text-final-off-white">See all customers</Link>
             </Card>
           </div>
 

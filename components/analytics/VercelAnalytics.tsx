@@ -3,14 +3,14 @@
 import { Analytics, type BeforeSendEvent } from '@vercel/analytics/next'
 
 // Pages that never go to analytics: staff areas, and pages whose URLs carry tokens.
-const EXCLUDED = /^\/(admin|login|unsubscribe)(\/|$)/
+const EXCLUDED = /^\/(studio|admin|login|unsubscribe)(\/|$)/
 const KEEP_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign']
 
 /**
  * Vercel Web Analytics (cookieless; collects only on Vercel deployments with
  * Web Analytics enabled). Before anything is sent:
  *  - visitors with Do Not Track or Global Privacy Control are not counted
- *  - admin, login and unsubscribe pages are never sent
+ *  - the admin area (and its old addresses) and unsubscribe pages are never sent
  *  - query strings are removed except UTM campaign tags, because on this site
  *    they can carry payment references, order numbers or unsubscribe tokens
  */

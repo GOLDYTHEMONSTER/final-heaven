@@ -100,7 +100,7 @@ graph TD
     SF[Storefront pages] --> CS[cartStore<br/>localStorage]
     SF --> IS[interestStore<br/>localStorage]
     ADM[Admin pages] --> IS
-    LOGIN[/login/] --> SBA[Supabase Auth]
+    LOGIN[/studio/login/] --> SBA[Supabase Auth]
   end
 
   subgraph "Next.js server"

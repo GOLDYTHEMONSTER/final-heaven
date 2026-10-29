@@ -74,7 +74,7 @@ export default function BrandsPage() {
         <h1 className="display text-3xl md:text-4xl">Labels</h1>
         <p className="mt-1 text-sm text-final-muted">
           Independent brands you stock. Add a label here, then pick it on each of its products in{' '}
-          <Link href="/admin" className="underline underline-offset-2 hover:text-final-off-white">Products</Link>. A label shows in the store
+          <Link href="/studio" className="underline underline-offset-2 hover:text-final-off-white">Products</Link>. A label shows in the store
           (with its own page) only once it&apos;s published, so only list partnerships that are real.
         </p>
       </div>

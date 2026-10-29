@@ -4,10 +4,11 @@ import { supabasePublishableKey, supabaseUrl } from './env'
 
 /**
  * Refreshes the Supabase session cookie and turns signed-out visitors away
- * from the admin area (pages redirect to /login, API routes get a 401).
- * Signed in means a valid session that passed MFA (aal2); /login finishes
- * the second step for a password-only session. Which tenant and which permissions a
- * user has is decided per request by app/admin/layout.tsx, every admin route
+ * from the admin area (/studio pages redirect to /studio/login, API routes
+ * get a 401). Signed in means a valid session that passed MFA (aal2);
+ * /studio/login finishes the second step for a password-only session. Which
+ * tenant and which permissions a user has is decided per request by
+ * app/studio/(panel)/layout.tsx, every admin route
  * (requirePermission) and RLS, which this middleware never replaces.
  */
 export async function updateSession(request: NextRequest) {
@@ -45,9 +46,11 @@ export async function updateSession(request: NextRequest) {
     return withCookies(NextResponse.json({ error: 'Not signed in.' }, { status: 401 }))
   }
 
-  if (pathname.startsWith('/admin') && !signedIn) {
+  // The sign-in page itself must stay reachable without a session.
+  const studio = pathname === '/studio' || pathname.startsWith('/studio/')
+  if (studio && pathname !== '/studio/login' && !signedIn) {
     const url = request.nextUrl.clone()
-    url.pathname = '/login'
+    url.pathname = '/studio/login'
     url.search = `?next=${encodeURIComponent(pathname)}`
     return withCookies(NextResponse.redirect(url))
   }

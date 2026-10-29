@@ -33,7 +33,7 @@ on pre-order. Nothing second-hand-specific is built.
 | 1 | Product source (original, wholesale, distributor, local maker, independent label), supply (in stock, or made to order with a lead time), label, SKU | `20261026120000_marketplace_catalogue.sql`, `lib/collections.ts` |
 | 2 | Review before sale (staff-only): a listing marked "needs review" or "refused" can't be put on sale, enforced in the database | same migration; `lib/sourcing.ts`; product editor |
 | 3 | Staff-only sourcing: stock on order and expected date, supplier lead time, image permission, landed-cost parts with the recorded exchange rate; landed cost and gross margin in the editor | `lib/landed-cost.ts`, `SourcingFields` |
-| 4 | Labels (brands) and collections (hand-picked and/or rule-based), public once published, admin pages | `/admin/brands`, `/admin/collections`, `/brands/[slug]`, `/collections` |
+| 4 | Labels (brands) and collections (hand-picked and/or rule-based), public once published, admin pages | `/studio/brands`, `/studio/collections`, `/brands/[slug]`, `/collections` |
 | 5 | Homepage: shorter hero, Shop by mood, Final Heaven Originals, Labels, Upcoming drops (each hidden when there's nothing real to show) | `app/page.tsx`, `components/home` |
 | 6 | Shop: "From" (Originals / Labels / Curated) and "Ready to ship" filters; cards and pages say "Made to order" and "Last one" only when true | `ShopView`, `ProductCard`, `ProductView` |
 | 7 | Made to order disclosed on cart, checkout, the order, tracking, the admin and the receipt | `lib/checkout/pricing.ts` and the pages |

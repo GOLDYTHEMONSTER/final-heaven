@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getStaffContext } from '@/lib/auth'
 import { handle } from '@/lib/api'
+import { studioLink } from '@/lib/admin/paths'
 
 export const dynamic = 'force-dynamic'
 
@@ -42,7 +43,7 @@ export const GET = handle('admin.activity', async () => {
 
   const lastSeenAt: string | null = seen.data?.last_seen_at ?? null
   const seenMs = lastSeenAt ? Date.parse(lastSeenAt) : 0
-  const rows = items.data ?? []
+  const rows = (items.data ?? []).map((r) => ({ ...r, link: studioLink(r.link) }))
   return NextResponse.json({
     items: rows,
     lastSeenAt,

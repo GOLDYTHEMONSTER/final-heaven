@@ -1,6 +1,6 @@
 # Shipping and cost recovery
 
-Migration: `supabase/migrations/20261027120000_shipping_engine.sql`. Code: the engine `lib/shipping/engine.ts` (every formula, pure), its Supabase readers `lib/shipping/store.ts`, the dashboard figures `lib/shipping/report.ts`, staff input `lib/shipping/admin.ts`, the endpoints `app/api/admin/shipping/*`, the pages `app/admin/shipping/*`, and the product editor's `components/admin/ShippingFields.tsx`. Tests: `tests/unit/shipping.test.ts`, `tests/unit/shipping-report.test.ts`, the "shipping allocation" block of `tests/unit/checkout.test.ts`, and `tests/db/shipping.test.ts`. Terms: `GLOSSARY.md`.
+Migration: `supabase/migrations/20261027120000_shipping_engine.sql`. Code: the engine `lib/shipping/engine.ts` (every formula, pure), its Supabase readers `lib/shipping/store.ts`, the dashboard figures `lib/shipping/report.ts`, staff input `lib/shipping/admin.ts`, the endpoints `app/api/admin/shipping/*`, the pages `app/studio/(panel)/shipping/*`, and the product editor's `components/admin/ShippingFields.tsx`. Tests: `tests/unit/shipping.test.ts`, `tests/unit/shipping-report.test.ts`, the "shipping allocation" block of `tests/unit/checkout.test.ts`, and `tests/db/shipping.test.ts`. Terms: `GLOSSARY.md`.
 
 ## What customers see: nothing new
 

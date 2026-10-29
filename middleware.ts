@@ -18,5 +18,5 @@ export async function middleware(request: NextRequest) {
 
 // Only the routes that need a session. The storefront stays fully static.
 export const config = {
-  matcher: ['/admin/:path*', '/api/admin/:path*', '/login'],
+  matcher: ['/studio/:path*', '/api/admin/:path*'],
 }

@@ -68,8 +68,11 @@ Run the scripts in `scripts/audit/` (they need Chrome; analytics are blocked whi
 
 ### Unauthenticated routes that must refuse
 
+The admin area is at `/studio`, its sign-in at `/studio/login`. The old addresses leaked, so they are gone, and nothing public (robots, sitemap, footer, emails to customers) may link to `/studio`.
+
 - `/api/admin/*` returns 401.
-- `/admin` returns 307 (redirect to login).
+- `/studio` and `/studio/*` return 307 to `/studio/login?next=…`; `/studio/login` returns 200.
+- `/admin`, `/admin/*` and `/login` return a plain 404 (no redirect, nothing that mentions `/studio`).
 
 ### Marketing files
 

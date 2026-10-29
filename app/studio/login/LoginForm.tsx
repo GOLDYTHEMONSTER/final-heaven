@@ -7,9 +7,9 @@ import { FiArrowLeft } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
-/** Only same-site admin paths, so ?next= can't be used to redirect somewhere else. */
+/** Only same-site studio paths, so ?next= can't be used to redirect somewhere else. */
 function safeNext(value: string | null) {
-  return value && /^\/admin(\/[A-Za-z0-9/_-]*)?$/.test(value) ? value : '/admin'
+  return value && /^\/studio(?!\/login(\/|$))(\/[A-Za-z0-9/_-]*)?$/.test(value) ? value : '/studio'
 }
 
 // Sign-in is two steps: password, then a 6-digit code from an authenticator app.

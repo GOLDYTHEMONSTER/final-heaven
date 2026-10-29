@@ -89,7 +89,7 @@ export default function MessagesPage() {
             </div>
             <p className="mt-1 text-xs text-final-muted">
               <span className={m.topic === 'privacy' ? 'text-final-ember' : ''}>{TOPIC[m.topic]}</span>
-              {m.order_number && <> · <Link href={`/admin/orders?q=${encodeURIComponent(m.order_number)}`} className="font-mono underline underline-offset-2">{m.order_number}</Link></>}
+              {m.order_number && <> · <Link href={`/studio/orders?q=${encodeURIComponent(m.order_number)}`} className="font-mono underline underline-offset-2">{m.order_number}</Link></>}
               {' '}· {m.status}
             </p>
             <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed">{m.message}</p>

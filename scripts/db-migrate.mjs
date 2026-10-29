@@ -39,13 +39,13 @@ const AFTER_DEPLOY = {
   '20261028140000_staff_mfa.sql': {
     why: 'admin sign-in must already ask for the authenticator code, or nobody can get into admin',
     async check() {
-      const html = await fetch(`${SITE}/login`).then((r) => r.text())
+      const html = await fetch(`${SITE}/studio/login`).then((r) => r.text())
       const chunks = [...new Set(html.match(/\/_next\/static\/chunks\/[^"']+\.js/g) ?? [])]
       for (const c of chunks) if ((await fetch(SITE + c).then((r) => r.text())).includes('one-time-code')) {
         const staff = query(`select count(*) from public.memberships m join public.membership_roles mr on mr.membership_id = m.id join public.roles r on r.id = mr.role_id where m.status = 'active' and r.key = 'owner'`)
         return Number(staff) > 0 ? null : 'no active Owner: grant one first, or nobody will be able to sign in afterwards'
       }
-      return `${SITE}/login doesn't ask for a code yet: deploy the two-step sign-in first`
+      return `${SITE}/studio/login doesn't ask for a code yet: deploy the two-step sign-in first`
     },
   },
 }

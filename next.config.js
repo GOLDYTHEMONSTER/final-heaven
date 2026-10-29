@@ -54,9 +54,8 @@ const nextConfig = {
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },
-      // Never cache admin pages, login, or API responses at the edge.
-      { source: '/admin/:path*', headers: [{ key: 'Cache-Control', value: 'private, no-store' }] },
-      { source: '/login', headers: [{ key: 'Cache-Control', value: 'private, no-store' }] },
+      // Never cache the admin area (sign-in included) at the edge.
+      { source: '/studio/:path*', headers: [{ key: 'Cache-Control', value: 'private, no-store' }] },
     ]
   },
 }

@@ -37,7 +37,7 @@ The storefront, cart, checkout form, admin pages and product APIs; Supabase Auth
 | Migration | `supabase/migrations/20261018130000_phase1_tenancy_rbac_payments.sql` |
 | Domain libraries | `lib/auth.ts`, `lib/tenancy.ts`, `lib/audit.ts`, `lib/rate-limit.ts`, `lib/log.ts`, `lib/money.ts`, `lib/checkout/` (was `lib/orders.ts`), `lib/api.ts`, `lib/payments/{types,flutterwave,service,store,index}.ts`, `lib/supabase/middleware.ts` |
 | API | `app/api/orders`, `app/api/payments/{start,verify}`, `app/api/webhooks/flutterwave`, `app/api/cron/payments`, `app/api/health`, `app/api/platform/health`, `app/api/admin/{products,drops,orders,orders/payments}`, `app/api/{products,products/[id],products/suggestions,drops,newsletter}` |
-| UI | `app/checkout/page.tsx`, `app/checkout/complete/page.tsx`, `app/track-order/page.tsx`, `app/cart/page.tsx`, `app/admin/layout.tsx`, `app/admin/orders/page.tsx`, `components/admin/AdminShell.tsx`, `app/login/LoginForm.tsx` |
+| UI | `app/checkout/page.tsx`, `app/checkout/complete/page.tsx`, `app/track-order/page.tsx`, `app/cart/page.tsx`, `app/studio/(panel)/layout.tsx`, `app/studio/(panel)/orders/page.tsx`, `components/admin/AdminShell.tsx`, `app/studio/login/LoginForm.tsx` |
 | Config | `vercel.json` (daily cron), `.eslintrc.json`, `vitest.config.ts`, `tsconfig.json` (`lib: esnext`), `.env.local.example`, `package.json` (`test`, `typecheck`) |
 | Tests | `tests/db/*` (PGlite), `tests/unit/*` |
 
@@ -75,7 +75,7 @@ The migration and the code **must go live together**: the old code can't insert 
    ```
    To also see platform health: `insert into public.platform_admins (user_id) select id from auth.users where email = 'owner@example.com';`
 7. **Turn off public sign-ups** in Supabase Auth.
-8. **Check**: `/api/health` returns ok, sign in at `/login`, place a test order, pay with a Flutterwave test card, and confirm the order shows Paid and Confirmed, `payment_events` shows `processed`, and `/api/platform/health` has no backlog.
+8. **Check**: `/api/health` returns ok, sign in at `/studio/login`, place a test order, pay with a Flutterwave test card, and confirm the order shows Paid and Confirmed, `payment_events` shows `processed`, and `/api/platform/health` has no backlog.
 
 Rollback: the migration is additive apart from the order status rename and the policy swap. Reversing it needs a written down-migration. I'd rather fix forward, and none was written because the live data is small.
 

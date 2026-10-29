@@ -66,7 +66,7 @@ export default function ShippingOverview() {
                 {data.rates.upcoming.filter((u: any) => u.method === m).map((u: any) => (
                   <p key={u.id} className="mt-1 text-xs text-final-muted">Next: {u.provider} from {u.effectiveFrom}</p>
                 ))}
-                <Link href="/admin/shipping/rates" className="mt-2 inline-block text-xs underline underline-offset-2">Rates and rules</Link>
+                <Link href="/studio/shipping/rates" className="mt-2 inline-block text-xs underline underline-offset-2">Rates and rules</Link>
               </div>
             )
           })}
@@ -120,7 +120,7 @@ export default function ShippingOverview() {
           </section>
 
           {data.partialRefunds.length > 0 && (
-            <Alert tone="warn">Partly refunded: {data.partialRefunds.join(', ')}. Their shipping shares weren’t reversed automatically; adjust them in the <Link href="/admin/shipping/ledger" className="underline">ledger</Link>.</Alert>
+            <Alert tone="warn">Partly refunded: {data.partialRefunds.join(', ')}. Their shipping shares weren’t reversed automatically; adjust them in the <Link href="/studio/shipping/ledger" className="underline">ledger</Link>.</Alert>
           )}
 
           <section aria-label="Product pricing health" className={card}>
@@ -137,7 +137,7 @@ export default function ShippingOverview() {
                   <ul className="mt-2 divide-y divide-final-off-white/5 text-sm">
                     {data.health[k].slice(0, 50).map((p: any) => (
                       <li key={p.productId} className="flex flex-wrap items-baseline justify-between gap-2 py-1.5">
-                        <Link href={`/admin?edit=${p.productId}`} className="underline-offset-2 hover:underline">{p.name}</Link>
+                        <Link href={`/studio?edit=${p.productId}`} className="underline-offset-2 hover:underline">{p.name}</Link>
                         <span className="flex flex-wrap items-center gap-2 text-xs text-final-muted tabular-nums">
                           {naira(p.priceKobo)} · freight {naira(p.freightKobo)} · recovers {pct(p.recoveryPct)} · margin {pct(p.marginPct)}
                           <Pill value={p.status} />
@@ -153,7 +153,7 @@ export default function ShippingOverview() {
           <section aria-label="Shipments" className={card}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="text-lg font-semibold">Shipments</h2>
-              <Link href="/admin/shipping/shipments" className="text-sm underline underline-offset-2">
+              <Link href="/studio/shipping/shipments" className="text-sm underline underline-offset-2">
                 {data.awaitingShipment.length ? `${data.awaitingShipment.length} paid order${data.awaitingShipment.length === 1 ? '' : 's'} waiting for a shipment` : 'Manage shipments'}
               </Link>
             </div>
@@ -181,7 +181,7 @@ export default function ShippingOverview() {
           <section aria-label="Clearance" className={card}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="text-lg font-semibold">Clearance campaigns</h2>
-              <Link href="/admin/shipping/campaigns" className="text-sm underline underline-offset-2">Manage clearance</Link>
+              <Link href="/studio/shipping/campaigns" className="text-sm underline underline-offset-2">Manage clearance</Link>
             </div>
             {data.campaigns.length === 0 ? <p className="mt-3 text-sm text-final-muted">No campaigns yet.</p> : (
               <>

@@ -54,7 +54,7 @@ Restock the item, or refund the missing items.
   - There is a release date field and a "Take pre-orders" section, with a ship date and the number of pre-orders available.
   - Members-only is labelled as not buyable for now.
   - The old "External payment link" field is now labelled as a staff-only reference: customers always pay through checkout.
-- **Promo codes** (`/admin/promos`):
+- **Promo codes** (`/studio/promos`):
   - Create percent or fixed-amount codes, with optional minimum order, start and end dates, usage limit and one use per customer.
   - Switch codes on or off.
   - See uses and the total discount given.
