@@ -87,6 +87,7 @@ For batches, take each product through the same steps. One product's problem nev
   - prices the screenshot doesn't show.
 - **What to crop out:** models' branded sneakers and props, app logos, Chinese overlay text, colour-dot legends and inset photos.
 - **Weapon-like items** (bats, sticks, knives): list them as the sporting good they are. Never use the supplier's "self-defence" wording.
+- **Never prepare** bows, crossbows, compound bows, slingshots for hunting, blades over pocket size, stun devices or anything sold for "car carry" or protection. The owner declined these on 29 Oct 2026: they put the Flutterwave account and customs clearance at risk, and the store has no age check. Say so in one line and stop.
 
 ## Questions for the owner
 
