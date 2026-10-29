@@ -12,6 +12,7 @@ import { getStorefront } from '@/lib/tenancy'
 import { sendLaunchEmail } from '@/lib/email/launch-store'
 import { queueProductAlerts } from '@/lib/email/alerts-store'
 import { queueOrderFollowups } from '@/lib/email/followups-store'
+import { sendStaffDigest } from '@/lib/email/digest-store'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -32,6 +33,8 @@ export const maxDuration = 60
  *     while checkout is closed.
  *  2d. Delivered follow-up ("How's it fitting?"): orders delivered 3 to 14
  *     days ago get one email, at most 30 a day.
+ *  2e. Staff digest: one email a day to STAFF_ALERT_EMAIL summarising the last
+ *     24 hours (lib/email/digest); nothing when everything is zero.
  *  3. Retention: expire analytics (13 months), rate-limit windows (2 days),
  *     old analytics salts and the email log (13 months). Financial records
  *     are never touched.
@@ -73,6 +76,12 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
   }
   // Delivers what the alert step just queued (and anything else waiting), within the time left.
   result.alertEmails = await sendQueuedEmails(60, { deadline: started + 50_000 })
+  try {
+    result.digest = await sendStaffDigest(await getStorefront()) // after every send above, so their failures are in it
+  } catch (error) {
+    result.digest = { error: (error as Error).message }
+    logger.error('cron.digest_failed', { error })
+  }
   try {
     const { data, error } = await createSupabaseServiceClient().rpc('run_retention')
     if (error) throw error
