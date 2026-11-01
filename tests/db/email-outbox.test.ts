@@ -34,7 +34,8 @@ describe('email outbox', () => {
     await db.query(`update public.orders set payment_status = 'partially_refunded' where id = $1`, [f.orders.a1])
     await db.query(`update public.orders set payment_status = 'paid' where id = $1`, [f.orders.a1])
     const rows = await outbox()
-    expect(rows.map((r) => r.kind).sort()).toEqual(['order.paid', 'staff.order_paid'])
+    // (the part-refund in the flip is its own, one-off notice)
+    expect(rows.map((r) => r.kind).sort()).toEqual(['order.paid', 'order.refunded', 'staff.order_paid'])
     expect(rows.every((r) => r.order_id === f.orders.a1 && r.status === 'queued')).toBe(true)
   })
 

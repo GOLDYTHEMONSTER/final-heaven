@@ -31,6 +31,8 @@ export type OrderEmailData = {
   shippingCarrier: string | null
   shippingReference: string | null
   status: string
+  /** unpaid, paid, partially_refunded, refunded...; the refund email reads it. */
+  paymentStatus?: string
 }
 
 export type MessageEmailData = {
@@ -230,6 +232,48 @@ export function orderShippedEmail(o: OrderEmailData, site: string): RenderedEmai
     '',
     `${BUSINESS.tradingName}`,
   ].filter((l) => l !== null).join('\n')
+  return { subject, html, text }
+}
+
+export function orderDeliveredEmail(o: OrderEmailData, site: string): RenderedEmail {
+  const subject = `Your order ${o.orderNumber} has been delivered`
+  const returns = `Something not right? You have ${POLICY.returnWindowDays} days from delivery to return it: ${site}/returns`
+  const html = layout({
+    preheader: 'Your order has arrived.',
+    heading: 'Your order has arrived.',
+    body: [
+      p(`Order <strong>${escapeHtml(o.orderNumber)}</strong> is marked as delivered. We hope it’s everything you wanted.`),
+      button(trackUrl(site, o.orderNumber), 'View your order'),
+      p(`<span style="font-size:13px;color:${C.muted};">Something not right? You have ${POLICY.returnWindowDays} days from delivery to return it. See our <a href="${escapeHtml(site)}/returns" style="color:${C.muted};">returns policy</a>, or just reply to this email.</span>`),
+    ].join('\n'),
+    footer: customerFooter(site),
+  })
+  const text = [
+    'Your order has arrived.', '',
+    `Order ${o.orderNumber} is marked as delivered. We hope it’s everything you wanted.`, '',
+    `View your order: ${trackUrl(site, o.orderNumber)}`, returns, '', BUSINESS.tradingName,
+  ].join('\n')
+  return { subject, html, text }
+}
+
+export function orderRefundedEmail(o: OrderEmailData, site: string): RenderedEmail {
+  const part = o.paymentStatus === 'partially_refunded'
+  const subject = `${part ? 'A partial refund' : 'A refund'} for order ${o.orderNumber}`
+  const line = `We’ve recorded ${part ? 'a partial refund' : 'a refund'} for order ${o.orderNumber}. It goes back to the way you paid; how long your bank takes to show it is up to them.`
+  const html = layout({
+    preheader: `${part ? 'A partial refund' : 'A refund'} has been recorded for your order.`,
+    heading: part ? 'Partial refund recorded' : 'Refund recorded',
+    body: [
+      p(escapeHtml(line)),
+      button(trackUrl(site, o.orderNumber), 'View your order'),
+      p(`<span style="font-size:13px;color:${C.muted};">Not seen it after a few days? Reply to this email and we’ll trace it with you.</span>`),
+    ].join('\n'),
+    footer: customerFooter(site),
+  })
+  const text = [
+    part ? 'Partial refund recorded' : 'Refund recorded', '', line, '',
+    `View your order: ${trackUrl(site, o.orderNumber)}`, 'Not seen it after a few days? Reply to this email and we’ll trace it with you.', '', BUSINESS.tradingName,
+  ].join('\n')
   return { subject, html, text }
 }
 

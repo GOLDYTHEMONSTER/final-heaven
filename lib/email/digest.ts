@@ -21,11 +21,13 @@ export type DigestData = {
   emailProblems: { reason: string; count: number }[]
   bounces: number
   complaints: number
+  /** Marketing emails held in Studio → Outbox, waiting for the owner. */
+  heldBatches?: number
 }
 
 export function digestIsEmpty(d: DigestData): boolean {
   return d.paid.count === 0 && d.messages === 0 && Object.values(d.subscribers).every((n) => n === 0)
-    && d.lowStock.length === 0 && d.emailsFailed === 0 && d.emailsSkipped === 0 && d.bounces === 0 && d.complaints === 0
+    && d.lowStock.length === 0 && d.emailsFailed === 0 && d.emailsSkipped === 0 && d.bounces === 0 && d.complaints === 0 && !d.heldBatches
 }
 
 const listName = (source: string) => (isAudience(source) ? AUDIENCES[source].label : source)
@@ -47,6 +49,7 @@ export function staffDigestEmail(d: DigestData, { site, day }: { site: string; d
   const subs = Object.entries(d.subscribers).filter(([, n]) => n > 0)
   lines.push({ label: 'New subscribers', value: subs.length ? subs.map(([s, n]) => `${listName(s)} ${n}`).join(', ') : '0' })
   lines.push({ label: 'Emails failed / skipped', value: `${d.emailsFailed} / ${d.emailsSkipped}`, tone: d.emailsFailed ? 'warn' : undefined })
+  if (d.heldBatches) lines.push({ label: 'Emails waiting for your OK', value: `${d.heldBatches} (Studio → Outbox)`, tone: 'warn' })
   lines.push({ label: 'Bounces / complaints', value: `${d.bounces} / ${d.complaints}`, tone: d.bounces || d.complaints ? 'warn' : undefined })
 
   const rows = lines.map((l) => `<tr><td style="padding:8px 0;border-bottom:1px solid ${C.line};color:${C.muted};width:48%;">${escapeHtml(l.label)}</td>

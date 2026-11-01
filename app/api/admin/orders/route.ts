@@ -78,7 +78,7 @@ export const PUT = handle('admin.orders.update', async (req: NextRequest) => {
     .maybeSingle()
   if (error) throw error
   if (!data) return NextResponse.json({ error: 'Order not found.' }, { status: 404 })
-  // Marking an order shipped queues the customer's shipping notice.
-  if (updates.status === 'shipped') await sendQueuedEmails()
+  // Marking an order shipped or delivered queues the customer's notice (the orders trigger queues it; this sends it).
+  if (updates.status === 'shipped' || updates.status === 'delivered') await sendQueuedEmails()
   return NextResponse.json({ order: data })
 })

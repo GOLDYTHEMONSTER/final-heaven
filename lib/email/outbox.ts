@@ -8,11 +8,11 @@ import { EmailError, type EmailSender, type OutgoingEmail } from './resend'
 import { AUDIENCES, isAudience } from './campaign'
 import { orderFollowupEmail, productAvailableEmail, welcomeEmail, type AlertProduct } from './lifecycle'
 import {
-  orderPaidEmail, orderShippedEmail, staffMessageEmail, staffOrderPaidEmail,
+  orderDeliveredEmail, orderPaidEmail, orderRefundedEmail, orderShippedEmail, staffMessageEmail, staffOrderPaidEmail,
   type MessageEmailData, type OrderEmailData, type RenderedEmail,
 } from './templates'
 
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup'
+export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'order.delivered' | 'order.refunded'
 
 export type OutboxRow = {
   id: number
@@ -116,6 +116,12 @@ async function compose(deps: EmailDeps, row: OutboxRow): Promise<OutgoingEmail |
     case 'order.shipped':
       if (o.status === 'cancelled') return { skip: 'order was cancelled' }
       return base([o.email], orderShippedEmail(o, site), config!.replyTo)
+    case 'order.delivered':
+      if (o.status !== 'delivered') return { skip: `order is ${o.status}, not delivered` }
+      return base([o.email], orderDeliveredEmail(o, site), config!.replyTo)
+    case 'order.refunded':
+      if (o.paymentStatus !== 'refunded' && o.paymentStatus !== 'partially_refunded') return { skip: 'order is no longer refunded' }
+      return base([o.email], orderRefundedEmail(o, site), config!.replyTo)
     case 'order.followup':
       // Only while it's still a delivered order: not if it was since returned, cancelled or refunded.
       if (o.status !== 'delivered') return { skip: `order is ${o.status}, not delivered` }
