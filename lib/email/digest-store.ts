@@ -14,7 +14,7 @@ export async function gatherDigest(store: StoreContext, db: SupabaseClient, now 
   const since = new Date(now.getTime() - DAY_MS).toISOString()
   const ok = <T>(r: { data: T | null; error: unknown }): T => { if (r.error) throw r.error; return (r.data ?? []) as T }
 
-  const [paid, messages, subs, low, outbox, events] = await Promise.all([
+  const [paid, messages, subs, low, outbox, events, held] = await Promise.all([
     db.from('orders').select('total, currency').eq('tenant_id', store.tenantId).eq('payment_status', 'paid').gte('created_at', since),
     db.from('contact_messages').select('id', { count: 'exact', head: true }).eq('tenant_id', store.tenantId).gte('created_at', since),
     db.from('newsletter_subscribers').select('source').eq('tenant_id', store.tenantId).gte('subscribed_at', since),
@@ -22,8 +22,10 @@ export async function gatherDigest(store: StoreContext, db: SupabaseClient, now 
       .lte('stock', LOW_STOCK_AT).order('stock').order('name').limit(20),
     db.from('email_outbox').select('status, last_error').eq('tenant_id', store.tenantId).in('status', ['failed', 'skipped']).gte('created_at', since),
     db.from('email_events').select('type').in('type', ['email.bounced', 'email.complained']).gte('created_at', since),
+    db.from('email_batches').select('id', { count: 'exact', head: true }).eq('tenant_id', store.tenantId).eq('status', 'held'),
   ])
   if (messages.error) throw messages.error
+  if (held.error) throw held.error
 
   const paidRows = ok<{ total: string | number; currency: string }[]>(paid)
   const subscribers: Record<string, number> = {}
@@ -40,6 +42,7 @@ export async function gatherDigest(store: StoreContext, db: SupabaseClient, now 
     emailProblems: topReasons(problems.map((r) => r.last_error)),
     bounces: eventTypes.filter((e) => e.type === 'email.bounced').length,
     complaints: eventTypes.filter((e) => e.type === 'email.complained').length,
+    heldBatches: held.count ?? 0,
   }
 }
 

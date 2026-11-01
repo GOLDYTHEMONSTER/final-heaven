@@ -1,4 +1,8 @@
-// The launch-day email, sent from the daily job once payments open.
+// The launch-day email. Its words (launchCampaignContent) are what the held
+// "We're open" batch carries (reachout.ts, M5); the owner approves it in Studio →
+// Outbox and the batch is sent within the marketing budget (batches-store.ts).
+// runLaunchEmail below is the earlier direct-to-campaign flow, no longer called
+// by the daily job.
 // Pure flow over a small store seam, so it can be tested with fakes; the
 // Supabase side is ./launch-store.ts. The sending itself is sendCampaignStep:
 // per-subscriber keys in the database and in Resend mean nobody gets it twice,

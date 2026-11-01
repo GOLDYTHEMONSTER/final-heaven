@@ -21,7 +21,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
 
     async loadOrder(id) {
       const { data, error } = await db.from('orders')
-        .select('order_number, email, subtotal, discount, promo_code, total, currency, delivery_option, delivery_fee, delivery_estimate, is_preorder, stock_shortfall, order_items, tracking_number, shipping_city, shipping_state, shipping_carrier, shipping_reference, status')
+        .select('order_number, email, subtotal, discount, promo_code, total, currency, delivery_option, delivery_fee, delivery_estimate, is_preorder, stock_shortfall, order_items, tracking_number, shipping_city, shipping_state, shipping_carrier, shipping_reference, status, payment_status')
         .eq('id', id).maybeSingle()
       if (error) throw error
       if (!data) return null
@@ -37,7 +37,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
           madeToOrderDays: i.made_to_order ? Number(i.lead_time_days) || null : null,
         })),
         trackingNumber: data.tracking_number, shippingCity: data.shipping_city, shippingState: data.shipping_state,
-        shippingCarrier: data.shipping_carrier, shippingReference: data.shipping_reference, status: data.status,
+        shippingCarrier: data.shipping_carrier, shippingReference: data.shipping_reference, status: data.status, paymentStatus: data.payment_status,
       }
     },
 

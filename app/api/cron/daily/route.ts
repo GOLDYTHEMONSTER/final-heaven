@@ -9,7 +9,8 @@ import { logger } from '@/lib/log'
 import { sendQueuedEmails } from '@/lib/email'
 import { refreshHype } from '@/lib/hype-server'
 import { getStorefront } from '@/lib/tenancy'
-import { sendLaunchEmail } from '@/lib/email/launch-store'
+import { queueMarketingBatches } from '@/lib/email/reachout-store'
+import { drainMarketing } from '@/lib/email/drain'
 import { queueProductAlerts } from '@/lib/email/alerts-store'
 import { queueOrderFollowups } from '@/lib/email/followups-store'
 import { sendStaffDigest } from '@/lib/email/digest-store'
@@ -25,7 +26,7 @@ export const maxDuration = 60
  *   checkout reminder ................ 30  (also 1 per address per 24 hours)
  *   back-in-stock / drop alert ....... 30  (over the cap: waits for tomorrow)
  *   delivered follow-up .............. 30  (over the cap: waits for tomorrow)
- *   launch email ..................... the waitlist, once; carries on across days if Resend's quota stops it
+ *   marketing (held for the owner) ... 60 a day in all, approved batches only, after service mail
  *   staff digest ..................... 1
  * Receipts and staff alerts are not capped: they come first in the queue.
  *
@@ -36,15 +37,17 @@ export const maxDuration = 60
  *     about payments still open, abandon ones it never saw after 24h.
  *  2. Email catch-up: send anything still queued (e.g. after a Resend outage
  *     or the daily quota), up to 50.
- *  2b. Launch email: once stores.payments_open_on has arrived, the launch
- *     waitlist gets one "We're open" email (lib/email/launch). It carries on
- *     over several runs if time or Resend's quota runs out; never twice.
+ *  2b. Marketing triggers (lib/email/reachout): welcome backfill, nurture, launch
+ *     (once checkout is open), retargeting, review ask and win-back are put into
+ *     held batches in Studio → Outbox. Nothing is sent without the owner's approval.
  *  2c. Product alerts ("email me when it's available"): waiting alerts whose
  *     product can now be bought are queued, at most 30 a day, and sent. Not
  *     while checkout is closed.
  *  2d. Delivered follow-up ("How's it fitting?"): orders delivered 3 to 14
  *     days ago get one email, at most 30 a day.
- *  2e. Staff digest: one email a day to STAFF_ALERT_EMAIL summarising the last
+ *  2e. Approved batches (lib/email/drain): sent oldest approval first, at most 60
+ *     marketing emails a UTC day in all, after the service mail above.
+ *  2f. Staff digest: one email a day to STAFF_ALERT_EMAIL summarising the last
  *     24 hours (lib/email/digest); nothing when everything is zero.
  *  3. Retention: expire analytics (13 months), rate-limit windows (2 days),
  *     old analytics salts and the email log (13 months). Financial records
@@ -68,10 +71,10 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
   }
   result.emails = await sendQueuedEmails(50)
   try {
-    result.launchEmail = await sendLaunchEmail(await getStorefront(), started + 25_000)
+    result.marketing = await queueMarketingBatches(await getStorefront()) // held for the owner's approval; sends nothing
   } catch (error) {
-    result.launchEmail = { error: (error as Error).message }
-    logger.error('cron.launch_email_failed', { error })
+    result.marketing = { error: (error as Error).message }
+    logger.error('cron.marketing_failed', { error })
   }
   try {
     result.alerts = await queueProductAlerts(await getStorefront())
@@ -87,6 +90,12 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
   }
   // Delivers what the alert step just queued (and anything else waiting), within the time left.
   result.alertEmails = await sendQueuedEmails(60, { deadline: started + 50_000 })
+  try {
+    result.approved = await drainMarketing(await getStorefront(), started + 52_000) // approved batches, after all service mail
+  } catch (error) {
+    result.approved = { error: (error as Error).message }
+    logger.error('cron.approved_batches_failed', { error })
+  }
   try {
     result.digest = await sendStaffDigest(await getStorefront()) // after every send above, so their failures are in it
   } catch (error) {

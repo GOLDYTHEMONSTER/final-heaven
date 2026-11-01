@@ -7,6 +7,7 @@ import 'server-only'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { EmailError, type EmailSender } from './resend'
 import { suppressedAmong } from './suppression'
+import { emailUsage, marketingAllowance, marketingPause, MARKETING_DAILY } from './budget'
 import { AUDIENCES, campaignProblems, isAudience, renderCampaign, type CampaignProduct } from './campaign'
 
 export const BATCH = 8
@@ -97,9 +98,15 @@ export async function sendCampaignStep(deps: {
     else return refresh(db, { ...c, status: 'sending' })
   }
 
+  // Campaigns share the marketing budget (60 a day, 2,700 a month) with held batches and welcomes.
+  const usage = await emailUsage(db, c.tenant_id)
+  const stop = marketingPause(usage)
+  if (stop) return { ...(await refresh(db, c)), paused: stop }
+  let room = marketingAllowance(usage)
+
   const products = await campaignProducts(db, c.tenant_id, c.product_ids ?? [])
   const { data: queue, error: qe } = await db.from('email_campaign_recipients').select('subscriber_id, email, attempts')
-    .eq('campaign_id', c.id).eq('status', 'queued').limit(BATCH)
+    .eq('campaign_id', c.id).eq('status', 'queued').limit(Math.min(BATCH, room))
   if (qe) throw qe
 
   const blocked = await suppressedAmong(db, c.tenant_id, (queue ?? []).map((r) => r.email))
@@ -130,6 +137,7 @@ export async function sendCampaignStep(deps: {
       }, `campaign:${c.id}:${r.subscriber_id}`)
       await db.from('email_campaign_recipients').update({ status: 'sent', provider_message_id: id, sent_at: new Date().toISOString(), attempts: r.attempts + 1, last_error: null })
         .eq('campaign_id', c.id).eq('subscriber_id', r.subscriber_id)
+      room -= 1
     } catch (e) {
       const err = e instanceof EmailError ? e : new EmailError(String((e as Error).message), true)
       if (err.retryable) {
@@ -143,5 +151,6 @@ export async function sendCampaignStep(deps: {
     await new Promise((res) => setTimeout(res, PAUSE_MS))
   }
   const progress = await refresh(db, c)
+  if (!paused && room <= 0 && progress.remaining > 0) paused = `Today’s ${MARKETING_DAILY} marketing sends are used. Carry on tomorrow.`
   return { ...progress, paused }
 }
