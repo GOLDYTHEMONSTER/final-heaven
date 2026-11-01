@@ -33,7 +33,16 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/cs
 const server = createServer(async (req, res) => {
   const path = join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname))
   if (!path.startsWith(root) || !(await stat(path).catch(() => null))?.isFile()) return res.writeHead(404).end()
-  res.writeHead(200, { 'content-type': TYPES[extname(path)] ?? 'application/octet-stream' }).end(await readFile(path))
+  const body = await readFile(path)
+  const type = TYPES[extname(path)] ?? 'application/octet-stream'
+  // Byte ranges, so a <video> in a composition can seek anywhere in a clip (Chrome asks for ranges).
+  const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range ?? '')
+  if (range) {
+    const start = range[1] ? Number(range[1]) : body.length - Number(range[2])
+    const end = range[1] && range[2] ? Math.min(Number(range[2]), body.length - 1) : body.length - 1
+    return res.writeHead(206, { 'content-type': type, 'accept-ranges': 'bytes', 'content-range': `bytes ${start}-${end}/${body.length}`, 'content-length': end - start + 1 }).end(body.subarray(start, end + 1))
+  }
+  res.writeHead(200, { 'content-type': type, 'accept-ranges': 'bytes' }).end(body)
 })
 await new Promise((r) => server.listen(0, '127.0.0.1', r))
 // A query string (?clip=home) passes through to the page.

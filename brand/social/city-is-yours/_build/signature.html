@@ -1,0 +1,83 @@
+<!doctype html>
+<!--
+  The lens signature: a paint-marker tag written across the camera glass, then
+  the ink runs. Rendered by brand/social/video/_build/render.mjs on black and
+  laid over a clip with ffmpeg (blend=lighten), so only the ink shows.
+    ?text=FH            the short tag (default)
+    ?text=Final%20Heaven the full tag (the montage end card)
+    ?seed=3             a different hand: wobble and drips change per signer
+-->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=block" rel="stylesheet">
+<style>html,body{margin:0;width:1080px;height:1920px;background:#000;overflow:hidden}canvas{display:block}</style>
+</head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+const q = new URLSearchParams(location.search)
+const TEXT = q.get('text') || 'FH'
+let seed = Number(q.get('seed') || 1)
+const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646
+const INK = '#F2F1EE'        // dirty white paint marker
+const WRITE = TEXT.length > 3 ? 1.1 : 0.7   // seconds to write the tag
+const ctx = document.getElementById('c').getContext('2d')
+const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3)
+
+let tag, box, drips
+window.duration = 4
+window.ready = document.fonts.load('200px "Permanent Marker"').then(() => {
+  // Draw the tag once, tilted like a quick signature, and find where its strokes end at the bottom.
+  const size = TEXT.length > 3 ? 190 : 420
+  tag = document.createElement('canvas'); tag.width = 1080; tag.height = 1920
+  const t = tag.getContext('2d')
+  t.translate(540, 820); t.rotate(-0.12)
+  t.font = `${size}px "Permanent Marker"`; t.textAlign = 'center'; t.textBaseline = 'middle'; t.fillStyle = INK
+  if (TEXT.length > 3) { const [a, ...b] = TEXT.split(' '); t.fillText(a, -40, -110); t.fillText(b.join(' '), 40, 110) }
+  else t.fillText(TEXT, 0, 0)
+  const px = t.getImageData(0, 0, 1080, 1920).data
+  let minX = 1080, maxX = 0
+  const bottom = []
+  for (let x = 0; x < 1080; x++) {
+    for (let y = 1919; y >= 0; y--) if (px[(y * 1080 + x) * 4 + 3] > 200) { bottom[x] = y; minX = Math.min(minX, x); maxX = Math.max(maxX, x); break }
+  }
+  box = { minX, maxX }
+  // Drips start where a stroke ends lowest in its neighbourhood; longer ones from the heaviest strokes.
+  const n = TEXT.length > 3 ? 9 : 6
+  drips = []
+  for (let i = 0; i < n; i++) {
+    let x = Math.round(minX + (maxX - minX) * ((i + 0.25 + rand() * 0.5) / n))
+    while (x < maxX && bottom[x] == null) x++
+    if (bottom[x] == null) continue
+    drips.push({ x, y: bottom[x] - 6, len: 120 + rand() * (TEXT.length > 3 ? 360 : 520), w: 7 + rand() * 9, delay: rand() * 0.6, speed: 1.2 + rand() * 1.4 })
+  }
+})
+
+window.renderFrame = (s) => {
+  ctx.clearRect(0, 0, 1080, 1920)
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 1080, 1920)
+  // Write-on: a wipe that follows the hand left to right, with a ragged edge like a marker tip.
+  const p = ease(s / WRITE)
+  const edge = box.minX + (box.maxX - box.minX + 60) * p
+  ctx.save()
+  ctx.beginPath(); ctx.moveTo(0, 0)
+  for (let y = 0; y <= 1920; y += 40) ctx.lineTo(edge + Math.sin(y * 0.05 + s * 9) * 18, y)
+  ctx.lineTo(0, 1920); ctx.closePath(); ctx.clip()
+  ctx.shadowColor = 'rgba(242,241,238,0.35)'; ctx.shadowBlur = 14   // ink on glass glows slightly in the flash
+  ctx.drawImage(tag, 0, 0)
+  ctx.restore()
+  // Drips: each starts once the wipe has passed it, runs fast then slows, with a bead at the tip.
+  ctx.fillStyle = INK; ctx.shadowColor = 'rgba(242,241,238,0.3)'; ctx.shadowBlur = 8
+  for (const d of drips) {
+    const passed = (box.maxX - box.minX) ? (d.x - box.minX) / (box.maxX - box.minX) : 0
+    const t0 = WRITE * passed + 0.15 + d.delay
+    if (s < t0) continue
+    const L = d.len * (1 - Math.exp(-(s - t0) * d.speed))
+    ctx.beginPath()
+    ctx.moveTo(d.x - d.w / 2, d.y)
+    ctx.lineTo(d.x - d.w * 0.35, d.y + L)
+    ctx.lineTo(d.x + d.w * 0.35, d.y + L)
+    ctx.lineTo(d.x + d.w / 2, d.y)
+    ctx.closePath(); ctx.fill()
+    ctx.beginPath(); ctx.ellipse(d.x, d.y + L, d.w * 0.62, d.w * 0.8, 0, 0, Math.PI * 2); ctx.fill()
+  }
+  ctx.shadowBlur = 0
+}
+</script></body></html>

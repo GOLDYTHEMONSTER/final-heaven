@@ -1,0 +1,234 @@
+<!doctype html>
+<!--
+  THE CITY IS YOURS: the edit. One page draws every cut of the campaign films
+  from the generated clips (../clips) onto a canvas, frame by frame, with the
+  type, the mark and the sound cues on top. Rendered by
+  brand/social/video/_build/render.mjs:
+    node brand/social/video/_build/render.mjs "brand/social/city-is-yours/_build/film.html?cut=t1" out.mp4
+  Cuts: t1 (the location), t2 (the finds), t3 (the message). Nothing here is
+  generated text: every word is typeset, so it is always spelled right.
+-->
+<html><head><meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=block');
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000}
+canvas{display:block}
+</style></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+const CUT = new URLSearchParams(location.search).get('cut') || 't1'
+const ctx = document.getElementById('c').getContext('2d')
+const PAPER = '#F2F1EE', MUTED = '#A3A3A8', RED = '#B3122B'
+const clamp = (x) => Math.min(1, Math.max(0, x))
+const ease = (x) => 1 - Math.pow(1 - clamp(x), 3)
+const fade = (t, a, b) => clamp((t - a) / (b - a))
+
+// A shot: clip, where it starts in the film (at), how long (dur), where in the clip it starts (from), speed.
+// A title: lines at a time; style 'display' (big extended caps) or 'mono' (small spaced caps).
+const CUTS = {
+  t1: {
+    duration: 10,
+    shots: [{ clip: 'T1', at: 0, dur: 10, from: 0, speed: 1, hold: true, stencil: { at: 3.6 } }],
+    dark: [[5.0, 6.0, 0.55]],
+    titles: [
+      { at: 5.6, out: 10, lines: ['SOMETHING', 'IS COMING.'], style: 'display', y: 1380 },
+      { at: 7.4, out: 10, lines: ['NOVEMBER'], style: 'mono', y: 1640 },
+    ],
+    cues: [{ at: 0.2, kind: 'hiss', dur: 4.6 }, { at: 3.6, kind: 'zap' }, { at: 5.6, kind: 'boom' }, { at: 7.4, kind: 'tick' }],
+  },
+  t2: {
+    duration: 9,
+    shots: [
+      { clip: 'T2a', at: 0, dur: 2.2, from: 1.0, speed: 1 },
+      { clip: 'T2b', at: 2.2, dur: 2.0, from: 1.5, speed: 1 },
+      { clip: 'T2c', at: 4.2, dur: 2.2, from: 1.5, speed: 1 },
+    ],
+    flashes: [2.2, 4.2],
+    titles: [
+      { at: 6.7, out: 9, lines: ['YOU KNOW', 'THE FEELING.'], style: 'display', y: 900 },
+      { at: 7.6, out: 9, mark: true, y: 1240 },
+    ],
+    cues: [{ at: 0, kind: 'tick' }, { at: 2.2, kind: 'zap' }, { at: 4.2, kind: 'zap' }, { at: 6.5, kind: 'off' }, { at: 6.7, kind: 'boom' }],
+  },
+  t3: {
+    duration: 11,
+    shots: [{ clip: 'T3', at: 0, dur: 6.6, from: 0, speed: 0.75 }],
+    dark: [[0, 6.6, 0.35]],
+    titles: [
+      { at: 1.2, out: 6.4, lines: ['WHAT IF'], style: 'display', y: 1300 },
+      { at: 2.4, out: 6.4, lines: ['EVERYTHING YOU', 'FOUND ONLINE'], style: 'display', y: 1460, size: 74 },
+      { at: 3.9, out: 6.4, lines: ['WAS CLOSER?'], style: 'display', y: 1680, color: PAPER },
+      { at: 7.2, out: 11, mark: true, y: 760 },
+      { at: 7.9, out: 11, lines: ['FINAL HEAVEN'], style: 'display', y: 1080, size: 96 },
+      { at: 8.8, out: 11, lines: ['OPENING THIS NOVEMBER'], style: 'mono', y: 1240 },
+    ],
+    cues: [{ at: 1.2, kind: 'tick' }, { at: 2.4, kind: 'tick' }, { at: 3.9, kind: 'tick' }, { at: 6.6, kind: 'off' }, { at: 7.2, kind: 'boom' }],
+  },
+  // The 45 s hero film (teaser 04): city, culture, interruption, reveal, discovery, invitation.
+  hero: {
+    duration: 45,
+    shots: [
+      // 0–5 The city
+      { clip: 'T1', at: 0, dur: 3.2, from: 0, speed: 1 },
+      { clip: 'S9', at: 3.2, dur: 1.8, from: 0.6, speed: 1 },
+      // 5–12 The culture
+      { clip: 'S7', at: 5, dur: 1, from: 2, speed: 1 },
+      { clip: 'S3', at: 6, dur: 1, from: 1.2, speed: 1 },
+      { clip: 'S5', at: 7, dur: 0.8, from: 0.3, speed: 1 },
+      { clip: 'S11', at: 7.8, dur: 1, from: 0, speed: 1 },
+      { clip: 'S14', at: 8.8, dur: 1.2, from: 1.5, speed: 1 },
+      { clip: 'S12', at: 10, dur: 1, from: 1, speed: 1 },
+      { clip: 'S13', at: 11, dur: 1, from: 3.5, speed: 1 },
+      // 12–18 The interruption
+      { clip: 'T2b', at: 12.3, dur: 2.7, from: 0.5, speed: 0.8 },
+      { clip: 'T3', at: 15, dur: 3, from: 2, speed: 0.6 },
+      // 24–37 The discovery
+      { clip: 'S10', at: 24, dur: 0.9, from: 0, speed: 1 },
+      { clip: 'S12', at: 24.9, dur: 1, from: 2.5, speed: 1 },
+      { clip: 'S5', at: 25.9, dur: 0.8, from: 0.6, speed: 1 },
+      { clip: 'T2a', at: 26.7, dur: 1, from: 2, speed: 1 },
+      { clip: 'T2c', at: 27.7, dur: 1, from: 3, speed: 1 },
+      { clip: 'S13', at: 28.7, dur: 1.1, from: 1, speed: 1 },
+      { clip: 'S8', at: 29.8, dur: 1.2, from: 1, speed: 1 },
+      { clip: 'S4', at: 31, dur: 1.2, from: 2.5, speed: 1 },
+      { clip: 'S15', at: 32.2, dur: 1.4, from: 1, speed: 1 },
+      { clip: 'edit/S2-signature', at: 33.6, dur: 3.4, from: 3.8, speed: 1 },
+      // 37–45 The invitation
+      { clip: 'S11', at: 37, dur: 4, from: 0.5, speed: 1 },
+    ],
+    dark: [[40.2, 41, 1]],
+    flashes: [6, 7, 7.8, 8.8, 10, 11, 24.9, 25.9, 26.7, 27.7, 28.7, 29.8, 31, 32.2, 33.6],
+    titles: [
+      { at: 0.6, out: 4.9, lines: ['THE WORLD IS FULL OF', 'THINGS WORTH FINDING.'], style: 'display', y: 1500, size: 58 },
+      { at: 9.4, out: 11.9, lines: ['BUT NOT EVERYTHING', 'IS WITHIN REACH.'], style: 'display', y: 1500, size: 66 },
+      { at: 16.2, out: 18, lines: ['UNTIL NOW.'], style: 'display', y: 1560, size: 120 },
+      { at: 18.6, out: 23.8, mark: true, y: 820 },
+      { at: 19.3, out: 23.8, lines: ['FINAL HEAVEN'], style: 'display', y: 1080, size: 92 },
+      { at: 25.0, out: 26.5, lines: ['DISCOVER.'], style: 'display', y: 1000, size: 140 },
+      { at: 28.0, out: 29.5, lines: ['HYPE.'], style: 'display', y: 1000, size: 140 },
+      { at: 31.0, out: 32.5, lines: ['EXPLORE.'], style: 'display', y: 1000, size: 140 },
+      { at: 41.2, lines: ['OPENING THIS', 'NOVEMBER.'], style: 'display', y: 700, size: 90 },
+      { at: 42.0, lines: ['YOUR NEXT FAVOURITE FIND', 'IS CLOSER THAN EVER.'], style: 'mono', y: 960 },
+      { at: 42.8, lines: ['WAITLIST DISCOUNT', 'FREE STANDARD DELIVERY'], style: 'mono', y: 1130 },
+      { at: 43.5, mark: true, y: 1400 },
+      { at: 44.0, lines: ['FINAL HEAVEN'], style: 'display', y: 1600, size: 72 },
+    ],
+    cues: [
+      { at: 0.1, kind: 'hiss', dur: 4.8 }, { at: 3.2, kind: 'tick' },
+      ...[5, 6, 7, 7.8, 8.8, 10, 11].map((at) => ({ at, kind: 'tick' })),
+      { at: 12, kind: 'off' }, { at: 16.2, kind: 'zap' }, { at: 18.6, kind: 'boom' },
+      ...[24, 24.9, 25.9, 26.7, 27.7, 28.7, 29.8, 31, 32.2, 33.6].map((at) => ({ at, kind: 'tick' })),
+      { at: 25, kind: 'zap' }, { at: 28, kind: 'zap' }, { at: 31, kind: 'zap' },
+      { at: 40.6, kind: 'off' }, { at: 43.5, kind: 'boom' },
+    ],
+  },
+  // The lens-signature montage: each signer tags the lens, then the full tag, then the line.
+  sig: {
+    duration: 17,
+    shots: [
+      { clip: 'edit/S1-signature', at: 0, dur: 4.2, from: 3.2, speed: 1 },
+      { clip: 'edit/S2-signature', at: 4.2, dur: 4.2, from: 3.2, speed: 1 },
+      { clip: 'edit/sig-full', at: 8.6, dur: 4, from: 0, speed: 1 },
+    ],
+    flashes: [4.2, 8.6],
+    titles: [
+      { at: 12.8, out: 17, lines: ['EVERYONE HAS', 'THEIR OWN TASTE.'], style: 'display', y: 820, size: 76 },
+      { at: 14.0, out: 17, lines: ['THERE’S ROOM', 'FOR ALL OF IT.'], style: 'display', y: 1080, size: 76 },
+      { at: 15.4, out: 17, mark: true, y: 1380 },
+      { at: 15.9, out: 17, lines: ['FINAL HEAVEN'], style: 'mono', y: 1520 },
+    ],
+    cues: [{ at: 1, kind: 'hiss', dur: 0.8 }, { at: 4.2, kind: 'zap' }, { at: 5.2, kind: 'hiss', dur: 0.8 }, { at: 8.6, kind: 'zap' }, { at: 8.8, kind: 'hiss', dur: 1.2 }, { at: 12.8, kind: 'tick' }, { at: 14, kind: 'tick' }, { at: 15.4, kind: 'boom' }],
+  },
+}
+const cut = CUTS[CUT]
+window.duration = cut.duration
+window.cues = cut.cues
+
+const videos = {}
+const mark = new Image(); mark.src = '/brand/logo/mark-white.png'
+const load = (name) => new Promise((ok, fail) => {
+  const v = document.createElement('video')
+  // A name with a slash is a finished edit (e.g. edit/S2-signature); otherwise a raw clip.
+  v.muted = true; v.preload = 'auto'; v.src = `/brand/social/city-is-yours/${name.includes('/') ? name : `clips/${name}`}.mp4`
+  v.addEventListener('loadeddata', () => ok(v), { once: true }); v.addEventListener('error', fail, { once: true })
+  videos[name] = v
+})
+const seek = (v, t) => new Promise((ok) => {
+  const target = Math.min(Math.max(0, t), v.duration - 0.05)
+  if (Math.abs(v.currentTime - target) < 0.001) return ok()
+  v.addEventListener('seeked', ok, { once: true }); v.currentTime = target
+})
+window.ready = Promise.all([
+  document.fonts.load('800 100px Archivo'), document.fonts.load('600 30px "JetBrains Mono"'),
+  new Promise((ok) => (mark.complete ? ok() : (mark.onload = ok))),
+  ...[...new Set(cut.shots.map((s) => s.clip))].map(load),
+])
+
+// Film grain: a fixed set of noise tiles, picked by frame so every render is identical.
+const grain = Array.from({ length: 6 }, (_, k) => {
+  const g = document.createElement('canvas'); g.width = 270; g.height = 480
+  const c = g.getContext('2d'), d = c.createImageData(270, 480)
+  let s = 1234 + k * 99
+  for (let i = 0; i < d.data.length; i += 4) { s = (s * 16807) % 2147483647; const n = s % 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = n; d.data[i + 3] = 22 }
+  c.putImageData(d, 0, 0); return g
+})
+
+function drawCover(v) {
+  const r = Math.max(1080 / v.videoWidth, 1920 / v.videoHeight)
+  const w = v.videoWidth * r, h = v.videoHeight * r
+  ctx.drawImage(v, (1080 - w) / 2, (1920 - h) / 2, w, h)
+}
+
+// The mark sprayed on the tunnel's right wall, skewed to the wall, fading in like paint.
+function stencil(p) {
+  ctx.save()
+  ctx.globalAlpha = 0.62 * ease(p)
+  ctx.globalCompositeOperation = 'screen'
+  ctx.setTransform(0.62, -0.30, 0, 1, 862, 770)
+  ctx.filter = 'blur(1.2px) contrast(1.2)'
+  ctx.drawImage(mark, -110, -110, 220, 220)
+  ctx.restore()
+}
+
+function title(t, ti) {
+  const p = ease((t - ti.at) / 0.45)
+  const out = ti.out && t > ti.out - 0.3 ? 1 - (t - (ti.out - 0.3)) / 0.3 : 1
+  ctx.save(); ctx.globalAlpha = p * out
+  ctx.textAlign = 'center'; ctx.fillStyle = ti.color || PAPER
+  if (ti.mark) {
+    const s = 150; ctx.drawImage(mark, 540 - s / 2, ti.y - s / 2 + (1 - p) * 20, s, s)
+  } else if (ti.style === 'mono') {
+    ctx.font = '600 38px "JetBrains Mono"'; ctx.fillStyle = '#D6D5D2'
+    ctx.letterSpacing = '10px'
+    ti.lines.forEach((l, i) => ctx.fillText(l, 545, ti.y + i * 46 + (1 - p) * 12))
+  } else {
+    const size = ti.size || 104
+    ctx.font = `800 ${size}px Archivo`; ctx.fontStretch = 'expanded'
+    ctx.letterSpacing = '-1px'
+    ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 30
+    ti.lines.forEach((l, i) => ctx.fillText(l, 540, ti.y + i * size * 0.98 + (1 - p) * 18))
+  }
+  ctx.restore()
+}
+
+window.renderFrame = async (t) => {
+  ctx.globalAlpha = 1; ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 1080, 1920)
+  for (const s of cut.shots) {
+    if (t < s.at || t >= s.at + s.dur) continue
+    const v = videos[s.clip]
+    await seek(v, s.from + (t - s.at) * s.speed)
+    drawCover(v)
+    if (s.stencil && t >= s.stencil.at) stencil((t - s.stencil.at) / 1.2)
+  }
+  for (const [a, b, amt] of cut.dark || []) {
+    if (t >= a) { ctx.fillStyle = `rgba(0,0,0,${amt * clamp((t - a) / Math.max(0.01, b - a))})`; ctx.fillRect(0, 0, 1080, 1920) }
+  }
+  // A white flash frame on each hard cut.
+  for (const f of cut.flashes || []) if (t >= f && t < f + 0.07) { ctx.fillStyle = 'rgba(242,241,238,.85)'; ctx.fillRect(0, 0, 1080, 1920) }
+  // Vignette and grain over everything, type on top.
+  const g = ctx.createRadialGradient(540, 960, 500, 540, 960, 1250)
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.55)')
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 1920)
+  ctx.drawImage(grain[Math.floor(t * 24) % grain.length], 0, 0, 1080, 1920)
+  for (const ti of cut.titles) if (t >= ti.at && (!ti.out || t < ti.out)) title(t, ti)
+}
+</script></body></html>

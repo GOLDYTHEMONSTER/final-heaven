@@ -59,3 +59,8 @@ brand/catalog/*/*.webp
 brand/catalog/*/supplier/
 brand/catalog/_worker/
 .claude/worktrees/
+# Campaign media (generated stills, clips, renders, model photos): kept out of git; only the build files and docs are committed.
+brand/social/city-is-yours/**/*.png
+brand/social/city-is-yours/**/*.jpg
+brand/social/city-is-yours/**/*.jpeg
+brand/social/city-is-yours/**/*.mp4
