@@ -13,11 +13,7 @@ import {
   type MessageEmailData, type OrderEmailData, type RenderedEmail,
 } from './templates'
 
-<<<<<<< HEAD
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'order.delivered' | 'order.refunded'
-=======
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'support.ack' | 'support.reply'
->>>>>>> worktree-agent-a274c27e96fb0cfda
+export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'order.delivered' | 'order.refunded' | 'support.ack' | 'support.reply'
 
 export type OutboxRow = {
   id: number

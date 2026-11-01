@@ -3,6 +3,7 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { BadRequest, email, handle, readJson, text } from '@/lib/api'
 import { fromMinor } from '@/lib/money'
 import { parseCart, parseDelivery, parseGift, parsePromoCode } from '@/lib/checkout'
+import { parseAttribution } from '@/lib/attribution'
 import { checkoutForRequest } from '@/lib/checkout/supabase-store'
 import { getStorefront } from '@/lib/tenancy'
 import { POLICY } from '@/lib/legal'
@@ -34,6 +35,8 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
 
   const result = await (await checkoutForRequest(req)).begin({
     lines: parseCart(body.items), promoCode: parsePromoCode(body.promoCode), gift: parseGift(body.gift), delivery: parseDelivery(body.delivery), buyer,
+    // Only labels where the sale came from: checked and cut to size, never trusted for anything else, and never a reason to refuse.
+    attribution: parseAttribution(body.attribution),
   })
   if (!result.ok) {
     return NextResponse.json({ error: result.message, reason: result.reason }, { status: result.reason === 'cart_invalid' ? 400 : 503 })

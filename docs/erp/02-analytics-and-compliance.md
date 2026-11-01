@@ -49,6 +49,17 @@ Both are cookieless and skip Do Not Track and Global Privacy Control visitors, s
 - **Install note:** `.npmrc` sets `legacy-peer-deps=true`. `@vercel/analytics` lists SvelteKit as an optional peer and npm 11 fails trying to reconcile it with Vitest's Vite. No Svelte package is installed; a clean `npm ci` was verified.
 - **Do not remove the first-party tracker** in favour of Vercel: admin would lose visitors, conversion, funnel, sources and devices.
 
+### Ad attribution (added 1 Nov 2026)
+
+Migration `20261101300000_ad_attribution.sql`. Shows where a paid order came from, without sending anything to anyone.
+
+- **Tags:** `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` and `fbclid`, each cut to 200 characters and cleaned on the server (`lib/attribution.ts`; the database keeps only those six keys).
+- **On the visit:** `/api/track` records them on the event, like the other UTM tags.
+- **First and last touch:** the one exception to "no browser storage". When a link carries tags, the browser keeps them (`fh_attribution` in local storage, first touch for 30 days). A shopper who didn't arrive from a tagged link stores nothing, and Do Not Track / Global Privacy Control visitors store nothing. Checkout sends them with the order; the server cleans them again and they never affect a price. The privacy policy should say so before ads run.
+- **To the order:** `checkouts.attribution` is copied to `orders.attribution` when payment places the order.
+- **Studio → Analytics → Ads:** paid orders, revenue (order total, before refunds) and visitors by campaign, ad set (`utm_content`) and ad (`utm_term`), crediting the last or the first touch.
+- **Audience exports** (`customers.read`): hashed emails for purchasers (paid or partly refunded, last 180 days) and for subscribers who consented, are still subscribed, aren't suppressed and have never bought. Each download writes an `audience.exported` audit entry with its count, never the addresses.
+
 ## Customers
 
 `/studio/customers` lists one row per customer email (lower-cased) from orders: order count, paid count and total, first and last order, latest city. Expanding a row shows that customer's orders with status and courier tracking. Requires `customers.read`. It's derived from orders until Phase 2 adds a `customers` table; nothing is merged automatically.

@@ -13,6 +13,7 @@ import { formatDay, paymentsClosed } from '@/lib/catalog'
 import { CheckoutCountdown } from '@/components/launch/CheckoutCountdown'
 import { PENDING_CHECKOUT_KEY, quoteLineAt, useQuote } from '@/lib/useQuote'
 import type { DeliveryOption } from '@/lib/delivery'
+import { storedAttribution } from '@/lib/attribution-client'
 import { DeliveryChoice } from '@/components/cart/DeliveryChoice'
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
@@ -87,6 +88,7 @@ export default function CheckoutPage() {
       gift,
       delivery,
       termsAccepted,
+      attribution: storedAttribution(),
     }
 
     let response: Response
