@@ -11,6 +11,9 @@ Migration: `supabase/migrations/20261018180000_email_outbox.sql`. Code: `lib/ema
 | New order | `STAFF_ALERT_EMAIL` | the order is placed. Flagged if stock ran short (restock or refund) or if the order was cancelled (refund needed). Reply-to is the customer. |
 | New message | `STAFF_ALERT_EMAIL` | contact form message. Reply-to is the customer, so replying answers them directly. |
 
+| Message acknowledgement | customer | contact form sent (`support.ack`). Gives the reference (FH-7K2Q) and says they'll hear back within 1–2 working days. |
+| Support reply | customer | staff reply in Studio → Messages (`support.reply`). Subject "Re: <topic> [FH-7K2Q]". Sent at once, never held. Migration `20261101200000_support_inbox.sql`. |
+
 No marketing email is sent. Newsletter sign-ups are stored only.
 
 ## How it works

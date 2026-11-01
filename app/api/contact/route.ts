@@ -4,6 +4,7 @@ import { BadRequest, email, handle, readJson, text } from '@/lib/api'
 import { getStorefront } from '@/lib/tenancy'
 import { rateLimit } from '@/lib/rate-limit'
 import { sendQueuedEmails } from '@/lib/email'
+import { newSupportReference } from '@/lib/support'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,10 +28,14 @@ export const POST = handle('contact.create', async (req: NextRequest) => {
   if (message.length < 10) throw new BadRequest('Please tell us a little more (at least 10 characters).')
 
   const store = await getStorefront()
-  const { error } = await createSupabaseServiceClient().from('contact_messages').insert({
-    tenant_id: store.tenantId, store_id: store.storeId, name, email: from, topic, order_number: orderNumber, message,
-  })
-  if (error) throw error
-  await sendQueuedEmails() // staff alert, with reply-to set to the customer
+  // The reference is unique per store: on the rare clash, draw another.
+  for (let attempt = 1; ; attempt++) {
+    const { error } = await createSupabaseServiceClient().from('contact_messages').insert({
+      tenant_id: store.tenantId, store_id: store.storeId, name, email: from, topic, order_number: orderNumber, message, reference: newSupportReference(),
+    })
+    if (!error) break
+    if (error.code !== '23505' || attempt >= 5) throw error
+  }
+  await sendQueuedEmails() // staff alert (reply-to is the customer) and the customer's acknowledgement
   return NextResponse.json({ ok: true }, { status: 201 })
 })

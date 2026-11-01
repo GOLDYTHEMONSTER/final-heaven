@@ -41,7 +41,11 @@ const PROBES = {
   '20261029170000_order_followup.sql': `to_regprocedure('public.orders_due_followup(uuid,integer,integer,integer)') is not null`,
   '20261029180000_campaign_stats.sql': `to_regprocedure('public.campaign_email_stats(uuid)') is not null`,
   '20261029190000_business_overview.sql': `to_regprocedure('public.business_overview(uuid,date,date)') is not null and to_regprocedure('public.launch_signals(uuid)') is not null`,
+<<<<<<< HEAD
   '20261101100000_email_approvals.sql': `to_regclass('public.email_batches') is not null and to_regprocedure('public.email_usage(uuid)') is not null`,
+=======
+  '20261101200000_support_inbox.sql': `to_regclass('public.support_replies') is not null and to_regclass('public.support_saved_replies') is not null and to_regprocedure('public.send_support_reply(uuid,uuid,uuid,text,text)') is not null`,
+>>>>>>> worktree-agent-a274c27e96fb0cfda
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).
