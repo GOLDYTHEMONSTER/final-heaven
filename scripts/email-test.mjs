@@ -1,7 +1,7 @@
 // Email set-up and test sends through Resend, from this machine.
 //   node scripts/email-test.mjs status          the sending domain and which DNS records Resend still wants
 //   node scripts/email-test.mjs verify          ask Resend to check the DNS again
-//   node scripts/email-test.mjs send <to> [campaign|order-paid|order-shipped|--all]   one sample email (campaign by default); --all sends the three
+//   node scripts/email-test.mjs send <to> [campaign|order-paid|order-shipped|welcome-early|--all]   one sample email (campaign by default); --all sends them all
 // Reads RESEND_API_KEY and EMAIL_FROM from .env.local; never prints the key.
 // Before the domain is verified, Resend only sends from onboarding@resend.dev to
 // the account's own email, so `send` falls back to that until then.
@@ -51,7 +51,8 @@ if (cmd === 'status' || cmd === 'verify') {
   let from = FROM
   try {
     const { d } = await findDomain()
-    if (!d || !['verified', 'partially_verified'].includes(d.status)) { from = 'Final Heaven <onboarding@resend.dev>'; console.log('Domain not verified yet: sending from onboarding@resend.dev (only reaches the Resend account’s own email).') }
+    // partially_failed: sending records verified, the receiving MX left pending (inbound isn't on).
+    if (!d || !['verified', 'partially_verified', 'partially_failed'].includes(d.status)) { from = 'Final Heaven <onboarding@resend.dev>'; console.log('Domain not verified yet: sending from onboarding@resend.dev (only reaches the Resend account’s own email).') }
   } catch { /* a sending-only key can't read domains: try EMAIL_FROM as is */ }
   const out = mkdtempSync(join(tmpdir(), 'fh-email-'))
   const r = spawnSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['vitest', 'run', 'tests/email-samples.render.test.ts'], { env: { ...process.env, EMAIL_RENDER_OUT: out }, encoding: 'utf8', shell: process.platform === 'win32' })
@@ -59,7 +60,7 @@ if (cmd === 'status' || cmd === 'verify') {
   if (!files.length) { console.error(`Couldn't render the samples:\n${(r.stdout ?? '') + (r.stderr ?? '')}`.slice(0, 1500)); process.exit(1) }
   // One email per test by default: every send counts against the production quota.
   const picked = which === '--all' ? files : files.filter((f) => f === `${which}.json`)
-  if (!picked.length) { console.error(`Unknown sample ${which}: campaign, order-paid, order-shipped or --all`); process.exit(1) }
+  if (!picked.length) { console.error(`Unknown sample ${which}: campaign, order-paid, order-shipped, welcome-early or --all`); process.exit(1) }
   for (const f of picked) {
     const e = JSON.parse(readFileSync(join(out, f), 'utf8'))
     const s = await api('/emails', { method: 'POST', body: JSON.stringify({ from, to: [to], subject: `[Test] ${e.subject}`, html: e.html, text: e.text }) })

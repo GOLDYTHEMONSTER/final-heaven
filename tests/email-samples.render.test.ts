@@ -6,6 +6,8 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { orderPaidEmail, orderShippedEmail, type OrderEmailData } from '@/lib/email/templates'
 import { renderCampaign } from '@/lib/email/campaign'
+import { welcomeEmail } from '@/lib/email/lifecycle'
+import { inviteLink } from '@/lib/early-access'
 
 const out = process.env.EMAIL_RENDER_OUT
 
@@ -28,8 +30,11 @@ it.skipIf(!out)('renders sample emails', () => {
     { id: 'p1793210836554', name: 'Striped Track Pants', price: 25000, image: null },
     { id: 'p1793275911791', name: 'Water Blaster — Shark 43 cm', price: 10500, image: null },
   ] })
+  // The welcome a launch-waitlist sign-up gets before checkout opens, with a sample early access code.
+  const welcomeEarly = welcomeEmail({ source: 'launch_waitlist', site, unsubscribeUrl: `${site}/unsubscribe`, reason: 'this is a test',
+    early: { code: 'FHTEST01', percent: 25, inviteLink: inviteLink(site, 'FHTEST01') } })
   mkdirSync(out!, { recursive: true })
-  for (const [name, e] of Object.entries({ campaign, 'order-paid': orderPaidEmail(order, site), 'order-shipped': orderShippedEmail(order, site) })) {
+  for (const [name, e] of Object.entries({ campaign, 'order-paid': orderPaidEmail(order, site), 'order-shipped': orderShippedEmail(order, site), 'welcome-early': welcomeEarly })) {
     writeFileSync(join(out!, `${name}.json`), JSON.stringify(e))
   }
 })
