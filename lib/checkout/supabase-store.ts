@@ -65,6 +65,7 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
         discount: c.discount, total: c.total, promo_code_id: c.promoCodeId, promo_code: c.promoCode,
         is_preorder: c.isPreorder, terms_version: c.termsVersion, terms_accepted_at: c.termsAcceptedAt, shipping: c.shipping,
         delivery_option: c.deliveryOption, delivery_fee: c.deliveryFee, delivery_estimate: c.deliveryEstimate,
+        attribution: c.attribution,
       } })
       const held = heldLine(error)
       if (held) return { ok: false, held }

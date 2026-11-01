@@ -90,6 +90,7 @@ export default function AnalyticsPage() {
           <h1 className="display text-3xl md:text-4xl">Analytics</h1>
           <p className="mt-1 text-sm text-final-muted">From verified orders and anonymous visit counts. Days are in Lagos time.</p>
         </div>
+        <Link href="/studio/analytics/ads" className="text-sm text-final-muted underline underline-offset-4 hover:text-final-off-white sm:ml-auto">Ads (Meta)</Link>
         {/* One filter row; it scopes everything below. */}
         <div role="radiogroup" aria-label="Date range" className="inline-flex rounded-lg border border-final-off-white/15 p-1">
           {RANGES.map((r) => (

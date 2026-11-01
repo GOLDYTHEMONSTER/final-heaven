@@ -23,7 +23,9 @@
 //  - begin saves the order's shipping allocation (lib/shipping/engine) with the
 //    Checkout, worked out from the same server prices; it never changes the
 //    total, and checkout doesn't wait on it: if it can't be worked out, the
-//    Checkout is saved without one.
+//    Checkout is saved without one;
+//  - begin carries the shopper's ad tags (lib/attribution) to the Checkout and
+//    on to the order, as a label only: they never touch the price.
 //
 // Behind it: the purchase and pricing rules (./pricing, lib/catalog), the
 // CheckoutStore seam (Supabase in production, in-memory in tests) and the
@@ -32,6 +34,7 @@ import { BadRequest, int, reference, text } from '@/lib/api'
 import { fromMinor, toMinor } from '@/lib/money'
 import { paymentsClosed, paymentsState, storeToday, type CatalogueProduct, type PaymentsState } from '@/lib/catalog'
 import { POLICY } from '@/lib/legal'
+import type { Attribution } from '@/lib/attribution'
 import { logger } from '@/lib/log'
 import { allocateOrder, type Context, type Costs, type Profile, type Snapshot } from '@/lib/shipping/engine'
 import { DELIVERY_OPTIONS, orderDayFor, type DeliveryOption } from '@/lib/delivery'
@@ -84,6 +87,8 @@ export type NewCheckout = Buyer & {
   deliveryFee: string
   /** When the order should arrive, as quoted. */
   deliveryEstimate: { minDays: number; maxDays: number; from: string | null; to: string | null }
+  /** Where the shopper came from (ad tags): a label only, it never changes what is charged. */
+  attribution: Attribution | null
 }
 
 /** What the shipping allocation needs for some products: policy, rates, campaigns, profiles, costs, categories. */
@@ -247,8 +252,8 @@ export function checkout(deps: CheckoutDeps) {
     }
   }
 
-  async function begin({ lines, promoCode = null, gift = null, delivery = 'standard', buyer }:
-    { lines: CartLine[]; promoCode?: string | null; gift?: GiftPick | null; delivery?: DeliveryOption; buyer: Buyer }): Promise<BeginResult> {
+  async function begin({ lines, promoCode = null, gift = null, delivery = 'standard', buyer, attribution = null }:
+    { lines: CartLine[]; promoCode?: string | null; gift?: GiftPick | null; delivery?: DeliveryOption; buyer: Buyer; attribution?: Attribution | null }): Promise<BeginResult> {
     const priced = await quote({ lines, promoCode, email: buyer.email, gift, delivery })
     const problem = quoteProblem(priced)
     if (problem) return { ok: false, reason: 'cart_invalid', message: problem, quote: priced }
@@ -279,6 +284,7 @@ export function checkout(deps: CheckoutDeps) {
       deliveryOption: priced.delivery.option,
       deliveryFee: m(priced.delivery.feeMinor),
       deliveryEstimate: priced.delivery.estimates[priced.delivery.option as 'standard'],
+      attribution,
     })
     // Someone else started a checkout for the last pieces between pricing and saving.
     if (!saved.ok) {

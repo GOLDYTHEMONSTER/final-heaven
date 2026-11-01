@@ -3,6 +3,7 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { getStorefront } from '@/lib/tenancy'
 import { clientIp, rateLimit } from '@/lib/rate-limit'
 import { logger } from '@/lib/log'
+import { touchFromParams, type Touch } from '@/lib/attribution'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,8 +17,6 @@ function device(ua: string): 'mobile' | 'tablet' | 'desktop' {
   return 'desktop'
 }
 
-const clean = (v: unknown, max: number) =>
-  typeof v === 'string' && v.trim() ? v.trim().slice(0, max).replace(/[^\w.\- ]/g, '') || null : null
 
 /**
  * Privacy-first analytics. No cookies, nothing stored in the browser, no IP
@@ -38,19 +37,15 @@ export async function POST(req: NextRequest) {
     const body = JSON.parse(raw || '{}') as Record<string, unknown>
     if (typeof body.type !== 'string' || !EVENTS.has(body.type)) return NO_CONTENT()
 
-    // Path only: query strings can carry personal data. UTM tags are read from it first.
+    // Path only: query strings can carry personal data. The ad tags (utm_*, fbclid) are read from it first.
     let path: string | null = null
-    let utm: Record<string, string | null> = { source: null, medium: null, campaign: null }
+    let tags: Touch | null = null
     if (typeof body.url === 'string') {
       try {
         const u = new URL(body.url, 'https://placeholder.invalid')
         if (/^\/(studio|admin|login)(\/|$)/.test(u.pathname)) return NO_CONTENT()
         path = u.pathname.slice(0, 300)
-        utm = {
-          source: clean(u.searchParams.get('utm_source'), 100),
-          medium: clean(u.searchParams.get('utm_medium'), 100),
-          campaign: clean(u.searchParams.get('utm_campaign'), 100),
-        }
+        tags = touchFromParams(u.searchParams)
       } catch {}
     }
 
@@ -74,9 +69,12 @@ export async function POST(req: NextRequest) {
       p_path: path,
       p_product: productId,
       p_referrer_host: referrerHost,
-      p_utm_source: utm.source,
-      p_utm_medium: utm.medium,
-      p_utm_campaign: utm.campaign,
+      p_utm_source: tags?.utm_source ?? null,
+      p_utm_medium: tags?.utm_medium ?? null,
+      p_utm_campaign: tags?.utm_campaign ?? null,
+      p_utm_content: tags?.utm_content ?? null,
+      p_utm_term: tags?.utm_term ?? null,
+      p_fbclid: tags?.fbclid ?? null,
       p_device: device(ua),
       p_country: country && /^[A-Z]{2}$/.test(country) ? country : null,
     })

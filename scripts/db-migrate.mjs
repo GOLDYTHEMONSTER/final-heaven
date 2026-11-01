@@ -41,6 +41,7 @@ const PROBES = {
   '20261029170000_order_followup.sql': `to_regprocedure('public.orders_due_followup(uuid,integer,integer,integer)') is not null`,
   '20261029180000_campaign_stats.sql': `to_regprocedure('public.campaign_email_stats(uuid)') is not null`,
   '20261029190000_business_overview.sql': `to_regprocedure('public.business_overview(uuid,date,date)') is not null and to_regprocedure('public.launch_signals(uuid)') is not null`,
+  '20261101300000_ad_attribution.sql': `exists (select 1 from information_schema.columns where table_name = 'orders' and column_name = 'attribution') and exists (select 1 from information_schema.columns where table_name = 'analytics_events' and column_name = 'fbclid') and to_regprocedure('public.ads_report(uuid,date,date,text)') is not null and to_regprocedure('public.audience_emails(uuid,text,integer)') is not null`,
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).
