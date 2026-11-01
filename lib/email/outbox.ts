@@ -7,12 +7,13 @@
 import { EmailError, type EmailSender, type OutgoingEmail } from './resend'
 import { AUDIENCES, isAudience } from './campaign'
 import { orderFollowupEmail, productAvailableEmail, welcomeEmail, type AlertProduct } from './lifecycle'
+import { supportAckEmail, supportReplyEmail } from './support'
 import {
   orderPaidEmail, orderShippedEmail, staffMessageEmail, staffOrderPaidEmail,
   type MessageEmailData, type OrderEmailData, type RenderedEmail,
 } from './templates'
 
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup'
+export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'support.ack' | 'support.reply'
 
 export type OutboxRow = {
   id: number
@@ -22,11 +23,14 @@ export type OutboxRow = {
   messageId: string | null
   subscriberId: string | null
   alertId: string | null
+  replyId?: string | null
   dedupeKey: string
   attempts: number
 }
 
 export type SubscriberEmailData = { email: string; source: string | null; unsubscribeToken: string; unsubscribed: boolean }
+/** A staff reply with the customer's message it answers. */
+export type ReplyEmailData = { body: string; message: MessageEmailData }
 /** An alert with its product as it is now; buyable is purchaseState at the time of sending. */
 export type AlertEmailData = { email: string; unsubscribeToken: string; product: AlertProduct | null; buyable: boolean }
 
@@ -38,6 +42,7 @@ export interface EmailStore {
   claim(limit: number, maxAttempts: number): Promise<OutboxRow[]>
   loadOrder(id: string): Promise<OrderEmailData | null>
   loadMessage(id: string): Promise<MessageEmailData | null>
+  loadReply(id: string): Promise<ReplyEmailData | null>
   loadSubscriber(id: string): Promise<SubscriberEmailData | null>
   loadAlert(id: string): Promise<AlertEmailData | null>
   /** Whether this address is on the suppression list (hard bounce or spam complaint). */
@@ -78,6 +83,18 @@ async function compose(deps: EmailDeps, row: OutboxRow): Promise<OutgoingEmail |
     const m = row.messageId ? await store.loadMessage(row.messageId) : null
     if (!m) return { skip: 'message no longer exists' }
     return base(config!.staffTo, staffMessageEmail(m, site), m.email) // reply goes straight to the customer
+  }
+
+  if (row.kind === 'support.ack') {
+    const m = row.messageId ? await store.loadMessage(row.messageId) : null
+    if (!m) return { skip: 'message no longer exists' }
+    return base([m.email], supportAckEmail(m, site), config!.replyTo)
+  }
+
+  if (row.kind === 'support.reply') {
+    const r = row.replyId ? await store.loadReply(row.replyId) : null
+    if (!r) return { skip: 'reply no longer exists' }
+    return base([r.message.email], supportReplyEmail(r.message, r.body, site), config!.replyTo)
   }
 
   if (row.kind === 'subscriber.welcome') {

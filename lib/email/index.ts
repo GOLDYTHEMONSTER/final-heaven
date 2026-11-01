@@ -15,7 +15,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
       const { data, error } = await db.rpc('claim_email_outbox', { p_limit: limit, p_max_attempts: maxAttempts })
       if (error) throw error
       return (data ?? []).map((r: Record<string, any>) => ({
-        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, alertId: r.alert_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
+        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, alertId: r.alert_id, replyId: r.reply_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
       }))
     },
 
@@ -43,9 +43,18 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
 
     async loadMessage(id) {
       const { data, error } = await db.from('contact_messages')
-        .select('name, email, topic, order_number, message').eq('id', id).maybeSingle()
+        .select('name, email, topic, order_number, message, reference').eq('id', id).maybeSingle()
       if (error) throw error
-      return data ? { name: data.name, email: data.email, topic: data.topic, orderNumber: data.order_number, message: data.message } : null
+      return data ? { name: data.name, email: data.email, topic: data.topic, orderNumber: data.order_number, message: data.message, reference: data.reference } : null
+    },
+
+    async loadReply(id) {
+      const { data, error } = await db.from('support_replies')
+        .select('body, message:contact_messages(name, email, topic, order_number, message, reference)').eq('id', id).maybeSingle()
+      if (error) throw error
+      const m = data?.message as unknown as Record<string, any> | null | undefined
+      if (!data || !m) return null
+      return { body: data.body, message: { name: m.name, email: m.email, topic: m.topic, orderNumber: m.order_number, message: m.message, reference: m.reference } }
     },
 
     async loadSubscriber(id) {

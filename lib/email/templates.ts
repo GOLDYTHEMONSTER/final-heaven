@@ -39,6 +39,8 @@ export type MessageEmailData = {
   topic: string
   orderNumber: string | null
   message: string
+  /** FH-7K2Q; null for messages sent before references existed. */
+  reference?: string | null
 }
 
 export type RenderedEmail = { subject: string; html: string; text: string }
@@ -69,7 +71,7 @@ export function formatMoney(amount: number | string, currency: string) {
   }
 }
 
-const TOPICS: Record<string, string> = {
+export const TOPICS: Record<string, string> = {
   order: 'About an order', return: 'Return or refund', privacy: 'Personal data request', other: 'General enquiry',
 }
 
