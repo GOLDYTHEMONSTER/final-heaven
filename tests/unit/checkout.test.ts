@@ -173,6 +173,18 @@ describe('promo codes in a quote', () => {
     expect((await make().quote({ lines: [tee(1)], promoCode: 'SAVE10' })).discountMinor).toBe(100_000)
   })
 
+  it('a personal early access code works only for its owner, until 30 days after launch', async () => {
+    mem = memoryStore({ FHAB12CD: { ...promo({ code: 'FHAB12CD', value: 30, subscriber_id: 'sub1' }), forOtherEmail: true } })
+    const theirs = await make().quote({ lines: [tee(1)], promoCode: 'FHAB12CD', email: 'someone@else.test' })
+    expect(theirs.promoError).toBe('That code belongs to another email address. Use the email it was sent to.')
+    expect((await make().begin({ lines: [tee(1)], promoCode: 'FHAB12CD', buyer })).ok).toBe(false)
+
+    mem = memoryStore({ FHAB12CD: promo({ code: 'FHAB12CD', value: 30, subscriber_id: 'sub1' }) })
+    expect((await make(NOW, { paymentsOpenOn: '2026-10-01' }).quote({ lines: [tee(1)], promoCode: 'FHAB12CD' })).discountMinor).toBe(300_000)
+    mem = memoryStore({ FHAB12CD: promo({ code: 'FHAB12CD', value: 30, subscriber_id: 'sub1' }) })
+    expect((await make(NOW, { paymentsOpenOn: '2026-09-01' }).quote({ lines: [tee(1)], promoCode: 'FHAB12CD' })).promoError).toBe('That promo code has expired.')
+  })
+
   it('reports an unknown code', async () => {
     expect((await make().quote({ lines: [tee(1)], promoCode: 'NOPE' })).promoError).toBe('That promo code isn’t valid.')
   })

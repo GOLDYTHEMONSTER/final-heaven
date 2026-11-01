@@ -13,6 +13,8 @@ import { AUDIENCES, isAudience, renderCampaign, type CampaignContent, type Campa
 import { campaignProducts } from './campaign-send'
 import { emailUsage, marketingAllowance, marketingPause } from './budget'
 import { MARKETING_GAP_DAYS, type BatchTrigger } from './reachout'
+import { fillEarly, needsEarly } from './lifecycle'
+import { earlyFill } from '@/lib/early-access-store'
 
 const PAUSE_MS = 550
 const DAY_MS = 86_400_000
@@ -178,7 +180,18 @@ export async function drainApprovedBatches(
       const unsubscribeUrl = `${site}/unsubscribe?token=${sub.unsubscribe_token}`
       const reason = isAudience(sub.source) ? AUDIENCES[sub.source].reason : 'you signed up for Final Heaven emails'
       const products = await productsOf(r.product_id ? [r.product_id] : (b.product_ids ?? []))
-      const email = renderCampaign(batchContent(b), { products, site, unsubscribeUrl, reason })
+      // Copy with {code}, {percent} or {invite_link} (the early access welcome) gets this person's own details.
+      let content = batchContent(b)
+      if (needsEarly([content.subject, content.preheader, content.body].join(' '))) {
+        const fill = await earlyFill(db, r.subscriber_id, site)
+        if (!fill) {
+          await mark(r.subscriber_id, { status: 'skipped', last_error: 'no early access code for this subscriber' })
+          result.skipped += 1
+          continue
+        }
+        content = { ...content, subject: fillEarly(content.subject, fill), preheader: fillEarly(content.preheader, fill), body: fillEarly(content.body, fill) }
+      }
+      const email = renderCampaign(content, { products, site, unsubscribeUrl, reason })
       try {
         const { id } = await sender.send({
           from: deps.from, to: [r.email], replyTo: deps.replyTo, subject: email.subject, html: email.html, text: email.text,

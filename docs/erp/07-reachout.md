@@ -97,6 +97,17 @@ Rules for every marketing trigger:
 - every email has a one-click unsubscribe;
 - views are only joined to a subscriber after they've given us their email (first-party, same rule as analytics).
 
+## Early access (before checkout opens)
+
+Everyone who subscribes before `stores.payments_open_on` gets a personal code (`FH` + 6 characters), made on sign-up. Everyone on the list when this shipped got one too, in the migration.
+
+- **The code:** 25% off their first order, plus 2 months of membership free when membership opens. The free months are recorded on the subscriber (`free_membership_months`).
+- **Who can use it:** their own email only, once, until the end of the 30th day after launch day.
+- **Invites:** each friend who joins through their link (`/?invite=CODE`) adds 5%. Another 5% is added when that friend's first paid order comes in, credited by the daily job. The total is capped at 35%.
+- **Where the code goes:** the welcome email, as `{percent}`, `{code}` and `{invite_link}`, filled in per person when it is sent. Held welcome batches that still have the plain wording pick up the early access version.
+- **Rules in code:** `lib/early-access.ts`. Data: `20261101400000_early_access.sql`. Studio → Promos shows the totals; the personal codes themselves aren't listed.
+- **Abuse:** a fake email that "joins" earns at most the subscribe credit, and the 35% cap limits the damage.
+
 ## Support
 
 - **Contact form** (`contact_messages`) gets a reference number. The customer gets an acknowledgement (S7) that says when they'll hear back.

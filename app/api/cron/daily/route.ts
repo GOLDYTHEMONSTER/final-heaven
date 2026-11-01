@@ -37,6 +37,8 @@ export const maxDuration = 60
  *     about payments still open, abandon ones it never saw after 24h.
  *  2. Email catch-up: send anything still queued (e.g. after a Resend outage
  *     or the daily quota), up to 50.
+ *  2a. Invite credits (lib/early-access): an invited friend's first paid order
+ *     adds 5% to their inviter's early access code (up to 35%). Sends nothing.
  *  2b. Marketing triggers (lib/email/reachout): welcome backfill, nurture, launch
  *     (once checkout is open), retargeting, review ask and win-back are put into
  *     held batches in Studio → Outbox. Nothing is sent without the owner's approval.
@@ -70,6 +72,15 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
     logger.error('cron.reconcile_failed', { error })
   }
   result.emails = await sendQueuedEmails(50)
+  try {
+    const store = await getStorefront()
+    const { data, error } = await createSupabaseServiceClient().rpc('credit_paid_invites', { p_tenant: store.tenantId })
+    if (error) throw error
+    result.invites = { paidCredits: data }
+  } catch (error) {
+    result.invites = { error: (error as Error).message }
+    logger.error('cron.invites_failed', { error })
+  }
   try {
     result.marketing = await queueMarketingBatches(await getStorefront()) // held for the owner's approval; sends nothing
   } catch (error) {

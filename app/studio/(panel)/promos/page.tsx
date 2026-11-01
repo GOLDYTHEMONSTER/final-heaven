@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { formatCurrency } from '@/lib/utils/format'
+import { EARLY_ACCESS } from '@/lib/early-access'
 
 type Promo = {
   id: string
@@ -19,6 +20,8 @@ type Promo = {
   discount_total: number
 }
 
+type Early = { codes: number; used: number; given: number; joined: number; paid: number }
+
 const empty = { code: '', description: '', kind: 'percent', value: '', min_subtotal: '', starts_on: '', ends_on: '', max_uses: '', once_per_customer: true }
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Africa/Lagos' })
 const field = 'w-full rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm text-final-off-white focus:border-final-off-white/40 focus:outline-none'
@@ -35,6 +38,7 @@ function status(p: Promo) {
 export default function PromosPage() {
   const [promos, setPromos] = useState<Promo[]>([])
   const [canWrite, setCanWrite] = useState(false)
+  const [early, setEarly] = useState<Early | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [form, setForm] = useState<typeof empty>(empty)
@@ -48,6 +52,7 @@ export default function PromosPage() {
       if (!res.ok) throw new Error(body?.error || 'Could not load promo codes.')
       setPromos(body.promos)
       setCanWrite(body.canWrite)
+      setEarly(body.early ?? null)
       setError('')
     } catch (e) {
       setError((e as Error).message)
@@ -88,6 +93,25 @@ export default function PromosPage() {
           A use counts only when the order is paid. Sale prices are set on each product instead.
         </p>
       </div>
+
+      {early && early.codes > 0 && (
+        <section aria-labelledby="early-heading" className="mb-8 rounded-xl border border-final-off-white/10 bg-final-gray p-5">
+          <h2 id="early-heading" className="font-semibold">Early access codes</h2>
+          <p className="mt-1 text-sm text-final-muted">
+            Everyone who subscribes before checkout opens gets a personal code by email: {EARLY_ACCESS.basePercent}% off their first order,
+            +{EARLY_ACCESS.perCreditPercent}% for each friend who joins and +{EARLY_ACCESS.perCreditPercent}% when that friend first orders, up to {EARLY_ACCESS.maxPercent}%.
+            It works with their own email only, once, until {EARLY_ACCESS.daysAfterLaunch} days after launch day. They also get {EARLY_ACCESS.freeMembershipMonths} months of membership free when it opens.
+          </p>
+          <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-5">
+            {([['Codes', early.codes], ['Used', early.used], ['Given', formatCurrency(early.given)], ['Friends joined', early.joined], ['Friends ordered', early.paid]] as const).map(([k, v]) => (
+              <div key={k} className="rounded-lg border border-final-off-white/10 bg-final-black px-3 py-2">
+                <dt className="text-xs text-final-muted">{k}</dt>
+                <dd className="mt-0.5 font-semibold tabular-nums">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
 
       {error && <div role="alert" className="mb-6 rounded-lg border border-final-ember/40 p-4 text-sm text-final-ember">{error}</div>}
 

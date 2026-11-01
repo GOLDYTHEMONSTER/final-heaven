@@ -6,6 +6,7 @@
 //  - Never throws: callers run it after their real work is done.
 import { EmailError, type EmailSender, type OutgoingEmail } from './resend'
 import { AUDIENCES, isAudience } from './campaign'
+import { inviteLink } from '@/lib/early-access'
 import { orderFollowupEmail, productAvailableEmail, welcomeEmail, type AlertProduct } from './lifecycle'
 import { supportAckEmail, supportReplyEmail } from './support'
 import {
@@ -28,7 +29,8 @@ export type OutboxRow = {
   attempts: number
 }
 
-export type SubscriberEmailData = { email: string; source: string | null; unsubscribeToken: string; unsubscribed: boolean }
+/** `early`: their personal early access code and its percent now (lib/early-access), when they have one. */
+export type SubscriberEmailData = { email: string; source: string | null; unsubscribeToken: string; unsubscribed: boolean; early?: { code: string; percent: number } | null }
 /** A staff reply with the customer's message it answers. */
 export type ReplyEmailData = { body: string; message: MessageEmailData }
 /** An alert with its product as it is now; buyable is purchaseState at the time of sending. */
@@ -103,7 +105,10 @@ async function compose(deps: EmailDeps, row: OutboxRow): Promise<OutgoingEmail |
     if (s.unsubscribed) return { skip: 'unsubscribed before the welcome was sent' }
     const reason = isAudience(s.source) ? AUDIENCES[s.source].reason : 'you signed up for Final Heaven emails'
     return {
-      ...base([s.email], welcomeEmail({ source: s.source, site, unsubscribeUrl: `${site}/unsubscribe?token=${s.unsubscribeToken}`, reason }), config!.replyTo),
+      ...base([s.email], welcomeEmail({
+        source: s.source, site, unsubscribeUrl: `${site}/unsubscribe?token=${s.unsubscribeToken}`, reason,
+        early: s.early ? { ...s.early, inviteLink: inviteLink(site, s.early.code) } : null,
+      }), config!.replyTo),
       headers: {
         'List-Unsubscribe': `<${site}/api/newsletter/unsubscribe?token=${s.unsubscribeToken}>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',

@@ -8,6 +8,8 @@ import { NeonMark } from '@/components/ui/NeonMark'
 import { LAUNCH_CONSENT } from '@/lib/consent'
 import { LAUNCH_WINDOW } from '@/lib/catalog'
 import { loadLaunch } from '@/lib/useLaunch'
+import { EARLY_ACCESS } from '@/lib/early-access'
+import { rememberInvite, storedInvite } from '@/lib/invite-client'
 import type { LaunchState } from '@/lib/launch'
 import { Countdown, timeLeft, useNow } from './Countdown'
 
@@ -35,13 +37,15 @@ export function LaunchGate() {
 
   useEffect(() => {
     let cancelled = false
+    const invited = rememberInvite()
     loadLaunch()
       .then((s) => {
         if (cancelled || !s || s.open) return
         setLaunch(s)
         const seen = read()
         setJoined(seen === 'joined')
-        if (!seen && !SKIP.some((p) => pathname?.startsWith(p))) {
+        // An invite link opens the sheet even for someone who has seen it before.
+        if ((invited && seen !== 'joined') || (!seen && !SKIP.some((p) => pathname?.startsWith(p)))) {
           // A beat after the page lands, so the store is glimpsed behind it.
           window.setTimeout(() => { if (!cancelled) { remember('seen'); setOpen(true) } }, 1200)
         }
@@ -149,7 +153,7 @@ function LaunchSheet({ launch, target, now, joined, onJoined, onClose }: {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), consent: true, source: 'launch_waitlist' }),
+        body: JSON.stringify({ email: email.trim(), consent: true, source: 'launch_waitlist', invite: storedInvite() }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) { setStatus('error'); setMessage(data.error || 'That didn’t go through. Try again in a moment.'); return }
@@ -221,6 +225,11 @@ function LaunchSheet({ launch, target, now, joined, onJoined, onClose }: {
                   ? `Doors open ${opensOn}. Join the waitlist and we’ll email you the moment they do.`
                   : `Doors open in ${LAUNCH_WINDOW}. Join the waitlist and we’ll email you the moment they do.`}
             </p>
+            {!joined && (
+              <p className="mt-3 max-w-[32ch] text-[13px] leading-relaxed text-final-off-white/75">
+                <span className="font-semibold text-final-off-white">Join before we open:</span> {EARLY_ACCESS.basePercent}% off your first order and {EARLY_ACCESS.freeMembershipMonths} months of membership free. Invite friends to reach {EARLY_ACCESS.maxPercent}%.
+              </p>
+            )}
           </div>
 
           <motion.div className="mt-6" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.35 }}>

@@ -7,6 +7,8 @@ import { startPayment } from '@/lib/payments/service'
 import { loadContext, loadProducts, toRate } from '@/lib/shipping/store'
 import { activeRate, chargeable } from '@/lib/shipping/engine'
 import { cancelReminder, scheduleReminder } from '@/lib/email/reminders-store'
+import { earlyPercent } from '@/lib/early-access'
+import { inviteCredits } from '@/lib/early-access-store'
 import { checkout, type CheckoutPayments, type CheckoutStore, type Held, type PromoCode } from './index'
 
 const PRODUCT_COLUMNS =
@@ -39,7 +41,7 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
 
     async promo(tenantId, code, email) {
       const { data: promo, error } = await db.from('promo_codes')
-        .select('id, code, description, kind, value, min_subtotal, starts_at, ends_at, max_uses, once_per_customer, active')
+        .select('id, code, description, kind, value, min_subtotal, starts_at, ends_at, max_uses, once_per_customer, active, subscriber_id')
         .eq('tenant_id', tenantId).eq('code', code).maybeSingle()
       if (error) throw error
       if (!promo) return null
@@ -52,7 +54,19 @@ export function supabaseCheckoutStore(db: SupabaseClient = createSupabaseService
         return n ?? 0
       }
       const [uses, customerUses] = await Promise.all([count(false), email ? count(true) : Promise.resolve(0)])
-      return { promo: promo as PromoCode, uses, customerUses }
+      if (!promo.subscriber_id) return { promo: promo as PromoCode, uses, customerUses }
+
+      // A personal early access code: its owner's email only, at the percent their invites have earned.
+      const [{ data: owner, error: oe }, credits] = await Promise.all([
+        db.from('newsletter_subscribers').select('email').eq('id', promo.subscriber_id).maybeSingle(),
+        inviteCredits(db, promo.subscriber_id),
+      ])
+      if (oe) throw oe
+      if (!owner) return null
+      return {
+        promo: { ...(promo as PromoCode), value: earlyPercent(credits) }, uses, customerUses,
+        forOtherEmail: Boolean(email) && owner.email.trim().toLowerCase() !== email!.trim().toLowerCase(),
+      }
     },
 
     async save(c) {

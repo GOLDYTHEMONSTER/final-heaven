@@ -117,7 +117,9 @@ export const POST = handle('admin.outbox.decide', async (req: NextRequest, { par
   if (ae) throw ae
   if (!approved) return NextResponse.json({ error: 'That batch was changed. Open it again.' }, { status: 409 })
   // Approving the welcome as written also approves it for new sign-ups, until its words change.
-  if ((b.trigger === 'welcome' || b.trigger === 'welcome_backfill') && copyHash(batchContent(b)) === copyHash(triggerContent(b.trigger, b.list))) {
+  // Either version counts: the plain welcome, or the early access one sent before checkout opens.
+  if ((b.trigger === 'welcome' || b.trigger === 'welcome_backfill')
+    && [false, true].some((early) => copyHash(batchContent(b)) === copyHash(triggerContent(b.trigger, b.list, early)))) {
     await approveTemplate(service, tenantId, welcomeTemplate(b.list), batchContent(b), staff.userId)
   }
   await audit({ tenantId, action: 'outbox.approved', entityType: 'email_batch', entityId: b.id, actor: { type: 'user', userId: staff.userId }, requestId: requestIdOf(req), metadata: { trigger: b.trigger, recipients: count } })

@@ -9,6 +9,9 @@ import { WELCOME_DAILY_CAP, welcomeDecision } from '@/lib/email/lifecycle'
 import { addToHeldBatch, templateApproved, welcomeTemplate } from '@/lib/email/batches-store'
 import { TRIGGERS, triggerContent } from '@/lib/email/reachout'
 import { logger } from '@/lib/log'
+import { storeToday } from '@/lib/catalog'
+import { isEarly, parseInvite } from '@/lib/early-access'
+import { joinEarly } from '@/lib/early-access-store'
 
 // Per-request only: never cached or prerendered.
 export const dynamic = 'force-dynamic'
@@ -50,11 +53,24 @@ export const POST = handle('newsletter.subscribe', async (req: NextRequest) => {
     .select('id').single()
   if (error) throw error
 
+  // Early access (lib/early-access): before checkout opens, everyone on a list gets a personal code,
+  // and a new subscriber who came with a friend's code earns that friend a credit. A bonus, like the welcome.
+  let early = false
+  try {
+    const { data: shop, error: se } = await db.from('stores').select('payments_open_on').eq('id', store.storeId).single()
+    if (se) throw se
+    if (isEarly(shop.payments_open_on ?? null, storeToday(store.timeZone, new Date()))) {
+      early = Boolean(await joinEarly(db, { subscriberId: saved.id, isNew: !existing, invite: parseInvite(body.invite) }))
+    }
+  } catch (e) {
+    logger.warn('newsletter.early_access_failed', { error: e })
+  }
+
   // The welcome is a bonus: whatever goes wrong here, the sign-up itself stands.
   const decision = welcomeDecision(existing ? { unsubscribedAt: existing.unsubscribed_at } : null, new Date())
   if (decision.welcome) {
     try {
-      const content = triggerContent('welcome', source)
+      const content = triggerContent('welcome', source, early)
       if (await templateApproved(db, store.tenantId, welcomeTemplate(source), content)) {
         const { error: queueError } = await db.rpc('queue_email_capped', {
           p_tenant: store.tenantId, p_kind: 'subscriber.welcome', p_ref_col: 'subscriber_id', p_ref: saved.id,

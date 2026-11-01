@@ -5,6 +5,7 @@
 import { BUSINESS, POLICY } from '@/lib/legal'
 import { LAUNCH_WINDOW, formatDay } from '@/lib/catalog'
 import { sized } from '@/lib/images'
+import { EARLY_ACCESS } from '@/lib/early-access'
 import { C, button, customerFooter, escapeHtml, formatMoney, itemDetails, layout, lineAmount, p, type OrderEmailData, type RenderedEmail } from './templates'
 
 /** Footer for emails sent because someone subscribed: why they got it, and a one-click way out. */
@@ -70,10 +71,34 @@ export function welcomeDecision(existing: { unsubscribedAt: string | null } | nu
   return old ? { welcome: true, keySuffix: left.toISOString().slice(0, 10) } : { welcome: false, keySuffix: '' }
 }
 
-export const welcomeCopy =(source: string | null) => WELCOME[source ?? ''] ?? WELCOME.footer
+/**
+ * The early access lines (lib/early-access.ts) a welcome carries for someone
+ * who joined before checkout opened. {percent}, {code} and {invite_link} are
+ * filled in per person when it is sent (fillEarly).
+ */
+export const EARLY_WELCOME_PARAS = [
+  `Because you joined before we open, you get {percent} off your first order with your code {code}, and ${EARLY_ACCESS.freeMembershipMonths} months of membership free when membership opens. The code works with this email address, once, until ${EARLY_ACCESS.daysAfterLaunch} days after checkout opens.`,
+  `Invite friends with your link and get ${EARLY_ACCESS.perCreditPercent}% more when each one joins, and ${EARLY_ACCESS.perCreditPercent}% more when they place their first order, up to ${EARLY_ACCESS.maxPercent}% off: {invite_link}`,
+]
 
-export function welcomeEmail({ source, site, unsubscribeUrl, reason }: { source: string | null; site: string; unsubscribeUrl: string; reason: string }): RenderedEmail {
-  const c = welcomeCopy(source)
+export const welcomeCopy = (source: string | null, early = false) => {
+  const c = WELCOME[source ?? ''] ?? WELCOME.footer
+  return early ? { ...c, paras: [...c.paras, ...EARLY_WELCOME_PARAS] } : c
+}
+
+export type EarlyFill = { code: string; percent: number; inviteLink: string }
+
+/** Puts one person's early access details into copy written with {percent}, {code} and {invite_link}. */
+export const fillEarly = (text: string, e: EarlyFill) =>
+  text.replaceAll('{percent}', `${e.percent}%`).replaceAll('{code}', e.code).replaceAll('{invite_link}', e.inviteLink)
+
+/** Whether copy is waiting for someone's early access details. */
+export const needsEarly = (text: string) => /\{(code|percent|invite_link)\}/.test(text)
+
+export function welcomeEmail({ source, site, unsubscribeUrl, reason, early = null }:
+  { source: string | null; site: string; unsubscribeUrl: string; reason: string; early?: EarlyFill | null }): RenderedEmail {
+  const base = welcomeCopy(source, Boolean(early))
+  const c = early ? { ...base, paras: base.paras.map((t) => fillEarly(t, early)) } : base
   return {
     subject: c.subject,
     html: layout({

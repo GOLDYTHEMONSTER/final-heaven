@@ -4,7 +4,8 @@ import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 import { paymentsState, storeToday } from '@/lib/catalog'
 import type { StoreContext } from '@/lib/tenancy'
 import { isAudience } from './campaign'
-import { addToHeldBatch, lastContacts, type NewRecipient } from './batches-store'
+import { addToHeldBatch, batchContent, copyHash, lastContacts, type NewRecipient } from './batches-store'
+import { isEarly } from '@/lib/early-access'
 import { suppressedAmong } from './suppression'
 import {
   RETARGET_REPEAT_DAYS, TRIGGERS, eligible, launchDue, lowStockViewedDue, nurtureDue, reviewAskDue, triggerContent, viewedTwiceDue, welcomeBackfillDue, winbackDue,
@@ -23,6 +24,23 @@ const DAY_MS = 86_400_000
  */
 async function subscriberViews(_db: SupabaseClient, _tenantId: string, _since: Date): Promise<View[]> {
   return []
+}
+
+/**
+ * Held welcome batches made before the early access offer existed still have
+ * the plain welcome. One whose words are exactly the plain welcome (nobody has
+ * reworded it) gets the early access welcome instead; an edited one is left alone.
+ */
+async function addEarlyToHeldWelcomes(db: SupabaseClient, tenantId: string) {
+  const { data, error } = await db.from('email_batches').select('id, trigger, list, subject, preheader, heading, body, cta_label, cta_url')
+    .eq('tenant_id', tenantId).eq('status', 'held').in('trigger', ['welcome_backfill', 'welcome'])
+  if (error) throw error
+  for (const b of data ?? []) {
+    if (copyHash(batchContent(b)) !== copyHash(triggerContent(b.trigger as BatchTrigger, b.list))) continue
+    const c = triggerContent(b.trigger as BatchTrigger, b.list, true)
+    const { error: ue } = await db.from('email_batches').update({ body: c.body, preheader: c.preheader }).eq('id', b.id).eq('status', 'held')
+    if (ue) throw ue
+  }
 }
 
 export type ReachoutRun = Partial<Record<BatchTrigger, number>> & { retargeting?: string; skipped?: string }
@@ -47,6 +65,11 @@ export async function queueMarketingBatches(store: StoreContext, db: SupabaseCli
   if (!people.length) return run
 
   const [suppressed, lastContact] = await Promise.all([suppressedAmong(db, tenantId, people.map((p) => p.email)), lastContacts(db, tenantId, now)])
+  const { data: shop, error: se } = await db.from('stores').select('payments_open_on, purchases_paused, launch_email_sent_at').eq('id', store.storeId).single()
+  if (se) throw se
+  // Before checkout opens, welcomes carry the early access offer (lib/early-access).
+  const early = isEarly(shop.payments_open_on ?? null, storeToday(store.timeZone, now))
+  if (early) await addEarlyToHeldWelcomes(db, tenantId)
   const hadIn = async (triggers: BatchTrigger[], withinDays?: number) => {
     let q = db.from('email_batch_recipients').select('subscriber_id').eq('tenant_id', tenantId).in('trigger', triggers)
     if (withinDays) q = q.gte('created_at', new Date(now.getTime() - withinDays * DAY_MS).toISOString())
@@ -65,7 +88,7 @@ export async function queueMarketingBatches(store: StoreContext, db: SupabaseCli
     for (const [list, group] of lists) {
       const recipients: NewRecipient[] = group.map((d) => ({ subscriberId: d.person.id, email: d.person.email, productId: d.productId, why: d.why }))
       added += (await addToHeldBatch(db, {
-        tenantId, trigger, list: list || null, content: triggerContent(trigger, list || null), reason: TRIGGERS[trigger].why, recipients,
+        tenantId, trigger, list: list || null, content: triggerContent(trigger, list || null, early), reason: TRIGGERS[trigger].why, recipients,
       })).added
       // Whoever just got a place can't also be put in another batch today.
       for (const d of group) lastContact.set(d.person.id, now)
@@ -94,8 +117,6 @@ export async function queueMarketingBatches(store: StoreContext, db: SupabaseCli
   await submit('nurture_7d', nurtureDue('nurture_7d', people, buyers, now), await hadIn(['nurture_7d']))
 
   // M5: the launch waitlist, once checkout has opened (and never after the launch email has gone).
-  const { data: shop, error: se } = await db.from('stores').select('payments_open_on, purchases_paused, launch_email_sent_at').eq('id', store.storeId).single()
-  if (se) throw se
   if (!shop.launch_email_sent_at && paymentsState({ paymentsOpenOn: shop.payments_open_on ?? null, purchasesPaused: shop.purchases_paused === true }, storeToday(store.timeZone, now)).open) {
     await submit('launch', launchDue(people), await hadIn(['launch']))
   }

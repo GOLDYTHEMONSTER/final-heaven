@@ -21,10 +21,15 @@ export type PromoCode = {
   max_uses: number | null
   once_per_customer: boolean
   active: boolean
+  /** A personal code (lib/early-access): only this subscriber's email can use it. */
+  subscriber_id?: string | null
 }
 
-/** A promo code plus how often it has been used on paid orders. */
-export type PromoContext = { promo: PromoCode; uses: number; customerUses: number }
+/**
+ * A promo code plus how often it has been used on paid orders. forOtherEmail:
+ * it's a personal code and the shopper's email isn't its owner's.
+ */
+export type PromoContext = { promo: PromoCode; uses: number; customerUses: number; forOtherEmail?: boolean }
 
 export type QuoteLine = {
   id: string
@@ -101,6 +106,7 @@ export function evaluatePromo(ctx: PromoContext | null, subtotalMinor: number, c
   if (promo.starts_at && new Date(promo.starts_at) > now) return { error: 'That promo code isn’t active yet.' }
   if (promo.ends_at && new Date(promo.ends_at) <= now) return { error: 'That promo code has expired.' }
   if (promo.max_uses != null && ctx.uses >= promo.max_uses) return { error: 'That promo code has been fully used.' }
+  if (ctx.forOtherEmail) return { error: 'That code belongs to another email address. Use the email it was sent to.' }
   if (promo.once_per_customer && ctx.customerUses > 0) return { error: 'You’ve already used that promo code.' }
   const minMinor = toMinor(promo.min_subtotal, currency)
   if (subtotalMinor < minMinor) {

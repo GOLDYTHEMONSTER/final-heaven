@@ -11,21 +11,34 @@ const DATE = /^\d{4}-\d{2}-\d{2}$/
 const dayStart = (d: string) => `${d}T00:00:00+01:00`
 const dayEnd = (d: string) => `${d}T23:59:59+01:00`
 
-/** Promo codes with how often each was used on paid orders. */
+/** Promo codes with how often each was used on paid orders; personal early access codes are summed up, not listed. */
 export const GET = handle('admin.promos.list', async () => {
   const { staff, denied } = await requirePermission('products.read')
   if (denied) return denied
 
-  const [codes, usage] = await Promise.all([
-    staff.supabase.from('promo_codes').select('*').eq('tenant_id', staff.tenant.tenantId).order('created_at', { ascending: false }),
-    staff.supabase.rpc('promo_usage', { p_tenant: staff.tenant.tenantId }),
+  const tenantId = staff.tenant.tenantId
+  const [codes, usage, personal, credits] = await Promise.all([
+    staff.supabase.from('promo_codes').select('*').eq('tenant_id', tenantId).is('subscriber_id', null).order('created_at', { ascending: false }),
+    staff.supabase.rpc('promo_usage', { p_tenant: tenantId }),
+    staff.supabase.from('promo_codes').select('id').eq('tenant_id', tenantId).not('subscriber_id', 'is', null).limit(10_000),
+    staff.supabase.from('invite_credits').select('step').eq('tenant_id', tenantId).limit(10_000),
   ])
   if (codes.error) throw codes.error
   if (usage.error) throw usage.error
+  if (personal.error) throw personal.error
   type Usage = { promo_code_id: string; uses: number; discount_total: number }
   const byId = new Map<string, Usage>(((usage.data ?? []) as Usage[]).map((u) => [u.promo_code_id, u]))
+  const personalIds = (personal.data ?? []).map((p) => p.id as string)
+  const steps = credits.error ? [] : (credits.data ?? []).map((c) => c.step as string) // invite credits need customers.read
   return NextResponse.json({
     promos: (codes.data ?? []).map((p) => ({ ...p, uses: Number(byId.get(p.id)?.uses ?? 0), discount_total: Number(byId.get(p.id)?.discount_total ?? 0) })),
+    early: {
+      codes: personalIds.length,
+      used: personalIds.filter((id) => Number(byId.get(id)?.uses ?? 0) > 0).length,
+      given: personalIds.reduce((sum, id) => sum + Number(byId.get(id)?.discount_total ?? 0), 0),
+      joined: steps.filter((s) => s === 'subscribed').length,
+      paid: steps.filter((s) => s === 'paid').length,
+    },
     canWrite: staff.can('products.write'),
   }, { headers: { 'Cache-Control': 'private, no-store' } })
 })

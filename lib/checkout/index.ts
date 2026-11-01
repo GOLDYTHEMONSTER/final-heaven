@@ -38,6 +38,7 @@ import type { Attribution } from '@/lib/attribution'
 import { logger } from '@/lib/log'
 import { allocateOrder, type Context, type Costs, type Profile, type Snapshot } from '@/lib/shipping/engine'
 import { DELIVERY_OPTIONS, orderDayFor, type DeliveryOption } from '@/lib/delivery'
+import { earlyEndsAt } from '@/lib/early-access'
 import { orderItems, quoteCart, quoteProblem, type CartLine, type GiftPick, type PromoContext, type Quote } from './pricing'
 
 export type { CartLine, GiftOption, GiftPick, Quote, QuoteDelivery, QuoteLine, PromoCode, PromoContext } from './pricing'
@@ -187,6 +188,8 @@ export function checkout(deps: CheckoutDeps) {
       promoCode ? deps.store.promo(shop.tenantId, promoCode, email) : Promise.resolve(null),
       shop.giftCategory ? deps.store.giftProducts(shop.storeId, shop.giftCategory) : Promise.resolve([]),
     ])
+    // A personal early access code runs until 30 days after launch day (lib/early-access).
+    if (promo?.promo.subscriber_id) promo.promo.ends_at = earlyEndsAt(shop.paymentsOpenOn)
     // Hidden categories, and gift pieces, can't be bought even by calling the API directly.
     const sellable = rows.filter((p) => !shop.hiddenCategories.includes(p.category) && p.category !== shop.giftCategory)
 

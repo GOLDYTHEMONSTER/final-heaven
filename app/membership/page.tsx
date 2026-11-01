@@ -1,10 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiClock, FiGift, FiUsers } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { WAITLIST_CONSENT } from '@/lib/consent'
+import { EARLY_ACCESS } from '@/lib/early-access'
+import { rememberInvite, storedInvite } from '@/lib/invite-client'
+import { loadLaunch } from '@/lib/useLaunch'
 
 // Membership isn't live yet. Everything here is described as planned, and
 // signing up joins a waitlist. No payment is taken and nothing is promised.
@@ -19,6 +22,12 @@ export default function MembershipPage() {
   const [consent, setConsent] = useState(false)
   const [state, setState] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  // The early access offer is shown only until checkout opens.
+  const [early, setEarly] = useState(false)
+  useEffect(() => {
+    rememberInvite()
+    loadLaunch().then((s) => setEarly(Boolean(s && !s.open))).catch(() => {})
+  }, [])
 
   async function join(e: React.FormEvent) {
     e.preventDefault()
@@ -32,12 +41,14 @@ export default function MembershipPage() {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), consent, source: 'membership_waitlist' }),
+        body: JSON.stringify({ email: email.trim(), consent, source: 'membership_waitlist', invite: storedInvite() }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data?.error || 'Could not join the waitlist.')
       setState('done')
-      setMessage('You’re on the waitlist. We’ll email you when membership opens.')
+      setMessage(early
+        ? 'You’re on the waitlist. Your early access code is on its way by email. We’ll email you again when membership opens.'
+        : 'You’re on the waitlist. We’ll email you when membership opens.')
     } catch (err) {
       setState('error')
       setMessage((err as Error).message)
@@ -69,6 +80,10 @@ export default function MembershipPage() {
 
         <section aria-labelledby="waitlist-heading" className="mt-16 max-w-xl rounded-2xl border border-final-off-white/10 bg-final-gray p-6 md:p-8">
           <h2 id="waitlist-heading" className="display text-2xl">Join the waitlist</h2>
+          {early && <p className="mt-2 text-sm text-final-muted">
+            Join before checkout opens and get {EARLY_ACCESS.basePercent}% off your first order, plus {EARLY_ACCESS.freeMembershipMonths} months of membership free when it opens.
+            Each friend you invite adds {EARLY_ACCESS.perCreditPercent}% when they join and {EARLY_ACCESS.perCreditPercent}% when they first order, up to {EARLY_ACCESS.maxPercent}%.
+          </p>}
           {state === 'done' ? (
             <p role="status" className="mt-4 text-final-muted">{message}</p>
           ) : (

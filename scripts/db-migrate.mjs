@@ -44,6 +44,7 @@ const PROBES = {
   '20261101100000_email_approvals.sql': `to_regclass('public.email_batches') is not null and to_regprocedure('public.email_usage(uuid)') is not null`,
   '20261101200000_support_inbox.sql': `to_regclass('public.support_replies') is not null and to_regclass('public.support_saved_replies') is not null and to_regprocedure('public.send_support_reply(uuid,uuid,uuid,text,text)') is not null`,
   '20261101300000_ad_attribution.sql': `exists (select 1 from information_schema.columns where table_name = 'orders' and column_name = 'attribution') and exists (select 1 from information_schema.columns where table_name = 'analytics_events' and column_name = 'fbclid') and to_regprocedure('public.ads_report(uuid,date,date,text)') is not null and to_regprocedure('public.audience_emails(uuid,text,integer)') is not null`,
+  '20261101400000_early_access.sql': `exists (select 1 from information_schema.columns where table_name = 'promo_codes' and column_name = 'subscriber_id') and to_regclass('public.invite_credits') is not null and to_regprocedure('public.ensure_early_access(uuid)') is not null and to_regprocedure('public.record_invite(uuid,text)') is not null and to_regprocedure('public.credit_paid_invites(uuid)') is not null`,
 }
 
 // Applied after the code that needs it is live (the other way round locks people out).

@@ -6,6 +6,8 @@ import { createResendSender } from './resend'
 import { isSuppressed } from './suppression'
 import { canBuy, purchaseState, storeToday, type CatalogueProduct } from '@/lib/catalog'
 import { ALERT_PRODUCT_COLUMNS } from './alerts-store'
+import { earlyPercent } from '@/lib/early-access'
+import { inviteCredits } from '@/lib/early-access-store'
 import { deliverQueuedEmails, type DeliverySummary, type EmailConfig, type EmailDeps, type EmailStore } from './outbox'
 
 /** Outbox persistence on Supabase. Server-only: uses the service key. */
@@ -61,7 +63,13 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
       const { data, error } = await db.from('newsletter_subscribers')
         .select('email, source, unsubscribe_token, unsubscribed_at').eq('id', id).maybeSingle()
       if (error) throw error
-      return data ? { email: data.email, source: data.source ?? null, unsubscribeToken: data.unsubscribe_token, unsubscribed: data.unsubscribed_at != null } : null
+      if (!data) return null
+      const { data: code, error: ce } = await db.from('promo_codes').select('code').eq('subscriber_id', id).maybeSingle()
+      if (ce) throw ce
+      return {
+        email: data.email, source: data.source ?? null, unsubscribeToken: data.unsubscribe_token, unsubscribed: data.unsubscribed_at != null,
+        early: code ? { code: code.code, percent: earlyPercent(await inviteCredits(db, id)) } : null,
+      }
     },
 
     async loadAlert(id) {

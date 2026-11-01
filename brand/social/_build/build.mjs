@@ -440,6 +440,85 @@ post('ice', '05-live-now', page(1080, 1350, ICE, `
   </div>
 `, 'paper'))
 
+// ─── Early access (lib/early-access.ts: 25%, +5% a step, 35% cap, 30 days after launch, 2 months free) ──
+const EARLY = '#E8613C'
+const steps = [
+  ['Join the list', '25%', 'Your own code, by email'],
+  ['A friend joins', '+5%', 'With your invite link'],
+  ['They order', '+5%', 'Their first paid order'],
+]
+const ladder = (size = 'post') => `<div style="display:grid; gap:${size === 'post' ? 16 : 22}px;">
+  ${steps.map(([k, v, note], i) => `<div style="display:grid; grid-template-columns:${size === 'post' ? '120px 1fr 220px' : '130px 1fr 230px'}; align-items:center; gap:18px; padding:${size === 'post' ? 22 : 30}px 26px; border:1px solid rgba(242,241,238,.22); background:rgba(10,10,11,.72);">
+    <span class="mono accent" style="font-size:16px;">Step 0${i + 1}</span>
+    <span><span style="font-size:${size === 'post' ? 32 : 38}px; font-weight:700;">${k}</span><br><span class="mono muted" style="font-size:14px;">${note}</span></span>
+    <span class="display" style="font-size:${size === 'post' ? 84 : 96}px; text-align:right;">${v}</span>
+  </div>`).join('')}
+</div>`
+const terms = 'First order · Your own email · Until 30 days after checkout opens'
+
+post('early-access', '01-cover', page(1080, 1350, EARLY, `
+  <img class="bg" src="${shot('m-holy-ground')}" style="height:700px; object-position:50% 6%;"><div class="shade" style="background:linear-gradient(180deg, rgba(10,10,11,.55) 0%, rgba(10,10,11,0) 14%, rgba(10,10,11,0) 32%, rgba(10,10,11,.92) 48%, var(--ink) 52%);"></div>
+  ${top('Early access — 01/03')}
+  <div class="bottom">
+    <div class="mono accent">Before the doors open · November</div>
+    <div class="display" style="font-size:230px; margin-top:12px;">25%<span class="outline" style="-webkit-text-stroke-width:3px;"> off</span></div>
+    <div class="rule"></div>
+    <div style="font-size:34px; font-weight:500; line-height:1.25; max-width:880px;">Join the list before checkout opens. Your first order is 25% off, and membership is free for 2 months when it opens.</div>
+    <div class="mono muted" style="margin-top:26px; font-size:15px;">${terms}</div>
+  </div>`))
+
+post('early-access', '02-invite', page(1080, 1350, EARLY, `
+  ${top('Early access — 02/03')}
+  <div style="position:absolute; top:150px; left:72px; right:72px;">
+    <div class="display" style="font-size:118px;">Bring<br><span class="accent">friends</span></div>
+    <div style="font-size:30px; font-weight:500; margin-top:26px; max-width:860px; line-height:1.3;">Every friend you invite adds 5% when they join, and 5% more when they place their first order.</div>
+  </div>
+  <div style="position:absolute; top:560px; left:72px; right:72px;">${ladder('post')}</div>
+  <div class="bottom" style="display:flex; justify-content:space-between; align-items:flex-end;">
+    <div><div class="mono muted" style="font-size:15px;">Up to</div><div class="display accent" style="font-size:150px;">35%</div></div>
+    <div class="mono muted" style="font-size:15px; text-align:right; line-height:1.7;">Capped at 35% in all<br>One code per person</div>
+  </div>`))
+
+post('early-access', '03-join', page(1080, 1350, EARLY, `
+  <img class="bg" src="${shot('w-heaven-outline')}" style="height:1000px; object-position:50% 10%;"><div class="shade" style="background:linear-gradient(180deg, rgba(10,10,11,.5) 0%, rgba(10,10,11,0) 14%, rgba(10,10,11,0) 44%, rgba(10,10,11,.9) 62%, var(--ink) 70%);"></div>
+  ${top('Early access — 03/03')}
+  <div class="bottom">
+    <div class="display" style="font-size:120px;">Get on<br><span class="outline">the list</span></div>
+    <div class="rule"></div>
+    <div class="specs mono" style="font-size:16px; grid-template-columns:260px 1fr; margin-top:0;">
+      <span class="k">You get</span><span>25% off your first order</span>
+      <span class="k">Plus</span><span>2 months of membership, free</span>
+      <span class="k">Invite friends</span><span>Up to 35% off</span>
+      <span class="k">Checkout opens</span><span>November</span>
+      <span class="k">Join</span><span>finalheaven.shop · link in bio</span>
+    </div>
+  </div>`))
+
+story('early-access', 'story-01-offer', page(1080, 1920, EARLY, `
+  <img class="bg" src="${shot('m-holy-ground')}" style="height:1120px; object-position:50% 10%;"><div class="shade" style="background:linear-gradient(180deg, rgba(10,10,11,.55) 0%, rgba(10,10,11,0) 14%, rgba(10,10,11,0) 40%, rgba(10,10,11,.92) 54%, var(--ink) 59%);"></div>
+  ${top('Early access', false, 150)}
+  <div style="position:absolute; left:72px; right:72px; bottom:300px;">
+    <div class="mono accent">Before the doors open · November</div>
+    <div class="display" style="font-size:280px; margin-top:16px;">25%</div>
+    <div class="display outline" style="font-size:96px; -webkit-text-stroke-width:3px;">Off your<br>first order</div>
+    <div class="rule"></div>
+    <div style="font-size:38px; font-weight:500; line-height:1.3;">Plus 2 months of membership, free. Invite friends to reach 35%.</div>
+    <div class="mono muted" style="margin-top:28px; font-size:16px;">${terms}</div>
+  </div>
+  <div class="mono" style="position:absolute; left:72px; right:72px; bottom:180px; text-align:center; font-size:18px;">Join at finalheaven.shop · link in bio</div>`))
+
+story('early-access', 'story-02-invite', page(1080, 1920, EARLY, `
+  ${top('Early access', false, 150)}
+  <div style="position:absolute; top:330px; left:72px; right:72px;">
+    <div class="display" style="font-size:150px;">Bring<br><span class="accent">friends</span></div>
+    <div style="font-size:36px; font-weight:500; margin-top:30px; line-height:1.3;">Your code comes with an invite link. Every friend adds 5% when they join, and 5% when they first order.</div>
+  </div>
+  <div style="position:absolute; top:880px; left:72px; right:72px;">${ladder('story')}</div>
+  <div style="position:absolute; left:72px; right:72px; bottom:200px; display:flex; justify-content:space-between; align-items:flex-end;">
+    <div><div class="mono muted" style="font-size:16px;">Up to</div><div class="display accent" style="font-size:170px;">35%</div></div>
+    <div class="mono muted" style="font-size:16px; text-align:right; line-height:1.7;">Capped at 35%<br>finalheaven.shop</div>
+  </div>`))
+
 // ─── Write and render ────────────────────────────────────────────────────
 mkdirSync(htmlDir, { recursive: true })
 const only = process.argv[2]

@@ -176,11 +176,12 @@ export function winbackDue(trigger: 'winback_120' | 'winback_180', orders: PaidO
 // ---------------------------------------------------------------------------
 
 /** The starting copy of each batch. Product cards come from each recipient's own piece (retargeting, review ask). */
-export function triggerContent(trigger: BatchTrigger, source: string | null = null): CampaignContent {
+export function triggerContent(trigger: BatchTrigger, source: string | null = null, early = false): CampaignContent {
   switch (trigger) {
     case 'welcome_backfill':
     case 'welcome': {
-      const c = welcomeCopy(source)
+      // Before checkout opens the welcome also carries the early access offer, filled in per person when sent.
+      const c = welcomeCopy(source, early)
       return { subject: c.subject, preheader: c.paras[0], heading: c.heading, body: c.paras.join('\n\n'), ctaLabel: c.cta, ctaUrl: '/shop' }
     }
     case 'nurture_3d':
