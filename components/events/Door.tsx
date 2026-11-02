@@ -7,7 +7,8 @@ import type { DoorResult } from '@/lib/events/store'
 
 const time = (iso: string) => new Date(iso).toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Africa/Lagos' })
 
-async function call(ref: string, event: string | null, checkIn: boolean): Promise<DoorResult> {
+/** Looks a ticket up (or checks it in) through /api/door/check-in, as this phone's door actor. */
+export async function doorCall(ref: string, event: string | null, checkIn: boolean): Promise<DoorResult> {
   const res = await fetch('/api/door/check-in', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref, event, checkIn }),
   })
@@ -65,14 +66,13 @@ export function DoorTicket({ token, initial }: { token: string; initial: DoorRes
   const checkIn = async () => {
     setBusy(true)
     setError('')
-    try { setResult(await call(token, null, true)) } catch (e) { setError((e as Error).message) }
+    try { setResult(await doorCall(token, null, true)) } catch (e) { setError((e as Error).message) }
     setBusy(false)
   }
   return (
     <div>
       <DoorResultView result={result} onCheckIn={checkIn} busy={busy} />
       {error && <p className="mt-3 text-sm text-red-400" role="alert">{error}</p>}
-      <p className="mt-4 text-center text-sm text-final-muted">Scan the next ticket with your camera.</p>
     </div>
   )
 }
@@ -88,7 +88,7 @@ export function DoorConsole({ event }: { event: string | null }) {
     setBusy(true)
     setError('')
     try {
-      const r = await call(code, event, checkIn)
+      const r = await doorCall(code, event, checkIn)
       setResult(r)
       if (checkIn && r.outcome === 'checked_in') setCode('')
     } catch (e) {

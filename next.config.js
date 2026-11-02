@@ -56,6 +56,11 @@ const nextConfig = {
       { source: '/:path*', headers: securityHeaders },
       // Never cache the admin area (sign-in included) at the edge.
       { source: '/studio/:path*', headers: [{ key: 'Cache-Control', value: 'private, no-store' }] },
+      // The ticket scanner (Studio's top bar, the door page, a scanned ticket's door view) needs
+      // this site's own camera access; everywhere else the camera stays off. Later rules override the one above.
+      ...['/studio/:path*', '/door/:path*', '/t/:path*'].map((source) => ({
+        source, headers: [{ key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=(), payment=(), usb=()' }],
+      })),
     ]
   },
 }

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { formatCurrency } from '@/lib/utils/format'
 import { showCode } from '@/lib/events'
 import { api, btn, date, field, label } from '../../outbox/api'
+import { EventAnalytics } from '@/components/admin/EventAnalytics'
 
 type Status = 'draft' | 'published' | 'cancelled'
 type Event = {
@@ -138,6 +139,8 @@ export default function EventPage({ params }: { params: { id: string } }) {
           </div>
         ))}
       </dl>
+
+      {e.status !== 'draft' && <EventAnalytics eventId={e.id} />}
 
       {/* Tiers */}
       <section className={`${card} mt-8`} aria-labelledby="tiers-h">

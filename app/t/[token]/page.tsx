@@ -4,6 +4,7 @@ import { FiCalendar, FiMapPin } from 'react-icons/fi'
 import { Layout } from '@/components/layout/Layout'
 import { TicketCard } from '@/components/events/TicketCard'
 import { DoorTicket } from '@/components/events/Door'
+import { ScanButton } from '@/components/events/Scanner'
 import { eventWhen, validToken } from '@/lib/events'
 import { loadTicket } from '@/lib/events/store'
 import { doorActor, doorAs } from '@/lib/events/door'
@@ -27,6 +28,7 @@ export default async function TicketPage({ params }: { params: { token: string }
         <main className="mx-auto max-w-md px-4 pb-24 pt-28">
           <p className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-final-muted">Door{actor.kind === 'link' ? ` · ${actor.link.label}` : ''}</p>
           <DoorTicket token={params.token} initial={result} />
+          <ScanButton event={actor.kind === 'link' ? actor.link.eventId : null} label="Scan the next ticket" className="btn-secondary mt-4 flex w-full items-center justify-center gap-2 py-3" />
         </main>
       </Layout>
     )

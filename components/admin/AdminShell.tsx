@@ -8,6 +8,7 @@ import { FiActivity, FiAward, FiCalendar, FiExternalLink, FiGlobe, FiInbox, FiLa
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { ActivityBell, ActivityProvider, LiveStatus, NavBadge, type Section } from '@/components/admin/activity'
+import { ScanButton } from '@/components/events/Scanner'
 
 // Each section is shown only to staff holding its permission. Hiding is a
 // convenience: the API and RLS enforce the same permissions.
@@ -93,6 +94,9 @@ export function AdminShell({
           </Link>
 
           <div className="flex items-center gap-1 text-sm">
+            {permissions.includes('events.checkin') && (
+              <ScanButton label="Scan" className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-final-muted transition-colors hover:bg-final-off-white/5 hover:text-final-off-white" />
+            )}
             <LiveStatus />
             <ActivityBell />
             {email && <span className="mx-2 hidden max-w-[220px] truncate text-final-muted lg:inline">{email}</span>}

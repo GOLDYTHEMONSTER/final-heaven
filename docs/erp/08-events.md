@@ -72,6 +72,30 @@ These are the defaults chosen when the feature was built. Change them in `TICKET
     - The link and its QR code are shown once. Only a SHA-256 of the secret is stored.
     - Opening it leaves an httpOnly cookie on that phone until it expires.
 - **Undo.** A check-in made by mistake can be undone by `events.manage` (`undo_check_in`).
+- **The scanner** (`components/events/Scanner.tsx`).
+  - Where it is: a **Scan** button in Studio's top bar, for staff with `events.checkin`; **Scan a ticket** on `/door`; **Scan the next ticket** on a scanned ticket's door view.
+  - What it does: opens the back camera full screen and reads one ticket QR at a time. It shows the ticket with **Check in**, then **Scan next**.
+  - How it decodes: with the browser's BarcodeDetector where there is one (Chrome on Android), otherwise with jsQR, loaded only then (iPhone Safari).
+  - The camera is allowed only on `/studio`, `/door` and `/t/` (`Permissions-Policy` in `next.config.js`). Everywhere else it stays off.
+
+## Analytics
+
+Each published event's Studio page has an **Analytics** section (`GET /api/admin/events/<id>/analytics`, figures in `lib/events/analytics.ts`):
+
+- **Totals:**
+  - visitors and page views of `/events/<slug>`, and the conversion from visitor to paid order;
+  - tickets sold out of the places available, money taken, average order;
+  - check-ins (and the share of sold), waitlist discount given and codes used;
+  - checkouts started that never paid, and cancellations and refunds.
+- **By day,** for the last 30 days, ending on the event day once it has passed: tickets sold, and page views. Staff who can't read analytics see money taken instead.
+- **Breakdowns:**
+  - the funnel (visitors, then started checkout, then paid);
+  - where visitors came from (Instagram, WhatsApp, Google, direct…);
+  - devices;
+  - tickets by tier;
+  - check-ins by hour, and who checked people in (Studio staff or each door link).
+
+Visitors come from the store's own analytics, which keep only a daily-rotating visitor hash. So a visitor counts once per day, and the totals add up daily visitors.
 
 ## Studio
 

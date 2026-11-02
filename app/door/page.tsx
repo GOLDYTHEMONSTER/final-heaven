@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Layout } from '@/components/layout/Layout'
 import { DoorConsole } from '@/components/events/Door'
+import { ScanButton } from '@/components/events/Scanner'
 import { eventWhen } from '@/lib/events'
 import { doorActor } from '@/lib/events/door'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
@@ -62,8 +63,9 @@ export default async function DoorPage({ searchParams }: { searchParams: { event
             <h1 className="display mt-2 text-3xl">{event.title}</h1>
             <p className="mt-1 text-sm text-final-muted">{eventWhen(event.starts_at, timeZone)}{event.venue ? ` · ${event.venue}` : ''}</p>
             {c && <p className="mt-4 text-lg"><span className="font-semibold tabular-nums">{c.inside}</span> <span className="text-final-muted">of</span> <span className="tabular-nums">{c.sold}</span> <span className="text-final-muted">checked in</span></p>}
+            <ScanButton event={event.id} label="Scan a ticket" className="btn-primary mt-6 flex w-full items-center justify-center gap-2 py-4 text-base" />
             <ol className="mt-6 space-y-2 text-sm text-final-off-white/80">
-              <li>1. Open this phone’s camera and point it at the guest’s QR code. Tap the link that appears.</li>
+              <li>1. Press <strong>Scan a ticket</strong> and point the camera at the guest’s QR code.</li>
               <li>2. Check the name, then press <strong>Check in</strong>. Each ticket works once.</li>
               <li>3. If a code won’t scan, type the 6-character code under it here.</li>
             </ol>
