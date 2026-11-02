@@ -101,6 +101,8 @@ export function useTouchReveal(ref: RefObject<HTMLElement>, enabled = true) {
     const onStart = (e: TouchEvent) => {
       held = false
       if (e.touches.length !== 1) return release()
+      // The card's own buttons (marked data-no-peek, like "+") are always a tap, however long the press.
+      if ((e.target as Element | null)?.closest?.('[data-no-peek]')) return release()
       start = { x: e.touches[0].clientX, y: e.touches[0].clientY }
       setNear(true)
       timer = window.setTimeout(() => {

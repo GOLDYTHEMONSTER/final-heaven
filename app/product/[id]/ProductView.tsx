@@ -19,6 +19,7 @@ import { sourceLabel, supplyLabel, supplyNote } from '@/lib/collections'
 import { setGroups } from '@/lib/sets'
 import { HypeMeter } from '@/components/hype/Hype'
 import { DeliveryEstimate } from '@/components/product/DeliveryEstimate'
+import { OrderCountdown } from '@/components/product/Arrival'
 import { StockAlert } from '@/components/product/StockAlert'
 
 
@@ -324,6 +325,9 @@ export function ProductView({ params }: { params: { id: string } }) {
                   )}
                 </div>
               </div>
+
+              {/* Order now to get it by …: the date moves on at midnight, or when checkout opens. */}
+              {buyable && <OrderCountdown product={product} />}
 
               {/* Add to Cart */}
               <motion.button

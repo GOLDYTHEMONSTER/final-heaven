@@ -12,6 +12,8 @@ import type { Product } from '@/lib/catalog'
 import { orderedIn } from '@/lib/collections'
 import { CardFrame, CardFrameMat, HypeTag, useCardFrame } from '@/components/hype/Hype'
 import { useTouchReveal } from '@/lib/useTouchReveal'
+import { QuickAdd } from '@/components/ui/QuickAdd'
+import { useCardArrival } from '@/components/product/Arrival'
 
 /** What stops this product being bought now, as a short label; null when it can be bought. */
 function blockedLabel(product: Product) {
@@ -45,6 +47,7 @@ interface ProductCardProps {
 const PLACEHOLDER = '/api/placeholder/400/500'
 
 function Badges({ product, underFrame = false }: { product: Product; underFrame?: boolean }) {
+  const arrival = useCardArrival(product)
   const preorder = product.purchase?.state === 'preorder'
   const blocked = blockedLabel(product)
   const single = lastOne(product)
@@ -64,7 +67,7 @@ function Badges({ product, underFrame = false }: { product: Product; underFrame?
       )}
       {made && (
         <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
-          {orderedIn(product) ? (product.leadTimeDays ? `Ships in ~${product.leadTimeDays} days` : 'Ordered in') : 'Made to order'}
+          {arrival ?? (orderedIn(product) ? (product.leadTimeDays ? `Ships in ~${product.leadTimeDays} days` : 'Ordered in') : 'Made to order')}
         </span>
       )}
       {single && (
@@ -105,6 +108,7 @@ function Price({ product, large = false }: { product: Product; large?: boolean }
 export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   const { addItem } = useCart()
   const [justAdded, setJustAdded] = useState(false)
+  const [choosing, setChoosing] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>()
 
   useEffect(() => () => clearTimeout(timer.current), [])
@@ -138,14 +142,17 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
   }, [addItem, product.id, product.name, product.price, product.membersOnly, mainImage])
 
   // Icon morphs from plus to check, so the confirmation appears exactly where the tap happened.
+  // With sizes or colours, the plus opens a small chooser (QuickAdd) rather than the product page.
   const addButton = !buyable ? null : needsChoice ? (
-    <Link
-      href={href}
-      aria-label={`Choose options for ${product.name}`}
+    <motion.button
+      type="button"
+      onClick={() => setChoosing(true)}
+      whileTap={{ scale: 0.9 }}
+      aria-label={`Choose options and add ${product.name} to cart`}
       className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-final-off-white text-final-black transition-colors duration-200 hover:bg-final-accent-dark"
     >
       <FiPlus className="h-[18px] w-[18px]" strokeWidth={2.5} />
-    </Link>
+    </motion.button>
   ) : (
     <motion.button
       type="button"
@@ -204,6 +211,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
             {addButton}
           </div>
         </div>
+        {choosing && <QuickAdd product={product} onClose={() => setChoosing(false)} />}
       </article>
     )
   }
@@ -236,7 +244,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
         {frame && <CardFrame rank={frame.rank} geometry={frame.geometry} />}
         <Badges product={product} underFrame={Boolean(frame)} />
         {/* Always visible on touch screens; revealed on hover or keyboard focus with a pointer. */}
-        <div style={frame?.buttonStyle} className={`${frame ? 'fh-cardframe-button' : ''} absolute bottom-3 right-3 z-10 transition-[opacity,transform] duration-200 ease-out [@media(hover:hover)]:translate-y-1 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within:translate-y-0 [@media(hover:hover)]:group-focus-within:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100`}>
+        <div data-no-peek style={frame?.buttonStyle} className={`${frame ? 'fh-cardframe-button' : ''} absolute bottom-3 right-3 z-10 transition-[opacity,transform] duration-200 ease-out [@media(hover:hover)]:translate-y-1 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within:translate-y-0 [@media(hover:hover)]:group-focus-within:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100`}>
           {addButton}
         </div>
       </div>
@@ -253,6 +261,7 @@ export function ProductCard({ product, viewMode = 'grid' }: ProductCardProps) {
         </div>
         <HypeTag productId={product.id} />
       </div>
+      {choosing && <QuickAdd product={product} onClose={() => setChoosing(false)} />}
     </article>
   )
 }

@@ -119,6 +119,20 @@ export function estimate(supplies: Supply[], option: DeliveryOption, orderDay: s
   return { minDays, maxDays, from, to }
 }
 
+/**
+ * The last day standard delivery should arrive for one product ordered on
+ * `orderDay` (the product card's "Get it by", the product page's countdown), or
+ * null without an order day. The same window as the product page and checkout.
+ */
+export function arrivesBy(
+  p: { fulfilment?: string | null; sourceType?: string | null; leadTimeDays?: number | null },
+  state: { state: string; shipsOn?: string },
+  orderDay: string | null,
+): string | null {
+  const supply = supplyOf({ fulfilment: p.fulfilment, source_type: p.sourceType, lead_time_days: p.leadTimeDays }, state)
+  return estimate([supply], 'standard', orderDay).to
+}
+
 /** Express in kobo for the chargeable weight of the order's ordered-in items (unknown weight: the base fee). */
 export function expressFee(kg: number | null): number {
   const extra = kg == null ? 0 : Math.max(0, Math.round((kg - DELIVERY.expressIncludedKg) * 1000) / 1000)

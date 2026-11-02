@@ -1,6 +1,6 @@
 // Delivery estimates and the Express fee (lib/delivery), as agreed on 28 Oct 2026.
 import { describe, expect, it } from 'vitest'
-import { arrivalText, estimate, expressAvailable, expressFee, supplyOf } from '@/lib/delivery'
+import { arrivalText, arrivesBy, estimate, expressAvailable, expressFee, supplyOf } from '@/lib/delivery'
 
 const day = '2026-11-13'
 
@@ -53,5 +53,24 @@ describe('express', () => {
     expect(expressFee(1.01)).toBe(350_000)
     expect(expressFee(2.3)).toBe(450_000)
     expect(expressFee(null)).toBe(250_000) // weight unknown: the base fee, never less
+  })
+})
+
+describe('arrivesBy (product card and countdown)', () => {
+  const available = { state: 'available' }
+  it('is the last day of the standard window from the order day', () => {
+    // From China: 14–21 days.
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'wholesale' }, available, '2026-11-07')).toBe('2026-11-28')
+    // In stock in Nigeria: 3–7 days.
+    expect(arrivesBy({ fulfilment: 'stock', sourceType: 'original' }, available, '2026-11-07')).toBe('2026-11-14')
+    // Made to order: its lead time, then 3–7 days.
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'original', leadTimeDays: 10 }, available, '2026-11-07')).toBe('2026-11-24')
+  })
+  it('moves on a day when the order day does, and has no date without one', () => {
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'wholesale' }, available, '2026-11-08')).toBe('2026-11-29')
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'wholesale' }, available, null)).toBeNull()
+  })
+  it('a pre-order arrives from its ship date, whenever it is ordered', () => {
+    expect(arrivesBy({ fulfilment: 'stock' }, { state: 'preorder', shipsOn: '2026-12-01' }, '2026-11-07')).toBe('2026-12-08')
   })
 })
