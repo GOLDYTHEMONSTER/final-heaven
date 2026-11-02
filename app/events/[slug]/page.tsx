@@ -5,10 +5,9 @@ import { Layout } from '@/components/layout/Layout'
 import { TicketPicker } from '@/components/events/TicketPicker'
 import { LAUNCH_BACKDROP, LAUNCH_SCENES } from '@/components/events/scenes'
 import { PerspectiveTunnelHero } from '@/components/ui/PerspectiveTunnelHero'
-import { DEFAULT_TICKET_TERMS, closedMessage, eventWhen, salesState } from '@/lib/events'
+import { DEFAULT_TICKET_TERMS, closedMessage, eventWhen, priceLabel, salesState } from '@/lib/events'
 import { loadPublicEvent } from '@/lib/events/store'
 import { fromMinor, toMinor } from '@/lib/money'
-import { formatCurrency } from '@/lib/utils/format'
 
 // Seats change by the minute: always rendered fresh.
 export const dynamic = 'force-dynamic'
@@ -35,7 +34,7 @@ export default async function EventPage({ params }: { params: { slug: string } }
   const soldOut = tiers.length > 0 && tiers.every((t) => (free[t.id] ?? 0) === 0)
   const when = eventWhen(event.starts_at, store.timeZone)
   const until = event.ends_at ? new Date(event.ends_at).toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: store.timeZone }) : null
-  const from = prices.length ? formatCurrency(fromMinor(Math.min(...prices), event.currency)) : null
+  const from = prices.length ? priceLabel(fromMinor(Math.min(...prices), event.currency), event.currency) : null
   const status = event.status === 'cancelled' ? 'This event has been cancelled.'
     : soldOut ? 'Sold out.'
     : sales.open ? (from ? `Tickets on sale now, from ${from}.` : 'Tickets on sale now.')

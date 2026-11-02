@@ -24,6 +24,8 @@ const KEY = 'fh_launch'
 export const OPEN_LAUNCH_GATE = 'fh:open-launch'
 // Ticket pages and the door are opened at the event or from a ticket email: no coming-soon sheet there.
 const SKIP = ['/unsubscribe', '/track', '/privacy', '/terms', '/events', '/tickets', '/t/', '/door']
+// Nor the corner pill: there it covers the ticket form and the door controls.
+const NO_PILL = ['/events', '/tickets', '/t/', '/door']
 
 const read = () => { try { return localStorage.getItem(KEY) } catch { return null } }
 const remember = (v: 'seen' | 'joined') => { try { localStorage.setItem(KEY, v) } catch { /* private mode: it just shows again */ } }
@@ -75,7 +77,7 @@ export function LaunchGate() {
   return (
     <>
       <AnimatePresence>
-        {!open && <LaunchPill key="pill" target={target} now={now} joined={joined} onOpen={() => setOpen(true)} />}
+        {!open && !NO_PILL.some((p) => pathname?.startsWith(p)) && <LaunchPill key="pill" target={target} now={now} joined={joined} onOpen={() => setOpen(true)} />}
       </AnimatePresence>
       <AnimatePresence>
         {open && (
