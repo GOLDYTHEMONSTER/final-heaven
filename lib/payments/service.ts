@@ -51,8 +51,11 @@ export interface PaymentStore {
   markAbandoned(reference: string): Promise<void>
 }
 
-/** What a payment pays for: a checkout (its order is placed when it succeeds) or an existing order. */
-export type PaymentTarget = { kind: 'checkout' | 'order'; id: string; tenantId: string }
+/**
+ * What a payment pays for: a checkout (its order is placed when it succeeds),
+ * an existing order, or a ticket checkout (its tickets are issued when it succeeds, lib/events).
+ */
+export type PaymentTarget = { kind: 'checkout' | 'order' | 'ticket_checkout'; id: string; tenantId: string }
 
 export type Deps = {
   store: PaymentStore
@@ -76,7 +79,9 @@ export type StartResult =
 export async function startPayment(
   deps: Deps,
   payFor: PaymentTarget & { amountMinor: number; currency: string; email: string; description: string },
-  redirectBaseUrl: string
+  redirectBaseUrl: string,
+  /** The page Flutterwave sends the customer back to, with ?ref=<payment reference>. */
+  returnPath = '/checkout/complete'
 ): Promise<StartResult> {
   const { store, provider, log } = deps
   if (!provider) return { ok: false, reason: 'not_configured' }
@@ -90,7 +95,7 @@ export async function startPayment(
   const reference = newReference('FHP', 12)
   await store.createAttempt({ target, reference, amountMinor: payFor.amountMinor, currency: payFor.currency, provider: provider.name })
   try {
-    const redirectUrl = `${redirectBaseUrl.replace(/\/$/, '')}/checkout/complete?ref=${encodeURIComponent(reference)}`
+    const redirectUrl = `${redirectBaseUrl.replace(/\/$/, '')}${returnPath}?ref=${encodeURIComponent(reference)}`
     const { checkoutUrl } = await provider.initiate({
       reference, amountMinor: payFor.amountMinor, currency: payFor.currency,
       customer: { email: payFor.email }, redirectUrl, description: payFor.description,

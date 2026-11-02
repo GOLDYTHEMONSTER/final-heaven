@@ -22,7 +22,8 @@ import { Countdown, timeLeft, useNow } from './Countdown'
 const KEY = 'fh_launch'
 /** Dispatch on window to open the sheet from elsewhere (checkout's countdown). */
 export const OPEN_LAUNCH_GATE = 'fh:open-launch'
-const SKIP = ['/unsubscribe', '/track', '/privacy', '/terms']
+// Ticket pages and the door are opened at the event or from a ticket email: no coming-soon sheet there.
+const SKIP = ['/unsubscribe', '/track', '/privacy', '/terms', '/events', '/tickets', '/t/', '/door']
 
 const read = () => { try { return localStorage.getItem(KEY) } catch { return null } }
 const remember = (v: 'seen' | 'joined') => { try { localStorage.setItem(KEY, v) } catch { /* private mode: it just shows again */ } }

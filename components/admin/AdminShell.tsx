@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiActivity, FiAward, FiCalendar, FiExternalLink, FiGlobe, FiInbox, FiLayers, FiLogOut, FiMail, FiPackage, FiSend, FiShoppingBag, FiSliders, FiTag, FiTruck, FiUsers } from 'react-icons/fi'
+import { FiActivity, FiAward, FiCalendar, FiExternalLink, FiGlobe, FiInbox, FiLayers, FiLogOut, FiMail, FiPackage, FiSend, FiShoppingBag, FiSliders, FiStar, FiTag, FiTruck, FiUsers } from 'react-icons/fi'
 import { LogoMark } from '@/components/ui/LogoMark'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { ActivityBell, ActivityProvider, LiveStatus, NavBadge, type Section } from '@/components/admin/activity'
@@ -21,6 +21,7 @@ const nav: { name: string; href: string; icon: typeof FiActivity; permission: st
   { name: 'Shipping', href: '/studio/shipping', icon: FiGlobe, permission: 'shipping.read' },
   { name: 'Drops', href: '/studio/drops', icon: FiCalendar, permission: 'products.read' },
   { name: 'Promo codes', href: '/studio/promos', icon: FiTag, permission: 'products.read' },
+  { name: 'Events', href: '/studio/events', icon: FiStar, permission: 'events.manage' },
   { name: 'Customers', href: '/studio/customers', icon: FiUsers, permission: 'customers.read', section: 'customers' },
   { name: 'Messages', href: '/studio/messages', icon: FiMail, permission: 'customers.read', section: 'messages' },
   { name: 'Campaigns', href: '/studio/campaigns', icon: FiSend, permission: 'marketing.send' },

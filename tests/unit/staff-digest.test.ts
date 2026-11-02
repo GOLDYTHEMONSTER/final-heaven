@@ -61,3 +61,14 @@ describe('topReasons', () => {
     expect(topReasons(['a', 'b', 'c', 'd'], 2)).toHaveLength(2)
   })
 })
+
+describe('event tickets in the digest', () => {
+  it('counts as activity and gets its own line', () => {
+    expect(digestIsEmpty({ ...ZERO, tickets: { count: 0, total: 0 } })).toBe(true)
+    expect(digestIsEmpty({ ...ZERO, tickets: { count: 3, total: 45000 } })).toBe(false)
+    const e = render({ ...ZERO, tickets: { count: 3, total: 45000 } })
+    expect(e.text).toContain('Tickets sold')
+    expect(e.text).toContain('3 · ₦45,000.00')
+    expect(render(ZERO).text).not.toContain('Tickets sold')
+  })
+})

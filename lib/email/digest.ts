@@ -23,11 +23,14 @@ export type DigestData = {
   complaints: number
   /** Marketing emails held in Studio → Outbox, waiting for the owner. */
   heldBatches?: number
+  /** Event tickets sold in the window (lib/events): tickets, and what their orders took. */
+  tickets?: { count: number; total: number }
 }
 
 export function digestIsEmpty(d: DigestData): boolean {
   return d.paid.count === 0 && d.messages === 0 && Object.values(d.subscribers).every((n) => n === 0)
     && d.lowStock.length === 0 && d.emailsFailed === 0 && d.emailsSkipped === 0 && d.bounces === 0 && d.complaints === 0 && !d.heldBatches
+    && !d.tickets?.count
 }
 
 const listName = (source: string) => (isAudience(source) ? AUDIENCES[source].label : source)
@@ -45,6 +48,7 @@ export function topReasons(reasons: (string | null)[], max = 3): { reason: strin
 export function staffDigestEmail(d: DigestData, { site, day }: { site: string; day: string }): RenderedEmail {
   const lines: { label: string; value: string; tone?: 'warn' }[] = []
   lines.push({ label: 'Paid orders', value: d.paid.count ? `${d.paid.count} · ${formatMoney(d.paid.total, d.paid.currency)}` : '0' })
+  if (d.tickets?.count) lines.push({ label: 'Tickets sold', value: `${d.tickets.count} · ${formatMoney(d.tickets.total, d.paid.currency)}` })
   lines.push({ label: 'New messages', value: String(d.messages) })
   const subs = Object.entries(d.subscribers).filter(([, n]) => n > 0)
   lines.push({ label: 'New subscribers', value: subs.length ? subs.map(([s, n]) => `${listName(s)} ${n}`).join(', ') : '0' })

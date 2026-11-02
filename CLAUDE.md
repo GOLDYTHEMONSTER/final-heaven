@@ -58,6 +58,16 @@ Checkout is closed until `stores.payments_open_on` is set. Launch is planned for
 
 The shipping split (contribution, recovery, reserve, platform share) is internal: the quote response must never contain it, and checkout totals must not change because of it. See `docs/erp/06-shipping.md`.
 
+Event tickets (`docs/erp/08-events.md`) use the same payment path, on their own sale window (not `payments_open_on`):
+- Quote: `POST /api/events/<slug>/quote` with `{ "items": [{ "id": "<tier id>", "quantity" }], "email"?, "code"? }`.
+- Refusals to try:
+  - an unknown tier id;
+  - more than the event's per-order limit;
+  - more seats than are free;
+  - a shop promo code (only personal early access codes work on tickets);
+  - someone else's early access code.
+- Tickets exist only after a verified payment (`tests/db/event-tickets.test.ts`).
+
 ### Browser checks
 
 Run the scripts in `scripts/audit/` (they need Chrome; analytics are blocked while they run). In Git Bash, prefix them with `MSYS_NO_PATHCONV=1`.
@@ -73,6 +83,9 @@ The admin area is at `/studio`, its sign-in at `/studio/login`. The old addresse
 - `/api/admin/*` returns 401.
 - `/studio` and `/studio/*` return 307 to `/studio/login?next=…`; `/studio/login` returns 200.
 - `/admin`, `/admin/*` and `/login` return a plain 404 (no redirect, nothing that mentions `/studio`).
+- `POST /api/door/check-in` returns 401 without a door link cookie or a staff session.
+- `/t/<unknown token>` and `/tickets/<unknown token>` return 404.
+- `/door` without a door link says the phone isn't set up, and links nowhere.
 
 ### Marketing files
 

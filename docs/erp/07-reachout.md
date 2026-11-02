@@ -57,6 +57,7 @@ In the Permission column: **A** = automatic, **H** = held for approval.
 | S7 | contact form sent | **new** "We've got your message" + reference | at once | A |
 | S8 | staff replies in Studio → Messages | **new** Support reply (threaded) | at once | A (staff wrote it) |
 | S9 | checkout opened, not paid after 2 h | Checkout reminder, once | cap 30, 1 per address/24 h | A (their own cart) |
+| S10 | ticket payment confirmed (docs/erp/08-events) | Tickets: a QR code and door code for each | at once | A |
 
 ### Staff (already built unless marked new)
 | # | Trigger | Email | Permission |

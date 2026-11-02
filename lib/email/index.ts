@@ -17,7 +17,7 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
       const { data, error } = await db.rpc('claim_email_outbox', { p_limit: limit, p_max_attempts: maxAttempts })
       if (error) throw error
       return (data ?? []).map((r: Record<string, any>) => ({
-        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, alertId: r.alert_id, replyId: r.reply_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
+        id: Number(r.id), tenantId: r.tenant_id, kind: r.kind, orderId: r.order_id, messageId: r.message_id, subscriberId: r.subscriber_id, alertId: r.alert_id, replyId: r.reply_id, ticketOrderId: r.ticket_order_id, dedupeKey: r.dedupe_key, attempts: r.attempts,
       }))
     },
 
@@ -84,6 +84,23 @@ export function supabaseEmailStore(db: SupabaseClient = createSupabaseServiceCli
         email: data.email, unsubscribeToken: data.unsubscribe_token,
         product: p ? { id: p.id, name: p.name, price: Number(p.price), image: images[0]?.url ?? null, shipsOn: state?.state === 'preorder' ? state.shipsOn : null } : null,
         buyable: state ? canBuy(state) : false,
+      }
+    },
+
+    async loadTicketOrder(id) {
+      const { data, error } = await db.from('ticket_orders')
+        .select('email, name, order_number, access_token, total, currency, status, events(title, starts_at, venue, address), tickets(token, code, status, created_at, ticket_types(name, sort))')
+        .eq('id', id).maybeSingle()
+      if (error) throw error
+      if (!data) return null
+      const e = data.events as unknown as Record<string, any>
+      const tickets = ((data.tickets ?? []) as Record<string, any>[]).filter((t) => t.status !== 'void')
+        .sort((a, b) => (a.ticket_types?.sort ?? 0) - (b.ticket_types?.sort ?? 0) || String(a.created_at).localeCompare(String(b.created_at)))
+      return {
+        email: data.email, name: data.name, orderNumber: data.order_number, accessToken: data.access_token, total: data.total,
+        currency: data.currency, status: data.status, timeZone: process.env.STORE_TIMEZONE || 'Africa/Lagos',
+        event: { title: e.title, startsAt: e.starts_at, venue: e.venue ?? '', address: e.address ?? '' },
+        tickets: tickets.map((t) => ({ token: t.token, code: t.code, type: t.ticket_types?.name ?? 'Ticket' })),
       }
     },
 

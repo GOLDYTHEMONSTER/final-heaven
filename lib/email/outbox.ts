@@ -9,12 +9,13 @@ import { AUDIENCES, isAudience } from './campaign'
 import { inviteLink } from '@/lib/early-access'
 import { orderFollowupEmail, productAvailableEmail, welcomeEmail, type AlertProduct } from './lifecycle'
 import { supportAckEmail, supportReplyEmail } from './support'
+import { ticketsEmail, type TicketEmailData } from './tickets'
 import {
   orderDeliveredEmail, orderPaidEmail, orderRefundedEmail, orderShippedEmail, staffMessageEmail, staffOrderPaidEmail,
   type MessageEmailData, type OrderEmailData, type RenderedEmail,
 } from './templates'
 
-export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'order.delivered' | 'order.refunded' | 'support.ack' | 'support.reply'
+export type OutboxKind = 'order.paid' | 'order.shipped' | 'staff.order_paid' | 'staff.message' | 'subscriber.welcome' | 'product.available' | 'order.followup' | 'order.delivered' | 'order.refunded' | 'support.ack' | 'support.reply' | 'tickets.issued'
 
 export type OutboxRow = {
   id: number
@@ -25,6 +26,7 @@ export type OutboxRow = {
   subscriberId: string | null
   alertId: string | null
   replyId?: string | null
+  ticketOrderId?: string | null
   dedupeKey: string
   attempts: number
 }
@@ -47,6 +49,8 @@ export interface EmailStore {
   loadReply(id: string): Promise<ReplyEmailData | null>
   loadSubscriber(id: string): Promise<SubscriberEmailData | null>
   loadAlert(id: string): Promise<AlertEmailData | null>
+  /** A ticket order with its event and tickets (lib/events). */
+  loadTicketOrder?(id: string): Promise<TicketEmailData | null>
   /** Whether this address is on the suppression list (hard bounce or spam complaint). */
   suppressed(tenantId: string, email: string): Promise<boolean>
   finish(id: number, result: FinishResult, maxAttempts: number): Promise<void>
@@ -128,6 +132,13 @@ async function compose(deps: EmailDeps, row: OutboxRow): Promise<OutgoingEmail |
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
     }
+  }
+
+  if (row.kind === 'tickets.issued') {
+    const t = row.ticketOrderId && store.loadTicketOrder ? await store.loadTicketOrder(row.ticketOrderId) : null
+    if (!t) return { skip: 'ticket order no longer exists' }
+    if (t.status === 'cancelled') return { skip: 'ticket order was cancelled' }
+    return base([t.email], ticketsEmail(t, site), config!.replyTo)
   }
 
   const o = row.orderId ? await store.loadOrder(row.orderId) : null

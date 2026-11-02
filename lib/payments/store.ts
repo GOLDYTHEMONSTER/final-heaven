@@ -5,6 +5,8 @@ import type { ApplyOutcome, BacklogEvent, PaymentRecord, PaymentStore } from './
 import type { VerifiedTransaction } from './types'
 
 const PAYMENT_COLUMNS = 'id, reference, tenant_id, order_id, checkout_id, amount_minor, currency, status, checkout_url, created_at, orders(order_number)'
+/** The payments column that points at each kind of target. */
+const TARGET_COLUMN = { checkout: 'checkout_id', order: 'order_id', ticket_checkout: 'ticket_checkout_id' } as const
 
 function toRecord(row: Record<string, any>): PaymentRecord {
   return {
@@ -29,7 +31,7 @@ export function supabasePaymentStore(db: SupabaseClient = createSupabaseServiceC
   return {
     async findReusableAttempt(target, maxAgeMinutes) {
       const { data, error } = await db.from('payments').select(PAYMENT_COLUMNS)
-        .eq(target.kind === 'checkout' ? 'checkout_id' : 'order_id', target.id)
+        .eq(TARGET_COLUMN[target.kind], target.id)
         .in('status', ['initiated', 'pending']).not('checkout_url', 'is', null)
         .gte('created_at', minutesAgo(maxAgeMinutes)).order('created_at', { ascending: false }).limit(1).maybeSingle()
       if (error) throw error
@@ -39,7 +41,7 @@ export function supabasePaymentStore(db: SupabaseClient = createSupabaseServiceC
     async createAttempt(a) {
       const { error } = await db.from('payments').insert({
         tenant_id: a.target.tenantId, provider: a.provider, reference: a.reference,
-        ...(a.target.kind === 'checkout' ? { checkout_id: a.target.id } : { order_id: a.target.id }),
+        [TARGET_COLUMN[a.target.kind]]: a.target.id,
         amount_minor: a.amountMinor, currency: a.currency, status: 'initiated',
       })
       if (error) throw error

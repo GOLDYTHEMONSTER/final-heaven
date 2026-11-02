@@ -17,6 +17,8 @@ export async function middleware(request: NextRequest) {
 }
 
 // Only the routes that need a session. The storefront stays fully static.
+// Ticket pages and the door refresh a staff session so staff scanning a QR
+// code can check it in; they never redirect anyone to the admin area.
 export const config = {
-  matcher: ['/studio/:path*', '/api/admin/:path*'],
+  matcher: ['/studio/:path*', '/api/admin/:path*', '/t/:path*', '/door/:path*', '/api/door/:path*'],
 }

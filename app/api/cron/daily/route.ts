@@ -52,8 +52,9 @@ export const maxDuration = 60
  *  2f. Staff digest: one email a day to STAFF_ALERT_EMAIL summarising the last
  *     24 hours (lib/email/digest); nothing when everything is zero.
  *  3. Retention: expire analytics (13 months), rate-limit windows (2 days),
- *     old analytics salts and the email log (13 months). Financial records
- *     are never touched.
+ *     old analytics salts and the email log (13 months); unpaid shop and
+ *     ticket checkouts lose their personal details after 30 days. Financial
+ *     records are never touched.
  *  4. Hype: re-score every hyped product, so momentum fades as hypes age
  *     (lib/hype). Skipped quietly where Hype isn't set up.
  */
@@ -114,9 +115,12 @@ export const GET = handle('cron.daily', async (req: NextRequest) => {
     logger.error('cron.digest_failed', { error })
   }
   try {
-    const { data, error } = await createSupabaseServiceClient().rpc('run_retention')
+    const db = createSupabaseServiceClient()
+    const { data, error } = await db.rpc('run_retention')
     if (error) throw error
-    result.retention = data
+    const tickets = await db.rpc('run_ticket_retention')
+    if (tickets.error) throw tickets.error
+    result.retention = { ...data, ticketCheckoutsAnonymised: tickets.data }
   } catch (error) {
     result.retention = { error: (error as Error).message }
     logger.error('cron.retention_failed', { error })

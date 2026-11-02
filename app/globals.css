@@ -24,10 +24,14 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* No sideways scroll. `clip` rather than `hidden`: hidden on both html and body
+   makes body a scroll container, and then nothing inside can be position: sticky
+   (the event page tunnel, the cart summary). Browsers without clip keep hidden. */
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {

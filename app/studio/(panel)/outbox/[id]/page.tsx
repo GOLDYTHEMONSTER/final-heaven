@@ -31,6 +31,9 @@ export default function OutboxBatchPage() {
   const [d, setD] = useState<Detail | null>(null)
   const [copy, setCopy] = useState<Copy | null>(null)
   const [busy, setBusy] = useState<'' | 'approve' | 'skip' | 'save'>('')
+  // Asked on the page, not with confirm(): a browser that blocks dialogs answers
+  // confirm() with false at once, which made Approve look dead.
+  const [asking, setAsking] = useState<'' | 'approve' | 'skip'>('')
   const [error, setError] = useState('')
   const [note, setNote] = useState('')
 
@@ -46,7 +49,8 @@ export default function OutboxBatchPage() {
   const set = (key: keyof Copy) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setCopy((c) => (c ? { ...c, [key]: e.target.value } : c))
 
   async function approve() {
-    if (!d || !confirm(`Approve “${d.batch.subject}” for ${d.recipients.queued} ${d.recipients.queued === 1 ? 'person' : 'people'}? ${d.quota.text}`)) return
+    if (!d) return
+    setAsking('')
     setBusy('approve'); setError(''); setNote('')
     try {
       await api(`/api/admin/outbox/${id}`, { method: 'POST', body: JSON.stringify({ action: 'approve' }) })
@@ -64,7 +68,8 @@ export default function OutboxBatchPage() {
   }
 
   async function skip() {
-    if (!d || !confirm('Skip this batch? Nobody in it will be emailed.')) return
+    if (!d) return
+    setAsking('')
     setBusy('skip'); setError('')
     try {
       await api(`/api/admin/outbox/${id}`, { method: 'POST', body: JSON.stringify({ action: 'skip' }) })
@@ -151,15 +156,31 @@ export default function OutboxBatchPage() {
           <p role="alert" className="min-h-[1.25rem] text-sm text-final-ember">{error}</p>
           {note && <p role="status" className="text-sm text-green-400">{note}</p>}
 
-          {open && !copy && (
+          {open && !copy && asking && (
+            <div role="alertdialog" aria-labelledby="ask-heading" className="rounded-lg border border-final-ember/50 bg-final-black p-4">
+              <p id="ask-heading" className="text-sm">
+                {asking === 'approve'
+                  ? <>Send “{b.subject}” to {d.recipients.queued} {d.recipients.queued === 1 ? 'person' : 'people'}? It starts going out now. {d.quota.text}</>
+                  : 'Skip this batch? Nobody in it will be emailed.'}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                <button type="button" autoFocus onClick={asking === 'approve' ? approve : skip} disabled={!!busy}
+                  className={`${btn} ${asking === 'approve' ? 'bg-final-ember text-final-black hover:bg-final-ember/90' : 'bg-final-off-white text-final-black hover:bg-final-off-white/90'}`}>
+                  {asking === 'approve' ? 'Yes, approve and send' : 'Yes, skip it'}
+                </button>
+                <button type="button" onClick={() => setAsking('')} disabled={!!busy} className={`${btn} border border-final-off-white/20 hover:border-final-off-white/50`}>Cancel</button>
+              </div>
+            </div>
+          )}
+          {open && !copy && !asking && (
             <div className="flex flex-wrap gap-3">
               {b.status === 'held' && (
-                <button type="button" onClick={approve} disabled={!!busy || d.problems.length > 0 || d.recipients.queued === 0} className={`${btn} bg-final-ember text-final-black hover:bg-final-ember/90`}>
+                <button type="button" onClick={() => setAsking('approve')} disabled={!!busy || d.problems.length > 0 || d.recipients.queued === 0} className={`${btn} bg-final-ember text-final-black hover:bg-final-ember/90`}>
                   {busy === 'approve' ? 'Approving…' : 'Approve'}
                 </button>
               )}
               <button type="button" onClick={() => setCopy(toCopy(b))} disabled={!!busy} className={`${btn} border border-final-off-white/20 hover:border-final-off-white/50`}>Edit copy</button>
-              <button type="button" onClick={skip} disabled={!!busy} className={`${btn} border border-final-off-white/20 hover:border-final-off-white/50`}>{busy === 'skip' ? 'Skipping…' : 'Skip'}</button>
+              <button type="button" onClick={() => setAsking('skip')} disabled={!!busy} className={`${btn} border border-final-off-white/20 hover:border-final-off-white/50`}>{busy === 'skip' ? 'Skipping…' : 'Skip'}</button>
             </div>
           )}
           {b.status === 'held' && d.problems.length > 0 && <p className="text-xs text-final-muted">Before approving: {d.problems.join(' ')}</p>}
