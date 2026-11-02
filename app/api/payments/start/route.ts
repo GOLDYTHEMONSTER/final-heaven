@@ -4,6 +4,8 @@ import { checkoutForRequest } from '@/lib/checkout/supabase-store'
 import { rateLimit } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
+// Calls Flutterwave (15 s timeout): room to finish, never cut off by the platform default.
+export const maxDuration = 30
 
 const STATUS = { not_found: 404, already_paid: 409, expired: 410, payment_unavailable: 503 } as const
 

@@ -7,6 +7,8 @@ import { confirmPayment } from '@/lib/payments/service'
 import { sendQueuedEmails } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
+// Calls Flutterwave (15 s timeout) and may send emails: room to finish, never left hanging by the platform default.
+export const maxDuration = 30
 
 /**
  * Called by /checkout/complete when the customer returns from Flutterwave.
@@ -15,6 +17,7 @@ export const dynamic = 'force-dynamic'
  * are returned only once the order exists, i.e. once payment is verified.
  */
 export const POST = handle('payments.verify', async (req: NextRequest) => {
+  const started = Date.now()
   const limited = await rateLimit(req, 'payments.verify', 30, 600)
   if (limited) return limited
 
@@ -30,7 +33,7 @@ export const POST = handle('payments.verify', async (req: NextRequest) => {
     return NextResponse.json({ error: 'We couldn’t confirm this payment yet.', reason: result.reason }, { status })
   }
   // A payment just applied has placed the order and queued the receipt and the staff alert.
-  if (result.outcome === 'applied' || result.outcome === 'applied_to_cancelled_order') await sendQueuedEmails()
+  if (result.outcome === 'applied' || result.outcome === 'applied_to_cancelled_order') await sendQueuedEmails(5, { deadline: started + 20_000 })
 
   const db = createSupabaseServiceClient()
   const { data: payment, error: payError } = await db.from('payments')

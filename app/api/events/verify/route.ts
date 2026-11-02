@@ -7,6 +7,8 @@ import { confirmPayment } from '@/lib/payments/service'
 import { sendQueuedEmails } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
+// Calls Flutterwave (15 s timeout) and may send emails: room to finish, never left hanging by the platform default.
+export const maxDuration = 30
 
 /**
  * Called by /events/complete when a ticket buyer returns from Flutterwave. As
@@ -16,6 +18,7 @@ export const dynamic = 'force-dynamic'
  * leaked return address alone doesn't hand them over (they're emailed too).
  */
 export const POST = handle('events.verify', async (req: NextRequest) => {
+  const started = Date.now()
   const limited = await rateLimit(req, 'events.verify', 30, 600)
   if (limited) return limited
 
@@ -37,7 +40,7 @@ export const POST = handle('events.verify', async (req: NextRequest) => {
     return NextResponse.json({ error: 'We couldn’t confirm this payment yet.', reason: result.reason }, { status })
   }
   // A payment just applied has issued the tickets and queued their email.
-  if (result.outcome === 'applied') await sendQueuedEmails()
+  if (result.outcome === 'applied') await sendQueuedEmails(5, { deadline: started + 20_000 })
 
   const { data: payment, error } = await db.from('payments')
     .select('status, ticket_order_id, ticket_checkouts(email, event_id, events(slug)), ticket_orders(order_number, access_token, email, status)')

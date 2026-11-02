@@ -4,9 +4,11 @@ import { beginTicketCheckout, loadPublicEvent } from '@/lib/events/store'
 import { rateLimit } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
+// Calls Flutterwave (15 s timeout): room to finish, never cut off by the platform default.
+export const maxDuration = 30
 
 /**
- * Buys tickets: { items, name, email, phone?, code?, terms: true }. Returns the
+ * Buys tickets: { items, name, email, phone, code?, terms: true }. Returns the
  * Flutterwave payment link. The tickets are issued only when Flutterwave
  * confirms the payment (lib/events/store beginTicketCheckout).
  */
