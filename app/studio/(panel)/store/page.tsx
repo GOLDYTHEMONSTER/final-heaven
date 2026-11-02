@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { formatDay, type PaymentsState } from '@/lib/catalog'
+import { clockLabel, formatDay, type PaymentsState } from '@/lib/catalog'
 import { formatCurrency } from '@/lib/utils/format'
 import { HypeSwitch } from '@/components/admin/HypeSwitch'
 import { LaunchChecklist } from '@/components/admin/LaunchChecklist'
 
 type Selling = {
-  paymentsOpenOn: string | null; purchasesPaused: boolean; today: string; payments: PaymentsState
+  paymentsOpenOn: string | null; paymentsOpenTime: string | null; purchasesPaused: boolean; today: string; payments: PaymentsState
   giftCategory: string | null; giftMinSubtotal: number
 }
-type Changes = { payments_open_on?: string | null; purchases_paused?: boolean; gift_category?: string | null; gift_min_subtotal?: number }
+type Changes = { payments_open_on?: string | null; payments_open_time?: string | null; purchases_paused?: boolean; gift_category?: string | null; gift_min_subtotal?: number }
 
 const field = 'rounded-lg border border-final-off-white/15 bg-final-black px-3 py-2 text-sm text-final-off-white focus:border-final-off-white/40 focus:outline-none'
 const button = 'rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-50'
@@ -23,7 +23,7 @@ function status(s: Selling) {
     label: s.purchasesPaused ? 'Closed until launch, then paused' : 'Closed until launch',
     tone: 'text-final-ember',
     detail: (s.paymentsOpenOn
-      ? `Checkout opens on ${formatDay(s.paymentsOpenOn)} (midnight, Lagos time). Until then customers can browse and fill their carts.`
+      ? `Checkout opens on ${formatDay(s.paymentsOpenOn)} at ${s.paymentsOpenTime ? clockLabel(s.paymentsOpenTime) : 'midnight'} (Lagos time). Until then customers can browse and fill their carts.`
       : 'No launch day set. Customers can browse and fill their carts, but checkout stays closed until you set one.')
       + (s.purchasesPaused ? ' Purchases are also paused, so it won’t open on launch day until you resume.' : ''),
   }
@@ -57,6 +57,9 @@ function pauseCopy(s: Selling) {
 export default function StoreSellingPage() {
   const [selling, setSelling] = useState<Selling | null>(null)
   const [launchDay, setLaunchDay] = useState('')
+  const [launchAt, setLaunchAt] = useState('')
+  // Asked on the page: browsers that block confirm() answer it with "no" at once.
+  const [asking, setAsking] = useState<'' | 'open' | 'clear'>('')
   const [giftCategory, setGiftCategory] = useState('Gifts')
   const [giftMin, setGiftMin] = useState('0')
   const [saving, setSaving] = useState(false)
@@ -73,6 +76,7 @@ export default function StoreSellingPage() {
   function show(data: Selling) {
     setSelling(data)
     setLaunchDay(data.paymentsOpenOn ?? '')
+    setLaunchAt(data.paymentsOpenTime ?? '')
     setGiftCategory(data.giftCategory ?? 'Gifts')
     setGiftMin(String(data.giftMinSubtotal ?? 0))
   }
@@ -119,38 +123,49 @@ export default function StoreSellingPage() {
           </section>
 
           <section className="rounded-xl border border-final-off-white/10 bg-final-gray p-5">
-            <h2 className="font-semibold">Launch day</h2>
-            <p className="mt-1 text-sm text-final-muted">Checkout opens on its own at midnight (Lagos time) on this day.</p>
+            <h2 className="font-semibold">Launch day and time</h2>
+            <p className="mt-1 text-sm text-final-muted">
+              Checkout opens on its own at this time (Lagos time) on this day; leave the time empty for midnight. The countdown,
+              the “we’re open” email and the waitlist codes all follow it.
+            </p>
             <form
               className="mt-4 flex flex-wrap items-center gap-3"
-              onSubmit={(e) => { e.preventDefault(); save({ payments_open_on: launchDay || null }) }}
+              onSubmit={(e) => { e.preventDefault(); save({ payments_open_on: launchDay || null, payments_open_time: launchDay ? launchAt || null : null }) }}
             >
               <label className="sr-only" htmlFor="launch-day">Launch day</label>
               <input id="launch-day" type="date" value={launchDay} onChange={(e) => setLaunchDay(e.target.value)} className={field} />
-              <button type="submit" disabled={saving || launchDay === (selling.paymentsOpenOn ?? '')} className={`${button} bg-final-off-white text-final-black hover:bg-final-off-white/90`}>
+              <label className="sr-only" htmlFor="launch-time">Launch time</label>
+              <input id="launch-time" type="time" step={60} value={launchAt} onChange={(e) => setLaunchAt(e.target.value)} className={field} />
+              <button type="submit" disabled={saving || (launchDay === (selling.paymentsOpenOn ?? '') && launchAt === (selling.paymentsOpenTime ?? ''))}
+                className={`${button} bg-final-off-white text-final-black hover:bg-final-off-white/90`}>
                 Save
               </button>
-              {(!selling.paymentsOpenOn || selling.paymentsOpenOn > selling.today) && (
-                <button
-                  type="button"
-                  disabled={saving}
-                  onClick={() => confirm('Open checkout now? Customers will be able to pay straight away.') && save({ payments_open_on: selling.today })}
-                  className={`${button} border border-final-off-white/20 hover:border-final-off-white/50`}
-                >
-                  Open today
+              {!selling.payments.open && selling.payments.closedFor === 'launch' && (
+                <button type="button" disabled={saving} onClick={() => setAsking('open')} className={`${button} border border-final-off-white/20 hover:border-final-off-white/50`}>
+                  Open now
                 </button>
               )}
               {selling.paymentsOpenOn && (
-                <button
-                  type="button"
-                  disabled={saving}
-                  onClick={() => confirm('Clear the launch day? Checkout closes until you set one again.') && save({ payments_open_on: null })}
-                  className={`${button} text-final-muted hover:text-final-off-white`}
-                >
+                <button type="button" disabled={saving} onClick={() => setAsking('clear')} className={`${button} text-final-muted hover:text-final-off-white`}>
                   Clear
                 </button>
               )}
             </form>
+            {asking && (
+              <div role="alertdialog" aria-labelledby="ask-launch" className="mt-4 rounded-lg border border-final-ember/50 bg-final-black p-4">
+                <p id="ask-launch" className="text-sm">
+                  {asking === 'open' ? 'Open checkout now? Customers will be able to pay straight away.' : 'Clear the launch day? Checkout closes until you set one again.'}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button type="button" autoFocus disabled={saving}
+                    onClick={() => { const a = asking; setAsking(''); save(a === 'open' ? { payments_open_on: selling.today, payments_open_time: null } : { payments_open_on: null, payments_open_time: null }) }}
+                    className={`${button} bg-final-off-white text-final-black hover:bg-final-off-white/90`}>
+                    {asking === 'open' ? 'Yes, open now' : 'Yes, clear it'}
+                  </button>
+                  <button type="button" onClick={() => setAsking('')} className={`${button} border border-final-off-white/20`}>Cancel</button>
+                </div>
+              </div>
+            )}
           </section>
 
           <section className="rounded-xl border border-final-off-white/10 bg-final-gray p-5">

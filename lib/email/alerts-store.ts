@@ -1,7 +1,7 @@
 import 'server-only'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
-import { paymentsState, storeToday } from '@/lib/catalog'
+import { paymentsState, storeMoment, storeToday } from '@/lib/catalog'
 import type { StoreContext } from '@/lib/tenancy'
 import { ALERT_DAILY_CAP, ALERT_SCAN_LIMIT, readyAlerts } from './alerts'
 
@@ -18,9 +18,9 @@ export type AlertRun = { queued: number; waiting: number; skipped?: string }
  */
 export async function queueProductAlerts(store: StoreContext, db: SupabaseClient = createSupabaseServiceClient(), now = new Date()): Promise<AlertRun> {
   const today = storeToday(store.timeZone, now)
-  const { data: shop, error: se } = await db.from('stores').select('payments_open_on, purchases_paused').eq('id', store.storeId).single()
+  const { data: shop, error: se } = await db.from('stores').select('payments_open_on, payments_open_time, purchases_paused').eq('id', store.storeId).single()
   if (se) throw se
-  if (!paymentsState({ paymentsOpenOn: shop.payments_open_on ?? null, purchasesPaused: shop.purchases_paused === true }, today).open) {
+  if (!paymentsState({ paymentsOpenOn: shop.payments_open_on ?? null, paymentsOpenTime: shop.payments_open_time ?? null, purchasesPaused: shop.purchases_paused === true }, storeMoment(store.timeZone, now)).open) {
     return { queued: 0, waiting: 0, skipped: 'checkout is closed' }
   }
 

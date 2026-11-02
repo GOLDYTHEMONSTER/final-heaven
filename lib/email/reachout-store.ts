@@ -1,7 +1,7 @@
 import 'server-only'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
-import { paymentsState, storeToday } from '@/lib/catalog'
+import { paymentsState, storeMoment, storeToday } from '@/lib/catalog'
 import type { StoreContext } from '@/lib/tenancy'
 import { isAudience } from './campaign'
 import { addToHeldBatch, batchContent, copyHash, lastContacts, type NewRecipient } from './batches-store'
@@ -65,10 +65,10 @@ export async function queueMarketingBatches(store: StoreContext, db: SupabaseCli
   if (!people.length) return run
 
   const [suppressed, lastContact] = await Promise.all([suppressedAmong(db, tenantId, people.map((p) => p.email)), lastContacts(db, tenantId, now)])
-  const { data: shop, error: se } = await db.from('stores').select('payments_open_on, purchases_paused, launch_email_sent_at').eq('id', store.storeId).single()
+  const { data: shop, error: se } = await db.from('stores').select('payments_open_on, payments_open_time, purchases_paused, launch_email_sent_at').eq('id', store.storeId).single()
   if (se) throw se
   // Before checkout opens, welcomes carry the early access offer (lib/early-access).
-  const early = isEarly(shop.payments_open_on ?? null, storeToday(store.timeZone, now))
+  const early = isEarly(shop.payments_open_on ?? null, storeMoment(store.timeZone, now), shop.payments_open_time ?? null)
   if (early) await addEarlyToHeldWelcomes(db, tenantId)
   const hadIn = async (triggers: BatchTrigger[], withinDays?: number) => {
     let q = db.from('email_batch_recipients').select('subscriber_id').eq('tenant_id', tenantId).in('trigger', triggers)
@@ -117,7 +117,7 @@ export async function queueMarketingBatches(store: StoreContext, db: SupabaseCli
   await submit('nurture_7d', nurtureDue('nurture_7d', people, buyers, now), await hadIn(['nurture_7d']))
 
   // M5: the launch waitlist, once checkout has opened (and never after the launch email has gone).
-  if (!shop.launch_email_sent_at && paymentsState({ paymentsOpenOn: shop.payments_open_on ?? null, purchasesPaused: shop.purchases_paused === true }, storeToday(store.timeZone, now)).open) {
+  if (!shop.launch_email_sent_at && paymentsState({ paymentsOpenOn: shop.payments_open_on ?? null, paymentsOpenTime: shop.payments_open_time ?? null, purchasesPaused: shop.purchases_paused === true }, storeMoment(store.timeZone, now)).open) {
     await submit('launch', launchDue(people), await hadIn(['launch']))
   }
 

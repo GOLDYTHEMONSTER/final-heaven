@@ -26,8 +26,13 @@ export function earlyEndsAt(paymentsOpenOn: string | null): string | null {
   return `${addDays(paymentsOpenOn.slice(0, 10), EARLY_ACCESS.daysAfterLaunch)}T23:59:59+01:00`
 }
 
-/** Whether someone signing up now is early: checkout hasn't opened yet. `today` is the store's day (YYYY-MM-DD). */
-export const isEarly = (paymentsOpenOn: string | null, today: string) => !paymentsOpenOn || paymentsOpenOn.slice(0, 10) > today
+/**
+ * Whether someone signing up now is early: checkout hasn't opened yet. `now` is
+ * a store moment (lib/catalog storeMoment) or a store day; on launch day it's
+ * early until the launch time.
+ */
+export const isEarly = (paymentsOpenOn: string | null, now: string, paymentsOpenTime: string | null = null) =>
+  !paymentsOpenOn || (paymentsOpenTime ? `${paymentsOpenOn.slice(0, 10)}T${paymentsOpenTime}` : paymentsOpenOn.slice(0, 10)) > now
 
 /** The link a subscriber shares: the store, which opens the waitlist sign-up with their code (components/launch/LaunchGate). */
 export const inviteLink = (site: string, code: string) => `${site.replace(/\/$/, '')}/?invite=${encodeURIComponent(code)}`

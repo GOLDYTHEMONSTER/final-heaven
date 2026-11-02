@@ -14,7 +14,7 @@
 //  - begin creates a Checkout, never an Order: the Order is placed only when
 //    Payments verifies the payment (docs/adr/0001);
 //  - no payment starts before the store's launch day or while the store is
-//    paused (Shop.paymentsOpenOn, Shop.purchasesPaused);
+//    paused (Shop.paymentsOpenOn at Shop.paymentsOpenTime, Shop.purchasesPaused);
 //  - gift pieces (Shop.giftCategory) are never sold: one is added free, as the
 //    last line, only when the cart earns it;
 //  - delivery (lib/delivery): Express by air is offered only when something
@@ -32,7 +32,7 @@
 // CheckoutPayments seam (Flutterwave through lib/payments, a fake in tests).
 import { BadRequest, int, reference, text } from '@/lib/api'
 import { fromMinor, toMinor } from '@/lib/money'
-import { paymentsClosed, paymentsState, storeToday, type CatalogueProduct, type PaymentsState } from '@/lib/catalog'
+import { paymentsClosed, paymentsState, storeMoment, storeToday, type CatalogueProduct, type PaymentsState } from '@/lib/catalog'
 import { POLICY } from '@/lib/legal'
 import type { Attribution } from '@/lib/attribution'
 import { logger } from '@/lib/log'
@@ -52,7 +52,7 @@ export type { DeliveryOption } from '@/lib/delivery'
  */
 export type Shop = {
   tenantId: string; storeId: string; currency: string; hiddenCategories: string[]; timeZone: string
-  paymentsOpenOn: string | null; purchasesPaused: boolean
+  paymentsOpenOn: string | null; paymentsOpenTime?: string | null; purchasesPaused: boolean
   giftCategory: string | null; giftMinSubtotal: number | string
 }
 
@@ -175,7 +175,7 @@ export function checkout(deps: CheckoutDeps) {
 
   /** Whether checkout takes payments now, and if not, why. */
   function payments(): PaymentsState {
-    return paymentsState(shop, storeToday(shop.timeZone, now()))
+    return paymentsState(shop, storeMoment(shop.timeZone, now()))
   }
 
   const orderDay = () => orderDayFor(payments(), storeToday(shop.timeZone, now()))

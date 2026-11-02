@@ -1,7 +1,7 @@
 import 'server-only'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { getStorefront } from '@/lib/tenancy'
-import { PUBLIC_PRODUCT_SELECT, paymentsState, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
+import { PUBLIC_PRODUCT_SELECT, paymentsState, storeMoment, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
 import { orderDayFor, productDelivery, supplyOf } from '@/lib/delivery'
 import { collectionProducts, parseRule, type CollectionRule } from '@/lib/collections'
 
@@ -38,7 +38,7 @@ export async function publicProduct(id: string): Promise<Product | null> {
   const db = createSupabasePublicClient()
   const [{ data, error }, shop] = await Promise.all([
     db.from('products').select(PUBLIC_PRODUCT_SELECT).eq('store_id', store.storeId).eq('id', id).eq('status', 'active').maybeSingle(),
-    db.from('stores').select('payments_open_on, purchases_paused').eq('id', store.storeId).single(),
+    db.from('stores').select('payments_open_on, payments_open_time, purchases_paused').eq('id', store.storeId).single(),
   ])
   if (error) throw error
   if (shop.error) throw shop.error
@@ -46,7 +46,7 @@ export async function publicProduct(id: string): Promise<Product | null> {
   const today = storeToday(store.timeZone)
   const product = toPublicProduct(data, today) as Product
   // Dates count from today, or from launch day while checkout waits for it.
-  const payments = paymentsState({ paymentsOpenOn: shop.data.payments_open_on ?? null, purchasesPaused: shop.data.purchases_paused === true }, today)
+  const payments = paymentsState({ paymentsOpenOn: shop.data.payments_open_on ?? null, paymentsOpenTime: shop.data.payments_open_time ?? null, purchasesPaused: shop.data.purchases_paused === true }, storeMoment(store.timeZone))
   product.delivery = productDelivery(supplyOf(data, product.purchase!), orderDayFor(payments, today))
   return product
 }

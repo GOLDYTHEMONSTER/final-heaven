@@ -126,14 +126,47 @@ export function saleOriginalPrice(p: Pick<CatalogueProduct, 'price' | 'original_
   return Number.isFinite(original) && original > Number(p.price) ? original : null
 }
 
-/** Whether checkout takes payments: not before the store's launch day, nor while staff pause the store (lib/checkout). */
-export type PaymentsState = { open: boolean; closedFor: 'launch' | 'paused' | null; opensOn: string | null }
+/**
+ * Now in the store's time zone, to the minute: "2026-11-07T20:59". It compares
+ * as text with a launch moment ("2026-11-07T21:00") and with a bare launch day
+ * ("2026-11-07", which counts as midnight), so paymentsState takes either.
+ */
+export function storeMoment(timeZone = 'Africa/Lagos', now = new Date()) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+    timeZone, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
+  }).formatToParts(now).map((x) => [x.type, x.value]))
+  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`
+}
 
-/** The store's switches on a given store day (YYYY-MM-DD). Before launch wins over a pause: it says when. */
-export function paymentsState(s: { paymentsOpenOn: string | null; purchasesPaused: boolean }, today: string): PaymentsState {
+/** A launch time as staff type it: "21:00" (store time), or null for none (midnight). */
+export const launchTime = (v: unknown): string | null => (typeof v === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(v) ? v : null)
+
+/** Whether checkout takes payments: not before the store's launch day and time, nor while staff pause the store (lib/checkout). */
+export type PaymentsState = {
+  open: boolean
+  closedFor: 'launch' | 'paused' | null
+  opensOn: string | null
+  /** The time checkout opens on opensOn (store time, "21:00"), or null for midnight. */
+  opensTime: string | null
+}
+
+/**
+ * The store's switches at a store moment (storeMoment) or on a store day
+ * (YYYY-MM-DD, read as its first minute). Checkout opens on paymentsOpenOn at
+ * paymentsOpenTime (midnight when it's empty). Before launch wins over a pause: it says when.
+ */
+export function paymentsState(s: { paymentsOpenOn: string | null; paymentsOpenTime?: string | null; purchasesPaused: boolean }, now: string): PaymentsState {
   const opensOn = s.paymentsOpenOn?.slice(0, 10) ?? null
-  const closedFor = opensOn == null || today < opensOn ? 'launch' : s.purchasesPaused ? 'paused' : null
-  return { open: closedFor == null, closedFor, opensOn }
+  const opensTime = launchTime(s.paymentsOpenTime)
+  const opening = opensOn && (opensTime ? `${opensOn}T${opensTime}` : opensOn)
+  const closedFor = !opening || now < opening ? 'launch' : s.purchasesPaused ? 'paused' : null
+  return { open: closedFor == null, closedFor, opensOn, opensTime }
+}
+
+/** "9 pm", "9:30 pm" for a launch time. */
+export function clockLabel(time: string) {
+  const [h, m] = time.split(':').map(Number)
+  return `${h % 12 || 12}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'am' : 'pm'}`
 }
 
 /**
@@ -146,7 +179,10 @@ export const LAUNCH_WINDOW = 'November'
 /** Why checkout isn't taking payments, as a button label and a sentence. */
 export function paymentsClosed(p: PaymentsState) {
   if (p.closedFor === 'paused') return { label: 'Purchases paused', message: 'Purchases are paused right now. Please check back soon.' }
-  return { label: 'Checkout opens at launch', message: p.opensOn ? `Checkout opens on ${formatDay(p.opensOn)}.` : `Checkout opens in ${LAUNCH_WINDOW}.` }
+  return {
+    label: 'Checkout opens at launch',
+    message: p.opensOn ? `Checkout opens on ${formatDay(p.opensOn)}${p.opensTime ? ` at ${clockLabel(p.opensTime)}` : ''}.` : `Checkout opens in ${LAUNCH_WINDOW}.`,
+  }
 }
 
 /** For public catalogue responses: the CDN may serve them a minute old, as checkout always re-prices. */

@@ -365,16 +365,24 @@ describe('reading a cart from a request', () => {
 describe('launch day and pauses', () => {
   it('takes no payments before a launch day is set, but still prices the cart', async () => {
     const c = make(NOW, { paymentsOpenOn: null })
-    expect(c.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: null })
+    expect(c.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: null, opensTime: null })
     expect((await c.quote({ lines: [tee(1)] })).ok).toBe(true)
     expect(await c.begin({ lines: [tee(1)], buyer })).toEqual({ ok: false, reason: 'payment_unavailable', message: 'Checkout opens in November.' })
     expect(mem.store.save).not.toHaveBeenCalled()
     expect(payments.start).not.toHaveBeenCalled()
   })
 
+  it('with a launch time, takes no payment until that minute on launch day (Lagos time)', async () => {
+    const shop = { paymentsOpenOn: '2026-11-07', paymentsOpenTime: '21:00' }
+    const before = make(new Date('2026-11-07T19:59:00Z'), shop) // 20:59 in Lagos
+    expect(before.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: '2026-11-07', opensTime: '21:00' })
+    expect(await before.begin({ lines: [tee(1)], buyer })).toMatchObject({ ok: false, message: 'Checkout opens on 7 November 2026 at 9 pm.' })
+    expect(make(new Date('2026-11-07T20:00:00Z'), shop).payments().open).toBe(true) // 21:00 in Lagos
+  })
+
   it('names the launch day until it comes, then opens at midnight in the store’s time zone', async () => {
     const before = make(new Date('2026-10-31T22:30:00Z'), { paymentsOpenOn: '2026-11-01' }) // 23:30 in Lagos
-    expect(before.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: '2026-11-01' })
+    expect(before.payments()).toEqual({ open: false, closedFor: 'launch', opensOn: '2026-11-01', opensTime: null })
     expect(await before.begin({ lines: [tee(1)], buyer })).toMatchObject({ ok: false, message: 'Checkout opens on 1 November 2026.' })
     const after = make(new Date('2026-10-31T23:30:00Z'), { paymentsOpenOn: '2026-11-01' }) // 00:30 on 1 Nov in Lagos
     expect(after.payments().open).toBe(true)
@@ -383,7 +391,7 @@ describe('launch day and pauses', () => {
 
   it('takes no payments while the store is paused, and says so', async () => {
     const c = make(NOW, { purchasesPaused: true })
-    expect(c.payments()).toEqual({ open: false, closedFor: 'paused', opensOn: '2026-10-01' })
+    expect(c.payments()).toEqual({ open: false, closedFor: 'paused', opensOn: '2026-10-01', opensTime: null })
     expect(await c.begin({ lines: [tee(1)], buyer })).toEqual({ ok: false, reason: 'payment_unavailable', message: 'Purchases are paused right now. Please check back soon.' })
     expect(payments.start).not.toHaveBeenCalled()
   })

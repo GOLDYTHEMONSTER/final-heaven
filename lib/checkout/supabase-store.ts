@@ -170,10 +170,11 @@ function flutterwavePayments(req: Request): CheckoutPayments {
  */
 async function sellingSwitches(storeId: string, db: SupabaseClient = createSupabaseServiceClient()) {
   const { data, error } = await db.from('stores')
-    .select('payments_open_on, purchases_paused, gift_category, gift_min_subtotal').eq('id', storeId).single()
+    .select('payments_open_on, payments_open_time, purchases_paused, gift_category, gift_min_subtotal').eq('id', storeId).single()
   if (error) throw error
   return {
-    paymentsOpenOn: (data.payments_open_on as string | null) ?? null, purchasesPaused: data.purchases_paused === true,
+    paymentsOpenOn: (data.payments_open_on as string | null) ?? null, paymentsOpenTime: (data.payments_open_time as string | null) ?? null,
+    purchasesPaused: data.purchases_paused === true,
     giftCategory: (data.gift_category as string | null) ?? null, giftMinSubtotal: data.gift_min_subtotal ?? 0,
   }
 }

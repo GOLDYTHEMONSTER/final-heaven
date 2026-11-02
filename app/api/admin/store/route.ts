@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requirePermission } from '@/lib/auth'
 import { audit } from '@/lib/audit'
 import { BadRequest, handle, money, readJson, requestIdOf, text } from '@/lib/api'
-import { paymentsState, storeToday } from '@/lib/catalog'
+import { launchTime, paymentsState, storeMoment, storeToday } from '@/lib/catalog'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,17 +12,17 @@ function isDay(v: unknown): v is string {
   const d = new Date(`${v}T00:00:00Z`)
   return !Number.isNaN(d.getTime()) && d.toISOString().startsWith(v)
 }
-const COLUMNS = 'payments_open_on, purchases_paused, gift_category, gift_min_subtotal'
+const COLUMNS = 'payments_open_on, payments_open_time, purchases_paused, gift_category, gift_min_subtotal'
 
-// The store's selling switches: its launch day, a pause on all purchases and
+// The store's selling switches: its launch day and time, a pause on all purchases and
 // the free gift with orders (a category of pieces, and the spend that earns one).
 // Checkout reads them on every request (lib/checkout/supabase-store), so a
 // change applies at once. Per-product pauses are on the products API.
 
-function selling(row: { payments_open_on: string | null; purchases_paused: boolean; gift_category: string | null; gift_min_subtotal: number | string }) {
-  const switches = { paymentsOpenOn: row.payments_open_on, purchasesPaused: row.purchases_paused }
+function selling(row: { payments_open_on: string | null; payments_open_time: string | null; purchases_paused: boolean; gift_category: string | null; gift_min_subtotal: number | string }) {
+  const switches = { paymentsOpenOn: row.payments_open_on, paymentsOpenTime: row.payments_open_time, purchasesPaused: row.purchases_paused }
   return {
-    ...switches, today: storeToday(), payments: paymentsState(switches, storeToday()),
+    ...switches, today: storeToday(), payments: paymentsState(switches, storeMoment()),
     giftCategory: row.gift_category, giftMinSubtotal: Number(row.gift_min_subtotal),
   }
 }
@@ -49,6 +49,11 @@ export const PUT = handle('admin.store.update', async (req: NextRequest) => {
     const day = body.payments_open_on
     if (day !== null && !isDay(day)) throw new BadRequest('Launch day must be a date (YYYY-MM-DD), or empty.')
     updates.payments_open_on = day
+  }
+  if ('payments_open_time' in body) {
+    const time = body.payments_open_time === '' ? null : body.payments_open_time
+    if (time !== null && !launchTime(time)) throw new BadRequest('Launch time must be HH:MM (24-hour, store time), or empty for midnight.')
+    updates.payments_open_time = time
   }
   if ('purchases_paused' in body) {
     if (typeof body.purchases_paused !== 'boolean') throw new BadRequest('Pause must be on or off.')

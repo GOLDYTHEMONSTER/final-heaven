@@ -24,13 +24,20 @@ export function zonedMidnight(day: string, timeZone: string): Date {
   return new Date(guess.getTime() - (wall - guess.getTime()))
 }
 
+/** The UTC instant checkout opens: the launch day's midnight plus its launch time ("21:00"), in the store's zone. */
+export function openingInstant(day: string, time: string | null, timeZone: string): Date {
+  const [h, m] = (time ?? '00:00').split(':').map(Number)
+  return new Date(zonedMidnight(day, timeZone).getTime() + (h * 60 + m) * 60_000)
+}
+
+/** `now` is a store moment (lib/catalog storeMoment) or a store day. */
 export function launchState(
-  s: { paymentsOpenOn: string | null; purchasesPaused: boolean },
+  s: { paymentsOpenOn: string | null; paymentsOpenTime?: string | null; purchasesPaused: boolean },
   timeZone: string,
-  today: string,
+  now: string,
 ): LaunchState {
-  const p = paymentsState(s, today)
+  const p = paymentsState(s, now)
   // A pause after launch isn't "coming soon": the store is open, just not selling.
   if (p.closedFor !== 'launch') return { open: true, opensOn: p.opensOn, opensAt: null }
-  return { open: false, opensOn: p.opensOn, opensAt: p.opensOn ? zonedMidnight(p.opensOn, timeZone).toISOString() : null }
+  return { open: false, opensOn: p.opensOn, opensAt: p.opensOn ? openingInstant(p.opensOn, p.opensTime, timeZone).toISOString() : null }
 }

@@ -9,7 +9,7 @@ import { WELCOME_DAILY_CAP, welcomeDecision } from '@/lib/email/lifecycle'
 import { addToHeldBatch, templateApproved, welcomeTemplate } from '@/lib/email/batches-store'
 import { TRIGGERS, triggerContent } from '@/lib/email/reachout'
 import { logger } from '@/lib/log'
-import { storeToday } from '@/lib/catalog'
+import { storeMoment } from '@/lib/catalog'
 import { isEarly, parseInvite } from '@/lib/early-access'
 import { joinEarly } from '@/lib/early-access-store'
 
@@ -57,9 +57,9 @@ export const POST = handle('newsletter.subscribe', async (req: NextRequest) => {
   // and a new subscriber who came with a friend's code earns that friend a credit. A bonus, like the welcome.
   let early = false
   try {
-    const { data: shop, error: se } = await db.from('stores').select('payments_open_on').eq('id', store.storeId).single()
+    const { data: shop, error: se } = await db.from('stores').select('payments_open_on, payments_open_time').eq('id', store.storeId).single()
     if (se) throw se
-    if (isEarly(shop.payments_open_on ?? null, storeToday(store.timeZone, new Date()))) {
+    if (isEarly(shop.payments_open_on ?? null, storeMoment(store.timeZone, new Date()), shop.payments_open_time ?? null)) {
       early = Boolean(await joinEarly(db, { subscriberId: saved.id, isNew: !existing, invite: parseInvite(body.invite) }))
     }
   } catch (e) {
