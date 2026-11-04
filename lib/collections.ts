@@ -33,18 +33,17 @@ export const orderedIn = (p: Pick<Product, 'fulfilment' | 'sourceType'>) =>
 
 /** "Made to order · ships in about N days", or "Ordered in · …" for bought-in pieces; null for stock. */
 export function supplyLabel(p: Pick<Product, 'fulfilment' | 'leadTimeDays' | 'sourceType'>): string | null {
-  if (p.fulfilment !== 'made_to_order') return null
-  const kind = orderedIn(p) ? 'Ordered in' : 'Made to order'
+  // Bought-in pieces say nothing about how they're supplied: the delivery date speaks for them.
+  if (p.fulfilment !== 'made_to_order' || orderedIn(p)) return null
+  const kind = 'Made to order'
   return p.leadTimeDays ? `${kind} · ships in about ${p.leadTimeDays} days` : kind
 }
 
 /** The sentence under it on the product page: what happens after payment. */
 export function supplyNote(p: Pick<Product, 'fulfilment' | 'leadTimeDays' | 'sourceType'>): string | null {
-  if (p.fulfilment !== 'made_to_order') return null
+  if (p.fulfilment !== 'made_to_order' || orderedIn(p)) return null
   const when = p.leadTimeDays ? `, so it ships about ${p.leadTimeDays} days after payment` : ''
-  return orderedIn(p)
-    ? `We order this in for you once you’ve paid${when}. It doesn’t ship straight away.`
-    : `We make this after you order${when}. It doesn’t ship straight away.`
+  return `We make this after you order${when}. It doesn’t ship straight away.`
 }
 
 /** The rule part of a collection: every condition given must hold. */

@@ -21,6 +21,7 @@ import { HypeMeter } from '@/components/hype/Hype'
 import { DeliveryEstimate } from '@/components/product/DeliveryEstimate'
 import { OrderCountdown } from '@/components/product/Arrival'
 import { StockAlert } from '@/components/product/StockAlert'
+import { SizeChartTable, SpecsTable } from '@/components/product/ProductTables'
 
 
 /** Who makes it (originals and labels), and, when it's made or ordered in after payment, that it doesn't ship straight away. */
@@ -394,6 +395,20 @@ export function ProductView({ params }: { params: { id: string } }) {
                   <p className="text-final-off-white/70 leading-relaxed">
                     {product.description}
                   </p>
+                  {!!product.specs?.length && (
+                    <div>
+                      <h4 className="text-lg font-semibold text-final-off-white mb-3">Specifications</h4>
+                      <SpecsTable specs={product.specs} />
+                    </div>
+                  )}
+                  {product.sizeChart && (
+                    <div>
+                      <h4 className="text-lg font-semibold text-final-off-white mb-3">
+                        Size guide{product.sizeChart.unit ? <span className="ml-2 text-sm font-normal text-final-muted">in {product.sizeChart.unit}</span> : null}
+                      </h4>
+                      <SizeChartTable chart={product.sizeChart} />
+                    </div>
+                  )}
                   {product.tags && product.tags.length > 0 && (
                     <div>
                       <h4 className="text-lg font-semibold text-final-off-white mb-3">Tags</h4>

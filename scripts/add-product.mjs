@@ -170,6 +170,9 @@ const columns = {
   preorder: p.preorder ?? false, preorder_ships_on: p.preorder_ships_on ?? null, preorder_limit: p.preorder_limit ?? 0,
   // Only when the folder says so: sea freight only (lithium batteries) is false.
   ...('ships_by_air' in p ? { ships_by_air: p.ships_by_air !== false } : {}),
+  // The page's tables, when the folder has them (shapes: lib/product-tables.ts; the database checks sizes).
+  ...('specs' in p ? { specs: p.specs ?? [] } : {}),
+  ...('size_chart' in p ? { size_chart: p.size_chart ?? null } : {}),
 }
 if (p.id) {
   // An update keeps the product's status: publishing is its own step.

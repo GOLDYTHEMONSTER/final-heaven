@@ -4,6 +4,7 @@ import { getStorefront } from '@/lib/tenancy'
 import { PUBLIC_PRODUCT_SELECT, paymentsState, storeMoment, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
 import { orderDayFor, productDelivery, supplyOf } from '@/lib/delivery'
 import { collectionProducts, parseRule, type CollectionRule } from '@/lib/collections'
+import { parseSizeChart, parseSpecs } from '@/lib/product-tables'
 
 // Public catalogue reads, shared by the API routes and the server-rendered
 // pages. All go through the public (anon) client, so RLS decides what shows:
@@ -48,6 +49,9 @@ export async function publicProduct(id: string): Promise<Product | null> {
   // Dates count from today, or from launch day while checkout waits for it.
   const payments = paymentsState({ paymentsOpenOn: shop.data.payments_open_on ?? null, paymentsOpenTime: shop.data.payments_open_time ?? null, purchasesPaused: shop.data.purchases_paused === true }, storeMoment(store.timeZone))
   product.delivery = productDelivery(supplyOf(data, product.purchase!), orderDayFor(payments, today))
+  // The page's tables travel with the one product, not with every card in the lists.
+  product.specs = parseSpecs(data.specs)
+  product.sizeChart = parseSizeChart(data.size_chart)
   return product
 }
 

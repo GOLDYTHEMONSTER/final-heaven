@@ -17,7 +17,7 @@ const ZONE = 'Africa/Lagos'
  * while the launch state loads, without a launch day, or when it can't be
  * worked out.
  */
-export function useArrival(product: Pick<Product, 'fulfilment' | 'sourceType' | 'leadTimeDays' | 'purchase'>, tick = 0) {
+export function useArrival(product: Pick<Product, 'fulfilment' | 'sourceType' | 'leadTimeDays' | 'shipsByAir' | 'purchase'>, tick = 0) {
   const launch = useLaunch()
   const [now, setNow] = useState<number | null>(null)
   useEffect(() => {

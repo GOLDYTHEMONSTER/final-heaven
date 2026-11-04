@@ -10,6 +10,7 @@ import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import type { Product } from '@/lib/catalog'
 import { orderedIn } from '@/lib/collections'
+import { arrivesInText } from '@/lib/delivery'
 import { CardFrame, CardFrameMat, HypeTag, useCardFrame } from '@/components/hype/Hype'
 import { useTouchReveal } from '@/lib/useTouchReveal'
 import { QuickAdd } from '@/components/ui/QuickAdd'
@@ -67,7 +68,7 @@ function Badges({ product, underFrame = false }: { product: Product; underFrame?
       )}
       {made && (
         <span className="rounded-md bg-final-off-white px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-final-black">
-          {arrival ?? (orderedIn(product) ? (product.leadTimeDays ? `Ships in ~${product.leadTimeDays} days` : 'Ordered in') : 'Made to order')}
+          {arrival ?? (orderedIn(product) ? arrivesInText(product, product.purchase ?? { state: 'available' }) : 'Made to order')}
         </span>
       )}
       {single && (

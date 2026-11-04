@@ -3,6 +3,7 @@
 // Pure: the caller supplies the store's local date.
 
 import type { ProductDelivery } from '@/lib/delivery'
+import type { SizeChart, Spec } from '@/lib/product-tables'
 
 export type CatalogueProduct = {
   id: string
@@ -61,12 +62,17 @@ export interface Product {
   /** stock (ready to ship) or made_to_order (made after the order, in about leadTimeDays). */
   fulfilment?: string
   leadTimeDays?: number
+  /** False: sea freight only (no Express by air), so it takes longer (lib/delivery). */
+  shipsByAir?: boolean
   /** Its label, when it has a published one. */
   brand?: { id: string; name: string; slug: string }
   /** From the server: whether and how this can be bought right now. */
   purchase?: PurchaseState
   /** On the product's own page: when it should arrive, and Express when it comes from China (lib/delivery). */
   delivery?: ProductDelivery
+  /** On the product's own page only: the spec table and the size chart (lib/product-tables). */
+  specs?: Spec[]
+  sizeChart?: SizeChart | null
 }
 
 /** The columns the storefront reads for a product, with its published brand. */
@@ -216,6 +222,7 @@ export function toPublicProduct(row: Record<string, any>, today: string) {
     sourceType: row.source_type ?? 'original',
     fulfilment: row.fulfilment ?? 'stock',
     leadTimeDays: row.lead_time_days ?? undefined,
+    shipsByAir: row.ships_by_air === false ? false : undefined,
     brand: row.brand ? { id: row.brand.id, name: row.brand.name, slug: row.brand.slug } : undefined,
     purchase: purchaseState(row as CatalogueProduct, today),
   }

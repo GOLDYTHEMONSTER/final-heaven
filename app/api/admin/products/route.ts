@@ -4,6 +4,7 @@ import { audit } from '@/lib/audit'
 import { BadRequest, handle, int, money, readJson, requestIdOf, text, url } from '@/lib/api'
 import { SOURCE_SELECT, blocksSale, saveSource, sourceFields } from '@/lib/sourcing'
 import { FULFILMENTS, SOURCE_TYPES } from '@/lib/collections'
+import { checkSizeChart, checkSpecs } from '@/lib/product-tables'
 import { createSupabaseServiceClient } from '@/lib/supabase/admin'
 
 // Per-request only: never cached or prerendered.
@@ -97,6 +98,16 @@ function productColumns(body: Record<string, unknown>, partial: boolean) {
   if (has('colors')) out.colors = list(body.colors, 'Colors')
   if (has('sizes')) out.sizes = list(body.sizes, 'Sizes')
   if (has('tags')) out.tags = list(body.tags, 'Tags')
+  if (has('specs')) {
+    const checked = checkSpecs(body.specs)
+    if ('error' in checked) throw new BadRequest(checked.error)
+    out.specs = checked.value
+  }
+  if (has('size_chart')) {
+    const checked = checkSizeChart(body.size_chart)
+    if ('error' in checked) throw new BadRequest(checked.error)
+    out.size_chart = checked.value
+  }
   if (has('images')) {
     const images = body.images ?? []
     if (!Array.isArray(images) || images.length > 12) throw new BadRequest('Images must be a list of up to 12.')

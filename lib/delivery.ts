@@ -6,6 +6,7 @@
 //   made to order (originals)      its lead time, then 3–7 days
 //   ordered in from China          standard 14–21 days (free), or
 //                                  Express by air 10–17 days (paid)
+//   from China, sea freight only   25–35 days, standard only (no Express)
 //   pre-order                      from its ship date, then 3–7 days
 //
 // Express is offered only when an order has ordered-in items: it is the air
@@ -18,6 +19,8 @@ export const DELIVERY = {
   inStock: { min: 3, max: 7 },
   fromChina: { min: 14, max: 21 },
   expressFromChina: { min: 10, max: 17 },
+  /** Items that can't fly (ships_by_air off): sea freight is slower, and there's no Express. */
+  seaFromChina: { min: 25, max: 35 },
   expressBaseKobo: 250_000,
   expressIncludedKg: 1,
   expressPerExtraKgKobo: 100_000,
@@ -44,7 +47,7 @@ export function addDays(day: string, n: number) {
 /** Days from ordering until it arrives, for one line (pre-orders: from their ship date). */
 function lineWindow(s: Supply, option: DeliveryOption): Window {
   if (s.kind === 'made') return { min: s.leadDays + DELIVERY.inStock.min, max: s.leadDays + DELIVERY.inStock.max }
-  if (s.kind === 'ordered_in') return option === 'express' ? DELIVERY.expressFromChina : DELIVERY.fromChina
+  if (s.kind === 'ordered_in') return s.seaOnly ? DELIVERY.seaFromChina : option === 'express' ? DELIVERY.expressFromChina : DELIVERY.fromChina
   return DELIVERY.inStock
 }
 
@@ -125,12 +128,22 @@ export function estimate(supplies: Supply[], option: DeliveryOption, orderDay: s
  * null without an order day. The same window as the product page and checkout.
  */
 export function arrivesBy(
-  p: { fulfilment?: string | null; sourceType?: string | null; leadTimeDays?: number | null },
+  p: { fulfilment?: string | null; sourceType?: string | null; leadTimeDays?: number | null; shipsByAir?: boolean | null },
   state: { state: string; shipsOn?: string },
   orderDay: string | null,
 ): string | null {
-  const supply = supplyOf({ fulfilment: p.fulfilment, source_type: p.sourceType, lead_time_days: p.leadTimeDays }, state)
+  const supply = supplyOf({ fulfilment: p.fulfilment, source_type: p.sourceType, lead_time_days: p.leadTimeDays, ships_by_air: p.shipsByAir }, state)
   return estimate([supply], 'standard', orderDay).to
+}
+
+/** "Get it in 14–21 days" for one product, for when there's no order day to count dates from yet. */
+export function arrivesInText(
+  p: { fulfilment?: string | null; sourceType?: string | null; leadTimeDays?: number | null; shipsByAir?: boolean | null },
+  state: { state: string; shipsOn?: string },
+): string {
+  const supply = supplyOf({ fulfilment: p.fulfilment, source_type: p.sourceType, lead_time_days: p.leadTimeDays, ships_by_air: p.shipsByAir }, state)
+  const e = estimate([supply], 'standard', null)
+  return `Get it in ${e.minDays}–${e.maxDays} days`
 }
 
 /** Express in kobo for the chargeable weight of the order's ordered-in items (unknown weight: the base fee). */

@@ -66,9 +66,10 @@ describe('source labels', () => {
     expect(supplyLabel({})).toBeNull()
   })
 
-  it('never says a bought-in piece is made: it is ordered in after payment', () => {
-    expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'wholesale' })).toBe('Ordered in · ships in about 14 days')
-    expect(supplyNote({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'wholesale' })).toBe('We order this in for you once you’ve paid, so it ships about 14 days after payment. It doesn’t ship straight away.')
+  it('says nothing about how a bought-in piece is supplied: the delivery date speaks for it', () => {
+    expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'wholesale' })).toBeNull()
+    expect(supplyLabel({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'distributor' })).toBeNull()
+    expect(supplyNote({ fulfilment: 'made_to_order', leadTimeDays: 14, sourceType: 'wholesale' })).toBeNull()
     expect(supplyNote({ fulfilment: 'made_to_order', leadTimeDays: 10, sourceType: 'original' })).toMatch(/^We make this after you order/)
     expect(orderedIn({ fulfilment: 'stock', sourceType: 'wholesale' })).toBe(false)
   })

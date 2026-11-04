@@ -1,6 +1,6 @@
 // Delivery estimates and the Express fee (lib/delivery), as agreed on 28 Oct 2026.
 import { describe, expect, it } from 'vitest'
-import { arrivalText, arrivesBy, estimate, expressAvailable, expressFee, supplyOf } from '@/lib/delivery'
+import { arrivalText, arrivesBy, arrivesInText, estimate, expressAvailable, expressFee, supplyOf } from '@/lib/delivery'
 
 const day = '2026-11-13'
 
@@ -72,5 +72,30 @@ describe('arrivesBy (product card and countdown)', () => {
   })
   it('a pre-order arrives from its ship date, whenever it is ordered', () => {
     expect(arrivesBy({ fulfilment: 'stock' }, { state: 'preorder', shipsOn: '2026-12-01' }, '2026-11-07')).toBe('2026-12-08')
+  })
+})
+
+describe('sea freight only (items that can’t fly)', () => {
+  const sea = { kind: 'ordered_in', seaOnly: true } as const
+
+  it('takes 25–35 days, longer than standard by air', () => {
+    expect(estimate([sea], 'standard', day)).toEqual({ minDays: 25, maxDays: 35, from: '2026-12-08', to: '2026-12-18' })
+    expect(estimate([{ kind: 'ordered_in' }], 'standard', day)).toEqual({ minDays: 14, maxDays: 21, from: '2026-11-27', to: '2026-12-04' })
+  })
+
+  it('stretches the whole order, since an order travels together', () => {
+    expect(estimate([{ kind: 'stock' }, { kind: 'ordered_in' }, sea], 'standard', day).maxDays).toBe(35)
+  })
+
+  it('shows on the card and the countdown too', () => {
+    const available = { state: 'available' }
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'wholesale', shipsByAir: false }, available, '2026-11-07')).toBe('2026-12-12')
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'wholesale', shipsByAir: true }, available, '2026-11-07')).toBe('2026-11-28')
+    expect(arrivesBy({ fulfilment: 'made_to_order', sourceType: 'wholesale' }, available, '2026-11-07')).toBe('2026-11-28')
+  })
+
+  it('gives days when there is no order day to count from', () => {
+    expect(arrivesInText({ fulfilment: 'made_to_order', sourceType: 'wholesale', shipsByAir: false }, { state: 'available' })).toBe('Get it in 25–35 days')
+    expect(arrivesInText({ fulfilment: 'made_to_order', sourceType: 'wholesale' }, { state: 'available' })).toBe('Get it in 14–21 days')
   })
 })
