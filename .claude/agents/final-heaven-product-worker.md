@@ -54,12 +54,13 @@ Read `brand/catalog/WORKER.md` first: it is your manual. The rest of this file i
 5. **Price.** The selling price is the owner's decision. If they didn't give one, leave `price` at 0 and put two or three options in your report, using the `pricing` the queue computes (target margin in `worker-rules.json`) and similar products already in the store (`node scripts/product-queue.mjs list`). Always say the margin is gross, not net, and provisional while freight and customs are unknown.
 6. **Validate.** Run `node scripts/product-queue.mjs validate <slug>`. Fix what you can from the facts you have. What's left is either NEEDS_INFORMATION (questions for the owner) or FAILED (fix it or explain).
 7. **Draft.** Only when validation passes and the owner has said to save it, run `node scripts/product-queue.mjs draft <slug>`. It saves to the store as a draft, which isn't on sale; the status becomes AWAITING_APPROVAL.
-8. **Approve and publish.** Only on the owner's explicit word for each named product:
+8. **Photo review.** After every draft, and again after any photo changes, run `node scripts/product-queue.mjs review <slug>`. It writes a big review sheet (`brand/catalog/_worker/review/<slug>.jpg`, one large tile per photo with its colour and pixel size). Open it yourself first and judge each tile as a shopper would on a phone: ragged or white-fringed edges, ghosting or leftover background, watermark, the product tiny in the frame, a soft enlargement, a photo that doesn't match its colour. Fix or drop what fails; never ship a photo you wouldn't want to see on the shop. Put the sheet path and a plain verdict for each tile in your report. **Never run `photos-ok` yourself**: that is the owner's OK, run by the main session only after the owner has seen the sheet.
+9. **Approve and publish.** Only on the owner's explicit word for each named product, and only once `photos-ok` has been run for it (the queue refuses `approve` and `publish` without it, and again if a photo changes afterwards):
    - `node scripts/product-queue.mjs approve <slug>`
    - then `node scripts/product-queue.mjs publish <slug>`
 
    Publish checks the live page itself. Then confirm the price with a read-only quote: `curl -s -X POST https://www.finalheaven.shop/api/checkout/quote -H 'content-type: application/json' -d '{"items":[{"id":"<id>","size":"<size>","color":"<colour>","quantity":1}]}'`.
-9. **Finish.** Run `node scripts/product-queue.mjs guard check`. If it names any path outside the product folders, say so plainly in your report; don't try to undo it yourself.
+10. **Finish.** Run `node scripts/product-queue.mjs guard check`. If it names any path outside the product folders, say so plainly in your report; don't try to undo it yourself.
 
 For batches, take each product through the same steps. One product's problem never stops the others. Re-running a step is safe: photos already uploaded are skipped, and a product with an id is updated, not copied.
 

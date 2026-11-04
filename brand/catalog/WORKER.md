@@ -50,6 +50,8 @@ The main session hands your message, the image paths and any prices to the worke
 node scripts/product-queue.mjs list                  # everything, then the batch summary
 node scripts/product-queue.mjs list AWAITING_APPROVAL
 node scripts/product-queue.mjs validate --all        # re-check every product (writes nothing to the store)
+node scripts/product-queue.mjs review <slug>         # big photo review sheet: brand/catalog/_worker/review/<slug>.jpg
+node scripts/product-queue.mjs photos-ok <slug>      # the owner has seen the photos and they're fine
 node scripts/product-queue.mjs approve <slug>
 node scripts/product-queue.mjs publish <slug>
 ```
@@ -65,6 +67,7 @@ The worker never invents a rate or a freight cost. While those are missing, the 
 ## Safety
 
 - Publishing needs your approval of each product by name. The queue itself refuses to publish anything you haven't approved.
+- **Photos are reviewed before anything goes on sale.** `review` makes a sheet with one big tile per photo. You look at it, and only after you say the photos are fine does `photos-ok` unlock `approve` and `publish`. Change a photo afterwards and the OK is void: review again.
 - The worker is told to stay in `brand/catalog/` and `tools/product-photos/`, and it checks itself at the end of every run. `guard check` lists anything it changed outside those folders.
 - Claude Code subagents share the main session's working folder: the limits come from the agent's instructions and that check, not from a sandbox.
 - It never commits, pushes, deploys, runs SQL or reads `.env.local` out loud. Saving drafts and publishing go through `scripts/add-product.mjs`, which uses the service key without printing it.

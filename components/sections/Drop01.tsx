@@ -120,6 +120,10 @@ export function Drop01() {
   }
 
   const pieces = DROP_01_PIECES.map((id) => products[id]).filter(Boolean)
+  // The rest of the drop: anything else tagged drop-01 (the ladies' line, the print tees, the tracksuits), outside the set builder.
+  const more = Object.values(products)
+    .filter((p) => p.tags?.includes('drop-01') && !p.tags.includes('set') && !DROP_01_PIECES.includes(p.id))
+    .sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name))
 
   return (
     <main className="bg-final-black pt-16">
@@ -244,6 +248,19 @@ export function Drop01() {
         </div>
         {loaded && !pieces.length ? <p className="mt-10 text-final-muted">The pieces will be listed here shortly.</p> : null}
       </section>
+
+      {/* 4. The rest of the drop. */}
+      {more.length > 0 && (
+        <section id="more" aria-labelledby="more-title" className="mx-auto max-w-7xl scroll-mt-20 px-4 pb-24 sm:px-6 lg:px-8">
+          <div className="border-t border-final-light-gray/40 pt-12">
+            <p className="text-xs font-medium uppercase tracking-[0.24em] text-final-muted">Also in the drop</p>
+            <h2 id="more-title" className="display mt-3 text-4xl md:text-5xl">The rest of the drop</h2>
+          </div>
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+            {more.map((p) => <ProductCard key={p.id} product={p} viewMode="grid" />)}
+          </div>
+        </section>
+      )}
     </main>
   )
 }

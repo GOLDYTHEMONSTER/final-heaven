@@ -9,6 +9,7 @@ The main session is for development. When the owner sends a product (1688 screen
 - **Its brief:** `.claude/agents/final-heaven-product-worker.md`.
 - **Its queue:** `node scripts/product-queue.mjs list`.
 - **Your part:** relay the worker's `QUESTION` lines to the owner as quick choices, send the answers back, and only publish what the owner approves by name.
+- **Photo review before anything goes live:** run `node scripts/product-queue.mjs review <slug>` and send the owner the big sheet (`brand/catalog/_worker/review/<slug>.jpg`). Run `photos-ok <slug>` only after they have seen it and said the photos are fine; `approve` and `publish` refuse without it. Drop or redo any photo you would not want to see on the shop yourself.
 
 ## Audit
 

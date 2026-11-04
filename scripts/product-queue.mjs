@@ -6,7 +6,9 @@
 //   node scripts/product-queue.mjs new <slug>                start a folder (RECEIVED)
 //   node scripts/product-queue.mjs validate <slug...|--all>  checks, pricing → DRAFT_READY / NEEDS_INFORMATION / FAILED
 //   node scripts/product-queue.mjs draft <slug...>           save as a draft in the store (not on sale) → AWAITING_APPROVAL
-//   node scripts/product-queue.mjs approve <slug...>         the owner's go-ahead → APPROVED
+//   node scripts/product-queue.mjs review <slug...>          big photo review sheet (brand/catalog/_worker/review/<slug>.jpg): show it to the owner
+//   node scripts/product-queue.mjs photos-ok <slug...>       the owner has seen those photos and they're fine (needed before approve)
+//   node scripts/product-queue.mjs approve <slug...>         the owner's go-ahead → APPROVED (refused until the photos were reviewed)
 //   node scripts/product-queue.mjs reject <slug> [reason]    → REJECTED
 //   node scripts/product-queue.mjs publish <slug...>         APPROVED only: on sale, then checked live → PUBLISHED
 //   node scripts/product-queue.mjs status <slug> <STATUS> [note]   set by hand (e.g. reopen a rejected product)
@@ -108,12 +110,69 @@ async function cmdDraft(slugs) {
   }
 }
 
+// Nothing goes on sale on a contact sheet alone: the owner looks at every photo, big, and says they're fine.
+// The OK is tied to the files' contents, so changing a photo afterwards asks for a new review.
+const photoHashes = (slug, p) => Object.fromEntries((p.photos ?? []).map((ph) => {
+  const f = join(ROOT, slug, ph.file)
+  return [ph.file, existsSync(f) ? createHash('sha256').update(readFileSync(f)).digest('hex') : null]
+}))
+function photosReviewed(slug, p) {
+  const seen = photoHashes(slug, p)
+  if (!Object.keys(seen).length) return { ok: false, why: 'it has no photos' }
+  const done = p.queue?.photos_reviewed?.hashes
+  if (!done) return { ok: false, why: `the photos haven't been reviewed: run \`review ${slug}\`, show the owner the sheet, and run \`photos-ok ${slug}\` once they say the photos are fine` }
+  const same = Object.keys(seen).length === Object.keys(done).length && Object.entries(seen).every(([f, h]) => h && done[f] === h)
+  return same ? { ok: true } : { ok: false, why: `the photos changed since they were reviewed: run \`review ${slug}\` again` }
+}
+
+const TILE = { w: 800, h: 1000, label: 56, gap: 24, bg: { r: 232, g: 230, b: 225 } }
+async function cmdReview(slugs) {
+  mkdirSync(join(WORK, 'review'), { recursive: true })
+  for (const slug of slugs) {
+    if (!need(slug)) continue
+    const p = load(slug)
+    const photos = (p.photos ?? []).filter((ph) => existsSync(join(ROOT, slug, ph.file)))
+    if (!photos.length) { console.log(`${slug}: no photos to review`); continue }
+    const cols = Math.min(2, photos.length), rows = Math.ceil(photos.length / cols)
+    const cellH = TILE.h + TILE.label
+    const layers = []
+    for (const [i, ph] of photos.entries()) {
+      const left = TILE.gap + (i % cols) * (TILE.w + TILE.gap), top = TILE.gap + Math.floor(i / cols) * (cellH + TILE.gap)
+      const file = join(ROOT, slug, ph.file)
+      const buf = await sharp(file).resize(TILE.w, TILE.h, { fit: 'contain', background: TILE.bg }).jpeg({ quality: 92 }).toBuffer()
+      const m = await sharp(file).metadata()
+      const text = `${i + 1}. ${ph.color ?? 'no colour'}  (${m.width}x${m.height})`.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      const label = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${TILE.w}" height="${TILE.label}"><rect width="100%" height="100%" fill="#111"/><text x="16" y="38" font-family="Arial, sans-serif" font-size="28" fill="#fff">${text}</text></svg>`)
+      layers.push({ input: buf, left, top }, { input: label, left, top: top + TILE.h })
+    }
+    const out = join(WORK, 'review', `${slug}.jpg`)
+    await sharp({ create: { width: TILE.gap + cols * (TILE.w + TILE.gap), height: TILE.gap + rows * (cellH + TILE.gap), channels: 3, background: TILE.bg } })
+      .composite(layers).jpeg({ quality: 90 }).toFile(out)
+    console.log(`${slug}: ${photos.length} photo(s), review sheet ${out}`)
+  }
+}
+
+async function cmdPhotosOk(slugs) {
+  for (const slug of slugs) {
+    if (!need(slug)) continue
+    const p = load(slug)
+    const hashes = photoHashes(slug, p)
+    if (!Object.keys(hashes).length || Object.values(hashes).some((h) => !h)) { console.log(`${slug}: not marked (a photo file is missing)`); continue }
+    ;(p.queue ??= {}).photos_reviewed = { at: now(), hashes }
+    save(slug, p)
+    log(slug, 'photos_reviewed', { photos: Object.keys(hashes).length })
+    console.log(`${slug}: photos marked as reviewed (${Object.keys(hashes).length})`)
+  }
+}
+
 async function cmdApprove(slugs) {
   for (const slug of slugs) {
     if (!need(slug)) continue
     const p = load(slug)
     const a = allowed('approve', p.queue)
     if (!a.ok) { console.log(`${slug}: not approved (${a.why})`); continue }
+    const ph = photosReviewed(slug, p)
+    if (!ph.ok) { console.log(`${slug}: not approved (${ph.why})`); continue }
     setStatus(slug, p, 'APPROVED', { approved_at: now(), note: 'approved by the owner' })
     console.log(`${slug}: APPROVED`)
   }
@@ -125,6 +184,8 @@ async function cmdPublish(slugs) {
     let p = load(slug)
     const a = allowed('publish', p.queue)
     if (!a.ok) { console.log(`${slug}: not published (${a.why})`); continue }
+    const ph = photosReviewed(slug, p)
+    if (!ph.ok) { console.log(`${slug}: not published (${ph.why})`); continue }
     setStatus(slug, p, 'PUBLISHING')
     const r = run(slug, '--publish')
     p = load(slug)
@@ -198,6 +259,8 @@ const commands = {
   new: () => cmdNew(args),
   validate: () => cmdValidate(slugsFrom(args)),
   draft: () => cmdDraft(slugsFrom(args)),
+  review: () => cmdReview(args),
+  'photos-ok': () => cmdPhotosOk(args),
   approve: () => cmdApprove(args),
   reject: () => { const [slug, ...why] = args; if (need(slug)) { setStatus(slug, load(slug), 'REJECTED', { note: why.join(' ') || 'rejected by the owner' }); console.log(`${slug}: REJECTED`) } },
   publish: () => cmdPublish(args),
