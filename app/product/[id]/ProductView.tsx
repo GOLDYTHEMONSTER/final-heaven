@@ -21,7 +21,7 @@ import { HypeMeter } from '@/components/hype/Hype'
 import { DeliveryEstimate } from '@/components/product/DeliveryEstimate'
 import { OrderCountdown } from '@/components/product/Arrival'
 import { StockAlert } from '@/components/product/StockAlert'
-import { SizeChartTable, SpecsTable } from '@/components/product/ProductTables'
+import { Disclosure, SizeChartTable, SpecsTable } from '@/components/product/ProductTables'
 
 
 /** Who makes it (originals and labels), and, when it's made or ordered in after payment, that it doesn't ship straight away. */
@@ -58,6 +58,8 @@ export function ProductView({ params }: { params: { id: string } }) {
   const [selectedSize, setSelectedSize] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [quantity, setQuantity] = useState(1)
+  // Said on the page, never in an alert (browsers can block those, and the button then looks dead).
+  const [pickError, setPickError] = useState('')
   const [zoomIndex, setZoomIndex] = useState<number | null>(null)
   const [activeTab, setActiveTab] = useState<'description' | 'shipping'>('description')
   const [product, setProduct] = useState<any>(null)
@@ -182,13 +184,14 @@ export function ProductView({ params }: { params: { id: string } }) {
   const handleAddToCart = () => {
     if (!buyable) return
     if (!selectedSize && product.sizes && product.sizes.length > 0) {
-      alert('Please select a size')
+      setPickError('Please choose a size.')
       return
     }
     if (!selectedColor && product.colors && product.colors.length > 0) {
-      alert('Please select a color')
+      setPickError('Please choose a colour.')
       return
     }
+    setPickError('')
 
     trackCartAddition(product.id)
     addItem({
@@ -265,7 +268,8 @@ export function ProductView({ params }: { params: { id: string } }) {
                     {product.sizes.map((size: string) => (
                       <button
                         key={size}
-                        onClick={() => setSelectedSize(size)}
+                        aria-pressed={selectedSize === size}
+                        onClick={() => { setSelectedSize(size); setPickError('') }}
                         className={`px-4 py-2 rounded-lg border-2 transition-all duration-300 ${
                           selectedSize === size
                             ? 'border-final-accent bg-final-accent text-final-black'
@@ -276,6 +280,13 @@ export function ProductView({ params }: { params: { id: string } }) {
                       </button>
                     ))}
                   </div>
+                  {product.sizeChart && (
+                    <div className="mt-4">
+                      <Disclosure title="Size guide" hint={product.sizeChart.unit ? `in ${product.sizeChart.unit}` : undefined}>
+                        <SizeChartTable chart={product.sizeChart} />
+                      </Disclosure>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -287,7 +298,8 @@ export function ProductView({ params }: { params: { id: string } }) {
                     {product.colors.map((color: string) => (
                       <button
                         key={color}
-                        onClick={() => setSelectedColor(color)}
+                        aria-pressed={selectedColor === color}
+                        onClick={() => { setSelectedColor(color); setPickError('') }}
                         className={`px-4 py-2 rounded-lg border-2 transition-all duration-300 ${
                           selectedColor === color
                             ? 'border-final-accent bg-final-accent text-final-black'
@@ -306,6 +318,8 @@ export function ProductView({ params }: { params: { id: string } }) {
                 <h3 className="text-lg font-semibold text-final-off-white mb-3">Quantity</h3>
                 <div className="flex items-center space-x-4">
                   <button
+                    aria-label="Decrease quantity"
+                    disabled={quantity <= 1}
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="w-10 h-10 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white hover:bg-final-accent hover:text-final-black transition-colors"
                   >
@@ -313,6 +327,7 @@ export function ProductView({ params }: { params: { id: string } }) {
                   </button>
                   <span className="text-xl font-semibold text-final-off-white w-12 text-center">{quantity}</span>
                   <button
+                    aria-label="Increase quantity"
                     onClick={() => setQuantity(Math.min(quantity + 1, Math.max(1, maxQuantity)))}
                     disabled={!buyable || quantity >= maxQuantity}
                     className="w-10 h-10 bg-final-gray border border-final-light-gray/30 rounded-lg text-final-off-white hover:bg-final-accent hover:text-final-black transition-colors"
@@ -329,6 +344,8 @@ export function ProductView({ params }: { params: { id: string } }) {
 
               {/* Order now to get it by …: the date moves on at midnight, or when checkout opens. */}
               {buyable && <OrderCountdown product={product} />}
+
+              {pickError && <p role="alert" className="text-sm font-medium text-final-ember">{pickError}</p>}
 
               {/* Add to Cart */}
               <motion.button
@@ -396,18 +413,9 @@ export function ProductView({ params }: { params: { id: string } }) {
                     {product.description}
                   </p>
                   {!!product.specs?.length && (
-                    <div>
-                      <h4 className="text-lg font-semibold text-final-off-white mb-3">Specifications</h4>
+                    <Disclosure title="Specifications" defaultOpen>
                       <SpecsTable specs={product.specs} />
-                    </div>
-                  )}
-                  {product.sizeChart && (
-                    <div>
-                      <h4 className="text-lg font-semibold text-final-off-white mb-3">
-                        Size guide{product.sizeChart.unit ? <span className="ml-2 text-sm font-normal text-final-muted">in {product.sizeChart.unit}</span> : null}
-                      </h4>
-                      <SizeChartTable chart={product.sizeChart} />
-                    </div>
+                    </Disclosure>
                   )}
                   {product.tags && product.tags.length > 0 && (
                     <div>

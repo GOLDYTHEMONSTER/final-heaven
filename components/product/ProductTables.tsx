@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+import { FiChevronDown } from 'react-icons/fi'
 import type { SizeChart, Spec } from '@/lib/product-tables'
 
 // The product page's two tables. Plain markup (a real <table>, with a caption and
@@ -49,5 +51,24 @@ export function SizeChartTable({ chart }: { chart: SizeChart }) {
         </tbody>
       </table>
     </div>
+  )
+}
+
+/**
+ * A dropdown that works without script (a real <details>): the summary is the
+ * button, the chevron turns when it's open, and it's reachable by keyboard.
+ */
+export function Disclosure({ title, hint, defaultOpen, children }: { title: string; hint?: string; defaultOpen?: boolean; children: ReactNode }) {
+  return (
+    <details open={defaultOpen} className="group rounded-lg border border-final-light-gray/30 bg-final-gray/30">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-final-off-white marker:content-none [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-final-accent">
+        <span>
+          {title}
+          {hint ? <span className="ml-2 text-xs font-normal text-final-muted">{hint}</span> : null}
+        </span>
+        <FiChevronDown aria-hidden className="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180" />
+      </summary>
+      <div className="px-3 pb-3">{children}</div>
+    </details>
   )
 }

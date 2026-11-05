@@ -60,7 +60,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData(product)).replace(/</g, '\\u003c') }}
         />
       )}
-      <ProductView params={params} />
+      <ProductView key={params.id} params={params} />
     </>
   )
 }
