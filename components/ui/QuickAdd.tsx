@@ -1,5 +1,6 @@
 'use client'
 
+import { ColorSwatches } from '@/components/product/ColorSwatches'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -86,9 +87,9 @@ export function QuickAdd({ product, onClose }: { product: Product; onClose: () =
             )}
             {colors.length > 0 && (
               <fieldset className="mt-5">
-                <legend className="mb-2 text-xs uppercase tracking-[0.12em] text-final-muted">Colour</legend>
+                <legend className="mb-2 text-xs uppercase tracking-[0.12em] text-final-muted">Colour{color ? <span className="ml-2 normal-case tracking-normal text-final-off-white">{color}</span> : null}</legend>
                 <div className="flex flex-wrap gap-2">
-                  {colors.map((c) => <button key={c} type="button" aria-pressed={color === c} onClick={() => setColor(c)} className={chip(color === c)}>{c}</button>)}
+                  <ColorSwatches colors={colors} images={product.images} value={color} onChange={setColor} size="sm" />
                 </div>
               </fieldset>
             )}

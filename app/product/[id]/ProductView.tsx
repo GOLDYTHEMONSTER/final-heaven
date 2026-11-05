@@ -22,6 +22,8 @@ import { DeliveryEstimate } from '@/components/product/DeliveryEstimate'
 import { OrderCountdown } from '@/components/product/Arrival'
 import { StockAlert } from '@/components/product/StockAlert'
 import { Disclosure, SizeChartTable, SpecsTable } from '@/components/product/ProductTables'
+import { ColorSwatches } from '@/components/product/ColorSwatches'
+import { sizeGuideFor } from '@/lib/size-guides'
 
 
 /** Who makes it (originals and labels), and, when it's made or ordered in after payment, that it doesn't ship straight away. */
@@ -75,6 +77,9 @@ export function ProductView({ params }: { params: { id: string } }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [zoomIndex])
   const { addItem } = useCart()
+  useEffect(() => {
+    if (product?.sizes?.length === 1) setSelectedSize(product.sizes[0])
+  }, [product])
   const { trackProductView, updateTimeSpent, addFavoriteCategory, trackCartAddition } = useInterestStore()
 
   useEffect(() => {
@@ -156,6 +161,7 @@ export function ProductView({ params }: { params: { id: string } }) {
   }
 
   const isSet = !!setGroups(stringList(product.colors))
+  const sizeGuide = sizeGuideFor(product)
 
   // Every photo, each with its colour when it shows one (legacy products have a single `image`).
   const galleryImages: GalleryImage[] = product.images && product.images.length > 0
@@ -263,7 +269,9 @@ export function ProductView({ params }: { params: { id: string } }) {
               {/* Size Selection */}
               {product.sizes && product.sizes.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-final-off-white mb-3">Size</h3>
+                  <h3 className="text-lg font-semibold text-final-off-white mb-3">
+                    Size{selectedSize ? <span className="ml-2 font-normal text-final-off-white/70">{selectedSize}</span> : null}
+                  </h3>
                   <div className="flex flex-wrap gap-3">
                     {product.sizes.map((size: string) => (
                       <button
@@ -280,10 +288,11 @@ export function ProductView({ params }: { params: { id: string } }) {
                       </button>
                     ))}
                   </div>
-                  {product.sizeChart && (
+                  {sizeGuide && (
                     <div className="mt-4">
-                      <Disclosure title="Size guide" hint={product.sizeChart.unit ? `in ${product.sizeChart.unit}` : undefined}>
-                        <SizeChartTable chart={product.sizeChart} />
+                      <Disclosure title="Size guide" hint={sizeGuide.standard ? 'standard sizes' : sizeGuide.chart.unit ? `in ${sizeGuide.chart.unit}` : undefined}>
+                        <SizeChartTable chart={sizeGuide.chart} />
+                        {sizeGuide.note && <p className="mt-2 text-xs text-final-muted">{sizeGuide.note}</p>}
                       </Disclosure>
                     </div>
                   )}
@@ -293,23 +302,11 @@ export function ProductView({ params }: { params: { id: string } }) {
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-final-off-white mb-3">Color</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {product.colors.map((color: string) => (
-                      <button
-                        key={color}
-                        aria-pressed={selectedColor === color}
-                        onClick={() => { setSelectedColor(color); setPickError('') }}
-                        className={`px-4 py-2 rounded-lg border-2 transition-all duration-300 ${
-                          selectedColor === color
-                            ? 'border-final-accent bg-final-accent text-final-black'
-                            : 'border-final-light-gray/30 text-final-off-white hover:border-final-accent/50'
-                        }`}
-                      >
-                        {color}
-                      </button>
-                    ))}
-                  </div>
+                  <h3 className="text-lg font-semibold text-final-off-white mb-3">
+                    Colour{selectedColor ? <span className="ml-2 font-normal text-final-off-white/70">{selectedColor}</span> : null}
+                  </h3>
+                  <ColorSwatches colors={product.colors} images={galleryImages} value={selectedColor}
+                    onChange={(color) => { setSelectedColor(color); setPickError('') }} />
                 </div>
               )}
 
