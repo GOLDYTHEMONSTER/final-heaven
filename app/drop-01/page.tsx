@@ -4,7 +4,7 @@ import { Drop01 } from '@/components/sections/Drop01'
 
 export const metadata: Metadata = {
   title: 'Drop 01 - Final Heaven',
-  description: 'Tees, hoodies, the ladies’ line, tracksuits and a trucker cap. ₦80,000 for the full set, or buy each piece on its own.',
+  description: 'Three shirts, a hoodie and a cap for ₦80,000, or buy each piece on its own. Plus the ladies’ line and tracksuits.',
 }
 
 export default function Drop01Page() {
