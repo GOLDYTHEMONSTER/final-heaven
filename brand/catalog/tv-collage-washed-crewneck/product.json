@@ -1,5 +1,5 @@
 {
-  "name": "TV Collage Crewneck â€” Washed Black",
+  "name": "TV Collage Crewneck — Washed Black",
   "category": "Sweatshirts",
   "description": "A zine-style collage of old TV screens and grainy panels under a serif FINAL HEAVEN heading on the front. Embroidered mark at the front hem.\n\nHeavyweight washed cotton with a snow-wash finish, relaxed unisex fit. The three-star mark is embroidered. Printed to order, and the wash makes every one slightly different.",
   "price": 35000,
@@ -44,15 +44,15 @@
       "platform": "1688",
       "url": "https://detail.m.1688.com/page/index.htm?offerId=1066956422157"
     },
-    "notes": "Blank crewneck Â¥40 (owner, 8 Nov), same shop as the hoodies; the crewneck has its own listing, link not given yet (hoodie link used). Print and embroidery cost not included. Price = â‚¦30,000 base + â‚¦5,000 for the embroidered mark (owner rule). Sizes Sâ€“XL assumed. Photo generated on the real blank. Design: brand/designs/concepts-11."
+    "notes": "Blank crewneck ¥40 (owner, 8 Nov), same shop as the hoodies; the crewneck has its own listing, link not given yet (hoodie link used). Print and embroidery cost not included. Price = ₦30,000 base + ₦5,000 for the embroidered mark (owner rule). Sizes S–XL assumed. Photo generated on the real blank. Design: brand/designs/concepts-11."
   },
   "shipping": {
     "weight_kg": null,
     "data_status": "estimated"
   },
   "queue": {
-    "status": "AWAITING_APPROVAL",
-    "updated": "2026-11-08T07:48:43.253Z",
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T08:00:36.750Z",
     "history": [
       {
         "at": "2026-11-08T07:46:00.393Z",
@@ -80,6 +80,22 @@
         "from": "PROCESSING",
         "to": "AWAITING_APPROVAL",
         "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T08:00:29.567Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T08:00:34.914Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T08:00:36.750Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
@@ -111,8 +127,17 @@
       "margin": 0.7455657142857143,
       "suggested": 20000
     },
-    "note": "draft saved, not on sale",
-    "store_id": "p1794124122102"
+    "note": "approved by the owner",
+    "store_id": "p1794124122102",
+    "photos_reviewed": {
+      "at": "2026-11-08T08:00:29.312Z",
+      "hashes": {
+        "front.jpg": "66097139c00bbe13b69ef81201e36f3e5ac995fb317659345de6189d6c495944"
+      }
+    },
+    "approved_at": "2026-11-08T08:00:29.567Z",
+    "published_at": "2026-11-08T08:00:36.750Z",
+    "url": "https://www.finalheaven.shop/product/p1794124122102"
   },
   "id": "p1794124122102"
 }

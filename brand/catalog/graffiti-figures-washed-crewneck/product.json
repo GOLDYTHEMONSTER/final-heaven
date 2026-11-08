@@ -1,5 +1,5 @@
 {
-  "name": "Graffiti Figures Crewneck â€” Washed Black",
+  "name": "Graffiti Figures Crewneck — Washed Black",
   "category": "Sweatshirts",
   "description": "Dripping graffiti FINAL HEAVEN lettering over two figures against a wall of tags on the front, with script FINAL HEAVEN down both sleeves. Embroidered mark at the front hem.\n\nHeavyweight washed cotton with a snow-wash finish, relaxed unisex fit. The three-star mark is embroidered. Printed to order, and the wash makes every one slightly different.",
   "price": 35000,
@@ -44,15 +44,15 @@
       "platform": "1688",
       "url": "https://detail.m.1688.com/page/index.htm?offerId=1066956422157"
     },
-    "notes": "Blank crewneck Â¥40 (owner, 8 Nov), same shop as the hoodies; the crewneck has its own listing, link not given yet (hoodie link used). Print and embroidery cost not included. Price = â‚¦30,000 base + â‚¦5,000 for the embroidered mark (owner rule). Sizes Sâ€“XL assumed. Photo generated on the real blank. Design: brand/designs/concepts-11."
+    "notes": "Blank crewneck ¥40 (owner, 8 Nov), same shop as the hoodies; the crewneck has its own listing, link not given yet (hoodie link used). Print and embroidery cost not included. Price = ₦30,000 base + ₦5,000 for the embroidered mark (owner rule). Sizes S–XL assumed. Photo generated on the real blank. Design: brand/designs/concepts-11."
   },
   "shipping": {
     "weight_kg": null,
     "data_status": "estimated"
   },
   "queue": {
-    "status": "AWAITING_APPROVAL",
-    "updated": "2026-11-08T07:48:36.717Z",
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T08:00:32.721Z",
     "history": [
       {
         "at": "2026-11-08T07:48:31.323Z",
@@ -75,6 +75,22 @@
         "from": "PROCESSING",
         "to": "AWAITING_APPROVAL",
         "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T08:00:29.558Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T08:00:29.808Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T08:00:32.721Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
@@ -106,8 +122,17 @@
       "margin": 0.7455657142857143,
       "suggested": 20000
     },
-    "note": "draft saved, not on sale",
-    "store_id": "p1794124115663"
+    "note": "approved by the owner",
+    "store_id": "p1794124115663",
+    "photos_reviewed": {
+      "at": "2026-11-08T08:00:29.300Z",
+      "hashes": {
+        "front.jpg": "e08b1ab5e3094a1e0180d9a11bc7da000a2a99aa6498acbccecf5c221ae1d8fc"
+      }
+    },
+    "approved_at": "2026-11-08T08:00:29.556Z",
+    "published_at": "2026-11-08T08:00:32.721Z",
+    "url": "https://www.finalheaven.shop/product/p1794124115663"
   },
   "id": "p1794124115663"
 }
