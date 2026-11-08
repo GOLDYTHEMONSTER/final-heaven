@@ -7,6 +7,7 @@ import { parseAttribution } from '@/lib/attribution'
 import { checkoutForRequest } from '@/lib/checkout/supabase-store'
 import { getStorefront } from '@/lib/tenancy'
 import { POLICY } from '@/lib/legal'
+import { nigerianState } from '@/lib/nigeria'
 import { rateLimit } from '@/lib/rate-limit'
 
 // Per-request only: never cached or prerendered.
@@ -26,11 +27,13 @@ export const POST = handle('orders.create', async (req: NextRequest) => {
     email: email(body.email),
     shippingAddress: text(body.shippingAddress, 'Shipping address', { max: 300, required: true })!,
     shippingCity: text(body.shippingCity, 'City', { max: 100, required: true })!,
-    shippingState: text(body.shippingState, 'State', { max: 100 }),
-    shippingPostalCode: text(body.shippingPostalCode, 'Postal code', { max: 20, required: true })!,
+    shippingState: nigerianState(text(body.shippingState, 'State', { max: 100, required: true })),
+    // Most Nigerian addresses are delivered without one, so it's optional.
+    shippingPostalCode: text(body.shippingPostalCode, 'Postal code', { max: 20 }),
     shippingCountry: text(body.shippingCountry, 'Country', { max: 100, required: true })!,
   }
   if (buyer.shippingCountry.toLowerCase() !== POLICY.shipsTo.toLowerCase()) throw new BadRequest(`We deliver within ${POLICY.shipsTo} only.`)
+  if (!buyer.shippingState) throw new BadRequest('Please choose your state.')
   if (body.termsAccepted !== true) throw new BadRequest('Please accept the Terms of Sale and Returns Policy to place your order.')
 
   const result = await (await checkoutForRequest(req)).begin({

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiAlertCircle, FiLock } from 'react-icons/fi'
+import { FiAlertCircle, FiChevronDown, FiLock } from 'react-icons/fi'
 import Link from 'next/link'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
@@ -16,6 +16,8 @@ import type { DeliveryOption } from '@/lib/delivery'
 import { storedAttribution } from '@/lib/attribution-client'
 import { DeliveryChoice } from '@/components/cart/DeliveryChoice'
 import { forgetCheckoutDetails, loadCheckoutDetails, saveCheckoutDetails } from '@/lib/checkout-details'
+import { NIGERIAN_STATES, nigerianState } from '@/lib/nigeria'
+const FIELD = 'w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent'
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CheckoutPage() {
@@ -43,7 +45,7 @@ export default function CheckoutPage() {
     setEmail((v) => v || saved.email)
     setShippingAddress((v) => v || saved.address)
     setCity((v) => v || saved.city)
-    setStateValue((v) => v || saved.state)
+    setStateValue((v) => v || nigerianState(saved.state) || '')
     setPostalCode((v) => v || saved.postalCode)
   }, [])
   const [delivery, setDelivery] = useState<DeliveryOption>('standard')
@@ -67,8 +69,8 @@ export default function CheckoutPage() {
       return
     }
 
-    if (!email || !shippingAddress || !city || !postalCode || !country) {
-      setMessage('Please complete all shipping details.')
+    if (!email || !shippingAddress || !city || !stateValue || !country) {
+      setMessage('Please fill in your email, address, state and city or town.')
       setStatus('error')
       return
     }
@@ -185,66 +187,76 @@ export default function CheckoutPage() {
                       autoComplete="email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
-                      className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
+                      required
+                      className={FIELD}
                       placeholder="you@example.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-final-off-white/80 mb-2" htmlFor="shippingAddress">Shipping Address</label>
+                    <label className="block text-final-off-white/80 mb-2" htmlFor="shippingAddress">Delivery address</label>
                     <input
                       id="shippingAddress"
                       name="address"
                       type="text"
                       autoComplete="street-address"
+                      required
                       value={shippingAddress}
                       onChange={(event) => setShippingAddress(event.target.value)}
-                      className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                      placeholder="123 Main St"
+                      className={FIELD}
+                      placeholder="House number, street, nearest landmark"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-final-off-white/80 mb-2" htmlFor="city">City</label>
+                      <label className="block text-final-off-white/80 mb-2" htmlFor="state">State</label>
+                      <div className="relative">
+                        <select
+                          id="state"
+                          name="state"
+                          autoComplete="address-level1"
+                          required
+                          value={stateValue}
+                          onChange={(event) => setStateValue(event.target.value)}
+                          className={`${FIELD} appearance-none pr-10 ${stateValue ? '' : 'text-final-off-white/50'}`}
+                        >
+                          <option value="" disabled className="bg-final-black">Choose your state</option>
+                          {NIGERIAN_STATES.map((s) => <option key={s} value={s} className="bg-final-black text-final-off-white">{s}</option>)}
+                        </select>
+                        <FiChevronDown aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-final-muted" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-final-off-white/80 mb-2" htmlFor="city">City or town</label>
                       <input
                         id="city"
                         name="city"
                         type="text"
                         autoComplete="address-level2"
+                        required
                         value={city}
                         onChange={(event) => setCity(event.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                        placeholder="City"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-final-off-white/80 mb-2" htmlFor="state">State</label>
-                      <input
-                        id="state"
-                        name="state"
-                        type="text"
-                        autoComplete="address-level1"
-                        value={stateValue}
-                        onChange={(event) => setStateValue(event.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                        placeholder="State"
+                        className={FIELD}
+                        placeholder="e.g. Ikeja, Wuse, Port Harcourt"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-final-off-white/80 mb-2" htmlFor="postalCode">Postal Code</label>
+                      <label className="block text-final-off-white/80 mb-2" htmlFor="postalCode">Postal code <span className="text-final-muted">(optional)</span></label>
                       <input
                         id="postalCode"
                         name="postalCode"
                         type="text"
+                        inputMode="numeric"
                         autoComplete="postal-code"
+                        maxLength={6}
                         value={postalCode}
                         onChange={(event) => setPostalCode(event.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
-                        placeholder="ZIP / Postal Code"
+                        className={FIELD}
+                        placeholder="e.g. 100001"
                       />
                     </div>
                     <div>

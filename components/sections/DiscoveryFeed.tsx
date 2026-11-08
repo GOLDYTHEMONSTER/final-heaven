@@ -231,9 +231,10 @@ export function DiscoveryFeed() {
     return cols
   }, [items, columns])
 
-  // The page: so many rows tall. Clipped and faded while there's more below it.
+  // The page: so many rows tall. Clipped and faded while there's more below it, including
+  // while the next batch is still on its way, so the fade never drops away and snaps back.
   const cap = rowHeight ? Math.round(rows * rowHeight) : undefined
-  const clipped = !!cap && contentHeight > cap
+  const clipped = !!cap && (contentHeight > cap || !done)
   const hasMore = clipped || !done
 
   const seeMore = () => {
@@ -293,7 +294,8 @@ export function DiscoveryFeed() {
         <div ref={wrapRef} className="relative">
           <div
             className="overflow-hidden transition-[max-height] duration-500 ease-out motion-reduce:transition-none"
-            style={{ maxHeight: clipped ? cap : undefined }}
+            // While loading, hold the page's full height so the button doesn't jump up and back.
+            style={{ maxHeight: clipped ? cap : undefined, minHeight: clipped && status === 'loading' && items.length ? cap : undefined }}
           >
             <div ref={contentRef} className="flex items-start gap-3 sm:gap-5">
               {initialLoading

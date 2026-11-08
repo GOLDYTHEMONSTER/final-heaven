@@ -61,7 +61,7 @@ export type Buyer = {
   shippingAddress: string
   shippingCity: string
   shippingState: string | null
-  shippingPostalCode: string
+  shippingPostalCode: string | null
   shippingCountry: string
 }
 
