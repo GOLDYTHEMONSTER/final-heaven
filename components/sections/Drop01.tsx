@@ -130,7 +130,7 @@ export function Drop01() {
   }
 
   const pieces = DROP_01_PIECES.map((id) => products[id]).filter(Boolean)
-  // The rest of the drop: anything else tagged drop-01 (the tracksuits), outside the set builder.
+  // The rest of the drop: anything else tagged drop-01 that's on sale, outside the set builder (hidden when there's none).
   const more = Object.values(products)
     .filter((p) => p.tags?.includes('drop-01') && p.id !== DROP_01.setId && !DROP_01_PIECES.includes(p.id))
     .sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name))

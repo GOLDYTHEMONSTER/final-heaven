@@ -1,0 +1,113 @@
+{
+  "name": "Graffiti Figures Crewneck â€” Washed Black",
+  "category": "Sweatshirts",
+  "description": "Dripping graffiti FINAL HEAVEN lettering over two figures against a wall of tags on the front, with script FINAL HEAVEN down both sleeves. Embroidered mark at the front hem.\n\nHeavyweight washed cotton with a snow-wash finish, relaxed unisex fit. The three-star mark is embroidered. Printed to order, and the wash makes every one slightly different.",
+  "price": 35000,
+  "stock": 20,
+  "colors": [
+    "washed black"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "graphic",
+    "washed",
+    "crewneck",
+    "sweatshirt",
+    "embroidered",
+    "graffiti",
+    "figures",
+    "drop-01"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "original",
+  "photos": [
+    {
+      "file": "front.jpg",
+      "color": "washed black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f216b151-f1a0-4b18-a85e-d3ede92e47ad.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.m.1688.com/page/index.htm?offerId=1066956422157",
+    "unit_cost": 40,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "own",
+    "supplier": {
+      "name": "Suning Sufang Yazhi Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.m.1688.com/page/index.htm?offerId=1066956422157"
+    },
+    "notes": "Blank crewneck Â¥40 (owner, 8 Nov), same shop as the hoodies; the crewneck has its own listing, link not given yet (hoodie link used). Print and embroidery cost not included. Price = â‚¦30,000 base + â‚¦5,000 for the embroidered mark (owner rule). Sizes Sâ€“XL assumed. Photo generated on the real blank. Design: brand/designs/concepts-11."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "AWAITING_APPROVAL",
+    "updated": "2026-11-08T07:48:36.717Z",
+    "history": [
+      {
+        "at": "2026-11-08T07:48:31.323Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T07:48:32.237Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T07:48:33.221Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T07:48:36.717Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T07:48:32.236Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as astronaut-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as eagle-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as grain-boxer-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as grain-portrait-washed-crewneck (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as koi-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as motocross-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as skate-sun-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as tv-collage-washed-crewneck (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 8905,
+      "landed": 8905,
+      "gross": 26095,
+      "margin": 0.7455657142857143,
+      "suggested": 20000
+    },
+    "note": "draft saved, not on sale",
+    "store_id": "p1794124115663"
+  },
+  "id": "p1794124115663"
+}

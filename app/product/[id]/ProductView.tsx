@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FiTruck, FiShield } from 'react-icons/fi'
 import { ProductGallery, type GalleryImage } from '@/components/product/ProductGallery'
 import { formatCurrency } from '@/lib/utils/format'
@@ -77,6 +78,7 @@ export function ProductView({ params }: { params: { id: string } }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [zoomIndex])
   const { addItem } = useCart()
+  const router = useRouter()
   useEffect(() => {
     if (product?.sizes?.length === 1) setSelectedSize(product.sizes[0])
   }, [product])
@@ -187,15 +189,16 @@ export function ProductView({ params }: { params: { id: string } }) {
     unavailable: 'UNAVAILABLE',
   }[purchase.state as string] ?? 'UNAVAILABLE'
 
+  /** Puts the chosen options in the cart; false when something still has to be picked. */
   const handleAddToCart = () => {
-    if (!buyable) return
+    if (!buyable) return false
     if (!selectedSize && product.sizes && product.sizes.length > 0) {
       setPickError('Please choose a size.')
-      return
+      return false
     }
     if (!selectedColor && product.colors && product.colors.length > 0) {
       setPickError('Please choose a colour.')
-      return
+      return false
     }
     setPickError('')
 
@@ -210,6 +213,12 @@ export function ProductView({ params }: { params: { id: string } }) {
       quantity: Math.min(quantity, maxQuantity || 1),
       isMembersOnly: product.membersOnly || false
     })
+    return true
+  }
+
+  // Buy now: the same picks go in the cart, then straight to checkout.
+  const handleBuyNow = () => {
+    if (handleAddToCart()) router.push('/checkout')
   }
 
   return (
@@ -354,6 +363,15 @@ export function ProductView({ params }: { params: { id: string } }) {
               >
                 {buttonLabel}
               </motion.button>
+              {buyable && (
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="-mt-4 w-full rounded-lg border-2 border-final-off-white py-4 text-lg font-bold text-final-off-white transition-colors duration-200 hover:bg-final-off-white hover:text-final-black"
+                >
+                  BUY NOW
+                </button>
+              )}
               </>)}
               {purchase.state === 'preorder' && (
                 <p className="text-sm text-final-muted">Pay now to reserve yours. It ships from {shipsOn}; we&apos;ll email you when it does.</p>

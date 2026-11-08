@@ -50,6 +50,7 @@ export default function PrivacyPage() {
       <Section title="Cookies and storage on your device">
         <ul>
           <li>Your cart is saved in your browser’s local storage so it’s still there when you come back. It stays on your device until you check out.</li>
+          <li>If you leave “Remember my delivery details on this device” ticked at checkout, your email and delivery address are kept in your browser’s local storage so the form fills itself next time. They stay on that device only; untick the box to forget them.</li>
           <li>Staff who sign in to manage the shop get a sign-in cookie.</li>
           <li>If you tap Hype on a product, we set one cookie holding a random number, so each browser’s hype counts once per product. It isn’t linked to your name, orders or anything else, and we store only a scrambled form of it. Shoppers who never tap Hype get no cookie.</li>
           <li>If you arrive from one of our adverts, the web address carries tags saying which advert it was. We keep those tags in your browser’s local storage for up to 30 days, and send them with your order so we know which advert brought it. They hold no personal details, and visitors with Do Not Track or Global Privacy Control on aren’t tagged.</li>

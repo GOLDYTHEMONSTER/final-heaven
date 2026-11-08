@@ -15,6 +15,7 @@ import { PENDING_CHECKOUT_KEY, quoteLineAt, useQuote } from '@/lib/useQuote'
 import type { DeliveryOption } from '@/lib/delivery'
 import { storedAttribution } from '@/lib/attribution-client'
 import { DeliveryChoice } from '@/components/cart/DeliveryChoice'
+import { forgetCheckoutDetails, loadCheckoutDetails, saveCheckoutDetails } from '@/lib/checkout-details'
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CheckoutPage() {
@@ -34,6 +35,17 @@ export default function CheckoutPage() {
   // We deliver within Nigeria only (lib/legal.ts), so the country is fixed.
   const country = POLICY.shipsTo
   const [termsAccepted, setTermsAccepted] = useState(false)
+  // Details from a previous order on this device fill the form; the customer can untick to forget them.
+  const [remember, setRemember] = useState(true)
+  useEffect(() => {
+    const saved = loadCheckoutDetails()
+    if (!saved) return
+    setEmail((v) => v || saved.email)
+    setShippingAddress((v) => v || saved.address)
+    setCity((v) => v || saved.city)
+    setStateValue((v) => v || saved.state)
+    setPostalCode((v) => v || saved.postalCode)
+  }, [])
   const [delivery, setDelivery] = useState<DeliveryOption>('standard')
   const [status, setStatus] = useState<'idle' | 'loading' | 'redirecting' | 'error'>('idle')
   const [message, setMessage] = useState('')
@@ -68,6 +80,8 @@ export default function CheckoutPage() {
 
     setStatus('loading')
     setMessage('')
+    if (remember) saveCheckoutDetails({ email, address: shippingAddress, city, state: stateValue, postalCode })
+    else forgetCheckoutDetails()
 
     const payload = {
       email,
@@ -166,7 +180,9 @@ export default function CheckoutPage() {
                     <label className="block text-final-off-white/80 mb-2" htmlFor="email">Email</label>
                     <input
                       id="email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                       className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
@@ -178,7 +194,9 @@ export default function CheckoutPage() {
                     <label className="block text-final-off-white/80 mb-2" htmlFor="shippingAddress">Shipping Address</label>
                     <input
                       id="shippingAddress"
+                      name="address"
                       type="text"
+                      autoComplete="street-address"
                       value={shippingAddress}
                       onChange={(event) => setShippingAddress(event.target.value)}
                       className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
@@ -191,7 +209,9 @@ export default function CheckoutPage() {
                       <label className="block text-final-off-white/80 mb-2" htmlFor="city">City</label>
                       <input
                         id="city"
+                        name="city"
                         type="text"
+                        autoComplete="address-level2"
                         value={city}
                         onChange={(event) => setCity(event.target.value)}
                         className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
@@ -202,7 +222,9 @@ export default function CheckoutPage() {
                       <label className="block text-final-off-white/80 mb-2" htmlFor="state">State</label>
                       <input
                         id="state"
+                        name="state"
                         type="text"
+                        autoComplete="address-level1"
                         value={stateValue}
                         onChange={(event) => setStateValue(event.target.value)}
                         className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
@@ -216,7 +238,9 @@ export default function CheckoutPage() {
                       <label className="block text-final-off-white/80 mb-2" htmlFor="postalCode">Postal Code</label>
                       <input
                         id="postalCode"
+                        name="postalCode"
                         type="text"
+                        autoComplete="postal-code"
                         value={postalCode}
                         onChange={(event) => setPostalCode(event.target.value)}
                         className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent"
@@ -236,6 +260,11 @@ export default function CheckoutPage() {
                       <p id="country-note" className="mt-1 text-xs text-final-muted">We deliver within {POLICY.shipsTo} only.</p>
                     </div>
                   </div>
+
+                  <label className="flex items-center gap-3 text-sm text-final-muted">
+                    <input type="checkbox" checked={remember} onChange={(e) => { setRemember(e.target.checked); if (!e.target.checked) forgetCheckoutDetails() }} className="h-4 w-4 shrink-0 accent-final-ember" />
+                    <span>Remember my delivery details on this device</span>
+                  </label>
 
                   {quote?.delivery && <DeliveryChoice delivery={quote.delivery} value={delivery} onChange={setDelivery} />}
 
