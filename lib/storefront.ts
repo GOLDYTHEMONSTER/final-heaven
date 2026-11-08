@@ -1,7 +1,7 @@
 import 'server-only'
 import { createSupabasePublicClient } from '@/lib/supabase/server'
 import { getStorefront } from '@/lib/tenancy'
-import { PUBLIC_PRODUCT_SELECT, paymentsState, storeMoment, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
+import { NEW_DAYS, PUBLIC_PRODUCT_SELECT, paymentsState, storeMoment, storeToday, toPublicProduct, type Product } from '@/lib/catalog'
 import { orderDayFor, productDelivery, supplyOf } from '@/lib/delivery'
 import { collectionProducts, parseRule, type CollectionRule } from '@/lib/collections'
 import { parseSizeChart, parseSpecs } from '@/lib/product-tables'
@@ -24,12 +24,14 @@ export async function publicProducts({ category, isNew }: { category?: string | 
   const store = await getStorefront()
   let query = createSupabasePublicClient().from('products').select(PUBLIC_PRODUCT_SELECT)
     .eq('store_id', store.storeId).eq('status', 'active')
-  if (isNew) query = query.eq('is_new', true)
+  // New lasts NEW_DAYS (a day of slack here; toPublicProduct decides exactly, in store days).
+  if (isNew) query = query.eq('is_new', true).gte('created_at', new Date(Date.now() - (NEW_DAYS + 1) * 86_400_000).toISOString())
   if (category && category !== 'All') query = query.eq('category', category.slice(0, 60))
   const { data, error } = await query.order('created_at', { ascending: false }).limit(MAX_PRODUCTS)
   if (error) throw error
   const today = storeToday(store.timeZone)
-  return (data || []).map((p) => toPublicProduct(p, today) as Product)
+  const products = (data || []).map((p) => toPublicProduct(p, today) as Product)
+  return isNew ? products.filter((p) => p.isNew) : products
 }
 
 /** One active product with its delivery estimate, or null. */

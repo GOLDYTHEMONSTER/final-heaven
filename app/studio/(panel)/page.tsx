@@ -8,6 +8,10 @@ import {
 } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { formatCurrency } from '@/lib/utils/format'
+import { NEW_DAYS, isStillNew } from '@/lib/catalog'
+
+/** Today's date, for the two-week New rule. */
+const todayIso = () => new Date().toISOString().slice(0, 10)
 import { uploadProductImage } from '@/lib/admin/upload'
 import { SourcingFields, toSource, type Supplier } from '@/components/admin/SourcingFields'
 import { ProductOriginFields } from '@/components/admin/ProductOriginFields'
@@ -539,7 +543,7 @@ export default function AdminPage() {
               </div>
               <div className="flex gap-4 flex-wrap">
                 <label className="flex items-center gap-2 text-final-off-white/80">
-                  <input type="checkbox" name="is_new" checked={form.is_new} onChange={handleChange} /> New
+                  <input type="checkbox" name="is_new" checked={form.is_new} onChange={handleChange} /> New <span className="text-xs text-final-off-white/50">(shows for {NEW_DAYS} days after it&apos;s added)</span>
                 </label>
                 <label className="flex items-center gap-2 text-final-off-white/80">
                   <input type="checkbox" name="is_limited" checked={form.is_limited} onChange={handleChange} /> Limited
@@ -660,7 +664,7 @@ export default function AdminPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-final-off-white/70 text-sm">New Drops</p>
-                  <p className="text-3xl font-bold text-orange-400">{products.filter(p => p.is_new).length}</p>
+                  <p className="text-3xl font-bold text-orange-400">{products.filter(p => isStillNew(p, todayIso())).length}</p>
                 </div>
                 <div className="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center">
                   <FiTrendingUp className="w-6 h-6 text-orange-400" />
@@ -759,7 +763,7 @@ export default function AdminPage() {
                             <div>
                               <p className="font-semibold text-final-off-white">{product.name}</p>
                               <div className="flex items-center space-x-1 mt-1">
-                                {product.is_new && <span className="bg-final-accent text-final-black text-xs px-1 rounded">NEW</span>}
+                                {isStillNew(product, todayIso()) && <span className="bg-final-accent text-final-black text-xs px-1 rounded">NEW</span>}
                                 {product.is_limited && <span className="bg-red-500 text-white text-xs px-1 rounded">LIMITED</span>}
                                 {product.is_trending && <span className="bg-orange-500 text-white text-xs px-1 rounded">TRENDING</span>}
                                 {product.members_only && <span className="bg-purple-500 text-white text-xs px-1 rounded">MEMBERS</span>}

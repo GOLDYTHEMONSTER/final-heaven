@@ -2,7 +2,7 @@
 // the Checkout module enforces. Pricing and promo codes are tested through the
 // Checkout module (checkout.test.ts).
 import { describe, expect, it } from 'vitest'
-import { purchaseState, saleOriginalPrice, storeToday, toPublicProduct } from '@/lib/catalog'
+import { isStillNew, purchaseState, saleOriginalPrice, storeToday, toPublicProduct } from '@/lib/catalog'
 
 const TODAY = '2026-10-18'
 const base = { status: 'active', images: [], stock: 5, price: 10000 }
@@ -45,5 +45,16 @@ describe('sale prices', () => {
     expect(saleOriginalPrice({ price: 15000, original_price: 40 })).toBeNull()
     expect(saleOriginalPrice({ price: 20000, original_price: 40000 })).toBe(40000)
     expect(toPublicProduct({ ...catalogue[0], original_price: 40 }, TODAY).originalPrice).toBeUndefined()
+  })
+})
+
+describe('New lasts two weeks', () => {
+  it('is New for 14 store days after it was added, and only while the New tickbox is on', () => {
+    const row = { is_new: true, created_at: '2026-11-08T07:00:00Z' }
+    expect(isStillNew(row, '2026-11-08')).toBe(true)
+    expect(isStillNew(row, '2026-11-21')).toBe(true)
+    expect(isStillNew(row, '2026-11-22')).toBe(false)
+    expect(isStillNew({ ...row, is_new: false }, '2026-11-08')).toBe(false)
+    expect(isStillNew({ is_new: true, created_at: null }, '2026-11-08')).toBe(false)
   })
 })

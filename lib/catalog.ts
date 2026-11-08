@@ -194,6 +194,17 @@ export function paymentsClosed(p: PaymentsState) {
 /** For public catalogue responses: the CDN may serve them a minute old, as checkout always re-prices. */
 export const CATALOGUE_CACHE = { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=600' }
 
+/** How long a product counts as New after it's added (owner, 8 Nov 2026). The Studio's New tickbox can end it sooner. */
+export const NEW_DAYS = 14
+
+/** True while a product marked New is younger than NEW_DAYS, counted in store days from its creation date. */
+export function isStillNew(row: { is_new?: unknown; created_at?: string | null }, today: string) {
+  if (!row.is_new || !row.created_at) return false
+  const added = Date.parse(String(row.created_at).slice(0, 10))
+  const now = Date.parse(today)
+  return Number.isFinite(added) && Number.isFinite(now) && now - added < NEW_DAYS * 86_400_000
+}
+
 /** The public shape of a product: camelCase, no internal columns, with its purchase state. */
 export function toPublicProduct(row: Record<string, any>, today: string) {
   return {
@@ -204,7 +215,7 @@ export function toPublicProduct(row: Record<string, any>, today: string) {
     originalPrice: saleOriginalPrice(row as CatalogueProduct) ?? undefined,
     images: Array.isArray(row.images) ? row.images : [],
     category: row.category,
-    isNew: Boolean(row.is_new),
+    isNew: isStillNew(row, today),
     isLimited: Boolean(row.is_limited),
     isTrending: Boolean(row.is_trending),
     membersOnly: Boolean(row.members_only),

@@ -7,7 +7,7 @@ import { FiArrowDown, FiArrowUp, FiX } from 'react-icons/fi'
 import { sized } from '@/lib/images'
 import { formatCurrency } from '@/lib/utils/format'
 import { SOURCE_TYPES, matchesRule, parseRule, type CollectionRule } from '@/lib/collections'
-import type { Product } from '@/lib/catalog'
+import { isStillNew, type Product } from '@/lib/catalog'
 
 type Row = Record<string, any>
 type CollectionRow = {
@@ -35,7 +35,7 @@ const local = (iso: string | null) => (iso ? new Date(new Date(iso).getTime() - 
 /** The storefront view of an admin product row, for previewing rules. */
 const asProduct = (r: Row): Product => ({
   id: r.id, name: r.name, price: Number(r.price), category: r.category, stock: r.stock, status: r.status, tags: r.tags ?? [],
-  sourceType: r.source_type ?? 'original', isNew: r.is_new, createdAt: r.created_at, brand: r.brand_id ? { id: r.brand_id, name: '', slug: '' } : undefined,
+  sourceType: r.source_type ?? 'original', isNew: isStillNew(r, new Date().toISOString().slice(0, 10)), createdAt: r.created_at, brand: r.brand_id ? { id: r.brand_id, name: '', slug: '' } : undefined,
   images: r.images ?? [],
 })
 
