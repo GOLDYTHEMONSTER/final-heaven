@@ -10,8 +10,8 @@ const pick = (tees: string[], hoodie = 'Varsity 07', cap = 'Red') =>
   formatSetPick(DROP_01_SET, { Tees: tees, Hoodie: [hoodie], Cap: [cap] })
 
 describe('set options', () => {
-  it('stores 14 short options for the Drop 01 set and reads them back as its groups', () => {
-    expect(DROP_01_SET_COLORS).toHaveLength(14)
+  it('stores 40 short options for the Drop 01 set and reads them back as its groups', () => {
+    expect(DROP_01_SET_COLORS).toHaveLength(40)
     expect(DROP_01_SET_COLORS.every((c) => c.length <= 60)).toBe(true)
     expect(DROP_01_SET_COLORS[0]).toBe('Tees ×3: Big Mark')
     expect(setGroups(DROP_01_SET_COLORS)).toEqual(DROP_01_SET)
@@ -29,6 +29,7 @@ describe('set options', () => {
 
   it('accepts exactly three different listed tees, one hoodie and one cap', () => {
     expect(isValidSetPick(DROP_01_SET, pick(['Big Mark', 'Sculpted', 'Ascend']))).toBe(true)
+    expect(isValidSetPick(DROP_01_SET, pick(['Big Mark', 'Awaken', 'Red Rose Tank']))).toBe(true)
     expect(isValidSetPick(DROP_01_SET, pick(['Big Mark', 'Sculpted']))).toBe(false)
     expect(isValidSetPick(DROP_01_SET, pick(['Big Mark', 'Sculpted', 'Ascend', 'Spray Mark']))).toBe(false)
     expect(isValidSetPick(DROP_01_SET, 'Tees: Big Mark, Big Mark, Ascend · Hoodie: Varsity 07 · Cap: Red')).toBe(false)

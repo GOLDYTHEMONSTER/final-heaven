@@ -7,7 +7,7 @@ import { DropHeadline, DropKicker, DropReelBand } from '@/components/sections/Dr
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
-import { DROP_01, DROP_01_PIECES, DROP_01_SET } from '@/lib/drop-01'
+import { DROP_01, DROP_01_PIECES, DROP_01_SET, TOP_LINES, type TopLine } from '@/lib/drop-01'
 import { formatSetPick } from '@/lib/sets'
 import { sized } from '@/lib/images'
 import type { Product } from '@/lib/catalog'
@@ -64,6 +64,7 @@ export function Drop01() {
   const [products, setProducts] = useState<Record<string, Product>>({})
   const [loaded, setLoaded] = useState(false)
   const [tees, setTees] = useState<string[]>([])
+  const [line, setLine] = useState<TopLine>('Drop tees')
   const [hoodie, setHoodie] = useState<string | null>(null)
   const [cap, setCap] = useState<string | null>(null)
   const [size, setSize] = useState<string | null>(null)
@@ -90,6 +91,12 @@ export function Drop01() {
   const hoodiePick = DROP_01.hoodies.find((h) => h.id === hoodie)
   const capPick = DROP_01.cap.colours.find((c) => c.colour === cap)
   const sizes = set?.sizes?.length ? set.sizes : ['S', 'M', 'L', 'XL']
+  // Ladies tops stop at L, so a set with one can't be XL.
+  const hasLadies = teePicks.some((t) => t.line === 'Ladies')
+
+  useEffect(() => {
+    if (hasLadies) setSize((s) => (s === 'XL' ? null : s))
+  }, [hasLadies])
 
   // What the picked pieces cost on their own, from the live prices.
   const separately = useMemo(() => {
@@ -99,6 +106,9 @@ export function Drop01() {
     const total = ids.reduce((sum, id) => sum + (products[id]?.price ?? 0), 0) + (capProduct?.price ?? 0)
     return total
   }, [products, tees, hoodie, capProduct])
+
+  // The set's price is fixed, so three of the cheapest tops with the cheapest hoodie cost less on their own. Say so.
+  const cheaperAlone = tees.length === DROP_01.teeCount && !!hoodie && separately < (set?.price ?? 80000)
 
   const purchase = set?.purchase
   const buyable = purchase?.state === 'available' || purchase?.state === 'preorder'
@@ -120,9 +130,9 @@ export function Drop01() {
   }
 
   const pieces = DROP_01_PIECES.map((id) => products[id]).filter(Boolean)
-  // The rest of the drop: anything else tagged drop-01 (the ladies' line, the print tees, the tracksuits), outside the set builder.
+  // The rest of the drop: anything else tagged drop-01 (the tracksuits), outside the set builder.
   const more = Object.values(products)
-    .filter((p) => p.tags?.includes('drop-01') && !p.tags.includes('set') && !DROP_01_PIECES.includes(p.id))
+    .filter((p) => p.tags?.includes('drop-01') && p.id !== DROP_01.setId && !DROP_01_PIECES.includes(p.id))
     .sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name))
 
   return (
@@ -150,14 +160,27 @@ export function Drop01() {
         <div className="max-w-2xl">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-final-muted">The full set</p>
           <h2 id="set-title" className="display mt-3 text-5xl md:text-6xl">₦80,000</h2>
-          <p className="mt-4 text-final-muted">Any three tees, one hoodie and one cap: you choose. Four steps.</p>
+          <p className="mt-4 text-final-muted">Any three tops, one hoodie and one cap: you choose. Four steps.</p>
         </div>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-12">
           <div className="space-y-10 lg:col-span-8">
-            <Step n={1} title={`Pick your three tees · ${teePicks.length} of ${DROP_01.teeCount}`} hint="Any three of the eight. The Gothic Angel Tee comes in black.">
+            <Step n={1} title={`Pick your three tops · ${teePicks.length} of ${DROP_01.teeCount}`} hint={`Any three of the ${DROP_01.tees.length}, mixed however you like. The Gothic Angel Tee comes in black.`}>
+              <div className="mb-4 flex flex-wrap gap-2">
+                {TOP_LINES.map((l) => {
+                  const picked = teePicks.filter((t) => t.line === l).length
+                  return (
+                    <button key={l} type="button" onClick={() => setLine(l)} aria-pressed={line === l}
+                      className={`h-10 rounded-full border px-4 text-sm font-medium transition-colors duration-200 ${
+                        line === l ? 'border-final-off-white bg-final-off-white text-final-black' : 'border-final-light-gray/40 text-final-off-white hover:border-final-off-white/50'
+                      }`}>
+                      {l}{picked ? ` · ${picked}` : ''}
+                    </button>
+                  )
+                })}
+              </div>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {DROP_01.tees.map((t) => (
+                {DROP_01.tees.filter((t) => t.line === line).map((t) => (
                   <Choice key={t.id} image={firstImage(products[t.id])} label={t.pick}
                     selected={tees.includes(t.id)} onSelect={() => toggleTee(t.id)} />
                 ))}
@@ -182,11 +205,11 @@ export function Drop01() {
               </div>
             </Step>
 
-            <Step n={4} title="Your size" hint="One size for the tees and the hoodie. Relaxed, oversized fit.">
+            <Step n={4} title="Your size" hint={hasLadies ? 'One size for the tops and the hoodie. Ladies tops are fitted and stop at L.' : 'One size for the tees and the hoodie. Relaxed, oversized fit.'}>
               <div className="flex flex-wrap gap-3">
                 {sizes.map((s) => (
-                  <button key={s} type="button" onClick={() => setSize(s)} aria-pressed={size === s}
-                    className={`h-12 min-w-[3.5rem] rounded-lg border-2 px-4 font-semibold transition-colors duration-200 ${
+                  <button key={s} type="button" onClick={() => setSize(s)} aria-pressed={size === s} disabled={hasLadies && s === 'XL'}
+                    className={`h-12 min-w-[3.5rem] rounded-lg border-2 px-4 font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 ${
                       size === s ? 'border-final-off-white bg-final-off-white text-final-black' : 'border-final-light-gray/40 text-final-off-white hover:border-final-off-white/50'
                     }`}>
                     {s}
@@ -201,7 +224,7 @@ export function Drop01() {
             <div className="rounded-2xl border border-final-light-gray/40 bg-final-dark-gray p-6 lg:sticky lg:top-24">
               <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-final-muted">Your set</h3>
               <ul className="mt-5 space-y-3 text-sm">
-                <li className="flex justify-between gap-4"><span className="text-final-muted">Tees</span><span className="text-right text-final-off-white">{teePicks.length ? teePicks.map((t) => t.pick).join(', ') : '—'}</span></li>
+                <li className="flex justify-between gap-4"><span className="text-final-muted">Tops</span><span className="text-right text-final-off-white">{teePicks.length ? teePicks.map((t) => t.pick).join(', ') : '—'}</span></li>
                 <li className="flex justify-between gap-4"><span className="text-final-muted">Hoodie</span><span className="text-final-off-white">{hoodiePick?.pick ?? '—'}</span></li>
                 <li className="flex justify-between gap-4"><span className="text-final-muted">Cap</span><span className="text-final-off-white">{capPick?.pick ?? '—'}</span></li>
                 <li className="flex justify-between gap-4"><span className="text-final-muted">Size</span><span className="text-final-off-white">{size ?? '—'}</span></li>
@@ -214,6 +237,11 @@ export function Drop01() {
                 {separately > (set?.price ?? 80000) ? (
                   <p className="mt-2 text-right text-sm text-final-muted">
                     {formatCurrency(separately)} bought separately · <span className="text-final-ember">save {formatCurrency(separately - (set?.price ?? 80000))}</span>
+                  </p>
+                ) : null}
+                {cheaperAlone ? (
+                  <p className="mt-2 text-right text-sm text-final-muted">
+                    These picks are {formatCurrency(separately)} on their own, so they cost less bought singly.
                   </p>
                 ) : null}
               </div>

@@ -1,0 +1,135 @@
+{
+  "name": "Race 07 Tee — Acid Stone",
+  "category": "T-Shirts",
+  "description": "A number 07 race car on a chequered floor under slanted red FINAL HEAVEN lettering on the back. Small mark at the front hem.\n\nAcid-fade wash, relaxed oversized fit. Each tee is printed to order, and the wash makes every one slightly different.",
+  "price": 29000,
+  "stock": 20,
+  "colors": [
+    "acid stone"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "graphic",
+    "acid-fade",
+    "racing",
+    "07",
+    "drop-01"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "original",
+  "photos": [
+    {
+      "file": "back.jpg",
+      "color": "acid stone",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cf23cf1f-44fd-49ab-8c16-86290a8be501.jpg"
+    },
+    {
+      "file": "front.jpg",
+      "color": "acid stone",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/97e178a2-2530-46d9-b67d-22b010535416.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "NGN",
+    "fx_rate": null,
+    "image_permission": "own",
+    "notes": "Own Final Heaven design (brand/designs/concepts-09). Photos are generated mockups, not a shoot. Acid-fade blanks and print cost not confirmed yet."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T06:36:49.528Z",
+    "history": [
+      {
+        "at": "2026-11-05T09:54:39.784Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-05T09:54:58.667Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-05T09:55:29.512Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-05T09:55:36.435Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-05T09:55:40.257Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T06:36:43.547Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T06:36:47.533Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T06:36:49.528Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-05T09:55:29.512Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "listed with supplier unit cost unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793872539405",
+    "photos_reviewed": {
+      "at": "2026-11-08T06:36:43.256Z",
+      "hashes": {
+        "back.jpg": "682bb04d964abc10e9d301b6a8802a88e961ac7bff7bfa364269bbbaf854495d",
+        "front.jpg": "90a48055b2b0132588d0f9b21c9f6a67d4918e53d6cee8eefe3b18310dc7660a"
+      }
+    },
+    "approved_at": "2026-11-08T06:36:43.547Z",
+    "published_at": "2026-11-08T06:36:49.528Z",
+    "url": "https://www.finalheaven.shop/product/p1793872539405"
+  },
+  "id": "p1793872539405"
+}

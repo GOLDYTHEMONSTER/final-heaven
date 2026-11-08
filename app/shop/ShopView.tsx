@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FiRotateCw, FiSearch, FiSliders, FiX } from 'react-icons/fi'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { useInterestStore } from '@/lib/stores/interestStore'
-import { EMPTY_PROFILE, FEED_SEED_KEY, buildProfile, rankProducts, type FeedProfile } from '@/lib/discovery'
+import { EMPTY_PROFILE, FEED_SEED_KEY, buildProfile, rankProducts, shuffled, type FeedProfile } from '@/lib/discovery'
 import type { Product } from '@/lib/catalog'
 
 /* ── Shop ────────────────────────────────────────────────────────
@@ -82,7 +82,10 @@ export function ShopView() {
   const [featured, setFeatured] = useState<{ seed: number; profile: FeedProfile }>({ seed: 1, profile: EMPTY_PROFILE })
   useEffect(() => {
     let seed = 1
-    try { seed = Number(sessionStorage.getItem(FEED_SEED_KEY)) || 1 } catch {}
+    try {
+      seed = Number(sessionStorage.getItem(FEED_SEED_KEY)) || 0
+      if (!seed) { seed = Math.floor(Math.random() * 2 ** 31) || 1; sessionStorage.setItem(FEED_SEED_KEY, String(seed)) }
+    } catch { seed = Math.floor(Math.random() * 2 ** 31) || 1 }
     setFeatured({ seed, profile: buildProfile(useInterestStore.getState().interests) })
   }, [])
 
@@ -174,7 +177,12 @@ export function ShopView() {
       case 'newest': return [...filtered].sort((a, b) => Date.parse(b.createdAt ?? '0') - Date.parse(a.createdAt ?? '0'))
       case 'price-asc': return [...filtered].sort((a, b) => a.price - b.price)
       case 'price-desc': return [...filtered].sort((a, b) => b.price - a.price)
-      default: return rankProducts(filtered, featured.profile, { seed: featured.seed, freshFirst: true })
+      default:
+        // A section of the shop (a category, Originals, a collection, a brand) is shuffled for the visit,
+        // so pieces added together don't sit in one block. The whole shop keeps the feed's ranking.
+        return category || collection || sources.length || brand
+          ? shuffled(filtered, featured.seed)
+          : rankProducts(filtered, featured.profile, { seed: featured.seed, freshFirst: true })
     }
   }, [products, q, category, collection, onlyNew, sizes, colors, sources, readyOnly, brand, inStock, min, max, sort, featured])
 

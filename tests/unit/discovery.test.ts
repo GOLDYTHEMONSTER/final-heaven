@@ -2,7 +2,7 @@
 // and related products. Deterministic per seed, never repeats across pages,
 // follows the shopper's interests without collapsing into one category.
 import { describe, expect, it } from 'vitest'
-import { EMPTY_PROFILE, buildProfile, rankProducts, scoreProduct } from '@/lib/discovery'
+import { EMPTY_PROFILE, buildProfile, rankProducts, scoreProduct, shuffled } from '@/lib/discovery'
 import type { Product, PurchaseState } from '@/lib/catalog'
 
 const NOW = Date.parse('2026-10-22T12:00:00Z')
@@ -141,5 +141,18 @@ describe('hype in discovery', () => {
     const profile = buildProfile({ viewedProducts: [], favoritedCategories: [], cartAdditions: [], hypedProducts: [{ productId: 'x', category: 'Hoodies', tags: [], at: NOW }] }, NOW)
     const top = rankProducts(catalogue, profile, { seed: 7, now: NOW, limit: 1 })
     expect(top[0].category).toBe('Hoodies')
+  })
+})
+
+describe('shuffled', () => {
+  const items = Array.from({ length: 12 }, (_, i) => ({ id: `p${1793872535713 + i}` }))
+  it('keeps every item, in the same order for the same seed', () => {
+    const a = shuffled(items, 42)
+    expect(a.map((x) => x.id).sort()).toEqual(items.map((x) => x.id).sort())
+    expect(shuffled(items, 42)).toEqual(a)
+  })
+  it('breaks up the order things were added in, and changes with the seed', () => {
+    expect(shuffled(items, 42).map((x) => x.id)).not.toEqual(items.map((x) => x.id))
+    expect(shuffled(items, 7).map((x) => x.id)).not.toEqual(shuffled(items, 42).map((x) => x.id))
   })
 })

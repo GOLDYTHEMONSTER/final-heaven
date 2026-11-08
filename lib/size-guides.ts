@@ -48,7 +48,7 @@ export function sizeKind(p: { name?: string; category?: string; sizes?: string[]
   const name = p.name ?? ''
   if (GLOVES.test(name)) return 'gloves'
   if (p.category === 'Pants' || BOTTOMS.test(name)) return 'bottoms'
-  if (['T-Shirts', 'Hoodies', 'Jackets', 'Tracksuits', 'Ladies', 'Sets'].includes(p.category ?? '')) return 'tops'
+  if (['T-Shirts', 'Hoodies', 'Sweatshirts', 'Jackets', 'Tracksuits', 'Ladies', 'Sets'].includes(p.category ?? '')) return 'tops'
   return null
 }
 

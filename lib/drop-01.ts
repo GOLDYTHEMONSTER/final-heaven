@@ -1,31 +1,63 @@
 // Drop 01 in one place: which products it is, how the full set is put
 // together, and the images the reel streams. The set is one product whose
-// options are groups of picks (see lib/sets): any 3 tees, 1 hoodie, 1 cap.
+// options are groups of picks (see lib/sets): any 3 tops, 1 hoodie, 1 cap.
+// New picks must be added to the set product's `colors` in the store before
+// this file deploys, or checkout refuses them.
 
 import { setColors, type SetGroup } from '@/lib/sets'
 import { sized } from '@/lib/images'
 
 type Pick = { id: string; pick: string }
 
+/** The tabs of the tops step. Ladies tops come in XS–L, so a set with one stops at L. */
+export const TOP_LINES = ['Drop tees', 'Acid fade', 'Print line', 'Ladies'] as const
+export type TopLine = (typeof TOP_LINES)[number]
+
 export const DROP_01 = {
   setId: 'p1792716318708',
   /** The customer picks any three for the set. The Gothic Angel Tee comes in black. */
   tees: [
-    { id: 'p1792678401431', pick: 'Big Mark' },
-    { id: 'p1792678401432', pick: 'Angel Wings' },
-    { id: 'p1779109863726', pick: 'Gothic Angel' },
-    { id: 'p1792717233095', pick: 'Spray Mark' },
-    { id: 'p1792717233096', pick: 'Sculpted' },
-    { id: 'p1792717233097', pick: 'See You in Heaven' },
-    { id: 'p1792717233098', pick: 'Ascend' },
-    { id: 'p1792717233099', pick: 'Heaven Smoke' },
-  ] as Pick[],
+    { id: 'p1792678401431', pick: 'Big Mark', line: 'Drop tees' },
+    { id: 'p1792678401432', pick: 'Angel Wings', line: 'Drop tees' },
+    { id: 'p1779109863726', pick: 'Gothic Angel', line: 'Drop tees' },
+    { id: 'p1792717233095', pick: 'Spray Mark', line: 'Drop tees' },
+    { id: 'p1792717233096', pick: 'Sculpted', line: 'Drop tees' },
+    { id: 'p1792717233097', pick: 'See You in Heaven', line: 'Drop tees' },
+    { id: 'p1792717233098', pick: 'Ascend', line: 'Drop tees' },
+    { id: 'p1792717233099', pick: 'Heaven Smoke', line: 'Drop tees' },
+    { id: 'p1793872547837', pick: 'Retro Sun', line: 'Acid fade' },
+    { id: 'p1793872558568', pick: 'Tiger', line: 'Acid fade' },
+    { id: 'p1793872555073', pick: 'Orange Grove', line: 'Acid fade' },
+    { id: 'p1793872535713', pick: 'Main Character', line: 'Acid fade' },
+    { id: 'p1793872539405', pick: 'Race 07', line: 'Acid fade' },
+    { id: 'p1793872544099', pick: 'Grain Profile', line: 'Acid fade' },
+    { id: 'p1792829988609', pick: 'Awaken', line: 'Print line' },
+    { id: 'p1792829988610', pick: 'Holy Ground', line: 'Print line' },
+    { id: 'p1792829988611', pick: 'Seraph Helm', line: 'Print line' },
+    { id: 'p1792829988612', pick: 'Celestial Glyphs', line: 'Print line' },
+    { id: 'p1792829988613', pick: 'Heaven Blade', line: 'Print line' },
+    { id: 'p1792829988614', pick: 'Chrome Flames 07', line: 'Print line' },
+    { id: 'p1792829988615', pick: 'Heaven Outline', line: 'Print line' },
+    { id: 'p1792829988616', pick: 'Seraph 07 Spec', line: 'Print line' },
+    { id: 'p1792844704814', pick: 'Rose Ringer', line: 'Ladies' },
+    { id: 'p1792844704815', pick: 'Rose Waffle Tank', line: 'Ladies' },
+    { id: 'p1792844704816', pick: 'Long-Stem Rose Tank', line: 'Ladies' },
+    { id: 'p1792844704817', pick: 'Heaven Sent Crop', line: 'Ladies' },
+    { id: 'p1792844704818', pick: 'Rose Trio Ringer', line: 'Ladies' },
+    { id: 'p1792844704819', pick: 'Red Rose Tank', line: 'Ladies' },
+  ] as (Pick & { line: TopLine })[],
   teeCount: 3,
   /** The customer picks one. The Gothic Angel Hoodie comes in black. */
   hoodies: [
     { id: 'p1792678401434', pick: 'Varsity 07' },
     { id: 'p1792678401433', pick: 'Move in Faith' },
     { id: 'p1778969625006', pick: 'Gothic Angel' },
+    { id: 'p1794119984895', pick: 'Koi' },
+    { id: 'p1794119989099', pick: 'Eagle' },
+    { id: 'p1794119992899', pick: 'Astronaut' },
+    { id: 'p1794119996591', pick: 'Skate Sun' },
+    { id: 'p1794120001932', pick: 'Motocross' },
+    { id: 'p1794120005860', pick: 'Grain Boxer' },
   ] as Pick[],
   /** One cap product in three colours; the customer picks one. */
   cap: {

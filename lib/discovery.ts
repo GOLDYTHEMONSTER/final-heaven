@@ -60,6 +60,7 @@ export const HYPE_SIGNAL = { weight: 3, halfLifeDays: 30 }
 export const COMPLEMENTS: Record<string, string[]> = {
   'T-Shirts': ['Pants', 'Jackets', 'Hoodies', 'Pendants', 'Accessories'],
   Hoodies: ['Pants', 'T-Shirts', 'Pendants', 'Accessories'],
+  Sweatshirts: ['Pants', 'T-Shirts', 'Pendants', 'Accessories'],
   Jackets: ['T-Shirts', 'Pants', 'Hoodies', 'Pendants'],
   Pants: ['T-Shirts', 'Hoodies', 'Jackets', 'Accessories'],
   Tracksuits: ['T-Shirts', 'Pendants', 'Accessories'],
@@ -84,6 +85,11 @@ export function jitter(seed: number, id: string) {
   let h = 2166136261 ^ seed
   for (let i = 0; i < id.length; i++) h = Math.imul(h ^ id.charCodeAt(i), 16777619)
   return ((h >>> 0) % 100000) / 100000
+}
+
+/** The items in a random order that stays the same for the same seed (so a visit doesn't reshuffle on every render). */
+export function shuffled<T extends { id: string }>(items: T[], seed: number): T[] {
+  return [...items].sort((a, b) => jitter(seed, a.id) - jitter(seed, b.id) || (a.id < b.id ? -1 : 1))
 }
 
 const normalise = (m: Record<string, number>) => {

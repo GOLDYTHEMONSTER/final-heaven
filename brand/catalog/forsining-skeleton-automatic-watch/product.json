@@ -1,0 +1,193 @@
+{
+  "name": "Men's Skeleton Dial Automatic Mechanical Watch",
+  "category": "Accessories",
+  "description": "An automatic mechanical men's watch with a square-edged case and a metal link bracelet. The dial has a large date window, day and month sub-dials and an open section showing the moving balance wheel. Seven case and dial colours.",
+  "price": 77000,
+  "stock": 20,
+  "colors": [
+    "Black / Grey",
+    "Steel / Blue",
+    "Steel / Grey",
+    "Black / Green",
+    "Steel / Green",
+    "Steel / Ice Blue",
+    "Steel / White"
+  ],
+  "sizes": [],
+  "tags": [
+    "watch",
+    "automatic watch",
+    "mechanical watch",
+    "skeleton watch",
+    "men",
+    "accessories",
+    "steel bracelet",
+    "square case"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black-grey.jpg",
+      "color": "Black / Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2ea0ce05-27cb-4763-a6a9-275d002bf630.jpg"
+    },
+    {
+      "file": "steel-blue.jpg",
+      "color": "Steel / Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/851a0ec5-7376-419b-ab19-b4425c9801ec.jpg"
+    },
+    {
+      "file": "steel-grey.jpg",
+      "color": "Steel / Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/307d98c6-cbbf-40fa-99ca-2badbf8f4b61.jpg"
+    },
+    {
+      "file": "black-green.jpg",
+      "color": "Black / Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3c138aae-f525-4a6f-8d06-2d1387ec9564.jpg"
+    },
+    {
+      "file": "steel-green.jpg",
+      "color": "Steel / Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4b16749f-1ca0-4bb0-98a6-57f9b8c75b1b.jpg"
+    },
+    {
+      "file": "steel-ice-blue.jpg",
+      "color": "Steel / Ice Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/00107ece-f2d4-4b26-b837-b99513dddb43.jpg"
+    },
+    {
+      "file": "steel-white.jpg",
+      "color": "Steel / White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/af4422f8-9de3-4602-acf5-870be4b78712.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1047470805978",
+    "unit_cost": 155,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "notes": "Listing title: New Forsining European and American style men's fashion casual hollow mechanical flywheel automatic mechanical watch. Screenshot: CNY 155 for 1+ (about N34,508.13), CNY 150 for 50+ (about N33,394.97); unit_cost is the CNY 155 regular price; fx 222.63 = 34508.13/155. Free shipping over CNY 1000 (not used). Shop name not shown. Store return rate cut off in the screenshot (repurchase rate 45.45% is shown, not the same thing): ask owner. 7 styles photographed (screenshot shows 7 thumbnails, first named Atlas; our colour names are ours); 6 duplicate photos in the upload were dropped. Weight 200 g packed from the owner (estimated). Dial prints the maker's own name FORSINING; we keep it out of the title and copy. The case and bracelet closely resemble a famous luxury sports watch design: trademark/lookalike risk. Not claimed: water resistance, case size, case/bracelet material, movement model, power reserve, strap length, warranty. Mechanical automatic: no battery. Photos: 1500 px supplier originals, cropped to 4:5, clean white background, no overlays. Owner set price N77,000 (8 Nov 2026) and accepted the lookalike risk. Store return rate: unknown, not recorded (owner, 8 Nov). Shop name kept as placeholder.",
+    "supplier": {
+      "name": "Mechanical watch seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1047470805978"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.2,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T06:31:37.392Z",
+    "history": [
+      {
+        "at": "2026-11-08T06:06:22.227Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T06:07:08.977Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T06:10:11.318Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T06:10:11.568Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T06:10:23.892Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T06:31:33.037Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T06:31:33.298Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T06:31:37.392Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T06:10:11.316Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 34508,
+      "landed": 34508,
+      "gross": 42492,
+      "margin": 0.5518487012987012,
+      "suggested": 77000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794118222278",
+    "photos_reviewed": {
+      "at": "2026-11-08T06:10:37.044Z",
+      "hashes": {
+        "black-grey.jpg": "ea3909df6ba15a3583a79c3d64f3ae0439c67a85f89faa359bdbc59d783b4df2",
+        "steel-blue.jpg": "1e216232380ca01cf5859a19c3016627a5854e252a994ffed32dd486f6a6c1bb",
+        "steel-grey.jpg": "fb1b012c632f8c5088bf923be73123702ebe1e8af55a6585601ab483011bca88",
+        "black-green.jpg": "327ff4b8b2a69d9900570d50828bc611cee26c3d987b385f061e72da179d2df2",
+        "steel-green.jpg": "f7e60e8ede56e63cf9a441894b06b25da4ccb6c0817cc1cd3f6262aab49a9f6c",
+        "steel-ice-blue.jpg": "2509507a06d63576a3c8a9a841de537dce955094b57cc4ff906e6a6b356f249c",
+        "steel-white.jpg": "35202946b23b6f05dac6526c7ea615d369a19f29217601b517a49292b89782c7"
+      }
+    },
+    "approved_at": "2026-11-08T06:31:33.036Z",
+    "published_at": "2026-11-08T06:31:37.392Z",
+    "url": "https://www.finalheaven.shop/product/p1794118222278"
+  },
+  "specs": [
+    {
+      "label": "Movement",
+      "value": "Automatic mechanical"
+    },
+    {
+      "label": "Dial",
+      "value": "Large date, day and month sub-dials, open balance wheel"
+    },
+    {
+      "label": "Strap",
+      "value": "Metal link bracelet"
+    },
+    {
+      "label": "Case and dial colours",
+      "value": "Black / Grey, Steel / Blue, Steel / Grey, Black / Green, Steel / Green, Steel / Ice Blue, Steel / White"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "200 g"
+    }
+  ],
+  "id": "p1794118222278"
+}

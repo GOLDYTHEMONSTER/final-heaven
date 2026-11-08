@@ -1,0 +1,138 @@
+{
+  "name": "Astronaut Hoodie — Washed Teal",
+  "category": "Hoodies",
+  "description": "A halftone astronaut drifting between ringed planets inside arched FINAL HEAVEN lettering on the back. Small mark at the front hem.\n\nHeavyweight 350 g washed cotton with a snow-wash finish, relaxed unisex fit. Printed to order, and the wash makes every one slightly different.",
+  "price": 35000,
+  "stock": 20,
+  "colors": [
+    "washed teal"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "graphic",
+    "washed",
+    "space",
+    "astronaut",
+    "drop-01"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "original",
+  "photos": [
+    {
+      "file": "back.jpg",
+      "color": "washed teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d9719e53-664b-4dd8-bc04-e322a891cdb1.jpg"
+    },
+    {
+      "file": "front.jpg",
+      "color": "washed teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0630bfe0-2cd1-452f-a8d2-198a0287cb82.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.m.1688.com/page/index.htm?offerId=1066956422157",
+    "unit_cost": 50,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "own",
+    "supplier": {
+      "name": "Suning Sufang Yazhi Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.m.1688.com/page/index.htm?offerId=1066956422157"
+    },
+    "notes": "Blank hoodie cost only (¥50, 350 g washed cotton). Print cost not included. fx from the 1688 watch screenshot of the same week (₦34,508.13 / ¥155). Sizes S–XL assumed: the blank uses European sizing, size chart not seen yet. Store \"…rate 55.8%\" label was cut off in the screenshot. Photos are generated on the real blank, not a shoot. Design: brand/designs/concepts-10."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T06:42:52.219Z",
+    "history": [
+      {
+        "at": "2026-11-08T06:39:14.885Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T06:39:27.564Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T06:39:49.950Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T06:39:53.737Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T06:42:44.544Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T06:42:50.493Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T06:42:52.219Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T06:39:27.564Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as eagle-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as grain-boxer-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as koi-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as motocross-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as skate-sun-washed-hoodie (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 11132,
+      "landed": 11132,
+      "gross": 23869,
+      "margin": 0.6819571428571428,
+      "suggested": 25000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794119992899",
+    "photos_reviewed": {
+      "at": "2026-11-08T06:42:44.259Z",
+      "hashes": {
+        "back.jpg": "21d4215c555f800e71287eadc8c12b2ea6621c70832af2009925247b363c3381",
+        "front.jpg": "01e09781727219c54a2be6b1d65af2e046bf1d324f24df91e82a537318e911c1"
+      }
+    },
+    "approved_at": "2026-11-08T06:42:44.544Z",
+    "published_at": "2026-11-08T06:42:52.219Z",
+    "url": "https://www.finalheaven.shop/product/p1794119992899"
+  },
+  "id": "p1794119992899"
+}

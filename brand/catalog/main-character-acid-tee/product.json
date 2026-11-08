@@ -1,0 +1,135 @@
+{
+  "name": "Main Character Tee — Acid Black",
+  "category": "T-Shirts",
+  "description": "A cartoon kid in a patchwork puffer, striding along with the three-star mark over one shoulder, under bubble MAIN CHARACTER lettering on the back. Small mark at the front hem.\n\nAcid-fade wash, relaxed oversized fit. Each tee is printed to order, and the wash makes every one slightly different.",
+  "price": 29000,
+  "stock": 20,
+  "colors": [
+    "acid black"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "graphic",
+    "acid-fade",
+    "character",
+    "cartoon",
+    "drop-01"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "original",
+  "photos": [
+    {
+      "file": "back.jpg",
+      "color": "acid black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4cb182b8-f360-4bf7-a829-5f1363cc83e1.jpg"
+    },
+    {
+      "file": "front.jpg",
+      "color": "acid black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bfa396b1-74c5-41f7-b5fa-d48b9b8e3efe.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "NGN",
+    "fx_rate": null,
+    "image_permission": "own",
+    "notes": "Own Final Heaven design (brand/designs/concepts-09). Photos are generated mockups, not a shoot. Acid-fade blanks and print cost not confirmed yet."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T06:36:47.528Z",
+    "history": [
+      {
+        "at": "2026-11-05T09:54:36.258Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-05T09:54:57.981Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-05T09:55:29.130Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-05T09:55:31.189Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-05T09:55:36.427Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T06:36:43.540Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T06:36:43.830Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T06:36:47.528Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-05T09:55:29.128Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "listed with supplier unit cost unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793872535713",
+    "photos_reviewed": {
+      "at": "2026-11-08T06:36:43.245Z",
+      "hashes": {
+        "back.jpg": "271bdefceef51afea2e26aa893986e7de85ba20b88672306fa5e65a3e3328c37",
+        "front.jpg": "7738bb06412912f65d0339fbcfd3ed6c2daea4122b1315fad5a57d23010a02d2"
+      }
+    },
+    "approved_at": "2026-11-08T06:36:43.539Z",
+    "published_at": "2026-11-08T06:36:47.528Z",
+    "url": "https://www.finalheaven.shop/product/p1793872535713"
+  },
+  "id": "p1793872535713"
+}

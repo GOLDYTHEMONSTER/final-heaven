@@ -14,7 +14,7 @@ import { ProductOriginFields } from '@/components/admin/ProductOriginFields'
 import { ShippingFields } from '@/components/admin/ShippingFields'
 
 // The usual categories, plus any a product already uses, so editing never swaps a category.
-const BASE_CATEGORIES = ['Hoodies', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Grillz', 'Gadgets', 'Sets', 'Vapes']
+const BASE_CATEGORIES = ['Hoodies', 'Sweatshirts', 'T-Shirts', 'Ladies', 'Jackets', 'Tracksuits', 'Pants', 'Sweaters', 'Shoes', 'Accessories', 'Grillz', 'Gadgets', 'Sets', 'Vapes']
 const statuses = ['All', 'Active', 'Draft', 'Archived']
 
 export default function AdminPage() {

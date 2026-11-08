@@ -1,0 +1,135 @@
+{
+  "name": "Retro Sun Tee — Acid Brown",
+  "category": "T-Shirts",
+  "description": "A banded orange sun and palm trees over groovy 70s FINAL HEAVEN lettering on the back. Small mark at the front hem.\n\nAcid-fade wash, relaxed oversized fit. Each tee is printed to order, and the wash makes every one slightly different.",
+  "price": 29000,
+  "stock": 20,
+  "colors": [
+    "acid brown"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "graphic",
+    "acid-fade",
+    "retro",
+    "sun",
+    "drop-01"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "original",
+  "photos": [
+    {
+      "file": "back.jpg",
+      "color": "acid brown",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1999deba-4cd2-4c1e-addd-67a7cd76d7d3.jpg"
+    },
+    {
+      "file": "front.jpg",
+      "color": "acid brown",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7950df43-f444-41e0-87ea-46383ad29082.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "NGN",
+    "fx_rate": null,
+    "image_permission": "own",
+    "notes": "Own Final Heaven design (brand/designs/concepts-09). Photos are generated mockups, not a shoot. Acid-fade blanks and print cost not confirmed yet."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T06:36:52.824Z",
+    "history": [
+      {
+        "at": "2026-11-05T09:54:47.028Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-05T09:55:00.016Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-05T09:55:30.240Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-05T09:55:44.769Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-05T09:55:48.415Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T06:36:43.556Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T06:36:51.293Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T06:36:52.824Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-05T09:55:30.240Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "listed with supplier unit cost unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793872547837",
+    "photos_reviewed": {
+      "at": "2026-11-08T06:36:43.271Z",
+      "hashes": {
+        "back.jpg": "0351704e0e7b8098054e2f9afb9dcdf5456397ebb8bd14c10c2954100c1b9f33",
+        "front.jpg": "842d0305dfe0e60b783e2d7926287b0876665734c0d82d81c9acc40f17ad63ef"
+      }
+    },
+    "approved_at": "2026-11-08T06:36:43.556Z",
+    "published_at": "2026-11-08T06:36:52.824Z",
+    "url": "https://www.finalheaven.shop/product/p1793872547837"
+  },
+  "id": "p1793872547837"
+}

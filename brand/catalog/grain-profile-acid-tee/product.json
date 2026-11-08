@@ -1,0 +1,135 @@
+{
+  "name": "Grain Profile Tee — Acid Black",
+  "category": "T-Shirts",
+  "description": "A big portrait in sunglasses looking up, built from solid grain dots across the chest. Small mark at the front hem, FINAL HEAVEN under the collar at the back.\n\nAcid-fade wash, relaxed oversized fit. Each tee is printed to order, and the wash makes every one slightly different.",
+  "price": 29000,
+  "stock": 20,
+  "colors": [
+    "acid black"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "graphic",
+    "acid-fade",
+    "portrait",
+    "grain",
+    "drop-01"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "original",
+  "photos": [
+    {
+      "file": "front.jpg",
+      "color": "acid black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/15f37636-24fb-411e-bc25-5ae3e51b334b.jpg"
+    },
+    {
+      "file": "back.jpg",
+      "color": "acid black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/53962283-d869-42a0-8123-c8de6a92dbd5.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "NGN",
+    "fx_rate": null,
+    "image_permission": "own",
+    "notes": "Own Final Heaven design (brand/designs/concepts-09). Photos are generated mockups, not a shoot. Acid-fade blanks and print cost not confirmed yet."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T06:36:51.289Z",
+    "history": [
+      {
+        "at": "2026-11-05T09:54:43.327Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-05T09:54:59.346Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-05T09:55:29.889Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-05T09:55:40.259Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-05T09:55:44.766Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T06:36:43.551Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T06:36:49.533Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T06:36:51.289Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-05T09:55:29.889Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "listed with supplier unit cost unknown (owner approved): margin unknown"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "cost_unknown_approved": true,
+    "note": "approved by the owner",
+    "store_id": "p1793872544099",
+    "photos_reviewed": {
+      "at": "2026-11-08T06:36:43.264Z",
+      "hashes": {
+        "front.jpg": "9b7710b4d1b4b1d1cfcc5fb69ceed0150161feb37b41e08fddf2786a1d5d16d3",
+        "back.jpg": "cee25de1dae17b9cee68f84058867805151c059579e4c05d9784c30b32324c2f"
+      }
+    },
+    "approved_at": "2026-11-08T06:36:43.551Z",
+    "published_at": "2026-11-08T06:36:51.289Z",
+    "url": "https://www.finalheaven.shop/product/p1793872544099"
+  },
+  "id": "p1793872544099"
+}

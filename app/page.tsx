@@ -10,6 +10,7 @@ import { UpcomingDrops } from '@/components/home/UpcomingDrops'
 import { Layout } from '@/components/layout/Layout'
 import { liveCollectionsWithProducts, publicProducts, publishedBrands, upcomingDrops } from '@/lib/storefront'
 import { log } from '@/lib/log'
+import { shuffled } from '@/lib/discovery'
 
 // Rebuilt at most once a minute; the feed below loads per visitor.
 export const revalidate = 60
@@ -31,7 +32,8 @@ export default async function Home() {
     safely('brands', publishedBrands),
     safely('drops', upcomingDrops),
   ])
-  const originals = products.filter((p) => p.sourceType === 'original' && p.purchase?.state !== 'sold_out').slice(0, 8)
+  // A fresh random eight each time the page is rebuilt (every minute), not the eight added last.
+  const originals = shuffled(products.filter((p) => p.sourceType === 'original' && p.purchase?.state !== 'sold_out'), Math.floor(Date.now() / 60_000)).slice(0, 8)
 
   return (
     <Layout>
