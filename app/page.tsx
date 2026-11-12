@@ -1,5 +1,4 @@
 import { HeroSection } from '@/components/sections/HeroSection'
-import { DropReel } from '@/components/sections/DropReel'
 import { ValueStrip } from '@/components/sections/ValueStrip'
 import { DiscoveryFeed } from '@/components/sections/DiscoveryFeed'
 import { MembershipCTA } from '@/components/sections/MembershipCTA'
@@ -39,15 +38,15 @@ export default async function Home() {
     <Layout>
       <main>
         <HeroSection />
-        <DropReel />
-        <CollectionRail items={collections} />
-        <ValueStrip />
+        {/* Products first (owner, 12 Nov). Drop 01 lives on its own page, /drop-01, linked from the header. */}
         <DiscoveryFeed />
         <ProductRail
           id="originals-heading" kicker="Made by us" title="Final Heaven Originals" href="/shop?source=original" linkLabel="All originals"
           description="Our own designs: the mark up front, the artwork on the back, printed in small runs."
           products={originals}
         />
+        <CollectionRail items={collections} />
+        <ValueStrip />
         <LabelsSection brands={brands} />
         <UpcomingDrops drops={drops} />
         <MembershipCTA />

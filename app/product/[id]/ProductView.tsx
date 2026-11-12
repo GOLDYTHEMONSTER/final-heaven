@@ -221,6 +221,15 @@ export function ProductView({ params }: { params: { id: string } }) {
     if (handleAddToCart()) router.push('/checkout')
   }
 
+  // The buttons ride along at the bottom of the screen until the customer reaches them, so they may be far from
+  // the size and colour pickers: a missing pick takes the customer back up to them, where the message shows.
+  const withPick = (action: () => void) => () => {
+    if (!buyable) return
+    const needsPick = (!selectedSize && (product.sizes?.length ?? 0) > 0) || (!selectedColor && (product.colors?.length ?? 0) > 0)
+    action()
+    if (needsPick) document.getElementById('product-options')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <Layout>
       <div className="min-h-screen bg-final-black pt-20 md:pt-24">
@@ -275,6 +284,7 @@ export function ProductView({ params }: { params: { id: string } }) {
                   BUILD YOUR SET
                 </Link>
               ) : (<>
+              <div id="product-options" aria-hidden="true" className="scroll-mt-24 -mb-8" />
               {/* Size Selection */}
               {product.sizes && product.sizes.length > 0 && (
                 <div>
@@ -353,25 +363,31 @@ export function ProductView({ params }: { params: { id: string } }) {
 
               {pickError && <p role="alert" className="text-sm font-medium text-final-ember">{pickError}</p>}
 
-              {/* Add to Cart */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleAddToCart}
-                disabled={!buyable}
-                className="w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {buttonLabel}
-              </motion.button>
-              {buyable && (
-                <button
-                  type="button"
-                  onClick={handleBuyNow}
-                  className="-mt-4 w-full rounded-lg border-2 border-final-off-white py-4 text-lg font-bold text-final-off-white transition-colors duration-200 hover:bg-final-off-white hover:text-final-black"
-                >
-                  BUY NOW
-                </button>
-              )}
+              {/* Add to Cart / Buy now. Sticky to the bottom of the screen: from the top of the page they sit just under
+                  the photo and travel down with the customer until they reach their own place here, then stay.
+                  Only while it can be bought: a greyed-out Sold out button has no reason to follow anyone. */}
+              <div className={buyable ? 'sticky bottom-0 z-30 -mx-4 bg-final-black/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0' : ''}>
+                <div className={buyable ? 'grid grid-cols-2 gap-3' : ''}>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={withPick(handleAddToCart)}
+                    disabled={!buyable}
+                    className="w-full bg-final-accent text-final-black py-4 rounded-lg font-bold text-base sm:text-lg hover:shadow-lg hover:shadow-final-accent/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {purchase.state === 'preorder' ? 'PRE-ORDER' : buttonLabel}
+                  </motion.button>
+                  {buyable && (
+                    <button
+                      type="button"
+                      onClick={withPick(handleBuyNow)}
+                      className="w-full rounded-lg border-2 border-final-off-white py-4 text-base font-bold text-final-off-white transition-colors duration-200 hover:bg-final-off-white hover:text-final-black sm:text-lg"
+                    >
+                      BUY NOW
+                    </button>
+                  )}
+                </div>
+              </div>
               </>)}
               {purchase.state === 'preorder' && (
                 <p className="text-sm text-final-muted">Pay now to reserve yours. It ships from {shipsOn}; we&apos;ll email you when it does.</p>

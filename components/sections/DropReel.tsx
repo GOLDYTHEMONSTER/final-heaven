@@ -1,8 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { FiArrowRight } from 'react-icons/fi'
 import { TiltedGridHero } from '@/components/ui/TiltedGridHero'
 import { DROP_01_REEL } from '@/lib/drop-01'
 import { LAUNCH_WINDOW, formatDay } from '@/lib/catalog'
@@ -59,26 +57,5 @@ export function DropHeadline({ as: Tag = 'h2', id }: { as?: 'h1' | 'h2'; id?: st
       <br />
       <span className="text-final-muted">A&nbsp;hoodie. A&nbsp;cap.</span>
     </Tag>
-  )
-}
-
-export function DropReel() {
-  return (
-    <section id="drop-01" aria-labelledby="drop-reel-title" className="scroll-mt-16 border-y border-final-light-gray/40 py-14 sm:py-20">
-      <div className="px-4 text-center">
-        <DropKicker />
-        <DropHeadline id="drop-reel-title" />
-      </div>
-      <div className="my-6 sm:my-8">
-        <DropReelBand />
-      </div>
-      <div className="flex flex-col items-center gap-4 px-4 text-center">
-        <p className="max-w-md text-sm text-final-muted">₦80,000 for the full set, or buy each piece on its own.</p>
-        <Link href="/drop-01" className="btn-primary group">
-          See Drop 01
-          <FiArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-        </Link>
-      </div>
-    </section>
   )
 }

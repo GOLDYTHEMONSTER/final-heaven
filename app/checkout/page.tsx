@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiAlertCircle, FiChevronDown, FiLock } from 'react-icons/fi'
+import { FiAlertCircle, FiChevronDown, FiLock, FiTruck } from 'react-icons/fi'
 import Link from 'next/link'
 import { useCart } from '@/components/providers/CartProvider'
 import { formatCurrency } from '@/lib/utils/format'
@@ -17,7 +17,21 @@ import { storedAttribution } from '@/lib/attribution-client'
 import { DeliveryChoice } from '@/components/cart/DeliveryChoice'
 import { forgetCheckoutDetails, loadCheckoutDetails, saveCheckoutDetails } from '@/lib/checkout-details'
 import { NIGERIAN_STATES, nigerianState } from '@/lib/nigeria'
-const FIELD = 'w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-off-white placeholder-final-off-white/50 focus:outline-none focus:border-final-accent'
+import { CHECKOUT_FIELDS, validateCheckout, type CheckoutErrors } from '@/lib/checkout-validate'
+const FIELD_BASE = 'w-full px-4 py-3 rounded-lg bg-final-gray border text-final-off-white placeholder-final-off-white/50 focus:outline-none'
+const FIELD = `${FIELD_BASE} border-final-light-gray/30 focus:border-final-accent`
+const fieldClass = (error?: string) => (error ? `${FIELD_BASE} border-red-400 focus:border-red-400` : FIELD)
+// a field with a problem: red border, and screen readers read the message with the field
+const invalid = (id: string, error?: string) => (error ? { 'aria-invalid': true as const, 'aria-describedby': `${id}-error` } : {})
+function FieldError({ id, error }: { id: string; error?: string }) {
+  if (!error) return null
+  return (
+    <p id={`${id}-error`} className="mt-1.5 flex items-start gap-1.5 text-sm text-red-400">
+      <FiAlertCircle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
+      <span>{error}</span>
+    </p>
+  )
+}
 const formatDate = (d: string) => formatDay(d, { day: 'numeric', month: 'short', year: 'numeric' })
 
 export default function CheckoutPage() {
@@ -51,6 +65,14 @@ export default function CheckoutPage() {
   const [delivery, setDelivery] = useState<DeliveryOption>('standard')
   const [status, setStatus] = useState<'idle' | 'loading' | 'redirecting' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  // Field checks start on the first Pay tap, then follow every change, so a message goes as soon as it's fixed.
+  const [tried, setTried] = useState(false)
+  const [errors, setErrors] = useState<CheckoutErrors>({})
+  const fields = { email, shippingAddress, state: stateValue, city, termsAccepted }
+  useEffect(() => {
+    if (tried) setErrors(validateCheckout({ email, shippingAddress, state: stateValue, city, termsAccepted }))
+  }, [tried, email, shippingAddress, stateValue, city, termsAccepted])
+  const errorCount = Object.keys(errors).length
   // The server's price: exactly what Flutterwave will charge.
   const { quote, loading: pricing, error: quoteError } = useQuote(items, promoCode, email, gift, delivery)
   // Express is offered only when something comes from China; otherwise the choice goes back to standard.
@@ -69,26 +91,29 @@ export default function CheckoutPage() {
       return
     }
 
-    if (!email || !shippingAddress || !city || !stateValue || !country) {
-      setMessage('Please fill in your email, address, state and city or town.')
-      setStatus('error')
-      return
-    }
-    if (!termsAccepted) {
-      setMessage('Please accept the Terms of Sale and Returns Policy.')
-      setStatus('error')
+    const found = validateCheckout(fields)
+    setTried(true)
+    setErrors(found)
+    const first = CHECKOUT_FIELDS.find((f) => found[f])
+    if (first) {
+      setMessage('')
+      setStatus('idle')
+      // take the customer straight to the first thing to fix
+      const el = document.getElementById(first)
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      el?.focus({ preventScroll: true })
       return
     }
 
     setStatus('loading')
     setMessage('')
-    if (remember) saveCheckoutDetails({ email, address: shippingAddress, city, state: stateValue, postalCode })
+    if (remember) saveCheckoutDetails({ email: email.trim(), address: shippingAddress.trim(), city: city.trim(), state: stateValue, postalCode })
     else forgetCheckoutDetails()
 
     const payload = {
-      email,
-      shippingAddress,
-      shippingCity: city,
+      email: email.trim(),
+      shippingAddress: shippingAddress.trim(),
+      shippingCity: city.trim(),
       shippingState: stateValue,
       shippingPostalCode: postalCode,
       shippingCountry: country,
@@ -177,20 +202,29 @@ export default function CheckoutPage() {
                 ) : (
                   <p className="text-final-off-white/70 mb-6">Enter your delivery details, then pay securely on Flutterwave. Your order is placed once payment is confirmed. No account is required.</p>
                 )}
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <p className="mb-6 flex items-start gap-2 rounded-lg border border-final-light-gray/30 bg-final-gray/60 px-4 py-3 text-sm text-final-off-white/85">
+                  <FiTruck aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-final-accent" />
+                  <span>We only ship within {POLICY.shipsTo}, so please use a delivery address there.</span>
+                </p>
+                <form className="space-y-6" onSubmit={handleSubmit} noValidate>
                   <div>
                     <label className="block text-final-off-white/80 mb-2" htmlFor="email">Email</label>
                     <input
                       id="email"
                       name="email"
                       type="email"
+                      inputMode="email"
                       autoComplete="email"
+                      autoCapitalize="none"
+                      spellCheck={false}
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                       required
-                      className={FIELD}
+                      {...invalid('email', errors.email)}
+                      className={fieldClass(errors.email)}
                       placeholder="you@example.com"
                     />
+                    <FieldError id="email" error={errors.email} />
                   </div>
 
                   <div>
@@ -201,11 +235,14 @@ export default function CheckoutPage() {
                       type="text"
                       autoComplete="street-address"
                       required
+                      maxLength={300}
                       value={shippingAddress}
                       onChange={(event) => setShippingAddress(event.target.value)}
-                      className={FIELD}
+                      {...invalid('shippingAddress', errors.shippingAddress)}
+                      className={fieldClass(errors.shippingAddress)}
                       placeholder="House number, street, nearest landmark"
                     />
+                    <FieldError id="shippingAddress" error={errors.shippingAddress} />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -219,13 +256,15 @@ export default function CheckoutPage() {
                           required
                           value={stateValue}
                           onChange={(event) => setStateValue(event.target.value)}
-                          className={`${FIELD} appearance-none pr-10 ${stateValue ? '' : 'text-final-off-white/50'}`}
+                          {...invalid('state', errors.state)}
+                          className={`${fieldClass(errors.state)} appearance-none pr-10 ${stateValue ? '' : 'text-final-off-white/50'}`}
                         >
                           <option value="" disabled className="bg-final-black">Choose your state</option>
                           {NIGERIAN_STATES.map((s) => <option key={s} value={s} className="bg-final-black text-final-off-white">{s}</option>)}
                         </select>
                         <FiChevronDown aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-final-muted" />
                       </div>
+                      <FieldError id="state" error={errors.state} />
                     </div>
                     <div>
                       <label className="block text-final-off-white/80 mb-2" htmlFor="city">City or town</label>
@@ -235,11 +274,14 @@ export default function CheckoutPage() {
                         type="text"
                         autoComplete="address-level2"
                         required
+                        maxLength={100}
                         value={city}
                         onChange={(event) => setCity(event.target.value)}
-                        className={FIELD}
+                        {...invalid('city', errors.city)}
+                        className={fieldClass(errors.city)}
                         placeholder="e.g. Ikeja, Wuse, Port Harcourt"
                       />
+                      <FieldError id="city" error={errors.city} />
                     </div>
                   </div>
 
@@ -259,18 +301,7 @@ export default function CheckoutPage() {
                         placeholder="e.g. 100001"
                       />
                     </div>
-                    <div>
-                      <label className="block text-final-off-white/80 mb-2" htmlFor="country">Country</label>
-                      <input
-                        id="country"
-                        type="text"
-                        value={country}
-                        readOnly
-                        aria-describedby="country-note"
-                        className="w-full px-4 py-3 rounded-lg bg-final-gray border border-final-light-gray/30 text-final-muted focus:outline-none"
-                      />
-                      <p id="country-note" className="mt-1 text-xs text-final-muted">We deliver within {POLICY.shipsTo} only.</p>
-                    </div>
+                    {/* no country box: it's always Nigeria, and the notice above the form says so */}
                   </div>
 
                   <label className="flex items-center gap-3 text-sm text-final-muted">
@@ -280,8 +311,9 @@ export default function CheckoutPage() {
 
                   {quote?.delivery && <DeliveryChoice delivery={quote.delivery} value={delivery} onChange={setDelivery} />}
 
+                  <div>
                   <label className="flex items-start gap-3 text-sm text-final-muted">
-                    <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required className="mt-0.5 h-4 w-4 shrink-0 accent-final-ember" />
+                    <input id="terms" type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required {...invalid('terms', errors.terms)} className="mt-0.5 h-4 w-4 shrink-0 accent-final-ember" />
                     <span>
                       I agree to the <Link href="/terms" target="_blank" className="underline underline-offset-2 hover:text-final-off-white">Terms of Sale</Link> and{' '}
                       <Link href="/returns" target="_blank" className="underline underline-offset-2 hover:text-final-off-white">Returns Policy</Link>.
@@ -289,6 +321,15 @@ export default function CheckoutPage() {
                       <Link href="/privacy" target="_blank" className="underline underline-offset-2 hover:text-final-off-white">Privacy Policy</Link>.
                     </span>
                   </label>
+                  <FieldError id="terms" error={errors.terms} />
+                  </div>
+
+                  {errorCount > 0 && (
+                    <p className="flex items-start gap-1.5 text-sm text-red-400" role="alert">
+                      <FiAlertCircle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{errorCount === 1 ? 'One detail above needs your attention.' : `${errorCount} details above need your attention.`}</span>
+                    </p>
+                  )}
 
                   <button
                     type="submit"

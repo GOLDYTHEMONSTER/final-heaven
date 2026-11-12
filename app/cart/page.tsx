@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { sized } from '@/lib/images'
 import Link from 'next/link'
-import { FiTrash2, FiArrowLeft, FiLock, FiAlertCircle } from 'react-icons/fi'
+import { FiTrash2, FiArrowLeft, FiLock, FiAlertCircle, FiTruck } from 'react-icons/fi'
+import { POLICY } from '@/lib/legal'
 import { formatCurrency } from '@/lib/utils/format'
 import { useCart } from '@/components/providers/CartProvider'
 import { Layout } from '@/components/layout/Layout'
@@ -294,6 +295,10 @@ export default function CartPage() {
                 <p className="text-sm text-final-off-white/50 text-center mt-4">
                   <FiLock className="inline w-4 h-4 mr-1" />
                   Secure payment with Flutterwave
+                </p>
+                <p className="mt-1 text-center text-sm text-final-off-white/50">
+                  <FiTruck aria-hidden="true" className="inline w-4 h-4 mr-1" />
+                  We only ship within {POLICY.shipsTo}
                 </p>
               </div>
             </div>
