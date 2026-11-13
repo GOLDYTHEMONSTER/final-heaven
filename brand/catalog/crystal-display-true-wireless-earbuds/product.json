@@ -1,0 +1,156 @@
+{
+  "name": "Crystal True Wireless Earbuds — Battery Display Case",
+  "category": "Gadgets",
+  "description": "True wireless in-ear earbuds with a see-through charging case that shows the battery level as a percentage.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "True wireless, in-ear"
+    },
+    {
+      "label": "Charging case",
+      "value": "See-through, with battery display"
+    },
+    {
+      "label": "Battery display",
+      "value": "Percentage, on the case"
+    },
+    {
+      "label": "Colours",
+      "value": "White, Pink, Black"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "50 g"
+    }
+  ],
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Pink",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "in-ear",
+    "true wireless"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/183f6183-805b-410a-80e2-fb382b850a2d.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/570041bd-94a3-4800-a805-d3df9eaeffc7.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8e0c25dc-9512-40d0-9935-d2ca66d4a09b.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1010950822548",
+    "unit_cost": 13.5,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "notes": "¥13.5 per piece, MOQ 2 (mixed batch OK), free shipping inside China; ≈₦2,994.79 on the screenshot. Store return rate 43.4% (high), praise rate 98.2%. Supplier title says noise-cancelling and sports: not claimed (unverified at this price). Bluetooth version, battery hours and water resistance not stated: not claimed. Weight 50 g (owner). Lithium battery in case and buds: sea freight only. Light Blue and Green exist only in the small group shot (transparent cases, too soft to cut out cleanly): left out, so only White, Pink, Black are listed. Black photo is 1280 px (slightly soft). Water-splash marketing shot not used. Generic, no brand printed. Display figures (95/90) in photos are the supplier's demo. Price raised from NGN 7000 to NGN 7500 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Shenzhen Soba Weiye Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1010950822548"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.05,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:27:35.364Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2995,
+      "landed": 2995,
+      "gross": 4005,
+      "margin": 0.5721657142857143,
+      "suggested": 7000
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:35.366Z",
+    "history": [
+      {
+        "at": "2026-11-04T10:38:03.724Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T10:43:42.617Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T10:43:59.609Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T10:44:04.829Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:44:22.474Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:44:22.699Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:44:24.827Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:35.366Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793789043193",
+    "approved_at": "2026-11-04T10:44:22.472Z",
+    "published_at": "2026-11-04T10:44:24.827Z",
+    "url": "https://www.finalheaven.shop/product/p1793789043193"
+  },
+  "id": "p1793789043193"
+}

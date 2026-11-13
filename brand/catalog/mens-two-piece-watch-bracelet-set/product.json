@@ -1,0 +1,189 @@
+{
+  "name": "Men's Two-Piece Quartz Watch and Bracelet Set",
+  "category": "Accessories",
+  "description": "A two-piece set: a quartz watch on a brown or tan PU strap and a matching bracelet. The three small sub-dials on the numeral dials are decorative. The gift box and props in the photos are not included.",
+  "specs": [
+    {
+      "label": "Pieces",
+      "value": "Watch and matching bracelet"
+    },
+    {
+      "label": "Movement",
+      "value": "Quartz"
+    },
+    {
+      "label": "Case and dial",
+      "value": "Black case, black dial with orange-tone markings"
+    },
+    {
+      "label": "Strap",
+      "value": "Brown or tan PU"
+    },
+    {
+      "label": "Dial size",
+      "value": "42 mm across, 9 mm thick"
+    },
+    {
+      "label": "Strap size",
+      "value": "20 mm wide, 235 mm long (hand measurements)"
+    },
+    {
+      "label": "Bracelet",
+      "value": "Brown cord with a metal \"believe\" plate, or woven black and tan"
+    },
+    {
+      "label": "Gift box and props",
+      "value": "Not included"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "50 g"
+    }
+  ],
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Numeral Dial, Believe Bracelet",
+    "Date Dial, Believe Bracelet",
+    "Tan Strap, Woven Bracelet"
+  ],
+  "sizes": [],
+  "tags": [
+    "watch",
+    "watch set",
+    "quartz",
+    "bracelet",
+    "men",
+    "brown",
+    "black",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "numeral-dial-believe.jpg",
+      "color": "Numeral Dial, Believe Bracelet",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/102dc61b-13af-445e-8a18-ca2af19d7b9f.jpg"
+    },
+    {
+      "file": "date-dial-believe.jpg",
+      "color": "Date Dial, Believe Bracelet",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/56effe9b-fd72-4d2a-b14a-8d6572b46166.jpg"
+    },
+    {
+      "file": "tan-strap-woven.jpg",
+      "color": "Tan Strap, Woven Bracelet",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cff6a465-3918-4fab-8d9d-8fbb902df581.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1003208225495",
+    "unit_cost": 7.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Lisong Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://shop6tv12394b6900.1688.com"
+    },
+    "notes": "Supplier: Yiwu Lisong Trading Co., Ltd. (same shop as the other two watch sets), 1K+ sold. Title as shown: 'Temu2-Piece Men's Watch Set, Sporty, Casual, Fashionable, Digital Round Dial, Quartz, and Pu Woven Strap Wristwatch'; 'Temu' (another retailer's name), 'Sporty' and 'Digital' (the dials are analogue) left out. Price tiers CNY 7.5 (about N1,675) from 1 item, CNY 7 (about N1,563.33) for 360-1199, CNY 6.5 (about N1,451.66) for 1200+; fx_rate 223.33 = 1675 / 7.5. Owner chose unit_cost 7.5 and price 7500 on 2 Nov 2026. Listing shows 'Standard Consolidation - Air to Nigeria'; no freight figure given. Weight 50 g per set in all four colours (Brown, Brown 1, Brown 2, Khaki), supplier-stated. Supplier attributes: brand 'Box pine2', model 8-110/111, print logo: can, imported: No; unused. Sizes from the supplier's parameters photo (hand-measured, minor errors): dial 42 mm, thickness 9 mm, band 20 mm wide and 235 mm long, watch 28 g. The supplier's own photo labels the three sub-dials 'Nonfunctional decoration': not called a chronograph. Whether the date window works is not stated. 3 styles photographed; the listing has 4 colours and the mapping to photos is not shown, so the fourth is not listed. Photos say 'Boxes not included' / 'Photo Props': box, cushion and props not included; captions cropped out. Dials print 'Geneva' / 'GENEVA' on every style: owner chose to list under a generic name; not retouched, kept out of name, copy and tags. The dial close-up carrying the supplier's label is not used. Store return rate not shown. Bracelet length and materials not stated (only 'PU' in the title); none claimed. Watch has a button cell (type unknown); ships_by_air unset like the other watches."
+  },
+  "shipping": {
+    "weight_kg": 0.05,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:14.929Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:26:58.497Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:27:29.420Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:31:46.251Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-02T20:32:00.469Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-02T20:32:19.628Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-02T20:32:26.412Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft only, not on sale. Geneva dials listed under a generic name (owner's choice)."
+      },
+      {
+        "at": "2026-11-03T05:39:05.940Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-03T05:39:06.196Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-03T05:39:08.213Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:30.382Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:14.929Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:14.928Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1675,
+      "landed": 1675,
+      "gross": 5825,
+      "margin": 0.77667,
+      "suggested": 4000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793651538155",
+    "approved_at": "2026-11-03T05:39:05.938Z",
+    "published_at": "2026-11-03T05:39:08.213Z",
+    "url": "https://www.finalheaven.shop/product/p1793651538155"
+  },
+  "id": "p1793651538155"
+}

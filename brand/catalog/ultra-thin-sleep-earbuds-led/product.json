@@ -1,0 +1,99 @@
+{
+  "name": "Ultra-Thin Earbuds — LED Display Glow Case",
+  "category": "Gadgets",
+  "description": "Slim wireless earbuds in an oval charging case with an LED display and a glowing ring. Black.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "mini",
+    "led display"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "BLOCKER: the only photo (800 px) is covered by a Chinese spec panel (BT 5.3, LED display, touch, Type-C, noise-cancelling call, no-latency claims) and slogan text at the bottom, over a piano background. A clean crop is about 520x430 px (2.3x enlargement): too soft. Store photo NOT made. Needs a clean photo. Supplier claims not used. One colour only (black). Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. Lithium battery: sea freight only. No battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Earbuds seller (name to confirm)",
+      "platform": "1688",
+      "url": ""
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-13T16:30:13.509Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:26:16.381Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:27:11.041Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-13T16:27:11.856Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION",
+        "note": "set by hand"
+      },
+      {
+        "at": "2026-11-13T16:30:13.509Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "set by hand"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:27:11.040Z",
+      "ok": false,
+      "problems": [
+        "no photos"
+      ],
+      "needs": [
+        "selling price",
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": [
+        "no photo shows Black"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "set by hand"
+  },
+  "ships_by_air": false
+}

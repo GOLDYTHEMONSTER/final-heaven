@@ -1,0 +1,109 @@
+{
+  "name": "Wall-Mounted Steel Pull-Up Bar with Foam Grips",
+  "category": "Sports",
+  "description": "A steel pull-up bar that bolts to a wall on two arms, with foam grips for a wide hold, a narrow hold and two parallel hammer-style grips. The bar is 97 cm overall, 51 cm between the arms, and the arms reach 30 cm out from the wall; each wall plate is 18 × 10 cm. A small eyelet ring sits in the centre of the bar. It needs drilling: fix it into a solid wall with bolts suited to the wall, as no fixings are shown with the set.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "pull-up bar",
+    "wall mounted",
+    "chin-up bar",
+    "steel",
+    "home gym",
+    "fitness",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black-angle.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "black-front.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "black-top.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "wall-plate.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "white-measured.jpg",
+      "color": "White"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=570601158219",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yongkang Jiaxiang Fitness Equipment Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=570601158219"
+    },
+    "notes": "MINIMUM ORDER 10 pieces. STORE RETURN RATE 58.6% shown plainly on the page (very high if a real return rate; the same shop's door-bar page shows a 59% repurchase rate, so it may be mistranslated; unconfirmed). Supplier: Yongkang Jiaxiang Fitness Equipment Co., Ltd., same shop as telescopic-door-pull-up-bar. Title: 'Wall horizontal bar manufacturers directly supply pull-up body to upgrade the whole Pole version with sandbag swing ring 4kg class'; the sandbag wording is left out: no sandbag is in the photos and none is promised, the 'ring' is a central eyelet. Price tiers CNY 60 (about N13,399.97) for 10+, CNY 40.9 (about N9,134.31) for 50-998, CNY 39.9 for 999+; also a 'distribution' price of CNY 60 for 10+; fx_rate 223.33 = 13399.97 / 60. unit_cost unset until the owner chooses the tier. 'Standard Consolidation - Air to Nigeria' is offered. Attributes: brand '100 million Unified person' (supplier label, unused), steel, item no. ytz006, origin Yongkang, Zhejiang. Colours Black and White, 4,100 g each (shipping.weight_kg 4.1, supplier-stated); no packed carton size given: heavy and bulky, freight will weigh heavily on margin. Dimensions from the supplier's measured photo (white bar): bar 97 cm overall, 51 cm between arms, arms 30 cm out, plates 18 x 10 cm; assumed the same for the black bar (not stated). Four grips seen: wide, narrow and two parallel hammer grips (foam, black with orange rings). NO load rating or capacity claim: none given; owner may want one from the supplier before selling. Wall fixings not shown and not claimed as included. The only white-bar photo is the supplier's measured shot on a wood floor (800 px, soft, red dimension lines, blurred fill to 4:5); black photos are cutouts from 800 px originals, soft. Reviews (30+): comfortable sponge grips; not quoted."
+  },
+  "shipping": {
+    "weight_kg": 4.1,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-02T20:58:29.104Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:47:40.299Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:49:35.028Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:58:29.104Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "owner dropped it (58.6% store return rate, load-bearing, no rating)"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-02T20:49:35.027Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price",
+        "supplier unit cost"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "owner dropped it (58.6% store return rate, load-bearing, no rating)"
+  }
+}

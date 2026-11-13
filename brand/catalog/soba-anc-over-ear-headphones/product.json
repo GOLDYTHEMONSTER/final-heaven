@@ -1,0 +1,184 @@
+{
+  "name": "Wireless Over-Ear Headphones with Active Noise Cancelling (Metal-Look Arms)",
+  "category": "Gadgets",
+  "description": "Bluetooth over-ear headphones with active noise cancelling (ANC) and a built-in microphone for calls.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Over-ear, Bluetooth"
+    },
+    {
+      "label": "Noise cancelling",
+      "value": "Active (ANC)"
+    },
+    {
+      "label": "Microphone",
+      "value": "Built in, for calls"
+    },
+    {
+      "label": "Controls",
+      "value": "ANC button and volume on the right ear cup"
+    },
+    {
+      "label": "Ear cups",
+      "value": "Wide, padded"
+    },
+    {
+      "label": "Headband",
+      "value": "Knit mesh"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, Space Grey, Silver (with green cushions)"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "265 g"
+    }
+  ],
+  "price": 66000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Space Grey",
+    "Silver"
+  ],
+  "sizes": [],
+  "tags": [
+    "headphones",
+    "bluetooth",
+    "over-ear",
+    "anc",
+    "noise cancelling",
+    "wireless",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cbdd9fc7-ecbd-41c0-8cc1-30ede12098fb.jpg"
+    },
+    {
+      "file": "space-grey.jpg",
+      "color": "Space Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bb50838f-3ee7-4696-beab-e75cc7db2c59.jpg"
+    },
+    {
+      "file": "silver.jpg",
+      "color": "Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/97bd9982-4022-4884-b557-86c2d38f3b49.jpg"
+    },
+    {
+      "file": "pair.jpg",
+      "color": "Space Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/43679e8a-6ec4-4fe3-be01-6fd6d7657d25.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=873924907022",
+    "unit_cost": 118,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "notes": "Costed from the 1688 screenshot: CNY 118 per set, about NGN 26,176.66 (rate 221.84), free shipping in China, min 1 set. Store return rate 43.4% (flagged, well over 30%). 6800+ reviews. Listing function line includes waterproof, long battery life, voice control: NOT claimed (boilerplate, no evidence). Range about 15 m. Weight 265 g from the 1688 table, packed weight to confirm. Look-alike design of a famous brand over-ear headphone; no logo or text printed on the product in the photos; no brand words used. Lithium battery: sea only. Source photos are 800 px, cutouts enlarged up to 2.2x (soft). Silver-with-brown and White styles exist on the listing but their photos did not cut out cleanly (ragged band, washed-out white), so they are not listed. Silver photo is the supplier side-on view (cup on a cushion). Two Havit-sheet images pasted by mistake were ignored. Per-style prices not shown; assumed same CNY 118. Price raised from NGN 50000 to NGN 66000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Shenzhen Soba Weiye Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=873924907022"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.265,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:30.732Z",
+    "history": [
+      {
+        "at": "2026-11-04T10:35:23.536Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-04T10:36:15.793Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T10:43:41.883Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T10:43:52.309Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T10:43:59.376Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:44:19.915Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:44:20.143Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:44:22.205Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:34.344Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:30.732Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:30.731Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 26177,
+      "landed": 26177,
+      "gross": 23823,
+      "margin": 0.47645760000000004,
+      "suggested": 58500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793789037887",
+    "approved_at": "2026-11-04T10:44:19.913Z",
+    "published_at": "2026-11-04T10:44:22.205Z",
+    "url": "https://www.finalheaven.shop/product/p1793789037887"
+  },
+  "ships_by_air": false,
+  "id": "p1793789037887"
+}

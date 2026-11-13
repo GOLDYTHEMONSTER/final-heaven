@@ -1,0 +1,223 @@
+{
+  "name": "Oversized Fleece-Lined Zip-Up Hoodie",
+  "category": "Hoodies",
+  "description": "Oversized zip-up hoodie with a fleece lining. Sold as the hoodie only: the chain necklace in the photos is not included.\n\nSizes M to 5XL run very small. Choose by height and weight, not by your usual letter size.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Gray"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL, 4XL, 5XL"
+    },
+    {
+      "label": "Fit",
+      "value": "Oversized, dropped shoulders"
+    },
+    {
+      "label": "Lining",
+      "value": "Fleece"
+    },
+    {
+      "label": "Hood",
+      "value": "Drawstring"
+    },
+    {
+      "label": "Pockets",
+      "value": "Kangaroo"
+    },
+    {
+      "label": "Cuffs and hem",
+      "value": "Ribbed"
+    },
+    {
+      "label": "Closure",
+      "value": "Zip-up"
+    },
+    {
+      "label": "Chain necklace in photos",
+      "value": "Not included"
+    }
+  ],
+  "size_chart": {
+    "headers": [
+      "Size",
+      "Height (cm)",
+      "Weight (kg)"
+    ],
+    "rows": [
+      [
+        "M",
+        "151-160",
+        "40-50"
+      ],
+      [
+        "L",
+        "161-165",
+        "50.5-57.5"
+      ],
+      [
+        "XL",
+        "166-170",
+        "58-65"
+      ],
+      [
+        "2XL",
+        "171-175",
+        "65.5-72.5"
+      ],
+      [
+        "3XL",
+        "176-180",
+        "73-80"
+      ],
+      [
+        "4XL",
+        "180-185",
+        "80-87.5"
+      ],
+      [
+        "5XL",
+        "180-185",
+        "87.5-100"
+      ]
+    ]
+  },
+  "price": 28500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Gray"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL",
+    "4XL",
+    "5XL"
+  ],
+  "tags": [
+    "hoodie",
+    "mens",
+    "zip-up",
+    "fleece",
+    "oversized",
+    "winter",
+    "hooded"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/55908381-c1ab-4cdb-a58b-2b608b2fa9c3.jpg"
+    },
+    {
+      "file": "gray.jpg",
+      "color": "Gray",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/19bc0701-e9b7-44b4-9c02-e5320cb0872e.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=978706683998",
+    "unit_cost": 12.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Regular price ¥12.80 (screenshot: ≈₦2,854.76); the size screen also shows ¥11.50 (≈₦2,564.82) estimated price for 1 pc, not used. Shipping from ¥3.00 (≈₦669.08), not entered as a cost. Bestseller, 7K+ sold, repurchase rate 37.27%. Supplier title: Autumn and Winter Velvet Thickened Hooded Zipper Cardigan Sweatshirt Loose Korean Style Ins Long-Sleeved Warm Jacket Top. Listing has 4 styles; only Gray fleece (size screen) and Black (photos) were seen, the other two not seen. Sizes and height/weight guide from the supplier size screen; they run very small. Fibre content not stated, left out. Black photo is 1080x1080 and gray 1080x1080, cropped to 4:5, model's chain necklace left in shot. Gray colour name assumed from 'Gray fleece'. Inventory about 530-890 per size. Store return rate not shown. Seller name not visible. Price raised from NGN 12000 to NGN 28500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Hoodie and sweatshirt seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=978706683998"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:48.536Z",
+    "history": [
+      {
+        "at": "2026-11-01T08:13:50.851Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T08:14:21.310Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:15:05.268Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T08:15:05.502Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T08:15:11.624Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T08:15:20.910Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T08:15:21.151Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T08:15:25.002Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:48.536Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:48.533Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2855,
+      "landed": 2855,
+      "gross": 9145,
+      "margin": 0.7621013333333334,
+      "suggested": 6500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793520909716",
+    "approved_at": "2026-11-01T08:15:20.908Z",
+    "published_at": "2026-11-01T08:15:25.002Z",
+    "url": "https://www.finalheaven.shop/product/p1793520909716"
+  },
+  "id": "p1793520909716"
+}

@@ -1,0 +1,185 @@
+{
+  "name": "Retro Digital Watch with Steel Bracelet",
+  "category": "Accessories",
+  "description": "A retro rectangular digital watch on a metal link bracelet. The dial is printed Water Resist, but keep it away from water.",
+  "specs": [
+    {
+      "label": "Display",
+      "value": "LCD: time, day and date"
+    },
+    {
+      "label": "Modes",
+      "value": "Alarm and chronograph"
+    },
+    {
+      "label": "Case",
+      "value": "Rectangular"
+    },
+    {
+      "label": "Bracelet",
+      "value": "Metal link"
+    },
+    {
+      "label": "Battery",
+      "value": "Lithium button cell"
+    },
+    {
+      "label": "Colours",
+      "value": "Silver or Black with a black face; Gold or Rose Gold with a matching face"
+    },
+    {
+      "label": "Water resistance",
+      "value": "Dial is printed Water Resist; keep away from water"
+    }
+  ],
+  "price": 6500,
+  "stock": 20,
+  "colors": [
+    "Silver",
+    "Black",
+    "Gold",
+    "Rose Gold"
+  ],
+  "sizes": [],
+  "tags": [
+    "digital watch",
+    "retro watch",
+    "steel bracelet",
+    "alarm",
+    "chronograph",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "silver.jpg",
+      "color": "Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6d8feb19-0188-48ca-b51d-a88a736b1e78.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6d550068-3cc3-4168-b22e-7e1f61a60175.jpg"
+    },
+    {
+      "file": "gold.jpg",
+      "color": "Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d1d6c9f7-90a4-4ebc-96b2-e922f548d315.jpg"
+    },
+    {
+      "file": "rose-gold.jpg",
+      "color": "Rose Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/25ecdf93-5990-43a5-9887-48df40edf042.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=673084428060",
+    "unit_cost": 6.03,
+    "cost_currency": "CNY",
+    "fx_rate": 222,
+    "image_permission": "unknown",
+    "notes": "Owner (4 Nov 2026): price 6500, cost CNY 6.03 for all colours. WEIGHT PENDING: owner will send one; saved without a weight. Supplier Foshan Whitening Electrical Appliance Co., Ltd. (Shunde, Foshan; 6 yrs), 2K+ sold, 3,100+ praised; return rate not seen. Title: Foreign trade explosions LED electronic watch WR F91W steel belt A159 Harajuku wind Kakashi watch multi-function watch; F91W, A159 (Casio model numbers), Kakashi and the marketing words kept out. Price CNY 4.41 to 6.03 per piece (about N978-1,338 at 222 per CNY); which colour costs what is not shown, so unit_cost is set to the top of the range, 6.03, as a floor. LOOK-ALIKE: a copy of a classic Casio digital watch design with a WR mark in place of the maker name; no Casio name used or implied. Dial text (ALARM CHRONO, LIGHT/LAP/RESET, Lithium, WR, MODE, START-STOP/12-24H, WATER RESIST) is printed on the product and shows in the photos; no water-resistance rating given, so no water claim. Lithium button cell: ships_by_air left unset like the other watches. No weight or size stated: weight_kg unset (Express base fee). Photos: supplier cutouts on white, 800 px, cropped above the shop watermark at the foot (strap ends cut slightly); the lifestyle photo (watermark across it) and duplicates not used. Four colours, one photo each (gold and rose gold have a matching gold-tone face).",
+    "supplier": {
+      "name": "Foshan Whitening Electrical Appliance Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=673084428060"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:22.800Z",
+    "history": [
+      {
+        "at": "2026-11-04T06:39:55.095Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-04T06:40:16.533Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T06:41:12.251Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T06:41:12.447Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T06:41:20.215Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T06:41:20.427Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft only, not on sale. Weight pending from the owner: add before publishing (Express base fee until then)."
+      },
+      {
+        "at": "2026-11-04T06:41:39.185Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T06:41:39.409Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T06:41:41.931Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:31.649Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:22.800Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:22.798Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1339,
+      "landed": 1339,
+      "gross": 5161,
+      "margin": 0.7940523076923077,
+      "suggested": 3000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793774478749",
+    "approved_at": "2026-11-04T06:41:39.183Z",
+    "published_at": "2026-11-04T06:41:41.931Z",
+    "url": "https://www.finalheaven.shop/product/p1793774478749"
+  },
+  "id": "p1793774478749"
+}

@@ -1,0 +1,72 @@
+{
+  "_help": "Editorial carousel: one post for several products, on ink. Photos are the store photos (front, back) in brand/catalog. details = captions for the close-ups A (front), B (back print), C (sleeve), in that order. Crops are [x, y, width, height] as fractions of the photo, for the detail slide. accent = a colour from the garment, used for thin rules only. Name, colour, price and sizes are read from the live store.",
+  "post": "two-hoodies-nov",
+  "headline": [
+    "Two new",
+    "hoodies"
+  ],
+  "products": [
+    {
+      "id": "p1794321975434",
+      "front": "../../catalog/pink-07-hoodie/front.jpg",
+      "back": "../../catalog/pink-07-hoodie/back.jpg",
+      "accent": "#E0457B",
+      "crops": {
+        "print": [
+          0.335,
+          0.44,
+          0.33,
+          0.213
+        ],
+        "sleeve": [
+          0.05,
+          0.71,
+          0.22,
+          0.17
+        ],
+        "mark": [
+          0.4,
+          0.3,
+          0.2,
+          0.2
+        ]
+      },
+      "details": [
+        "Front: the mark, embroidered",
+        "Back: Final 07 Heaven, DTF print",
+        "Sleeves: Final Heaven, DTF print"
+      ]
+    },
+    {
+      "id": "p1794322001570",
+      "front": "../../catalog/heaven-hoodie-taupe/front.jpg",
+      "back": "../../catalog/heaven-hoodie-taupe/back.jpg",
+      "accent": "#B9A894",
+      "crops": {
+        "print": [
+          0.13,
+          0.395,
+          0.7,
+          0.452
+        ],
+        "sleeve": [
+          0.05,
+          0.71,
+          0.22,
+          0.17
+        ],
+        "mark": [
+          0.4,
+          0.3,
+          0.2,
+          0.2
+        ]
+      },
+      "details": [
+        "Front: the mark, embroidered",
+        "Back: HEAVEN arch, DTF print",
+        "Sleeves: Final Heaven, DTF print"
+      ]
+    }
+  ]
+}

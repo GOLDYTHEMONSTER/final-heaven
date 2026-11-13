@@ -1,0 +1,174 @@
+{
+  "name": "Lightweight Cropped Jogger Pants",
+  "category": "Pants",
+  "description": "Light, loose-fitting cropped joggers with an elasticated drawstring waist, side pockets and gathered cuffs. Built for hot weather: the supplier describes the fabric as thin and quick-drying. They run about a size small: if you are between sizes, go one up.",
+  "price": 17500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Dark Grey",
+    "Light Grey"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "pants",
+    "joggers",
+    "cropped",
+    "lightweight",
+    "summer",
+    "mens"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/69eec506-02ae-41bc-9220-275b34c98959.jpg"
+    },
+    {
+      "file": "dark-grey.jpg",
+      "color": "Dark Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6b354c1d-94b1-4d9b-934e-7440340bd727.jpg"
+    },
+    {
+      "file": "light-grey.jpg",
+      "color": "Light Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d05d3962-5d2e-4802-b6b1-9d8044ef53e8.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=793526637248",
+    "unit_cost": 10,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "notes": "Supplier title: Premium Selection of Men's Loose-Fitting Cropped Jogger Pants, Summer Thin Sports Casual Quick-Dry Pants, Export Ice Silk Pants for Men. ¥10 from 1 piece (screenshot shows about ₦2,225.2); a 100-off-3000 coupon is shown, not used. 4K+ sold. Store return rate 55.3% (HIGH, supplier risk); commodity repurchase rate 65.07%. Sizes M-3XL assumed (no size chart seen), so fit and the go-one-up line are assumed. Fibre not stated: quick-dry and ice silk are supplier wording, not claimed. Styles on 1688: GK02 Black, dark grey, light grey. Photos are waist-down model shots cropped just below the cuffs to remove the models' Nike trainers (swooshes), Chinese label boxes and the MODEL SHOWS header. Source photos are 750-790 px wide, so the store photos are upscaled and slightly soft. The two dark grey source photos are near-identical; one is used. Price raised from NGN 15000 to NGN 17500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Jieyang Type Dongpai Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=793526637248"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T07:10:42.987Z",
+    "history": [
+      {
+        "at": "2026-11-10T07:06:33.308Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T07:07:41.127Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T07:07:50.747Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T07:09:20.381Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T07:09:20.626Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T07:09:26.848Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T07:10:39.059Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T07:10:39.287Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T07:10:42.987Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T07:09:20.380Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2225,
+      "landed": 2225,
+      "gross": 12775,
+      "margin": 0.8516533333333333,
+      "suggested": 5000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794294565505",
+    "photos_reviewed": {
+      "at": "2026-11-10T07:10:38.837Z",
+      "hashes": {
+        "black.jpg": "5718b48801b9572c2800fff83ba296815f0b7194c7eb3703bbfdf9dde618136d",
+        "dark-grey.jpg": "6ffd8e3d9ee2f24987684ce08172dc5639e334fd1b6f1f181fbd9cd385a90a84",
+        "light-grey.jpg": "1b37b1fc33be5e3cdf9f11101e8b9e568f36b18f49fb8c04dad409b22cbb24ed"
+      }
+    },
+    "approved_at": "2026-11-10T07:10:39.058Z",
+    "published_at": "2026-11-10T07:10:42.987Z",
+    "url": "https://www.finalheaven.shop/product/p1794294565505"
+  },
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Dark Grey, Light Grey"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL"
+    },
+    {
+      "label": "Fit",
+      "value": "Loose, cropped, tapered to the ankle"
+    },
+    {
+      "label": "Waist",
+      "value": "Elastic with drawstring"
+    },
+    {
+      "label": "Detail",
+      "value": "Side pockets, elasticated cuffs"
+    }
+  ],
+  "id": "p1794294565505"
+}

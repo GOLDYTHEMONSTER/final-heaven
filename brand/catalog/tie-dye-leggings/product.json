@@ -1,8 +1,42 @@
 {
   "name": "Tie-Dye Pocket Leggings",
   "category": "Ladies",
-  "description": "High-waist seamless leggings in a tie-dye knit, with a side pocket that holds your phone. The tall waistband smooths and holds you in, and contour seams shape and lift at the back. Stretchy and quick-dry, for the gym, yoga or everyday.\n\nThey fit close to the body. If you're between sizes, go one up.",
-  "price": 18000,
+  "description": "High-waist seamless leggings in a tie-dye knit, with a side pocket that holds your phone, for the gym, yoga or everyday. They fit close to the body. If you're between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Teal, Olive, Navy, Blue, Brown, Light Grey, White, Dark Grey"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L"
+    },
+    {
+      "label": "Waist",
+      "value": "High, smooths and holds you in"
+    },
+    {
+      "label": "Construction",
+      "value": "Seamless tie-dye knit"
+    },
+    {
+      "label": "Back",
+      "value": "Contour seams shape and lift"
+    },
+    {
+      "label": "Pocket",
+      "value": "Side pocket that holds your phone"
+    },
+    {
+      "label": "Fabric",
+      "value": "Stretchy, quick-dry"
+    },
+    {
+      "label": "Fit",
+      "value": "Close to the body"
+    }
+  ],
+  "price": 26000,
   "stock": 20,
   "colors": [
     "Teal",
@@ -77,7 +111,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥29 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: white-background supplier shots cropped to 4:5; the text-overlay hero shots left out.",
+    "notes": "¥29 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: white-background supplier shots cropped to 4:5; the text-overlay hero shots left out. Price raised from NGN 18000 to NGN 22000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 22000 to NGN 26000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Seamless activewear seller, 54% returns (name to confirm)",
       "platform": "1688",
@@ -94,7 +128,7 @@
     "url": "https://www.finalheaven.shop/product/p1793213829048",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:19.252Z",
+    "updated": "2026-11-04T22:27:01.969Z",
     "history": [
       {
         "at": "2026-10-28T20:23:06.701Z",
@@ -111,10 +145,15 @@
         "at": "2026-10-28T22:03:19.252Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:01.969Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:19.252Z",
+      "at": "2026-11-04T22:27:01.968Z",
       "ok": true,
       "problems": [],
       "needs": [],

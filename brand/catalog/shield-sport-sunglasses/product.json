@@ -1,0 +1,175 @@
+{
+  "name": "Shield Sport Sunglasses",
+  "category": "Accessories",
+  "description": "Half-rim shield sunglasses in one wide lens, with vents along the brow and dotted grip on the temples. 150 mm wide, 135 mm temples, 24.6 g. Unisex. Four colours: black, silver mirror, blue mirror and green mirror.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Silver Mirror",
+    "Blue Mirror",
+    "Green Mirror"
+  ],
+  "sizes": [],
+  "tags": [
+    "sunglasses",
+    "accessories",
+    "eyewear",
+    "unisex",
+    "shield",
+    "sport",
+    "mirror"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a799329e-57d0-4a77-a7ce-a65334d7b0e5.jpg"
+    },
+    {
+      "file": "silver-mirror.jpg",
+      "color": "Silver Mirror",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/602539d1-a09f-44b2-8fe5-91f1694a1e10.jpg"
+    },
+    {
+      "file": "blue-mirror.jpg",
+      "color": "Blue Mirror",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9cf9b01e-7c79-45f0-a914-962b50bf22d5.jpg"
+    },
+    {
+      "file": "green-mirror.jpg",
+      "color": "Green Mirror",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2d2bd9fb-352a-40d5-955c-61c1345e0358.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1096514176398",
+    "unit_cost": 6,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "notes": "Unit cost ¥6 per pair given by the owner (no screenshot). fx 222.63 kept by owner, borrowed from the square-aviator listing, not shown for this one. Supplier title: Cycling glasses, same style for men and women, mountaineering, skiing, anti-UV ... Listing has three models; only GY030 listed (GY14 and LY201 have text-tiled photos only). GY030 specs from the spec tiles: 150 mm wide, lens 72 mm, height 56 mm, nose 17 mm, temples 135 mm, frame 24.6 g. Owner packed weight 50 g. Left out on purpose: anti-UV, polarised, cycling and ski safety claims (no certification). Photos are 800 px sources, padded with white to 4:5 and enlarged 1.5x (soft at full size). Blue Mirror photo was cut from a text-tiled spec photo by keeping only the band with the glasses; no clean blue shot exists. Owner file ids for green and black did not match the files (cd393bee is the black spec tile); used 544a048c for green. Store return rate not seen.",
+    "supplier": {
+      "name": "Sport shield glasses seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1096514176398"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.05,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T12:23:10.026Z",
+    "history": [
+      {
+        "at": "2026-11-08T12:18:49.489Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T12:19:30.198Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T12:21:03.845Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T12:21:04.203Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T12:21:10.704Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T12:23:07.378Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T12:23:07.611Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T12:23:10.026Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T12:21:03.843Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1336,
+      "landed": 1336,
+      "gross": 6164,
+      "margin": 0.8218960000000001,
+      "suggested": 3000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794140469160",
+    "photos_reviewed": {
+      "at": "2026-11-08T12:23:07.148Z",
+      "hashes": {
+        "black.jpg": "1a3e54c2d5fc41b43cd936f075cebda35ef6996625aa3bf39d8d8c3e6c48fa03",
+        "silver-mirror.jpg": "243edbda9fdd0c7c6e45f3300be80b95fb2e3752d77a237a6fa45c08f727854f",
+        "blue-mirror.jpg": "a68788d2382c7dc704415a791279dd4fcbe7ce826aac2722584020ef4add508f",
+        "green-mirror.jpg": "2ae0fb4c320c3c1411d4761e53d7c402c6b06d1ac7a1edf07419ae0d0fc35d13"
+      }
+    },
+    "approved_at": "2026-11-08T12:23:07.377Z",
+    "published_at": "2026-11-08T12:23:10.026Z",
+    "url": "https://www.finalheaven.shop/product/p1794140469160"
+  },
+  "specs": [
+    {
+      "label": "Style",
+      "value": "Half-rim shield, one-piece lens"
+    },
+    {
+      "label": "Width",
+      "value": "150 mm"
+    },
+    {
+      "label": "Lens",
+      "value": "72 mm wide, 56 mm high"
+    },
+    {
+      "label": "Temples",
+      "value": "135 mm"
+    },
+    {
+      "label": "Weight",
+      "value": "24.6 g"
+    },
+    {
+      "label": "Fit",
+      "value": "Unisex"
+    }
+  ],
+  "id": "p1794140469160"
+}

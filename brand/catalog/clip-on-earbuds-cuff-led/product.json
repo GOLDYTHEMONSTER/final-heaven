@@ -1,0 +1,104 @@
+{
+  "name": "Clip-On Ear-Cuff Earbuds — LED Display Case",
+  "category": "Gadgets",
+  "description": "Wireless clip-on earbuds that hook over the ear like a cuff, with an oval charging case and LED display. Comes in white, black and beige.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Black",
+    "Beige"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "clip-on",
+    "open-ear",
+    "led display"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "BLOCKER: all 3 photos (800 px) have a Chinese text panel and laurel badge. The text starts right at the bud and the case is cut off at the left edge, so a crop leaves only about 535x480 px, which would need a 2.2x enlargement: too soft. Store photos NOT made; needs clean photos. Supplier text claims (not used): BT 5.3, 48h, HiFi, CVC, sweatproof, lifetime warranty. Do not claim lifetime warranty. Overlap: store has clip-on-earbuds-led/dome/pebble (clip-on Q71, ₦10,000, ¥15.9); this is another clip-on with an oval case, so it competes with them: possible near-duplicate, owner to decide. Lithium battery: sea freight only. Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. No Bluetooth version, battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Earbuds seller (name to confirm)",
+      "platform": "1688",
+      "url": ""
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-13T16:26:51.705Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:24:58.079Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:25:44.656Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-13T16:25:48.633Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION",
+        "note": "set by hand"
+      },
+      {
+        "at": "2026-11-13T16:26:51.705Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "set by hand"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:25:44.655Z",
+      "ok": false,
+      "problems": [
+        "no photos"
+      ],
+      "needs": [
+        "selling price",
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": [
+        "no photo shows White",
+        "no photo shows Black",
+        "no photo shows Beige"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "set by hand"
+  },
+  "ships_by_air": false
+}

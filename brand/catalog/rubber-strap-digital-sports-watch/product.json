@@ -1,0 +1,187 @@
+{
+  "name": "Digital Sports Watch with Rubber Strap",
+  "category": "Accessories",
+  "description": "A digital sports watch with a square-octagon case and a rubber strap. The dial is printed water resist 30 m (3 bar): that covers splashes and rain, not swimming or diving.",
+  "specs": [
+    {
+      "label": "Display",
+      "value": "LCD: time, date and weekday"
+    },
+    {
+      "label": "Case",
+      "value": "Square-octagon"
+    },
+    {
+      "label": "Strap",
+      "value": "Rubber"
+    },
+    {
+      "label": "Buttons",
+      "value": "Light, mode, start, reset"
+    },
+    {
+      "label": "Water resistance",
+      "value": "Printed on the dial: 30 m (3 bar); splashes and rain only"
+    },
+    {
+      "label": "Colours",
+      "value": "Army Green, Lime Green, Black, Red, Navy Blue"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "47 g"
+    }
+  ],
+  "price": 6500,
+  "stock": 20,
+  "colors": [
+    "Army Green",
+    "Lime Green",
+    "Black",
+    "Red",
+    "Navy Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "digital watch",
+    "sports watch",
+    "rubber strap",
+    "lcd watch",
+    "octagon case",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "army-green.jpg",
+      "color": "Army Green",
+      "old_url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f82ffd80-8b10-4411-9be3-4c049f407b36.jpg",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/373d5785-335a-4f54-b09d-97c6d9ba883d.jpg"
+    },
+    {
+      "file": "lime-green.jpg",
+      "color": "Lime Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a3c24eb1-90b4-4bab-b582-81d1cb5e7f97.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9719ce42-5ce3-4fd0-8604-7b4a1758a1fc.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/33b00baf-a9ad-44b6-b06c-795d98486a6d.jpg"
+    },
+    {
+      "file": "navy-blue.jpg",
+      "color": "Navy Blue",
+      "old_url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/64e5f307-7c86-4999-91db-99ba0e8eee49.jpg",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c6d0fd5c-a97a-4451-8abb-00181025de29.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=754602014571",
+    "unit_cost": 7,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "notes": "Supplier Bantian Dongxi Nanbei Department Store Wholesaler (Longgang). Screenshot price CNY 7 (about N1,552.85 on the page, rate 221.84), from 1 item, 8K+ sold, 20+ praised, repurchase rate 30% (at the flag threshold, not over), Choice badge. Title: Watch male student electronic watch large male junior high school student boy multi-functional 30m waterproof watch; the 'student', 'boy' and 'waterproof' wording is left out of the copy. The screenshot shows ONE price, CNY 7; per-colour prices and the Style tab were not shown, so whether all five colours cost CNY 7 is not confirmed. Weight 47 g is the owner's figure (shipping.weight_kg 0.047). Strap material 'rubber' is the owner's description; the case/strap material, battery type, size and strap length are not stated, so none are claimed. TRADEMARK/LOOK-ALIKE: every dial prints a look-alike maker mark (C-SHCOK style text) and a second line (GASJQ), and the design imitates a well-known shock-resistant watch. No photo hides or avoids it (all five show it; it is on the product). Neither mark is in the name, copy or tags; no shock-resistance claim. Dial also prints WATER 30M RESIST and WR3BAR: copy says water resist 30 m (3 bar) printed on the dial, for splashes not diving. Photos: supplier backgrounds were fake (Christmas, party, beach, Chinese-text scenes), so each watch is cut out on the store background. Sources: army green from img7 (Chinese overlay text sits on the background, removed by the cutout), lime green img3, black img4, red img8 (img9 is a duplicate, unused), navy img5 (800 px original, upscaled 2x, soft), Grey blue was dropped by the owner on 4 Nov 2026 (it only existed in the 769 px group shot). Army green and navy photos redone 4 Nov 2026 with hand-drawn cut lines (railing strip and glare wedge removed); navy is still soft (800 px source enlarged 2.2x). Button cell inside (per the owner): ships_by_air left unset, as for the other watches on the store.",
+    "supplier": {
+      "name": "Bantian Dongxi Nanbei Department Store Wholesaler",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=754602014571"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.047,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:27.413Z",
+    "history": [
+      {
+        "at": "2026-11-04T10:05:03.035Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-04T10:08:28.888Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T10:12:23.784Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T10:12:24.042Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T10:12:34.423Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:25:25.667Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:25:25.914Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:25:30.333Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T12:01:01.733Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:27.413Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:27.412Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1553,
+      "landed": 1553,
+      "gross": 4947,
+      "margin": 0.7610953846153846,
+      "suggested": 3500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793787152422",
+    "approved_at": "2026-11-04T10:25:25.665Z",
+    "published_at": "2026-11-04T10:25:30.333Z",
+    "url": "https://www.finalheaven.shop/product/p1793787152422"
+  },
+  "id": "p1793787152422"
+}

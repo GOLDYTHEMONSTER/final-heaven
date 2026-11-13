@@ -1,0 +1,196 @@
+{
+  "name": "Men's Drawstring Gym Shorts",
+  "category": "Pants",
+  "description": "Above-knee gym shorts with an elastic waist and white drawcords. If you are between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Dark grey, Light grey, Navy, Royal blue, Orange"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL, 4XL, 5XL"
+    },
+    {
+      "label": "Length",
+      "value": "Above the knee"
+    },
+    {
+      "label": "Waist",
+      "value": "Elastic, white drawcords"
+    },
+    {
+      "label": "Pockets",
+      "value": "Zip pockets at both sides"
+    },
+    {
+      "label": "Fabric",
+      "value": "Quick-dry"
+    }
+  ],
+  "price": 16000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Dark grey",
+    "Light grey",
+    "Navy",
+    "Royal blue",
+    "Orange"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL",
+    "4XL",
+    "5XL"
+  ],
+  "tags": [
+    "shorts",
+    "mens",
+    "gym",
+    "sports",
+    "drawstring",
+    "zip-pockets",
+    "summer"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2030a39a-157f-4a9f-99c4-2effe7c5b161.jpg"
+    },
+    {
+      "file": "dark-grey.jpg",
+      "color": "Dark grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/64f61f41-8ba6-45b2-9c43-144c0ba72846.jpg"
+    },
+    {
+      "file": "light-grey.jpg",
+      "color": "Light grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5a79536b-4cf3-49be-8ab5-b875660cfbaa.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/33521d4a-2432-45c8-86a8-086f3abf82ac.jpg"
+    },
+    {
+      "file": "royal-blue.jpg",
+      "color": "Royal blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/67c397c3-d0f8-40cb-a495-ca97a566f808.jpg"
+    },
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/19cad1db-86c0-4bc7-8063-0d8d3fcce79f.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=922338434751",
+    "unit_cost": 17,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Price ¥17 from 1 piece, bestseller, 7K+ sold, repurchase rate about 35%. Screenshot shows no naira figure, so fx 223.03 is the rate on recent products. Store return rate is cut off in the screenshot, not checked. Seller name not visible. Sizes M-5XL chosen by the owner, unconfirmed (no size chart shown), as is the go-one-up line. Fabric not stated; quick-dry is the supplier claim only. Zip tape has factory text and stripes, left in photos, not mentioned in copy. Royal blue photo is a flat shot (no on-model). Source photos 1318-1340 px wide. Supplier title says Cross-Border Special Edition: left out. Price 9500 set by owner. Price raised from NGN 9500 to NGN 16000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Gym shorts seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=922338434751"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:13.578Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:32:30.953Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:33:10.025Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:34:55.410Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:34:55.648Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:35:06.316Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:35:18.724Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:35:18.951Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:35:22.718Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:29.693Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:13.578Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:13.577Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 3792,
+      "landed": 3792,
+      "gross": 5708,
+      "margin": 0.6008936842105262,
+      "suggested": 8500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532904848",
+    "approved_at": "2026-11-01T11:35:18.723Z",
+    "published_at": "2026-11-01T11:35:22.718Z",
+    "url": "https://www.finalheaven.shop/product/p1793532904848"
+  },
+  "id": "p1793532904848"
+}

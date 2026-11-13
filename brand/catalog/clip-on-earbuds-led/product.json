@@ -8,7 +8,41 @@
   "source_type": "wholesale",
   "ships_by_air": false,
   "name": "Clip-On Open-Ear Earbuds — LED Display",
-  "description": "Open-ear earbuds that clip onto the ear instead of sitting inside it. The round charging case has an LED display that shows the battery level, and charges over USB-C. Bluetooth 5.4 with touch controls; they connect when you open the lid and work with iPhone and Android.",
+  "description": "Open-ear earbuds that clip onto the ear instead of sitting inside it, with a round charging case that shows the battery level on an LED display.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Open-ear, clip-on"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.4"
+    },
+    {
+      "label": "Controls",
+      "value": "Touch"
+    },
+    {
+      "label": "Pairing",
+      "value": "Connects when you open the lid"
+    },
+    {
+      "label": "Charging case",
+      "value": "Round, LED battery display"
+    },
+    {
+      "label": "Charging port",
+      "value": "USB-C"
+    },
+    {
+      "label": "Compatible with",
+      "value": "iPhone and Android"
+    },
+    {
+      "label": "Colours",
+      "value": "Champagne, Black, Purple"
+    }
+  ],
   "colors": [
     "Champagne",
     "Black",
@@ -57,7 +91,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T06:29:59.676Z",
+    "updated": "2026-11-04T22:26:45.327Z",
     "history": [
       {
         "at": "2026-10-28T22:14:14.410Z",
@@ -101,10 +135,15 @@
         "at": "2026-10-29T06:29:59.676Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:45.327Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T06:29:24.605Z",
+      "at": "2026-11-04T22:26:45.326Z",
       "ok": true,
       "problems": [],
       "needs": [],

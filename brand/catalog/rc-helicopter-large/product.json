@@ -1,0 +1,183 @@
+{
+  "name": "Large Remote-Control Helicopter — 80 cm",
+  "category": "Gadgets",
+  "description": "A large rechargeable remote-control toy helicopter, about 80 cm long, in red or silver. It comes in a gift box with a handheld remote. Recommended for ages 14 and up.",
+  "price": 107000,
+  "stock": 20,
+  "colors": [
+    "Red",
+    "Silver"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "toy",
+    "remote-control",
+    "helicopter",
+    "rc",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e5ecdaa3-9f84-4152-8f60-447995a34176.jpg"
+    },
+    {
+      "file": "silver.jpg",
+      "color": "Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4c1303b9-a69b-43c8-a5d4-c2268f999a16.jpg"
+    },
+    {
+      "file": "with-remote.jpg",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1f7a6d3d-93e7-4919-993c-a334362c0203.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=575968605215",
+    "unit_cost": 95,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "Cost is the bottom of the ¥95–¥175 range: per-style prices not shown, owner to check the Style tab. 80 cm length comes from the style thumbnails (80厘米), attribute says \"more than 50 cm\". Blue 80 cm and the 86 cm model are not listed (no clean photo; 86 cm probably a different price = separate listing). Weight 2000 g on the page may be the packed gift box; volumetric weight unchecked. Rechargeable, assumed lithium: ships_by_air false until confirmed. Store return rate not shown; repurchase rate 48.15%, 6K+ sold. Age 14+ from the box (owner). Printed names on the bodies (\"Gorgeous\", \"T-SERIES T-69\") cannot be cropped out of the photos; kept out of title and copy. Flight time, range and drop-resistance not claimed: the listing text gives no proof. Photos 800 px and 769 px source, extended with blurred fill to 4:5, person holding the toy.",
+    "supplier": {
+      "name": "Shantou Xiaowang Kingdom Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=575968605215"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-12T21:57:08.244Z",
+    "history": [
+      {
+        "at": "2026-11-12T21:52:43.327Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-12T21:53:12.200Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-12T21:54:34.183Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-12T21:54:34.503Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-12T21:54:39.470Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-12T21:55:39.980Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-12T21:55:40.240Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-12T21:55:44.316Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-12T21:57:05.450Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-12T21:57:05.709Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-12T21:57:08.244Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-12T21:55:39.979Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 21137,
+      "landed": 21137,
+      "gross": 85863,
+      "margin": 0.8024621495327102,
+      "suggested": 47000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794520478430",
+    "photos_reviewed": {
+      "at": "2026-11-12T21:56:19.740Z",
+      "hashes": {
+        "red.jpg": "1a44ae65e236b3301542e6678ed03e83b8f940b4644260bee9c710f07b1eba65",
+        "silver.jpg": "94115021ab4727c1f0b228d5980e575aa4b27ba25e81664cc1c83f76f2e5d47a",
+        "with-remote.jpg": "5e845e6d90b2ef9976e384836dd866a19bc466d4b084a6ba0f872c9c7cbbf59e"
+      }
+    },
+    "approved_at": "2026-11-12T21:57:05.449Z",
+    "published_at": "2026-11-12T21:57:08.244Z",
+    "url": "https://www.finalheaven.shop/product/p1794520478430"
+  },
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Remote-control helicopter"
+    },
+    {
+      "label": "Length",
+      "value": "About 80 cm"
+    },
+    {
+      "label": "Power",
+      "value": "Rechargeable battery"
+    },
+    {
+      "label": "Colours",
+      "value": "Red, Silver"
+    },
+    {
+      "label": "Recommended age",
+      "value": "14+"
+    },
+    {
+      "label": "Packaging",
+      "value": "Gift box"
+    }
+  ],
+  "ships_by_air": false,
+  "id": "p1794520478430"
+}

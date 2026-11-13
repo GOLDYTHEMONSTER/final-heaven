@@ -1,0 +1,121 @@
+{
+  "name": "Retro Campus Quartz Watch",
+  "category": "Accessories",
+  "description": "A unisex quartz watch with a round case, a fabric nylon-tape strap and a day and date window. The day shows in Chinese characters (星期一 for Monday), not English. Six colourways, in a silver or black case, each with a two-tone strap.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Silver Pink",
+    "Silver Sage",
+    "Silver Mint",
+    "Black Cream",
+    "Black Khaki",
+    "Black Burgundy"
+  ],
+  "sizes": [],
+  "tags": [
+    "watch",
+    "quartz watch",
+    "unisex",
+    "retro",
+    "campus",
+    "nylon strap",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "silver-pink.jpg",
+      "color": "Silver Pink"
+    },
+    {
+      "file": "silver-sage.jpg",
+      "color": "Silver Sage"
+    },
+    {
+      "file": "silver-mint.jpg",
+      "color": "Silver Mint"
+    },
+    {
+      "file": "black-cream.jpg",
+      "color": "Black Cream"
+    },
+    {
+      "file": "black-khaki.jpg",
+      "color": "Black Khaki"
+    },
+    {
+      "file": "black-burgundy.jpg",
+      "color": "Black Burgundy"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=963254302041",
+    "unit_cost": 28,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Guangzhou Belloshi Watch Industry Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=963254302041"
+    },
+    "notes": "Price ¥28-¥29 from 1 item; costed at ¥28 (₦6,244.78 on the screenshot, 223.03 per ¥). Supplier lists 6 styles; all 6 photographed and listed (owner to choose). STORE RETURN RATE 50.6% (high risk). Dials and straps carry the factory mark \"Louie Juelen\" (looks like a luxury-house name): cannot be cropped out of the photos, kept out of title and copy; owner to decide. Supplier banner also says \"Louis Juren ... 100% genuine\": ignore, do not repeat. Day window is Chinese (星期一). Strap is nylon tape per owner; no waterproof or luminous spec given, none claimed. Case size, movement and weight unknown. Style 1/6 named \"L-9565 silver shell beige flour lettering tape (s)\"; other style codes not shown. Source photos 800x800, upscaled to 1200x1500 so slightly soft. Colour names are ours, from the photos."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-01T06:07:29.919Z",
+    "history": [
+      {
+        "at": "2026-11-01T06:04:40.534Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T06:05:34.859Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T06:05:39.920Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T06:07:29.919Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "Owner rejected: store return rate 50.6%"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-01T06:05:39.919Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6245,
+      "landed": 6245,
+      "gross": null,
+      "margin": null,
+      "suggested": 14000
+    },
+    "note": "Owner rejected: store return rate 50.6%"
+  }
+}

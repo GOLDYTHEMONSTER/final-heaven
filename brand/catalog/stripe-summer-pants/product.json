@@ -1,8 +1,34 @@
 {
   "name": "Side-Stripe Summer Pants",
   "category": "Pants",
-  "description": "Thin, cool pants for hot days, in a light quick-dry \"ice silk\" fabric that drapes. Bold stripes run down each side over angled panel seams, with a drawstring waist and a loose, wide straight leg.\n\nFour colourways: cream with red, grey with navy, black with white, and navy with yellow.\n\nThey run about a size small: if you're between sizes, go one up.",
-  "price": 18000,
+  "description": "Thin, cool pants for hot days, with bold stripes down each side and a loose, wide straight leg. They run about a size small: if you're between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Cream & Red, Grey & Navy, Black & White, Navy & Yellow"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL"
+    },
+    {
+      "label": "Fabric",
+      "value": "Light, quick-dry \"ice silk\" that drapes"
+    },
+    {
+      "label": "Detail",
+      "value": "Bold stripes down each side over angled panel seams"
+    },
+    {
+      "label": "Waist",
+      "value": "Drawstring"
+    },
+    {
+      "label": "Fit",
+      "value": "Loose, wide straight leg"
+    }
+  ],
+  "price": 21500,
   "stock": 20,
   "colors": [
     "Cream & Red",
@@ -55,7 +81,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥13.8 with the first-order coupon. Sizes M–3XL assumed (size chart not seen). Three side stripes resemble an Adidas trademark: generic name at the owner's choice. Photos cropped to keep the models' branded sneakers (Adidas-style, LV) out of frame.",
+    "notes": "¥13.8 with the first-order coupon. Sizes M–3XL assumed (size chart not seen). Three side stripes resemble an Adidas trademark: generic name at the owner's choice. Photos cropped to keep the models' branded sneakers (Adidas-style, LV) out of frame. Price raised from NGN 18000 to NGN 21500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Summer pants seller (name to confirm)",
       "platform": "1688",
@@ -72,7 +98,7 @@
     "url": "https://www.finalheaven.shop/product/p1793211677659",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:18.701Z",
+    "updated": "2026-11-04T22:26:58.381Z",
     "history": [
       {
         "at": "2026-10-28T20:23:04.675Z",
@@ -89,10 +115,15 @@
         "at": "2026-10-28T22:03:18.701Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:58.381Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:18.701Z",
+      "at": "2026-11-04T22:26:58.379Z",
       "ok": true,
       "problems": [],
       "needs": [],

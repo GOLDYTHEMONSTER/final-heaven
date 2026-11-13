@@ -1,0 +1,188 @@
+{
+  "name": "Aluminium Fidget Spinner",
+  "category": "Gadgets",
+  "description": "A three-lobe fidget spinner with an aluminium alloy body and brushed metal caps on each lobe. It sits flat on a fingertip and spins freely. 6.8 cm across and 75 g, so it has some weight in the hand. Small parts: not for young children.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Cyan",
+    "Black",
+    "Silver",
+    "Pink",
+    "Blue",
+    "Gold",
+    "Red"
+  ],
+  "sizes": [],
+  "tags": [
+    "fidget-spinner",
+    "fidget",
+    "toy",
+    "desk",
+    "gadget"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "cyan.jpg",
+      "color": "Cyan",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/351760c4-b31a-4060-b5da-9a19904a7337.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d3cdc423-3438-42a5-9e9f-60c0c3baa137.jpg"
+    },
+    {
+      "file": "silver.jpg",
+      "color": "Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8af28416-9095-4d34-adae-9cac0bbf500a.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1059aee6-7978-4b5a-8388-08b585309ed4.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/28cd0d3a-b548-4300-bf00-7602fa41e8ab.jpg"
+    },
+    {
+      "file": "gold.jpg",
+      "color": "Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a09afc4c-9951-4796-a62b-680913bea797.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1637b2f7-4fd4-4de2-8942-5149d8b742c6.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=656776049823",
+    "unit_cost": 9,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "Cost ¥9 is the bottom of the ¥9-¥20 range; the plain-style price is not shown, check the Style tab. fx 222.49 from the screenshot (¥9 = N2,002.44). Listing title says \"stainless steel\" but the attributes say alloy; bearing material and spin time are not stated, so not claimed. Gold and red photos come from a different shoot (glossy surface). Weight 75 g is the product weight only (estimated for shipping). Supplier brand shown on listing: yonikoko; 23.4% repurchase rate; no return rate shown. Skipped: a \"MINI\" model photo with Chinese banner, a wavy-edged gold model (other seller), a black splash-paint style (ask). Photos 800 px sources, extended to 4:5 with a blurred background.",
+    "supplier": {
+      "name": "Shenzhen Chuangyi Future Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=656776049823"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.075,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-12T21:56:58.155Z",
+    "history": [
+      {
+        "at": "2026-11-12T21:36:02.952Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-12T21:37:05.130Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-12T21:38:30.742Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-12T21:38:31.010Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-12T21:38:42.882Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-12T21:56:54.921Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-12T21:56:55.178Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-12T21:56:58.155Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-12T21:38:30.741Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as fingertip-gyro-spinner-led (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2002,
+      "landed": 2002,
+      "gross": 5498,
+      "margin": 0.733012,
+      "suggested": 4500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794519521269",
+    "photos_reviewed": {
+      "at": "2026-11-12T21:56:18.896Z",
+      "hashes": {
+        "cyan.jpg": "6050bdfb36e796637525d4ee73434efb91650a54674e4e2069b68bd391573b4c",
+        "black.jpg": "cec7973211f9f3eb8d678365494dbe7fa3b276aeafa0720fe3d892489009f761",
+        "silver.jpg": "d7e9808503368f96e4c56510c5e3e0ad644acca80f25bb386fd60f1a5c2713db",
+        "pink.jpg": "5d232ed1b801d8951a506c4df28989921b97a5eda8ab66ad5b52624f770c9afa",
+        "blue.jpg": "073351199d0030239133c44d95695200150f89afa30ad014814ad3e75dfb7481",
+        "gold.jpg": "cf9d3743d44fda7ca7493afd8bc58b1411861966aa57e3cd0849dfd38018fc38",
+        "red.jpg": "a4c9503254a8f86d47f2b17e3dfef0a0482a479a55ed53d68a385b027b9795a3"
+      }
+    },
+    "approved_at": "2026-11-12T21:56:54.920Z",
+    "published_at": "2026-11-12T21:56:58.155Z",
+    "url": "https://www.finalheaven.shop/product/p1794519521269"
+  },
+  "specs": [
+    {
+      "label": "Material",
+      "value": "Aluminium alloy body"
+    },
+    {
+      "label": "Width",
+      "value": "6.8 cm"
+    },
+    {
+      "label": "Thickness",
+      "value": "1.2 cm"
+    },
+    {
+      "label": "Weight",
+      "value": "75 g"
+    }
+  ],
+  "id": "p1794519521269"
+}

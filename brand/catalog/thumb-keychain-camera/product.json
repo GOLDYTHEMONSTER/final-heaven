@@ -1,0 +1,185 @@
+{
+  "name": "Mini Keychain Camera",
+  "category": "Gadgets",
+  "description": "A mini camera about the size of a matchbox, with a lens and viewfinder on the front, two buttons on top, and a small screen with up, down and OK buttons on the back. It comes with a metal chain and lobster clasp, so it clips to a bag or keys. Each design is printed on the body; pick your colour at checkout.",
+  "price": 19500,
+  "stock": 20,
+  "colors": [
+    "Red",
+    "Grey Retro",
+    "Teal Faces",
+    "Lime Pop",
+    "Cream Blocks",
+    "Clear",
+    "Blue Triangles",
+    "Black Swirl",
+    "Yellow Rainbow"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "camera",
+    "mini camera",
+    "keychain",
+    "bag charm",
+    "retro",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c1e39688-05d5-4dd0-abf9-4d1d95daef40.jpg"
+    },
+    {
+      "file": "grey-retro.jpg",
+      "color": "Grey Retro",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c4722131-1d31-462e-b473-8aeaeeb508d5.jpg"
+    },
+    {
+      "file": "teal-faces.jpg",
+      "color": "Teal Faces",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/381b7af4-e741-4b01-8527-1c3412c8b2df.jpg"
+    },
+    {
+      "file": "lime-pop.jpg",
+      "color": "Lime Pop",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cde0e7a1-ae74-49c9-9213-6172472b892d.jpg"
+    },
+    {
+      "file": "cream-blocks.jpg",
+      "color": "Cream Blocks",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b00eaad8-a9e6-42bc-a890-f4cf010c5a0c.jpg"
+    },
+    {
+      "file": "clear.jpg",
+      "color": "Clear",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2600cbb2-10e9-46b7-ac7c-823d8cb148c7.jpg"
+    },
+    {
+      "file": "blue-triangles.jpg",
+      "color": "Blue Triangles",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5d4feecf-bebc-4862-a59e-9ed468834502.jpg"
+    },
+    {
+      "file": "black-swirl.jpg",
+      "color": "Black Swirl",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1b63bae8-a229-4f70-b7d3-645175dbdb7e.jpg"
+    },
+    {
+      "file": "yellow-rainbow.jpg",
+      "color": "Yellow Rainbow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5952db35-6520-4cda-b030-66b82baebffb.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1098007433363",
+    "unit_cost": 39,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "¥39 is the price for 10+ sets; single-unit price not shown. No specs visible (resolution, battery, size, weight, memory card, cable): none stated in copy. Lithium battery assumed: ships_by_air false. Printed body text THUMB CAMERA / Record Anytime Anywhere / 1984 is the supplier design, not used as a brand. Clear design prints CAMERA Hi, may be a different model. Colour names are proposed from the designs. Photos: 1280 px square supplier renders padded to 4:5 on white, not enlarged. Same supplier as pocket-gimbal-camera. Owner decisions: price ₦19,500 (55.5% gross, provisional), all 9 designs, name Mini Keychain Camera, box contents and specs left out of copy.",
+    "supplier": {
+      "name": "Shenzhen Aoying Manufacturing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1098007433363"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T06:39:45.088Z",
+    "history": [
+      {
+        "at": "2026-11-13T06:23:59.420Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T06:24:36.955Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T06:25:58.381Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T06:25:58.617Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T06:26:09.175Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T06:39:42.698Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T06:39:42.967Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T06:39:45.088Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T06:25:58.380Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 8677,
+      "landed": 8677,
+      "gross": 10823,
+      "margin": 0.55502,
+      "suggested": 19500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794551168237",
+    "photos_reviewed": {
+      "at": "2026-11-13T06:39:42.420Z",
+      "hashes": {
+        "red.jpg": "0c219ec66576b79a9cfbfb8d82a5c5d5e12ac198b893ebdfcc6dd2d519f9129a",
+        "grey-retro.jpg": "ffa03b4c82aff3c127499307439cdd137e23b8f7aa34f57dd456038b3a890d24",
+        "teal-faces.jpg": "0d8b52d2263fbcb58628e129604b7c7a0a6b09635126d33ccd6d92fb94101c6a",
+        "lime-pop.jpg": "b829239de80f0c456e25e1d00e541230820f3efe89fa358775389b7af34e3571",
+        "cream-blocks.jpg": "ab1c4123cc553f4cf1f94820704b42ad2fd4bbe9829eb04eafa625fa1f718a83",
+        "clear.jpg": "0a068ec317f77327515dd569ad7c29cf24bdc2cbae79016b9a75a44b45f7c660",
+        "blue-triangles.jpg": "9125e4e14d16c0fc09dba7e2ad4576baf8ea79879a72ffe09fd49ddbcc905e4a",
+        "black-swirl.jpg": "a3f973f4e3ffdb9a54b1de27ebab02cf38d3702f568ea8731d25d48f449d25c3",
+        "yellow-rainbow.jpg": "f860a506f8a4a2fe3aef4a9092d240f062725834eedcacfdce001732a3dc023a"
+      }
+    },
+    "approved_at": "2026-11-13T06:39:42.697Z",
+    "published_at": "2026-11-13T06:39:45.088Z",
+    "url": "https://www.finalheaven.shop/product/p1794551168237"
+  },
+  "ships_by_air": false,
+  "id": "p1794551168237"
+}

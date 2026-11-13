@@ -2,8 +2,30 @@
   "id": "p1793175144810",
   "name": "Galaxy Projector — Bluetooth Speaker",
   "category": "Gadgets",
-  "description": "Turns your ceiling into a moving galaxy: twinkling stars over a swirling nebula, in red, green, blue or purple. A Bluetooth speaker is built in, so it plays your music while it projects. Comes with a remote (with 1-hour and 2-hour timers) and a USB cable.",
-  "price": 18000,
+  "description": "Turns your ceiling into a moving galaxy: twinkling stars over a swirling nebula. A Bluetooth speaker is built in, so it plays your music while it projects.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "White, Black"
+    },
+    {
+      "label": "Light colours",
+      "value": "Red, green, blue or purple"
+    },
+    {
+      "label": "Speaker",
+      "value": "Built-in Bluetooth speaker"
+    },
+    {
+      "label": "Remote",
+      "value": "Included, with 1-hour and 2-hour timers"
+    },
+    {
+      "label": "Cable",
+      "value": "USB cable included"
+    }
+  ],
+  "price": 22500,
   "stock": 20,
   "colors": [
     "White",
@@ -52,7 +74,8 @@
       "name": "Galaxy projector seller (name to confirm)",
       "platform": "1688",
       "url": "https://detail.1688.com/offer/799444151310.html"
-    }
+    },
+    "notes": "Price raised from NGN 18000 to NGN 22500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
   },
   "shipping": {
     "weight_kg": null,
@@ -63,7 +86,7 @@
     "url": "https://www.finalheaven.shop/product/p1793175144810",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:16.998Z",
+    "updated": "2026-11-04T22:26:50.102Z",
     "history": [
       {
         "at": "2026-10-28T20:22:54.830Z",
@@ -80,10 +103,15 @@
         "at": "2026-10-28T22:03:16.998Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:50.102Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:16.998Z",
+      "at": "2026-11-04T22:26:50.101Z",
       "ok": true,
       "problems": [],
       "needs": [],

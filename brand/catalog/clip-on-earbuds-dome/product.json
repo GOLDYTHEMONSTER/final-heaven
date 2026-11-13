@@ -8,7 +8,33 @@
   "source_type": "wholesale",
   "ships_by_air": false,
   "name": "Clip-On Open-Ear Earbuds — Dome",
-  "description": "Open-ear earbuds that clip onto the ear instead of sitting inside it, in a rounded dome-shaped charging case. Bluetooth 6.0, a charging cable in the box, and they work with iPhone and Android.",
+  "description": "Open-ear earbuds that clip onto the ear instead of sitting inside it, in a rounded dome-shaped charging case.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Open-ear, clip-on"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "6.0"
+    },
+    {
+      "label": "Charging case",
+      "value": "Rounded dome shape"
+    },
+    {
+      "label": "Charging cable",
+      "value": "Included"
+    },
+    {
+      "label": "Compatible with",
+      "value": "iPhone and Android"
+    },
+    {
+      "label": "Colours",
+      "value": "Cream, Black, Purple"
+    }
+  ],
   "colors": [
     "Cream",
     "Black",
@@ -57,7 +83,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T07:21:38.699Z",
+    "updated": "2026-11-04T22:26:44.650Z",
     "history": [
       {
         "at": "2026-10-28T22:14:14.600Z",
@@ -101,10 +127,15 @@
         "at": "2026-10-29T07:21:38.699Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:44.650Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T07:20:40.343Z",
+      "at": "2026-11-04T22:26:44.649Z",
       "ok": true,
       "problems": [],
       "needs": [],

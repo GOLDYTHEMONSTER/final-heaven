@@ -1,0 +1,179 @@
+{
+  "name": "Remote-Control Stunt Jet — Quad-Rotor",
+  "category": "Gadgets",
+  "description": "A rechargeable four-rotor remote-control toy jet in grey or teal, about 28 cm long, with LED lights under the rotors. It switches between handheld remote control and gravity-sensing mode. The box holds the jet, remote, battery, spare propellers and a USB charging cable. Recommended for ages 14 and up.",
+  "price": 36500,
+  "stock": 20,
+  "colors": [
+    "Grey",
+    "Teal"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "toy",
+    "remote-control",
+    "rc",
+    "jet",
+    "drone",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "grey.jpg",
+      "color": "Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d2d0e7b3-d421-4e5a-9f94-84645c7259dc.jpg"
+    },
+    {
+      "file": "leds.jpg",
+      "color": "Teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0c7541fc-030c-4f94-87e4-bcbadcb15fe3.jpg"
+    },
+    {
+      "file": "lit.jpg",
+      "color": "Teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7027d79b-13aa-4dfb-bb72-67ec88e497d2.jpg"
+    },
+    {
+      "file": "tray.jpg",
+      "color": "Teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b0a12cd0-b066-4e82-b523-4f75569ec329.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=668949993344",
+    "unit_cost": 73,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "Cost is the bottom of the ¥73–¥109 range; per-style prices not shown, the ¥109 style probably adds batteries (unconfirmed). Silver/grey style 2/2 shown as 'V17 Quadrotor Dual Mode, Silver Color + Gravity Sensing'; contents from the listing image: battery, 4 spare propellers, USB cable, box. 28 cm length from the size table (28 x 10 cm, 6,440 cm3; packed weights 400-460 g, one per style). Teal style has only a text-overlaid image: not listed. Store return rate 49.4% (very high). Rechargeable, assumed lithium: ships_by_air false. Age 14+ assumed, owner to check the box. Body, remote and wing print a small third-party brand mark (4DRC) that cannot be removed without redrawing; box shows another brand name. Kept out of title and copy. Flight time, range and durability not claimed. Photo: 800 px source, upscaled to 1200 and padded with white to 4:5 (soft). Photos 2-4 are customer review photos of the TEAL jet (LEDs on, lit in hand, in the box tray with remote), untagged by colour; 900 px source upscaled to 1200 (soft), warehouse floor mat background. 4DRC mark is faintly visible on the jet wing and remote in all three (not the subject); dropped: a2dc91c4 (remote logo clear, wide), dc8fee3f/082397c2 (tiny jet on warehouse floor), 0e3e0e9b (small, tray), aba6a0ff (retail box). Owner decisions: stock despite 49.4% return rate; price ₦36,500; Teal added with customer photos (no clean supplier photo); ¥73 assumed for both colours until the Style tab is checked.",
+    "supplier": {
+      "name": "Shantou Xiaowang Kingdom Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=668949993344"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T04:59:46.015Z",
+    "history": [
+      {
+        "at": "2026-11-12T21:55:05.399Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-12T21:55:38.359Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-12T21:56:14.560Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-12T21:58:16.768Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-12T21:58:17.020Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-12T21:58:24.177Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T04:59:41.657Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T04:59:41.926Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T04:59:46.015Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-12T21:58:16.767Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 16242,
+      "landed": 16242,
+      "gross": 20258,
+      "margin": 0.55502,
+      "suggested": 36500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794520703156",
+    "photos_reviewed": {
+      "at": "2026-11-13T04:59:41.390Z",
+      "hashes": {
+        "grey.jpg": "53ec036664b4c11ba8853ffe216906155f3ede0f6fab52d4a87a79328acd8161",
+        "leds.jpg": "aa01630d9cfea57711d985ef44fe63b1fa81450dd3dab08105a7a3c4588c728c",
+        "lit.jpg": "0549cf3c2eb43c0e790a77a9292cbf21614efddfc0f88a31e24ac06cb055e476",
+        "tray.jpg": "667256fe12f0e87483ae55da6e0d3d57d2fca69f3f406445fb0b64c9900daa82"
+      }
+    },
+    "approved_at": "2026-11-13T04:59:41.656Z",
+    "published_at": "2026-11-13T04:59:46.015Z",
+    "url": "https://www.finalheaven.shop/product/p1794520703156"
+  },
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Four-rotor remote-control jet"
+    },
+    {
+      "label": "Length",
+      "value": "About 28 cm"
+    },
+    {
+      "label": "Control",
+      "value": "Remote, or gravity sensing"
+    },
+    {
+      "label": "Power",
+      "value": "Rechargeable battery, USB charging"
+    },
+    {
+      "label": "Colours",
+      "value": "Grey, Teal"
+    },
+    {
+      "label": "Recommended age",
+      "value": "14+"
+    }
+  ],
+  "ships_by_air": false,
+  "id": "p1794520703156"
+}

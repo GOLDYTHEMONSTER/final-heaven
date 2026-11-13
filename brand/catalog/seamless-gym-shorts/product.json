@@ -1,8 +1,46 @@
 {
   "name": "Seamless High-Waist Gym Shorts",
   "category": "Ladies",
-  "description": "High-waist seamless shorts for the gym, yoga or a run, in a stretchy, quick-dry knit. The tall waistband holds you in, and drawstring ties at the sides let you ruch the legs as short as you like.\n\nThe leopard prints (brown, white and black) have a scrunched back that lifts and shapes. The plain colours have a smooth, contoured back.\n\nThey fit close to the body. If you're between sizes, go one up.",
-  "price": 12000,
+  "description": "High-waist seamless shorts for the gym, yoga or a run. They fit close to the body. If you're between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Brown Leopard, White Leopard, Black Leopard, Black, Royal Blue, Orange, Coral, Magenta, Sky Blue"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L"
+    },
+    {
+      "label": "Waist",
+      "value": "High"
+    },
+    {
+      "label": "Fabric",
+      "value": "Stretchy, quick-dry knit"
+    },
+    {
+      "label": "Construction",
+      "value": "Seamless"
+    },
+    {
+      "label": "Leg",
+      "value": "Drawstring ties at the sides to ruche the legs"
+    },
+    {
+      "label": "Back (leopard prints)",
+      "value": "Scrunched, lifts and shapes"
+    },
+    {
+      "label": "Back (plain colours)",
+      "value": "Smooth, contoured"
+    },
+    {
+      "label": "Fit",
+      "value": "Close to the body"
+    }
+  ],
+  "price": 18500,
   "stock": 20,
   "colors": [
     "Brown Leopard",
@@ -83,7 +121,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥14 with the first-order coupon, ¥22 from 100 pieces. The leopard and plain styles may be priced differently on the Style tab: check when ordering. Sizes S–L assumed (size chart not seen). Photos: supplier shots cropped to 4:5, Chinese labels and colour dots left out.",
+    "notes": "¥14 with the first-order coupon, ¥22 from 100 pieces. The leopard and plain styles may be priced differently on the Style tab: check when ordering. Sizes S–L assumed (size chart not seen). Photos: supplier shots cropped to 4:5, Chinese labels and colour dots left out. Price raised from NGN 12000 to NGN 13000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 13000 to NGN 18500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Gym shorts seller (name to confirm)",
       "platform": "1688",
@@ -100,7 +138,7 @@
     "url": "https://www.finalheaven.shop/product/p1793213531682",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:18.125Z",
+    "updated": "2026-11-04T22:26:54.924Z",
     "history": [
       {
         "at": "2026-10-28T20:23:01.071Z",
@@ -117,10 +155,15 @@
         "at": "2026-10-28T22:03:18.125Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:54.924Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:18.125Z",
+      "at": "2026-11-04T22:26:54.923Z",
       "ok": true,
       "problems": [],
       "needs": [],

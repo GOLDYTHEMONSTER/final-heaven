@@ -1,0 +1,187 @@
+{
+  "name": "Door Anchor Resistance Band Set with Triceps Strap",
+  "category": "Sports",
+  "description": "A door-anchor resistance set for arm and triceps work. The 75 to 225 lb figure comes from the bands' own labels and is not a tested rating.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Orange, Yellow, Black, Blue"
+    },
+    {
+      "label": "Resistance bands",
+      "value": "3, covered, carabiner at each end"
+    },
+    {
+      "label": "Band label",
+      "value": "75 lb (34 kg) each"
+    },
+    {
+      "label": "Resistance (by labels)",
+      "value": "75-225 lb, clip on one to three bands"
+    },
+    {
+      "label": "Door anchor",
+      "value": "With foam block"
+    },
+    {
+      "label": "Triceps strap",
+      "value": "V-shaped, padded loops"
+    },
+    {
+      "label": "Webbing",
+      "value": "Polyester"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "450 g"
+    }
+  ],
+  "price": 24500,
+  "stock": 20,
+  "colors": [
+    "Orange",
+    "Yellow",
+    "Black",
+    "Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "resistance bands",
+    "triceps",
+    "door anchor",
+    "arm trainer",
+    "home gym",
+    "strength training",
+    "fitness",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/733c3bd8-05d4-4cb5-8006-619b772fc8ad.jpg"
+    },
+    {
+      "file": "yellow.jpg",
+      "color": "Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/77ac8bc6-7f72-419c-bce4-1366e08a4c92.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/defcb0bf-637e-41b4-89a6-491497f4987e.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/09e0fa75-0653-45cc-a0af-21dbc0b2d357.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1067768834359",
+    "unit_cost": 26.9,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Haorui Webbing Factory",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1067768834359"
+    },
+    "notes": "Supplier: Yiwu Haorui Webbing Factory (19 years on 1688, 'Choice' badge, 1K+ sets sold, commodity repurchase rate 37.14% = repeat buyers, 50+ people like it). Title: 'Best-selling 75-225 lbs home fitness training set, resistance rope with handle, arm strength trainer, triceps rope for strength training'. Price CNY 26.9 (about N6,007.65) to CNY 36.5 (about N8,151.65) per set from 1 set; fx_rate 223.33 = 6007.65 / 26.9. Which option costs what is NOT shown on the page: owner chose CNY 26.9 for this basic set and CNY 36.5 for the handles set, and price 16000 (2 Nov 2026), but did NOT confirm the tiers on the 1688 page, so the cost is unconfirmed. This folder is the basic set (3 bands, door anchor, triceps strap); the version with 2 handles is door-anchor-resistance-band-set-with-handles. Attributes: brand Other, tensioner, polyester, single set. Packed: 4 rows each 15 x 3 cm, 900 cm3, 450 g (length column cut off, 20 cm implied); shipping.weight_kg 0.45, supplier-stated. Resistance figures are the supplier's labels (75 lb / 34 kg per band; 75-225 lb = 1 to 3 bands), not tested ratings. Not used: the door infographic (carries a Doubao AI-generated watermark), the orange 'Complete Gym Equipment Kit' photo (bands labelled 35/45/55 lb and a carry bag, which does not match the 75 lb bands; a review mentions storage bags, none claimed) and the 'TOP PICKS' badge photo. Supplier badge 'elasticity can be adjusted' (cut off) not claimed. Hero photos show the same model in every colour; 800 px originals extended to 4:5 so soft, blue is a real photo on a table. Door, weight limits and anchor safety not stated; none claimed. Return rate not shown. Price raised from NGN 16000 to NGN 24500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": 0.45,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:39.829Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:33:50.091Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:35:21.320Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:38:19.849Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-02T20:38:20.410Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-02T20:38:29.680Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-03T05:38:27.176Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-03T05:38:27.429Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-03T05:38:29.602Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:23.830Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:39.829Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:39.827Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as door-anchor-resistance-band-set-with-handles (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6008,
+      "landed": 6008,
+      "gross": 9992,
+      "margin": 0.6245264374999999,
+      "suggested": 13500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793651908088",
+    "approved_at": "2026-11-03T05:38:27.175Z",
+    "published_at": "2026-11-03T05:38:29.602Z",
+    "url": "https://www.finalheaven.shop/product/p1793651908088"
+  },
+  "id": "p1793651908088"
+}

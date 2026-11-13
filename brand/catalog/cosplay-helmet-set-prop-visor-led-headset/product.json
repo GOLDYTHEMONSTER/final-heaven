@@ -1,0 +1,173 @@
+{
+  "name": "Cosplay Helmet Set with Prop Quad-Lens Visor, LED Strobe & Headset (Black)",
+  "category": "Cosplay",
+  "description": "A costume helmet set in black. The night-vision unit is a non-functional prop and gives no night vision. Sets differ in which parts are included, so check the photos for the fuller versions.\n\nCostume use only. The helmet is not protective: not for riding, cycling or impact.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Black"
+    },
+    {
+      "label": "Size",
+      "value": "Adult"
+    },
+    {
+      "label": "Helmet cover",
+      "value": "Mesh"
+    },
+    {
+      "label": "Strobe light",
+      "value": "Flashing LED"
+    },
+    {
+      "label": "Flashlight",
+      "value": "Rail-mounted"
+    },
+    {
+      "label": "Headset",
+      "value": "With mic"
+    },
+    {
+      "label": "Goggles",
+      "value": "With face guard"
+    },
+    {
+      "label": "Night-vision model",
+      "value": "Four-tube prop on a flip-up mount (non-functional)"
+    }
+  ],
+  "price": 23000,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "cosplay",
+    "costume",
+    "helmet",
+    "prop",
+    "led strobe",
+    "headset",
+    "goggles",
+    "halloween"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black-set-3-goggles-guard.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/aa4ec5a9-97a2-4254-92f1-f7d5d591619b.jpg"
+    },
+    {
+      "file": "black-set-2-visor-headset.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d1e02557-271d-4272-9a04-234b2637f9be.jpg"
+    }
+  ],
+  "source": {
+    "supplier": {
+      "name": "Caoxian Xiran Brother and Sister Clothing Factory",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1047273311670"
+    },
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1047273311670",
+    "unit_cost": 40,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Listing range CNY 30-160 by set. Screenshot shows only Child2 CNY 30 and Adult CNY 40 (as at Nov 2026); per-set prices unknown. Black set 1 Adult at CNY 40 is provisional (assumes the lowest adult price). Child size skipped; recommend Adult only. Desert/Cp/Tiger/green sets not listed: military look, and all their photos show a flag patch, tanks or vehicles, plus an AI-generated watermark. Only 2 usable photos (black sets 2 and 3, indoor, no watermark; a small flag at the corner of set 3 was cropped out). Black set 1 has no clean photo (watermarked). Repurchase rate 50%; store return rate not visible in the cropped screenshot. Contains batteries (strobe, flashlight, headset): ships_by_air false. Same seller as draft cosplay-tactical-helmet-kit. Supplier title uses a military/tactical model name: not used. Contents of each set, weight and head size unknown. Price raised from NGN 20000 to NGN 23000 on 9 Nov 2026 (owner approved margin review: 60% floor)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:33.539Z",
+    "history": [
+      {
+        "at": "2026-11-01T19:43:23.097Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T19:44:10.740Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T10:43:43.432Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T10:44:05.063Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T10:44:10.051Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:44:25.124Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:44:25.350Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:44:27.895Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:23.199Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:33.539Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:33.538Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 8921,
+      "landed": 8921,
+      "gross": 11079,
+      "margin": 0.55394,
+      "suggested": 20000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793789048801",
+    "approved_at": "2026-11-04T10:44:25.122Z",
+    "published_at": "2026-11-04T10:44:27.895Z",
+    "url": "https://www.finalheaven.shop/product/p1793789048801"
+  },
+  "ships_by_air": false,
+  "id": "p1793789048801"
+}

@@ -7,7 +7,25 @@
   "price": 7500,
   "category": "Gadgets",
   "name": "Sunset Lamp — Tripod",
-  "description": "A USB-powered sunset lamp with a round head that tilts, mounted on a small tripod so you can set it on a desk or shelf and aim the glow at a wall.",
+  "description": "A sunset lamp on a small tripod that you can set on a desk or shelf and aim at a wall.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Black"
+    },
+    {
+      "label": "Power",
+      "value": "USB-powered"
+    },
+    {
+      "label": "Head",
+      "value": "Round, tilts"
+    },
+    {
+      "label": "Mount",
+      "value": "Small tripod"
+    }
+  ],
   "colors": [
     "Black"
   ],
@@ -46,7 +64,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T07:21:24.116Z",
+    "updated": "2026-11-04T22:27:01.231Z",
     "history": [
       {
         "at": "2026-10-29T07:03:00.103Z",
@@ -95,10 +113,15 @@
         "at": "2026-10-29T07:21:24.116Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:01.231Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T07:20:38.486Z",
+      "at": "2026-11-04T22:27:01.230Z",
       "ok": true,
       "problems": [],
       "needs": [],

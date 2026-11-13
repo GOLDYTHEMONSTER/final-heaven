@@ -1,0 +1,170 @@
+{
+  "name": "Mini Projector with 2 Wireless Gamepads",
+  "category": "Gadgets",
+  "description": "An Android smart projector: install your streaming apps and watch on a big screen. It plays games with the two wireless gamepads, and also comes with a remote control and a UK 3-pin power cable. Rated at 65 W. Best used in a dim room.",
+  "price": 150000,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "projector",
+    "gamepad",
+    "home-cinema",
+    "games"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "projector.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/86ac7879-fb14-436c-a923-f998e0fe5bba.jpg"
+    },
+    {
+      "file": "kit.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9198684f-6110-4485-922f-a3bac6d10177.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=963594977632",
+    "unit_cost": 198,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "notes": "1688 listing title: Cross-Border Hy320Mini Game Projector Android Hd 4K Retro Game Console F600 Home Projector. One-piece price ¥198 (screenshot shows ≈₦44,081.35; owner said use 222.63). 100+ sold. Store: flagship, 2 years, 38% repurchase (not a return rate; over 30% so noted), service 4.5, comprehensive 93%, store positive 78.6%. Supports custom logo. Item no. Hy320mini game set, colour code 3326, power 65 W, weight 1000 g (packed weight to confirm). In the box from photos: projector, 2 wireless 2.4G gamepads, remote, power cable. Supplier photos show a US two-pin cable; order the British-regulations spec for a UK plug. Not claimed: 4K, resolution, brightness, Android/apps, game count, Wi-Fi (title/box say 4K, Android, WiFi 6, streaming apps; unproven or third-party). Supplier box prints streaming-service logos, so box left out of every photo. Another listing image (HY320 Mini Max, grey face) is a different model: not used. Photos cut from the 1080 px white kit shot and enlarged about 2x, so soft. Likely preloaded unlicensed retro games: IP and customs risk, owner to decide. After the sample: test YouTube, Netflix, Spotify; add the ones that work to the copy in plain text (e.g. 'Tested with YouTube and Spotify'). Never logos. Owner decision 8 Nov: no app names in copy yet, no app logos in photos; copy says only 'install your streaming apps'. Android is from the listing title only: confirm on the sample. Order spec: British regulations (UK plug), ¥198, colour 3326; 1688 domestic freight ¥16 (≈₦3,562 at 222.63, recorded as china_domestic_ngn). Other plugs offered (EU, US, AU) at the same ¥198. Owner 8 Nov: list as is, games wording allowed (no game names, count, brands, 4K or app claims); price ₦150,000 = 70.6% gross margin on ₦44,081 goods, freight and customs not included. Photo 2 (single gamepad) dropped. Sample question skipped.",
+    "supplier": {
+      "name": "Guangzhou Xinwu Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=963594977632"
+    },
+    "china_domestic_ngn": 3562
+  },
+  "shipping": {
+    "weight_kg": 1,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T22:02:17.492Z",
+    "history": [
+      {
+        "at": "2026-11-08T21:52:29.720Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T21:54:30.874Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T21:54:38.797Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T22:00:54.870Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T22:00:55.106Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T22:01:01.585Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T22:01:17.977Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-08T22:01:18.223Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T22:01:20.132Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T22:02:13.330Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T22:02:13.599Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T22:02:17.492Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T22:01:17.976Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 44081,
+      "landed": 47643,
+      "gross": 102357,
+      "margin": 0.6823817333333334,
+      "suggested": 106000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794175259592",
+    "photos_reviewed": {
+      "at": "2026-11-08T22:02:13.045Z",
+      "hashes": {
+        "projector.jpg": "6afdb55e1b234157ebd909cf4ca42674c454a1c6c691273389d23c20b1614490",
+        "kit.jpg": "bda0afe22df903a37c71a58b84718e81ed90c8b3ce11923ee21077d10a3ab5d6"
+      }
+    },
+    "approved_at": "2026-11-08T22:02:13.329Z",
+    "published_at": "2026-11-08T22:02:17.492Z",
+    "url": "https://www.finalheaven.shop/product/p1794175259592"
+  },
+  "specs": [
+    {
+      "label": "Power",
+      "value": "65 W"
+    },
+    {
+      "label": "Plug",
+      "value": "UK 3-pin"
+    },
+    {
+      "label": "In the box",
+      "value": "Projector, 2 wireless gamepads, remote control, UK 3-pin power cable"
+    },
+    {
+      "label": "Weight",
+      "value": "About 1 kg"
+    }
+  ],
+  "id": "p1794175259592"
+}

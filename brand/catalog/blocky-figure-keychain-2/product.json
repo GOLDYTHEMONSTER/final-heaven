@@ -1,0 +1,169 @@
+{
+  "name": "Blocky Pixel Figure Keychain II",
+  "category": "Accessories",
+  "description": "A blocky pixel-style figure on a gold-tone ring and lobster clasp, with a soft rubber wrist strap. Eight styles, each with its own look and strap colour, from pickaxe-carrying guys to a skeleton and an orange critter. Made to hang on keys, a school bag or a car mirror.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Headphones",
+    "Blue Shirt Sword",
+    "Blue Shirt Pickaxe",
+    "Blue Armour Pickaxe",
+    "Skeleton",
+    "Grey Figure",
+    "Orange Critter",
+    "Big Head"
+  ],
+  "sizes": [],
+  "tags": [
+    "keychain",
+    "bag charm",
+    "pixel figure",
+    "blocky",
+    "car key",
+    "gift",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "bearded-headphones.jpg",
+      "color": "Headphones",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a2a151bc-2ac5-4f44-8520-b725afd7fea4.jpg"
+    },
+    {
+      "file": "orange-hair-sword.jpg",
+      "color": "Blue Shirt Sword",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ee612155-a0e1-4fe3-a834-e7d29368d9f9.jpg"
+    },
+    {
+      "file": "blue-shirt-pickaxe.jpg",
+      "color": "Blue Shirt Pickaxe",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/92a6b99d-8436-49ae-9349-efdfabbf341b.jpg"
+    },
+    {
+      "file": "blue-armour-pickaxe.jpg",
+      "color": "Blue Armour Pickaxe",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bb24ffda-a589-4b1b-9590-9a87482037b4.jpg"
+    },
+    {
+      "file": "skeleton.jpg",
+      "color": "Skeleton",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5d822b4c-e4c5-42c0-89d6-a252569b8325.jpg"
+    },
+    {
+      "file": "grey-crossbow.jpg",
+      "color": "Grey Figure",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3bc809ff-475f-46d7-9e12-f1dde2936e83.jpg"
+    },
+    {
+      "file": "orange-critter.jpg",
+      "color": "Orange Critter",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c67c8f9f-5255-46fc-a807-249ca6405f13.jpg"
+    },
+    {
+      "file": "big-head.jpg",
+      "color": "Big Head",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/402e6348-9b2a-4f9d-a4b9-448600b72237.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/948536682052.html",
+    "unit_cost": 2.5,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Yaopan Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/790182677082.html"
+    },
+    "notes": "Price tiers: 2.5 CNY for 1+, 2.4 for 50-199, 2.3 for 200+ (cost uses regular 2.5). Rate from screenshot: N556.3 / 2.5. 12K+ sold; no store return rate visible. Listing has 31 styles; 16 photographed, split across two 8-style listings (blocky-figure-keychain and blocky-figure-keychain-2). Supplier title and photos name a licensed video game; listed generically. Every strap has the game word mark moulded on it, visible in all photos; photos not retouched. Owner chose list as is. The Grey Figure photo shows a small toy crossbow as a pixel prop on the figure; it is a cartoon accessory, flagged for owner awareness. Size, weight and material not stated. Photos are 1920 px squares cropped to 4:5."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-10T10:50:09.329Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as blocky-figure-keychain (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 556,
+      "landed": 556,
+      "gross": 6944,
+      "margin": 0.9258266666666667,
+      "suggested": 1500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T10:51:29.347Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:50:09.330Z",
+        "from": null,
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T10:50:20.384Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T10:50:31.920Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T10:51:26.997Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T10:51:27.207Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T10:51:29.347Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1794307831033",
+    "photos_reviewed": {
+      "at": "2026-11-10T10:51:26.790Z",
+      "hashes": {
+        "bearded-headphones.jpg": "64e00910ead348b86b2a6ff65936d214862bc8bd1a211f4f996eeb5bbee9b1d3",
+        "orange-hair-sword.jpg": "bc8934d52a68141101795aa7f74a26f61221980942988ef57157a11b9585dd40",
+        "blue-shirt-pickaxe.jpg": "3510fde90f7dcc129705a9ffb7145a65889b180e4c4a32715d17f98e4b722c75",
+        "blue-armour-pickaxe.jpg": "197db03eaccadfec499dc837aca7584c29bf77a2283c7640af15f0f6f194e1aa",
+        "skeleton.jpg": "9b47523be737ca0611713772c245fcee57979acdd162477dac3f8282258894e9",
+        "grey-crossbow.jpg": "434e43ce5a436fcd6199edd1fe90c07ffb78de1f6be558e8dfae510b19731c67",
+        "orange-critter.jpg": "fa448ab4061e868413570c3e86eec95f723ff02311cc356db8130f824fb8298d",
+        "big-head.jpg": "2efab40770c8c2588260acb908de34c20eefba05029f38f83e475dc342e549cb"
+      }
+    },
+    "approved_at": "2026-11-10T10:51:26.996Z",
+    "published_at": "2026-11-10T10:51:29.347Z",
+    "url": "https://www.finalheaven.shop/product/p1794307831033"
+  },
+  "id": "p1794307831033"
+}

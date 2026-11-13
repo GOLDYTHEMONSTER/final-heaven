@@ -1,0 +1,197 @@
+{
+  "name": "Carabiner Chest Vest Bag",
+  "category": "Accessories",
+  "description": "A tactical-style chest vest bag with a front zip pocket and a buckle flap pocket.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Khaki, Army Green, Black, Camo"
+    },
+    {
+      "label": "Front pocket",
+      "value": "Zip, with an earphone port"
+    },
+    {
+      "label": "Flap pocket",
+      "value": "Buckle"
+    },
+    {
+      "label": "Webbing panel",
+      "value": "With a plastic carabiner"
+    },
+    {
+      "label": "Back",
+      "value": "Mesh"
+    },
+    {
+      "label": "Straps",
+      "value": "Adjustable shoulder and waist straps"
+    }
+  ],
+  "price": 13500,
+  "stock": 20,
+  "colors": [
+    "Khaki",
+    "Army Green",
+    "Black",
+    "Camo"
+  ],
+  "sizes": [],
+  "tags": [
+    "chest bag",
+    "chest vest",
+    "vest bag",
+    "tactical",
+    "carabiner",
+    "utility",
+    "cycling",
+    "streetwear"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "khaki.jpg",
+      "color": "Khaki",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/446e6180-9040-44c1-9f4b-476a691f7326.jpg"
+    },
+    {
+      "file": "army-green.jpg",
+      "color": "Army Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4f637dc0-982b-4187-932f-80aa7e80bc67.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/767978ea-c1ea-489a-b6c7-a94a4804d552.jpg"
+    },
+    {
+      "file": "camo.jpg",
+      "color": "Camo",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/509346ba-c2c7-4517-95f7-1a7c6ebf647e.jpg"
+    },
+    {
+      "file": "army-green-angle.jpg",
+      "color": "Army Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/38a29d24-839e-46b4-a8a3-5b7ff2061e70.jpg"
+    },
+    {
+      "file": "khaki-open.jpg",
+      "color": "Khaki",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4bad5c12-0ecf-4d92-b4c3-69b744ebc2c3.jpg"
+    },
+    {
+      "file": "camo-model.jpg",
+      "color": "Camo",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1bfebf05-c27c-41f1-a37f-e53c90259887.jpg"
+    },
+    {
+      "file": "army-green-model.jpg",
+      "color": "Army Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7e46a5d8-78a5-42e9-9bb0-fe764ee304d0.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1053107983689",
+    "unit_cost": 22,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "¥22 from 1 piece (screenshot shows NGN 4,906.62; 4906.62/22 = 223.03). 2K+ sold, repurchase rate 50%, store return rate cut off in screenshot (UNCHECKED). Supplier colour \"Brown\" listed as Khaki. \"Splash-proof\" is the supplier wording only; not claimed waterproof. Dimensions, capacity, weight and fabric not shown. Supplier photos are 800 px, so soft when upscaled (model shots most). Supplier headline photo with Chinese text not used. Open-pocket photo shows a phone and earbuds (props, not included). Carabiner is plastic per supplier photos. Price raised from NGN 12000 to NGN 12500 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 12500 to NGN 13500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Baoding Chiran Luggage Manufacturing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1053107983689"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:39.159Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:29:13.981Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:30:04.192Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:30:36.664Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:30:36.913Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:30:50.004Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:31:04.240Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:31:04.451Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:31:07.469Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:35.551Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:39.159Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:39.158Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4907,
+      "landed": 4907,
+      "gross": 7093,
+      "margin": 0.5911116666666667,
+      "suggested": 11000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532649056",
+    "approved_at": "2026-11-01T11:31:04.239Z",
+    "published_at": "2026-11-01T11:31:07.469Z",
+    "url": "https://www.finalheaven.shop/product/p1793532649056"
+  },
+  "id": "p1793532649056"
+}

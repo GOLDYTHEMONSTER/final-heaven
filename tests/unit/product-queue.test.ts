@@ -53,6 +53,32 @@ describe('product worker', () => {
     expect(none.needs).toContain('supplier unit cost')
   })
 
+  it('3b. with freight rules, freight comes from the packed weight, the card fee counts, and a price under the floor needs the owner', () => {
+    const fr = {
+      ...rules,
+      pricing: { ...rules.pricing, target_gross_margin: 0.5, min_gross_margin: 0.45, enforce_floor: true, card_fee_pct: 0.014, card_fee_cap_ngn: 2000,
+        freight: { air_usd_per_kg: 9, ngn_per_usd: 1550, packaging_factor: 1.1, sea_ngn_per_kg: null } },
+    }
+    const withWeight = (o: Record<string, unknown> = {}) => ({ ...good(), price: 20000, shipping: { weight_kg: 0.3 }, ...o })
+    const r = pricing(withWeight(), fr)
+    expect(r.freight).toBe(Math.round(0.3 * 1.1 * 9 * 1550)) // 4604
+    expect(r.freightBasis).toBe('estimate')
+    expect(r.fee).toBe(280)
+    expect(r.landed).toBe(5142 + 4604)
+    expect(Math.round((r.margin ?? 0) * 100)).toBe(50) // (20000 - 9746 - 280) / 20000
+    expect(r.missing).not.toContain('international shipping')
+    // The source's own freight figure wins over the estimate.
+    expect(pricing(withWeight({ source: { ...good().source, shipping_cost_ngn: 1000 } }), fr).freight).toBe(1000)
+    // No packed weight: freight is missing, and it says why.
+    expect(pricing({ ...good(), price: 20000 }, fr).missing).toContain('packed weight (for freight)')
+    // Sea-only with no sea rate: provisional, asking for the rate.
+    expect(pricing(withWeight({ ships_by_air: false }), fr).missing).toContain('sea freight rate (₦ per kg, in worker-rules.json)')
+    // Under the floor: blocks the draft with the price that keeps it, unless the owner approved it.
+    const low = validate(withWeight({ price: 15000 }), ctx({ rules: fr }))
+    expect(low.needs.join(' ')).toMatch(/under the 45% floor: ₦18,500 or more keeps it/)
+    expect(validate(withWeight({ price: 15000, queue: { below_floor_approved: true } }), ctx({ rules: fr })).needs).toEqual([])
+  })
+
   it('4. a product with the same name as another folder is a possible duplicate', () => {
     const r = validate(good(), ctx({ others: [{ slug: 'seamless-gym-shorts', name: 'Seamless gym shorts', listing_url: 'x' }] }))
     expect(r.problems[0]).toMatch(/possible duplicate/)

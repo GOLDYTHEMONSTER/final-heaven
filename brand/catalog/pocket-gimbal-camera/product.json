@@ -1,0 +1,166 @@
+{
+  "name": "Pocket Gimbal Camera",
+  "category": "Gadgets",
+  "description": "A pocket-size handheld camera on a tilting gimbal head, with a built-in touch screen. Records at 2 million pixels (about 1080p), so it suits everyday clips and cycling or outdoor footage, not 4K work. The box holds the camera, a grip stand, a wrist strap, a USB-C cable and a USB-C adapter.",
+  "price": 27000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White",
+    "Orange"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "camera",
+    "pocket camera",
+    "gimbal",
+    "vlog",
+    "cycling",
+    "outdoor",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/54c32f3e-6278-466f-894f-cf14dde7ee60.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f0b71a01-14f7-4d92-a456-224bf9af7ede.jpg"
+    },
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/74dc04f8-ac8a-4a0b-9c8d-8033473487f6.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1098269924469",
+    "unit_cost": 48,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "¥48 is the price for 10+ sets; single-unit price not shown. Store: Shenzhen Aoying Manufacturing Co., Ltd., 1 year on platform, 33.33% repurchase rate, 200+ reviews, new this month. Listing attributes: pixel range 2 million pixels, battery life \"3\" (unit unknown, left out), body plastic. Packed size 51.0 x 16.9 cm, 260 g (assumed the packed box). Product drawing 50.5 mm wide, 110 mm tall. Box contents from a customer unboxing photo (retail box prints a CCD DIGITAL CAMERA Q7 mark): camera, grip stand, wrist strap, USB-C cable, USB-C adapter, Chinese manual; no memory card visible, so the copy does not mention one. USB-C charging inferred from the cable; built-in lithium battery assumed: ships_by_air false. Design resembles a well-known brand pocket gimbal camera: no brand names or comparisons in copy. No 4K, stabilisation grade, axis count or waterproof claims. Pack shots show a stock skier image on the screen. Photos: 1000 px sources, padded to 4:5 on white and enlarged about 1.6x (slightly soft). No in-box photo made (customer photo too small). Owner decisions: price ₦27,000 (60.4% gross, provisional), chosen to leave room in case the single-unit cost is above ¥48; all three colours; copy says nothing about memory card or battery.",
+    "supplier": {
+      "name": "Shenzhen Aoying Manufacturing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1098269924469"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.26,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T06:39:42.106Z",
+    "history": [
+      {
+        "at": "2026-11-13T06:20:03.942Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T06:21:55.145Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T06:23:40.638Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T06:23:40.877Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T06:23:46.968Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T06:39:38.123Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T06:39:38.393Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T06:39:42.106Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T06:23:40.637Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 10680,
+      "landed": 10680,
+      "gross": 16320,
+      "margin": 0.6044622222222222,
+      "suggested": 24000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794551025291",
+    "photos_reviewed": {
+      "at": "2026-11-13T06:39:37.856Z",
+      "hashes": {
+        "black.jpg": "5406985977989f8880404f129749637687a9435a676444b597f61823f246c64f",
+        "white.jpg": "e43bd7962a8d6f0c87f217a51d6e06fea3bdc93606d431891b335d5784607633",
+        "orange.jpg": "0c124a8fd8d5424133da111d0ad9ae38cd8e44ec1874bf920f5d15bd3acd2ecf"
+      }
+    },
+    "approved_at": "2026-11-13T06:39:38.122Z",
+    "published_at": "2026-11-13T06:39:42.106Z",
+    "url": "https://www.finalheaven.shop/product/p1794551025291"
+  },
+  "ships_by_air": false,
+  "specs": [
+    {
+      "label": "Resolution",
+      "value": "2 million pixels"
+    },
+    {
+      "label": "Height",
+      "value": "110 mm"
+    },
+    {
+      "label": "Width",
+      "value": "50.5 mm"
+    },
+    {
+      "label": "Body",
+      "value": "Plastic"
+    },
+    {
+      "label": "Charging",
+      "value": "USB-C"
+    }
+  ],
+  "id": "p1794551025291"
+}

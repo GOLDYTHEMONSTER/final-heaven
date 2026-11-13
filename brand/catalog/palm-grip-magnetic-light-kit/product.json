@@ -1,0 +1,93 @@
+{
+  "name": "Magnetic Palm Grip Kit with Fill Light and Phone Clamp",
+  "category": "Gadgets",
+  "description": "A handheld magnetic phone grip (11.5 cm) with a magnetic fill light, a magnetic phone clamp, a stick-on magnetic ring, a wrist strap and a USB-C cable. In white or black. Magnetic hold uses the included ring.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "selfie grip",
+    "fill light",
+    "magnetic",
+    "phone clamp",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "grip-white.jpg",
+      "color": "White"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1061072713641",
+    "unit_cost": 260,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "notes": "Same 1688 listing and shop as the other WONEW-family items; store return rate 28.7% (flagged), 300+ sold, 1 review (3 stars). Brand WONEW / Colorful Snail kept out of name and copy; AI-face mirror photos and the watermarked hero not used. Sea only (lithium batteries), owner confirmed. Price NOT set: owner to choose. Cost CNY 260 (white z3 + j08 clip + fl22 light, owner); black assumed to cost the same (not shown). Weight 200-250 g per the page. PHOTOS PENDING: only a clean white grip alone (not the kit); no clean kit photo and no black photo yet. Black not listed until it has a photo.",
+    "supplier": {
+      "name": "Dongguan Liangmei Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1061072713641"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.25,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-03T04:52:32.351Z",
+    "history": [
+      {
+        "at": "2026-11-03T04:49:24.265Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-03T04:49:49.118Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-03T04:52:32.351Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "replaced by magnetic-palm-grip-tripod (grip only)"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-03T04:49:49.118Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": [
+        "same supplier listing as m27-magnetic-mirror-fill-light (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as magnetic-selfie-grip-fill-light (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 58066,
+      "landed": 58066,
+      "gross": null,
+      "margin": null,
+      "suggested": 129500
+    },
+    "note": "replaced by magnetic-palm-grip-tripod (grip only)"
+  },
+  "ships_by_air": false
+}

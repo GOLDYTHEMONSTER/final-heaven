@@ -1,0 +1,107 @@
+{
+  "name": "Foldable Camera Drone",
+  "category": "Gadgets",
+  "description": "A small foldable quadcopter with a front camera, altitude hold and a phone app view. Comes with a remote, a modular battery, USB charger, 4 prop guards, 2 spare props, a screwdriver and a manual. Colours: black, and grey and white.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Grey/White"
+  ],
+  "sizes": [],
+  "tags": [
+    "drone",
+    "camera drone",
+    "foldable",
+    "gadget",
+    "toy"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "cover.jpg",
+      "color": "Grey/White"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "grey.jpg",
+      "color": "Grey/White"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/831913844766.html",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Foldable drone seller (name to confirm)",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/831913844766.html"
+    },
+    "notes": "Listing page needs login; no price, return rate or variant screenshot given. Supplier title claims 8K/4K/25 min/3 km: NOT repeated, unproven for E88-class drones. Contents from owner. Possible higher variant with carry case and 3 batteries (buyer photo). Contains lithium battery. HOLD: drones are restricted imports in Nigeria (ONSA end-user clearance, NCAA rules); owner to decide. Photos not yet made; e3c66270 is only 800px. Single-battery listing planned. Photos: cover from e3c66270 (800px, upscaled 1.5x, soft); black and grey from the 1688 hero shots padded with white, grid and text removed. 9ba83d31 and buyer photos dropped (text-heavy / casual / 3-battery variant)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-10T10:57:03.996Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:54:13.584Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T10:54:42.872Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-10T10:55:37.893Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T10:57:03.996Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "owner chose V53 instead"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T10:55:37.891Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price",
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "owner chose V53 instead"
+  },
+  "ships_by_air": false
+}

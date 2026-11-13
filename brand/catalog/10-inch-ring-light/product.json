@@ -1,0 +1,163 @@
+{
+  "name": "10-Inch Ring Light with Phone Holder",
+  "category": "Gadgets",
+  "description": "A 10-inch LED ring light with a phone holder in the centre, in a desk stand or a floor tripod version. It runs on USB power, with an inline controller for on/off, brightness up and down, and light mode. Choose the desk stand for tabletop use or the floor tripod for standing shots.",
+  "price": 15000,
+  "stock": 20,
+  "colors": [
+    "Desktop stand",
+    "Floor tripod"
+  ],
+  "sizes": [],
+  "tags": [
+    "ring light",
+    "fill light",
+    "phone holder",
+    "live streaming",
+    "tripod",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "floor-tripod.jpg",
+      "color": "Floor tripod",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9bb46f9b-666c-462a-b2fd-eb5bd372c779.jpg"
+    },
+    {
+      "file": "desktop-stand.jpg",
+      "color": "Desktop stand",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cbadf647-04ac-4f99-b0b8-2c85fcf7b6bf.jpg"
+    },
+    {
+      "file": "controller.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/29c9e6d0-8e08-4865-9671-92d1e3a67db4.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": 19.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.87,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Ningbo Dayi Photographic Equipment Co., Ltd.",
+      "platform": "1688",
+      "url": ""
+    },
+    "notes": "Listing link MISSING (owner pasted the rotating-screen camera link by mistake). Price shown ¥9.35 to ¥19.8, min order 1; which variant costs what is not visible. ASSUMED: floor tripod ¥19.8, desktop stand ¥9.35; unit_cost holds the higher figure. FX 223.87 taken from the screenshot (₦2,093.21 / ¥9.35), not 222.49. 19K+ sold, 700+ reviews; store return rate not shown. Supplier lists 4 variants at 3.3 x 25.7 cm weighing 308/317/356/368 g, mapping to our two versions unknown. Controller photo is 675 px wide (soft). Not used: customer photo of a JINBEI-branded light, retail box printed NiteCore (third-party marks). No lux/CRI/colour-temperature claims made. Owner confirmed (13 Nov): one listing, both versions, single price ₦15,000. Listing URL left blank on purpose: the 1688 link for this item has not been supplied. Costs are assumed, not confirmed: floor tripod ¥19.8, desktop stand ¥9.35 (unit_cost holds ¥19.8, so margin is worst case). Gross margin about 70% at ¥19.8, provisional until freight and customs are known."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T06:39:51.042Z",
+    "history": [
+      {
+        "at": "2026-11-13T06:32:05.408Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T06:32:35.586Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T06:33:46.442Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T06:33:46.724Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T06:33:52.347Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T06:39:48.631Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T06:39:48.892Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T06:39:51.042Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T06:33:46.441Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4433,
+      "landed": 4433,
+      "gross": 10567,
+      "margin": 0.7044916,
+      "suggested": 10000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794551631095",
+    "photos_reviewed": {
+      "at": "2026-11-13T06:39:48.377Z",
+      "hashes": {
+        "floor-tripod.jpg": "4ad87e424ad176779d7f209a50843c2b2d3b1735dbb89ead8994476de4100216",
+        "desktop-stand.jpg": "e9b682cf325063ae293b1709e2462d7415bd86c87a2f97ed53f7b0ba603bb853",
+        "controller.jpg": "a0ba2ff05a7c7e7b2b8269654fdb6a48867d83c29af262d2cfb0668c1a823e0e"
+      }
+    },
+    "approved_at": "2026-11-13T06:39:48.630Z",
+    "published_at": "2026-11-13T06:39:51.042Z",
+    "url": "https://www.finalheaven.shop/product/p1794551631095"
+  },
+  "specs": [
+    {
+      "label": "Ring size",
+      "value": "10 inch"
+    },
+    {
+      "label": "Power",
+      "value": "USB, inline controller (on/off, brightness +/-, mode)"
+    },
+    {
+      "label": "Light source power",
+      "value": "Below 10 W"
+    },
+    {
+      "label": "Versions",
+      "value": "Desk stand, floor tripod"
+    },
+    {
+      "label": "Weight (supplier, per variant)",
+      "value": "308 g, 317 g, 356 g or 368 g"
+    }
+  ],
+  "ships_by_air": true,
+  "id": "p1794551631095"
+}

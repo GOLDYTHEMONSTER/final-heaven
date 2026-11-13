@@ -1,0 +1,188 @@
+{
+  "name": "Lightweight Sports Tee with Line Print",
+  "category": "T-Shirts",
+  "description": "Lightweight short-sleeve round-neck sports tee with a line print across the chest. If you are between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "White, Black, Dark gray"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL, 4XL, 5XL"
+    },
+    {
+      "label": "Sleeve",
+      "value": "Short"
+    },
+    {
+      "label": "Neck",
+      "value": "Round"
+    },
+    {
+      "label": "Fit",
+      "value": "Loose cut"
+    },
+    {
+      "label": "Fabric",
+      "value": "Lightweight, quick-dry and breathable"
+    },
+    {
+      "label": "Print",
+      "value": "Reflective-look line print across the chest"
+    },
+    {
+      "label": "Side panels",
+      "value": "Perforated panel graphics"
+    }
+  ],
+  "price": 10000,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Black",
+    "Dark gray"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL",
+    "4XL",
+    "5XL"
+  ],
+  "tags": [
+    "tee",
+    "mens",
+    "sports",
+    "summer",
+    "lightweight",
+    "round-neck",
+    "printed"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c8589c08-07e5-48cd-826e-f0ecca33178b.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5a66eb0b-f622-4306-8092-efea7a6e0b8f.jpg"
+    },
+    {
+      "file": "dark-gray.jpg",
+      "color": "Dark gray",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c4b0daed-0e52-4dfe-9326-2f38797415cd.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "1688, owner screenshot",
+    "unit_cost": 6.7,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Price ¥6.70 from 1 piece (screenshot: ≈₦1,494.29), free shipping within China. 8K+ sold. Supplier title: 2026 New Men's Quick-Dry Ice Silk T-Shirt Summer Sports Short Sleeve Breathable Loose Casual Round Neck Fitness Top. Quick-dry and breathable are supplier claims; fibre not stated. Colours White, Black, Dark gray; sizes M-5XL from the supplier list. Supplier stock: 2XL only 78, others about 1000. No size chart, so fit and the go-one-up line are assumed. Small neck label in photos is the factory size label (left in). Dark gray source photo 800x800 (soft when cropped). Black photo has a plain white background, the others a brown studio set. Design has diagonal stripe panels, not a brand mark, but check it against three-stripe styling. Store return rate not shown in screenshots. Price raised from NGN 9500 to NGN 10000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Jieyang Zhongfa Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "1688, owner screenshot"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:20.355Z",
+    "history": [
+      {
+        "at": "2026-11-01T08:11:52.592Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T08:12:30.487Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:13:11.060Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T08:13:11.287Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T08:13:18.744Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T08:13:29.830Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T08:13:30.045Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T08:13:32.344Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:31.041Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:20.355Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:20.354Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as lightning-panel-suede-skate-shoe (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1494,
+      "landed": 1494,
+      "gross": 8006,
+      "margin": 0.8427051578947368,
+      "suggested": 3500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793520797372",
+    "approved_at": "2026-11-01T08:13:29.829Z",
+    "published_at": "2026-11-01T08:13:32.344Z",
+    "url": "https://www.finalheaven.shop/product/p1793520797372"
+  },
+  "id": "p1793520797372"
+}

@@ -1,8 +1,54 @@
 {
   "name": "A50S Smart Projector",
   "category": "Gadgets",
-  "description": "A compact projector that runs Android and connects to Wi-Fi, so it plays films and shows without a laptop. It throws a 50 to 200 inch picture at native 1080p (it accepts 4K video), with 360 ANSI lumens and a 2500:1 contrast ratio, so it looks best in a dim or dark room.\n\nAuto keystone squares the picture up when the projector sits at an angle, and the stand turns all the way round, so it can point at a wall or the ceiling.\n\nDual-band Wi-Fi 6 (2.4 GHz and 5 GHz) and Bluetooth 5.0. About 17.6 × 18.3 × 7.4 cm. Comes with a UK 3-pin plug.",
-  "price": 150000,
+  "description": "A compact Android projector with Wi-Fi, so it plays films and shows without a laptop. With 360 ANSI lumens it looks best in a dim or dark room.",
+  "specs": [
+    {
+      "label": "Operating system",
+      "value": "Android"
+    },
+    {
+      "label": "Picture size",
+      "value": "50 to 200 inch"
+    },
+    {
+      "label": "Native resolution",
+      "value": "1080p (accepts 4K video)"
+    },
+    {
+      "label": "Brightness",
+      "value": "360 ANSI lumens"
+    },
+    {
+      "label": "Contrast ratio",
+      "value": "2500:1"
+    },
+    {
+      "label": "Keystone",
+      "value": "Auto"
+    },
+    {
+      "label": "Stand",
+      "value": "Turns all the way round (wall or ceiling)"
+    },
+    {
+      "label": "Wi-Fi",
+      "value": "Dual-band Wi-Fi 6 (2.4 GHz and 5 GHz)"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.0"
+    },
+    {
+      "label": "Dimensions",
+      "value": "About 17.6 × 18.3 × 7.4 cm"
+    },
+    {
+      "label": "Plug",
+      "value": "UK 3-pin"
+    }
+  ],
+  "price": 190000,
   "stock": 20,
   "colors": [],
   "sizes": [],
@@ -34,7 +80,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Order the UK plug. ¥375 with the first-order coupon. Supplier photos cleaned locally; the app-logo row (YouTube, Netflix, Google Play) and the spec collage left out. The listing also claims '7200 lumens', which contradicts its own 360 ANSI figure: not used. No streaming apps are promised by name.",
+    "notes": "Order the UK plug. ¥375 with the first-order coupon. Supplier photos cleaned locally; the app-logo row (YouTube, Netflix, Google Play) and the spec collage left out. The listing also claims '7200 lumens', which contradicts its own 360 ANSI figure: not used. No streaming apps are promised by name. Price raised from NGN 150000 to NGN 190000 on 9 Nov 2026 (owner approved margin review: projector, gentler step).",
     "supplier": {
       "name": "A50S projector seller (name to confirm)",
       "platform": "1688",
@@ -51,7 +97,7 @@
     "url": "https://www.finalheaven.shop/product/p1793204879465",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:15.579Z",
+    "updated": "2026-11-04T22:26:42.548Z",
     "history": [
       {
         "at": "2026-10-28T20:22:46.120Z",
@@ -68,10 +114,15 @@
         "at": "2026-10-28T22:03:15.579Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:42.548Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:15.578Z",
+      "at": "2026-11-04T22:26:42.547Z",
       "ok": true,
       "problems": [],
       "needs": [],

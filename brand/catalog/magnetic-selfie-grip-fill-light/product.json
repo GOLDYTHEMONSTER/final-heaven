@@ -1,0 +1,97 @@
+{
+  "name": "Magnetic Selfie Grip with Fill Light (styles to confirm)",
+  "category": "Gadgets",
+  "description": "DRAFT TEXT, NOT FINAL: the owner has not yet chosen which styles to carry. A handheld magnetic phone grip with a stick-on magnetic ring, wrist strap and USB-C cable, in white or black.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "selfie grip",
+    "magnetic",
+    "fill light",
+    "phone accessory",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "palm-grip-white.jpg",
+      "color": "White"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1061072713641",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "notes": "HOLD: 12-style family of different products, CNY 29 (N6,476.65) to CNY 260 (N58,066.52) from 1 pc; styles, costs and price not chosen. Store return rate 28.7% (under 30%, flagged); 300+ sold; 1 review, 3 stars. Brand WONEW / Colorful Snail is on the products and hero (2687750d, not used): kept out of name and copy. M27 mirror photos with a face (8262bd72, f7c64cf8) not used (likely AI face); plain spec photos exist. Real specs: M27 3 W, 3.7 V, 120 deg, 45 LEDs, 110 g net, USB-C, 75.2x64.8x23.5 mm, CRI>95, 800 mAh, 147 g per set; round light FL22 360 deg horizontal, 180 deg tilt, extends 40 mm, 61 mm wide; clamp opens 63-95 mm, 71x18 mm; palm grip 11.5 cm. Packed 9x8 cm, 936 cm3, 200-250 g. Lithium batteries: ships_by_air false (sea only). Remote ambiguous (Is1): not claimed; zoom model unexplained: not claimed; magnetic only with the included stick-on ring. Only one clean photo made (white palm grip).",
+    "supplier": {
+      "name": "Dongguan Liangmei Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1061072713641"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.25,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-03T04:49:49.511Z",
+    "history": [
+      {
+        "at": "2026-11-03T04:45:20.957Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-03T04:45:23.145Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-03T04:49:49.312Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "set by hand"
+      },
+      {
+        "at": "2026-11-03T04:49:49.511Z",
+        "from": "REJECTED",
+        "to": "REJECTED",
+        "note": "split into m27-magnetic-mirror-fill-light and palm-grip-magnetic-light-kit"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-03T04:45:23.143Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price",
+        "supplier unit cost"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "split into m27-magnetic-mirror-fill-light and palm-grip-magnetic-light-kit"
+  },
+  "ships_by_air": false
+}

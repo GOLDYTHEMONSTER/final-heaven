@@ -1,0 +1,182 @@
+{
+  "name": "Square Clear-Lens Glasses",
+  "category": "Accessories",
+  "description": "Square frame with plain clear lenses, for men and women. Lightweight plastic frame at 13.6 g, in four finishes: matte black, gloss black, clear and clear grey. Fashion frame only: the lenses are plain, not prescription.",
+  "price": 5000,
+  "stock": 20,
+  "colors": [
+    "Matte Black",
+    "Gloss Black",
+    "Clear",
+    "Clear Grey"
+  ],
+  "sizes": [],
+  "tags": [
+    "glasses",
+    "accessories",
+    "eyewear",
+    "unisex",
+    "square",
+    "clear lens"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "matte-black.jpg",
+      "color": "Matte Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cf9fa3e3-ae50-4630-97a3-1db2062c2abb.jpg"
+    },
+    {
+      "file": "gloss-black.jpg",
+      "color": "Gloss Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1a365a3b-30d6-4f61-8e57-8c3792786b70.jpg"
+    },
+    {
+      "file": "clear.jpg",
+      "color": "Clear",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/956e227d-7538-49ae-8901-460a27f3d8a3.jpg"
+    },
+    {
+      "file": "clear-grey.jpg",
+      "color": "Clear Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/93d2e34d-bade-4c0b-b1e9-bc5b9f0c8365.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=932562318967",
+    "unit_cost": 3.7,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "notes": "DO NOT PUBLISH until a sample pair has been checked (store return rate 61.8%). Supplier title: Trendy Blue Light Blocking Glasses Frame for Women and Men ... Prescription Glasses, model Ka1004, labelled Bestseller. ¥3.7 per pair from 1 pair; free shipping in China over ¥500. No naira shown: FX 222.63 used as on other 1688 items on 8 Nov 2026. STORE RETURN RATE 61.8% (very high). Only 10+ people praise. Sizes (143/57/51/15/149 mm, hand-measured, 1-3 mm error), frame 13.6 g from the listing; packed weight 50 g from owner. Left out on purpose: blue-light blocking, UV400/CE (lens sticker, unverified), eye protection, prescription, optician lens replacement (not stated by supplier). Photos: supplier 800 px, strip photos cropped to the glasses band and padded to 4:5, enlarged 1.5x (soft at full size). Gloss black uses the clean photo. Not used: hand-held photos with UV400/CE sticker, supplier model photo (someone else likeness). Supplier photo of the clear and grey frames shows pale frames on white.",
+    "supplier": {
+      "name": "Linhai Xinglu Glasses Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=932562318967"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.05,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T12:24:01.773Z",
+    "history": [
+      {
+        "at": "2026-11-08T12:21:30.957Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T12:21:59.454Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T12:22:40.924Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T12:22:41.145Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T12:22:47.600Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T12:23:59.464Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T12:23:59.693Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T12:24:01.773Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T12:22:40.923Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 824,
+      "landed": 824,
+      "gross": 4176,
+      "margin": 0.8352538,
+      "suggested": 2000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794140566165",
+    "photos_reviewed": {
+      "at": "2026-11-08T12:23:59.186Z",
+      "hashes": {
+        "matte-black.jpg": "2a7769e014b60e4654c48532471b56b4663cc5a050c5e8006ee231554786dcdd",
+        "gloss-black.jpg": "9a1dcea3583ddb1f1a185c34388e011ac191093b312cf356ce4cb1595d3b2859",
+        "clear.jpg": "e6654d2f7e5c58c2b02b3ba31ab0cc1ae5f24a3c26db10eac9f92cd3b65afc3f",
+        "clear-grey.jpg": "2305eece003288dbb3468df42d833509cafc2b27b31b974d40a08596853c4f5c"
+      }
+    },
+    "approved_at": "2026-11-08T12:23:59.462Z",
+    "published_at": "2026-11-08T12:24:01.773Z",
+    "url": "https://www.finalheaven.shop/product/p1794140566165"
+  },
+  "specs": [
+    {
+      "label": "Style",
+      "value": "Square frame, clear lenses"
+    },
+    {
+      "label": "Total width",
+      "value": "143 mm"
+    },
+    {
+      "label": "Lens width",
+      "value": "57 mm"
+    },
+    {
+      "label": "Lens height",
+      "value": "51 mm"
+    },
+    {
+      "label": "Bridge",
+      "value": "15 mm"
+    },
+    {
+      "label": "Temple length",
+      "value": "149 mm"
+    },
+    {
+      "label": "Frame weight",
+      "value": "13.6 g"
+    },
+    {
+      "label": "Fit",
+      "value": "Unisex"
+    }
+  ],
+  "id": "p1794140566165"
+}

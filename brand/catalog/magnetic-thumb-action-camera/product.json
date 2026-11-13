@@ -1,0 +1,155 @@
+{
+  "name": "Magnetic Thumb Action Camera",
+  "category": "Gadgets",
+  "description": "A thumb-sized 1080p action camera, 8.4 x 3.2 cm and 128 g, with a wide lens and a record button on the front and a small screen and USB port on the back. The body is magnetic, so it clips to a shirt or strap, and it also fits helmet and tripod mounts. Pick Black or White at checkout. The last photo is the supplier's box layout: you are buying the camera, and the mounts and extras shown there are not all confirmed as included.",
+  "price": 29000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "camera",
+    "action camera",
+    "thumb camera",
+    "pocket camera",
+    "magnetic",
+    "1080p",
+    "travel"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3a541317-29ac-4f1e-884a-c63c4ad15209.jpg"
+    },
+    {
+      "file": "black-open.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0388e594-7a87-4d4a-9fcc-3e4efd53f8bb.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6a4f9c01-6de0-475c-9eaf-08b4604eb1ea.jpg"
+    },
+    {
+      "file": "white-open.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/da4e5cd1-4420-4ca1-8eef-4d665023c9f6.jpg"
+    },
+    {
+      "file": "in-the-box.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/14b17d7a-658c-4313-8fd8-6c896440be43.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1003711873193",
+    "unit_cost": 58,
+    "cost_currency": "CNY",
+    "fx_rate": 223.87,
+    "image_permission": "unknown",
+    "notes": "Listing shows 4 styles at CNY 58 to 145 (min 1 pc); what each style buys is NOT known, so cost is the lowest price (CNY 58) and may be the camera only. Supplier code K161, model K162, 8.4 x 3.2 cm (third dimension cut off in screenshot), 128 g. Box reads COMPACT HD ACTION CAMERA, thumbnail says 1080P; no resolution beyond that, no battery capacity, no memory card info, no waterproof rating (supplier title says waterproof: NOT claimed). Magnetic body is inferred from the title and the magnetic pendant in the box photo; confirm. Box photo shows: camera, magnetic pendant on lanyard, adhesive helmet mount with 1/4 inch screw, quick-release buckle mount, thumbscrew, USB cable, black strap/stick, quick start guide; it is not confirmed which style includes which, so contents are left out of the copy. Lithium battery assumed: ships_by_air false. Design resembles a well-known brand thumb camera: no brand named anywhere. Photos: 800 px supplier renders padded to 4:5 (1.5x enlargement, soft); box photo is white unit only. Black photos are renders, no real black unit shot. Store repurchase rate 29.7% (just under 30%). Owner decisions: camera only at CNY 58, price 29000, Black and White, name confirmed, no memory card or waterproof wording. Box photo kept; the product schema has no photo caption/alt field, so the description carries a line saying the extras shown are not confirmed as included.",
+    "supplier": {
+      "name": "Shenzhen Fangju Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1003711873193"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T06:39:53.970Z",
+    "history": [
+      {
+        "at": "2026-11-13T06:35:31.790Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T06:36:39.028Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T06:38:45.698Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T06:38:45.996Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T06:38:52.693Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T06:39:51.606Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T06:39:51.867Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T06:39:53.970Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T06:38:45.696Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 12984,
+      "landed": 12984,
+      "gross": 16016,
+      "margin": 0.55226,
+      "suggested": 29000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794551931440",
+    "photos_reviewed": {
+      "at": "2026-11-13T06:39:51.345Z",
+      "hashes": {
+        "black.jpg": "6dffd11b88c7fac4953cf5773f38a744b1b9160d37d04b643175a99bf87c0123",
+        "black-open.jpg": "cdcff6e0472fed12e24d68f27976038bcf6935eb195a4c94960ddb2a6c0f1e22",
+        "white.jpg": "82930875c1ce80a10f0e0b41070dc785aa23682d19a92c758e662c9f5300979e",
+        "white-open.jpg": "7ae22c0acc67bacaedb189c358c9870f69987a7a011f42dc2c2dbddfbe4b98c2",
+        "in-the-box.jpg": "6cba489eaf7358aae682e2db12e31d0f55d1c6760ca286263356c75c94c7e105"
+      }
+    },
+    "approved_at": "2026-11-13T06:39:51.605Z",
+    "published_at": "2026-11-13T06:39:53.970Z",
+    "url": "https://www.finalheaven.shop/product/p1794551931440"
+  },
+  "ships_by_air": false,
+  "id": "p1794551931440"
+}

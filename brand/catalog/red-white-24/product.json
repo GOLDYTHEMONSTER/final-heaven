@@ -1,0 +1,169 @@
+{
+  "name": "Oversized Mesh Jersey Top, Red/White 24",
+  "category": "Ladies",
+  "description": "White mesh jersey top with red and black colour-blocking, a star graphic on the front, \"Extraordinary\" lettering at the chest and a number 24 on each sleeve. Oversized V-neck fit with half sleeves. The supplier describes the top as washable, quick-drying and breathable. Sizes are assumed, not from a size chart: if you are between sizes, go one up.",
+  "price": 18500,
+  "stock": 20,
+  "colors": [
+    "Red/White 24"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "ladies",
+    "jersey",
+    "mesh",
+    "v-neck",
+    "oversized",
+    "printed",
+    "streetwear",
+    "number-print",
+    "top"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red-white-24.jpg",
+      "color": "Red/White 24",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/536bc25c-25e6-44ec-90a2-eb2f60328252.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1038496360073",
+    "unit_cost": 20,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "notes": "Supplier title: 2026 Cross-Border Washable Printed Hot Girl Outfit, Collectible Quality, Must-Have Summer Item, Quick-Drying and Breathable. Price tiers: ¥20 for 1+ (screenshot ≈₦4,450.41), ¥18 for 100-999 (≈₦4,005.37), ¥16 for 1000+ (≈₦3,560.33); unit_cost is the ¥20 regular price. 2 coupons off at ¥25 spend shown, not used. Listing has 20 styles (screenshot shows 15/20); only 15 photographed styles were supplied, 10 chosen here. Same supplier as bainb-ridge-mesh-jersey-tee (Shangrao Omans Clothing Co., Ltd., 3 years on 1688). Store return rate not shown. Quick-drying is the supplier's claim, not verified. ASSUMED: sizes S-3XL (owner's choice) and the go-one-up line (no size chart given); fabric, fibre and weight unknown ('mesh' from photos). Photos are 800x800 supplier shots with white side bands; photo area cropped out (x 102-698) to 4:5 and enlarged ~2x (soft). Left out of this range: e20bf297, 409db06f, 4d62d820, black 28 \"Stay Strong\" and black/red 14 \"Only Boy\" (reasons in the combined first draft; owner approved the 10 styles). RISKS: small crests/patches (shield 'A', 'SPORT', USA star, flag patches) are generic and could not be matched to a real team or brand; not named in copy. Brown star patches on the white/brown leopard New York shirt look team-like: owner to judge. The 07 style also exists cropped (supplier screenshot, pink body); no clean photo supplied. Style: Red/White 24, source photo 1e19ba16. Price raised from NGN 15000 to NGN 18500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Shangrao Omans Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1038496360073"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T06:44:54.065Z",
+    "history": [
+      {
+        "at": "2026-11-10T06:40:04.455Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T06:40:35.173Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T06:40:35.409Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T06:40:38.466Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T06:44:51.821Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T06:44:52.067Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T06:44:54.065Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T06:40:35.172Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as black-leopard-01 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as black-orange-36 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as black-pink-07 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as cream-black-66 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as hot-style-mesh-jersey-tops (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as magenta-98 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as pink-leopard-28 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as red-01 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as white-brown-leopard-ny-28 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as white-pink-ny-28 (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4450,
+      "landed": 4450,
+      "gross": 10550,
+      "margin": 0.7033066666666665,
+      "suggested": 10000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794292837514",
+    "photos_reviewed": {
+      "at": "2026-11-10T06:41:10.095Z",
+      "hashes": {
+        "red-white-24.jpg": "950028f80057895b45ed75cd9222ec26deb2e86b0f5b2afe2e8ededecc808cbd"
+      }
+    },
+    "approved_at": "2026-11-10T06:44:51.820Z",
+    "published_at": "2026-11-10T06:44:54.065Z",
+    "url": "https://www.finalheaven.shop/product/p1794292837514"
+  },
+  "specs": [
+    {
+      "label": "Colourway",
+      "value": "Red/White 24"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L, XL, 2XL, 3XL"
+    },
+    {
+      "label": "Neck",
+      "value": "V-neck"
+    },
+    {
+      "label": "Sleeve",
+      "value": "Half"
+    },
+    {
+      "label": "Fit",
+      "value": "Oversized"
+    },
+    {
+      "label": "Material",
+      "value": "Mesh"
+    }
+  ],
+  "id": "p1794292837514"
+}

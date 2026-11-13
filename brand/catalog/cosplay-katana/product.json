@@ -1,8 +1,50 @@
 {
   "name": "Wooden Cosplay Katana",
   "category": "Cosplay",
-  "description": "A full-size cosplay katana with its sheath, in 12 designs. The blade is wood and not sharpened; the handle, guard and sheath are ABS plastic.\n\n100 cm long overall: a 68 cm blade (2.3 cm wide) and a 24 cm handle, with a 74 cm sheath. It weighs 0.35 kg.",
-  "price": 35000,
+  "description": "A full-size cosplay katana with its sheath, in 12 designs. The blade is wood and not sharpened.",
+  "specs": [
+    {
+      "label": "Designs",
+      "value": "12 (see colour options)"
+    },
+    {
+      "label": "Blade",
+      "value": "Wood, not sharpened"
+    },
+    {
+      "label": "Handle, guard and sheath",
+      "value": "ABS plastic"
+    },
+    {
+      "label": "Overall length",
+      "value": "100 cm"
+    },
+    {
+      "label": "Blade length",
+      "value": "68 cm"
+    },
+    {
+      "label": "Blade width",
+      "value": "2.3 cm"
+    },
+    {
+      "label": "Handle length",
+      "value": "24 cm"
+    },
+    {
+      "label": "Sheath length",
+      "value": "74 cm"
+    },
+    {
+      "label": "Weight",
+      "value": "0.35 kg"
+    },
+    {
+      "label": "What's included",
+      "value": "Katana and sheath"
+    }
+  ],
+  "price": 55000,
   "stock": 20,
   "colors": [
     "Flame White",
@@ -97,7 +139,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Supplier photos cleaned locally (background removed, spec text and inset dropped). ¥19.42 with first-order coupon. Not offered: Silver Flame, Blue Edge, Mist Blue (near duplicates).",
+    "notes": "Supplier photos cleaned locally (background removed, spec text and inset dropped). ¥19.42 with first-order coupon. Not offered: Silver Flame, Blue Edge, Mist Blue (near duplicates). Price raised from NGN 35000 to NGN 55000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Cosplay katana seller (name to confirm)",
       "platform": "1688",
@@ -114,7 +156,7 @@
     "url": "https://www.finalheaven.shop/product/p1793180401190",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:16.193Z",
+    "updated": "2026-11-04T22:26:47.374Z",
     "history": [
       {
         "at": "2026-10-28T20:22:52.156Z",
@@ -131,10 +173,15 @@
         "at": "2026-10-28T22:03:16.193Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:47.374Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:16.193Z",
+      "at": "2026-11-04T22:26:47.373Z",
       "ok": true,
       "problems": [],
       "needs": [],

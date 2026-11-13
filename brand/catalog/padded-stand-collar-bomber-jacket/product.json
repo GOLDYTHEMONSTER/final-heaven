@@ -1,0 +1,111 @@
+{
+  "name": "Padded Stand-Collar Bomber Jacket",
+  "category": "Jackets",
+  "description": "Padded bomber jacket with a stand collar, a double-zip front with snap placket, ribbed cuffs and hem, and a zip pocket on the sleeve. Snap-flap hand pockets, a hidden inner pocket and a quilted puffer inner layer. Loose cut. The supplier describes it as windproof and warm.\n\nSizes M to 3XL are assumed, not confirmed. It may run about a size small: go one up.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Grey",
+    "Khaki"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "jacket",
+    "bomber",
+    "mens",
+    "winter",
+    "padded",
+    "stand-collar",
+    "harmattan"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "grey.jpg",
+      "color": "Grey"
+    },
+    {
+      "file": "khaki.jpg",
+      "color": "Khaki"
+    },
+    {
+      "file": "grey-back.jpg",
+      "color": "Grey"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=998913244618",
+    "unit_cost": 93,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Price ¥93 from 1 piece (screenshot: ≈₦20,741.61), ¥90 from 100 pieces. Supplier title: Winter New Men's Jacket Loose Stand Collar Outdoor Windproof Warm Temperature-Locking Cotton Coat (the supplier's \"Trendy Brand\" wording is left out). Windproof and warm are supplier claims; fibre content not stated and not listed. Store return rate 53% (very high for a garment; owner must decide). Colours Black, Grey, Khaki (supplier 黑色/灰色/卡其); the khaki photo looks olive. Sizes not shown: M-3XL and the go-one-up line are assumed. Winter-weight coat: suits harmattan and cold travel, heavy for most Nigerian weather. Store photos cropped from 800 px originals (soft; sleeve tips trimmed slightly). The grey back view is the only back photo. Group photo and detail collage not used (Chinese text). Freight and customs not known. REJECTED by owner: 53% store return rate. If revisited with a better supplier, owner preference was price ₦38,000, sizes M-3XL, 3 colours (Black, Grey, Khaki).",
+    "supplier": {
+      "name": "Shishi City Junfan Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=998913244618"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-01T11:42:54.516Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:40:52.308Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:41:42.549Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:42:54.516Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "store return rate 53%"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-01T11:41:42.548Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 20742,
+      "landed": 20742,
+      "gross": null,
+      "margin": null,
+      "suggested": 46500
+    },
+    "note": "store return rate 53%"
+  }
+}

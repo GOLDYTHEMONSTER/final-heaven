@@ -1,0 +1,177 @@
+{
+  "name": "Fleece-Lined High-Top Sneaker Boots",
+  "category": "Sports",
+  "description": "Chunky-sole high-top sneaker boots with a faux-leather look and a fleece lining. Chinese sizing often runs small: go one size up if you are between sizes.",
+  "specs": [
+    {
+      "label": "Style",
+      "value": "High-top sneaker boot, chunky sole"
+    },
+    {
+      "label": "Look",
+      "value": "Faux leather"
+    },
+    {
+      "label": "Collar",
+      "value": "Knit"
+    },
+    {
+      "label": "Lining",
+      "value": "Fleece"
+    },
+    {
+      "label": "Lacing",
+      "value": "Twist dial on the side tightens elastic laces; no tying"
+    },
+    {
+      "label": "Colours",
+      "value": "Tan, Black, Green"
+    },
+    {
+      "label": "Sizes",
+      "value": "Men's EU 39 to 44"
+    }
+  ],
+  "price": 45500,
+  "stock": 20,
+  "colors": [
+    "Tan",
+    "Black",
+    "Green"
+  ],
+  "sizes": [
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44"
+  ],
+  "tags": [
+    "sneakers",
+    "high-top",
+    "boots",
+    "fleece-lined",
+    "thick sole",
+    "mens",
+    "footwear",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "tan.jpg",
+      "color": "Tan",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/814f80c4-589e-46f0-b495-2936dfba3d60.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f8f4b091-48e9-41ca-b67e-e5bdf26c03b9.jpg"
+    },
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5d4f150b-862a-454d-9634-6d63cd020cd0.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=988067995175",
+    "unit_cost": 26,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Supplier title: Men's Shoes 2025 Autumn Fleece-Lined New High-Top Boots Men's British Style Retro Thick-Soled Work Shoes Casual. 26.00 CNY a pair from 1 pair; screenshot shows 5,798.73 NGN. Supplier shipping from 3.50 CNY (780.60 NGN), not entered as a cost. Styles H631-1 yellow/black/green plus velvet = Tan/Black/Green. Sizes EU 39-44 from the screenshot; sizing-runs-small note is an assumption. Materials not stated, so left out of the copy (faux-leather look is from the photos). Factory FASHION side patch and dial badge are generic, no brand named. Photos are 800 px, extended to 4:5 with blurred fill. The supplier flame badge with Chinese text (fleece-lined, thickened) was covered with a patch of the photo background; check the top-right corner. Return rate not shown in screenshots. Weight and freight unknown. Fleece-lined: cold-weather or harmattan pick. Price raised from NGN 16000 to NGN 45500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Fleece sneaker boots seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=988067995175"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:55.027Z",
+    "history": [
+      {
+        "at": "2026-11-01T08:08:17.314Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T08:09:46.448Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:10:40.154Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T08:10:40.368Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T08:10:47.595Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T08:10:59.217Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T08:10:59.452Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T08:11:02.754Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:55.027Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:55.025Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 5799,
+      "landed": 5799,
+      "gross": 10201,
+      "margin": 0.6375762500000001,
+      "suggested": 13000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793520645634",
+    "approved_at": "2026-11-01T08:10:59.216Z",
+    "published_at": "2026-11-01T08:11:02.754Z",
+    "url": "https://www.finalheaven.shop/product/p1793520645634"
+  },
+  "id": "p1793520645634"
+}

@@ -1,0 +1,165 @@
+{
+  "name": "Ultra-Thin Pocket Game Console, 500 Games",
+  "category": "Gadgets",
+  "description": "A card-slim handheld game console with 500 built-in games. Charges by USB Type-C. The game menu is in English, Chinese, Arabic, Spanish and Portuguese. Comes in off-white, blue or green.",
+  "price": 23500,
+  "stock": 20,
+  "colors": [
+    "Off-white",
+    "Blue",
+    "Green"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "handheld",
+    "game console",
+    "retro",
+    "portable",
+    "travel"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "off-white.jpg",
+      "color": "Off-white",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2df29543-008e-491d-af2e-920bf48d28d5.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c615ebf2-4e7c-4748-a23f-f69943e9c8c5.jpg"
+    },
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/68bfdd1f-32ec-4fa8-81c6-388b7bcbbff7.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=806692066500",
+    "unit_cost": 47,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yichun Songling Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=806692066500"
+    },
+    "notes": "Cost CNY 47 is for the K10 ultra-thin style (style 1/13) only; screenshot shows no naira figure so fx_rate is unknown. Listed weight 1000 g is probably a placeholder, so shipping weight left blank. Return rate text cut off in screenshot (repurchase rate 48.28%). Store: 3 yrs on 1688, 200+ sold, 6 reviews. Supplier title names Nintendo-era game titles; store copy is generic. Game screens in the photos show third-party game art (TMNT, Battle City, Mario-style menu). Screen size, battery and included items not stated for K10, so left out. Other 10 styles (3.0 inch 800-in-1 single and 2P) not prepared, awaiting owner decision and prices. Owner set price 23500 and fx 222.52 on 13 Nov; kept photos with third-party game art."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T15:59:12.392Z",
+    "history": [
+      {
+        "at": "2026-11-13T15:56:38.939Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T15:57:08.757Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T15:57:15.438Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T15:58:15.040Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T15:58:15.301Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T15:58:22.612Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T15:59:09.333Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T15:59:09.633Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T15:59:12.392Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T15:58:15.039Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 10458,
+      "landed": 10458,
+      "gross": 13042,
+      "margin": 0.55496,
+      "suggested": 23500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794585500686",
+    "photos_reviewed": {
+      "at": "2026-11-13T15:59:03.167Z",
+      "hashes": {
+        "off-white.jpg": "09a7afbf69136903ec880507a9b1284f2b5b7a9a5b199b20df721ebac0df1b6d",
+        "blue.jpg": "b0c20080590ee556f36d36b850912b2a76e1a80d87b12f795f0fef2d3e7d5556",
+        "green.jpg": "3a565a686683a0b393e0418f4bf6ca17795389d17f0ebf0b4825356d9be045d1"
+      }
+    },
+    "approved_at": "2026-11-13T15:59:09.332Z",
+    "published_at": "2026-11-13T15:59:12.392Z",
+    "url": "https://www.finalheaven.shop/product/p1794585500686"
+  },
+  "specs": [
+    {
+      "label": "Model",
+      "value": "K10"
+    },
+    {
+      "label": "Built-in games",
+      "value": "500"
+    },
+    {
+      "label": "Charging",
+      "value": "USB Type-C"
+    },
+    {
+      "label": "Colours",
+      "value": "Off-white, Blue, Green"
+    }
+  ],
+  "ships_by_air": false,
+  "id": "p1794585500686"
+}

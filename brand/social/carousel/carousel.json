@@ -1,0 +1,8 @@
+{
+  "_help": "One entry per product. id = store id (name, price, sizes and colour are read live from the store). spread = front-and-back mockup (front on the left). back = a back-only shot; used for the back slide when given, and as the only photo when there is no spread. See README.md.",
+  "products": [
+    { "slug": "main-character-acid-tee", "id": "p1793872535713", "spread": "source/main-character-acid-tee.png" },
+    { "slug": "grain-boxer-washed-hoodie", "id": "p1794120005860", "spread": "source/grain-boxer-washed-hoodie.png", "back": "source/grain-boxer-washed-hoodie-back.png" },
+    { "slug": "astronaut-washed-hoodie", "id": "p1794119992899", "back": "source/astronaut-washed-hoodie-back.png" }
+  ]
+}

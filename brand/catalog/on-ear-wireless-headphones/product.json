@@ -1,0 +1,101 @@
+{
+  "name": "Wireless On-Ear Headphones",
+  "category": "Gadgets",
+  "description": "Wireless on-ear headphones with a padded headband and flat round ear cups with metal-look trim. Buttons and a charging port on the right cup. Comes in mint, black, lilac, pink and cream.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Mint",
+    "Black",
+    "Lilac",
+    "Pink",
+    "Cream"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "headphones",
+    "wireless",
+    "bluetooth",
+    "on-ear",
+    "colourful"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "Owner sent 5 colour photos (mint, black, lilac, pink, cream; 1179 px square) with no message: shop, listing and price unknown, may be in the Shenzhen Huixun listing (offerId 1025659251706) but not confirmed. BLOCKER: every photo carries a faint Chinese company-name watermark across the middle, over the headband, hinge and metal yoke. It sits on the product, not on the background, so it cannot be cropped out and cannot be cleaned without rebuilding the hinge and trim detail: store photos NOT made. Needs clean supplier photos. Copy states only what the photos show; no specs known. If from the 58.6%-return-rate shop: samples first, stay unpublished. Lithium battery: sea freight only.",
+    "supplier": {
+      "name": "On-ear headphones seller (name to confirm)",
+      "platform": "1688",
+      "url": ""
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-13T16:22:59.836Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:21:19.087Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:21:49.177Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-13T16:22:59.836Z",
+        "from": "FAILED",
+        "to": "REJECTED",
+        "note": "set by hand"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:21:49.176Z",
+      "ok": false,
+      "problems": [
+        "no photos"
+      ],
+      "needs": [
+        "selling price",
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": [
+        "no photo shows Mint",
+        "no photo shows Black",
+        "no photo shows Lilac",
+        "no photo shows Pink",
+        "no photo shows Cream"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "set by hand"
+  },
+  "ships_by_air": false
+}

@@ -1,0 +1,156 @@
+{
+  "name": "Half-Finger Gym Gloves with Wrist Wrap",
+  "category": "Sports",
+  "description": "Half-finger training gloves, sold as a pair. Sizing is assumed and runs about a size small: go one up.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Black"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L, XL"
+    },
+    {
+      "label": "Style",
+      "value": "Half-finger"
+    },
+    {
+      "label": "Palm",
+      "value": "Thickened PU with grey checker grip pads"
+    },
+    {
+      "label": "Thumb",
+      "value": "Towel sweat-wipe"
+    },
+    {
+      "label": "Wrist strap",
+      "value": "Velcro"
+    },
+    {
+      "label": "Sold as",
+      "value": "A pair"
+    }
+  ],
+  "price": 15500,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "gym gloves",
+    "workout gloves",
+    "half-finger gloves",
+    "wrist wrap",
+    "weightlifting",
+    "fitness"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e402840e-9763-459a-8082-2793d7991a58.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=796897295305",
+    "unit_cost": 23,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Gym gloves seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=796897295305"
+    },
+    "notes": "Regular price ¥23 (1+), ¥22.50 at 50+. Shipping to warehouse from ¥3.30 (about ₦736), not yet included. Sizes S-XL from the screenshot; no size chart seen, so fit is assumed. Supplier brand on wrist strap and one photo only. Return rate not shown. Price raised from NGN 11500 to NGN 13000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 13000 to NGN 15500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:27:53.407Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 5130,
+      "landed": 5130,
+      "gross": 6370,
+      "margin": 0.55394,
+      "suggested": 11500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:53.408Z",
+    "history": [
+      {
+        "at": "2026-11-01T19:38:54.772Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T19:39:26.506Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T19:39:26.705Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T19:39:51.338Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T19:40:46.552Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T19:40:46.726Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T19:40:58.409Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:53.408Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793561988886",
+    "approved_at": "2026-11-01T19:40:46.551Z",
+    "published_at": "2026-11-01T19:40:58.409Z",
+    "url": "https://www.finalheaven.shop/product/p1793561988886"
+  },
+  "id": "p1793561988886"
+}

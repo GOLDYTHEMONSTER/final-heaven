@@ -1,0 +1,178 @@
+{
+  "name": "Pull-Tab Half-Finger Training Gloves with Wrist Strap",
+  "category": "Sports",
+  "description": "Half-finger training gloves for men and women, made for weight training, horizontal bar and general gym work. If you are between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, White"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L, XL"
+    },
+    {
+      "label": "Style",
+      "value": "Half-finger, for men and women"
+    },
+    {
+      "label": "Palm",
+      "value": "Padded"
+    },
+    {
+      "label": "Wrist strap",
+      "value": "Velcro"
+    },
+    {
+      "label": "Finger pull tabs",
+      "value": "Yes, help take them off"
+    }
+  ],
+  "price": 16500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White"
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "tags": [
+    "gym gloves",
+    "fitness",
+    "weight training",
+    "wrist wrap",
+    "half finger",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a0ab0373-8bcb-4d27-a78f-e7e7e0ab3c95.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f17d8a2f-f384-45b9-8615-18f9b1da3a53.jpg"
+    },
+    {
+      "file": "model-black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f69f77a4-bff2-43d5-ab9b-7d2b5bc490ce.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=955558035540",
+    "unit_cost": 25,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Regular price 25 CNY per pair (1+), 24 CNY at 50+, 23 CNY at 20000+. fx 223.03 from the screenshot (5,575.70 NGN for 25 CNY). Supplier shipping to warehouse from 3.30 CNY (not entered as cost). Store return rate 46.8% (HIGH). Sold 1K+. Sizes S/M/L/XL from the listing (screenshot shows XL as 'XI'); no size chart, go-one-up line is an assumption. Materials not stated: copy says only padded palm and Velcro strap. Gloves carry the supplier's own brand (visible on strap and cuff, left in photos, kept out of title and copy). Source photos 800 px: model shot upscaled, slightly soft. Black and White each have a pair shot; White has no model shot. Seller: Yiwu Yuchan Sports Goods Co., Ltd., 3 years on 1688. Price raised from NGN 12500 to NGN 14000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 14000 to NGN 16500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Yiwu Yuchan Sports Goods Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=955558035540"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:45.976Z",
+    "history": [
+      {
+        "at": "2026-11-01T19:38:40.729Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T19:39:42.640Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-01T19:39:48.638Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T19:43:23.307Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T19:43:23.939Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T19:43:30.540Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:44:10.321Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:44:10.552Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:44:14.353Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:25.711Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:45.976Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:45.976Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 5576,
+      "landed": 5576,
+      "gross": 6924,
+      "margin": 0.55394,
+      "suggested": 12500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793562208902",
+    "approved_at": "2026-11-04T10:44:10.320Z",
+    "published_at": "2026-11-04T10:44:14.353Z",
+    "url": "https://www.finalheaven.shop/product/p1793562208902"
+  },
+  "id": "p1793562208902"
+}

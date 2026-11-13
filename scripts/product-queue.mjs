@@ -224,7 +224,7 @@ function cmdNew([slug]) {
 function print(slug, p) {
   const q = p.queue ?? {}
   const pr = q.pricing
-  const money = pr?.landed != null ? ` · landed ₦${pr.landed.toLocaleString()}${pr.status === 'provisional' ? ' (provisional)' : ''}${pr.margin != null ? ` · margin ${Math.round(pr.margin * 100)}%` : ''} · suggest ₦${pr.suggested?.toLocaleString()}` : ''
+  const money = pr?.landed != null ? ` · landed ₦${pr.landed.toLocaleString()}${pr.freight != null ? ` (freight ₦${pr.freight.toLocaleString()}${pr.freightBasis === 'estimate' ? ' est.' : ''})` : ''}${pr.status === 'provisional' ? ' (provisional)' : ''}${pr.margin != null ? ` · margin ${Math.round(pr.margin * 100)}%` : ''} · suggest ₦${pr.suggested?.toLocaleString()}` : ''
   console.log(`${(q.status ?? '—').padEnd(17)} ${slug}${p.id ? ` (${p.id})` : ''} · ₦${Number(p.price || 0).toLocaleString()}${money}`)
   const v = q.last_validation
   for (const m of v?.problems ?? []) console.log(`    fix:  ${m}`)

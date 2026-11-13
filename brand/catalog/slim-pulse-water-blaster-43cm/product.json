@@ -1,8 +1,30 @@
 {
   "name": "Slim Pulse Water Blaster — 43 cm",
   "category": "Gadgets",
-  "description": "An electric water blaster with continuous spray and automatic water intake. 43 cm long. The box has the blaster, a rechargeable battery pack and a USB charging cable. Water only. Don't aim at faces or animals. Adult supervision for young children.",
-  "price": 12500,
+  "description": "An electric water blaster with continuous spray and automatic water intake. Water only. Don't aim at faces or animals. Adult supervision for young children.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Blue, Yellow-Green"
+    },
+    {
+      "label": "Spray",
+      "value": "Continuous"
+    },
+    {
+      "label": "Water intake",
+      "value": "Automatic"
+    },
+    {
+      "label": "Length",
+      "value": "43 cm"
+    },
+    {
+      "label": "What's included",
+      "value": "Blaster, rechargeable battery pack, USB charging cable"
+    }
+  ],
+  "price": 18000,
   "stock": 20,
   "colors": [
     "Blue",
@@ -46,7 +68,7 @@
       "platform": "1688",
       "url": "http://detail.m.1688.com/page/index.htm?offerId=1089431913643"
     },
-    "notes": "Style code 2302 (photo text: electric burst, auto absorption, 43 cm). Matched to the style-list thumbnails (yellow and blue). Capacity not shown. The supplier's battery pack is called waterproof on the photo: not repeated. The gun body has a \"Superior\" script on it. In both photos the muzzle sits at the very left edge of the supplier image and may be slightly clipped. Same 1688 offer (1089431913643) as the rest of the water-blaster range. MOQ unclear: the page says \"1 Box starting batch\" and lists carton counts of 12-48 pcs, so whether the price is per piece for a 1-piece order or needs a carton is unconfirmed. Prices are per piece from the style list. Store return rate not shown in the screenshots. China freight ¥4/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped toy: possible customs hold as an imitation firearm, owner to confirm with the clearing agent. Range is stated only on the 2309 box photo (8-10 m, seller figure) and used there; none is claimed for other models. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged). "
+    "notes": "Style code 2302 (photo text: electric burst, auto absorption, 43 cm). Matched to the style-list thumbnails (yellow and blue). Capacity not shown. The supplier's battery pack is called waterproof on the photo: not repeated. The gun body has a \"Superior\" script on it. In both photos the muzzle sits at the very left edge of the supplier image and may be slightly clipped. Same 1688 offer (1089431913643) as the rest of the water-blaster range. MOQ unclear: the page says \"1 Box starting batch\" and lists carton counts of 12-48 pcs, so whether the price is per piece for a 1-piece order or needs a carton is unconfirmed. Prices are per piece from the style list. Store return rate not shown in the screenshots. China freight ¥4/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped toy: possible customs hold as an imitation firearm, owner to confirm with the clearing agent. Range is stated only on the 2309 box photo (8-10 m, seller figure) and used there; none is claimed for other models. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged).  Price raised from NGN 12500 to NGN 18000 on 9 Nov 2026 (owner approved margin review: blaster, 50%)."
   },
   "shipping": {
     "weight_kg": null,
@@ -54,7 +76,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T12:12:14.960Z",
+    "updated": "2026-11-04T22:26:57.680Z",
     "history": [
       {
         "at": "2026-10-29T07:44:31.266Z",
@@ -98,10 +120,15 @@
         "at": "2026-10-29T12:12:14.960Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:57.680Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T12:11:30.531Z",
+      "at": "2026-11-04T22:26:57.679Z",
       "ok": true,
       "problems": [],
       "needs": [],

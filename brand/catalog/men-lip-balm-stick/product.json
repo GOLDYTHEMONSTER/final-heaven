@@ -1,0 +1,161 @@
+{
+  "name": "Men's Cool Moisturizing Lip Balm, 3-Pack",
+  "category": "Accessories",
+  "description": "Three black lip balm sticks for men, all in the flavour you choose. The flavours look the same, apart from the Chinese product text printed on the stick. Cosmetic lip balm for everyday use.",
+  "specs": [
+    {
+      "label": "Pack",
+      "value": "3 sticks, all in one flavour"
+    },
+    {
+      "label": "Flavours",
+      "value": "Mint, Vitamin, Cool, Invigorating, Petroleum Jelly, Moisturizing"
+    },
+    {
+      "label": "Stick",
+      "value": "Black, twist-up balm"
+    },
+    {
+      "label": "Cap",
+      "value": "Snap-on"
+    }
+  ],
+  "price": 7500,
+  "stock": 20,
+  "colors": [],
+  "sizes": [
+    "Mint",
+    "Vitamin",
+    "Cool",
+    "Invigorating",
+    "Petroleum Jelly",
+    "Moisturizing"
+  ],
+  "tags": [
+    "lip balm",
+    "men",
+    "grooming",
+    "skincare",
+    "moisturizing",
+    "3-pack"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "invigorating.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/fcaf185c-11b8-4eb6-81c9-52458582f7ab.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=733091590008",
+    "unit_cost": 2.22,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shenzhen Huanmen Love Muscle Beauty Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=733091590008"
+    },
+    "notes": "Price 0.74 CNY at 3+ pcs (0.72 at 1152+, 0.70 at 6912+); screenshot shows N165.04, so rate 165.04/0.74 = 223.03. Per-stick cost; MOQ 3. 3K+ sold, repurchase rate 25%. Supplier pack brand (Molianji, MAN logo) is not used in the title or copy. The MAN logo and Chinese text are printed on the stick itself and cannot be removed. Only the Invigorating stick has a clean photo; the other five variants only have photos on branded blister cards with Chinese headlines, left out.  No NAFDAC registration known, shelf life, expiry and weight unknown. Supplier photo 93b4e6cd (Meishudaiya balm) is a different product and was not used. No ingredients given. No medical or repair claims. Owner decisions: sold as a 3-pack of one flavour, N7,500; unit_cost 2.22 CNY = 3 x 0.74 (MOQ 3). All six flavours listed in the size option and share one photo (flavours look the same). Owner says NAFDAC has been checked and is fine (not independently verified; no number recorded)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:28:10.057Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 495,
+      "landed": 495,
+      "gross": 7005,
+      "margin": 0.93398312,
+      "suggested": 1500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:10.058Z",
+    "history": [
+      {
+        "at": "2026-11-01T06:17:54.816Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T07:40:15.454Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T07:40:15.679Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T07:40:20.373Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T07:40:24.368Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-01T07:40:24.581Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T07:40:26.161Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T07:47:16.880Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T07:47:17.335Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T07:47:19.975Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:10.058Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793518819005",
+    "approved_at": "2026-11-01T07:47:16.879Z",
+    "published_at": "2026-11-01T07:47:19.975Z",
+    "url": "https://www.finalheaven.shop/product/p1793518819005"
+  },
+  "id": "p1793518819005"
+}

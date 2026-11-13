@@ -1,0 +1,196 @@
+{
+  "name": "Blocky Pixel Figure Keychain",
+  "category": "Accessories",
+  "description": "A blocky pixel-style figure on a gold-tone ring and lobster clasp, with a soft rubber wrist strap. Eight styles, each with its own look and strap colour, from armour and ninja to a block-head mob and a pink critter. Made to hang on keys, a school bag or a car mirror.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Blue Shirt",
+    "Pink Jacket",
+    "Green Shirt Pickaxe",
+    "Green Armour",
+    "Purple Ninja",
+    "Black Figure",
+    "Green Block",
+    "Pink Critter"
+  ],
+  "sizes": [],
+  "tags": [
+    "keychain",
+    "bag charm",
+    "pixel figure",
+    "blocky",
+    "car key",
+    "gift",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "classic-blue-shirt.jpg",
+      "color": "Blue Shirt",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b9f201a1-1492-4b4c-bcd3-1488d0e16579.jpg"
+    },
+    {
+      "file": "pink-jacket.jpg",
+      "color": "Pink Jacket",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f3e92796-a182-4eb7-9088-def6e0715fe1.jpg"
+    },
+    {
+      "file": "orange-hair-pickaxe.jpg",
+      "color": "Green Shirt Pickaxe",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/949c46ee-01a8-434b-bc44-6696400840b8.jpg"
+    },
+    {
+      "file": "green-armour.jpg",
+      "color": "Green Armour",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b0b6abd3-348a-4893-81a8-5f6090803610.jpg"
+    },
+    {
+      "file": "purple-ninja.jpg",
+      "color": "Purple Ninja",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8561ef8c-e599-46a4-abf2-e9bdc00ca781.jpg"
+    },
+    {
+      "file": "black-figure.jpg",
+      "color": "Black Figure",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ae9840f2-753d-44be-b53b-80f78e4f5144.jpg"
+    },
+    {
+      "file": "green-block.jpg",
+      "color": "Green Block",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/afb29860-7970-4093-9c26-16f9cbda3e3e.jpg"
+    },
+    {
+      "file": "pink-critter.jpg",
+      "color": "Pink Critter",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6352642f-4202-40a2-846d-62372b5e6f8a.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/948536682052.html",
+    "unit_cost": 2.5,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Yaopan Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/790182677082.html"
+    },
+    "notes": "Price tiers: 2.5 CNY for 1+, 2.4 for 50-199, 2.3 for 200+ (cost uses regular 2.5). Rate from screenshot: N556.3 / 2.5. 12K+ sold; no store return rate visible. Listing has 31 styles; 16 photographed, split across two 8-style listings (blocky-figure-keychain and blocky-figure-keychain-2). Supplier title and photos name a licensed video game; listed generically. Every strap has the game word mark moulded on it, visible in all photos; photos not retouched. Owner chose list as is.  Size, weight and material not stated. Photos are 1920 px squares cropped to 4:5."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "id": "p1794307768024",
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-10T10:50:08.712Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as blocky-figure-keychain-2 (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 556,
+      "landed": 556,
+      "gross": 6944,
+      "margin": 0.9258266666666667,
+      "suggested": 1500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T10:51:26.545Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:47:21.449Z",
+        "from": null,
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-10T10:47:33.552Z",
+        "from": "FAILED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T10:49:07.388Z",
+        "from": "DRAFT_READY",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T10:49:07.598Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T10:49:29.247Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T10:50:08.713Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-10T10:50:15.904Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T10:50:19.328Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T10:51:23.981Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T10:51:24.183Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T10:51:26.545Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1794307768024",
+    "photos_reviewed": {
+      "at": "2026-11-10T10:51:23.783Z",
+      "hashes": {
+        "classic-blue-shirt.jpg": "88b0d88a476169b9e42be6d66da777524ab1bde7624c7371436d57482ae415be",
+        "pink-jacket.jpg": "165484bbe3372f4ca9a0801a2d6274797ba6bfd85ce8b17359376b8ea3a19c4e",
+        "orange-hair-pickaxe.jpg": "03b7690aeda4c66342edfb543ed2bd4f3b608a0dd16c37b1773b596122638fe2",
+        "green-armour.jpg": "faeeb8b8dde02828ec3f0fb242d55f663e4ca4a3b809541f55b0bc357103b23f",
+        "purple-ninja.jpg": "02f4ff4e3841fbbdad54db6f6025cd4bd7d140e16757380cc98d3491f88f8cff",
+        "black-figure.jpg": "2c6201ab9605215da64db5aaf2a54797128ad4819d19b04e11bf0471eaf31f30",
+        "green-block.jpg": "02c7425c327ea6ef72f06b597f0177b4a5c5c0e74114af039d927231de520f74",
+        "pink-critter.jpg": "5b0bcdabee4de803cf6df31deb1052679fbf7a8abc13fa82e99c87a70144e808"
+      }
+    },
+    "approved_at": "2026-11-10T10:51:23.980Z",
+    "published_at": "2026-11-10T10:51:26.545Z",
+    "url": "https://www.finalheaven.shop/product/p1794307768024"
+  }
+}

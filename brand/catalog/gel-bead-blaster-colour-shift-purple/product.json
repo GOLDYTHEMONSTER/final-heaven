@@ -1,0 +1,158 @@
+{
+  "name": "Gel Bead Blaster (Colour-Shift Purple)",
+  "category": "Gadgets",
+  "description": "A 96 cm gel bead blaster in a purple-to-blue colour-shift finish, with an electric burst mode and a manual single-shot mode. The full kit adds a scope, red-dot sight, flashlight, laser, vertical grip and strap, plus a 7.4 V battery pack. Includes 2 packs of gel beads. For teens and adults; children under 14 need adult supervision, and eye protection must be worn. Looks realistic: don't carry or use it in public.",
+  "price": 40000,
+  "stock": 20,
+  "colors": [
+    "Purple"
+  ],
+  "sizes": [],
+  "tags": [
+    "gel-bead-blaster",
+    "gel-blaster",
+    "toy",
+    "outdoor",
+    "electric",
+    "colour-shift",
+    "purple"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "purple-1.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4f9ebe69-0a8f-429f-95d9-b6072cbfaffb.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1041748082370",
+    "unit_cost": 70,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Dongcheng Rongsha Commercial Bank, Dongguan City",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1041748082370"
+    },
+    "notes": "Owner to confirm with the clearing agent that a realistic toy rifle can clear Nigerian Customs before any stock or publishing. Unit cost 70 CNY given by the owner for the colour-shift full kit bundle with 2 packs of gel beads (style 17/19); the page itself shows only a 40 to 120 CNY range across 19 styles. FX 222.63 from the page (8,905.32 / 40). Free shipping on orders over 60 CNY (within China). 60+ sold. Store return rate not shown. Colour-shift purple-blue full kit only; black, digital camo, black/tan and the drum-magazine version left out. Lithium 7.4 V battery pack: sea freight only (ships_by_air false). Package 7 x 16 cm per page, 5,600 cm3, 777 g, bag or colour box (odd figures: confirm). Supplier bundles a bonus sniper toy, a pistol toy and a colour-change target: left out of the listing and copy. Gel beads (2 packs) per the owner; a charger is not confirmed: not claimed. Supplier title and photo use brand and model names: none used here. Store photo is a cut-out from the 1440 px supplier image with text, size badge, bonus panel and accessory boxes removed. No safety certification shown or claimed."
+  },
+  "shipping": {
+    "weight_kg": 0.78,
+    "data_status": "estimated"
+  },
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Purple-blue colour-shift"
+    },
+    {
+      "label": "Length",
+      "value": "96 cm"
+    },
+    {
+      "label": "Modes",
+      "value": "Electric burst, manual single shot"
+    },
+    {
+      "label": "Kit",
+      "value": "Scope, red-dot sight, flashlight, laser, vertical grip, strap, 7.4 V battery pack"
+    },
+    {
+      "label": "Use",
+      "value": "Teens and adults; supervision under 14; wear eye protection"
+    }
+  ],
+  "ships_by_air": false,
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-08T12:10:22.126Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 15584,
+      "landed": 15584,
+      "gross": 24416,
+      "margin": 0.6103975,
+      "suggested": 35000
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T12:23:58.825Z",
+    "history": [
+      {
+        "at": "2026-11-08T12:07:37.161Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T12:08:09.078Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "Owner 8 Nov: drop guns for now (realistic toy rifles; reopen with status if wanted)"
+      },
+      {
+        "at": "2026-11-08T12:08:42.763Z",
+        "from": "REJECTED",
+        "to": "NEEDS_INFORMATION",
+        "note": "Owner 8 Nov: keep if the cut-out is good; price and cost to confirm"
+      },
+      {
+        "at": "2026-11-08T12:10:22.128Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T12:10:22.616Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T12:10:29.716Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T12:23:56.291Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T12:23:56.533Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T12:23:58.825Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1794139827672",
+    "photos_reviewed": {
+      "at": "2026-11-08T12:23:56.055Z",
+      "hashes": {
+        "purple-1.jpg": "932ebcd365ab0eb1f99529128369a1489c4bc00f30d3489c976e3ae817f27e69"
+      }
+    },
+    "approved_at": "2026-11-08T12:23:56.290Z",
+    "published_at": "2026-11-08T12:23:58.825Z",
+    "url": "https://www.finalheaven.shop/product/p1794139827672"
+  },
+  "id": "p1794139827672"
+}

@@ -1,0 +1,149 @@
+{
+  "name": "Hooded Hero Keychain",
+  "category": "Accessories",
+  "description": "A chibi hooded hero figure in grey shorts and red sneakers, on a gold-tone ring with a lobster clasp. It comes with a braided strap loop with a painted round badge. Four styles, each with its own hood and strap colours: green, black, red and blue. Made to hang on keys or a school bag.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Green",
+    "Black",
+    "Red",
+    "Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "keychain",
+    "bag charm",
+    "cartoon figure",
+    "hooded",
+    "car key",
+    "gift",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/373e2893-2582-4b8b-bdd0-429f341b3bf8.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/db72b399-d705-4d5c-9ec7-fef4ac629ff7.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4dff9768-2a1e-4476-a7e5-ab2c5edb681d.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/46b11a1a-6979-4622-be5f-894c1e30b6e6.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/790182677082.html",
+    "unit_cost": 3.6,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Yaopan Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/790182677082.html"
+    },
+    "notes": "Price tiers: 3.6 CNY for 1+, 3.5 for 50-199, 3.4 for 200+ (cost uses the regular 3.6). Rate from screenshot: N801.07 / 3.6. 6K+ sold; no store return rate visible. Supplier title and photos name a licensed Marvel/Sony character: listed generically only if owner confirms; the figure itself is that character. Size, weight and material not stated in screenshots. Group shots not used (cropped at the edge or would not fit 4:5)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T10:47:49.685Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:38:05.978Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T10:38:40.761Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T10:39:39.429Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T10:39:39.650Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T10:39:52.082Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T10:47:44.567Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T10:47:44.745Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T10:47:49.685Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T10:39:39.428Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 801,
+      "landed": 801,
+      "gross": 6699,
+      "margin": 0.8931903999999999,
+      "suggested": 2000
+    },
+    "photos_reviewed": {
+      "at": "2026-11-10T10:39:30.967Z",
+      "hashes": {
+        "green.jpg": "fdcadf94bfe3a42f99ca7d60c06eeceb152e95f3905610fbb866850356e64944",
+        "black.jpg": "144a8315d5a4329f9e8ce49ba0ec500e4543d7b38c43e7adca00734e3feb1af1",
+        "red.jpg": "026615140580ee613d91c8b864a9d0e7a5342ae802660e4719f2eb90c509d93a",
+        "blue.jpg": "c39c4cea69f2575708777af991cd0a497b22a8b3a0bf1df2425c050715e9f8ca"
+      }
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794307189624",
+    "approved_at": "2026-11-10T10:47:44.566Z",
+    "published_at": "2026-11-10T10:47:49.685Z",
+    "url": "https://www.finalheaven.shop/product/p1794307189624"
+  },
+  "id": "p1794307189624"
+}

@@ -1,0 +1,148 @@
+{
+  "name": "Magnetic Palm Grip and Mini Tripod for Phones",
+  "category": "Gadgets",
+  "description": "A handheld magnetic phone grip that extends into a selfie stick on a mini tripod.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "White"
+    },
+    {
+      "label": "Height",
+      "value": "11.5 cm"
+    },
+    {
+      "label": "Phone hold",
+      "value": "Included stick-on magnetic ring"
+    },
+    {
+      "label": "What's included",
+      "value": "Magnetic ring, wrist strap, USB-C charging cable"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "250 g"
+    }
+  ],
+  "price": 90000,
+  "stock": 20,
+  "colors": [
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "selfie grip",
+    "tripod",
+    "selfie stick",
+    "magnetic",
+    "phone accessory",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "grip-white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ab730903-5858-478f-a9b2-b852de3cca47.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1061072713641",
+    "unit_cost": 159.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "notes": "Grip and tripod version only (no fill light, no clamp), white, from the 1688 style \"white-z3 magnetic zoom model four-in-one\": cost CNY 159.80 (owner, 2 Nov 2026), fx 223.33; price 79500 = 55% target rounded up (owner said about 78000). Same shop and listing as the M27: store return rate 28.7% (flagged), 1 review (3 stars). WONEW / Colorful Snail brand kept out of name and copy. Sea only (battery likely), owner confirmed. \"Four-in-one\", \"zoom\" and remote not claimed (unexplained / Is1 unclear). Photo: clean white grip alone, 800 px upscaled (soft); does not show the tripod form. Weight 200-250 g per page. Black not listed (no photo). Price raised from NGN 79500 to NGN 90000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Dongguan Liangmei Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1061072713641"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.25,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:05.341Z",
+    "history": [
+      {
+        "at": "2026-11-03T04:52:26.104Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-03T04:52:33.227Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-03T04:52:42.815Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-03T04:52:45.713Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-03T05:38:55.491Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-03T05:38:55.739Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-03T05:38:57.764Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:05.341Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:05.340Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as m27-magnetic-mirror-fill-light (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as magnetic-selfie-grip-fill-light (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as palm-grip-magnetic-light-kit (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 35688,
+      "landed": 35688,
+      "gross": 43812,
+      "margin": 0.5510926540880502,
+      "suggested": 79500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793681564490",
+    "approved_at": "2026-11-03T05:38:55.490Z",
+    "published_at": "2026-11-03T05:38:57.764Z",
+    "url": "https://www.finalheaven.shop/product/p1793681564490"
+  },
+  "ships_by_air": false,
+  "id": "p1793681564490"
+}

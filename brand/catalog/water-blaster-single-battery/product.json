@@ -1,8 +1,30 @@
 {
   "name": "Pulse Water Blaster — Single Battery",
   "category": "Gadgets",
-  "description": "An electric pulse water blaster with a 610 ml tank and one modular battery that slots into the handle. About 58 × 5 × 20 cm. The box has the blaster and a USB charging cable. Water only. Don't aim at faces or animals. Adult supervision for young children.",
-  "price": 20000,
+  "description": "An electric pulse water blaster with a water tank. Water only. Don't aim at faces or animals. Adult supervision for young children.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Blue, White"
+    },
+    {
+      "label": "Tank",
+      "value": "610 ml"
+    },
+    {
+      "label": "Battery",
+      "value": "1 modular battery, slots into the handle"
+    },
+    {
+      "label": "Size",
+      "value": "About 58 × 5 × 20 cm"
+    },
+    {
+      "label": "What's included",
+      "value": "Blaster, USB charging cable"
+    }
+  ],
+  "price": 25000,
   "stock": 20,
   "colors": [
     "Blue",
@@ -46,7 +68,7 @@
       "platform": "1688",
       "url": "http://detail.m.1688.com/page/index.htm?offerId=1089431913643"
     },
-    "notes": "Style code \"Standard 2307\" (photo label NO.2307, single battery, 610 ml, 58x5x20 cm). Supplier labels the white/orange one 蓝色 (blue) but it is white: listed as White. Photos show a blue light strip on the body, but the supplier text does not mention lights, so the copy does not either. Same 1688 offer (1089431913643) as the rest of the water-blaster range. MOQ unclear: the page says \"1 Box starting batch\" and lists carton counts of 12-48 pcs, so whether the price is per piece for a 1-piece order or needs a carton is unconfirmed. Prices are per piece from the style list. Store return rate not shown in the screenshots. China freight ¥4/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped toy: possible customs hold as an imitation firearm, owner to confirm with the clearing agent. Range is stated only on the 2309 box photo (8-10 m, seller figure) and used there; none is claimed for other models. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged). "
+    "notes": "Style code \"Standard 2307\" (photo label NO.2307, single battery, 610 ml, 58x5x20 cm). Supplier labels the white/orange one 蓝色 (blue) but it is white: listed as White. Photos show a blue light strip on the body, but the supplier text does not mention lights, so the copy does not either. Same 1688 offer (1089431913643) as the rest of the water-blaster range. MOQ unclear: the page says \"1 Box starting batch\" and lists carton counts of 12-48 pcs, so whether the price is per piece for a 1-piece order or needs a carton is unconfirmed. Prices are per piece from the style list. Store return rate not shown in the screenshots. China freight ¥4/order (note only, not costed). Lithium battery: sea freight only. Realistic firearm-shaped toy: possible customs hold as an imitation firearm, owner to confirm with the clearing agent. Range is stated only on the 2309 box photo (8-10 m, seller figure) and used there; none is claimed for other models. No safety certification shown or claimed. Supplier photos are 800 px (soft once enlarged).  Price raised from NGN 20000 to NGN 25000 on 9 Nov 2026 (owner approved margin review: blaster, 50%)."
   },
   "shipping": {
     "weight_kg": null,
@@ -54,7 +76,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T12:12:07.275Z",
+    "updated": "2026-11-04T22:27:04.214Z",
     "history": [
       {
         "at": "2026-10-29T07:44:32.692Z",
@@ -98,10 +120,15 @@
         "at": "2026-10-29T12:12:07.275Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:04.214Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T12:11:29.471Z",
+      "at": "2026-11-04T22:27:04.212Z",
       "ok": true,
       "problems": [],
       "needs": [],

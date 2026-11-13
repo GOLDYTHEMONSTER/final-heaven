@@ -1,0 +1,163 @@
+{
+  "name": "Rechargeable 3-Head Electric Shaver Set (Full Kit)",
+  "category": "Gadgets",
+  "description": "A rechargeable rotary shaver with three floating heads and a battery display on the body. In the box: shaver, hair clipper head with 3, 5 and 7 mm guides, nose trimmer, sideburn trimmer, face brush head, spare shaver head, head cover, USB charging cable, cleaning brush and instructions. Charges over USB.",
+  "specs": [
+    {
+      "label": "Heads",
+      "value": "3 floating rotary heads"
+    },
+    {
+      "label": "Charging",
+      "value": "USB cable"
+    },
+    {
+      "label": "Display",
+      "value": "Battery percentage on the body"
+    },
+    {
+      "label": "In the box",
+      "value": "Shaver, clipper head with 3/5/7 mm guides, nose trimmer, sideburn trimmer, face brush head, spare shaver head, head cover, USB cable, cleaning brush, instructions"
+    }
+  ],
+  "price": 57000,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "shaver",
+    "grooming",
+    "travel",
+    "usb-rechargeable"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "shaver.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d4d10d98-bf87-43a3-804e-1765e1f94832.jpg"
+    },
+    {
+      "file": "heads.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7018d78d-55d9-405f-9af5-5988f5ae3239.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=864902760472",
+    "unit_cost": 101,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "notes": "Listing has 20 styles (kits) priced from ¥61.8 (₦13,758.73) to ¥101 (₦22,485.94); price per kit not known, so unit_cost left empty until the owner picks the kit(s). Screenshot is Style 17/20 (shaver + nose trimmer + clipper with 3/5/7 mm guides). Rechargeable lithium battery (USB), capacity not stated. Store return rate not visible; repurchase rate 20.59%, 4K+ sold. Not used as our claims: 365-day replace-not-repair banner, '1 hour charge = 3 months use', whole-body washable. Packed weight 410 g (owner), estimated. Kit photos all carry Chinese labels and the promo banner, so only the shaver and head close-up were used. Full kit = every head (F kit photo). Unit cost is ASSUMED (cheapest/dearest of the listing range) until the owner sends style prices. Weight 0.41 kg is the owner figure for the listing; the full kit may weigh more. Price raised from NGN 45000 to NGN 57000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Wenzhou Shimin Xiao Electric Appliance Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=864902760472"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.41,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-08T09:44:48.848Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as electric-shaver-travel-kit (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 22486,
+      "landed": 22486,
+      "gross": 22514,
+      "margin": 0.5003193333333333,
+      "suggested": 50000
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T11:53:07.535Z",
+    "history": [
+      {
+        "at": "2026-11-08T09:42:38.054Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T09:44:48.850Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T09:45:01.514Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T09:45:05.726Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T11:51:16.786Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T11:51:47.506Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T11:52:00.523Z",
+        "from": "PUBLISHING",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T11:53:00.225Z",
+        "from": "FAILED",
+        "to": "APPROVED",
+        "note": "publish dropped on a slow connection; owner approved by name 8 Nov"
+      },
+      {
+        "at": "2026-11-08T11:53:05.084Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T11:53:07.535Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1794131104568",
+    "photos_reviewed": {
+      "at": "2026-11-08T11:51:16.393Z",
+      "hashes": {
+        "shaver.jpg": "ea74b156b6e5c403ac248c3d95dd591a9ca950eb37117bcb5555da0e474a212a",
+        "heads.jpg": "f5f3afa80f55bee25f2bbe052b7b0db428e32f9843af2df9171440543ac9e577"
+      }
+    },
+    "approved_at": "2026-11-08T11:51:16.784Z",
+    "attempts": 1,
+    "published_at": "2026-11-08T11:53:07.535Z",
+    "url": "https://www.finalheaven.shop/product/p1794131104568"
+  },
+  "id": "p1794131104568"
+}

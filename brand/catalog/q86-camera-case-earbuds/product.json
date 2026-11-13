@@ -1,0 +1,166 @@
+{
+  "name": "Camera-Style Case Earbuds — LED Display",
+  "category": "Gadgets",
+  "description": "Wireless earbuds in a camera-shaped charging case with a round LED battery display on the lens. Comes in black, brown/orange and green.",
+  "price": 7000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Brown/Orange",
+    "Green"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "camera",
+    "led display",
+    "q86"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/844fcd82-d163-49ce-b604-fa1298caa3f8.jpg"
+    },
+    {
+      "file": "brown-orange.jpg",
+      "color": "Brown/Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d1b22335-e25f-4650-8bc5-a5f03cac839a.jpg"
+    },
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0148405a-948f-4f81-a432-88159ead360c.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706",
+    "unit_cost": 9.3,
+    "cost_currency": "CNY",
+    "fx_rate": 223.9,
+    "image_permission": "unknown",
+    "notes": "Style \"Q86\", ¥9.30. Rate 223.9 ₦/¥ (listing header). Shop confirmed as Huixun by the style picker. Owner set the price (₦7000). Owner accepts the printed \"Sound by KFG / Designed of California\" and \"Hi-Fi\" case; photos keep the print as supplied; copy must not mention KFG or California. PRODUCT-LEVEL ISSUE: \"Sound by KFG / Designed of California\" and \"Hi-Fi\" are printed on the case itself, so the physical product carries that third-party-style branding and a \"California\" origin line. It cannot be cropped or retouched without misrepresenting the product. Hold photos and listing until the owner decides: ask the supplier for a blank-case version, or accept selling the printed case. Photos 800 px square. Overlay not made; copy is ready. Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. Lithium battery: sea freight only. No battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Shenzhen Huixun Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T16:34:51.944Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:26:17.181Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:27:11.612Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-13T16:27:12.087Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION",
+        "note": "set by hand"
+      },
+      {
+        "at": "2026-11-13T16:30:16.177Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:30:54.163Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:32:39.654Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T16:32:51.478Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:32:56.269Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:34:49.465Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T16:34:49.767Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T16:34:51.944Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:32:39.653Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as macaron-square-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as open-ear-hook-earbuds-led (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as over-ear-wireless-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as p47-foldable-on-ear-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as sleep-style-earbuds-lanyard-case (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as touchscreen-case-earbuds (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2082,
+      "landed": 2082,
+      "gross": 4918,
+      "margin": 0.7025328571428571,
+      "suggested": 5000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794587575337",
+    "photos_reviewed": {
+      "at": "2026-11-13T16:34:49.157Z",
+      "hashes": {
+        "black.jpg": "1bf0bcc4fac01b41b4b93230080ca404ad1343b11f4e6bb4a7bc57f88f25aadb",
+        "brown-orange.jpg": "d5851868e835aad60c5547235e378334f1e446575e6a819358dbbe190b0d38c2",
+        "green.jpg": "f31c0c8e3032f6e163cebdc46749eb65fe3eec6f4bf9a2d562827f8d93b2ab21"
+      }
+    },
+    "approved_at": "2026-11-13T16:34:49.463Z",
+    "published_at": "2026-11-13T16:34:51.943Z",
+    "url": "https://www.finalheaven.shop/product/p1794587575337"
+  },
+  "ships_by_air": false,
+  "id": "p1794587575337"
+}

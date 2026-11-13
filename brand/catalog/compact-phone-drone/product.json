@@ -1,0 +1,195 @@
+{
+  "name": "Compact Camera Drone with Phone Remote",
+  "category": "Gadgets",
+  "description": "A compact camera drone with full propeller guards, optical-flow hover and obstacle avoidance. The remote has a holder for your own phone, which shows the camera view (phone not included). In the box: the drone, remote, 4 spare propellers, USB charging cable and a screwdriver, plus 3 AAA batteries for the remote. This is the 1-battery pack: 1 flight battery for the drone. Carry case not included.",
+  "price": 45000,
+  "stock": 20,
+  "colors": [
+    "White/Grey"
+  ],
+  "sizes": [],
+  "tags": [
+    "drone",
+    "camera drone",
+    "phone remote",
+    "gadget",
+    "toy"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "case-drone-remote.jpg",
+      "color": "White/Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/dc8f0656-187f-4264-87f2-7c1c1921b825.jpg"
+    },
+    {
+      "file": "case-open.jpg",
+      "color": "White/Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/68acf0fe-28c1-4396-b2d5-aac61a06a37b.jpg"
+    }
+  ],
+  "specs": [
+    {
+      "label": "Remote",
+      "value": "Phone-holder remote, phone not included"
+    },
+    {
+      "label": "Camera",
+      "value": "Front camera on the drone"
+    },
+    {
+      "label": "Flight aids",
+      "value": "Optical-flow hover, obstacle avoidance"
+    },
+    {
+      "label": "Protection",
+      "value": "Full propeller guards"
+    },
+    {
+      "label": "Size",
+      "value": "Under 30 cm"
+    },
+    {
+      "label": "Remote batteries",
+      "value": "3 x AAA, included"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/964258886072.html",
+    "unit_cost": 85,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shantou Xiaowang Kingdom Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/964258886072.html"
+    },
+    "notes": "1688 offer 964258886072, variant V53 gray optical flow dual aerial photography (camera + phone-holder remote), single battery package, no backup battery: 85 CNY (18,914.23 NGN shown, rate 222.52, screenshot df1112aa). Other packs: 95 / 105 / 115 CNY for 2 / 3 / 4 batteries (not listed). Repurchase rate 22.61% (OK), 4K+ boxes sold, MOQ 1 box. Supplier title and images claim 8K and 50x zoom: NOT repeated; no range, flight time or camera resolution verified. Brand 4DRC is the maker mark, kept out of title, copy and slug. Phone not included. Photos are owner buyer pictures (900 px; first is upscaled a little, soft; the second had a blister pack at top right cropped out). Both show a black carry case with foam insert: no case is in the supplier box contents, so the description does not mention it; owner to confirm. Weight 330-375 g across variants (mapping not shown); 0.35 kg assumed. Lithium drone battery: ships_by_air false. RISK: drones are restricted imports in Nigeria (ONSA end-user clearance, NCAA); owner already accepted this."
+  },
+  "shipping": {
+    "weight_kg": 0.35,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T11:58:06.236Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:58:05.952Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T10:58:37.351Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T10:59:06.340Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T11:00:32.791Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "owner listing screen version only"
+      },
+      {
+        "at": "2026-11-10T11:04:36.963Z",
+        "from": "REJECTED",
+        "to": "RECEIVED",
+        "note": "owner reopened as compact-phone-drone"
+      },
+      {
+        "at": "2026-11-10T11:04:50.040Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T11:05:03.112Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T11:05:09.254Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T11:57:43.456Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-10T11:57:43.690Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T11:57:45.605Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T11:58:03.860Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T11:58:04.077Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T11:58:06.236Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T11:57:43.456Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as compact-screen-drone (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 18914,
+      "landed": 18914,
+      "gross": 26086,
+      "margin": 0.5796844444444444,
+      "suggested": 42500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794308708056",
+    "photos_reviewed": {
+      "at": "2026-11-10T11:58:03.660Z",
+      "hashes": {
+        "case-drone-remote.jpg": "73993e2bec2f1a89de00c743224abfb010af79e3997583447e85d6b5bf24f552",
+        "case-open.jpg": "a79fe6b21d47e988236c487c1021efe092f8144711b54d6229b81a01a7cbefce"
+      }
+    },
+    "approved_at": "2026-11-10T11:58:03.859Z",
+    "published_at": "2026-11-10T11:58:06.236Z",
+    "url": "https://www.finalheaven.shop/product/p1794308708056"
+  },
+  "id": "p1794308708056"
+}

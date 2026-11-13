@@ -1,7 +1,33 @@
 {
   "name": "Magnetic Power Bank — 5,000 mAh",
   "category": "Gadgets",
-  "description": "A slim power bank that snaps onto the back of your phone and charges it wirelessly at up to 15W. It holds on magnetically to iPhone 12 and later; other phones with wireless charging need a magnetic case or ring.\n\nThe USB-C port does 20W fast charging both ways: plug in a cable to charge a second device at the same time, or to recharge the power bank itself. Four small lights show how much charge is left. 5,000 mAh, and small enough for your hand luggage on a flight.",
+  "description": "A slim power bank that snaps onto the back of your phone and charges it wirelessly. Small enough for your hand luggage on a flight.",
+  "specs": [
+    {
+      "label": "Capacity",
+      "value": "5,000 mAh"
+    },
+    {
+      "label": "Colours",
+      "value": "White, Orange, Black, Blue, Pink"
+    },
+    {
+      "label": "Wireless charging",
+      "value": "Up to 15W"
+    },
+    {
+      "label": "Magnetic hold",
+      "value": "iPhone 12 and later; other wireless-charging phones need a magnetic case or ring"
+    },
+    {
+      "label": "USB-C port",
+      "value": "20W fast charging, both ways (in and out)"
+    },
+    {
+      "label": "Charge indicator",
+      "value": "Four small lights"
+    }
+  ],
   "price": 15000,
   "stock": 20,
   "colors": [
@@ -72,7 +98,7 @@
     "store_id": "p1793211323197",
     "note": "approved by the owner",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:17.538Z",
+    "updated": "2026-11-04T22:26:53.543Z",
     "history": [
       {
         "at": "2026-10-28T20:22:57.042Z",
@@ -122,10 +148,15 @@
         "at": "2026-10-28T22:03:17.538Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:53.543Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:17.538Z",
+      "at": "2026-11-04T22:26:53.542Z",
       "ok": true,
       "problems": [],
       "needs": [],

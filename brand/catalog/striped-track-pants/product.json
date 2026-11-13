@@ -1,8 +1,34 @@
 {
   "name": "Striped Track Pants",
   "category": "Pants",
-  "description": "Wide-leg track pants in black, with grey stripes down each side and curved grey piping that sweeps across the legs. An elastic drawstring waist, and a long, loose cut that stacks over your shoes. Made from a light, quick-dry softshell fabric.\n\nThey run about a size small: if you're between sizes, go one up.",
-  "price": 25000,
+  "description": "Wide-leg track pants in black, with grey stripes down each side and a long, loose cut that stacks over your shoes. They run about a size small: if you're between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Black with grey stripes"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL"
+    },
+    {
+      "label": "Fit",
+      "value": "Wide-leg, long and loose"
+    },
+    {
+      "label": "Waist",
+      "value": "Elastic drawstring"
+    },
+    {
+      "label": "Detail",
+      "value": "Grey stripes down each side, curved grey piping across the legs"
+    },
+    {
+      "label": "Fabric",
+      "value": "Light, quick-dry softshell"
+    }
+  ],
+  "price": 29000,
   "stock": 20,
   "colors": [
     "Black"
@@ -47,7 +73,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "¥32 with the first-order coupon, ¥37 from 10 pieces. Sizes M–3XL assumed (size chart not seen): check against the listing when ordering. Three side stripes resemble an Adidas trademark: listed under a generic name at the owner's choice. The 'Mujie' word on the hip is the maker's label. Photos: supplier model shots cropped to 4:5.",
+    "notes": "¥32 with the first-order coupon, ¥37 from 10 pieces. Sizes M–3XL assumed (size chart not seen): check against the listing when ordering. Three side stripes resemble an Adidas trademark: listed under a generic name at the owner's choice. The 'Mujie' word on the hip is the maker's label. Photos: supplier model shots cropped to 4:5. Price raised from NGN 25000 to NGN 29000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Track pants seller (name to confirm)",
       "platform": "1688",
@@ -64,7 +90,7 @@
     "url": "https://www.finalheaven.shop/product/p1793210836554",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:18.969Z",
+    "updated": "2026-11-04T22:26:59.054Z",
     "history": [
       {
         "at": "2026-10-28T20:23:05.675Z",
@@ -81,10 +107,15 @@
         "at": "2026-10-28T22:03:18.969Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:59.054Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:18.969Z",
+      "at": "2026-11-04T22:26:59.053Z",
       "ok": true,
       "problems": [],
       "needs": [],

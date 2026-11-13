@@ -1,0 +1,162 @@
+{
+  "name": "Embroidered Suede Low-Top Shoes",
+  "category": "Sports",
+  "description": "Suede low-top shoes with a cartoon-face and lettering embroidery at the heel. Chinese sizing runs small: go one size up.",
+  "specs": [
+    {
+      "label": "Upper",
+      "value": "Suede, with a jagged suede overlay at the heel"
+    },
+    {
+      "label": "Embroidery",
+      "value": "Cartoon face and lettering"
+    },
+    {
+      "label": "Sole",
+      "value": "White rubber"
+    },
+    {
+      "label": "Colours",
+      "value": "Blue, Rose red"
+    },
+    {
+      "label": "Sizes",
+      "value": "Men's EU 38 to 43"
+    }
+  ],
+  "price": 46000,
+  "stock": 20,
+  "colors": [
+    "Blue",
+    "Rose red"
+  ],
+  "sizes": [
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43"
+  ],
+  "tags": [
+    "sneakers",
+    "low-top",
+    "suede",
+    "embroidered",
+    "mens",
+    "footwear",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b80f2aa0-4cb7-407f-b549-5b77327e7c16.jpg"
+    },
+    {
+      "file": "rose-red.jpg",
+      "color": "Rose red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/93e2b0a1-08ea-4590-8051-04790fefb501.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1076648931012",
+    "unit_cost": 26.9,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Owner accepted the design-similarity risk, 1 Nov 2026. Supplier title: 2026 Spring and Autumn New Men's Shoes with Cartoon Embroidery, Suede Low-Top Trendy Casual Versatile White Rubber Sole Shoes. Price 26.90 CNY a pair from 1 pair. Supplier colour \"White and blue\" sold here as Blue; \"Rose red\" kept as Rose red. Sizes EU 38-43 from screenshot. Screenshot shows freight 5.00 CNY (not recorded as a cost; confirm it is China domestic shipping). Screenshot says 100+ bought recently. Store return rate not shown. Supplier photos are 800 px, upscaled to 1200x1500, so soft; only the heel view is shown per colour, no full-side photo. Heel lettering in the photos is part of the embroidery; copy names no brand or character. Weight and freight unknown. Price raised from NGN 16000 to NGN 46000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Embroidered suede shoe seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1076648931012"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:41.927Z",
+    "history": [
+      {
+        "at": "2026-11-01T08:01:53.692Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T08:02:36.404Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:03:37.069Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T08:03:48.862Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T08:03:52.623Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T08:04:07.830Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T08:04:08.059Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T08:04:10.147Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:41.927Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:41.926Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6014,
+      "landed": 6014,
+      "gross": 9986,
+      "margin": 0.6241229375,
+      "suggested": 13500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793520231478",
+    "approved_at": "2026-11-01T08:04:07.828Z",
+    "published_at": "2026-11-01T08:04:10.147Z",
+    "url": "https://www.finalheaven.shop/product/p1793520231478"
+  },
+  "id": "p1793520231478"
+}

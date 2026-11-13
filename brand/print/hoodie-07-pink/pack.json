@@ -1,0 +1,82 @@
+{
+  "title": "Pink 07 Hoodie",
+  "slug": "pink-07-hoodie",
+  "version": 2,
+  "date": "13 November 2026",
+  "garment": "350 g washed (snow-wash) cotton pullover hoodie, unisex, colour washed pink. Supplier: Suning Sufang Yazhi Clothing Co., Ltd.",
+  "garmentHex": "#D9437A",
+  "photos": {
+    "front": "blank-front.png",
+    "back": "blank-back.png",
+    "width": 896,
+    "pxPerCm": 11.75
+  },
+  "colours": [
+    {
+      "hex": "#FFFFFF",
+      "name": "White",
+      "use": "letters, numbers, front mark"
+    },
+    {
+      "hex": "#111111",
+      "name": "Black",
+      "use": "outline on the 07"
+    }
+  ],
+  "sizeNote": "Sizes are for a size L. Use the same transfer size on every garment size. On S, move the back print up to 6 cm below the hood seam.",
+  "placements": [
+    {
+      "name": "Back",
+      "method": "dtf",
+      "side": "back",
+      "file": "dtf-back-final-07-heaven-black-outline-26cm-300dpi.png",
+      "widthCm": 26,
+      "what": "\"Final 07 Heaven\", white with a black outline on the 07",
+      "cx": 448,
+      "fromY": 344,
+      "belowCm": 7,
+      "where": "Centre it left to right. Measure from the seam where the hood joins the back, at the centre: the top edge of the print sits <b>7 cm</b> below that seam."
+    },
+    {
+      "name": "Front",
+      "method": "embroidery",
+      "side": "front",
+      "make": "mark",
+      "colour": "#FFFFFF",
+      "heightCm": 7,
+      "file": "embroidery-front-mark-white-7cm-600dpi.png",
+      "widthCm": 6.18,
+      "what": "Three-star mark, white, embroidered",
+      "cx": 448,
+      "fromY": 360,
+      "belowCm": 6,
+      "where": "Top middle of the chest. Centre it left to right. The top edge sits <b>6 cm</b> below the point where the hood crosses over at the neck.",
+      "thread": "Bright white polyester, 40 wt. One colour, no outline.",
+      "stitches": "Satin stitch for every star and for the long tail of the big star, with a light underlay so the fleece doesn't show through. Keep the points sharp: taper the satin into each tip. Widen any part under <b>1 mm</b> to 1 mm."
+    },
+    {
+      "name": "Sleeves",
+      "method": "dtf",
+      "side": "front",
+      "make": "sleeve-script",
+      "colour": "#FFFFFF",
+      "widthCm": 7,
+      "file": "dtf-sleeve-final-heaven-white-7cm-300dpi.png",
+      "what": "\"Final Heaven\" on one line, slim script",
+      "cuffs": [
+        [
+          140,
+          922,
+          4
+        ],
+        [
+          738,
+          925,
+          -4
+        ]
+      ],
+      "aboveCm": 1.5,
+      "where": "On <b>both</b> sleeves, on the outer forearm, centred on the sleeve's top fold, <b>just above the cuff band</b>: the bottom edge sits <b>1.5 cm</b> above the seam where the cuff rib starts. Press each sleeve flat on a sleeve platen. It reads upright when the arms hang down. Do <b>not</b> mirror it."
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "name": "Wireless Earbuds — Matte Colour Case",
+  "category": "Gadgets",
+  "description": "Wireless earbuds in a square charging case with a matte finish. Seven colours: light blue, yellow, pink, grey, navy, black and white. The case holds both buds and opens with a flip lid.",
+  "price": 7000,
+  "stock": 20,
+  "colors": [
+    "Light Blue",
+    "Yellow",
+    "Pink",
+    "Grey",
+    "Navy",
+    "Black",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "true wireless",
+    "matte"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "light-blue.jpg",
+      "color": "Light Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cae35337-29e8-480a-b80e-1d6c380e3301.jpg"
+    },
+    {
+      "file": "yellow.jpg",
+      "color": "Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/02cf3ad4-4e19-4cfc-a13b-0747d6970b3d.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/298e3c95-a968-4d43-9b98-c0d6e8529e1d.jpg"
+    },
+    {
+      "file": "grey.jpg",
+      "color": "Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/fd629455-b849-469d-a661-2028abad117f.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/90a5e7f8-d5d1-4fe9-b8c9-0169182ee78b.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7410a9ab-124c-42a3-82e0-032d1c4579b3.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/97fdaa5a-81eb-4525-9675-372f36f424f4.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706",
+    "unit_cost": 10.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.9,
+    "image_permission": "unknown",
+    "notes": "Style \"I12 macaron\", ¥10.80 (white selected; assumed same for all colours; a second ¥8.20 figure also shows, not used). Rate 223.9 ₦/¥ (listing header). Shop confirmed as Huixun by the style picker. Owner set the price (₦7000). Owner sent 7 colour photos (1920 px square, clean, on white, no text or logos) with no message. Assumed from the Shenzhen Huixun listing (offerId 1025659251706) but not confirmed: shop, style name and ¥ price unknown. Copy states only what the photos show (square case, matte finish, flip lid, two buds); no Bluetooth version, battery, playtime, touch controls or compatibility claimed. Case and bud shape closely copy a well-known premium brand earbud and case; the white colour is the closest copy. Owner chose to keep all 7 colours including white and accepts the lookalike risk. Overlap: store already has crystal-display-true-wireless-earbuds (₦7,500, ¥13.5), in-ear-earbuds-display and clip-on-earbuds-*; none has this square matte case, so not a duplicate. If from the 58.6%-return-rate Huixun shop: samples first, stay unpublished. Lithium battery: sea freight only.",
+    "supplier": {
+      "name": "Shenzhen Huixun Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T16:34:48.811Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:23:08.786Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:23:28.271Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:30:50.616Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:32:38.905Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T16:32:41.980Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:32:50.340Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:34:46.362Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T16:34:46.666Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T16:34:48.811Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:32:38.904Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as open-ear-hook-earbuds-led (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as over-ear-wireless-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as p47-foldable-on-ear-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as q86-camera-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as sleep-style-earbuds-lanyard-case (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as touchscreen-case-earbuds (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2418,
+      "landed": 2418,
+      "gross": 4582,
+      "margin": 0.6545542857142856,
+      "suggested": 5500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794587569322",
+    "photos_reviewed": {
+      "at": "2026-11-13T16:34:46.040Z",
+      "hashes": {
+        "light-blue.jpg": "41b2c97749e86bbf61c6095ac3434f6afdedd4a8ef6c7e44f7d990dbbe8663ab",
+        "yellow.jpg": "d21f48f6f2e0528228021234a48af57ebd9e18be508b6ba75545d70b351a4697",
+        "pink.jpg": "34648760261b7c6053b73c0b2d06fbe6660a1e05034b3f74dcb426125bd690ba",
+        "grey.jpg": "0da1677083e6236e85b357e4d1660758c9f95178e80bdc6e39b975ad84b473b7",
+        "navy.jpg": "cac6304131474bdc29600269b259ebf51aa876aadb86290dad48040794ba9ba4",
+        "black.jpg": "728cd56ea1b07e83812efdc24008c343fcfbbd725cf8be65604d45f8afd2acd9",
+        "white.jpg": "32704848749089d87b59c98e114dec5025d5d892136014eb0dc595aa3f0af26f"
+      }
+    },
+    "approved_at": "2026-11-13T16:34:46.360Z",
+    "published_at": "2026-11-13T16:34:48.811Z",
+    "url": "https://www.finalheaven.shop/product/p1794587569322"
+  },
+  "ships_by_air": false,
+  "id": "p1794587569322"
+}

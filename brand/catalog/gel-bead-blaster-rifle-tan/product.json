@@ -1,0 +1,116 @@
+{
+  "name": "Gel Bead Blaster Rifle (Tan)",
+  "category": "Gadgets",
+  "description": "A tan gel bead blaster with an electric burst mode and a manual single-shot mode. The full kit adds a drum magazine, scope, holographic sight, flashlight, laser, angled grip and front and rear sights. For teens and adults; children under 14 need adult supervision, and eye protection must be worn. Looks realistic: don't carry or use it in public.",
+  "price": 84500,
+  "stock": 20,
+  "colors": [
+    "Tan"
+  ],
+  "sizes": [],
+  "tags": [
+    "gel-bead-blaster",
+    "gel-blaster",
+    "toy",
+    "outdoor",
+    "electric",
+    "usb-rechargeable",
+    "tan"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1076498037035",
+    "unit_cost": 170,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Kahua Trading Company, Jinan",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1076498037035"
+    },
+    "notes": "Owner to confirm with the clearing agent that a realistic toy rifle can clear Nigerian Customs before any stock or publishing. Store return rate 32% (over the 30% flag). 7K+ sold. Tan full-kit style only (supplier style M416 full kit, 100x29.5x5.5 cm); owner gave the cost as 170 CNY, but the page's range tops out at 166.4 CNY, so confirm. FX 222.63 from the page (12,155.77 / 54.6). Free shipping within China. Lithium battery: sea freight only (ships_by_air false), as for the other blasters. Supplier bundles a free small sniper toy, a pistol toy and a target: left out of the listing and copy. Whether gel beads, battery and charger come in the box is not shown for this style: not claimed. Supplier photos are 800 px with Chinese text and a bonus panel burned in; automatic cut-out dropped the long barrel cover, so no store photo yet. Supplier title uses brand and model names: none used here. No safety certification shown or claimed."
+  },
+  "shipping": {
+    "weight_kg": 1,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-08T12:08:08.681Z",
+    "history": [
+      {
+        "at": "2026-11-08T12:01:48.094Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T12:02:56.914Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T12:05:34.301Z",
+        "from": "FAILED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T12:08:08.681Z",
+        "from": "FAILED",
+        "to": "REJECTED",
+        "note": "Owner 8 Nov: drop guns for now (realistic toy rifles; reopen with status if wanted)"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T12:05:34.300Z",
+      "ok": false,
+      "problems": [
+        "no photos"
+      ],
+      "needs": [],
+      "notes": [
+        "no photo shows Tan"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 37847,
+      "landed": 37847,
+      "gross": 46653,
+      "margin": 0.552105325443787,
+      "suggested": 84500
+    },
+    "note": "Owner 8 Nov: drop guns for now (realistic toy rifles; reopen with status if wanted)"
+  },
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Tan"
+    },
+    {
+      "label": "Size",
+      "value": "About 100 × 29.5 × 5.5 cm"
+    },
+    {
+      "label": "Modes",
+      "value": "Electric burst, manual single shot"
+    },
+    {
+      "label": "Kit",
+      "value": "Drum magazine, scope, holographic sight, flashlight, laser, angled grip, front and rear sights"
+    },
+    {
+      "label": "Use",
+      "value": "Teens and adults; supervision under 14; wear eye protection"
+    }
+  ],
+  "ships_by_air": false
+}

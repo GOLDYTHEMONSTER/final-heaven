@@ -1,0 +1,173 @@
+{
+  "name": "Vintage Banknote Print Silicone Case",
+  "category": "Accessories",
+  "description": "A vintage banknote-print silicone case in black. The print is artwork based on an old banknote design, not real currency.",
+  "specs": [
+    {
+      "label": "Fits",
+      "value": "iPhone 13, 14, 15 and 16 series (see the model list)"
+    },
+    {
+      "label": "Colour",
+      "value": "Black"
+    },
+    {
+      "label": "Material",
+      "value": "Silicone"
+    },
+    {
+      "label": "Body",
+      "value": "Soft, rounded"
+    },
+    {
+      "label": "Camera",
+      "value": "Raised rim around the cameras"
+    }
+  ],
+  "price": 6500,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [
+    "iPhone 13",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 14",
+    "iPhone 14 Plus",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 15",
+    "iPhone 15 Plus",
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 16",
+    "iPhone 16 Plus",
+    "iPhone 16 Pro",
+    "iPhone 16 Pro Max"
+  ],
+  "tags": [
+    "phone case",
+    "silicone",
+    "banknote print",
+    "vintage",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6384bd67-74df-4d88-8f72-6ee50482bae7.jpg"
+    },
+    {
+      "file": "black-2.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0ead5655-b5a8-426c-aeb0-6dcf8b11dc18.jpg"
+    },
+    {
+      "file": "black-3.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/03aa0327-5847-41de-8051-d5f624eaff5e.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=906822831787",
+    "unit_cost": 2.8,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Donglai Digital Electronics Trading Company",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=906822831787"
+    },
+    "notes": "Price varies by model: 1.98 to 2.8 CNY; costed at the top, 2.8. Rate from screenshot (N624.48 / 2.8). Free shipping over 30 CNY on 1688. 200+ sold. Store return rate 51.7%: owner accepts ~50% return rates on phone cases. Model list not in screenshots: owner confirmed iPhone 13-16 range (15 options); title also mentions 17 Pro (not listed). Print is a vintage 1928 Bolivian 100-boliviano banknote design used as art: not described as real currency. Supplier title wording (cross-border, Apple) not used. Photos 800 px (soft); bottom cropped on cover to leave out a watch. Hand-model nails shown. Only one colour (Black); 3 photos from the supplier's 4."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:40.351Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:14:08.367Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:14:23.915Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:15:38.642Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:15:38.859Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:15:47.888Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:16:07.439Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:16:07.657Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:16:10.765Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:40.351Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:40.350Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 624,
+      "landed": 624,
+      "gross": 5876,
+      "margin": 0.9039255384615384,
+      "suggested": 1500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793531746502",
+    "approved_at": "2026-11-01T11:16:07.438Z",
+    "published_at": "2026-11-01T11:16:10.765Z",
+    "url": "https://www.finalheaven.shop/product/p1793531746502"
+  },
+  "id": "p1793531746502"
+}

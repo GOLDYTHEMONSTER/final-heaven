@@ -1,0 +1,167 @@
+{
+  "name": "California Athletic Jersey Tee",
+  "category": "T-Shirts",
+  "description": "Loose-fit short-sleeve jersey-style tee in rayon, with a colour-block yoke, striped sleeves and a large \"California Athletic 23\" print on the front. Crew neck, pullover. Three colourways. Runs about a size small: go one up.",
+  "price": 12000,
+  "stock": 20,
+  "colors": [
+    "Royal Blue",
+    "Black and Red",
+    "Navy and Cream"
+  ],
+  "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+  ],
+  "tags": [
+    "jersey",
+    "jersey tee",
+    "mens",
+    "streetwear",
+    "retro",
+    "sports",
+    "california",
+    "varsity",
+    "rayon"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "royal-blue-crop.jpg",
+      "color": "Royal Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2a554e6b-5129-49de-a2c8-2de57b42510a.jpg"
+    },
+    {
+      "file": "black-red-crop.jpg",
+      "color": "Black and Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e1f5292e-933f-43c6-8cdf-d00fba19d3fd.jpg"
+    },
+    {
+      "file": "navy-cream-crop.jpg",
+      "color": "Navy and Cream",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9cc90daa-1bf0-4456-915a-b9f041f643fb.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1007681039852",
+    "unit_cost": 12.16,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shangrao Deshang Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1007681039852"
+    },
+    "notes": "One 1688 offer with 22 styles (V-neck and crew-neck); only the three crew-neck flats are listed, pending owner confirmation of which styles ship. Cost is the 1+ price CNY 12.16; fx 222.52 = the screenshot NGN 2,705.85 / 12.16. Free shipping on orders over 50 (CNY) on 1688 only. Sizes shown on the listing: XS, S, M, L at 180 g each (table may continue past L). Fabric: rayon (listing). Style thumbnails show the black/red and navy/cream pieces as crew necks. Garment photos are 800 px wide, upscaled to 1200 (slightly soft). Black/red photo: the fabric-swirl inset was painted out using background from the blue photo and one blue shoulder patch recoloured black. The garment prints carry a small \"XL\" size label and an \"CH\" emblem patch in the photos; size label reads XL regardless of size. Supplier risk: one 5-review buyer said she did not send photos before shipping and shipped late. Store return rate not shown. Supplier on 1688 for 2 years, 400+ sold. Title said \"white\"; the 3 colours are my reading of the style thumbnails (Royal blue named by 1688)."
+  },
+  "shipping": {
+    "weight_kg": 0.18,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T06:34:01.528Z",
+    "history": [
+      {
+        "at": "2026-11-10T06:23:29.695Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T06:24:59.977Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T06:26:35.575Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T06:26:35.816Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T06:26:43.514Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T06:33:58.908Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T06:33:59.130Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T06:34:01.528Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T06:26:35.573Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2706,
+      "landed": 2706,
+      "gross": 9294,
+      "margin": 0.7745130666666667,
+      "suggested": 6500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794292001958",
+    "photos_reviewed": {
+      "at": "2026-11-10T06:26:51.188Z",
+      "hashes": {
+        "royal-blue-crop.jpg": "ed24e111def2c0bd9607ac9d3e2c637aba186ad99f4e4753297b4605bad581c3",
+        "black-red-crop.jpg": "5df64f3b56aed77ecf2ddaa93df036bfdfbaa63640415557d914c002205e5dff",
+        "navy-cream-crop.jpg": "b06c4cb07cf68deb1f42ec159d737d23d1d2c8ed54d5019601cdb1a3d6f9b109"
+      }
+    },
+    "approved_at": "2026-11-10T06:33:58.907Z",
+    "published_at": "2026-11-10T06:34:01.528Z",
+    "url": "https://www.finalheaven.shop/product/p1794292001958"
+  },
+  "specs": [
+    {
+      "label": "Fabric",
+      "value": "Rayon"
+    },
+    {
+      "label": "Sleeve",
+      "value": "Short"
+    },
+    {
+      "label": "Neck",
+      "value": "Crew neck"
+    },
+    {
+      "label": "Style",
+      "value": "Pullover"
+    }
+  ],
+  "id": "p1794292001958"
+}

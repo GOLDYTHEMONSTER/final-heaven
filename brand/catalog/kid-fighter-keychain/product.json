@@ -1,0 +1,172 @@
+{
+  "name": "Martial Arts Kid Figure Keychain",
+  "category": "Accessories",
+  "description": "A chibi spiky-haired martial-arts kid figure on a gold-tone ring with a lobster clasp, with a silicone wrist strap. Eight styles: red, blue or orange gi in jumping, standing or shouting poses (orange comes in standing and jumping only). Made to hang on keys or a bag.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Red · Jumping",
+    "Red · Standing",
+    "Red · Shouting",
+    "Blue · Jumping",
+    "Blue · Standing",
+    "Blue · Shouting",
+    "Orange · Standing",
+    "Orange · Jumping"
+  ],
+  "sizes": [],
+  "tags": [
+    "keychain",
+    "bag charm",
+    "cartoon figure",
+    "martial arts",
+    "car key",
+    "gift",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red-jumping.jpg",
+      "color": "Red · Jumping",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f4e83e37-4d3d-4086-9115-63a64f254993.jpg"
+    },
+    {
+      "file": "red-standing.jpg",
+      "color": "Red · Standing",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/793f4395-7c90-43ba-97a4-e25e66718631.jpg"
+    },
+    {
+      "file": "red-shouting.jpg",
+      "color": "Red · Shouting",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a7876836-3bbd-423e-9ce0-7b40b3e89d17.jpg"
+    },
+    {
+      "file": "blue-jumping.jpg",
+      "color": "Blue · Jumping",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f7bde796-0cfc-4f0a-b16c-3687db9d963b.jpg"
+    },
+    {
+      "file": "blue-standing.jpg",
+      "color": "Blue · Standing",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f43d473b-7d01-4225-a68b-39f179dcd0ae.jpg"
+    },
+    {
+      "file": "blue-shouting.jpg",
+      "color": "Blue · Shouting",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c4d932f1-4a87-4abf-8111-efcecf1a91d8.jpg"
+    },
+    {
+      "file": "orange-standing.jpg",
+      "color": "Orange · Standing",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/de224a93-ec9a-47c0-a338-50e9e9fae03b.jpg"
+    },
+    {
+      "file": "orange-jumping.jpg",
+      "color": "Orange · Jumping",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/319c9300-63fe-49ef-ac72-a5bd79edad5c.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/724914243131.html",
+    "unit_cost": 3.2,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Yaopan Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/724914243131.html"
+    },
+    "notes": "Price tiers: 3.2 CNY for 2+ (minimum order 2), 3.1 for 50-799, 3.0 for 800+; cost uses the regular 3.2. Rate from screenshot: N712.07 / 3.2. 1K+ sold, praised by 300+; no store return rate visible in the screenshot. 8 of 9 pose/colour combinations (no orange shouting). The screenshot labels the orange style \"yellow\". Supplier title and photos name a licensed anime series and its main character; listed generically. Every strap has the series name moulded on it in large letters with the series emblem, visible in all photos; photos are not retouched (would misrepresent the product). HOLD: owner must decide to list as is or skip. Size, weight and material not stated. Group photo not used."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T10:47:58.276Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:41:21.371Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T10:42:34.803Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T10:43:27.338Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T10:43:38.815Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T10:47:54.558Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T10:47:54.954Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T10:47:58.276Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T10:42:34.803Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 712,
+      "landed": 712,
+      "gross": 6788,
+      "margin": 0.9050581333333333,
+      "suggested": 2000
+    },
+    "photos_reviewed": {
+      "at": "2026-11-10T10:43:20.053Z",
+      "hashes": {
+        "red-jumping.jpg": "1edce5f6d93f64e61eae9592b9758b92a6594d0a0a865fc569af7ea61261f455",
+        "red-standing.jpg": "dc054dfe4dac83c78ff4d57d77f9cc021d409de89f94b59ec9292dae601eff8e",
+        "red-shouting.jpg": "52419c479c283e8393566646344e563d9742e9e6eaf4b770f66bf258c0fb9f3f",
+        "blue-jumping.jpg": "ec2c60ac5b28e8e2139e40c40a3881f459676363cb0aa20cf2b4dec1dd23d56f",
+        "blue-standing.jpg": "d1ce2f82a20bdcfd45c11c9161f63ba4caa05a54a3e829766ac7c06b080c43eb",
+        "blue-shouting.jpg": "7f0562a8dc80c91412692c68ff18a94b23d26836bbb97190d45569203105ed99",
+        "orange-standing.jpg": "a79c456c89c35a15e88e27e4aab6d47fa0551f28ec464bd2d39e2ecac0e9527f",
+        "orange-jumping.jpg": "7c28a88cb87300a034c04bee7bb30085a14b3be8a0c04410ca73bde29f49b505"
+      }
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794307417611",
+    "approved_at": "2026-11-10T10:47:54.539Z",
+    "published_at": "2026-11-10T10:47:58.276Z",
+    "url": "https://www.finalheaven.shop/product/p1794307417611"
+  },
+  "id": "p1794307417611"
+}

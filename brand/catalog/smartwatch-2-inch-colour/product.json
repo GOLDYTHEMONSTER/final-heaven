@@ -1,0 +1,159 @@
+{
+  "name": "Square Smartwatch, 2-inch Screen",
+  "category": "Gadgets",
+  "description": "A square smartwatch with a 2.01-inch colour screen, in grey-green or black, on a soft silicone strap. The listing gives Bluetooth and sports tracking; features beyond that are unconfirmed. For fitness use, not medical. Watch faces shown in the photos are sample displays.",
+  "price": 28000,
+  "stock": 20,
+  "colors": [
+    "Grey-green",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "smartwatch",
+    "smart watch",
+    "bluetooth watch",
+    "fitness watch",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "grey-green.jpg",
+      "color": "Grey-green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a5d622b2-20b0-4bcd-a536-c9c0deaa7ea0.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8ed6ba51-08a3-421d-99c7-84e50b999c6e.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1077840891865",
+    "unit_cost": 40,
+    "cost_currency": "CNY",
+    "fx_rate": 222.68,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shenzhen Shangsheng Industrial Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1077840891865"
+    },
+    "notes": "CNY 40 for 1 piece (about NGN 8,907.36 on the page), CNY 38 for 1000+; costed at 40, fx 8907.36/40 = 222.68. Same supplier as smart-band-m9-style. Store return rate NOT shown in the screenshots. 70+ want, 100+ reviews. 1688 title (S11, Dynamic Island, payment NFC, Huaqiangbei) NOT used. Attributes: brand LeWai, launched 2025, ladies/men/adult, screen 2.01. Packaged about 8.5 x 2.5 cm, 120 g (weight used as shipping weight, estimated). NOT claimed: NFC/payment, sapphire glass (AI strip, unverified), waterproofing, battery life, health sensors, medical. Bluetooth is in the 1688 title only; calling vs notifications unconfirmed. Battery not stated: lithium assumed, ships_by_air false (sea only). COUNTERFEIT RISK: case shape, crown and faces copy a well-known brand watch; owner must confirm with supplier that the unit shows no other brand's name or logo (startup screen, software, back, box). Excluded photos: Hello Kitty face (third-party IP), retail-box photo with another company's branding, pink-beige loop photo (soft, Chinese text, strap cut off). Colours: only grey-green and black have usable photos; a blue loop-strap style exists on the listing (first image) and a pink-beige loop style may exist, no clean photo. Photos are 800 px, enlarged 1.5x, slightly soft. OWNER DECISIONS 9 Nov 2026: counterfeit/lookalike risk explained; owner chose to proceed anyway and accepts the risk of brand complaints (supplier confirmation of no other brand marks not obtained); copy kept fully neutral. Price NGN 28000 (owner figure, changed from 25000 on 9 Nov 2026). Two colours only (Grey-green, Black) with current photos; owner saw the review sheet. Battery UNCONFIRMED: ships_by_air false (sea only) kept as the safe default."
+  },
+  "shipping": {
+    "weight_kg": 0.12,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-09T07:22:08.996Z",
+    "history": [
+      {
+        "at": "2026-11-09T07:15:10.745Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-09T07:15:34.135Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-09T07:15:39.673Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-09T07:17:43.345Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-09T07:17:43.701Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-09T07:17:48.476Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-09T07:18:38.320Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-09T07:18:38.570Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-09T07:18:40.520Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-09T07:22:05.164Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-09T07:22:05.404Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-09T07:22:08.996Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-09T07:18:38.318Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 8907,
+      "landed": 8907,
+      "gross": 19093,
+      "margin": 0.6818857142857142,
+      "suggested": 20000
+    },
+    "claims_reviewed": [
+      "medical"
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1794208667268",
+    "photos_reviewed": {
+      "at": "2026-11-09T07:17:57.741Z",
+      "hashes": {
+        "grey-green.jpg": "15e612299fcfa132e945f7c9e58dcaa1090b0a2e02f19c535fa151d470660c2b",
+        "black.jpg": "25312ddbbc19b0a795b4545acd2a8ddf1a7bfba9aef0ef4379e7230a59521fe9"
+      }
+    },
+    "approved_at": "2026-11-09T07:22:05.162Z",
+    "published_at": "2026-11-09T07:22:08.996Z",
+    "url": "https://www.finalheaven.shop/product/p1794208667268"
+  },
+  "ships_by_air": false,
+  "id": "p1794208667268"
+}

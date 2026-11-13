@@ -1,7 +1,21 @@
 {
   "name": "Satellite Sky Projector — USB",
   "category": "Gadgets",
-  "description": "A little satellite that turns your ceiling or wall into a night sky: the moon, a galaxy, a sunset over the hills, whales and more. It comes with picture slides you swap to change the scene.\n\nIt runs from any USB port (a laptop, a power bank, a phone charger or a car), so there are no batteries to change. The bendy neck points it wherever you want the picture. Best in a dark room.",
+  "description": "A little satellite that turns your ceiling or wall into a night sky: the moon, a galaxy, a sunset over the hills, whales and more. Best in a dark room.",
+  "specs": [
+    {
+      "label": "Power",
+      "value": "Any USB port (laptop, power bank, phone charger or car); no batteries"
+    },
+    {
+      "label": "Scenes",
+      "value": "Picture slides you swap to change the scene"
+    },
+    {
+      "label": "Neck",
+      "value": "Bendy, points the picture where you want it"
+    }
+  ],
   "price": 10000,
   "stock": 20,
   "colors": [],
@@ -56,7 +70,7 @@
     "url": "https://www.finalheaven.shop/product/p1793205517115",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:19.520Z",
+    "updated": "2026-11-04T22:27:03.486Z",
     "history": [
       {
         "at": "2026-10-28T20:23:07.435Z",
@@ -73,10 +87,15 @@
         "at": "2026-10-28T22:03:19.520Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:03.486Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:19.520Z",
+      "at": "2026-11-04T22:27:03.485Z",
       "ok": false,
       "problems": [],
       "needs": [

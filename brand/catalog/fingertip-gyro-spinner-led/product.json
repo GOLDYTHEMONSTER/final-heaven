@@ -1,0 +1,168 @@
+{
+  "name": "Aluminium Fidget Spinner with LED Rings",
+  "category": "Gadgets",
+  "description": "A three-lobe fidget spinner with an aluminium alloy body and a light ring around each cap. 6.8 cm across and 75 g. Small parts: not for young children.",
+  "price": 12000,
+  "stock": 20,
+  "colors": [
+    "Silver",
+    "Black",
+    "Cyan",
+    "Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "fidget-spinner",
+    "fidget",
+    "toy",
+    "led",
+    "light-up",
+    "gadget"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "silver.jpg",
+      "color": "Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/db8dec8f-e51e-47a3-9999-6c3019473566.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3074a314-1afb-46de-9fcf-b56b43f46531.jpg"
+    },
+    {
+      "file": "cyan.jpg",
+      "color": "Cyan",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/cc5d776b-408a-4844-b22e-cf6b491ce9ac.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e72eadfa-0b5c-4ae2-a6ae-71737a316246.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=656776049823",
+    "unit_cost": 20,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "Cost ¥20 is the top of the ¥9-¥20 range, ASSUMED for the LED style: check the Style tab. fx 222.49. Style 9/17 is labelled \"light-in-the-dark version [with flashlight]\". Battery type, whether it is replaceable and whether the light is always on or spin-triggered are NOT stated: nothing claimed, and ships_by_air is left unset until confirmed (button cells would need it false). Pink LED exists in the listing (screenshot only, no clean photo). Same supplier/listing as fingertip-gyro-spinner. Photos 800 px sources, extended to 4:5.",
+    "supplier": {
+      "name": "Shenzhen Chuangyi Future Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=656776049823"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.075,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-12T21:57:05.142Z",
+    "history": [
+      {
+        "at": "2026-11-12T21:37:03.950Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-12T21:37:05.955Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-12T21:38:44.759Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-12T21:38:45.036Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-12T21:38:52.409Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-12T21:56:58.474Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-12T21:56:58.747Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-12T21:57:05.142Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-12T21:38:44.757Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as fingertip-gyro-spinner (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4450,
+      "landed": 4450,
+      "gross": 7550,
+      "margin": 0.6291833333333333,
+      "suggested": 10000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794519530799",
+    "photos_reviewed": {
+      "at": "2026-11-12T21:56:19.153Z",
+      "hashes": {
+        "silver.jpg": "dcf6b2083aaf435b0aab6f6f5beb8d35ce0d9ee0f3c0de83f0fa49f04a848e42",
+        "black.jpg": "c31bfb963687a49d37cd86446f5031262fb1e0fa294915d72136c1bad2619196",
+        "cyan.jpg": "3014090bea23d7a35317b4fa94f297b82983e6783d86714ef4ded49240e7e495",
+        "blue.jpg": "30c8e8b22a41dd6d2a9ce398945746086b165843350bdcb1026118814f1392bf"
+      }
+    },
+    "approved_at": "2026-11-12T21:56:58.473Z",
+    "published_at": "2026-11-12T21:57:05.142Z",
+    "url": "https://www.finalheaven.shop/product/p1794519530799"
+  },
+  "specs": [
+    {
+      "label": "Material",
+      "value": "Aluminium alloy body"
+    },
+    {
+      "label": "Width",
+      "value": "6.8 cm"
+    },
+    {
+      "label": "Thickness",
+      "value": "1.2 cm"
+    },
+    {
+      "label": "Weight",
+      "value": "75 g"
+    }
+  ],
+  "id": "p1794519530799"
+}

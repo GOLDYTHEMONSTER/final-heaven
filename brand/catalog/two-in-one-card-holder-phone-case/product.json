@@ -1,0 +1,198 @@
+{
+  "name": "Two-in-One Card Holder Phone Case",
+  "category": "Accessories",
+  "description": "A rugged phone case with a flip-out card slot and a ring holder on the back that doubles as a kickstand.",
+  "specs": [
+    {
+      "label": "Fits",
+      "value": "iPhone 13, 14, 15 and 16 series (see the model list)"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, Red, Blue, Teal, Purple, Burgundy"
+    },
+    {
+      "label": "Card slot",
+      "value": "Flip-out, holds up to 2 cards, slide-out tray"
+    },
+    {
+      "label": "Ring holder",
+      "value": "On the back, doubles as a kickstand"
+    },
+    {
+      "label": "Edges",
+      "value": "Raised, textured"
+    }
+  ],
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Red",
+    "Blue",
+    "Teal",
+    "Purple",
+    "Burgundy"
+  ],
+  "sizes": [
+    "iPhone 13",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 14",
+    "iPhone 14 Plus",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 15",
+    "iPhone 15 Plus",
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 16",
+    "iPhone 16 Plus",
+    "iPhone 16 Pro",
+    "iPhone 16 Pro Max"
+  ],
+  "tags": [
+    "phone case",
+    "card holder",
+    "ring holder",
+    "kickstand",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ddc88f19-031b-4e2c-be10-dad45ea13684.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a8302f99-032b-4962-9b94-8f7f85a7d8f0.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e985bc52-10f8-4135-9953-570108987a2f.jpg"
+    },
+    {
+      "file": "teal.jpg",
+      "color": "Teal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1336a22e-9fe9-4949-8766-726f488c8ce0.jpg"
+    },
+    {
+      "file": "purple.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/729321a0-6335-4a2e-8826-360b0a451f1e.jpg"
+    },
+    {
+      "file": "burgundy.jpg",
+      "color": "Burgundy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b83b9c51-362e-45c0-9912-124832609e88.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1031491657859",
+    "unit_cost": 9.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Tongyu Jiakaihui Plastic Products Factory",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1031491657859"
+    },
+    "notes": "Owner accepted 50.1% store return rate, 1 Nov 2026 (the same seller's other listing). Tiers: 9.5 CNY from 1, 9 at 100-499, 8 at 500+; unit_cost is the 1 piece price. Rate from screenshot (N2,118.77 / 9.5). 700+ sold. Store return rate is cut off in the screenshot: not checked. Phone model list not in screenshots: owner confirmed iPhone 13-16 range (15 options). A pink colour appears in thumbnails with no photo: not listed. Burgundy photo is a different shot (back and stand view, card slot not shown). Source photos 800 px (Burgundy and Purple 1200), padded to 4:5 on white. Supplier title mentions a marketplace name and Apple: not used. Photos show CREDIT CARD dummy text. No drop rating claimed."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:37.878Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:06:19.950Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:06:56.819Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:07:47.155Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:07:47.394Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:07:57.349Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:09:15.350Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:09:15.581Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:09:18.370Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-01T11:12:49.746Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:37.878Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:37.877Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2119,
+      "landed": 2119,
+      "gross": 5381,
+      "margin": 0.7174953333333334,
+      "suggested": 5000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793531276124",
+    "approved_at": "2026-11-01T11:09:15.348Z",
+    "published_at": "2026-11-01T11:09:18.370Z",
+    "url": "https://www.finalheaven.shop/product/p1793531276124"
+  },
+  "id": "p1793531276124"
+}

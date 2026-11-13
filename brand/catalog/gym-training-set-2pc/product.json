@@ -1,0 +1,168 @@
+{
+  "name": "Men's 2-Piece Training Set, Tee and Shorts",
+  "category": "Sets",
+  "description": "A short-sleeve training top and shorts, sold as one set, in three looks: neon-green side panel, plain black and a grey muscle-line print. The shorts have a grey reflective-style stripe on the leg. Thin fabric; the supplier describes it as quick-drying. The supplier gave no size chart: if you are between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Pieces",
+      "value": "2: short-sleeve top and shorts"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L, XL"
+    },
+    {
+      "label": "Thickness",
+      "value": "Thin (supplier listing)"
+    }
+  ],
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "stock": 20,
+  "price": 33500,
+  "colors": [
+    "Neon Green",
+    "Black",
+    "Muscle Print"
+  ],
+  "tags": [
+    "mens",
+    "training",
+    "gym",
+    "set",
+    "shorts",
+    "activewear"
+  ],
+  "photos": [
+    {
+      "file": "neon-green.jpg",
+      "color": "Neon Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/aa387454-b3c9-443c-ba66-bb3a5548294f.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a2f00a17-452f-4eee-87f8-fa6e3f465313.jpg"
+    },
+    {
+      "file": "muscle-print.jpg",
+      "color": "Muscle Print",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b0e04725-84b5-4cdd-bcec-e43c3dd254fa.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=922748551668",
+    "unit_cost": 60,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "notes": "Supplier title: Cross-Border Quick-Drying Fitness Clothing Suit Men's Sports Tights Five-Piece Running Breathable High-Elastic Basketball Training Suit. One 1688 offer (922748551668) with 33 styles at ¥12.8 to ¥58.8 per set (about ₦2,848 to ₦13,084 on the screenshot, fx 222.52); the real ¥ price per set size is NOT shown and unconfirmed. Owner said ¥60: used as one conservative cost for all three sets (above the top of the ¥12.8-58.8 range). Update when real per-set prices are known. 200+ sets sold, 100+ reviews (one says it is just not cool enough). Spot goods, thin, sport style. Sizes S, M, L, XL shown; no size chart; sizes S-XL taken from the screenshot, fit note assumed. Weights 900/903/1004/1006 g read like the five-piece set, not this one; L packed 35 x 29.7 x 9.5 cm: weight for this set unknown. Freight hint: consolidation air to Nigeria at ¥8.7 per 0.1 kg (first and additional). Store return rate not shown. Fabric not stated: quick-dry is supplier wording only. Source photos are 800 px, so store photos are scaled up and a little soft. Tights' waistband shows PRO COMBAT (a Nike line) in the supplier photos: the text was retouched out to a plain band; the 1688 main image (not used) has a model in swoosh trainers and Chinese text. 2-piece photos show no tights, so no waistband text. The ¥60 unit cost is a placeholder: confirm the real per-set cost with the supplier before reordering. Price raised from NGN 25000 to NGN 33500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Jieyang Type Dongpai Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=922748551668"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T07:21:36.514Z",
+    "history": [
+      {
+        "at": "2026-11-10T07:04:39.518Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T07:08:34.254Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T07:10:54.547Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T07:20:53.567Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T07:20:53.792Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T07:21:00.273Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T07:21:32.760Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T07:21:32.985Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T07:21:36.514Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T07:20:53.566Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as gym-training-set-3pc (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as gym-training-set-4pc (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 13351,
+      "landed": 13351,
+      "gross": 11649,
+      "margin": 0.465952,
+      "suggested": 30000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794295258808",
+    "photos_reviewed": {
+      "at": "2026-11-10T07:21:32.542Z",
+      "hashes": {
+        "neon-green.jpg": "591cafe620b203a1bd1c4bdc7f9553bd8a38a1e0322c7c161a600129bc5dd95a",
+        "black.jpg": "33c7304eab34f80d1cd3cec476f8ab9119bdccf364e6b71f7d0bd8688f3348d1",
+        "muscle-print.jpg": "98af4d1e86b202e772e60231d4817c9d6fbb862c217094f729d7f1969cdd18f3"
+      }
+    },
+    "approved_at": "2026-11-10T07:21:32.759Z",
+    "published_at": "2026-11-10T07:21:36.514Z",
+    "url": "https://www.finalheaven.shop/product/p1794295258808"
+  },
+  "id": "p1794295258808"
+}

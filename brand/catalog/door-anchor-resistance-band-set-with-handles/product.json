@@ -1,0 +1,192 @@
+{
+  "name": "Door Anchor Resistance Band Set with Triceps Strap and Two Handles",
+  "category": "Sports",
+  "description": "A door-anchor resistance set for arm and triceps work, with two foam-grip handles. The 75 to 225 lb figure comes from the bands' own labels and is not a tested rating.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Orange, Yellow, Black, Blue"
+    },
+    {
+      "label": "Resistance bands",
+      "value": "3, covered, carabiner at each end"
+    },
+    {
+      "label": "Band label",
+      "value": "75 lb (34 kg) each"
+    },
+    {
+      "label": "Resistance (by labels)",
+      "value": "75-225 lb, clip on one to three bands"
+    },
+    {
+      "label": "Door anchor",
+      "value": "With foam block"
+    },
+    {
+      "label": "Triceps strap",
+      "value": "V-shaped, padded loops"
+    },
+    {
+      "label": "Handles",
+      "value": "2, foam grip"
+    },
+    {
+      "label": "Webbing",
+      "value": "Polyester"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "450 g"
+    }
+  ],
+  "price": 28500,
+  "stock": 20,
+  "colors": [
+    "Orange",
+    "Yellow",
+    "Black",
+    "Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "resistance bands",
+    "triceps",
+    "door anchor",
+    "arm trainer",
+    "home gym",
+    "strength training",
+    "fitness",
+    "sports",
+    "foam handles"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/452cb1bf-c08a-4c53-9f01-f8b40782d11d.jpg"
+    },
+    {
+      "file": "yellow.jpg",
+      "color": "Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0d50d82e-5d38-438e-87f4-2409201c2055.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7fac096a-c4f9-4966-9878-e65387bc7b87.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/dc03225b-d510-4b61-9836-3b81a47cfe98.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1067768834359",
+    "unit_cost": 36.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Haorui Webbing Factory",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1067768834359"
+    },
+    "notes": "Supplier: Yiwu Haorui Webbing Factory (19 years on 1688, 'Choice' badge, 1K+ sets sold, repurchase rate 37.14% = repeat buyers). Same 1688 listing as door-anchor-resistance-band-set (see its notes): this is the version with two foam-grip handles added. Price CNY 26.9 (about N6,007.65) to CNY 36.5 (about N8,151.65) per set; fx_rate 223.33. Which option costs what is NOT shown on the page: owner chose CNY 36.5 for this handles set and CNY 26.9 for the basic set, and price 20000 (2 Nov 2026), but did NOT confirm the tiers on the 1688 page, so the cost is unconfirmed. Packed 450 g in every row (4 rows, 15 x 3 cm, 900 cm3); shipping.weight_kg 0.45, supplier-stated, not confirmed for the handle version. Resistance figures are the supplier's labels (75 lb / 34 kg per band), not tested ratings. Not used: the door infographic (Doubao AI-generated watermark), the orange 35/45/55 lb kit photo with a carry bag, and the 'TOP PICKS' badge photo. Photos: 800 px originals extended to 4:5, so soft; blue is a real photo with the foam handles. Return rate not shown. Price raised from NGN 20000 to NGN 21000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 21000 to NGN 28500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": 0.45,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:38.424Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:33:50.310Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:35:21.662Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:38:20.191Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-02T20:38:29.685Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-02T20:38:39.373Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-03T05:38:30.805Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-03T05:38:31.044Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-03T05:38:33.095Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:24.470Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:38.424Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:38.423Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as door-anchor-resistance-band-set (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 8152,
+      "landed": 8152,
+      "gross": 11848,
+      "margin": 0.59242275,
+      "suggested": 18500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793651916194",
+    "approved_at": "2026-11-03T05:38:30.803Z",
+    "published_at": "2026-11-03T05:38:33.095Z",
+    "url": "https://www.finalheaven.shop/product/p1793651916194"
+  },
+  "id": "p1793651916194"
+}

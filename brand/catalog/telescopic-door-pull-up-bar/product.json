@@ -1,0 +1,109 @@
+{
+  "name": "Telescopic Door Frame Pull-Up Bar",
+  "category": "Sports",
+  "description": "A telescopic horizontal bar that fits across a doorway or frame. It comes in three lengths set by the distance it has to span: 74-98 cm, 92-125 cm or 120-148 cm, so measure your frame and choose the size that covers it. A twist-lock fixes the length, a built-in spirit level helps you set it level, and wide anti-slip pads sit at each end. Black with red rings.",
+  "price": 15500,
+  "stock": 20,
+  "colors": [],
+  "sizes": [
+    "74-98 cm",
+    "92-125 cm",
+    "120-148 cm"
+  ],
+  "tags": [
+    "pull-up bar",
+    "door bar",
+    "chin-up bar",
+    "telescopic",
+    "home gym",
+    "fitness",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "bar-angled.jpg",
+      "color": null
+    },
+    {
+      "file": "bar.jpg",
+      "color": null
+    },
+    {
+      "file": "twist-lock.jpg",
+      "color": null
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=957822322823",
+    "unit_cost": 35,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yongkang Jiaxiang Fitness Equipment Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=957822322823"
+    },
+    "notes": "HOLD: do not draft or publish until the owner sends a rated load and install steps from the supplier (load-bearing doorway bar, no figures on any photo). MINIMUM ORDER 3 items. Supplier: Yongkang Jiaxiang Fitness Equipment Co., Ltd. (永康市佳翔健身器材有限公司), 9 years on 1688; shop 59% repurchase rate, 4.5 service score, 97% overall performance, 99.5% positive reviews; 2K+ sold, commodity repurchase rate 22.22%. The store return rate is cut off in the screenshot: unknown, not checked. Title: 'Home Indoor Pull-Up Device, Home Fitness Equipment, Children's Hanging Ring, Punch-Free Fitness Single Bar, Door-Mounted Single Bar'; 'Children's Hanging Ring' and 'punch-free' left out. Price CNY 25 (about N5,583.32) to CNY 35 (about N7,816.65) from 3 items; fx_rate 223.33 = 5583.32 / 25. Which length costs what is not shown on the page: Owner (2 Nov 2026): one listing, three sizes, price 15500; costed CNY 25 / 30 / 35 by length (74-98 / 92-125 / 120-148 cm), tiers NOT confirmed on 1688. The store holds one unit_cost per product, so unit_cost is set to 35 (the longest bar) as a conservative floor: gross margin at 15500 is about 64% / 57% / 50% by length, 50% on the stored figure; provisional, no freight or customs. Attributes: brand Jiaxiang (supplier's own), code Jx-072801, type single and parallel bars on the door. The 'colour' options on 1688 are really lengths (the span it fits): 74-98, 92-125, 120-148 cm; listed as size options. Weight 2,000 g each (shipping.weight_kg 2.0, supplier-stated). Packed size looks wrong: 99 x 20, 125 x 20, 148 x 20 cm with volumes 196,020 / 312,500 / 438,080 cm3, which equal length x length x 20; the real carton is probably smaller, ask the supplier. Long and bulky: volumetric weight may dominate freight, and 148 cm may not suit air at all. NO load rating, capacity, safety or install claims: the photos say 'safer, more durable, more load' with no figures; owner may want a load rating and the supplier's install instructions before selling. Not used: the photo with a child in a swing seat and a punching bag (accessories not in the set) and the photos with Chinese overlay text. Used: an angled cutout and a clean pack shot of the bar, and a twist-lock close-up with the text cropped; 800 px originals, so soft. The Chinese text on photos (upgrade level horizontal bar, new upgrade, two-in-one support single bar) is not used."
+  },
+  "shipping": {
+    "weight_kg": 2,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-02T20:58:35.433Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:46:09.451Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:46:55.184Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:49:35.420Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:58:29.831Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-02T20:58:35.433Z",
+        "from": "DRAFT_READY",
+        "to": "NEEDS_INFORMATION",
+        "note": "HOLD: do not draft until the owner sends a rated load and install steps from the supplier. Price 15500 and costs CNY 25/30/35 (unconfirmed tiers) recorded."
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-02T20:58:29.830Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 7817,
+      "landed": 7817,
+      "gross": 7683,
+      "margin": 0.4957064516129032,
+      "suggested": 17500
+    },
+    "note": "HOLD: do not draft until the owner sends a rated load and install steps from the supplier. Price 15500 and costs CNY 25/30/35 (unconfirmed tiers) recorded."
+  }
+}

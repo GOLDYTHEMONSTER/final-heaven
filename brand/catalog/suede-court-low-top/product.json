@@ -1,0 +1,179 @@
+{
+  "name": "Suede Low-Top Court Sneakers",
+  "category": "Sports",
+  "description": "Low-top court sneakers with a suede-look upper and white side stripes. Chinese sizing runs about a size small: go one size up.",
+  "specs": [
+    {
+      "label": "Style",
+      "value": "Low-top court sneaker, unisex"
+    },
+    {
+      "label": "Upper",
+      "value": "Suede-look"
+    },
+    {
+      "label": "Laces",
+      "value": "Chunky, flat"
+    },
+    {
+      "label": "Sole",
+      "value": "Cream"
+    },
+    {
+      "label": "Side detail",
+      "value": "White stripes"
+    },
+    {
+      "label": "Colours",
+      "value": "Burgundy, Black"
+    },
+    {
+      "label": "Sizes",
+      "value": "EU 35 to 44"
+    }
+  ],
+  "price": 46000,
+  "stock": 20,
+  "colors": [
+    "Burgundy",
+    "Black"
+  ],
+  "sizes": [
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44"
+  ],
+  "tags": [
+    "sneakers",
+    "low-top",
+    "suede",
+    "unisex",
+    "footwear",
+    "sports",
+    "chunky laces"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "burgundy.jpg",
+      "color": "Burgundy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/27b28de6-6507-4f0c-8d0b-ff35b77dd7da.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5bfa234f-0f6f-4063-8b0d-dd43f00c99d4.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025226974736",
+    "unit_cost": 27,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "owner reviewed the side-stripe trademark question, 1 Nov 2026 (owner says two stripes; the supplier photos show three white stripes on the outer side, so the stripe count is left out of the copy and the owner should re-check). Supplier title: Hong Kong Style Niche Couple's Bread Shoes for Men, Trendy on Instagram, 2026 Spring New Model, Versatile Student Sports Casual Sneakers for Women. Regular price 27 CNY for 1+ pair (26 for 30-99, 25 for 100+). Screenshot shows 6,021.76 NGN for 27 CNY. Supplier store repurchase rate 26.09%; return rate not visible (cut off). Supplier shows Chinese colour name All red = Burgundy, and Black. Sizes 35-44 from supplier list (owner said 34-44: 34 not on the list, awaiting owner). Unisex. Material not stated; copy says suede-look only. Supplier shipping fee from 3.50 CNY (not recorded as a cost). Photos 800 px, cropped below the sock line and extended with blurred fill to hide a third-party sock logo; far shoe laces slightly clipped. Factory side text on the shoe left as is. Weight and freight unknown. Price raised from NGN 16000 to NGN 46000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Yiwu Benzu E-commerce Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025226974736"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:33.396Z",
+    "history": [
+      {
+        "at": "2026-11-01T08:03:14.747Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T08:03:51.421Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:04:08.908Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:04:46.140Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T08:04:46.369Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T08:04:51.035Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T08:05:11.221Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T08:05:11.443Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T08:05:14.657Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:33.396Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:33.395Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6022,
+      "landed": 6022,
+      "gross": 9978,
+      "margin": 0.6236368749999999,
+      "suggested": 13500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793520289629",
+    "approved_at": "2026-11-01T08:05:11.220Z",
+    "published_at": "2026-11-01T08:05:14.657Z",
+    "url": "https://www.finalheaven.shop/product/p1793520289629"
+  },
+  "id": "p1793520289629"
+}

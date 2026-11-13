@@ -1,0 +1,191 @@
+{
+  "name": "Slim Fitness Band with Colour Screen",
+  "category": "Gadgets",
+  "description": "A slim fitness band with a colour touch screen on a soft silicone strap. It shows steps, distance, calories, time, date, weather and heart rate (for fitness, not medical use), and passes on phone notifications. It is for general activity use only, not for health decisions. Rechargeable; the numbers on the screens in the photos are sample displays.",
+  "price": 27000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Cream",
+    "Pink",
+    "Navy",
+    "Plum"
+  ],
+  "sizes": [],
+  "tags": [
+    "fitness band",
+    "smart band",
+    "step counter",
+    "activity tracker",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6484d6d2-3ad1-4b1f-902e-53252a92fe07.jpg"
+    },
+    {
+      "file": "cream.jpg",
+      "color": "Cream",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/23e32b20-3256-4470-81f8-9bf099df303f.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ab851910-ab6e-439a-89bd-19cdf1545fd2.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/35b29e1f-3c88-49d2-8957-1769f1aaeedc.jpg"
+    },
+    {
+      "file": "plum.jpg",
+      "color": "Plum",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/986d76ec-5bca-469e-ad66-2e355518e5fb.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": 47,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shenzhen Sailuo Intelligent Technology Co., Ltd.",
+      "platform": "1688",
+      "url": ""
+    },
+    "notes": "No 1688 link supplied: offerId missing. Price 1688 page showed 47 CNY for one piece (about NGN 10,464); costed at fx 222.63 as instructed. Title on 1688 is C68L; supplier brand attribute omitted on purpose. 1688 title claims blood pressure and body temperature monitoring: NOT used in copy. Heart rate not mentioned pending owner decision. Store return rate 49%; a second badge reads about 50% (cut off, unclear). Top visible review is one star (bad order experience). 1K+ sold, 400+ reviews. Wireless range 5-10 m (Bluetooth assumed, not stated). Battery capacity, charging and water resistance not shown: not claimed. Rechargeable is assumed from product type: confirm. Only the colours seen in photos: black, cream (creamy-white, champagne case), pink (rose-gold case), navy (blue case), plum (rose-gold case). Photos are 1200 px squares from supplier, padded white to 4:5. Lithium battery assumed: ships_by_air false (sea only), owner to confirm. OWNER DECISIONS 8 Nov 2026: list anyway despite 49% store return rate and one-star review (accepted risk, no sample first); price NGN 23,500; heart rate mentioned with fitness-only note; all 5 colours; photos approved. ASSUMPTIONS to confirm: rechargeable and lithium battery (ships_by_air false, sea only). Price raised from NGN 23500 to NGN 27000 on 9 Nov 2026 (owner approved margin review: 60% floor)."
+  },
+  "shipping": {
+    "weight_kg": 0.3,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T22:08:31.883Z",
+    "history": [
+      {
+        "at": "2026-11-08T22:05:24.222Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T22:05:58.610Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T22:06:03.656Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T22:06:08.649Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T22:07:39.773Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T22:07:52.646Z",
+        "from": "FAILED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T22:07:52.924Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T22:08:02.193Z",
+        "from": "PROCESSING",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T22:08:09.025Z",
+        "from": "FAILED",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T22:08:11.244Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T22:08:11.808Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-08T22:08:28.272Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T22:08:28.500Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T22:08:31.883Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T22:08:11.807Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 10464,
+      "landed": 10464,
+      "gross": 13036,
+      "margin": 0.55474,
+      "suggested": 23500
+    },
+    "claims_reviewed": [
+      "medical"
+    ],
+    "note": "approved by the owner",
+    "error": "}\r \r Node.js v24.11.1",
+    "attempts": 1,
+    "store_id": "p1794175680260",
+    "photos_reviewed": {
+      "at": "2026-11-08T22:08:28.049Z",
+      "hashes": {
+        "black.jpg": "388c69ce8049cbc3f546b81cfd235088937071a207c3316c662798c465a54f17",
+        "cream.jpg": "5ec3f9518f687470331669f4f1fa48bcbaccde4f68e82742286dfa84e6917ec1",
+        "pink.jpg": "7a5ad7001e08c20ba8bc50c54fcfaa12fa6039039962b4f4433d6ebd241bccfe",
+        "navy.jpg": "78c4fa15df698913503b6a1d7fb6597ce08e3b3ed12c3c1c5687489f407dc2e2",
+        "plum.jpg": "59afba8f092824caf6df0870dc79996c60cdb4d042e0d795ae2a12e67b1fc6e5"
+      }
+    },
+    "approved_at": "2026-11-08T22:08:28.270Z",
+    "published_at": "2026-11-08T22:08:31.883Z",
+    "url": "https://www.finalheaven.shop/product/p1794175680260"
+  },
+  "ships_by_air": false,
+  "id": "p1794175680260"
+}

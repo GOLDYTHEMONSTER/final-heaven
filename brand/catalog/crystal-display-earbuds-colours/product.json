@@ -1,0 +1,101 @@
+{
+  "name": "Transparent Case Earbuds — Round Digit Display",
+  "category": "Gadgets",
+  "description": "True wireless earbuds in a see-through charging case with a round digit display window. Comes in lime green, black and pink.",
+  "price": 7000,
+  "stock": 20,
+  "colors": [
+    "Green",
+    "Black",
+    "Pink"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "transparent",
+    "led display"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "green.jpg",
+      "color": "Green"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink"
+    }
+  ],
+  "source": {
+    "listing_url": "",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "Cost unknown, owner set the price (₦7000). Checked against the store's crystal-display-true-wireless-earbuds (₦7,500, ¥13.5): same idea (see-through case with digits) but a different case (round dial window, wider, purple internal glow) and different buds, so a separate listing, not a duplicate. Pink and Black overlap in colour name only. Photos 1080-1200 px, clean on white, padded to 4:5, sharp. Display digits (88) are the supplier demo. Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. Lithium battery: sea freight only. No battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Earbuds seller (name to confirm)",
+      "platform": "1688",
+      "url": ""
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-13T16:30:53.472Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:26:16.734Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:27:10.409Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:30:53.472Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:30:53.471Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    }
+  },
+  "ships_by_air": false
+}

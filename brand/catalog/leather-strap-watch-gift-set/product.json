@@ -1,0 +1,107 @@
+{
+  "name": "Men's Black Strap Watch, Bracelet, Pendant and Ring Set",
+  "category": "Accessories",
+  "description": "Four pieces in one set: a black quartz watch on a black strap, a black Cuban chain bracelet, a black bullet pendant necklace on a cord and a black spinner ring. Choose the dial: red numerals, blue markers or Roman numerals. The gift box in the photos is not included.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Red Numerals",
+    "Blue Markers",
+    "Roman Numerals"
+  ],
+  "sizes": [],
+  "tags": [
+    "watch",
+    "watch set",
+    "quartz",
+    "bracelet",
+    "pendant necklace",
+    "spinner ring",
+    "black",
+    "men",
+    "accessories",
+    "strap watch"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red-numerals.jpg",
+      "color": "Red Numerals"
+    },
+    {
+      "file": "blue-index.jpg",
+      "color": "Blue Markers"
+    },
+    {
+      "file": "roman-numerals.jpg",
+      "color": "Roman Numerals"
+    }
+  ],
+  "source": {
+    "listing_url": "https://shop6tv12394b6900.1688.com",
+    "unit_cost": 20,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Lisong Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://shop6tv12394b6900.1688.com"
+    },
+    "notes": "HELD pending the owner's decision on the dial print. Same supplier listing as black-steel-watch-gift-set (see its notes for the shop, price and photo details): 3 leather-strap styles, each with the bullet pendant on a cord. All three dials are printed GENEVA / Geneva (a generic fashion-watch marking that reads as a Swiss-origin claim); it cannot be cropped out and was not retouched, because that would change what the buyer receives. The word is kept out of the name, copy and tags. Photos: supplier watermark cropped out of the two 1000 px originals; the Roman-numeral original had none. unit_cost 20 is the owner's costing base (listing shows CNY 13.5); fx_rate unset, the screenshot shows no naira figure. Strap material (genuine leather or imitation) not stated, so 'black strap' only. The screenshot (style 9/9) names the red-numeral set 'Mig black silver + bullet set'; the other style names were not shown. Store return rate not shown: not checked. Case size, ring size, bracelet length, weight, battery type not stated; none claimed. ships_by_air left unset like the other watches in the store."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "REJECTED",
+    "updated": "2026-11-02T20:21:15.335Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:14:40.668Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:16:58.753Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:21:15.335Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "REJECTED",
+        "note": "owner chose the five octagon styles only; GENEVA dials dropped, can come back later"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-02T20:16:58.752Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": [
+        "same supplier listing as black-steel-watch-gift-set (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "owner chose the five octagon styles only; GENEVA dials dropped, can come back later"
+  }
+}

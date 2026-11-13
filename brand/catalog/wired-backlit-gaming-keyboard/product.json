@@ -1,0 +1,243 @@
+{
+  "name": "Wired Backlit Gaming Keyboard with Phone Slot",
+  "category": "Gadgets",
+  "description": "A wired gaming keyboard with a metal panel and a built-in phone slot, in three styles.",
+  "specs": [
+    {
+      "label": "Connection",
+      "value": "Wired"
+    },
+    {
+      "label": "Keys",
+      "value": "104, mechanical feel"
+    },
+    {
+      "label": "Anti-ghosting",
+      "value": "26-key"
+    },
+    {
+      "label": "Keycaps",
+      "value": "Two-colour injected, light up"
+    },
+    {
+      "label": "Lighting modes",
+      "value": "3: breathing, steady, heartbeat"
+    },
+    {
+      "label": "Lighting effects",
+      "value": "20"
+    },
+    {
+      "label": "Panel",
+      "value": "Metal"
+    },
+    {
+      "label": "Phone slot",
+      "value": "Built in"
+    },
+    {
+      "label": "Styles",
+      "value": "Black Ice Blue, Black Colourful, White Colourful"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "1 kg"
+    }
+  ],
+  "price": 39000,
+  "stock": 20,
+  "colors": [
+    "Black Ice Blue",
+    "Black Colourful",
+    "White Colourful"
+  ],
+  "sizes": [],
+  "tags": [
+    "gaming keyboard",
+    "backlit keyboard",
+    "wired keyboard",
+    "mechanical feel",
+    "led keyboard",
+    "phone slot",
+    "pc accessory",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black-ice-blue.jpg",
+      "color": "Black Ice Blue",
+      "old_url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2c8a85ec-9d96-4e37-8712-e3cdabf4e257.jpg",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ea7203e5-64f8-4a82-8a50-0800e11dc96c.jpg"
+    },
+    {
+      "file": "black-colourful.jpg",
+      "color": "Black Colourful",
+      "old_url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/fe06d6d6-ab9d-4c8a-9e96-b08f46c25de8.jpg",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d718e7a1-5753-4557-8d58-24970dfe40f7.jpg"
+    },
+    {
+      "file": "white-colourful.jpg",
+      "color": "White Colourful",
+      "old_url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c407b0f4-5a57-4353-8921-6d8fc5d986aa.jpg",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ec97fb26-c20a-4a2e-bb02-90ad1fa2fe16.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1044060767901",
+    "unit_cost": 69,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "notes": "1688 range CNY 49 to 69 by style (screenshot: about 10,869.97 to 15,306.69 NGN, rate 221.84). Per-style price not known: unit_cost uses the top of the range as a floor. Mechanical FEEL keyboard (not a true mechanical one): never call it mechanical. 1688 title also mentions a gaming mouse and headset set but photos show only the keyboard: no mouse or headset promised. Brand logo (AULA / Wolf Spider) printed on the board and in every photo: brand kept out of name, copy and tags; owner decides whether to list. Store return rate cut off in the screenshot (unknown). Weight 1000 g packed (owner), sea freight. Style 1/6 of the 1688 listing; 6 colours/styles seen. Photos are cutouts from 1500/800 px marketing images (some soft). Price raised from NGN 30000 to NGN 39000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Shenzhen Bocheng Computer Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1044060767901"
+    }
+  },
+  "shipping": {
+    "weight_kg": 1,
+    "data_status": "estimated"
+  },
+  "ships_by_air": false,
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-05T04:35:12.373Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 15307,
+      "landed": 15307,
+      "gross": 14693,
+      "margin": 0.489768,
+      "suggested": 34500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-05T04:55:26.483Z",
+    "history": [
+      {
+        "at": "2026-11-04T10:26:09.806Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T10:30:22.822Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T10:30:23.076Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T10:30:36.492Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:33:20.193Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:33:20.438Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:33:23.765Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:42.301Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:39:30.566Z",
+        "from": "PUBLISHED",
+        "to": "AWAITING_APPROVAL",
+        "note": "taken off sale: bad cutouts, redo photos"
+      },
+      {
+        "at": "2026-11-04T23:28:37.584Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-04T23:29:46.709Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-04T23:30:41.082Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-05T04:35:12.382Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-05T04:35:21.523Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-05T04:35:27.783Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-05T04:55:22.373Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-05T04:55:22.653Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-05T04:55:26.483Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793788234236",
+    "approved_at": "2026-11-05T04:55:22.372Z",
+    "published_at": "2026-11-05T04:55:26.483Z",
+    "url": "https://www.finalheaven.shop/product/p1793788234236",
+    "photos_reviewed": {
+      "at": "2026-11-05T04:35:21.262Z",
+      "hashes": {
+        "black-ice-blue.jpg": "60d564450a54656673577cc7bf8e93452cbbc0f9e41596c410d3b033616ac4b9",
+        "black-colourful.jpg": "e5091b9f6c3ab6acf34a262b3b66888f7c3340efc8a05bb12c5c0060737360cd",
+        "white-colourful.jpg": "658f03c5e4bdc6393d8fa47299758f5d8f71cb86adc38d5c7b95990c3c606af3"
+      }
+    }
+  },
+  "id": "p1793788234236"
+}

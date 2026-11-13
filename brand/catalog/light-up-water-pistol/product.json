@@ -1,7 +1,37 @@
 {
   "name": "Light-Up Water Pistol",
   "category": "Gadgets",
-  "description": "An electric water pistol that shoots continuous bursts at the squeeze of the trigger, with a light-up muzzle and a refillable water drum under the grip. Rechargeable by USB, and the box has the pistol, scope, drum and battery. About 25 × 27 × 10 cm. Water only. Not for use on faces or animals. Adult supervision for young children.",
+  "description": "An electric water pistol that shoots continuous bursts at the squeeze of the trigger. Water only. Not for use on faces or animals. Adult supervision for young children.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Blue, Red"
+    },
+    {
+      "label": "Firing",
+      "value": "Continuous bursts on trigger squeeze"
+    },
+    {
+      "label": "Muzzle",
+      "value": "Light-up"
+    },
+    {
+      "label": "Water drum",
+      "value": "Refillable, under the grip"
+    },
+    {
+      "label": "Charging",
+      "value": "Rechargeable by USB"
+    },
+    {
+      "label": "What's included",
+      "value": "Pistol, scope, drum, battery"
+    },
+    {
+      "label": "Size",
+      "value": "About 25 × 27 × 10 cm"
+    }
+  ],
   "price": 7500,
   "stock": 20,
   "colors": [
@@ -59,7 +89,7 @@
   },
   "queue": {
     "status": "REJECTED",
-    "updated": "2026-10-29T12:12:36.313Z",
+    "updated": "2026-11-04T22:26:52.199Z",
     "history": [
       {
         "at": "2026-10-29T07:18:47.982Z",
@@ -109,10 +139,15 @@
         "from": "PUBLISHED",
         "to": "REJECTED",
         "note": "replaced by the new water-blaster range, 30 Oct 2026"
+      },
+      {
+        "at": "2026-11-04T22:26:52.199Z",
+        "from": "REJECTED",
+        "to": "REJECTED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T07:24:15.698Z",
+      "at": "2026-11-04T22:26:52.198Z",
       "ok": true,
       "problems": [],
       "needs": [],

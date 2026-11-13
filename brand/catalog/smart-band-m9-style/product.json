@@ -1,0 +1,181 @@
+{
+  "name": "Colour Screen Smart Band",
+  "category": "Gadgets",
+  "description": "A light smart band with a colour screen on a soft silicone strap, in five colours. It counts steps, shows heart rate (for fitness, not medical use) and gives smart reminders. It weighs about 40 g. Not waterproof: keep it away from water. The numbers on the screens in the photos are sample displays.",
+  "price": 12000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Orange-red",
+    "Yellow",
+    "Navy",
+    "Pink"
+  ],
+  "sizes": [],
+  "tags": [
+    "smart band",
+    "fitness band",
+    "step counter",
+    "activity tracker",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5ecfd66a-2341-4603-81d3-004ae7b820d0.jpg"
+    },
+    {
+      "file": "orange-red.jpg",
+      "color": "Orange-red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/895def3f-ee44-4d10-b800-15fe7ed79d24.jpg"
+    },
+    {
+      "file": "yellow.jpg",
+      "color": "Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e625b292-b643-4d81-a213-35da58e8ab6d.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8ec134e1-17fe-474a-a10e-c6e8ccb2b78b.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ff08c930-9ace-4e97-ae3e-adcdbc8b4725.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1091386483993",
+    "unit_cost": 9.9,
+    "cost_currency": "CNY",
+    "fx_rate": 222.68,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shenzhen Shangsheng Industrial Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1091386483993"
+    },
+    "notes": "Price CNY 9.9 for 1 piece (about NGN 2,204.57 on the page), CNY 9.43 for 2 or more (NGN 2,099.91); costed at the 1-piece price, fx 2204.57/9.9 = 222.68. Store return rate 47.4% (HIGH, over 30%); listing is new this month; 1K+ sold. 1688 title (M9, blood oxygen, sleep monitoring) NOT used: attributes list only pedometer, heart rate monitoring and smart reminders, not waterproof, silicone strap, brand Neutral. Heart rate mentioned with fitness-only note, no medical claims. Weight 40 g per item (2.0 x 1.0 cm per the table, other dimension cut off), assumed packed weight 0.04 kg estimated. Colours: black, orange-red, yellow, navy, pink (a second pink thumbnail labelled Atlas is not listed). Supplier photos are 800 px squares padded to 4:5 and enlarged 1.5x, so slightly soft. Screens in photos copy a well-known brand band design: the name M9 is not used. Battery not stated: rechargeable and lithium assumed, ships_by_air false (sea only), owner to confirm. Bluetooth, battery life, screen size and phone compatibility not shown: not claimed. OVERLAP: C68L fitness band already live at NGN 23,500. OWNER DECISIONS 9 Nov 2026: add as a cheaper second option beside the C68L (C68L unchanged); list despite 47.4% store return rate (accepted risk); price NGN 12,000 (owner changed it from 18,000 later on 9 Nov); rechargeable confirmed by owner, sea only (ships_by_air false); owner saw the review sheet and said all five photos are fine."
+  },
+  "shipping": {
+    "weight_kg": 0.04,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-09T13:12:25.104Z",
+    "history": [
+      {
+        "at": "2026-11-09T07:11:51.096Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-09T07:12:32.622Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-09T07:12:37.993Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-09T07:14:34.427Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-09T07:14:34.673Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-09T07:14:42.885Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-09T07:17:41.856Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-09T07:17:42.114Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-09T07:17:44.490Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-09T13:12:13.397Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-09T13:12:15.584Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-09T13:12:25.104Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-09T07:17:41.854Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2205,
+      "landed": 2205,
+      "gross": 9795,
+      "margin": 0.816289,
+      "suggested": 5000
+    },
+    "claims_reviewed": [
+      "waterproof",
+      "medical"
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1794208481329",
+    "photos_reviewed": {
+      "at": "2026-11-09T07:14:55.311Z",
+      "hashes": {
+        "black.jpg": "1cf1a2edfd9f8a374d5638f22f08797b723c6e89dfbc1cee5b944e0e1e5045c2",
+        "orange-red.jpg": "a531f3ae779060afa97ac6ae859b968d9a87e3bc557373d68f20cfef26544761",
+        "yellow.jpg": "4baa7724839cbf2472c28c126134a7a401cc2f794f19796ccc68bbecc341e0cd",
+        "navy.jpg": "7d959c869ad6ff8a20f4727e896d6e78a46bd033021fdd53de500476418cbe37",
+        "pink.jpg": "466361d94e520618c0898be52d91ddf1034e476a340390fdd3e6cc584739bcbe"
+      }
+    },
+    "approved_at": "2026-11-09T13:12:13.387Z",
+    "published_at": "2026-11-09T13:12:25.103Z",
+    "url": "https://www.finalheaven.shop/product/p1794208481329"
+  },
+  "ships_by_air": false,
+  "id": "p1794208481329"
+}

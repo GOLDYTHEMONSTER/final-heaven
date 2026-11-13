@@ -1,0 +1,210 @@
+{
+  "name": "Round Smart Watch with Bluetooth Calling and Magnetic Charging",
+  "category": "Gadgets",
+  "description": "A round smart watch with Bluetooth calling, phone notifications and fitness tracking. It is sold as a lifestyle gadget, not for health readings.",
+  "specs": [
+    {
+      "label": "Display",
+      "value": "Round AMOLED"
+    },
+    {
+      "label": "Calling",
+      "value": "Bluetooth"
+    },
+    {
+      "label": "Features",
+      "value": "Phone notifications, fitness tracking"
+    },
+    {
+      "label": "Charging",
+      "value": "Magnetic puck with a USB cable (in the box)"
+    },
+    {
+      "label": "Frame and straps",
+      "value": "Silver frame with one strap, or black frame with two straps"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "208 g"
+    }
+  ],
+  "price": 28000,
+  "stock": 20,
+  "colors": [
+    "Silver / Mesh",
+    "Silver / Steel Link",
+    "Silver / Black Silicone",
+    "Silver / Brown Leather",
+    "Black / Silicone + Steel Link",
+    "Black / Silicone + Black Mesh",
+    "Black / Silicone + Silver Mesh",
+    "Black / Silicone + Brown Leather"
+  ],
+  "sizes": [],
+  "tags": [
+    "smart watch",
+    "bluetooth",
+    "amoled",
+    "magnetic charging",
+    "gadgets",
+    "round watch"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "silver-mesh.jpg",
+      "color": "Silver / Mesh",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8b45525c-c2f0-48d8-a685-5dc9e3e9cf2e.jpg"
+    },
+    {
+      "file": "silver-steel-link.jpg",
+      "color": "Silver / Steel Link",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b8bb4183-1bc1-4bd0-a6d5-d95903948b9d.jpg"
+    },
+    {
+      "file": "silver-black-silicone.jpg",
+      "color": "Silver / Black Silicone",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f10fea00-0f76-4201-94b4-f902d6f42b7b.jpg"
+    },
+    {
+      "file": "silver-brown-leather.jpg",
+      "color": "Silver / Brown Leather",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b1ff0df5-dd41-4295-b91d-99a6e14c3635.jpg"
+    },
+    {
+      "file": "black-silicone-steel-link.jpg",
+      "color": "Black / Silicone + Steel Link",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e76e614e-d455-4159-a693-37a4b2b65071.jpg"
+    },
+    {
+      "file": "black-silicone-black-mesh.jpg",
+      "color": "Black / Silicone + Black Mesh",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/875a7d57-be32-4211-99db-e27928fafe59.jpg"
+    },
+    {
+      "file": "black-silicone-silver-mesh.jpg",
+      "color": "Black / Silicone + Silver Mesh",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/74acb067-db18-44bb-a5c2-86523ab7942c.jpg"
+    },
+    {
+      "file": "black-silicone-brown-leather.jpg",
+      "color": "Black / Silicone + Brown Leather",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d3f3dc9e-5a5e-4596-8cc3-9483ca584b9f.jpg"
+    },
+    {
+      "file": "render-1.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7ea02b66-3c2f-4ed9-ad16-fd44ef143265.jpg"
+    },
+    {
+      "file": "render-2.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/71b46650-0470-4e11-9c56-3f37a9057a5b.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=691873652098",
+    "unit_cost": 49,
+    "cost_currency": "CNY",
+    "fx_rate": 222,
+    "image_permission": "unknown",
+    "notes": "Supplier Huizhou Gris Intelligent Technology Co., Ltd. (same shop as smart-fitness-band-nfc). Price CNY 49 from 1 item, 200+ sold, product repurchase rate 40%; store return rate is cut off in the screenshot, not checked. The screenshot shows no naira figure: fx_rate 222 is the app rate used for the same shop's band on 4 Nov 2026, NOT read from this screenshot. Whether the price differs by strap/frame combo is not shown (one price assumed). Title: Watch4Pro Smart Watch Nfc Bluetooth Call Blood Sugar Uric Acid Heart Rate Blood Pressure Blood Oxygen Monitoring Cross-Border Watch; Watch4Pro, NFC and all blood sugar / uric acid / blood pressure / blood oxygen wording left out. The supplier feature sheet (Chinese; blood sugar, lipids, uric acid, temperature, blood pressure, oxygen, Alipay, NFC door access, SOS) is not used and none of it is claimed. Weight 208 g packed (owner): shipping.weight_kg 0.208, estimated; sea freight. Rechargeable lithium battery (magnetic charger): ships_by_air false, owner to confirm; capacity not stated. LOOK-ALIKE / TRADEMARK: the box says WATCH 4 and the case resembles well-known smartwatch designs; the name avoids Watch 4 and Pro, but the box in the photos prints WATCH 4 SMART WATCH. Combos listed (8, one photo each): the 4 silver-frame single-strap sets and the 4 black-frame two-strap sets. Not listed: silver frame with black silicone + brown leather (only the screenshot shows it, too small). Black-frame sets include 2 straps per the photos; silver sets one. The black-frame box photos show a small Chinese instruction leaflet and a wooden table. Two black-frame renders (750 px, extended to 4:5 with blurred fill, soft) have no colour tag; two other renders with Chinese text on the watch face are not used. Colour names are ours. Supplier originals 800-1440 px. Price raised from NGN 24500 to NGN 28000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Huizhou Gris Intelligent Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=691873652098"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.208,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:28:26.253Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 10878,
+      "landed": 10878,
+      "gross": 13622,
+      "margin": 0.556,
+      "suggested": 24500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:26.254Z",
+    "history": [
+      {
+        "at": "2026-11-04T06:50:36.264Z",
+        "from": null,
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-04T06:50:40.359Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T06:52:49.914Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T06:52:50.157Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T06:53:07.524Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T06:53:47.981Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T06:53:48.218Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T06:53:52.227Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:33.017Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:26.254Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793775186205",
+    "approved_at": "2026-11-04T06:53:47.979Z",
+    "published_at": "2026-11-04T06:53:52.227Z",
+    "url": "https://www.finalheaven.shop/product/p1793775186205"
+  },
+  "id": "p1793775186205"
+}

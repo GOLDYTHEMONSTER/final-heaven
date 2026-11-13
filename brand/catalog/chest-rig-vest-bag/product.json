@@ -1,0 +1,180 @@
+{
+  "name": "Utility Chest Rig Bag",
+  "category": "Accessories",
+  "description": "A chest rig bag worn on the front of the body, with zip pockets and a buckle flap pocket.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Navy, Dark grey, Army green"
+    },
+    {
+      "label": "Front pockets",
+      "value": "Zip pockets, one with a reflective trim stripe"
+    },
+    {
+      "label": "Flap pocket",
+      "value": "Buckle flap pocket"
+    },
+    {
+      "label": "Hardware",
+      "value": "D-rings"
+    },
+    {
+      "label": "Straps",
+      "value": "Adjustable shoulder and waist straps"
+    },
+    {
+      "label": "Back",
+      "value": "Padded mesh"
+    },
+    {
+      "label": "What's included",
+      "value": "Rope carabiner charm"
+    }
+  ],
+  "price": 13500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Navy",
+    "Dark grey",
+    "Army green"
+  ],
+  "sizes": [],
+  "tags": [
+    "chest rig",
+    "chest bag",
+    "vest bag",
+    "utility bag",
+    "streetwear",
+    "reflective",
+    "techwear"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b5e531ca-19eb-4859-a04e-87ef11e640b8.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d5f1b24c-f792-46bb-b658-e06618490c56.jpg"
+    },
+    {
+      "file": "dark-grey.jpg",
+      "color": "Dark grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9d20b24d-0531-4fe1-97e4-6a11cc4f6052.jpg"
+    },
+    {
+      "file": "army-green.jpg",
+      "color": "Army green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/08185d94-3fde-4894-991d-449e6275daa0.jpg"
+    },
+    {
+      "file": "back.jpg",
+      "color": null,
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/86f571e3-e53e-4b42-b909-3db7db5feaef.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=732933845209",
+    "unit_cost": 21,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Listing shows ¥18-¥21 from 1 piece (NGN 4,014.5-4,683.59); ¥21 used as cost, assumed to be the style with the extra lanyard. Rate 4683.59/21 = 223.03. 9K+ sold, repurchase rate 72.73%, store return rate NOT shown (unchecked). Photos are 800 px so soft when upscaled. Lanyard with blue SORAKA tag (factory tag) is cropped out of all photos; only the rope carabiner charm shows. Not claimed waterproof. Bag dimensions, capacity, weight and fabric not shown. Model photo (cannabis-leaf cap) and open-pocket photo (US banknote) not used. Owner decision: sold without the extra lanyard; cost kept at ¥21 to stay conservative. Price raised from NGN 12000 to NGN 13500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Baoding Chiran Luggage Manufacturing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=732933845209"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:31.229Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:28:29.542Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:29:13.733Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:30:14.339Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:30:14.613Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:30:30.740Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:30:41.173Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:30:41.377Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:30:44.671Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:31.229Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:31.227Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4684,
+      "landed": 4684,
+      "gross": 7316,
+      "margin": 0.6096975,
+      "suggested": 10500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532628899",
+    "approved_at": "2026-11-01T11:30:41.172Z",
+    "published_at": "2026-11-01T11:30:44.671Z",
+    "url": "https://www.finalheaven.shop/product/p1793532628899"
+  },
+  "id": "p1793532628899"
+}

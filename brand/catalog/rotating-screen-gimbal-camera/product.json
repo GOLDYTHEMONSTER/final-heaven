@@ -1,0 +1,150 @@
+{
+  "name": "Rotating-Screen Gimbal Camera",
+  "category": "Gadgets",
+  "description": "A pocket-size handheld camera on a gimbal head, with a screen that rotates between portrait and landscape. Side buttons and a joystick sit under the screen, and the body comes in black or white. Small enough to carry on a ride or a day out.",
+  "price": 37000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "camera",
+    "gimbal",
+    "pocket camera",
+    "rotating screen",
+    "vlog",
+    "cycling",
+    "outdoor",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/41b3da5a-68fe-45b8-97c0-278464404102.jpg"
+    },
+    {
+      "file": "black-landscape.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8a1da85f-ed6e-466d-8546-69107af2805d.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3e78b048-4bc0-4088-af1d-07e7380dce2e.jpg"
+    },
+    {
+      "file": "white-landscape.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7a1fd9aa-f1f8-4d23-b704-0eb797e903f5.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1082041040985",
+    "unit_cost": 75,
+    "cost_currency": "CNY",
+    "fx_rate": 222.49,
+    "image_permission": "unknown",
+    "notes": "No price, specs, weight or shop details given; screenshots were the four white-background renders only. Four other listing photos (retail box, carry case, hand-held shots) show a well-known brand's logos and packaging: not used. Risk: seller may be using the branded maker's photos or shipping a branded/counterfeit unit; confirm shipped unit is unbranded and matches the renders. Renders have a different head (metal end cap, two LEDs, vent fins). Screens show stock/AI people. Renders are 800 px, enlarged 1.5x on white (soft). No resolution, stabilisation, battery, waterproof claims. Built-in lithium battery assumed: ships_by_air false. Colours Black and White only, from renders. Sister product pocket-gimbal-camera untouched. Owner decisions 13 Nov: unit cost ¥75 (MOQ not stated), price ₦37,000, name and Black/White confirmed, specs skipped (copy basic). CONDITION BEFORE ORDERING: the owner will ask the seller to confirm the shipped unit is unbranded (no DJI/Osmo branding) and matches the renders; do not order until confirmed.",
+    "supplier": {
+      "name": "Handheld gimbal camera seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1082041040985"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T06:39:48.072Z",
+    "history": [
+      {
+        "at": "2026-11-13T06:26:39.152Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T06:27:23.569Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T06:29:19.284Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T06:29:19.490Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T06:29:24.851Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T06:39:45.687Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T06:39:45.946Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T06:39:48.072Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T06:29:19.283Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 16687,
+      "landed": 16687,
+      "gross": 20313,
+      "margin": 0.5490067567567568,
+      "suggested": 37500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794551363621",
+    "photos_reviewed": {
+      "at": "2026-11-13T06:39:45.408Z",
+      "hashes": {
+        "black.jpg": "cd2635afc9f7aec8c435f383707fff0a2a1733346593eae60b260b9cff4d19bf",
+        "black-landscape.jpg": "2d6c09e4c1966938603e7fc15dbd891dcff2ae548aa8e9162fceb01deda34ff4",
+        "white.jpg": "c1cd648e1ca1eaa2a04ee56d2bd9520450067c1bb6435191bce9853a2cc5011e",
+        "white-landscape.jpg": "d37577f2a6a89c8286cd6dac6b415ce11c2f594ec53e2569dc180cdb4c9447e1"
+      }
+    },
+    "approved_at": "2026-11-13T06:39:45.685Z",
+    "published_at": "2026-11-13T06:39:48.072Z",
+    "url": "https://www.finalheaven.shop/product/p1794551363621"
+  },
+  "ships_by_air": false,
+  "id": "p1794551363621"
+}

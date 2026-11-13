@@ -1,8 +1,42 @@
 {
   "name": "Seamless Yoga Set — Long Sleeve",
   "category": "Ladies",
-  "description": "A two-piece seamless set for the gym, yoga or the street: a cropped long-sleeve top with thumbholes, and high-waist leggings shaped with contour seams that lift and sculpt. Knitted without side seams, in a stretchy, quick-dry fabric that wicks sweat away.\n\nIt fits close to the body. If you prefer it less snug, or you're between sizes, go one up.",
-  "price": 25000,
+  "description": "A two-piece seamless set for the gym, yoga or the street. It fits close to the body. If you prefer it less snug, or you're between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Pieces",
+      "value": "Cropped long-sleeve top and high-waist leggings"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, Royal Blue, Sky Blue, Rose"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L"
+    },
+    {
+      "label": "Top",
+      "value": "Cropped, long sleeve, thumbholes"
+    },
+    {
+      "label": "Leggings",
+      "value": "High waist, contour seams that lift and sculpt"
+    },
+    {
+      "label": "Construction",
+      "value": "Knitted without side seams"
+    },
+    {
+      "label": "Fabric",
+      "value": "Stretchy, quick-dry, wicks sweat away"
+    },
+    {
+      "label": "Fit",
+      "value": "Close to the body"
+    }
+  ],
+  "price": 31000,
   "stock": 20,
   "colors": [
     "Black",
@@ -53,7 +87,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Price per set (top + leggings); ¥40.9 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: model cut out locally, Chinese text, inset and colour dots removed, on a plain grey backdrop.",
+    "notes": "Price per set (top + leggings); ¥40.9 with the first-order coupon. Sizes S–L assumed (size chart not seen). The listing shows a 54% store return rate: consider a sample order first. Photos: model cut out locally, Chinese text, inset and colour dots removed, on a plain grey backdrop. Price raised from NGN 25000 to NGN 28000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 28000 to NGN 31000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Seamless activewear seller, 54% returns (name to confirm)",
       "platform": "1688",
@@ -71,7 +105,7 @@
     "url": "https://www.finalheaven.shop/product/p1793211873571",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:18.402Z",
+    "updated": "2026-11-04T22:26:55.596Z",
     "history": [
       {
         "at": "2026-10-28T20:23:03.589Z",
@@ -88,10 +122,15 @@
         "at": "2026-10-28T22:03:18.402Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:55.596Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:18.402Z",
+      "at": "2026-11-04T22:26:55.595Z",
       "ok": true,
       "problems": [],
       "needs": [],

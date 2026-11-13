@@ -1,0 +1,90 @@
+{
+  "name": "Cosplay Helmet Kit with Prop Night-Vision, Headset and Skull Mask",
+  "category": "Cosplay",
+  "description": "A plastic costume helmet with side rails and Velcro panels, a flip-up mount, a decorative night-vision model, a Bluetooth headset with mic (Type-C charging) and a skull-face mask with balaclava. Kits vary in what they include. The night-vision unit is a prop and does not provide night vision.\n\nCostume use only. The helmet is not protective: not for riding, cycling or impact, and not bulletproof.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "cosplay",
+    "costume",
+    "helmet",
+    "prop",
+    "skull mask",
+    "bluetooth headset"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [],
+  "source": {
+    "supplier": {
+      "name": "Caoxian Xiran Brother and Sister Clothing Factory",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=952112926197"
+    },
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=952112926197",
+    "unit_cost": 68,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Range CNY 68-158 by kit; per-kit prices not in screenshots, 68 is the lowest. Colours black and tan on listing; recommend black only (military-look gear risk in Nigeria). Return rate not visible; repurchase 55.56%. Headset has a battery: ships_by_air false. All 13 supplier photos carry a large Chinese watermark across the centre plus Chinese labels and a patch on the helmet: no clean store photo possible by cropping. Skull mask resembles a well-known game character: no game/brand names used. Kit contents, weight, head size unknown."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-01T19:41:53.344Z",
+    "history": [
+      {
+        "at": "2026-11-01T19:41:31.183Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T19:41:53.023Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-01T19:41:53.344Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION",
+        "note": "set by hand"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-01T19:41:53.022Z",
+      "ok": false,
+      "problems": [
+        "no photos"
+      ],
+      "needs": [
+        "selling price"
+      ],
+      "notes": [
+        "no photo shows Black"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 15166,
+      "landed": 15166,
+      "gross": null,
+      "margin": null,
+      "suggested": 34000
+    },
+    "note": "set by hand"
+  },
+  "ships_by_air": false
+}

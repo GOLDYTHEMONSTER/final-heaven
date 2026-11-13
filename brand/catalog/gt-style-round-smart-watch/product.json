@@ -1,0 +1,172 @@
+{
+  "name": "Round Smart Watch with Bluetooth Calling, Steel and Leather Straps",
+  "category": "Gadgets",
+  "description": "A round smart watch that takes Bluetooth calls from your phone and tracks heart rate. It runs by touch screen plus a side button, and is sold for men and women. Straps shown: silver mesh, black steel link, black leather and brown leather.",
+  "price": 81000,
+  "stock": 20,
+  "colors": [
+    "Silver Mesh",
+    "Black Steel Link",
+    "Black Leather",
+    "Brown Leather"
+  ],
+  "sizes": [],
+  "tags": [
+    "smart watch",
+    "bluetooth calling",
+    "round watch",
+    "heart rate",
+    "steel strap",
+    "leather strap",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "silver-mesh.jpg",
+      "color": "Silver Mesh",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a190a232-b356-4f39-8811-6a599eacee70.jpg"
+    },
+    {
+      "file": "black-steel-link.jpg",
+      "color": "Black Steel Link",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5606e50c-22c7-4edb-87cc-b13e0d96c946.jpg"
+    },
+    {
+      "file": "black-leather.jpg",
+      "color": "Black Leather",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a1322b33-7398-4261-b37b-21790bfb7885.jpg"
+    },
+    {
+      "file": "brown-leather.jpg",
+      "color": "Brown Leather",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8201a78f-f304-4813-af10-a34197355cb8.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=920212973096",
+    "unit_cost": 145,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "notes": "Supplier Shenzhen Xingyi Huanyu Intelligent Technology Co., Ltd. CNY 145 from 1 item, free shipping in China, 400+ sold, 3300+ add-to-carts, 90+ reviews. Store return rate is cut off in the screenshot, not checked. The screenshot shows no naira figure: fx_rate 223.57 is the rate used on other products this month, NOT read from this screenshot. LOOK-ALIKE / TRADEMARK: the 1688 title names a well-known phone brand, its GT4 Pro and Watch 5 models and says \"genuine goods\"; none of that is used (title, copy, tags). Two supplier photos carry the brand logo and were not used. Not used: blood glucose / blood pressure UI photos, messaging-app logo photo, black mesh photo (800 px cut-out with fringe artefacts). Photos used are 4 clean white-background shots: mesh and steel link at 1920 px source, the two leather shots from 800 px (padded, not cropped; 1.5x, slightly soft). The leather shots show a different case (matte black, red crown, no bezel ring) from the mesh and steel shots: ONE LISTING MAY MIX TWO CASE DESIGNS, owner to confirm what ships. Screen faces in photos are renders, not proof of the real display. Colour names are ours. Specs from the screenshots only: touch + button operation, men/women/couple/adult, 9 x 5 cm box, 405 cm3, 75 g (box weight as shown; weight_kg 0.075 estimated). Charger type, battery capacity and life, screen size, water resistance: not stated, left out. Rechargeable battery assumed: ships_by_air false, owner to confirm. Black and grey silicone styles exist on 1688 but their photos show blood-glucose/pressure readings and Chinese UI, so they are not listed. No medical claims. Owner set price NGN 81000 on 9 Nov 2026 (about 60% gross, provisional). Store return rate: unchecked (owner chose to skip).",
+    "supplier": {
+      "name": "Shenzhen Xingyi Huanyu Intelligent Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=920212973096"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.075,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-09T13:12:37.597Z",
+    "history": [
+      {
+        "at": "2026-11-09T12:53:37.252Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-09T12:54:21.902Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-09T13:09:31.429Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-09T13:09:33.524Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-09T13:09:55.773Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-09T13:12:27.754Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-09T13:12:29.881Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-09T13:12:37.597Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-09T13:09:31.419Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 32418,
+      "landed": 32418,
+      "gross": 48582,
+      "margin": 0.5997820987654322,
+      "suggested": 72500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794229792829",
+    "photos_reviewed": {
+      "at": "2026-11-09T13:10:22.680Z",
+      "hashes": {
+        "silver-mesh.jpg": "8478ed0fb8ff28b9a537fe8dce1e3307502443950b7faf06f74912bfc04de82f",
+        "black-steel-link.jpg": "2f1f456cf32d77698189d8d47e9c21fb1a333630d500823fd04ebc0d28ad210b",
+        "black-leather.jpg": "ac773a0d59bab9689aa8d6ad36a577b4277ab17561ec8372d005fbd49e8f06e5",
+        "brown-leather.jpg": "7c6e3399dad9b380a8c0318e06b532f6ebfd1fc62942fb2517c4ae8ea24c979d"
+      }
+    },
+    "approved_at": "2026-11-09T13:12:27.739Z",
+    "published_at": "2026-11-09T13:12:37.597Z",
+    "url": "https://www.finalheaven.shop/product/p1794229792829"
+  },
+  "specs": [
+    {
+      "label": "Shape",
+      "value": "Round, with crown and side button"
+    },
+    {
+      "label": "Operation",
+      "value": "Touch screen and button"
+    },
+    {
+      "label": "Calling",
+      "value": "Bluetooth"
+    },
+    {
+      "label": "Tracking",
+      "value": "Heart rate"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "75 g"
+    }
+  ],
+  "ships_by_air": false,
+  "id": "p1794229792829"
+}

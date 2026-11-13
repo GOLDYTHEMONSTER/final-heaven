@@ -58,11 +58,18 @@ node scripts/product-queue.mjs publish <slug>
 
 ## Pricing
 
-Landed cost = supplier price × the rate on the day, plus China domestic shipping, international shipping, and customs and clearing.
+Owner's rule, 13 Nov 2026: **every price carries its own freight and card fee, and still keeps at least 45%.** Delivery stays free for customers, so the price has to pay for the trip from China.
 
-Gross margin = (selling price − landed cost) ÷ selling price. It is gross, not net: no platform fees, returns or overheads.
+Landed cost = supplier price × the rate on the day, plus China domestic shipping, international freight, and customs and clearing.
+- **International freight** is the product's own figure (`source.shipping_cost_ngn`) when there is one. Otherwise it is worked out from the packed weight (`shipping.weight_kg`) and the rates in `worker-rules.json`: air is $9/kg × ₦1,550 × 1.1 for the box. Sea-only products (batteries) use the sea rate, which is not set yet, so their margin stays provisional.
+- **Every product needs a packed weight.** Without one the freight is missing and the margin is only on the goods.
 
-The worker never invents a rate or a freight cost. While those are missing, the margin is marked provisional and the missing costs are listed. The suggested price is the landed cost at the target margin in `worker-rules.json`, rounded up to ₦500. You set the real price.
+Margin = (selling price − landed cost − card fee) ÷ selling price. The card fee is 1.4%, capped at ₦2,000. Returns and overheads are not in it, which is why the floor is 45%.
+
+- The suggested price keeps the 50% target, rounded up to ₦500.
+- **A price under the 45% floor blocks the draft.** The report gives the lowest price that keeps the floor. Only the owner can let a product go below it, by saying so for that product (recorded as `queue.below_floor_approved`, with the reason in the notes).
+
+The worker never invents a rate or a freight cost. While those are missing, the margin is marked provisional and the missing costs are listed. You set the real price.
 
 ## Safety
 

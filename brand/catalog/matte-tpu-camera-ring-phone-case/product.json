@@ -1,0 +1,227 @@
+{
+  "name": "Matte Soft Phone Case with Camera Ring",
+  "category": "Accessories",
+  "description": "A plain, straight-edge matte soft TPU phone case with precise camera cutouts and a raised ring around the camera block. Slim, solid colour, no print.",
+  "specs": [
+    {
+      "label": "Fits",
+      "value": "iPhone 13, 14, 15 and 16 series (see the model list)"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, White, Pink, Lavender, Mint, Blue, Teal blue, Dark green, Red, Rose red"
+    },
+    {
+      "label": "Material",
+      "value": "Soft TPU"
+    },
+    {
+      "label": "Finish",
+      "value": "Matte"
+    },
+    {
+      "label": "Edges",
+      "value": "Straight"
+    },
+    {
+      "label": "Camera",
+      "value": "Precise cutouts, raised ring around the camera block"
+    }
+  ],
+  "price": 5500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White",
+    "Pink",
+    "Lavender",
+    "Mint",
+    "Blue",
+    "Teal blue",
+    "Dark green",
+    "Red",
+    "Rose red"
+  ],
+  "sizes": [
+    "iPhone 13",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 14",
+    "iPhone 14 Plus",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 15",
+    "iPhone 15 Plus",
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 16",
+    "iPhone 16 Plus",
+    "iPhone 16 Pro",
+    "iPhone 16 Pro Max"
+  ],
+  "tags": [
+    "phone case",
+    "matte",
+    "tpu",
+    "soft case",
+    "plain",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d7fb3d18-ffdf-421f-abfe-8c0d92a99c0f.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/aa2ba21f-bf93-48b0-9a53-84987bb37300.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4296ca7c-f22f-426d-973a-0f199a744719.jpg"
+    },
+    {
+      "file": "lavender.jpg",
+      "color": "Lavender",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8eb9c655-9ea8-4533-80e1-61cb0ac5a475.jpg"
+    },
+    {
+      "file": "mint.jpg",
+      "color": "Mint",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/810661ac-033c-4f3d-9c45-4921199bd8a0.jpg"
+    },
+    {
+      "file": "blue-2cam.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7d9ef72a-3f19-4d54-99be-23d95a6d4790.jpg"
+    },
+    {
+      "file": "teal-blue.jpg",
+      "color": "Teal blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/56082420-8547-4ee8-a3fc-803ae8d9de0b.jpg"
+    },
+    {
+      "file": "dark-green.jpg",
+      "color": "Dark green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3eca971e-a307-42dc-b0fc-4df3238e32d0.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1d019c27-c6d0-4281-9456-a83b6ef31ce0.jpg"
+    },
+    {
+      "file": "rose-red.jpg",
+      "color": "Rose red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/fa3284ca-514e-4193-acb4-afce45bf976a.jpg"
+    },
+    {
+      "file": "pink-2cam.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0d5cb0bc-fd82-4c06-a843-e5b05f55eb38.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=669398432325",
+    "unit_cost": 0.95,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Guangzhou Baiyi Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=669398432325"
+    },
+    "notes": "Price 0.95 CNY from 1 item (regular price); rate from screenshot (N211.88 / 0.95). 102K+ sold, repurchase rate 21.97% (not a return rate; store return rate not shown). Supplier title names Apple 18 Pro / 17: not used. Model list not in screenshots: proposed iPhone 13-16 (15 options, same as the card case), awaiting owner. Photos show 3-camera Pro-style block; Blue and one Pink photo show the 2-camera base cutout. Blue and Pink2 photos: 1920 px sources, no watermark; others cropped above the Chinese watermark. Sky blue (pale blue) in the group shot has no single photo: not listed. Group shot not used (12 cases in one frame, cannot crop to 4:5 cleanly). Duplicate lavender/teal photos skipped. Photos show a laptop and cup props, a poster reading YOU NEED IS (kept per owner). Mint and white cream named White. No freight/customs given. Owner confirmed 1 Nov 2026: price N5,500, 10 colours, iPhone 13-16."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:08.791Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:18:06.126Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:19:03.069Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:21:39.788Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:21:40.025Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:21:58.342Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:22:12.122Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:22:12.341Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:22:16.473Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:08.791Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:08.789Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 212,
+      "landed": 212,
+      "gross": 5288,
+      "margin": 0.9614766363636364,
+      "suggested": 500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532116856",
+    "approved_at": "2026-11-01T11:22:12.121Z",
+    "published_at": "2026-11-01T11:22:16.473Z",
+    "url": "https://www.finalheaven.shop/product/p1793532116856"
+  },
+  "id": "p1793532116856"
+}

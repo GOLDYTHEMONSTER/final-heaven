@@ -1,0 +1,123 @@
+{
+  "name": "Wall-Mounted Bluetooth Music Boxing Target with Gloves",
+  "category": "Sports",
+  "description": "A wall-mounted boxing target that connects to your phone by Bluetooth, plays your music and lights up in time with the beat. Pick the shape: round with a digital display, round with a star centre, hexagon, round white and grey, or five-point star with a digital display. Each set comes with a pair of gloves, a USB-C cable, a backing pad and three mounting straps. The listed material is PU.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Round, Digital Display",
+    "Round, Star Centre",
+    "Hexagon",
+    "Round, White and Grey",
+    "Five-Point Star, Digital Display"
+  ],
+  "sizes": [],
+  "tags": [
+    "boxing target",
+    "music boxing",
+    "bluetooth",
+    "wall target",
+    "boxing trainer",
+    "boxing gloves",
+    "home gym",
+    "sports"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "ships_by_air": false,
+  "photos": [
+    {
+      "file": "round-display.jpg",
+      "color": "Round, Digital Display"
+    },
+    {
+      "file": "round-star-centre.jpg",
+      "color": "Round, Star Centre"
+    },
+    {
+      "file": "hexagon.jpg",
+      "color": "Hexagon"
+    },
+    {
+      "file": "round-white-grey.jpg",
+      "color": "Round, White and Grey"
+    },
+    {
+      "file": "five-point-star.jpg",
+      "color": "Five-Point Star, Digital Display"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=742693097429",
+    "unit_cost": 118,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Dongyang Kesheng Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=742693097429"
+    },
+    "notes": "HOLD, DO NOT DRAFT: the 1688 page says 'Shipment to Nigeria: Not available for sale in your region'; the owner is checking with the forwarder and will confirm it can ship to Nigeria before this is drafted. Supplier: Dongyang Kesheng Technology Co., Ltd. (14 years on 1688), 4K+ sets sold, 1,500+ praise. Title: 'New Boxing Target Bluetooth Music Wall Target Home Smart Sports Music Boxing Machine Manufacturer Version Boxing Trainer'. Price CNY 5 (about N1,116.66) to CNY 118 (about N26,353.26) per set from 1 set; fx_rate 223.33 = 1116.66 / 5. Which style costs what is not shown (CNY 5 is likely an accessory such as gloves only). Owner chose unit_cost CNY 118 (top of the range) for all styles, one listing (2 Nov 2026). Attributes: other boxing supplies, item no. boxing target1, brand MDHL (the supplier's registered brand; logo on the hero photo; kept out of name, copy, tags and photos), material PU. Packed: width 43 cm, height 5 cm, 13,545 cm3 (length column cut off, implies 63 cm), 2,300 g in all 4 rows; shipping.weight_kg 2.3. Heavy and bulky: freight will weigh heavily on margin. ships_by_air false: a USB-C cable is in the box, so a built-in rechargeable battery is likely (capacity not stated); sea only, confirmed by the owner (2 Nov 2026). The hero photo shows UL, GS, PSE, KC, CE and BSCI marks: no certification claimed. Chinese marketing text, music-app logos and the MDHL banner are cropped out. Features kept to Bluetooth music and lights following the beat; no fitness or calorie claims. 5 styles photographed; kit per photos: gloves (open-finger MMA style in most, classic boxing gloves with the hexagon), USB-C cable, backing pad, 3 straps; no photo of the kit is used (too small to cut cleanly). Photos are 800 px crops except the star-centre cutout (1920 px), so soft. Return rate not shown. 13 of 14 attachments arrived."
+  },
+  "shipping": {
+    "weight_kg": 2.3,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-02T20:49:35.754Z",
+    "history": [
+      {
+        "at": "2026-11-02T20:42:36.112Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-02T20:44:41.080Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:47:12.341Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-02T20:47:12.583Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION",
+        "note": "HOLD: do not draft until the owner confirms the forwarder can ship this to Nigeria (1688 says not available for sale in your region). Cost CNY 118 recorded; selling price not set; sea only."
+      },
+      {
+        "at": "2026-11-02T20:49:35.754Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-02T20:49:35.754Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 26353,
+      "landed": 26353,
+      "gross": null,
+      "margin": null,
+      "suggested": 59000
+    },
+    "note": "HOLD: do not draft until the owner confirms the forwarder can ship this to Nigeria (1688 says not available for sale in your region). Cost CNY 118 recorded; selling price not set; sea only."
+  }
+}

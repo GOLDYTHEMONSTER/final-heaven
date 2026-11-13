@@ -1,0 +1,190 @@
+{
+  "name": "Buckle-Front Sling Bag",
+  "category": "Accessories",
+  "description": "A one-shoulder sling bag with a diagonal zip front pocket and a double-buckle strap front flap.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Navy, Gray"
+    },
+    {
+      "label": "Carry",
+      "value": "One-shoulder, adjustable strap"
+    },
+    {
+      "label": "Front",
+      "value": "Diagonal zip pocket, double-buckle strap flap"
+    },
+    {
+      "label": "Side pockets",
+      "value": "Drawcord"
+    },
+    {
+      "label": "Zip pulls",
+      "value": "Orange"
+    },
+    {
+      "label": "Back",
+      "value": "Padded mesh"
+    }
+  ],
+  "price": 12000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Navy",
+    "Gray"
+  ],
+  "sizes": [],
+  "tags": [
+    "sling bag",
+    "chest bag",
+    "crossbody",
+    "one-shoulder bag",
+    "buckle",
+    "orange zip",
+    "streetwear"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3f351b76-7220-4899-be0a-c95b59974dab.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/38516bcc-8a88-4c3e-8ca4-ecdd0c75cb25.jpg"
+    },
+    {
+      "file": "gray.jpg",
+      "color": "Gray",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8659dd95-f716-4712-a3fe-834fa56ba55c.jpg"
+    },
+    {
+      "file": "back.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/17ca477e-7cbb-4835-ad7f-7b80be381e92.jpg"
+    },
+    {
+      "file": "navy-model.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/bae1fc4d-4977-48cb-9452-f8f75fd836ff.jpg"
+    },
+    {
+      "file": "gray-model.jpg",
+      "color": "Gray",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8a77a083-8125-4f89-ad1f-b13ba19bf7b3.jpg"
+    },
+    {
+      "file": "gray-side.jpg",
+      "color": "Gray",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/41b5a250-c7e3-4c4b-b9de-513ea789537f.jpg"
+    },
+    {
+      "file": "gray-open.jpg",
+      "color": "Gray",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/37296113-8d77-4c0c-a560-320ff97130f9.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=732927817728",
+    "unit_cost": 17.64,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "¥17.64 at 1+ (screenshot shows NGN 3,934.21; 3934.21/17.64 = 223.03); ¥17 at 500-999, ¥16 at 1000+. Repurchase rate 50%, 20+ praised. Store return rate not shown (UNCHECKED). Seller shown only as \"Baigou Luggage Industrial Belt\"; full company name not confirmed, so not matched to Baoding Chiran. Dimensions, capacity, weight and fabric not shown; no waterproof claim. Supplier photos are 800 px, so soft at full size. Back-view photo is the black bag; open-pocket photo is the gray bag (phone, wallet, bottle are props, not included). Gray is the supplier colour \"Gray\" (dark grey). Supplier title wording (Korean style, fashion brand) not used.",
+    "supplier": {
+      "name": "Baigou luggage belt seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=732927817728"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:29.477Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:31:06.343Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:31:50.183Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:32:32.011Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:32:32.251Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:32:45.042Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:32:57.448Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:32:57.674Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:33:06.175Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:29.477Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:29.476Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 3934,
+      "landed": 3934,
+      "gross": 8066,
+      "margin": 0.6721459,
+      "suggested": 9000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532763401",
+    "approved_at": "2026-11-01T11:32:57.446Z",
+    "published_at": "2026-11-01T11:33:06.175Z",
+    "url": "https://www.finalheaven.shop/product/p1793532763401"
+  },
+  "id": "p1793532763401"
+}

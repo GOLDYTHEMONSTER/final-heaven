@@ -1,0 +1,140 @@
+{
+  "name": "Levitating Money Stack Lamp",
+  "category": "Gadgets",
+  "description": "A novelty money-stack block that floats above a black hexagonal base and lights up when you touch it. The block is 15.6 × 6.6 cm and the base is 19.5 cm wide and 3 cm high. ABS body, powered by USB.",
+  "price": 135000,
+  "stock": 20,
+  "colors": [
+    "Green"
+  ],
+  "sizes": [],
+  "tags": [
+    "levitating lamp",
+    "night light",
+    "desk lamp",
+    "novelty gift",
+    "gadget",
+    "money stack"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/2af1dbc2-bd56-41c5-842a-2fde3c635832.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1070478525694",
+    "unit_cost": 238,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Hengyi Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1070478525694"
+    },
+    "notes": "DO NOT PUBLISH until a sample has been ordered and checked: touch light, levitation, build quality (store return rate 45.7%). Owner decision 8 Nov 2026: price N95,000, green style only, warm candidate photo left out. Tiers: 238 for 1 set, 228 for 10-99, 205 for 100+. Supplier ships free within China. FX from the screenshot (N52,986.68 / 238). STORE RETURN RATE 45.7% (repurchase rate 44.44%), well over the 30% flag. 200+ sold, 7 reviews, 3 years on 1688. Four styles exist but the screenshots do not name them; only the green style has a usable photo. Supplier title and item numbers (SIM10-PZ1-GTA, SIM10-GW4-GTA) carry a game trademark: kept out of the listing. Printed bill style imitates US currency: describe as novelty only. Warm-lit photo shows a small GTA print on the band: not used. USB power, no battery stated. Packed 26x23x18 cm approx, 1,220 g. Touch-to-light and USB per owner; levitation effect is magnetic per supplier title. Price raised from NGN 95000 to NGN 135000 on 9 Nov 2026 (owner approved margin review: 60% floor)."
+  },
+  "shipping": {
+    "weight_kg": 1.22,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T12:23:55.795Z",
+    "history": [
+      {
+        "at": "2026-11-08T11:47:11.664Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T11:47:50.008Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T11:53:21.798Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T11:53:22.216Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T11:53:26.743Z",
+        "from": "PROCESSING",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-08T11:53:35.294Z",
+        "from": "FAILED",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T11:53:37.585Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T12:23:52.995Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T12:23:53.226Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T12:23:55.795Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T11:53:21.796Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 52986,
+      "landed": 52986,
+      "gross": 42014,
+      "margin": 0.4422532631578947,
+      "suggested": 118000
+    },
+    "note": "approved by the owner",
+    "error": "}\r \r Node.js v24.11.1",
+    "attempts": 1,
+    "store_id": "p1794138804871",
+    "photos_reviewed": {
+      "at": "2026-11-08T12:23:52.800Z",
+      "hashes": {
+        "green.jpg": "e7a03713f7a54e6ebff52d363b2a7a86d26b6fc747f7d6005f0c0a471c4f2dde"
+      }
+    },
+    "approved_at": "2026-11-08T12:23:52.994Z",
+    "published_at": "2026-11-08T12:23:55.795Z",
+    "url": "https://www.finalheaven.shop/product/p1794138804871"
+  },
+  "id": "p1794138804871"
+}

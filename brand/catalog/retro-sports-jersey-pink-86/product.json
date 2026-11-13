@@ -1,0 +1,166 @@
+{
+  "name": "Retro Football Jersey, Pink 86",
+  "category": "T-Shirts",
+  "description": "Pink and white short-sleeve football-style jersey with a V-neck, striped trim and a large number 86 printed on the front. 100% polyester. Runs about a size small: go one up.",
+  "price": 15000,
+  "stock": 20,
+  "colors": [
+    "Pink 86"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "jersey",
+    "football jersey",
+    "mens",
+    "streetwear",
+    "retro",
+    "sports",
+    "polyester"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "pink-86.jpg",
+      "color": "Pink 86",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9a8c3a55-2799-41d5-944a-a90527506148.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1063651404624",
+    "unit_cost": 16,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shangrao Ruyou Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1063651404624"
+    },
+    "notes": "One of seven styles on one 1688 offer (1063651404624), each listed as its own product at the owner's request. Cost is the 1+ price of CNY 16 (CNY 15.5 for 50-499, CNY 15 for 500+); fx 222.52 = the screenshot's NGN 3,560.33 / 16. Store return rate not shown. Sizes not shown on the listing: M-3XL assumed, \"runs small\" note added. Packed 15 x 3 cm, 200 g; length 20 cm derived from the 900 cm3 volume. IP RISK: the print is licensed anime character art (One Piece / Demon Slayer) with no licence evidence. Owner was warned and chose \"List anyway\" on 10 Nov 2026 on condition that no character, series or franchise names or trademarks appear in the name, copy, tags or colour names. The garment photo itself shows printed wording on the jersey and small emblem patches; the front-and-back photos with the official logo are not used. Supplier shop name in Chinese: 上饶市如优服装有限公司; on 1688 for 1 year, 100+ sold."
+  },
+  "shipping": {
+    "weight_kg": 0.2,
+    "length_cm": 20,
+    "width_cm": 15,
+    "height_cm": 3,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T06:33:58.647Z",
+    "history": [
+      {
+        "at": "2026-11-10T06:20:53.730Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T06:21:05.443Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T06:23:25.760Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T06:23:25.994Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T06:23:29.228Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T06:33:56.494Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T06:33:56.716Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T06:33:58.647Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T06:23:25.759Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as retro-sports-jersey-blue-46 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as retro-sports-jersey-brown-19 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as retro-sports-jersey-green-56 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as retro-sports-jersey-red-53 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as retro-sports-jersey-teal-63 (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as retro-sports-jersey-white-5 (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 3560,
+      "landed": 3560,
+      "gross": 11440,
+      "margin": 0.7626453333333334,
+      "suggested": 8000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794291808064",
+    "photos_reviewed": {
+      "at": "2026-11-10T06:23:41.154Z",
+      "hashes": {
+        "pink-86.jpg": "1dd870deac87e6b08ac8f81779bea1ee0d19819b84fa906dd209f93a654f7bea"
+      }
+    },
+    "approved_at": "2026-11-10T06:33:56.493Z",
+    "published_at": "2026-11-10T06:33:58.647Z",
+    "url": "https://www.finalheaven.shop/product/p1794291808064"
+  },
+  "specs": [
+    {
+      "label": "Colourway",
+      "value": "Pink 86"
+    },
+    {
+      "label": "Fabric",
+      "value": "100% polyester"
+    },
+    {
+      "label": "Sleeve",
+      "value": "Short"
+    },
+    {
+      "label": "Neck",
+      "value": "V-neck"
+    },
+    {
+      "label": "Style",
+      "value": "Pullover, sport"
+    }
+  ],
+  "id": "p1794291808064"
+}

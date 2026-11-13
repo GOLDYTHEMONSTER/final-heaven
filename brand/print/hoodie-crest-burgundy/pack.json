@@ -1,0 +1,76 @@
+{
+  "title": "Crest Hoodie · Burgundy",
+  "slug": "crest-hoodie-burgundy",
+  "version": 1,
+  "date": "10 November 2026",
+  "garment": "350 g washed (snow-wash) cotton pullover hoodie, unisex, colour washed burgundy. Supplier: Suning Sufang Yazhi Clothing Co., Ltd.",
+  "garmentHex": "#6A2C36",
+  "photos": {
+    "front": "blank-front.png",
+    "back": "blank-back.png",
+    "width": 896,
+    "pxPerCm": 11.75
+  },
+  "colours": [
+    {
+      "hex": "#EFE7D2",
+      "name": "Cream",
+      "use": "everything"
+    }
+  ],
+  "sizeNote": "Sizes are for a size L. Use the same transfer size on every garment size. On S, move the back print up to 8 cm below the hood seam.",
+  "placements": [
+    {
+      "name": "Back",
+      "method": "dtf",
+      "side": "back",
+      "file": "dtf-back-crest-cream-28cm-300dpi.png",
+      "widthCm": 28,
+      "what": "FINAL HEAVEN arched over a laurel crest with the mark and 07, all cream",
+      "cx": 448,
+      "fromY": 344,
+      "belowCm": 6,
+      "where": "Centre it left to right. Measure from the seam where the hood joins the back, at the centre: the top edge of the print sits <b>6 cm</b> below that seam."
+    },
+    {
+      "name": "Front",
+      "method": "dtf",
+      "side": "front",
+      "make": "mark",
+      "colour": "#EFE7D2",
+      "heightCm": 9,
+      "file": "dtf-front-mark-cream-9cm-300dpi.png",
+      "widthCm": 7.95,
+      "what": "Three-star mark, cream",
+      "cx": 448,
+      "fromY": 360,
+      "belowCm": 6,
+      "where": "Top middle of the chest. Centre it left to right. The top edge sits <b>6 cm</b> below the point where the hood crosses over at the neck."
+    },
+    {
+      "name": "Sleeves",
+      "method": "embroidery",
+      "side": "front",
+      "make": "sleeve-script",
+      "colour": "#EFE7D2",
+      "widthCm": 7,
+      "file": "embroidery-sleeve-final-heaven-cream-7cm-600dpi.png",
+      "what": "\"Final Heaven\" on one line, slim script",
+      "thread": "Cream / ecru polyester, 40 wt. One colour, no outline.",
+      "cuffs": [
+        [
+          140,
+          922,
+          4
+        ],
+        [
+          738,
+          925,
+          -4
+        ]
+      ],
+      "aboveCm": 1.5,
+      "where": "On <b>both</b> sleeves, on the outer forearm, centred on the sleeve's top fold, <b>just above the cuff band</b>: the bottom edge sits <b>1.5 cm</b> above the seam where the cuff rib starts. It reads upright when the arms hang down. Do <b>not</b> mirror it."
+    }
+  ]
+}

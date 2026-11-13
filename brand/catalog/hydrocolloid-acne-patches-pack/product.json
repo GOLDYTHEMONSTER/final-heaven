@@ -1,0 +1,149 @@
+{
+  "name": "Hydrocolloid Spot Patches, 5 Sheets",
+  "category": "Accessories",
+  "description": "Five individually sealed sheets of hydrocolloid spot patches in star and heart shapes (clear round dots in the clear pack), 40 patches per sheet. Each sheet is 65 × 93 mm in a sealed 81 × 120 mm pouch. Choose pink, purple, blue or clear: one colour per pack.",
+  "price": 3500,
+  "stock": 20,
+  "colors": [
+    "Pink",
+    "Purple",
+    "Blue",
+    "Clear"
+  ],
+  "sizes": [],
+  "tags": [
+    "spot patches",
+    "hydrocolloid",
+    "skincare",
+    "cute",
+    "stars",
+    "hearts",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3781e93b-9545-40db-b4e4-0ea83558e137.jpg"
+    },
+    {
+      "file": "purple.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/13d52ff2-6486-4a93-998e-03e52244ead1.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/02e1fbcf-4e19-4d74-aa82-fc1ed9d14d7d.jpg"
+    },
+    {
+      "file": "clear.jpg",
+      "color": "Clear",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1775a692-b01b-429b-8a07-c98f3f48ecc1.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=785750394722",
+    "unit_cost": 5.75,
+    "cost_currency": "CNY",
+    "fx_rate": 220.7,
+    "image_permission": "unknown",
+    "notes": "unit_cost is 5 sheets x CNY 1.15 (top of the CNY 0.75-1.15 range; the screenshot does not say which of the 18 styles costs what, so cost is the worst case; at CNY 0.75 five sheets cost 3.75). fx 220.70 = 253.8 / 1.15 (low end gives 222.63). MOQ 50 sheets, 18 styles. Supplier: Xi'an Chuancheng Medical Technology Co., Ltd., 4 yrs, 37K+ sold, repurchase rate 64.29%; RETURN RATE CUT OFF in the screenshot: owner to check. 1688 brand attribute \"Dancing grass\" (not used in copy). Listing title says \"Absorbing Pus\" and the supplier header has FDA/CE-style badges: none of that is used; no treatment, medical or certification claims, and no regulator listing (e.g. NAFDAC) on file. Retail boxes (320/288 patches, 8 colours) exist but have no price shown; not listed. Weight: listing says 3 g per sheet (2.7 g packed on the diagram): 15 g for 5 sheets, estimated. Patches per sheet from the owner (40 star+heart, 40 clear dots); the listing diagram shows a 24-star pink style, not used. Pink/purple/blue photos are star+heart; clear is round dots; the 18 other styles (yellow, black, green...) not listed. Pack contents (sheets in one colour) assumed: supplier sells by the sheet. Owner photos from supplier; image permission unknown.",
+    "supplier": {
+      "name": "Xi'an Chuancheng Medical Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=785750394722"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.015,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T12:14:57.421Z",
+    "history": [
+      {
+        "at": "2026-11-08T12:10:47.047Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T12:11:39.822Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T12:14:00.645Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T12:14:00.954Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T12:14:11.811Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T12:14:52.897Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T12:14:53.338Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T12:14:57.421Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T12:14:00.643Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1269,
+      "landed": 1269,
+      "gross": 2231,
+      "margin": 0.6374214285714287,
+      "suggested": 3000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794140050271",
+    "photos_reviewed": {
+      "at": "2026-11-08T12:14:52.429Z",
+      "hashes": {
+        "pink.jpg": "5821d12245bd9acde83c0e85078174233239974dafcea8383526620915352c56",
+        "purple.jpg": "75b60d531869c33a34dfc6a04dda1aa1224e6f9966de372be83d3ededf87f14f",
+        "blue.jpg": "6680e9531695884a4a5e684334f1e9d33b04f9b8e855402ebe66598f48738936",
+        "clear.jpg": "6e2e9625670cae41752a8471d6ee871c853a3d94b3cc23674c1fc6bd812badd8"
+      }
+    },
+    "approved_at": "2026-11-08T12:14:52.893Z",
+    "published_at": "2026-11-08T12:14:57.421Z",
+    "url": "https://www.finalheaven.shop/product/p1794140050271"
+  },
+  "id": "p1794140050271"
+}

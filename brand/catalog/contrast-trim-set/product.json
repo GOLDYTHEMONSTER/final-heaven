@@ -1,8 +1,42 @@
 {
   "name": "Contrast-Trim Gym Set",
   "category": "Ladies",
-  "description": "A two-piece set: a sports bra with double straps and contrast trim along the neckline, and high-waist leggings with a crossover V waistband edged in the same trim. The leggings shape and lift at the back.\n\nBlack and navy have cream trim, plum has lilac, and olive has lime.\n\nIt fits close to the body. If you're between sizes, go one up.",
-  "price": 25000,
+  "description": "A two-piece gym set: a sports bra and high-waist leggings with contrast trim. It fits close to the body. If you're between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Pieces",
+      "value": "Sports bra and high-waist leggings"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, Plum, Olive, Navy"
+    },
+    {
+      "label": "Trim colour",
+      "value": "Cream on black and navy, lilac on plum, lime on olive"
+    },
+    {
+      "label": "Sizes",
+      "value": "S, M, L, XL"
+    },
+    {
+      "label": "Fit",
+      "value": "Close to the body"
+    },
+    {
+      "label": "Bra",
+      "value": "Double straps, contrast trim along the neckline"
+    },
+    {
+      "label": "Leggings waistband",
+      "value": "High waist, crossover V, edged in contrast trim"
+    },
+    {
+      "label": "Leggings back",
+      "value": "Shapes and lifts"
+    }
+  ],
+  "price": 29500,
   "stock": 20,
   "colors": [
     "Black",
@@ -54,7 +88,7 @@
     "cost_currency": "CNY",
     "fx_rate": 223.57,
     "image_permission": "unknown",
-    "notes": "Price per set (bra + leggings); ¥37 with the first-order coupon, ¥44 from 200. Sizes S–XL per the owner (size chart not seen). The listing shows a 54% store return rate. Photos: supplier shots cropped to 4:5, Chinese label and colour dots left out.",
+    "notes": "Price per set (bra + leggings); ¥37 with the first-order coupon, ¥44 from 200. Sizes S–XL per the owner (size chart not seen). The listing shows a 54% store return rate. Photos: supplier shots cropped to 4:5, Chinese label and colour dots left out. Price raised from NGN 25000 to NGN 26000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 26000 to NGN 29500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
     "supplier": {
       "name": "Seamless activewear seller, 54% returns (name to confirm)",
       "platform": "1688",
@@ -71,7 +105,7 @@
     "url": "https://www.finalheaven.shop/product/p1793214573866",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:15.894Z",
+    "updated": "2026-11-04T22:26:46.683Z",
     "history": [
       {
         "at": "2026-10-28T20:22:51.179Z",
@@ -88,10 +122,15 @@
         "at": "2026-10-28T22:03:15.894Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:46.683Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:15.894Z",
+      "at": "2026-11-04T22:26:46.682Z",
       "ok": true,
       "problems": [],
       "needs": [],

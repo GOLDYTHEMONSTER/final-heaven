@@ -1,0 +1,127 @@
+{
+  "name": "Foam RC Glider Jet — Large",
+  "category": "Gadgets",
+  "description": "A large remote-control jet made of impact-resistant EPP foam, about 44 x 32 x 13 cm. It flies for about 15 minutes on a charge of about 30 minutes, with a remote range of about 300 m. The box holds the jet, remote, battery, propellers, USB charger and landing gear.",
+  "price": 0,
+  "stock": 20,
+  "colors": [
+    "Red",
+    "Blue"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "toy",
+    "remote-control",
+    "rc",
+    "jet",
+    "glider",
+    "foam",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red.jpg",
+      "color": "Red"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=919671650392",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "Shop name not in the screenshot (Zhiyang Toys / 志扬玩具 only). Photos are cut out of 800 px supplier tiles (soft when enlarged); Zhiyang logo, box and Chinese text removed. Lithium battery: ships_by_air false. Specs are the supplier sheet figures (about). Store return rate not shown. Weight: owner message says 950 g, unclear for which model, not entered. Toy: age not stated by the supplier, not claimed. Supplier price for this style NOT shown. Camo-blue style dropped: cutout failed (ghosting). Cutouts of red and blue have a pale notch between the engines and haze on the blue: not shop quality, need re-do or better source photo. Remote type differs from the 320 (black pistol-grip style).",
+    "supplier": {
+      "name": "Zhiyang Toys (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=919671650392"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-13T07:57:21.180Z",
+    "history": [
+      {
+        "at": "2026-11-13T07:56:07.141Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T07:57:21.180Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T07:57:21.179Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "selling price",
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": [
+        "same supplier listing as rc-foam-glider-small (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as rc-foam-glider-twin-tail (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    }
+  },
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Remote-control foam glider jet"
+    },
+    {
+      "label": "Size",
+      "value": "About 44 x 32 x 13 cm"
+    },
+    {
+      "label": "Material",
+      "value": "EPP foam"
+    },
+    {
+      "label": "Remote range",
+      "value": "About 300 m"
+    },
+    {
+      "label": "Battery",
+      "value": "3.7 V 350 mAh lithium, rechargeable"
+    },
+    {
+      "label": "Charge time",
+      "value": "About 30 min"
+    },
+    {
+      "label": "Flight time",
+      "value": "About 15 min"
+    }
+  ],
+  "ships_by_air": false
+}

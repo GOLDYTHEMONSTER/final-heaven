@@ -1,0 +1,189 @@
+{
+  "name": "Heavyweight Sleeveless Vest",
+  "category": "T-Shirts",
+  "description": "Heavyweight sleeveless vest with a ribbed crew neck and a curved, split hem. It runs about a size small: go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Navy, White, Brown, Charcoal"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL, 4XL, 5XL"
+    },
+    {
+      "label": "Weight class",
+      "value": "Heavyweight"
+    },
+    {
+      "label": "Sleeves",
+      "value": "Cut-off"
+    },
+    {
+      "label": "Neck",
+      "value": "Ribbed crew neck, contrast stitching"
+    },
+    {
+      "label": "Hem",
+      "value": "Curved, split; small woven patch reads RETRO VINTAGE"
+    },
+    {
+      "label": "Fit",
+      "value": "Loose, plain colour"
+    }
+  ],
+  "price": 10500,
+  "stock": 20,
+  "colors": [
+    "Navy",
+    "White",
+    "Brown",
+    "Charcoal"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL",
+    "4XL",
+    "5XL"
+  ],
+  "tags": [
+    "vest",
+    "sleeveless",
+    "mens",
+    "heavyweight",
+    "plain",
+    "loose",
+    "retro",
+    "summer"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9d3a354d-3ae3-486b-b60e-b5664ce84bec.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/260826e1-d1ca-403d-b098-2b7b367332e8.jpg"
+    },
+    {
+      "file": "brown.jpg",
+      "color": "Brown",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9c9da34b-28b9-4587-ba4c-4e8409510302.jpg"
+    },
+    {
+      "file": "charcoal.jpg",
+      "color": "Charcoal",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d2177b9f-edaa-4267-9d13-5c79e0686c54.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=895457013049",
+    "unit_cost": 7,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Price ¥7.00 from 1 piece (screenshot: ≈₦1,561.2), free shipping within China. Supplier title: American Style Retro Heavy Sleeveless Waistcoat Loose plus size Vest Men's Solid Color Base Shirt. 4 styles; supplier calls Navy \"Navy blue\", other colour names taken from the photos. Sizes M-5XL from the size screenshot (supplier stock about 4,970-4,995 each). No size chart, so fit and the go-one-up line are assumed. Fibre not stated by the supplier, so not claimed. Hem patch RETRO VINTAGE is the factory generic label (left in). Source photos 800x800, cropped to 500x625 and upscaled, so soft at full size. Framed photo of people (bottom-left) cropped out of all four. Store return rate not shown. Supplier name not visible. Price raised from NGN 9500 to NGN 10500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Plain vests seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=895457013049"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:25.044Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:04:00.574Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:04:22.857Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:04:57.372Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:04:57.598Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:05:05.186Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:05:15.953Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:05:16.165Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:05:19.780Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:32.377Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:25.044Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:25.043Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1561,
+      "landed": 1561,
+      "gross": 7939,
+      "margin": 0.8356621052631579,
+      "suggested": 3500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793531103753",
+    "approved_at": "2026-11-01T11:05:15.952Z",
+    "published_at": "2026-11-01T11:05:19.780Z",
+    "url": "https://www.finalheaven.shop/product/p1793531103753"
+  },
+  "id": "p1793531103753"
+}

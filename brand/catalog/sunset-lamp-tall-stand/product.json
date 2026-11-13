@@ -7,7 +7,29 @@
   "price": 10000,
   "category": "Gadgets",
   "name": "Sunset Lamp — Tall Stand with Remote",
-  "description": "A USB-powered sunset lamp on a slim stand, 24 cm tall. The round head tilts and rotates to aim the light, and a remote control changes the colour. Available in black and orange.",
+  "description": "A sunset lamp on a slim stand, with a remote control that changes the colour.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Orange"
+    },
+    {
+      "label": "Power",
+      "value": "USB-powered"
+    },
+    {
+      "label": "Height",
+      "value": "24 cm"
+    },
+    {
+      "label": "Head",
+      "value": "Round, tilts and rotates"
+    },
+    {
+      "label": "Remote",
+      "value": "Changes the colour"
+    }
+  ],
   "colors": [
     "Black",
     "Orange"
@@ -52,7 +74,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T07:21:30.850Z",
+    "updated": "2026-11-04T22:27:00.437Z",
     "history": [
       {
         "at": "2026-10-29T07:02:59.903Z",
@@ -101,10 +123,15 @@
         "at": "2026-10-29T07:21:30.850Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:00.437Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T07:20:39.351Z",
+      "at": "2026-11-04T22:27:00.436Z",
       "ok": true,
       "problems": [],
       "needs": [],

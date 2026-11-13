@@ -1,0 +1,158 @@
+{
+  "name": "Chibi Ninja Figure Keychain",
+  "category": "Accessories",
+  "description": "A chibi ninja figure on a gold-tone ring with a lobster clasp, with a silicone wrist strap. Six styles, each with its own outfit and strap colour: red armour, white coat, purple, masked, black cloak and orange. Made to hang on keys or a bag.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Red Armour",
+    "White Coat",
+    "Purple",
+    "Masked",
+    "Black Cloak",
+    "Orange"
+  ],
+  "sizes": [],
+  "tags": [
+    "keychain",
+    "bag charm",
+    "cartoon figure",
+    "ninja",
+    "car key",
+    "gift",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red-armour.jpg",
+      "color": "Red Armour",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/49b7e6a1-b03b-4ef7-90e8-79e2bf591400.jpg"
+    },
+    {
+      "file": "white-coat.jpg",
+      "color": "White Coat",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ce36862e-df88-4d93-af29-9f92e27ee878.jpg"
+    },
+    {
+      "file": "purple.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c78f9282-dab3-4e40-bfdb-a91a9efc50ea.jpg"
+    },
+    {
+      "file": "masked.jpg",
+      "color": "Masked",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a213be8b-d860-4390-81d3-61007e7749ba.jpg"
+    },
+    {
+      "file": "black-cloak.jpg",
+      "color": "Black Cloak",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/812aad15-9bde-43d4-9b58-406e505f40e9.jpg"
+    },
+    {
+      "file": "orange.jpg",
+      "color": "Orange",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/dd951d60-069e-4cc0-872b-2fb9191862b5.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "https://detail.1688.com/offer/1062615777691.html",
+    "unit_cost": 3.2,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yiwu Yaopan Trading Co., Ltd.",
+      "platform": "1688",
+      "url": "https://detail.1688.com/offer/790182677082.html"
+    },
+    "notes": "Price tiers: 3.2 CNY for 2+ (minimum order 2), 3.1 for 50-199, 3.0 for 200+; cost uses the regular 3.2. Rate from screenshot: N712.07 / 3.2. 2K+ sold. Store return rate 84.7% (very high). Supplier title and photos name a licensed anime series and its characters; listed generically. Every strap has the series name moulded on it in large letters and carries the series emblem, visible in all photos; photos are not retouched (would misrepresent the product). HOLD: owner must decide to list as is or skip. Size, weight and material not stated. Listing URL from offerId given by owner; supplier url reused from the hooded-hero listing."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T10:47:52.776Z",
+    "history": [
+      {
+        "at": "2026-11-10T10:40:13.096Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T10:40:58.755Z",
+        "from": "RECEIVED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T10:42:01.962Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T10:42:13.604Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T10:47:49.892Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T10:47:50.064Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T10:47:52.776Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T10:40:58.753Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 712,
+      "landed": 712,
+      "gross": 6788,
+      "margin": 0.9050581333333333,
+      "suggested": 2000
+    },
+    "photos_reviewed": {
+      "at": "2026-11-10T10:41:56.788Z",
+      "hashes": {
+        "red-armour.jpg": "8e2b54006357cbaea271500f16967d43ef67dffdf4dd66b472951d397bd2f525",
+        "white-coat.jpg": "5ba5924d90fae7cf7923c2b6b9956ed18d60f1844a02e8417e8473662c3062f8",
+        "purple.jpg": "907b864af0359a42f914d3770a8fb67337e122cc5e23c502a1824e274a2eb811",
+        "masked.jpg": "f1a3c8bdbcc36203a7200a578547034b71110bc3b246d44e1bd0fc24759e75d8",
+        "black-cloak.jpg": "32f01ef78ea0515385ee80d32660a3b22c307ca9fbac24ee0a3281cfb352ec75",
+        "orange.jpg": "11a255b5172eecb69a7be84757bf4c629995c3d2b35f00284d60ebfa88adf502"
+      }
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794307332286",
+    "approved_at": "2026-11-10T10:47:49.891Z",
+    "published_at": "2026-11-10T10:47:52.776Z",
+    "url": "https://www.finalheaven.shop/product/p1794307332286"
+  },
+  "id": "p1794307332286"
+}

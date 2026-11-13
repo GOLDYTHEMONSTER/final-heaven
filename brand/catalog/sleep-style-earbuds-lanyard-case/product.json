@@ -1,0 +1,154 @@
+{
+  "name": "Compact Earbuds — LED Case with Wrist Strap",
+  "category": "Gadgets",
+  "description": "Small wireless earbuds in a square charging case with a gold-tone edge, an LED display and a braided wrist strap. Comes in black, cream and white.",
+  "price": 7000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Cream",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "mini",
+    "led display"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b8370d10-f994-4f3c-98e9-c0d0c81dc14b.jpg"
+    },
+    {
+      "file": "cream.jpg",
+      "color": "Cream",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/472afb58-77cf-4836-b3ed-02b6e96ade2a.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/14150083-a40c-420c-8e7e-6d12d0f5353e.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706",
+    "unit_cost": 13.9,
+    "cost_currency": "CNY",
+    "fx_rate": 223.9,
+    "image_permission": "unknown",
+    "notes": "Style \"J11 (including lanyard)\", ¥13.90. Rate 223.9 ₦/¥ (listing header). Shop confirmed as Huixun by the style picker. Owner set the price (₦7000). Photos are 800 px square, upscaled 1.5x to 1200x1500: slightly soft, check on the review sheet. Strap colour differs by style (black, pink, silver). Do not call these sleep earbuds or claim sleep use: nothing in the photos says so. Not a duplicate of any store earbud. Lithium battery: sea freight only. Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. No Bluetooth version, battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Shenzhen Huixun Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T16:34:58.227Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:24:57.364Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:25:43.445Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:30:52.081Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:32:40.342Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T16:32:57.108Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:33:01.735Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:34:55.681Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T16:34:55.988Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T16:34:58.227Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:32:40.341Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as macaron-square-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as open-ear-hook-earbuds-led (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as over-ear-wireless-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as p47-foldable-on-ear-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as q86-camera-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as touchscreen-case-earbuds (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 3112,
+      "landed": 3112,
+      "gross": 3888,
+      "margin": 0.5553985714285714,
+      "suggested": 7000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794587580818",
+    "photos_reviewed": {
+      "at": "2026-11-13T16:34:55.387Z",
+      "hashes": {
+        "black.jpg": "8a38b8ae7131b971835c821e4163ae2423aafec2f6ed8de5ec251821ae4691d6",
+        "cream.jpg": "c188b3be27498411eed2f2629aa1fae2bbaf04e31c5d43a45f72862fc8e04a68",
+        "white.jpg": "ef8f7437af5f079c45a2ef81bf30b575ce40718ebed6b42cae3d2cbf23d669d6"
+      }
+    },
+    "approved_at": "2026-11-13T16:34:55.679Z",
+    "published_at": "2026-11-13T16:34:58.227Z",
+    "url": "https://www.finalheaven.shop/product/p1794587580818"
+  },
+  "ships_by_air": false,
+  "id": "p1794587580818"
+}

@@ -1,7 +1,25 @@
 {
   "name": "In-Ear Wireless Earbuds — Battery Display",
   "category": "Gadgets",
-  "description": "In-ear wireless earbuds in a rounded charging case with a digital display that shows the battery level. Noise reduction on calls (ENC), and up to 30 hours of listening with the case (seller’s figure).",
+  "description": "In-ear wireless earbuds in a rounded charging case with a digital display that shows the battery level.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "In-ear, wireless"
+    },
+    {
+      "label": "Charging case",
+      "value": "Rounded, digital battery display"
+    },
+    {
+      "label": "Call noise reduction",
+      "value": "ENC"
+    },
+    {
+      "label": "Colours",
+      "value": "Cream, White, Black & Red"
+    }
+  ],
   "price": 6500,
   "stock": 20,
   "colors": [
@@ -56,8 +74,8 @@
     "data_status": "estimated"
   },
   "queue": {
-    "status": "AWAITING_APPROVAL",
-    "updated": "2026-10-29T06:29:47.702Z",
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:26:50.790Z",
     "history": [
       {
         "at": "2026-10-29T06:13:50.277Z",
@@ -85,10 +103,31 @@
         "from": "PROCESSING",
         "to": "AWAITING_APPROVAL",
         "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:44:14.666Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:44:14.894Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:44:17.127Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:50.790Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T06:29:25.304Z",
+      "at": "2026-11-04T22:26:50.789Z",
       "ok": true,
       "problems": [],
       "needs": [],
@@ -107,8 +146,11 @@
       "margin": 0.7282764615384616,
       "suggested": 4000
     },
-    "note": "draft saved, not on sale",
-    "store_id": "p1793255386502"
+    "note": "approved by the owner",
+    "store_id": "p1793255386502",
+    "approved_at": "2026-11-04T10:44:14.665Z",
+    "published_at": "2026-11-04T10:44:17.127Z",
+    "url": "https://www.finalheaven.shop/product/p1793255386502"
   },
   "id": "p1793255386502"
 }

@@ -1,0 +1,180 @@
+{
+  "name": "Smart Fitness Band with Colour Screen",
+  "category": "Gadgets",
+  "description": "A slim fitness band with a small colour screen. It is for general activity use only, not for health decisions, and the readings on the screens in the photos are sample displays.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Blue, Red, Pink"
+    },
+    {
+      "label": "Strap",
+      "value": "Silicone"
+    },
+    {
+      "label": "Screen",
+      "value": "Small colour screen"
+    },
+    {
+      "label": "Charging",
+      "value": "Rechargeable by USB"
+    },
+    {
+      "label": "Features",
+      "value": "Step count, heart rate, call and message alerts"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "34 g"
+    }
+  ],
+  "price": 17000,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Blue",
+    "Red",
+    "Pink"
+  ],
+  "sizes": [],
+  "tags": [
+    "fitness band",
+    "smart band",
+    "step counter",
+    "heart rate",
+    "gadgets"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/39d91a34-1f06-4312-899e-4ec31bbe4b9f.jpg"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/50041d51-7246-4b93-832a-cb3c7c8b5d93.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/77cc2a3a-0fdd-4bbf-bf99-530c0361e54f.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/850be3d3-2508-41ec-bca3-0849bbd7f6f4.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=644376463335",
+    "unit_cost": 29.8,
+    "cost_currency": "CNY",
+    "fx_rate": 222,
+    "image_permission": "unknown",
+    "notes": "Owner (4 Nov 2026): price 15000, cost CNY 29.8 for all colours, sea only. Supplier Huizhou Gris Intelligent Technology Co., Ltd. (15 yrs), 7K+ sold, 50+ like it, repurchase rate 36.62% (repeat buyers); return rate not seen. Title: M6 Waterproof Smart Bracelet NFC Access Control Exercise Step Meter Heart Rate Blood Pressure Blood Oxygen Call Message Reminder nfc Exercise; M6, waterproof, NFC, blood pressure and blood oxygen left out. Price CNY 5.3 to 29.8 (about N1,176-6,611 at 222 per CNY); which style costs what is not shown: unit_cost set to the top, 29.8, as a floor. Weight 34 g (owner): shipping.weight_kg 0.034. NO health or medical claims: blood pressure and SpO2 readings on a cheap band are not accurate; photo screens show sample readings (BPM 89, 120/89 mmHg, 89% SpO2) that are display mock-ups; copy says not a medical device. No waterproof or IP claim (none given); NFC door access not claimed. M6 is the supplier model name and the band resembles a well-known fitness band (Xiaomi Mi Band 6): no brand named; no logo shown. Lithium battery, USB charging: ships_by_air false (sea only), owner to confirm. 4 styles with photos; the listing has more (packaged variants with a charger) not listed. Photos: 4 clean 1920 px cutouts cropped to 4:5; the first 1688 image (Chinese overlay) not used. Strap size and battery capacity not stated. Price raised from NGN 15000 to NGN 17000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Huizhou Gris Intelligent Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=644376463335"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.034,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:29.601Z",
+    "history": [
+      {
+        "at": "2026-11-04T06:44:02.262Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-04T06:44:15.458Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-04T06:44:20.355Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T06:45:16.988Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T06:45:17.211Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T06:45:23.801Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T06:58:34.086Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T06:58:34.304Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T06:58:36.400Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:33.658Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:29.601Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:29.600Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6616,
+      "landed": 6616,
+      "gross": 8384,
+      "margin": 0.55896,
+      "suggested": 15000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793774722367",
+    "approved_at": "2026-11-04T06:58:34.085Z",
+    "published_at": "2026-11-04T06:58:36.400Z",
+    "url": "https://www.finalheaven.shop/product/p1793774722367"
+  },
+  "ships_by_air": false,
+  "id": "p1793774722367"
+}

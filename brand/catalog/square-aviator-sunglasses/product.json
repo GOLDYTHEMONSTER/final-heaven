@@ -1,0 +1,199 @@
+{
+  "name": "Square Aviator Sunglasses",
+  "category": "Accessories",
+  "description": "Oversized square sunglasses with a double bridge, for men and women. Gold metal frame with acetate rims and gold mesh side panels. Eight colours, from black and gradient lenses to mirrored lenses.",
+  "price": 7500,
+  "stock": 20,
+  "colors": [
+    "Black / Black",
+    "Black / Grey Fade",
+    "Black / Blue Fade",
+    "Black / Ice Blue",
+    "Black / Silver",
+    "Black / Pink",
+    "Brown / Brown Fade",
+    "Tortoise / Gold"
+  ],
+  "sizes": [],
+  "tags": [
+    "sunglasses",
+    "accessories",
+    "eyewear",
+    "unisex",
+    "square",
+    "gold"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black / Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/69a15717-39cd-479f-b680-df9137805bae.jpg"
+    },
+    {
+      "file": "grey-fade.jpg",
+      "color": "Black / Grey Fade",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/125d167e-3905-4e77-948b-755a01bb0ef5.jpg"
+    },
+    {
+      "file": "blue-fade.jpg",
+      "color": "Black / Blue Fade",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/481e914a-d431-4d0e-9e84-295a593db0fe.jpg"
+    },
+    {
+      "file": "ice-blue.jpg",
+      "color": "Black / Ice Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c425070d-1c34-4bec-9cdc-8a4ec0f54b8f.jpg"
+    },
+    {
+      "file": "silver.jpg",
+      "color": "Black / Silver",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/554d111f-b188-47c8-9862-41a44591ff35.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Black / Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3ffc5f80-36c1-42d1-8cfe-7fb9b8f5ce7b.jpg"
+    },
+    {
+      "file": "brown-fade.jpg",
+      "color": "Brown / Brown Fade",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/041ae510-83e2-40c6-a250-5569de32f9ee.jpg"
+    },
+    {
+      "file": "tortoise-gold.jpg",
+      "color": "Tortoise / Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1b4e8e79-23c4-4026-9ab6-8fc1aac5cbc3.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=676927426259",
+    "unit_cost": 10.5,
+    "cost_currency": "CNY",
+    "fx_rate": 222.63,
+    "image_permission": "unknown",
+    "notes": "Supplier title: New Retro European and American Sunglasses ... 1828 (1688 brand attribute \"Wood Forest Evening\", item no. 1008 1828). ¥10.5 for 1 pair, ¥10 for 20+ pairs (₦2,337.65 / ₦2,226.33 on screenshot; rate = 2337.65/10.5). Eight styles; colour names shortened by owner. Weight 30 g and box 7 x 5 cm (595 cm3) from the listing. Store return rate not visible; repurchase rate \"20-something %\" (cut off); 700+ praised; supplier 11 years on 1688. Left out on purpose: polarized, UV and eye-protection claims (not stated), designer comparisons. Photos are 800 px, padded with white to 4:5 and enlarged 1.5x (soft at full size). Tortoise photo is a different, turned angle from the others; the supplier has no front-on tortoise shot. Lens attribute on listing says Grey and frame Gold only (default attributes).",
+    "supplier": {
+      "name": "Taizhou Yingtai Glasses Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=676927426259"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.03,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-08T12:23:06.752Z",
+    "history": [
+      {
+        "at": "2026-11-08T12:14:52.082Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-08T12:17:01.101Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T12:17:06.767Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-08T12:17:47.244Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-08T12:17:47.623Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-08T12:18:00.092Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-08T12:23:03.966Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-08T12:23:04.222Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-08T12:23:06.752Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-08T12:17:47.242Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2338,
+      "landed": 2338,
+      "gross": 5162,
+      "margin": 0.688318,
+      "suggested": 5500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794140278211",
+    "photos_reviewed": {
+      "at": "2026-11-08T12:23:03.757Z",
+      "hashes": {
+        "black.jpg": "8ed94f19391ca71b91755008e40d92ccce4ff670a226535d7472b04007e1b80d",
+        "grey-fade.jpg": "fe1dad0d8d19f3f30894b92bd71f32e86f1dceb9509dbedb71fc858a23afc700",
+        "blue-fade.jpg": "dc1f0f59319c97729882290d9147c5d9d1ac28ef5c2e626c47bb7e3384bae462",
+        "ice-blue.jpg": "632c89408640c29b0b81c69349a5099b3f272fa9b380ef56326b51547fd8c38c",
+        "silver.jpg": "f059a7d551b8f3a1fe3cb80471a09b191baab36422bfeab184a397e9a6972ea4",
+        "pink.jpg": "1e87010e4c7271d0a4c5cae2ec7edc3a8c18266e6d62f99f2b2698f8176689ed",
+        "brown-fade.jpg": "ddc95ab67a2d5aa4ba47c86aee0ba364ba016976a28f432cd4701f8545804654",
+        "tortoise-gold.jpg": "716074ce4193c75d349569e0ac933f86d1b569d1b5bd3110225924579d4e8081"
+      }
+    },
+    "approved_at": "2026-11-08T12:23:03.965Z",
+    "published_at": "2026-11-08T12:23:06.752Z",
+    "url": "https://www.finalheaven.shop/product/p1794140278211"
+  },
+  "specs": [
+    {
+      "label": "Style",
+      "value": "Oversized square, double bridge"
+    },
+    {
+      "label": "Frame",
+      "value": "Gold metal with acetate rims"
+    },
+    {
+      "label": "Fit",
+      "value": "Unisex"
+    },
+    {
+      "label": "Weight",
+      "value": "30 g"
+    }
+  ],
+  "id": "p1794140278211"
+}

@@ -1,0 +1,159 @@
+{
+  "name": "Globe Galaxy Projector Lamp with Film Discs",
+  "category": "Gadgets",
+  "description": "A globe-shaped star projector on a tilting stand that throws galaxies, planets and starry skies onto your walls and ceiling.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black and White (white with a black top), White, Black"
+    },
+    {
+      "label": "Shape",
+      "value": "Globe on a tilting stand"
+    },
+    {
+      "label": "Scenes",
+      "value": "Swap the film discs to change the scene"
+    },
+    {
+      "label": "Controls",
+      "value": "Touch buttons on the top ring: timer, rotation, power"
+    },
+    {
+      "label": "Timer",
+      "value": "1 hour or 2 hours"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "550 g"
+    }
+  ],
+  "price": 56500,
+  "stock": 20,
+  "colors": [
+    "Black and White",
+    "White",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "projector",
+    "galaxy",
+    "star-projector",
+    "night-light",
+    "bedroom"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black-and-white.jpg",
+      "color": "Black and White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7c42c000-449e-4f7a-9bb4-83dc3b5d5290.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/27c6ef8c-8466-403b-ae39-20601e3fa554.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/37d93276-5e95-4d9d-80db-338182f336eb.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=736807624138",
+    "unit_cost": 98,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Shenzhen Meimeida Lighting Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=736807624138"
+    },
+    "notes": "1688 price ¥98 (>=1 pc), N21,739.93 on screenshot. 19K+ sold. Store return rate 50.8% (high). Listing has 3 styles (Style 1/3); only 'Black and White Contrast (13 Film)' is named, so colours are inferred from photos (black, white, white with black top). Disc count conflicts: title and Chinese images say 13, English images and gift box say 12; no number used in copy. Power/cable not confirmed in screenshots, not stated. '4K' claims on supplier images not used. Black and White photos are cropped from 800 px images, soft. Black and White photos show a box printed '12 Film Discs'. Price raised from NGN 48500 to NGN 55000 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 55000 to NGN 56500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": 0.55,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:27:51.804Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 21740,
+      "landed": 21740,
+      "gross": 26760,
+      "margin": 0.5517459793814433,
+      "suggested": 48500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:51.805Z",
+    "history": [
+      {
+        "at": "2026-11-04T06:50:38.587Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T06:54:09.737Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T06:54:12.353Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T06:54:18.617Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T06:54:18.849Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T06:54:19.068Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T06:54:21.142Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:51.805Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793775257085",
+    "approved_at": "2026-11-04T06:54:18.848Z",
+    "published_at": "2026-11-04T06:54:21.142Z",
+    "url": "https://www.finalheaven.shop/product/p1793775257085"
+  },
+  "id": "p1793775257085"
+}

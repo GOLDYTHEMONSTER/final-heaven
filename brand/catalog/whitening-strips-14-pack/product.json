@@ -1,0 +1,87 @@
+{
+  "name": "Teeth Whitening Strips, 14 Applications",
+  "category": "Accessories",
+  "description": "A box of 14 single-use teeth whitening strip sachets. Each strip is applied once for about 30 minutes, as printed on the supplier's pack. This product has no expiry date, ingredients list or regulator listing on file; check the pack before use.",
+  "price": 0,
+  "stock": 20,
+  "colors": [],
+  "sizes": [],
+  "tags": [
+    "teeth whitening",
+    "whitening strips",
+    "oral care",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=632179810800",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": 223.33,
+    "image_permission": "unknown",
+    "notes": "HOLD: no draft until the supplier confirms PLAIN packs (every supplier photo shows SMILEKIT / pap+ / Focusmile packaging; brand names kept out of our name and copy). Supplier: Nanchang White Technology Co., Ltd., 7 yrs, 335K+ sold, repurchase rate 31.62%. Title: PAP Teeth Whitening Sticker. 1688 price CNY 13.8 from 1 set is the selected style (Smilekit purple 7 pairs, style 7 of 11); other styles not shown; fx 223.33 assumed (no naira figure seen). 14-application cost NOT known: ask the supplier. Owner: weight 60 g. Owner chose to draft WITHOUT expiry date, ingredients list or regulator listing (e.g. NAFDAC): this gap must stay in the notes and status line. Plain pack facts only (30 min per use as printed); no whitening or safety claims. No store photos made: the pack shots all show the third-party brand; the watermarked and corner-crop photos are not usable.",
+    "supplier": {
+      "name": "Nanchang White Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=632179810800"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.06,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-03T05:13:53.878Z",
+    "history": [
+      {
+        "at": "2026-11-03T05:13:52.052Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-03T05:13:53.475Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-03T05:13:53.878Z",
+        "from": "FAILED",
+        "to": "NEEDS_INFORMATION",
+        "note": "HOLD: wait for plain-pack confirmation; no photos; not covered by an expiry date, ingredients or regulator listing (owner accepted)."
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-03T05:13:53.475Z",
+      "ok": false,
+      "problems": [
+        "no photos"
+      ],
+      "needs": [
+        "selling price",
+        "supplier unit cost"
+      ],
+      "notes": [
+        "same supplier listing as whitening-strips-7-pack (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as whitening-strips-pack (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    },
+    "note": "HOLD: wait for plain-pack confirmation; no photos; not covered by an expiry date, ingredients or regulator listing (owner accepted)."
+  }
+}

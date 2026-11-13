@@ -1,0 +1,164 @@
+{
+  "name": "Wireless Earbuds — Touchscreen Charging Case",
+  "category": "Gadgets",
+  "description": "Wireless earbuds with stem buds and a charging case that has a built-in touchscreen showing battery level and controls. Comes in white and black.",
+  "price": 12000,
+  "stock": 20,
+  "colors": [
+    "White",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "touchscreen",
+    "display case"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/e24df6c4-f67e-4aec-a4b5-45c44f1e6de0.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5395db5f-782f-48b6-b014-f8b4f05af229.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706",
+    "unit_cost": 25,
+    "cost_currency": "CNY",
+    "fx_rate": 223.9,
+    "image_permission": "unknown",
+    "notes": "Style \"A9pro (fake noise…)\", ¥25.00. The supplier's own style name says the noise cancelling is fake: never claim ANC or noise cancelling, even though the case screen shows an ANC button. Owner raised the price to ₦12,000 because ₦7,000 was too thin. Rate 223.9 ₦/¥ (listing header). Shop confirmed as Huixun by the style picker. Owner set the price (₦12,000). Owner chose to keep it and accepts the lookalike risk. DO NOT claim ANC: the case screen shows an ANC button and Ambient Sound toggle but ANC is unverified. Design closely copies a well-known premium brand pro earbud and case, the white one closest: lookalike risk. Photos 800 px (black) and 1000 px (white) square, padded; black is soft. Screen UI text is English and is part of the product. Not a duplicate of the store earbuds. Lithium battery: sea freight only. Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. No Bluetooth version, battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Shenzhen Huixun Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T16:35:01.334Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:24:57.749Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:25:44.044Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:30:52.775Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:32:41.719Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T16:33:07.425Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:33:11.212Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:33:22.356Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:33:24.088Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:33:25.209Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-13T16:34:58.858Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T16:34:59.138Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T16:35:01.334Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:33:25.208Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as macaron-square-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as open-ear-hook-earbuds-led (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as over-ear-wireless-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as p47-foldable-on-ear-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as q86-camera-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as sleep-style-earbuds-lanyard-case (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 5598,
+      "landed": 5598,
+      "gross": 6403,
+      "margin": 0.5335416666666667,
+      "suggested": 12500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794587590315",
+    "photos_reviewed": {
+      "at": "2026-11-13T16:34:58.559Z",
+      "hashes": {
+        "white.jpg": "0f2e6fa446982dc90c016e0c487243b3ac20df3de53a2e7f43e53d2d03defc71",
+        "black.jpg": "a12b073c39704fc0ea89131ce9646be272f1b60905e12c46fbfa2881602bc044"
+      }
+    },
+    "approved_at": "2026-11-13T16:34:58.856Z",
+    "published_at": "2026-11-13T16:35:01.334Z",
+    "url": "https://www.finalheaven.shop/product/p1794587590315"
+  },
+  "ships_by_air": false,
+  "id": "p1794587590315"
+}

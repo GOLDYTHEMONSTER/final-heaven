@@ -1,0 +1,172 @@
+{
+  "name": "Faces Print Knee-Length Shorts",
+  "category": "Pants",
+  "description": "Knee-length drawstring shorts in an all-over woven-look print of illustrated faces in sunglasses. If you are between sizes, go one up.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black (grey, blue and brown print), Yellow (multicolour print in orange, teal and cream)"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL, 4XL, 5XL"
+    },
+    {
+      "label": "Length",
+      "value": "Knee-length"
+    },
+    {
+      "label": "Fit",
+      "value": "Loose cut"
+    },
+    {
+      "label": "Waistband",
+      "value": "Off-white elastic, white drawcords"
+    }
+  ],
+  "price": 13500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Yellow"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL",
+    "4XL",
+    "5XL"
+  ],
+  "tags": [
+    "shorts",
+    "mens",
+    "summer",
+    "printed",
+    "knee-length",
+    "drawstring"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/5bb45a06-78f4-4f5d-a605-daa0e8cde076.jpg"
+    },
+    {
+      "file": "yellow.jpg",
+      "color": "Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/791d9653-41bd-4023-86e5-acd9ad5eb3a2.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1069136437197",
+    "unit_cost": 8.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "notes": "Price ¥8.50 from 1 piece (screenshot: ≈₦1,895.74). Shipping fee from ¥3.00 (≈₦669.08) recorded as china_domestic_ngn; it is a minimum. Supplier colour names Black and Yellow; sizes M-5XL from the supplier size list. Fabric not stated by supplier. No size chart, so fit and the go-one-up line are assumed. Factory tag on the drawcord is visible in the photos (small, left in). Yellow photo has a hand at the hem. Source photos 800x1066, so store photos are soft. Store return rate not shown in screenshots. Price raised from NGN 12000 to NGN 13500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Jieyang Zhongfa Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1069136437197"
+    },
+    "china_domestic_ngn": 669
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:43.236Z",
+    "history": [
+      {
+        "at": "2026-11-01T08:05:11.676Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T08:05:43.756Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:05:56.227Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T08:06:59.982Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T08:07:00.224Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T08:07:05.774Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T08:07:15.859Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T08:07:16.095Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T08:07:18.635Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T16:50:25.123Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:43.236Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:43.235Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 1896,
+      "landed": 2565,
+      "gross": 9435,
+      "margin": 0.7862704166666665,
+      "suggested": 6000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793520424609",
+    "approved_at": "2026-11-01T08:07:15.857Z",
+    "published_at": "2026-11-01T08:07:18.635Z",
+    "url": "https://www.finalheaven.shop/product/p1793520424609"
+  },
+  "id": "p1793520424609"
+}

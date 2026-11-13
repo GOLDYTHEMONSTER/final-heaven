@@ -1,0 +1,120 @@
+{
+  "name": "Foldable Wireless On-Ear Headphones — P47",
+  "category": "Gadgets",
+  "description": "Foldable wireless on-ear headphones with a padded headband and ear cups. Playback buttons on the right cup. Comes with a retail box. Colours: lime green, blue, white, black and red.",
+  "price": 17000,
+  "stock": 20,
+  "colors": [
+    "Lime Green",
+    "Blue",
+    "White",
+    "Black",
+    "Red"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "headphones",
+    "wireless",
+    "bluetooth",
+    "on-ear",
+    "foldable",
+    "p47"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "lime-green.jpg",
+      "color": "Lime Green"
+    },
+    {
+      "file": "blue.jpg",
+      "color": "Blue"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706",
+    "unit_cost": 9.3,
+    "cost_currency": "CNY",
+    "fx_rate": 223.9,
+    "image_permission": "unknown",
+    "notes": "Style \"P47 complete set boxed\", ¥9.30 (a second ¥6.70 figure shows, not used). Rate 223.9 ₦/¥ (listing header). Shop confirmed as Huixun by the style picker. Owner set the price (₦17000). Awaiting sharper supplier photos (owner: hold until they arrive). \"P47 wireless\" is printed on the band and box: a model name, not a brand. Box reads 5.0+EDR (supplier print, not claimed in copy). Photos are 750 px desk shots cropped 600x750 to 4:5 and enlarged 2x: SOFT. Book spine with third-party text cropped out; the retail box stays in shot. Plant edge visible on the right. Very common cheap model; store has no on-ear headphones (over-ear ANC ones at ₦55-66k are a different tier). Do not call it ANC. Owner sent photos with no message; shop, listing, style name and ¥ price unknown. Likely the Shenzhen Huixun listing (offerId 1025659251706, 58.6% return rate) but unconfirmed: if so, samples first and stay unpublished. Lithium battery: sea freight only. No battery, playtime or waterproofing claimed.",
+    "supplier": {
+      "name": "Shenzhen Huixun Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "DRAFT_READY",
+    "updated": "2026-11-13T16:33:25.896Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:26:15.866Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:27:09.735Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:30:55.572Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:33:25.896Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:33:25.895Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as macaron-square-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as open-ear-hook-earbuds-led (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as over-ear-wireless-headphones (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as q86-camera-case-earbuds (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as sleep-style-earbuds-lanyard-case (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as touchscreen-case-earbuds (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2082,
+      "landed": 2082,
+      "gross": 14918,
+      "margin": 0.8775135294117646,
+      "suggested": 5000
+    }
+  },
+  "ships_by_air": false
+}

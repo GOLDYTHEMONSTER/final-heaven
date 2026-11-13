@@ -7,7 +7,25 @@
   "price": 7500,
   "category": "Gadgets",
   "name": "Mini Sunset Lamp — Cat Ear",
-  "description": "A small USB-powered lamp that casts a sunset-style circle of light on your wall. The round head sits on a short base and tilts to aim the glow, and has little ears on top. Available in black and pink. Check which versions come with a remote before you order.",
+  "description": "A small lamp that casts a sunset-style circle of light on your wall. Check which versions come with a remote before you order.",
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, Pink"
+    },
+    {
+      "label": "Power",
+      "value": "USB-powered"
+    },
+    {
+      "label": "Head",
+      "value": "Round, tilts to aim the glow, little ears on top"
+    },
+    {
+      "label": "Base",
+      "value": "Short"
+    }
+  ],
   "colors": [
     "Black",
     "Pink"
@@ -52,7 +70,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T07:21:18.401Z",
+    "updated": "2026-11-04T22:26:59.734Z",
     "history": [
       {
         "at": "2026-10-29T07:02:59.705Z",
@@ -101,10 +119,15 @@
         "at": "2026-10-29T07:21:18.401Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:59.734Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-29T07:20:37.740Z",
+      "at": "2026-11-04T22:26:59.732Z",
       "ok": true,
       "problems": [],
       "needs": [],

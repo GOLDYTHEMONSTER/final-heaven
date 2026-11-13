@@ -1,0 +1,159 @@
+{
+  "name": "Astronaut Star Projector Night Light",
+  "category": "Gadgets",
+  "description": "A white astronaut figure on a moon base that projects a starry sky onto your walls and ceiling from its visor. A desk or bedside piece that also works as a gift.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "White"
+    },
+    {
+      "label": "Power",
+      "value": "Plug-in (cable) model"
+    },
+    {
+      "label": "Projection effects",
+      "value": "Multiple"
+    },
+    {
+      "label": "Head",
+      "value": "Tilts and turns to aim the light"
+    },
+    {
+      "label": "Base",
+      "value": "Detachable"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "540 g"
+    }
+  ],
+  "price": 25000,
+  "stock": 20,
+  "colors": [
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "projector",
+    "astronaut",
+    "star-projector",
+    "night-light",
+    "bedroom",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c70100a7-ae98-49f8-b1b3-acf736d9301d.jpg"
+    },
+    {
+      "file": "projecting-beam.jpg",
+      "color": "White",
+      "label": "Astronaut projecting a purple beam of light from its visor",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/58d8e16d-5cfc-440d-9738-8fc771676ba6.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=999698361510",
+    "unit_cost": 22.5,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Dongyang Shengwang E-commerce Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=999698361510"
+    },
+    "notes": "1688 price ¥22.5 (>=1 pc), N4,991.31 on screenshot. 2K+ sold, repurchase rate 23.02% (not a store return rate; none shown). Plug-in model per the Chinese label on the front photo; other styles (battery, remote) not seen, so none claimed. Banner mentions a remote control: unconfirmed whether included, not claimed. Supplier images say 8 projection effects (Chinese only): copy says 'multiple'. Detachable base, tilting/rotating head and magnetic parts are from Chinese panels: base and head claimed, magnetic not. Power input (USB/5V), cable length and size not shown. Weight 540 g packed (owner-stated). Cover photo cut out of a 1300 px image. The model-with-square-ears photo (#6, 800 px) was not used: its head differs from the cover. Supplier 'Children's Christmas gift' title not used. Close cousin of the globe galaxy projector in the store; different shape. Price raised from NGN 11500 to NGN 12500 on 9 Nov 2026 (owner approved margin review: 60% floor). Price raised from NGN 12500 to NGN 25000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": 0.54,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:27:24.880Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4991,
+      "landed": 4991,
+      "gross": 6509,
+      "margin": 0.5659652173913043,
+      "suggested": 11500
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:24.881Z",
+    "history": [
+      {
+        "at": "2026-11-04T06:53:00.565Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T06:58:26.540Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T06:58:26.790Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T06:58:31.182Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T06:58:31.409Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T06:58:31.638Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T06:58:33.807Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T12:01:01.066Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:24.881Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793775509688",
+    "approved_at": "2026-11-04T06:58:31.408Z",
+    "published_at": "2026-11-04T06:58:33.807Z",
+    "url": "https://www.finalheaven.shop/product/p1793775509688"
+  },
+  "id": "p1793775509688"
+}

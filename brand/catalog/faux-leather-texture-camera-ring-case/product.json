@@ -1,0 +1,201 @@
+{
+  "name": "Faux-Leather Texture Camera Ring Case",
+  "category": "Accessories",
+  "description": "A plain soft phone case with a faux-leather texture and a metal-look ring around the camera cut-out. Solid colour, no print.",
+  "specs": [
+    {
+      "label": "Fits",
+      "value": "iPhone 13, 14, 15 and 16 series (see the model list)"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, Navy, Red, Grey, Light grey, Tan, Pink, Cream"
+    },
+    {
+      "label": "Texture",
+      "value": "Faux leather"
+    },
+    {
+      "label": "Camera",
+      "value": "Large opening, metal-look ring"
+    }
+  ],
+  "price": 6500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "Navy",
+    "Red",
+    "Grey",
+    "Light grey",
+    "Tan",
+    "Pink",
+    "Cream"
+  ],
+  "sizes": [
+    "iPhone 13",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 14",
+    "iPhone 14 Plus",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 15",
+    "iPhone 15 Plus",
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 16",
+    "iPhone 16 Plus",
+    "iPhone 16 Pro",
+    "iPhone 16 Pro Max"
+  ],
+  "tags": [
+    "phone case",
+    "faux leather texture",
+    "camera ring",
+    "plain",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/070a2d2c-7278-4857-b9ae-0256a89fe962.jpg"
+    },
+    {
+      "file": "navy.jpg",
+      "color": "Navy",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/9e762c3b-321e-4920-8533-3e99045544ab.jpg"
+    },
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/35127f4f-b4d0-4e39-a619-ac247f475031.jpg"
+    },
+    {
+      "file": "grey.jpg",
+      "color": "Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/278084bf-6c41-4b14-b4a9-2b7036f6c059.jpg"
+    },
+    {
+      "file": "light-grey.jpg",
+      "color": "Light grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/6a8c48af-c091-42c2-9dcb-7d450e9b5a1a.jpg"
+    },
+    {
+      "file": "tan.jpg",
+      "color": "Tan",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/34acaa2c-a175-4f4b-8196-fcb70c01b86c.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/dda1cbde-c56c-476a-b16a-5f481e50f2f4.jpg"
+    },
+    {
+      "file": "cream.jpg",
+      "color": "Cream",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/99464729-0612-46e8-ad93-4bfaf601e435.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=847150526169",
+    "unit_cost": 1.71,
+    "cost_currency": "CNY",
+    "fx_rate": 223.04,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Guangzhou Baiyi Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=847150526169"
+    },
+    "notes": "Tiers: 1.71 CNY at 1+, 1.5 at 800-1999, 1.2 at 2000+; unit_cost is the 1-piece price. Rate from screenshot (N381.38 / 1.71). 88K+ sold, seller 5 years on 1688. Store return rate not shown in screenshot: not checked. Phone model list not in screenshots (supplier title names iPhone 15 Pro Max): iPhone 13-16 range (15 options) is a suggestion, owner to confirm. Colour names from the listing and photos: Light grey is pale blue-grey, Tan is brown. Pink and Cream have no single photo: they use group shots (pink: 3 cases visible; cream: shown with other colours). Supplier watermark (Chinese text) cropped off all photos; 1200 px sources, cropped to 880x1100 then scaled up. Supplier title mentions Apple and leather: not used; described as faux-leather texture. One iPhone home-screen photo (9aef7aa4) not used because of app icons. Photos show metal-look camera ring; all shots show a large camera opening."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:44.603Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:16:13.504Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:19:02.327Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:19:59.269Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:19:59.498Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:20:10.567Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:23:57.174Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:23:57.407Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:24:00.991Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:44.603Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:44.602Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 381,
+      "landed": 381,
+      "gross": 6119,
+      "margin": 0.9413233230769231,
+      "suggested": 1000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532009388",
+    "approved_at": "2026-11-01T11:23:57.173Z",
+    "published_at": "2026-11-01T11:24:00.991Z",
+    "url": "https://www.finalheaven.shop/product/p1793532009388"
+  },
+  "id": "p1793532009388"
+}

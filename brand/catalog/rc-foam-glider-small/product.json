@@ -1,0 +1,174 @@
+{
+  "name": "Foam RC Glider Jet — Small",
+  "category": "Gadgets",
+  "description": "A small remote-control jet made of impact-resistant EPP foam, about 28.5 cm long. It flies for about 15 minutes on a charge of about 30 minutes, with a remote range of about 150 m. The box holds the jet, remote, USB charger, battery and 2 spare propellers.",
+  "price": 24000,
+  "stock": 20,
+  "colors": [
+    "Red",
+    "Yellow"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "toy",
+    "remote-control",
+    "rc",
+    "jet",
+    "glider",
+    "foam",
+    "gift"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "red.jpg",
+      "color": "Red",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3c01ac42-01c9-4bc6-aacb-f1a924347d11.jpg"
+    },
+    {
+      "file": "yellow.jpg",
+      "color": "Yellow",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/aebf6570-8bfa-4e40-b9d8-1ee4bc1710f4.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=919671650392",
+    "unit_cost": 48,
+    "cost_currency": "CNY",
+    "fx_rate": 223.87,
+    "image_permission": "unknown",
+    "notes": "Shop name not in the screenshot (Zhiyang Toys / 志扬玩具 only). Photos are cut out of 800 px supplier tiles (soft when enlarged); Zhiyang logo, box and Chinese text removed. Lithium battery: ships_by_air false. Specs are the supplier sheet figures (about). Store return rate not shown.  Toy: age not stated by the supplier, not claimed. Cost ¥48 is the 1-battery option (2/3/4 batteries are ¥56/¥64/¥72); screenshot rate ₦10,745.91 / ¥48 = 223.87 (brief said 222.49). The blue ZY-320 is in the listing but no photo was supplied: not listed. Owner set price ₦24,000, 1-battery only; 950 g confirmed by owner as packed weight of this jet.",
+    "supplier": {
+      "name": "Zhiyang Toys (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=919671650392"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.95,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T08:19:11.136Z",
+    "history": [
+      {
+        "at": "2026-11-13T07:56:06.882Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T07:57:20.463Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T08:10:17.640Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T08:10:17.903Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T08:10:23.521Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T08:19:06.800Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T08:19:07.027Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T08:19:11.136Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T08:10:17.638Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": [
+        "same supplier listing as rc-foam-glider-large (fine for a different capacity or style; check it isn't a repeat)",
+        "same supplier listing as rc-foam-glider-twin-tail (fine for a different capacity or style; check it isn't a repeat)"
+      ]
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 10746,
+      "landed": 10746,
+      "gross": 13254,
+      "margin": 0.55226,
+      "suggested": 24000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794557421560",
+    "photos_reviewed": {
+      "at": "2026-11-13T08:19:06.567Z",
+      "hashes": {
+        "red.jpg": "c179e0c96ee4be444d3416af3290f7b0021e2ca2c741e724f76c8df90673d78e",
+        "yellow.jpg": "6c9ae19e916b79bde7fc8882c697b0d03edf198c77f4398a30c97087c5720dfe"
+      }
+    },
+    "approved_at": "2026-11-13T08:19:06.799Z",
+    "published_at": "2026-11-13T08:19:11.136Z",
+    "url": "https://www.finalheaven.shop/product/p1794557421560"
+  },
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Remote-control foam glider jet"
+    },
+    {
+      "label": "Size",
+      "value": "About 285 x 210 x 75 mm"
+    },
+    {
+      "label": "Material",
+      "value": "EPP foam"
+    },
+    {
+      "label": "Remote range",
+      "value": "About 150 m"
+    },
+    {
+      "label": "Battery",
+      "value": "3.7 V 150 mAh lithium, rechargeable"
+    },
+    {
+      "label": "Charge time",
+      "value": "About 30 min"
+    },
+    {
+      "label": "Flight time",
+      "value": "About 15 min"
+    },
+    {
+      "label": "In the box",
+      "value": "Remote, USB charger, battery, 2 propellers"
+    }
+  ],
+  "ships_by_air": false,
+  "id": "p1794557421560"
+}

@@ -1,7 +1,29 @@
 {
   "name": "Mountain Road Phone Case",
   "category": "Accessories",
-  "description": "A soft, shockproof iPhone case with full coverage and a raised rim around the cameras, printed with a mountain road scene. In 7 colours: Black, Green, Mocha, Wine and Pink carry the \"See for yourself\" mountains; Cream Desert and Hot Pink Desert carry a desert road.\n\nChoose your model: iPhone 13 Pro, 14 Pro, 15 Pro, 16 Pro or 17 Pro.",
+  "description": "A soft, shockproof iPhone case with full coverage and a raised rim around the cameras, printed with a mountain road scene.",
+  "specs": [
+    {
+      "label": "Fits",
+      "value": "iPhone 13 Pro, 14 Pro, 15 Pro, 16 Pro, 17 Pro"
+    },
+    {
+      "label": "Colours",
+      "value": "Black, Cream Desert, Green, Mocha, Wine, Hot Pink Desert, Pink"
+    },
+    {
+      "label": "Print",
+      "value": "\"See for yourself\" mountains on Black, Green, Mocha, Wine and Pink; desert road on Cream Desert and Hot Pink Desert"
+    },
+    {
+      "label": "Case",
+      "value": "Soft, shockproof, full coverage"
+    },
+    {
+      "label": "Camera",
+      "value": "Raised rim around the cameras"
+    }
+  ],
   "price": 7500,
   "stock": 20,
   "colors": [
@@ -89,7 +111,7 @@
     "url": "https://www.finalheaven.shop/product/p1793200799074",
     "note": "on sale before the queue existed",
     "status": "PUBLISHED",
-    "updated": "2026-10-28T22:03:17.825Z",
+    "updated": "2026-11-04T22:26:54.236Z",
     "history": [
       {
         "at": "2026-10-28T20:22:59.380Z",
@@ -106,10 +128,15 @@
         "at": "2026-10-28T22:03:17.825Z",
         "from": "PUBLISHED",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:54.236Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "last_validation": {
-      "at": "2026-10-28T22:03:17.824Z",
+      "at": "2026-11-04T22:26:54.235Z",
       "ok": false,
       "problems": [],
       "needs": [

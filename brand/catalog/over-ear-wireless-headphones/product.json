@@ -1,0 +1,178 @@
+{
+  "name": "Wireless Over-Ear Headphones",
+  "category": "Gadgets",
+  "description": "Wireless over-ear headphones with padded ear cups and a padded headband. Five buttons on the right cup and a Type-C charging port. Comes in purple, pink, light blue, green and white.",
+  "price": 17000,
+  "stock": 20,
+  "colors": [
+    "Purple",
+    "Pink",
+    "Light Blue",
+    "Green",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "headphones",
+    "wireless",
+    "bluetooth",
+    "over-ear",
+    "colourful"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "purple.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7b365638-ccd8-41a6-88c3-0071aacda2d2.jpg"
+    },
+    {
+      "file": "pink.jpg",
+      "color": "Pink",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/919e1e4f-94b7-478f-b710-af8875f9cc10.jpg"
+    },
+    {
+      "file": "light-blue.jpg",
+      "color": "Light Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c4f0b8fc-e15f-434f-a61d-21338d5cffbc.jpg"
+    },
+    {
+      "file": "green.jpg",
+      "color": "Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d564abef-527f-46b6-a884-43b290c8bfa4.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8b933e80-b679-4b5f-9b35-a9a20080d2e0.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706",
+    "unit_cost": 9.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.9,
+    "image_permission": "unknown",
+    "notes": "Style \"Mz-09 complete set\" of the multi-style earbud listing (offerId 1025659251706, shop Shenzhen Huixun Electronic Technology Co., Ltd.), ¥9.50 at MOQ 1 (style-picker screenshot, light blue selected; all colours assumed same price, only blue confirmed). The app's ₦1,164.14 beside ¥9.50 is stale (carried over from the ¥5.2 style): not used; rate 223.9 ₦/¥ from the listing header (¥28 = ₦6,268.45). China shipping fee shown as at least ¥5 per order. Colours visible in the picker: white, blue, green, pink; purple assumed from owner photo. Owner sent 5 clean colour photos (purple, pink, light blue, green, white). No Bluetooth version, battery capacity or playtime known: not claimed. Store return rate is 58.6% (very high): owner wants samples ordered first, so this stays unpublished until samples are checked. Design closely resembles a well-known premium brand over-ear headphone: owner accepted the lookalike risk, generic copy only, no brand names, no ANC claim. Lithium battery: sea freight only.",
+    "supplier": {
+      "name": "Shenzhen Huixun Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1025659251706"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-13T16:34:45.683Z",
+    "history": [
+      {
+        "at": "2026-11-13T16:17:53.226Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-13T16:18:16.833Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:21:34.483Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-13T16:23:00.534Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-13T16:23:00.802Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:23:07.879Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:30:54.874Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-13T16:30:59.251Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-13T16:31:02.248Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-13T16:34:41.537Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-13T16:34:41.836Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-13T16:34:45.683Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-13T16:30:54.873Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2127,
+      "landed": 2127,
+      "gross": 14873,
+      "margin": 0.874879411764706,
+      "suggested": 5000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794586986630",
+    "photos_reviewed": {
+      "at": "2026-11-13T16:34:41.252Z",
+      "hashes": {
+        "purple.jpg": "7b02bef078f918db8e9d7f31282d703960632b13c9f60c6b6469abec8202b95f",
+        "pink.jpg": "ce6b1db195cfd71c55d7dd9ce7e6dd7a91a1bc6233d171322fdd0439526e6f6c",
+        "light-blue.jpg": "7a239a4259e35e61037cf8c5e5f7fc71aa398f2f7df47291a262367fa5fc45a5",
+        "green.jpg": "c25525fb4e2d6c3d356a9da546d0906d4d07e0b2dbdce89c962d383013df4add",
+        "white.jpg": "7dff0dcfc6b3545f35021df25db98ae898398023833013ca5d382c9a4d62286a"
+      }
+    },
+    "approved_at": "2026-11-13T16:34:41.536Z",
+    "published_at": "2026-11-13T16:34:45.683Z",
+    "url": "https://www.finalheaven.shop/product/p1794586986630"
+  },
+  "ships_by_air": false,
+  "id": "p1794586986630"
+}

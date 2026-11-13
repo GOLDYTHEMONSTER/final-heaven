@@ -1,0 +1,218 @@
+{
+  "name": "Hawaiian Print Short-Sleeve Shirt",
+  "category": "T-Shirts",
+  "description": "Short-sleeved Hawaiian-style shirt with a loose beach fit, collar and button front, made in a four-way stretch fabric. Choose from different all-over prints. Each shirt is made to order with a digital print on the outside only, so the inside of the shirt is white. The real shirt can differ slightly from the photos. Sizes are assumed, not from a size chart: if you are between sizes, go one up.",
+  "price": 19500,
+  "stock": 20,
+  "colors": [
+    "Blue Tropical Lily",
+    "Orange Watercolour Floral",
+    "Black Yellow Hibiscus",
+    "Navy Lemons and Leaves",
+    "White Blue Monstera",
+    "White Green Palm",
+    "Red Blue Hibiscus",
+    "Yellow Green Leaves",
+    "Black Palms and Surfboards",
+    "White Palms and Surfboards",
+    "Navy Monstera and Oranges",
+    "Cream Teal Abstract Floral"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "shirt",
+    "hawaiian",
+    "short-sleeve",
+    "floral",
+    "beach",
+    "printed",
+    "summer",
+    "loose-fit",
+    "men"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "blue-tropical-lily.jpg",
+      "color": "Blue Tropical Lily",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/10baef48-b8b8-4b50-93ba-65f3e91f6f77.jpg"
+    },
+    {
+      "file": "orange-watercolour-floral.jpg",
+      "color": "Orange Watercolour Floral",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/52b84628-f3a3-4541-9d9a-7fe883bb9bf4.jpg"
+    },
+    {
+      "file": "black-yellow-hibiscus.jpg",
+      "color": "Black Yellow Hibiscus",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1a029f9a-d9c2-4967-bff5-995b464c27e2.jpg"
+    },
+    {
+      "file": "navy-lemons-leaves.jpg",
+      "color": "Navy Lemons and Leaves",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/fb0b410a-6403-4876-9084-618849075f56.jpg"
+    },
+    {
+      "file": "white-blue-monstera.jpg",
+      "color": "White Blue Monstera",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f1bc12e0-213e-4103-9cf7-b36bd7e986c2.jpg"
+    },
+    {
+      "file": "white-green-palm.jpg",
+      "color": "White Green Palm",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/052c8479-f8f8-4441-b3eb-1987dd6ebbb9.jpg"
+    },
+    {
+      "file": "red-blue-hibiscus.jpg",
+      "color": "Red Blue Hibiscus",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/af8ea51f-0bd0-4cf1-8cc7-4ad15eca4b2a.jpg"
+    },
+    {
+      "file": "yellow-green-leaves.jpg",
+      "color": "Yellow Green Leaves",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a6048965-7439-4b18-8e16-437f0ac23c47.jpg"
+    },
+    {
+      "file": "black-palms-surfboards.jpg",
+      "color": "Black Palms and Surfboards",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/87b832a9-6656-47da-b1c5-60481693e1ad.jpg"
+    },
+    {
+      "file": "white-palms-surfboards.jpg",
+      "color": "White Palms and Surfboards",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ddae2e74-ca62-4d82-9e28-496195e523f0.jpg"
+    },
+    {
+      "file": "navy-monstera-oranges.jpg",
+      "color": "Navy Monstera and Oranges",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/ca089df5-fba7-432f-b81f-47e25d14d36a.jpg"
+    },
+    {
+      "file": "cream-teal-abstract-floral.jpg",
+      "color": "Cream Teal Abstract Floral",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/11bf5395-1e3a-4c6e-aaae-90d246472eb8.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1077769342825",
+    "unit_cost": 26,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "notes": "Supplier title: Beach vacation versatile floral shirt for men, short-sleeved, trendy and stylish Hawaiian retro-style loose beach shirt jacket. Item no. TMTXCS, brand 'Others', fabric four-way stretch. Price tiers: ¥26 for 1+ (screenshot ≈₦5,785.53), ¥24 for 100-999 (≈₦5,340.49), ¥22 for 1000+; unit_cost is the ¥26 regular price. Listing has 56 styles. Packed 30 x 1 cm, 180 g (supplier's figure, not entered as shipping weight). Free unboxing photos, goods wait at a consolidation hub. ASSUMED: sizes M-3XL and the go-one-up line (no size chart shown); category T-Shirts is the closest existing one (no Shirts category). SUPPLIER RISKS: every item is made to order; no returns or exchanges unless there is a quality fault; print is digital, one side only (inside white); the real item wins over the photos. Same shop as red-01 and the other Omans jerseys (Shangrao Omans Clothing Co., Ltd., 3 years on 1688): repurchase 62%, service 4 points, overall performance 93%, store positive-review rate 73.5%; another listing from this shop showed a 61.9% return rate. This listing's own return rate is not shown. PHOTOS: 800x800 supplier flats on navy with 'NEW ARRIVALS / Photo studio' text; text painted out with the flat navy (47,58,76) and cropped to 640x800 around the shirt, enlarged ~1.9x (a little soft). A small neck label ('En Zhe' on some) is left, unreadable at size. The kids' doodle print contains the hand-drawn word INNERSELF, and the surfboard prints the word SUMMER: generic. Flamingo print TMTXCS-2117 only appears in a screenshot, skipped. ONE LISTING: the store allows at most 12 photos per product, so 12 prints are in this listing; 18 more prints are made and kept in this folder (see report). Supplier originals are in supplier/. Price raised from NGN 17500 to NGN 19500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate).",
+    "supplier": {
+      "name": "Shangrao Omans Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1077769342825"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T06:57:40.972Z",
+    "history": [
+      {
+        "at": "2026-11-10T06:53:27.807Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T06:54:46.311Z",
+        "from": "RECEIVED",
+        "to": "FAILED"
+      },
+      {
+        "at": "2026-11-10T06:54:53.015Z",
+        "from": "FAILED",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T06:56:09.894Z",
+        "from": "DRAFT_READY",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T06:56:10.131Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T06:56:28.023Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T06:57:38.321Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T06:57:38.552Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T06:57:40.972Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T06:56:09.892Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 5786,
+      "landed": 5786,
+      "gross": 11714,
+      "margin": 0.6693988571428571,
+      "suggested": 13000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794293787025",
+    "photos_reviewed": {
+      "at": "2026-11-10T06:56:42.925Z",
+      "hashes": {
+        "blue-tropical-lily.jpg": "3de96a9ec7a6f512ac2513d62a7f1aa569e140ee0d276bf0d1bb1f137203aaff",
+        "orange-watercolour-floral.jpg": "c1b9f893317c0a64dc6c64f9f8163a0a3604ebe7343e21a019cc87cff85ee505",
+        "black-yellow-hibiscus.jpg": "5316de10f99806a4cc2932b10cc620da0a37cff0db6b1f45bcc1ed2d97a2e2c1",
+        "navy-lemons-leaves.jpg": "e2ea2021c7447ecf8aaacaa30ed855da0db1512471602a7cabda4e3cdf86c068",
+        "white-blue-monstera.jpg": "7c87212336088a7031392c98aa2a62751e85d8f0f394e265eeb9a7e78b2c983f",
+        "white-green-palm.jpg": "5757932e085cc0492b2b262f6c07be2b2b5437f8340fa1532259338e65f7e541",
+        "red-blue-hibiscus.jpg": "2b95b833058f8e6ca8f3d2821ebe8cf755650ebeac8e5aac0bdfe41138296526",
+        "yellow-green-leaves.jpg": "008dc679bb9d8ae08b10516c671839bb047a95a6dc47e989bb42adf390121e2b",
+        "black-palms-surfboards.jpg": "d9d02756d4078cca01ba0452a2a84b67ec4dde8d7541f7331b02443e38b3f82c",
+        "white-palms-surfboards.jpg": "79097164314fcf1995a5fa16f23f2cfc7a1b6e2eb49f129da7bfa884868b6901",
+        "navy-monstera-oranges.jpg": "c50064a32b35ec06268818f2deb96fde3684fb02be5d2b69237cd399e70e4ab2",
+        "cream-teal-abstract-floral.jpg": "4bd2f4c060464bf6741f1697cc4733ff02837213cdc3516ba77ec78d5d2960f9"
+      }
+    },
+    "approved_at": "2026-11-10T06:57:38.319Z",
+    "published_at": "2026-11-10T06:57:40.972Z",
+    "url": "https://www.finalheaven.shop/product/p1794293787025"
+  },
+  "id": "p1794293787025"
+}

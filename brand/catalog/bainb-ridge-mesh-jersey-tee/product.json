@@ -1,0 +1,172 @@
+{
+  "name": "Mesh Jersey Tee with 90 Print and Star Sleeves",
+  "category": "T-Shirts",
+  "description": "Loose short-sleeve mesh jersey tee with a V-neck, raglan sleeves and contrast piping. A distressed 90 numeral sits on the chest beside a small crest badge, with star prints on both sleeves and distressed stripes over the shoulders. Sizes are assumed, not from a size chart: if you are between sizes, go one up.",
+  "price": 17500,
+  "stock": 20,
+  "colors": [
+    "Black",
+    "White"
+  ],
+  "sizes": [
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL"
+  ],
+  "tags": [
+    "tee",
+    "mens",
+    "jersey",
+    "mesh",
+    "streetwear",
+    "v-neck",
+    "loose-fit",
+    "printed"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/51d02ea7-a21f-4fdf-a030-bfad21aa2da2.jpg"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/d84aec41-eef6-47e7-9145-c464ebeea07b.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=883985737812",
+    "unit_cost": 22,
+    "cost_currency": "CNY",
+    "fx_rate": 222.52,
+    "image_permission": "unknown",
+    "notes": "Supplier title: 25 New Men's American Internet Celebrity Mesh Graffiti Star Badge Rugby Jersey Loose Short-sleeved T-shirt Men. Price tiers: ¥22 for 1+ (screenshot ≈₦4,895.45), ¥20 for 100-999 (≈₦4,450.41), ¥18 for 1000+ (≈₦4,005.37); unit_cost is the ¥22 regular price. 2 coupons off at ¥25 spend shown, not used. Styles: black, and white labelled 'Svltx-jjj white'. Supplier on 1688 for 3 years; AI selection index 4.1, 'loose version is comfortable'. Store return rate not shown. ASSUMED: sizes M-3XL (usual Chinese menswear range, no size chart given) and the go-one-up line; 'Mesh' taken from the title and photos, fibre and weight unknown. Photos are 800x800 supplier flat-lays on white, padded to 4:5 and enlarged 1.5x (slightly soft). RISKS: printed text mark on the chest ('BAINB RIDGE') and the gold crest badge are not named in the listing and could not be matched to a known brand or club from the photos; both left out of the title and copy. Shoulder stripes look like a generic sporty detail but resemble sleeve-stripe styling: not described as three stripes.",
+    "supplier": {
+      "name": "Shangrao Omans Clothing Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=883985737812"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-10T06:34:04.202Z",
+    "history": [
+      {
+        "at": "2026-11-10T06:28:34.923Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-10T06:29:04.570Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-10T06:30:29.630Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-10T06:30:29.905Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-10T06:30:34.621Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-10T06:34:01.824Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-10T06:34:02.053Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-10T06:34:04.202Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-10T06:30:29.629Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4895,
+      "landed": 4895,
+      "gross": 12605,
+      "margin": 0.7202605714285714,
+      "suggested": 11000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1794292233315",
+    "photos_reviewed": {
+      "at": "2026-11-10T06:30:41.362Z",
+      "hashes": {
+        "black.jpg": "e55acc673f97d69bcf1cf5776e7e4ac597330e4b66415e1ffed2ced76d752883",
+        "white.jpg": "ebd5d39b64ea3ef76e3b1e7f81fece1712b2829a3063badd346cfd7e3b062cd4"
+      }
+    },
+    "approved_at": "2026-11-10T06:34:01.823Z",
+    "published_at": "2026-11-10T06:34:04.202Z",
+    "url": "https://www.finalheaven.shop/product/p1794292233315"
+  },
+  "specs": [
+    {
+      "label": "Colours",
+      "value": "Black, White"
+    },
+    {
+      "label": "Sizes",
+      "value": "M, L, XL, 2XL, 3XL"
+    },
+    {
+      "label": "Neck",
+      "value": "V-neck"
+    },
+    {
+      "label": "Sleeve",
+      "value": "Short, raglan"
+    },
+    {
+      "label": "Fit",
+      "value": "Loose"
+    },
+    {
+      "label": "Material",
+      "value": "Mesh"
+    },
+    {
+      "label": "Print",
+      "value": "Distressed 90 numerals, star sleeve prints, shoulder stripes"
+    }
+  ],
+  "id": "p1794292233315"
+}

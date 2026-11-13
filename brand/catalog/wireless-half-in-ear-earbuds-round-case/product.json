@@ -1,0 +1,155 @@
+{
+  "name": "Wireless Half In-Ear Earbuds — Round Charging Case",
+  "category": "Gadgets",
+  "description": "True wireless half in-ear earbuds with a round charging case.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "True wireless, half in-ear"
+    },
+    {
+      "label": "Charging case",
+      "value": "Round, with a status light"
+    },
+    {
+      "label": "Charging cable",
+      "value": "Included"
+    },
+    {
+      "label": "Colours",
+      "value": "Silver Grey, Rose Gold"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "80 g"
+    }
+  ],
+  "price": 16000,
+  "stock": 20,
+  "colors": [
+    "Silver Grey",
+    "Rose Gold"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "earbuds",
+    "wireless",
+    "bluetooth",
+    "half in-ear",
+    "true wireless"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "silver-grey.jpg",
+      "color": "Silver Grey",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/c537e134-3d88-45d0-aef2-c6d376e3a7ab.jpg"
+    },
+    {
+      "file": "rose-gold.jpg",
+      "color": "Rose Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0fd3c323-d8f9-4ad9-9dc9-4699f2846140.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=857859247106",
+    "unit_cost": 28,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "notes": "¥28 per piece (≥1), shown once for the selected style (Rose gold); not confirmed the same for all 3 styles. No naira figure on the screenshot: 221.84 is the rate from recent products. Store return rate: repurchase rate 29.2x% (cut off), just under the 30% flag. 4K+ sold, Bestseller. 1688 title says noise reduction: not claimed. Bluetooth version, battery hours, driver size, ENC, waterproof and warranty claims in the Chinese panels not repeated. Weight 80 g (owner). Lithium battery in case and buds: sea freight only. White (Elegant White) exists only inside an 800 px text panel, white on pale blue: could not be cut out cleanly, so left out. Rose Gold cut from a 1000 px panel (enlarged, soft). Silver Grey from a clean 1920 px shot on white. LOOK-ALIKE RISK: the white version closely resembles a widely copied branded earbud; no brand is printed on the product; list under a neutral name only. Price raised from NGN 14000 to NGN 16000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Shenzhen Lanyang Feihuang Industrial Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=857859247106"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.08,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:43.326Z",
+    "history": [
+      {
+        "at": "2026-11-04T10:45:48.908Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-04T10:47:22.145Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T11:48:27.921Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T11:48:28.201Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T11:48:33.870Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T11:48:34.118Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T11:48:34.357Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T11:48:40.896Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:43.326Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:43.325Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6212,
+      "landed": 6212,
+      "gross": 7788,
+      "margin": 0.5563199999999999,
+      "suggested": 14000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793792912046",
+    "approved_at": "2026-11-04T11:48:34.116Z",
+    "published_at": "2026-11-04T11:48:40.896Z",
+    "url": "https://www.finalheaven.shop/product/p1793792912046"
+  },
+  "ships_by_air": false,
+  "id": "p1793792912046"
+}

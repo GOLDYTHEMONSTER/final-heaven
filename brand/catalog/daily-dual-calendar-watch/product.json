@@ -1,0 +1,239 @@
+{
+  "name": "Dual Calendar Quartz Watch",
+  "category": "Accessories",
+  "description": "A quartz wristwatch with a day and date window, a Roman numeral dial and a faceted bezel.",
+  "specs": [
+    {
+      "label": "Movement",
+      "value": "Quartz"
+    },
+    {
+      "label": "Calendar",
+      "value": "Day and date window"
+    },
+    {
+      "label": "Dial",
+      "value": "Roman numerals"
+    },
+    {
+      "label": "Bezel",
+      "value": "Faceted"
+    },
+    {
+      "label": "Bracelet",
+      "value": "Metal link, in silver, two-tone or gold"
+    },
+    {
+      "label": "Dial colours",
+      "value": "Black, white, green, blue or gold"
+    },
+    {
+      "label": "Colour options",
+      "value": "Case colour then dial colour, e.g. Silver Black"
+    }
+  ],
+  "price": 16000,
+  "stock": 20,
+  "colors": [
+    "Silver Black",
+    "Silver White",
+    "Silver Green",
+    "Silver Blue",
+    "Two-Tone Gold",
+    "Two-Tone Black",
+    "Two-Tone Green",
+    "Two-Tone Blue",
+    "Gold Blue",
+    "Gold Green",
+    "Gold Black",
+    "Gold Gold"
+  ],
+  "sizes": [],
+  "tags": [
+    "watch",
+    "quartz",
+    "dual calendar",
+    "accessories",
+    "wristwatch",
+    "roman numerals"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "silver-black.jpg",
+      "color": "Silver Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/83a50658-ed73-4bc0-8683-7f5fdb8802d8.jpg"
+    },
+    {
+      "file": "silver-white.jpg",
+      "color": "Silver White",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4309420f-8602-44be-9d9c-08648ba866e5.jpg"
+    },
+    {
+      "file": "silver-green.jpg",
+      "color": "Silver Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/84c76afa-cc6a-484b-9630-e8e7d14c04fc.jpg"
+    },
+    {
+      "file": "silver-blue.jpg",
+      "color": "Silver Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/eaa606b6-4c88-4bba-a852-0d137d297276.jpg"
+    },
+    {
+      "file": "twotone-gold.jpg",
+      "color": "Two-Tone Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f7a0aef5-74f2-4e24-9596-e5c1182fecce.jpg"
+    },
+    {
+      "file": "twotone-black.jpg",
+      "color": "Two-Tone Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/78de487c-9647-48dc-9a9e-994bb2b5077a.jpg"
+    },
+    {
+      "file": "twotone-green.jpg",
+      "color": "Two-Tone Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/1db0a0fd-6912-4a18-9bc3-cb8367e26c1a.jpg"
+    },
+    {
+      "file": "twotone-blue.jpg",
+      "color": "Two-Tone Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b4036ea1-68ff-4c2f-b500-abf15a5a4cdb.jpg"
+    },
+    {
+      "file": "gold-blue.jpg",
+      "color": "Gold Blue",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/39c312bf-5c0d-4b0a-8911-e6525df2a51d.jpg"
+    },
+    {
+      "file": "gold-green.jpg",
+      "color": "Gold Green",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/f7193f24-b206-44e0-8778-ded42fde9483.jpg"
+    },
+    {
+      "file": "gold-black.jpg",
+      "color": "Gold Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/3d6f2169-5e22-4703-be41-0d048b0f407d.jpg"
+    },
+    {
+      "file": "gold-gold.jpg",
+      "color": "Gold Gold",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/544dfbb4-a3ad-44a5-b3f8-0a627f3de942.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1058893081538",
+    "unit_cost": 28,
+    "cost_currency": "CNY",
+    "fx_rate": 223.57,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Jishi E-commerce Studio",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1058893081538"
+    },
+    "notes": "CNY 28 is the price at 2 or more items (screenshot shows no naira figure, so fx_rate is unset). Listing has 28 styles; 12 of 14 supplied colourways listed (max 12 photos). Store return rate is cut off in the screenshot, not checked. Supplier title says men's but the photos look like a smaller ladies size; case size, strap length, materials and water resistance not stated, so none claimed. Dial carries the factory mark DAIYANG; kept out of title. Colour names: case colour then dial colour. Owner chose unisex (no gender in title) on 1 Nov 2026; ask supplier for case diameter. FX 223.57 set by owner. Price 9000 set by owner. Price raised from NGN 11000 to NGN 16000 on 9 Nov 2026 (owner approved margin review: 60% floor)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:36.756Z",
+    "history": [
+      {
+        "at": "2026-11-01T06:03:28.050Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T06:05:03.294Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T06:06:50.728Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T06:06:51.041Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T06:07:06.498Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T06:10:09.394Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "AWAITING_APPROVAL"
+      },
+      {
+        "at": "2026-11-01T06:10:11.778Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T06:10:18.715Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T07:47:05.916Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T07:47:06.317Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T07:47:12.125Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:36.756Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:36.754Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 6260,
+      "landed": 6260,
+      "gross": 4740,
+      "margin": 0.4309127272727273,
+      "suggested": 14000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793513224921",
+    "approved_at": "2026-11-01T07:47:05.898Z",
+    "published_at": "2026-11-01T07:47:12.125Z",
+    "url": "https://www.finalheaven.shop/product/p1793513224921"
+  },
+  "id": "p1793513224921"
+}

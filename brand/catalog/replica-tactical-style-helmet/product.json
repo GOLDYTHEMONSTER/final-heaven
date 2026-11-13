@@ -1,0 +1,170 @@
+{
+  "name": "Replica Tactical-Style Helmet for Airsoft & Cosplay",
+  "category": "Cosplay",
+  "description": "A plastic replica helmet for airsoft games and cosplay.\n\nCostume and airsoft use only. It is not a safety helmet: not for riding, cycling, motorcycling or impact protection, and not bulletproof.",
+  "specs": [
+    {
+      "label": "Colour",
+      "value": "Black"
+    },
+    {
+      "label": "Material",
+      "value": "Plastic"
+    },
+    {
+      "label": "Size",
+      "value": "One size"
+    },
+    {
+      "label": "Side rails",
+      "value": "Yes"
+    },
+    {
+      "label": "Front mount",
+      "value": "Yes"
+    },
+    {
+      "label": "Patch panels",
+      "value": "Velcro"
+    },
+    {
+      "label": "Chin strap",
+      "value": "Adjustable"
+    }
+  ],
+  "price": 44500,
+  "stock": 20,
+  "colors": [
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "cosplay",
+    "airsoft",
+    "helmet",
+    "replica",
+    "costume"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "black-side.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/02b484c9-405e-4fda-8987-a0f98f0f3082.jpg"
+    },
+    {
+      "file": "black-back.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b247535b-9022-4b1e-bc8a-a5ab35e666d2.jpg"
+    },
+    {
+      "file": "black-right.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/fc1411b6-550b-4350-afaa-d5f1dbcbd5b5.jpg"
+    },
+    {
+      "file": "black-left.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/adc1a07c-9cf5-4b3e-bddc-628df622dd14.jpg"
+    },
+    {
+      "file": "black-views.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/680fbef9-5469-4936-94c1-6d9877065592.jpg"
+    }
+  ],
+  "source": {
+    "supplier": {
+      "name": "Tactical helmet seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=643091092550"
+    },
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=643091092550",
+    "unit_cost": 18.73,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "china_domestic_ngn": 1025.93,
+    "notes": "Regular price 18.73 CNY (1+); 17.84 CNY at 100-499. China shipping to warehouse from 4.60 CNY (about N1,025.93 on screenshot), included as china_domestic_ngn. Colours on listing: Black, Desert, Army Green; only Black has photos, so only Black is listed (owner decision pending). Supplier copy mentions riding: not repeated, product is a costume/airsoft replica, not protective. Material, weight, head size not shown; unknown. Return rate not shown. Photos are 760-870 px (soft). Military-look gear: customs/police risk in Nigeria. Price raised from NGN 12000 to NGN 44500 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "last_validation": {
+      "at": "2026-11-04T22:28:21.508Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 4177,
+      "landed": 5203,
+      "gross": 6797,
+      "margin": 0.566393175,
+      "suggested": 12000
+    },
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:21.510Z",
+    "history": [
+      {
+        "at": "2026-11-01T19:39:37.950Z",
+        "from": null,
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T19:39:59.660Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T19:39:59.859Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T19:40:11.271Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T19:43:07.415Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T19:43:07.692Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T19:43:17.257Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:21.510Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "note": "approved by the owner",
+    "store_id": "p1793562008055",
+    "approved_at": "2026-11-01T19:43:07.413Z",
+    "published_at": "2026-11-01T19:43:17.257Z",
+    "url": "https://www.finalheaven.shop/product/p1793562008055"
+  },
+  "id": "p1793562008055"
+}

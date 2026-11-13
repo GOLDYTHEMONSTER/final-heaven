@@ -1,0 +1,174 @@
+{
+  "name": "Travel Passport Wallet with ID Card Slot and Pen Loop",
+  "category": "Accessories",
+  "description": "A PU faux leather passport wallet with an embossed airplane cover and a slide-out ID card sleeve. The pen is not included.",
+  "specs": [
+    {
+      "label": "Material",
+      "value": "PU faux leather"
+    },
+    {
+      "label": "Colours",
+      "value": "Brown, Tan, Black"
+    },
+    {
+      "label": "Closure",
+      "value": "Elastic band"
+    },
+    {
+      "label": "Cover",
+      "value": "Embossed airplane"
+    },
+    {
+      "label": "ID card sleeve",
+      "value": "Slide-out, clear window, held by rivets"
+    },
+    {
+      "label": "Inside",
+      "value": "Card slots, ticket slot, SIM and pin pocket, pen loop"
+    },
+    {
+      "label": "Pen",
+      "value": "Not included"
+    }
+  ],
+  "price": 8000,
+  "stock": 20,
+  "colors": [
+    "Brown",
+    "Tan",
+    "Black"
+  ],
+  "sizes": [],
+  "tags": [
+    "passport wallet",
+    "passport holder",
+    "travel",
+    "pu leather",
+    "card holder",
+    "id card holder",
+    "accessories"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "dark-brown.jpg",
+      "color": "Brown",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/7f83edd2-2ed3-4838-bc9e-d9c4fa25836d.jpg"
+    },
+    {
+      "file": "dark-brown-2.jpg",
+      "color": "Brown",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/0d4b2e4c-2266-4d04-ae1c-ba17fdbe2af6.jpg"
+    },
+    {
+      "file": "tan.jpg",
+      "color": "Tan",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/a359d33e-0220-4d9d-a8d8-4c68e98f34f5.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/4753f109-1869-4c3d-9325-58e85e69304f.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1045413495048",
+    "unit_cost": 10.5,
+    "cost_currency": "CNY",
+    "fx_rate": 223.03,
+    "image_permission": "unknown",
+    "supplier": {
+      "name": "Yipin Leather Goods Factory, Dongcheng Town, Xinxing County",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1045413495048"
+    },
+    "notes": "Regular price 10.5 CNY for 1+ (10 for 30-99, 9.5 for 100+); rate from screenshot (N2,341.79 / 10.5). 900+ sold, repurchase rate 22.58% (not a return rate). Store return rate is cut off in the screenshot: UNCHECKED. Material 'PU faux leather' per owner. Pen is a prop: pen not included. Cover is embossed with the factory's own SHABILI mark (kept off title/copy); supplier 'Shabili' watermark cropped from all photos. Tan has only the group shot (shows all three colours): no solo tan photo. Chinese-ID and interior photos (Chinese passport, UnionPay cards) not used. Source photos 1440 px wide, crops ~1100 px. Brown photo 2 has a plain keyboard prop (no visible logo). No dimensions, weight, freight or customs given. Price raised from NGN 7500 to NGN 8000 on 13 Nov 2026 (owner: every price carries its freight and card fee and keeps 45%; weight-based freight estimate)."
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:28:35.438Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:24:31.451Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:25:15.918Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:27:59.773Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-01T11:28:00.005Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-01T11:28:10.828Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-01T11:28:28.634Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-01T11:28:28.865Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-01T11:28:31.194Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:28:35.438Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:28:35.437Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 2342,
+      "landed": 2342,
+      "gross": 5158,
+      "margin": 0.687758,
+      "suggested": 5500
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793532489345",
+    "approved_at": "2026-11-01T11:28:28.633Z",
+    "published_at": "2026-11-01T11:28:31.194Z",
+    "url": "https://www.finalheaven.shop/product/p1793532489345"
+  },
+  "id": "p1793532489345"
+}

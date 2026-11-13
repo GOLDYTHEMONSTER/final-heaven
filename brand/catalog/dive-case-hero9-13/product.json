@@ -1,7 +1,37 @@
 {
   "name": "Waterproof Dive Case for HERO9–13 Action Cameras",
   "category": "Accessories",
-  "description": "A clear waterproof housing with a top latch, a built-in mount and buttons you press through the case. It comes with a quick-release buckle and a thumbscrew. Fits GoPro HERO9, HERO10, HERO11, HERO12 and HERO13 Black (camera not included).",
+  "description": "A clear waterproof housing for action cameras, with buttons you press through the case. The camera is not included.",
+  "specs": [
+    {
+      "label": "Fits",
+      "value": "GoPro HERO9, HERO10, HERO11, HERO12 and HERO13 Black"
+    },
+    {
+      "label": "Case",
+      "value": "Clear waterproof housing"
+    },
+    {
+      "label": "Latch",
+      "value": "Top latch"
+    },
+    {
+      "label": "Mount",
+      "value": "Built in"
+    },
+    {
+      "label": "Controls",
+      "value": "Buttons pressed through the case"
+    },
+    {
+      "label": "What's included",
+      "value": "Case, quick-release buckle, thumbscrew"
+    },
+    {
+      "label": "Camera",
+      "value": "Not included"
+    }
+  ],
   "price": 12000,
   "stock": 20,
   "colors": [],
@@ -47,7 +77,7 @@
   },
   "queue": {
     "status": "PUBLISHED",
-    "updated": "2026-10-29T06:55:39.663Z",
+    "updated": "2026-11-04T22:26:48.068Z",
     "history": [
       {
         "at": "2026-10-29T06:46:09.590Z",
@@ -91,6 +121,11 @@
         "at": "2026-10-29T06:55:39.663Z",
         "from": "PUBLISHING",
         "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:26:48.068Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
       }
     ],
     "claims_reviewed": [
@@ -99,7 +134,7 @@
     ],
     "claims_note": "GoPro: compatibility statement only. waterproof: the listing sells it as a waterproof diving case; no depth rating claimed.",
     "last_validation": {
-      "at": "2026-10-29T06:55:31.974Z",
+      "at": "2026-11-04T22:26:48.067Z",
       "ok": true,
       "problems": [],
       "needs": [],

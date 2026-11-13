@@ -1,0 +1,111 @@
+{
+  "name": "Open-Source Retro Handheld Max",
+  "category": "Gadgets",
+  "description": "A larger open-source retro handheld with dual joysticks, L1/L2/R1/R2 shoulder buttons, two TF card slots (one for the system, one for games), Type-C charging, an OTG port and a headphone jack. The 3000mAh battery gives 5 to 6 hours of play and charges in about 2 hours, per the supplier. It also plays video files. No games are included. Load your own legally owned game files.",
+  "price": 49000,
+  "stock": 20,
+  "colors": [
+    "Transparent Purple",
+    "Transparent Blue",
+    "Transparent Red",
+    "Transparent Black",
+    "White"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "handheld",
+    "retro",
+    "open-source",
+    "console",
+    "portable"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "transparent-purple.jpg",
+      "color": "Transparent Purple"
+    },
+    {
+      "file": "transparent-blue.jpg",
+      "color": "Transparent Blue"
+    },
+    {
+      "file": "transparent-red.jpg",
+      "color": "Transparent Red"
+    },
+    {
+      "file": "transparent-black.jpg",
+      "color": "Transparent Black"
+    },
+    {
+      "file": "white.jpg",
+      "color": "White"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=1066389137060",
+    "unit_cost": null,
+    "cost_currency": "CNY",
+    "fx_rate": null,
+    "image_permission": "unknown",
+    "notes": "No screenshot of the listing: price, seller, return rate and screen size not known. Supplier title starts \"r36max retro handheld game console\"; app/video-site claims and brand names are not used. Specs from supplier images: open source, two TF slots (system + game), 3000mAh battery, 5-6 h play, about 2 h charge, Type-C, OTG, headphone jack, dual joysticks, L1/L2/R1/R2, multi-format video playback. Screen size and resolution not stated: left out. Hardware only: ships with a TF card, owner must confirm blank or no card. Built-in lithium battery: sea freight only. Back label in the black photo is tiny and may read a different mAh figure: owner to check. Photos are 1000 px supplier images cropped to 4:5 (about 760 px wide, soft at full size); card and cable cropped out. Lifestyle photo (white, Chinese headline) skipped: clean crop would be about 430 px wide. Duplicate colour photos and the button diagram and battery image not used. Owner gave 5 colours: Transparent Black is grey. Owner confirmed seller ships blank/no card, 1 Nov 2026. Owner set price ₦49,000 and kept all 5 colours.",
+    "supplier": {
+      "name": "Retro handheld console seller (name to confirm)",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=1066389137060"
+    }
+  },
+  "shipping": {
+    "weight_kg": null,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "NEEDS_INFORMATION",
+    "updated": "2026-11-01T11:52:06.142Z",
+    "history": [
+      {
+        "at": "2026-11-01T11:50:32.554Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-01T11:51:07.558Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-01T11:52:06.142Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "NEEDS_INFORMATION"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-01T11:52:06.141Z",
+      "ok": false,
+      "problems": [],
+      "needs": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)"
+      ],
+      "notes": []
+    },
+    "pricing": {
+      "status": "missing",
+      "missing": [
+        "supplier unit cost",
+        "exchange rate (₦ per CNY)",
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": null,
+      "landed": null,
+      "margin": null,
+      "suggested": null
+    }
+  },
+  "ships_by_air": false
+}

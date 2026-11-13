@@ -1,0 +1,178 @@
+{
+  "name": "Wireless Over-Ear Headphones — Active Noise Cancelling",
+  "category": "Gadgets",
+  "description": "Over-ear Bluetooth headphones with active noise cancelling and a low-latency mode for gaming.",
+  "specs": [
+    {
+      "label": "Type",
+      "value": "Over-ear"
+    },
+    {
+      "label": "Bluetooth",
+      "value": "5.4"
+    },
+    {
+      "label": "Noise cancelling",
+      "value": "Active"
+    },
+    {
+      "label": "Ear cushions",
+      "value": "Memory foam"
+    },
+    {
+      "label": "Folding",
+      "value": "Folds flat to carry"
+    },
+    {
+      "label": "Gaming",
+      "value": "Low-latency mode"
+    },
+    {
+      "label": "Colours",
+      "value": "Cream, Black, Purple"
+    },
+    {
+      "label": "What's included",
+      "value": "Charging cable, audio cable"
+    },
+    {
+      "label": "Weight (packed)",
+      "value": "214 g"
+    }
+  ],
+  "price": 55000,
+  "stock": 20,
+  "colors": [
+    "Cream",
+    "Black",
+    "Purple"
+  ],
+  "sizes": [],
+  "tags": [
+    "gadget",
+    "headphones",
+    "wireless",
+    "bluetooth",
+    "noise-cancelling",
+    "over-ear",
+    "gaming"
+  ],
+  "fulfilment": "made_to_order",
+  "lead_time_days": 14,
+  "source_type": "wholesale",
+  "photos": [
+    {
+      "file": "cream.jpg",
+      "color": "Cream",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/8382847d-7ba0-41e6-aec3-af52db71bbff.jpg"
+    },
+    {
+      "file": "black.jpg",
+      "color": "Black",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/b1fc5765-b6e3-4beb-88fc-cc119cf06324.jpg"
+    },
+    {
+      "file": "purple.jpg",
+      "color": "Purple",
+      "url": "https://tdornzctuleymhbctsyy.supabase.co/storage/v1/object/public/product-images/e339a042-15ac-40ef-9917-7ed715dd15f9/67855b57-ea7e-4d2d-bc2c-41249b8dee3d.jpg"
+    }
+  ],
+  "source": {
+    "listing_url": "http://detail.m.1688.com/page/index.htm?offerId=844922188898",
+    "unit_cost": 99,
+    "cost_currency": "CNY",
+    "fx_rate": 221.84,
+    "image_permission": "unknown",
+    "notes": "1688 tiered price per set: ¥99 for 2+ sets (MOQ 2), ¥95 for 500-999, ¥85 for 1000+. Cost uses ¥99 (one-set price at the MOQ tier). Rate 221.84 from the screenshot (₦21,961.77 / ¥99). 1K+ sold, repurchase rate 35.48% (over 30% flag), 10+ praise; store return rate not shown. Price is the same for all colours as far as the screenshot shows (one price block; colour-specific prices not visible). Brand on 1688: Havit/seaweite; the shop title uses the Havit name and every photo shows HAVIT on the band: authenticity unverified, name kept out of title, copy and tags. Colours: Cream = 流金白 (champagne-white), Black = 星空黑, Purple = 芋泥紫 (taro). Weight 214 g from the 1688 table (packed weight to confirm; the size columns, 175 x 82 cm, are not reliable). Specs used: active noise reduction, Bluetooth 5.4 (both in the English attributes), foldable, memory-foam cushions, low-latency gaming mode, charging cable and audio cable included (panels). Left out on purpose: -25 dB, 80 h battery (the panel footnote says 30 h with a charging case), Hi-Res, HISA spatial audio, 40 mm driver, 1-year warranty / 7-day return (China shop terms). Photos: cream from the clean product shot; black and purple cut from the 800 px spec panels, upscaled about 2.4x, so soft. Lithium battery: sea freight only. Supplier name taken from the 1688 page header. Price raised from NGN 38500 to NGN 55000 on 9 Nov 2026 (owner approved margin review: 60% floor).",
+    "supplier": {
+      "name": "Guangzhou Kumai Electronic Technology Co., Ltd.",
+      "platform": "1688",
+      "url": "http://detail.m.1688.com/page/index.htm?offerId=844922188898"
+    }
+  },
+  "shipping": {
+    "weight_kg": 0.214,
+    "data_status": "estimated"
+  },
+  "queue": {
+    "status": "PUBLISHED",
+    "updated": "2026-11-04T22:27:27.738Z",
+    "history": [
+      {
+        "at": "2026-11-04T10:33:29.375Z",
+        "from": null,
+        "to": "RECEIVED"
+      },
+      {
+        "at": "2026-11-04T10:34:40.233Z",
+        "from": "RECEIVED",
+        "to": "NEEDS_INFORMATION"
+      },
+      {
+        "at": "2026-11-04T10:36:38.302Z",
+        "from": "NEEDS_INFORMATION",
+        "to": "DRAFT_READY"
+      },
+      {
+        "at": "2026-11-04T10:36:38.562Z",
+        "from": "DRAFT_READY",
+        "to": "PROCESSING",
+        "note": "saving draft"
+      },
+      {
+        "at": "2026-11-04T10:36:44.910Z",
+        "from": "PROCESSING",
+        "to": "AWAITING_APPROVAL",
+        "note": "draft saved, not on sale"
+      },
+      {
+        "at": "2026-11-04T10:36:45.156Z",
+        "from": "AWAITING_APPROVAL",
+        "to": "APPROVED",
+        "note": "approved by the owner"
+      },
+      {
+        "at": "2026-11-04T10:36:45.387Z",
+        "from": "APPROVED",
+        "to": "PUBLISHING"
+      },
+      {
+        "at": "2026-11-04T10:36:47.703Z",
+        "from": "PUBLISHING",
+        "to": "PUBLISHED"
+      },
+      {
+        "at": "2026-11-04T22:27:27.738Z",
+        "from": "PUBLISHED",
+        "to": "PUBLISHED"
+      }
+    ],
+    "last_validation": {
+      "at": "2026-11-04T22:27:27.737Z",
+      "ok": true,
+      "problems": [],
+      "needs": [],
+      "notes": []
+    },
+    "pricing": {
+      "status": "provisional",
+      "missing": [
+        "China domestic shipping",
+        "international shipping",
+        "customs and clearing"
+      ],
+      "goods": 21962,
+      "landed": 21962,
+      "gross": 16538,
+      "margin": 0.4295542857142857,
+      "suggested": 49000
+    },
+    "note": "approved by the owner",
+    "store_id": "p1793788602855",
+    "approved_at": "2026-11-04T10:36:45.154Z",
+    "published_at": "2026-11-04T10:36:47.703Z",
+    "url": "https://www.finalheaven.shop/product/p1793788602855"
+  },
+  "ships_by_air": false,
+  "id": "p1793788602855"
+}

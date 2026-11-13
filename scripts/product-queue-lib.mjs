@@ -16,9 +16,36 @@ const list = (v) => (Array.isArray(v) ? v : [])
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 /**
+ * International freight for one unit, from the rules' freight rates and the
+ * product's packed weight: air unless the product can't fly (ships_by_air
+ * false), then sea. Null when the weight or the rate is unknown.
+ */
+export function freightEstimate(p, rules) {
+  const f = rules?.pricing?.freight
+  const kg = Number(p.shipping?.weight_kg)
+  if (!f || !(kg > 0)) return null
+  const pack = Number(f.packaging_factor ?? 1)
+  const perKg = p.ships_by_air === false
+    ? (f.sea_ngn_per_kg == null ? null : Number(f.sea_ngn_per_kg))
+    : (f.air_usd_per_kg == null || f.ngn_per_usd == null ? null : Number(f.air_usd_per_kg) * Number(f.ngn_per_usd))
+  return perKg == null ? null : Math.round(kg * pack * perKg)
+}
+
+/** The card processor's fee on one sale: a share of the price, capped. */
+export function cardFee(price, rules) {
+  const pct = Number(rules?.pricing?.card_fee_pct ?? 0)
+  const cap = rules?.pricing?.card_fee_cap_ngn == null ? Infinity : Number(rules.pricing.card_fee_cap_ngn)
+  return Math.round(Math.min(price * pct, cap))
+}
+
+/**
  * Landed cost, margin and a suggested price, from the product's own source
  * block and the rules file. Never fills in a missing figure: what's missing is
  * listed, and the result is "provisional" or "missing".
+ *
+ * Landed cost includes international freight: the source's own figure when
+ * there is one, otherwise the freight rates in the rules × the packed weight.
+ * The margin is after the card fee too, so it is what the sale really keeps.
  */
 export function pricing(p, rules) {
   const s = p.source ?? {}
@@ -27,29 +54,47 @@ export function pricing(p, rules) {
   if (cost == null || !Number.isFinite(cost)) missing.push('supplier unit cost')
   const fx = s.cost_currency === 'NGN' ? 1 : s.fx_rate == null ? null : Number(s.fx_rate)
   if (s.cost_currency !== 'NGN' && (fx == null || !Number.isFinite(fx))) missing.push(`exchange rate (₦ per ${s.cost_currency ?? 'CNY'})`)
-  const extras = { china_domestic_ngn: 'China domestic shipping', shipping_cost_ngn: 'international shipping', customs_cost_ngn: 'customs and clearing' }
   const known = {}
-  for (const [k, label] of Object.entries(extras)) {
-    if (s[k] == null) missing.push(label)
-    else known[k] = Number(s[k])
+  if (s.china_domestic_ngn == null) missing.push('China domestic shipping')
+  else known.china_domestic_ngn = Number(s.china_domestic_ngn)
+  let freightBasis = null
+  if (s.shipping_cost_ngn != null) { known.shipping_cost_ngn = Number(s.shipping_cost_ngn); freightBasis = 'source' }
+  else {
+    const est = freightEstimate(p, rules)
+    if (est != null) { known.shipping_cost_ngn = est; freightBasis = 'estimate' }
+    else if (!rules?.pricing?.freight) missing.push('international shipping')
+    else if (!(Number(p.shipping?.weight_kg) > 0)) missing.push('packed weight (for freight)')
+    else missing.push(p.ships_by_air === false ? 'sea freight rate (₦ per kg, in worker-rules.json)' : 'air freight rate')
   }
+  if (s.customs_cost_ngn == null) missing.push('customs and clearing')
+  else known.customs_cost_ngn = Number(s.customs_cost_ngn)
   const other = Number(s.other_cost_ngn ?? 0)
-  if (cost == null || fx == null) return { status: 'missing', missing, goods: null, landed: null, margin: null, suggested: null }
+  if (cost == null || fx == null) return { status: 'missing', missing, goods: null, landed: null, freight: null, fee: null, margin: null, suggested: null }
 
   const goods = cost * fx
   const landed = goods + Object.values(known).reduce((a, b) => a + b, 0) + other
   const price = Number(p.price)
-  const gross = price > 0 ? price - landed : null
+  const fee = price > 0 ? cardFee(price, rules) : 0
+  const gross = price > 0 ? price - landed - fee : null
   const margin = price > 0 ? gross / price : null
   const target = Number(rules?.pricing?.target_gross_margin ?? 0.55)
   const step = Number(rules?.pricing?.round_to_ngn ?? 500)
-  const suggested = Math.ceil(landed / (1 - target) / step) * step
+  // The price that keeps the target after the card fee (uncapped share: a slight overestimate on big prices).
+  const suggested = Math.ceil(landed / (1 - target - Number(rules?.pricing?.card_fee_pct ?? 0)) / step) * step
   return {
     // Goods cost known but freight, customs or domestic shipping not: the margin is only on what's known.
     status: missing.length ? 'provisional' : 'complete',
     missing, goods: Math.round(goods), landed: Math.round(landed),
+    freight: known.shipping_cost_ngn == null ? null : Math.round(known.shipping_cost_ngn), freightBasis, fee,
     gross: gross == null ? null : Math.round(gross), margin, suggested,
   }
+}
+
+/** The lowest price that keeps the floor margin after freight and the card fee, rounded up. */
+export function floorPrice(landed, rules) {
+  const min = Number(rules?.pricing?.min_gross_margin ?? 0.35)
+  const step = Number(rules?.pricing?.round_to_ngn ?? 500)
+  return Math.ceil(landed / (1 - min - Number(rules?.pricing?.card_fee_pct ?? 0)) / step) * step
 }
 
 /**
@@ -116,8 +161,12 @@ export function validate(p, ctx) {
     if (p.queue?.cost_unknown_approved) notes.push(`listed with ${gaps.join(' and ')} unknown (owner approved): margin unknown`)
     else needs.push(...gaps)
   }
-  if (price.margin != null && price.margin < Number(rules?.pricing?.min_gross_margin ?? 0.35)) {
-    notes.push(`gross margin ${Math.round(price.margin * 100)}% is under the ${Math.round(Number(rules?.pricing?.min_gross_margin ?? 0.35) * 100)}% floor`)
+  const floor = Number(rules?.pricing?.min_gross_margin ?? 0.35)
+  if (price.margin != null && price.margin < floor) {
+    const msg = `margin ${Math.round(price.margin * 100)}% after freight and card fee is under the ${Math.round(floor * 100)}% floor: ₦${floorPrice(price.landed, rules).toLocaleString()} or more keeps it`
+    // With the freight rule on, a price under the floor needs the owner's say-so (queue.below_floor_approved), not just a note.
+    if (rules?.pricing?.enforce_floor && !p.queue?.below_floor_approved) needs.push(msg)
+    else notes.push(msg)
   }
 
   return { problems, needs, notes, pricing: price }
